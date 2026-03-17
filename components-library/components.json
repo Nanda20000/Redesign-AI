@@ -1,0 +1,77 @@
+{
+  "components": [
+    {
+      "name": "navbar-modern",
+      "category": "navbar",
+      "file": "navbar/navbar-modern.tsx",
+      "description": "A modern navigation bar with logo, links, and CTA button"
+    },
+    {
+      "name": "navbar-minimal",
+      "category": "navbar",
+      "file": "navbar/navbar-minimal.tsx",
+      "description": "A minimal navigation bar with logo, links, and CTA button"
+    },
+    {
+      "name": "navbar-elegant",
+      "category": "navbar",
+      "file": "navbar/navbar-elegant.tsx",
+      "description": "A elegant navigation bar with logo, links, and CTA button"
+    },
+    {
+      "name": "hero-modern",
+      "category": "hero",
+      "file": "hero/hero-modern.tsx",
+      "description": "A hero section with modern background and dual CTAs"
+    },
+    {
+      "name": "hero-gradient",
+      "category": "hero",
+      "file": "hero/hero-gradient.tsx",
+      "description": "A hero section with gradient background and dual CTAs"
+    },
+    {
+      "name": "hero-minimal",
+      "category": "hero",
+      "file": "hero/hero-minimal.tsx",
+      "description": "A hero section with minimal background and dual CTAs"
+    },
+    {
+      "name": "features-grid",
+      "category": "features",
+      "file": "features/features-grid.tsx",
+      "description": "A grid layout for displaying feature cards"
+    },
+    {
+      "name": "testimonial-cards",
+      "category": "testimonials",
+      "file": "testimonials/testimonial-cards.tsx",
+      "description": "Cards displaying customer testimonials with avatars"
+    },
+    {
+      "name": "contact-form",
+      "category": "contact",
+      "file": "contact/contact-form.tsx",
+      "description": "A contact form with name, email, and message fields"
+    },
+    {
+      "name": "footer-simple",
+      "category": "footer",
+      "file": "footer/footer-simple.tsx",
+      "description": "A simple footer with brand info, links, and social icons"
+    },
+    {
+      "name": "about-two-column",
+      "category": "about",
+      "file": "about/about-two-column.tsx",
+      "description": "A two-column About section with image, heading, paragraph, and CTA button"
+    },
+    {
+      "name": "pricing-cards",
+      "category": "pricing",
+      "file": "pricing/pricing-cards.tsx",
+      "description": "Three pricing cards with plan name, price, feature list, and CTA button"
+    }
+  ],
+  "categories": ["navbar", "hero", "features", "testimonials", "contact", "footer", "about", "pricing"]
+}

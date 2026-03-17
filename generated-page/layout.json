@@ -1,0 +1,28 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "navbar-modern"
+    },
+    {
+      "section": "hero",
+      "component": "hero-modern"
+    },
+    {
+      "section": "features",
+      "component": "features-grid"
+    },
+    {
+      "section": "services",
+      "component": "about-two-column"
+    },
+    {
+      "section": "contact",
+      "component": "contact-form"
+    },
+    {
+      "section": "footer",
+      "component": "footer-simple"
+    }
+  ]
+}
