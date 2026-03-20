@@ -2,11 +2,11 @@
   "layout": [
     {
       "section": "navbar",
-      "component": "navbar-modern"
+      "component": "navbar-minimal"
     },
     {
       "section": "hero",
-      "component": "hero-modern"
+      "component": "hero-simple"
     },
     {
       "section": "about",
@@ -18,7 +18,7 @@
     },
     {
       "section": "footer",
-      "component": "footer-modern"
+      "component": "footer-minimal"
     }
   ]
 }

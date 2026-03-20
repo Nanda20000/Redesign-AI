@@ -97,6 +97,24 @@
       "description": "Hero section component"
     },
     {
+      "name": "hero-ac",
+      "category": "hero",
+      "file": "hero/hero-ac.tsx",
+      "description": "A hero section with heading and subtext and CTA button with image"
+    },
+    {
+      "name": "hero-ad",
+      "category": "hero",
+      "file": "hero/hero-ad.tsx",
+      "description": "A hero section with heading and subtext and CTA button with image"
+    },
+    {
+      "name": "hero-ae",
+      "category": "hero",
+      "file": "hero/hero-ae.tsx",
+      "description": "A hero section, grid layout, flex layout, CTA buttons, image content and animations component"
+    },
+    {
       "name": "hero-elegant",
       "category": "hero",
       "file": "hero/hero-elegant.tsx",

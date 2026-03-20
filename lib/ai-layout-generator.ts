@@ -1,6 +1,8 @@
 import axios from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
+import { analyzeWebsite, getComponentRecommendations } from './website-analyzer';
+import { buildEnhancedPrompt, selectComponents } from './component-selector';
 
 // DeepSeek API endpoints (try primary, fallback to OpenRouter)
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
@@ -75,67 +77,54 @@ export function loadAvailableComponents(): Promise<ComponentsManifest> {
 /**
  * Build available components map by category
  */
-function buildComponentsByCategory(manifest: ComponentsManifest): Record<string, string[]> {
+export function buildComponentsByCategory(manifest: ComponentsManifest): Record<string, string[]> {
   const componentsByCategory: Record<string, string[]> = {};
-  
+
   for (const component of manifest.components) {
     if (!componentsByCategory[component.category]) {
       componentsByCategory[component.category] = [];
     }
     componentsByCategory[component.category].push(component.name);
   }
-  
+
   console.log('[AI Layout Generator] Components by category:', componentsByCategory);
   return componentsByCategory;
 }
 
 /**
- * Build the prompt for DeepSeek AI
+ * Build the prompt for DeepSeek AI (legacy - kept for compatibility)
+ * @deprecated Use buildEnhancedPrompt from component-selector instead
  */
 function buildPrompt(
   sections: string[],
   componentsByCategory: Record<string, string[]>
 ): string {
-  const categories = Object.keys(componentsByCategory);
-  
-  return `You are an expert UI/UX designer and web developer. Your task is to select the best components from a component library to build a website layout.
-
-## Detected Website Sections:
-${sections.map((s, i) => `${i + 1}. ${s}`).join('\n')}
-
-## Available Components by Category:
-${JSON.stringify(componentsByCategory, null, 2)}
-
-## Your Task:
-For each detected section, select the most appropriate component from the available components. Consider:
-- The purpose and content of each section
-- The component descriptions and their suitability
-- Creating a cohesive, modern design
-
-## Response Format:
-Return ONLY a valid JSON object with this exact structure (no additional text, no markdown):
-{
-  "layout": [
-    {"section": "section_name", "component": "component_name"},
-    ...
-  ]
-}
-
-## Rules:
-1. Each section must be mapped to exactly one component from the same category
-2. Use only component names from the availableComponents list
-3. Include all detected sections in your response
-4. Return ONLY the JSON, no explanations or additional text
-
-Example response:
-{
-  "layout": [
-    {"section": "navbar", "component": "navbar-modern"},
-    {"section": "hero", "component": "hero-gradient"},
-    {"section": "features", "component": "features-grid"},
-    {"section": "footer", "component": "footer-simple"}
-  ]
-}`;
+  return buildEnhancedPrompt(
+    sections,
+    componentsByCategory,
+    {
+      businessType: 'general',
+      tone: 'professional',
+      contentRichness: 'medium',
+      confidence: 0.5,
+      signals: {
+        businessTypeSignals: [],
+        toneSignals: [],
+        richnessSignals: []
+      }
+    },
+    getComponentRecommendations({
+      businessType: 'general',
+      tone: 'professional',
+      contentRichness: 'medium',
+      confidence: 0.5,
+      signals: {
+        businessTypeSignals: [],
+        toneSignals: [],
+        richnessSignals: []
+      }
+    })
+  );
 }
 
 /**
@@ -363,46 +352,96 @@ export function loadGeneratedPageData(): Promise<GeneratedPageData> {
 
 /**
  * Main function: Generate layout with AI based on page structure
- * 
+ * Uses intelligent content analysis for component selection
+ *
  * @param pageStructure - The detected page structure with sections
+ * @param extractedContent - Optional extracted content for deeper analysis
  * @returns The AI-selected layout mapping sections to components
  */
-export async function generateLayoutWithAI(pageStructure: PageStructure): Promise<LayoutResponse> {
-  console.log('[AI Layout Generator] Starting layout generation...');
+export async function generateLayoutWithAI(
+  pageStructure: PageStructure,
+  extractedContent?: ExtractedContent
+): Promise<LayoutResponse> {
+  console.log('[AI Layout Generator] Starting intelligent layout generation...');
   console.log('[AI Layout Generator] Page structure sections:', pageStructure.sections);
 
   try {
     // Step 1: Load available components
     console.log('[AI Layout Generator] Loading available components...');
     const manifest = await loadAvailableComponents();
-    
-    // Step 2: Build components map by category
+
+    // Step 2: Analyze website content for intelligent selection
+    console.log('[AI Layout Generator] Analyzing website content...');
+    const contentForAnalysis = extractedContent || {
+      headings: [],
+      paragraphs: [],
+      navigationLinks: pageStructure.sections,
+      footerText: ''
+    };
+
+    const analysis = analyzeWebsite(contentForAnalysis);
+    console.log('[AI Layout Generator] Analysis results:', {
+      businessType: analysis.businessType,
+      tone: analysis.tone,
+      contentRichness: analysis.contentRichness,
+      confidence: analysis.confidence
+    });
+    console.log('[AI Layout Generator] Detection signals:', analysis.signals);
+
+    // Step 3: Build components map by category
     const componentsByCategory = buildComponentsByCategory(manifest);
-    
-    // Step 3: Build the prompt
-    console.log('[AI Layout Generator] Building AI prompt...');
-    const prompt = buildPrompt(pageStructure.sections, componentsByCategory);
-    
-    // Step 4: Call DeepSeek API
+
+    // Step 4: Get intelligent recommendations
+    const recommendations = getComponentRecommendations(analysis);
+
+    // Step 5: Build enhanced prompt with analysis context
+    console.log('[AI Layout Generator] Building intelligent AI prompt...');
+    const prompt = buildEnhancedPrompt(
+      pageStructure.sections,
+      componentsByCategory,
+      analysis,
+      recommendations
+    );
+
+    // Step 6: Call DeepSeek API
     console.log('[AI Layout Generator] Calling DeepSeek API...');
     const aiResponse = await callDeepSeekAPI(prompt);
-    
-    // Step 5: Parse the response
+
+    // Step 7: Parse the response
     console.log('[AI Layout Generator] Parsing AI response...');
     const layout = parseLayoutResponse(aiResponse);
-    
-    // Step 6: Save the layout
+
+    // Step 8: Validate and enhance selection with rules engine
+    console.log('[AI Layout Generator] Validating component selection...');
+    const selectionResult = selectComponents({
+      manifest,
+      analysis,
+      sections: pageStructure.sections
+    });
+
+    // Log selection reasoning
+    console.log('[AI Layout Generator] Selection reasoning:');
+    Object.entries(selectionResult.selectionReasons).forEach(([section, reason]) => {
+      console.log(`  - ${section}: ${reason}`);
+    });
+    console.log(`[AI Layout Generator] Variety score: ${selectionResult.varietyScore}/100`);
+
+    // Step 9: Save the layout
     console.log('[AI Layout Generator] Saving layout...');
     saveLayout(layout);
-    
-    // Step 7: Log selected components
+
+    // Step 10: Log selected components
     console.log('[AI Layout Generator] === AI Component Selection Complete ===');
+    console.log('[AI Layout Generator] Website Analysis:');
+    console.log(`  - Business Type: ${analysis.businessType} (${Math.round(analysis.confidence * 100)}% confidence)`);
+    console.log(`  - Tone: ${analysis.tone}`);
+    console.log(`  - Content Richness: ${analysis.contentRichness}`);
     console.log('[AI Layout Generator] Selected components:');
     layout.layout.forEach((item) => {
       console.log(`  - ${item.section}: ${item.component}`);
     });
     console.log('[AI Layout Generator] =========================================');
-    
+
     return layout;
   } catch (error) {
     console.error('[AI Layout Generator] Error generating layout:', error);

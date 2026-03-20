@@ -1,15 +1,16 @@
 #!/usr/bin/env ts-node
 /**
- * Safe Component Registry Generator with Validation
- * 
+ * Safe Component Registry Generator with Validation and AI Descriptions
+ *
  * Automatically generates src/lib/component-registry.ts by scanning /components-library
- * 
+ *
  * Features:
  * - Non-destructive: skips components that fail validation
  * - Validates imports and exports
  * - Detects missing dependencies
  * - Generates validation report
  * - Prevents duplicate variable names
+ * - AI-powered description generation for new components
  */
 
 import * as fs from 'fs';
@@ -17,6 +18,7 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { execSync } from 'child_process';
+import { generateDescription } from './ai-description-generator.js';
 
 // Fix __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -263,19 +265,25 @@ function validateComponent(comp: ComponentInfo): { isValid: boolean; error?: str
 /**
  * Update component.json with scanned components
  * Merges with existing data, avoids duplicates, preserves existing descriptions
+ * Uses AI to generate descriptions for new components
+ * 
+ * RULES:
+ * - If a component already has a description → KEEP it (do not regenerate)
+ * - Only generate description when missing OR empty
+ * - Preserve manual edits always
  */
-function updateComponentsJson(components: ComponentInfo[]) {
+async function updateComponentsJson(components: ComponentInfo[]) {
   try {
     console.log('\n[Components.json] Loading existing component.json...');
-    
+
     let existingData: ComponentJSON = { components: [], categories: [] };
-    
+
     // Try to load existing component.json
     if (fs.existsSync(COMPONENTS_JSON_PATH)) {
       try {
         const content = fs.readFileSync(COMPONENTS_JSON_PATH, 'utf-8');
         existingData = JSON.parse(content);
-        
+
         // Validate structure
         if (!existingData.components || !Array.isArray(existingData.components)) {
           console.log('[Components.json] Invalid structure, starting fresh');
@@ -286,68 +294,106 @@ function updateComponentsJson(components: ComponentInfo[]) {
         existingData = { components: [], categories: [] };
       }
     }
-    
+
     // Build a map of existing components by name for quick lookup
     const existingMap = new Map<string, { description: string }>();
     existingData.components.forEach(comp => {
       existingMap.set(comp.name, { description: comp.description });
     });
-    
+
     // Track statistics
     let addedCount = 0;
     let skippedCount = 0;
-    let updatedCount = 0;
-    
+    let aiGeneratedCount = 0;
+
     // Build new components array
     const newComponents: ComponentJSON['components'] = [];
-    
+
+    // Collect components needing AI descriptions
+    const componentsNeedingDescriptions: Array<{
+      name: string;
+      category: string;
+      fileName: string;
+      fullPath: string;
+    }> = [];
+
+    // First pass: identify components needing descriptions
     for (const comp of components) {
       const componentName = comp.key;
       const category = comp.category;
+      const fullPath = path.join(COMPONENTS_LIBRARY_DIR, category, comp.fileName + '.tsx');
       const filePath = `${category}/${comp.fileName}.tsx`;
+
+      // Check if component already exists with description
+      const existingComponent = existingMap.get(componentName);
       
-      // Check if component already exists
-      if (existingMap.has(componentName)) {
-        // Keep existing component with its description
+      if (existingComponent?.description && existingComponent.description.trim() !== '') {
+        // KEEP existing description - DO NOT regenerate (preserves manual edits)
         newComponents.push({
           name: componentName,
           category: category,
           file: filePath,
-          description: existingMap.get(componentName)!.description,
+          description: existingComponent.description,
         });
         skippedCount++;
+        console.log(`  ✓ ${componentName}: keeping existing description`);
       } else {
-        // Add new component with generated description
-        const categoryCapitalized = category.charAt(0).toUpperCase() + category.slice(1);
-        const description = `${categoryCapitalized} section component`;
-        
-        newComponents.push({
+        // Mark for AI description generation (missing or empty description)
+        componentsNeedingDescriptions.push({
           name: componentName,
-          category: category,
-          file: filePath,
-          description: description,
+          category,
+          fileName: comp.fileName,
+          fullPath,
         });
-        addedCount++;
       }
     }
-    
+
+    // Second pass: generate AI descriptions for new components
+    console.log(`\n[Components.json] Generating descriptions for ${componentsNeedingDescriptions.length} new components...`);
+
+    for (const comp of componentsNeedingDescriptions) {
+      const filePath = `${comp.category}/${comp.fileName}.tsx`;
+      let description = "A reusable UI component";
+
+      try {
+        // Read file content and generate description using smart TSX analyzer
+        const fileContent = fs.readFileSync(comp.fullPath, 'utf-8');
+        description = await generateDescription(comp.fileName, fileContent);
+        aiGeneratedCount++;
+        console.log(`  ✨ ${comp.name}: "${description}"`);
+      } catch (error: any) {
+        // Fallback to simple description if generation fails
+        const categoryCapitalized = comp.category.charAt(0).toUpperCase() + comp.category.slice(1);
+        description = `${categoryCapitalized} section component`;
+        console.log(`  ⚠ ${comp.name}: using fallback description`);
+      }
+
+      newComponents.push({
+        name: comp.name,
+        category: comp.category,
+        file: filePath,
+        description,
+      });
+      addedCount++;
+    }
+
     // Extract unique categories
     const categories = Array.from(new Set(newComponents.map(c => c.category))).sort();
-    
+
     // Build final data structure
     const finalData: ComponentJSON = {
       components: newComponents,
       categories: categories,
     };
-    
+
     // Write to file
     fs.writeFileSync(COMPONENTS_JSON_PATH, JSON.stringify(finalData, null, 2) + '\n', 'utf-8');
-    
-    console.log(`[Components.json] Updated successfully`);
-    console.log(`  ✓ Added ${addedCount} new components`);
-    console.log(`  ✓ Skipped ${skippedCount} existing components`);
+
+    console.log(`\n[Components.json] Updated successfully`);
+    console.log(`  ✨ AI-generated: ${aiGeneratedCount} descriptions`);
+    console.log(`  ✓ Preserved: ${skippedCount} existing descriptions`);
     console.log(`  ✓ Total: ${newComponents.length} components in ${categories.length} categories`);
-    
+
   } catch (error: any) {
     console.error(`[Components.json] Error: ${error.message}`);
     console.log('[Components.json] Continuing without updating component.json (safe fallback)');
@@ -481,9 +527,9 @@ export function getComponentsByCategory(category: string): string[] {
 /**
  * Main generation function
  */
-function main() {
+async function main() {
   console.log('='.repeat(60));
-  console.log('Safe Component Registry Generator with Validation');
+  console.log('Safe Component Registry Generator with AI Descriptions');
   console.log('='.repeat(60));
 
   // Step 1: Scan components
@@ -554,8 +600,8 @@ function main() {
   console.log(`\n[Save] Registry saved to: ${REGISTRY_OUTPUT_PATH}`);
   console.log(`[Save] Registered ${validComponents.length} components`);
 
-  // Step 8: Update component.json (only for valid components)
-  updateComponentsJson(validComponents);
+  // Step 8: Update component.json with AI descriptions (only for valid components)
+  await updateComponentsJson(validComponents);
 
   // Step 9: Generate validation report
   console.log('\n[Report] Generating validation report...');
@@ -591,11 +637,11 @@ function main() {
     });
 
   console.log(`\nTotal: ${validComponents.length} components`);
-  
+
   if (skippedComponents.length > 0) {
     console.log(`\n⚠️  Skipped ${skippedComponents.length} components (see scripts/registry-report.json)`);
   }
-  
+
   console.log('\nTo regenerate: npm run generate:registry');
 }
 

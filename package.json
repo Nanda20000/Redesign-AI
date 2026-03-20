@@ -8,8 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "integrate": "ts-node scripts/integrate-components.ts",
-    "generate:registry": "ts-node scripts/generate-registry.ts"
+    "integrate": "npx tsx scripts/integrate-components.ts",
+    "generate:registry": "npx tsx scripts/generate-registry.ts"
   },
   "dependencies": {
     "@number-flow/react": "^0.6.0",

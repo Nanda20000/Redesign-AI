@@ -28,6 +28,9 @@ import { FooterStartup } from '../../components-library/footer/footer-startup';
 
 // Hero components
 import { HeroSlide as HeroAb } from '../../components-library/hero/hero-ab';
+import { HeroSection as HeroAc } from '../../components-library/hero/hero-ac';
+import HeroAd from '../../components-library/hero/hero-ad';
+import { HeroSection as HeroAe } from '../../components-library/hero/hero-ae';
 import HeroElegant from '../../components-library/hero/hero-elegant';
 import { HeroMinimal } from '../../components-library/hero/hero-minimal';
 import { OceanHero as HeroModern } from '../../components-library/hero/hero-modern';
@@ -81,6 +84,9 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Hero components
   'hero-ab': HeroAb,
+  'hero-ac': HeroAc,
+  'hero-ad': HeroAd,
+  'hero-ae': HeroAe,
   'hero-elegant': HeroElegant,
   'hero-minimal': HeroMinimal,
   'hero-modern': HeroModern,

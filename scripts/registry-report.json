@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-20T17:39:37.409Z",
+  "generated": "2026-03-20T18:51:55.566Z",
   "valid": [
     "about-two-column",
     "contact-form",
@@ -17,6 +17,9 @@
     "footer-simple",
     "footer-startup",
     "hero-ab",
+    "hero-ac",
+    "hero-ad",
+    "hero-ae",
     "hero-elegant",
     "hero-minimal",
     "hero-modern",
@@ -40,8 +43,8 @@
   ],
   "skipped": [],
   "summary": {
-    "total": 36,
-    "valid": 36,
+    "total": 39,
+    "valid": 39,
     "skipped": 0
   }
 }
