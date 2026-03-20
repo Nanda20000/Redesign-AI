@@ -2,18 +2,45 @@
 
 import { useEffect, useState } from "react";
 import { getComponentByName } from "@/lib/component-registry";
-import { 
-  mapContentToSections, 
-  getComponentContentProps, 
+import {
+  mapContentToSections,
+  getComponentContentProps,
   getDefaultMappedContent,
   type LayoutItem,
   type MappedContent,
-  type ExtractedContent 
+  type ExtractedContent
 } from "@/../lib/content-injector";
 
 export interface LayoutData {
   layout: LayoutItem[];
   content?: ExtractedContent | null;
+}
+
+// Fallback components for each section type
+const FALLBACK_COMPONENTS: Record<string, string> = {
+  hero: "hero-simple",
+  navbar: "navbar-minimal",
+  features: "features-grid",
+  testimonials: "testimonial-cards",
+  pricing: "pricing-cards",
+  contact: "contact-form",
+  footer: "footer-simple",
+  about: "about-two-column",
+};
+
+/**
+ * Get a safe fallback component for a given section type
+ */
+function getFallbackComponent(section: string): string {
+  // Try to find a fallback based on section type
+  const fallback = FALLBACK_COMPONENTS[section];
+  if (fallback) {
+    return fallback;
+  }
+  
+  // Default fallbacks in order of preference
+  const defaultFallbacks = ["features-grid", "hero-simple", "navbar-minimal", "footer-simple"];
+  return defaultFallbacks[0];
 }
 
 export default function GeneratedPage() {
@@ -105,25 +132,51 @@ export default function GeneratedPage() {
   return (
     <div className="min-h-screen bg-background">
       {layout.layout.map((item, index) => {
-        const Component = getComponentByName(item.component);
+        // Try to get the requested component
+        let Component = getComponentByName(item.component);
+        let usedFallback = false;
+        let componentName = item.component;
 
+        // If component not found, try fallback
         if (!Component) {
-          console.warn(`[GeneratedPage] Component "${item.component}" not found`);
+          console.warn(`[GeneratedPage] Component "${item.component}" not found, using fallback`);
+          const fallbackComponent = getFallbackComponent(item.section);
+          Component = getComponentByName(fallbackComponent);
+          usedFallback = true;
+          componentName = fallbackComponent;
+
+          // If fallback also fails, try the first available default
+          if (!Component) {
+            const defaultFallback = getFallbackComponent("default");
+            Component = getComponentByName(defaultFallback);
+            componentName = defaultFallback;
+            console.warn(`[GeneratedPage] Using default fallback: ${defaultFallback}`);
+          }
+        }
+
+        // If still no component, render error placeholder
+        if (!Component) {
+          console.error(`[GeneratedPage] All fallbacks failed for "${item.component}"`);
           return (
             <div
               key={`${item.section}-${index}`}
-              className="flex items-center justify-center p-8 text-muted-foreground"
+              className="flex min-h-[200px] items-center justify-center border-2 border-dashed border-muted p-8 text-muted-foreground"
             >
-              Component &quot;{item.component}&quot; not found
+              <div className="text-center">
+                <p className="font-medium">Unable to load component</p>
+                <p className="text-sm">Requested: {item.component}</p>
+              </div>
             </div>
           );
         }
 
-        console.log(`[GeneratedPage] Rendering ${item.component} for ${item.section} with injected content`);
+        console.log(
+          `[GeneratedPage] Rendering ${componentName}${usedFallback ? " (fallback)" : ""} for ${item.section}`
+        );
 
         // Get content props for this component
         const contentProps = getComponentContentProps(
-          item.component,
+          componentName,
           item.section,
           contentToUse
         );

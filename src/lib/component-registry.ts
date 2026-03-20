@@ -1,13 +1,13 @@
 // Auto-generated component registry
-// Run: npm run integrate to regenerate
+// Run: npm run generate:registry to regenerate
 
 import type { ComponentType } from "react";
 
 // About components
-import { About3 } from '../../components-library/about/about-two-column';
+import { About3 as AboutTwoColumn } from '../../components-library/about/about-two-column';
 
 // Contact components
-import { ContactCard } from '../../components-library/contact/contact-form';
+import { ContactCard as ContactForm } from '../../components-library/contact/contact-form';
 
 // Features components
 import { FeaturesImage } from '../../components-library/features/features- Image';
@@ -21,21 +21,22 @@ import { FeaturesSlideshow } from '../../components-library/features/features-sl
 import { FooterCorporate } from '../../components-library/footer/footer-corporate';
 import { FooterElegant } from '../../components-library/footer/footer-elegant';
 import { FooterGradient } from '../../components-library/footer/footer-gradient';
-import { NeoMinimalFooter } from '../../components-library/footer/footer-minimal';
+import { NeoMinimalFooter as FooterMinimal } from '../../components-library/footer/footer-minimal';
 import FooterModern from '../../components-library/footer/footer-modern';
 import { FooterSimple } from '../../components-library/footer/footer-simple';
 import { FooterStartup } from '../../components-library/footer/footer-startup';
 
 // Hero components
-import WarpShaderHero from '../../components-library/hero/hero-elegant';
+import { HeroSlide as HeroAb } from '../../components-library/hero/hero-ab';
+import HeroElegant from '../../components-library/hero/hero-elegant';
 import { HeroMinimal } from '../../components-library/hero/hero-minimal';
-import { OceanHero } from '../../components-library/hero/hero-modern';
+import { OceanHero as HeroModern } from '../../components-library/hero/hero-modern';
 import { HeroSimple } from '../../components-library/hero/hero-simple';
 import HeroStylish from '../../components-library/hero/hero-stylish';
 
 // Navbar components
-import { FloatingNav } from '../../components-library/navbar/navbar-elegant';
-import { TruncatingNavbar } from '../../components-library/navbar/navbar-gradient';
+import { FloatingNav as NavbarElegant } from '../../components-library/navbar/navbar-elegant';
+import { TruncatingNavbar as NavbarGradient } from '../../components-library/navbar/navbar-gradient';
 import NavbarMinimal from '../../components-library/navbar/navbar-minimal';
 import { NavbarModern } from '../../components-library/navbar/navbar-modern';
 import { NavbarStylish } from '../../components-library/navbar/navbar-stylish';
@@ -48,47 +49,47 @@ import { PricingModern } from '../../components-library/pricing/pricing-modern';
 import { PricingSimple } from '../../components-library/pricing/pricing-simple';
 
 // Testimonials components
-import { TestimonialsCards } from '../../components-library/testimonials/testimonial-cards';
-import { TestimonialsGradient } from '../../components-library/testimonials/testimonial-gradient';
-import { TestimonialsModern } from '../../components-library/testimonials/testimonial-modern';
-import { TestimonialsSection4 } from '../../components-library/testimonials/testimonial-section4';
-import { TestimonialsSection5 } from '../../components-library/testimonials/testimonial-section5';
-
+import { TestimonialsCards as TestimonialCards } from '../../components-library/testimonials/testimonial-cards';
+import { TestimonialsGradient as TestimonialGradient } from '../../components-library/testimonials/testimonial-gradient';
+import { TestimonialsModern as TestimonialModern } from '../../components-library/testimonials/testimonial-modern';
+import { TestimonialsSection4 as TestimonialSection4 } from '../../components-library/testimonials/testimonial-section4';
+import { TestimonialsSection5 as TestimonialSection5 } from '../../components-library/testimonials/testimonial-section5';
 // Component registry mapping component names to their implementations
 export const componentRegistry: Record<string, ComponentType<any>> = {
   // About components
-  'about-two-column': About3,
+  'about-two-column': AboutTwoColumn,
 
   // Contact components
-  'contact-form': ContactCard,
+  'contact-form': ContactForm,
 
   // Features components
-  'features-image': FeaturesImage,
+  'features- Image': FeaturesImage,
   'features-coursel': FeaturesCoursel,
   'features-gallery-type': FeaturesGalleryType,
   'features-grid': FeaturesGrid,
-  'features-image-new': FeaturesImageNew,
+  'features-Image-new': FeaturesImageNew,
   'features-slideshow': FeaturesSlideshow,
 
   // Footer components
   'footer-corporate': FooterCorporate,
   'footer-elegant': FooterElegant,
   'footer-gradient': FooterGradient,
-  'footer-minimal': NeoMinimalFooter,
+  'footer-minimal': FooterMinimal,
   'footer-modern': FooterModern,
   'footer-simple': FooterSimple,
   'footer-startup': FooterStartup,
 
   // Hero components
-  'hero-elegant': WarpShaderHero,
+  'hero-ab': HeroAb,
+  'hero-elegant': HeroElegant,
   'hero-minimal': HeroMinimal,
-  'hero-modern': OceanHero,
+  'hero-modern': HeroModern,
   'hero-simple': HeroSimple,
   'hero-stylish': HeroStylish,
 
   // Navbar components
-  'navbar-elegant': FloatingNav,
-  'navbar-gradient': TruncatingNavbar,
+  'navbar-elegant': NavbarElegant,
+  'navbar-gradient': NavbarGradient,
   'navbar-minimal': NavbarMinimal,
   'navbar-modern': NavbarModern,
   'navbar-stylish': NavbarStylish,
@@ -101,11 +102,12 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'pricing-simple': PricingSimple,
 
   // Testimonials components
-  'testimonials-cards': TestimonialsCards,
-  'testimonials-gradient': TestimonialsGradient,
-  'testimonials-modern': TestimonialsModern,
-  'testimonials-section4': TestimonialsSection4,
-  'testimonials-section5': TestimonialsSection5,
+  'testimonial-cards': TestimonialCards,
+  'testimonial-gradient': TestimonialGradient,
+  'testimonial-modern': TestimonialModern,
+  'testimonial-section4': TestimonialSection4,
+  'testimonial-section5': TestimonialSection5,
+
 };
 
 /**

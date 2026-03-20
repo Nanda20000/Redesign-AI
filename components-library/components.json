@@ -13,10 +13,10 @@
       "description": "A contact form with name, email, and message fields"
     },
     {
-      "name": "features-image",
+      "name": "features- Image",
       "category": "features",
       "file": "features/features- Image.tsx",
-      "description": "A grid layout for displaying feature cards"
+      "description": "Features section component"
     },
     {
       "name": "features-coursel",
@@ -37,10 +37,10 @@
       "description": "A grid layout for displaying content cards"
     },
     {
-      "name": "features-image-new",
+      "name": "features-Image-new",
       "category": "features",
       "file": "features/features-Image-new.tsx",
-      "description": "A grid layout for displaying feature cards"
+      "description": "Features section component"
     },
     {
       "name": "features-slideshow",
@@ -89,6 +89,12 @@
       "category": "footer",
       "file": "footer/footer-startup.tsx",
       "description": "A startup-focused section with modern elements"
+    },
+    {
+      "name": "hero-ab",
+      "category": "hero",
+      "file": "hero/hero-ab.tsx",
+      "description": "Hero section component"
     },
     {
       "name": "hero-elegant",
@@ -181,34 +187,34 @@
       "description": "Pricing cards with plan details and CTA buttons"
     },
     {
-      "name": "testimonials-cards",
+      "name": "testimonial-cards",
       "category": "testimonials",
       "file": "testimonials/testimonial-cards.tsx",
-      "description": "Cards layout with clean and organized design"
+      "description": "Testimonials section component"
     },
     {
-      "name": "testimonials-gradient",
+      "name": "testimonial-gradient",
       "category": "testimonials",
       "file": "testimonials/testimonial-gradient.tsx",
-      "description": "A modern testimonial layout with clean design"
+      "description": "Testimonials section component"
     },
     {
-      "name": "testimonials-modern",
+      "name": "testimonial-modern",
       "category": "testimonials",
       "file": "testimonials/testimonial-modern.tsx",
-      "description": "Cards displaying customer testimonials with avatars"
+      "description": "Testimonials section component"
     },
     {
-      "name": "testimonials-section4",
+      "name": "testimonial-section4",
       "category": "testimonials",
       "file": "testimonials/testimonial-section4.tsx",
-      "description": "A versatile section with flexible layout"
+      "description": "Testimonials section component"
     },
     {
-      "name": "testimonials-section5",
+      "name": "testimonial-section5",
       "category": "testimonials",
       "file": "testimonials/testimonial-section5.tsx",
-      "description": "A versatile section with flexible layout"
+      "description": "Testimonials section component"
     }
   ],
   "categories": [
