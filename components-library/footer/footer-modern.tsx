@@ -80,7 +80,7 @@ const contactInfo = [
   { icon: MapPin, text: data.contact.address, isAddress: true },
 ];
 
-export default function Footer4Col() {
+export default function FooterModern() {
   return (
     <footer className="bg-secondary dark:bg-secondary/20 mt-16 w-full place-self-end rounded-t-xl">
       <div className="mx-auto max-w-screen-xl px-4 pt-16 pb-6 sm:px-6 lg:px-8 lg:pt-24">

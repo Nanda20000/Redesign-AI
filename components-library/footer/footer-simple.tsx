@@ -26,7 +26,7 @@ interface FooterProps {
   links?: Array<{ name: string; url: string }>;
 }
 
-function Footerdemo({
+function FooterSimple({
   brandName = 'Your Company',
   description = 'Providing quality services since 2024',
   contactInfo = {},
@@ -206,4 +206,4 @@ function Footerdemo({
   )
 }
 
-export { Footerdemo }
+export { FooterSimple };

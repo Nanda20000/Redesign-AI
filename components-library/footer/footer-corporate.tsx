@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'; // Assumes shadcn Button
 /**
  * Props for the Footer component.
  */
-interface FooterProps extends React.HTMLAttributes<HTMLElement> {
+interface FooterCorporateProps extends React.HTMLAttributes<HTMLElement> {
   /** The source URL for the company logo. */
   logoSrc: string;
   /** The name of the company, displayed next to the logo. */
@@ -29,7 +29,7 @@ interface FooterProps extends React.HTMLAttributes<HTMLElement> {
  * A responsive and theme-adaptive footer component with a newsletter subscription form.
  * Designed following shadcn/ui and 21st.dev best practices.
  */
-export const Footer: FC<FooterProps> = ({
+export const FooterCorporate: FC<FooterCorporateProps> = ({
   logoSrc,
   companyName = 'Datally Inc.',
   description = 'Empowering businesses with intelligent financial solutions, designed for the future of finance.',

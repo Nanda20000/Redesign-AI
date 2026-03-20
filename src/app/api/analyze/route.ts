@@ -39,22 +39,20 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
       });
       
       const context = await browser.newContext({
-        viewport: { width: 1920, height: 1080 },
+        viewport: { width: 1920, height: 3000 },
         userAgent: USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)],
         bypassCSP: true,
       });
-      
+
       const page = await context.newPage();
 
-      // Block unnecessary resources to speed up loading
-      await page.route("**/*.{ttf,otf,woff,woff2,eot}", (route) => route.abort());
-      await page.route("**/*.{png,jpg,jpeg,gif,svg,webp,ico}", (route) => {
-        if (!route.request().url().includes('logo') && !route.request().url().includes('icon')) {
-          route.abort();
-        } else {
-          route.continue();
-        }
+      // Disable animations to fix slider/hero issues
+      await page.addStyleTag({
+        content: "* { animation: none !important; transition: none !important; }"
       });
+
+      // Block only fonts to speed up loading (allow ALL images)
+      await page.route("**/*.{ttf,otf,woff,woff2,eot}", (route) => route.abort());
 
       // Set additional headers to appear more like a real browser
       await page.setExtraHTTPHeaders({
@@ -62,38 +60,101 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
       });
 
-      // Navigate with retry-friendly settings
+      // Navigate with retry-friendly settings - wait for DOM content loaded
       try {
         await page.goto(url, {
-          waitUntil: "commit",
-          timeout: NAVIGATION_TIMEOUT,
-        });
-        
-        // Then wait for DOM content loaded with shorter timeout
-        await page.waitForLoadState("domcontentloaded", { timeout: 15000 }).catch(() => {
-          console.log("[Analyze] DOM content load timeout, continuing anyway...");
+          waitUntil: "domcontentloaded",
+          timeout: 60000,
         });
       } catch (navError: any) {
         console.error(`[Analyze] Navigation error: ${navError.message}`);
-        
+
         // If we got a connection error, throw to trigger retry
-        if (navError.message.includes("ERR_CONNECTION") || 
+        if (navError.message.includes("ERR_CONNECTION") ||
             navError.message.includes("net::ERR_") ||
             navError.message.includes("Timeout")) {
           throw navError;
         }
-        
+
         // Otherwise, try to continue with what we have
         console.log("[Analyze] Navigation had issues but continuing...");
       }
 
-      // Wait for network to be idle (page fully loaded)
-      await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => {
-        console.log("[Analyze] Network idle timeout, continuing anyway...");
+      // Manual delay to ensure full page load
+      await page.waitForTimeout(5000);
+
+      // Fully scroll page to load lazy images - scroll down
+      await page.evaluate(async () => {
+        await new Promise((resolve) => {
+          let totalHeight = 0;
+          const distance = 200;
+
+          const timer = setInterval(() => {
+            window.scrollBy(0, distance);
+            totalHeight += distance;
+
+            if (totalHeight >= document.body.scrollHeight) {
+              clearInterval(timer);
+              resolve();
+            }
+          }, 50);
+        });
       });
 
-      // Wait for page to stabilize
+      // Wait at bottom for images to load
       await page.waitForTimeout(2000);
+
+      // Scroll back to top
+      await page.evaluate(() => window.scrollTo(0, 0));
+
+      // Wait at top for images to load
+      await page.waitForTimeout(2000);
+
+      // Force load lazy images - multiple strategies
+      await page.evaluate(() => {
+        // Handle data-src and data-lazy
+        document.querySelectorAll("img").forEach(img => {
+          if (img.dataset.src) img.src = img.dataset.src;
+          if (img.dataset.lazy) img.src = img.dataset.lazy;
+          if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+          if (img.loading === "lazy") img.loading = "eager";
+          img.decoding = "sync";
+        });
+
+        // Trigger intersection observers for lazy loading
+        const observers = (window as any).__lazyLoadObservers || [];
+        observers.forEach((observer: any) => {
+          document.querySelectorAll("img").forEach(img => {
+            observer.observe(img);
+          });
+        });
+      });
+
+      // Wait for ALL images to load
+      await page.evaluate(async () => {
+        const images = Array.from(document.images);
+        await Promise.all(images.map(img => {
+          if (img.complete) return Promise.resolve();
+          return new Promise(resolve => {
+            img.onload = resolve;
+            img.onerror = resolve;
+          });
+        }));
+      });
+
+      // Force reveal any remaining lazy images with loading class
+      await page.evaluate(() => {
+        document.querySelectorAll(".lazy, .lazyload, .lazy-load, [data-original], [data-src]").forEach(el => {
+          el.classList.remove("lazy", "lazyload", "lazy-load");
+        });
+      });
+
+      // Wait for background images to render
+      await page.waitForTimeout(3000);
+
+      // Log image count for debugging
+      const imageCount = await page.evaluate(() => document.images.length);
+      console.log(`[Analyze] Total images on page: ${imageCount}`);
 
       // Generate filename from URL
       const urlObj = new URL(url);
@@ -111,6 +172,8 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
 
       // Capture screenshot
       await page.screenshot({ path: filePath, fullPage: true });
+
+      console.log("Screenshot captured after scroll and image load");
 
       // Extract page structure with improved navbar and footer detection
       const structure = await page.evaluate(() => {

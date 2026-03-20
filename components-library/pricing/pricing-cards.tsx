@@ -63,7 +63,7 @@ const defaultPlans: Plan[] = [
   },
 ];
 
-export const Component = ({
+export const PricingCards = ({
   plans = defaultPlans,
   heading = "Pricing Made Simple",
   subheading = "Pick a plan that matches your needs."

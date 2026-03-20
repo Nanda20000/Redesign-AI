@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+// Validate DeepSeek API key on module load
+if (!process.env.DEEPSEEK_API_KEY) {
+  console.log('DeepSeek API key not found. Please configure .env.local');
+}
+console.log('DeepSeek API key loaded:', !!process.env.DEEPSEEK_API_KEY);
+
 // DeepSeek API endpoints (try primary, fallback to OpenRouter)
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';

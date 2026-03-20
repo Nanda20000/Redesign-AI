@@ -25,12 +25,12 @@ interface PricingTier {
   icon: React.ReactNode
 }
 
-interface PricingSectionProps {
+interface PricingElegantProps {
   tiers: PricingTier[]
   className?: string
 }
 
-function PricingSection({ tiers, className }: PricingSectionProps) {
+function PricingElegant({ tiers, className }: PricingElegantProps) {
   const [isYearly, setIsYearly] = useState(false)
 
   const buttonStyles = {
@@ -205,4 +205,4 @@ function PricingSection({ tiers, className }: PricingSectionProps) {
   )
 }
 
-export { PricingSection }
+export { PricingElegant };

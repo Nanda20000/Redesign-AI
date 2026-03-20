@@ -1,7 +1,7 @@
 import NumberFlow from '@number-flow/react'
 import React from "react";
 
-export function PricingInteraction ({
+export function PricingModern ({
   starterMonth,
   starterAnnual,
   proMonth,

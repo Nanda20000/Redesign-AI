@@ -69,7 +69,7 @@ const socialLinks = [
   { icon: TwitterIcon, href: "#" },
 ];
 
-export function Footer2() {
+export function FooterStartup() {
   return (
     <footer className="bg-card/60 border-t">
       <div className="max-w-6xl mx-auto px-4 lg:px-6">

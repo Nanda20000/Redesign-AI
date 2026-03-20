@@ -1,7 +1,7 @@
 import { CheckIcon } from "lucide-react";
 import React from "react";
 
-const Pricing1 = () => {
+const PricingSimple = () => {
   // Pricing plan data
   const pricingPlans = [
     {
@@ -123,4 +123,4 @@ const Pricing1 = () => {
   );
 };
 
-export { Pricing1 };
+export { PricingSimple };

@@ -68,7 +68,7 @@ const defaultTestimonials: Testimonial[] = [
   },
 ];
 
-export function TestimonialsCards({
+export function TestimonialsSection5({
   testimonials = defaultTestimonials,
   className,
   title = "Read what people are saying",

@@ -34,7 +34,7 @@ const StatItem = ({ value, label }: { value: string; label: string }) => (
 );
 
 // --- MAIN COMPONENT ---
-export default function HeroSection() {
+export default function HeroStylish() {
   return (
     <div className="relative w-full bg-zinc-950 text-white overflow-hidden font-sans">
       {/* 

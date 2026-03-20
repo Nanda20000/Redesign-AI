@@ -1,72 +1,60 @@
 {
   "headings": [
-    "Jawaharbharathi ITE",
-    "Welcome to Jawahar Bharathi ITE",
-    "Support from government",
-    "General Facilities",
-    "Stay In The Know !",
-    "Contact Our Principal",
-    "Contact us"
+    "Excellence in Every Step",
+    "LCC CAMPUS",
+    "DEPARTMENTS",
+    "About Us"
   ],
   "paragraphs": [
-    "Jawaharbharathi ITE\n      Teachers Training Institute\n    \n    \n      \n      Tel: 04931 241444  Mail: jawaharbharathitti@gmail.com",
-    "Home\n      About us\n      \n      \n      Lab\n       \n      \n      Staff Members\n      Student Details\n      Gallery\n      NCTE Updation\n      Contact Us",
-    "Jawaharbharathiite  Complete teachers training institute.\n\t\t<>1234\n\n\t\t\n\t\t\tJawaharbharathiite  Complete teachers training institute.\n\t\t\n\n\t\t\n\t\t\tJawaharbharathiite  We provide strong training for teachin",
-    "Jawaharbharathiite  Complete teachers training institute.\n\t\t<>1234\n\n\t\t\n\t\t\tJawaharbharathiite  Complete teachers training institute.\n\t\t\n\n\t\t\n\t\t\tJawaharbharathiite  We provide strong training for teachin",
-    "Welcome to Jawahar Bharathi ITE\n          \n          Jawahar Bharathi Educational and Charitable\n           Trust was registered on the 28th day of October\n            2001 with the objects to establi",
-    "Support from government\n          50% Seats filled up by the Deputy Director of Education, Malappurem through District wise interview as per State Government norms (including Community Quota.). 50% Se",
-    "General Facilities\n          The college provides facility of library, reading room, hostel for ladies & college bus service.",
-    "Stay In The Know !\n      Please enter your email to join our mailing list\n      \n        \n          News Letter\n          \n          \n        \n      \n      To unsubscribe please click here »\n    \n    ",
-    "Copyright © 2026 - All Rights Reserved - JB ITE\n    Designed by www.dineshdesign.in"
+    "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com"
   ],
   "navigationLinks": [
     "home",
-    "about us",
-    "lab",
-    "staff members",
-    "student details",
+    "about",
+    "courses",
+    "blog",
     "gallery",
-    "ncte updation",
-    "contact us"
+    "contact"
   ],
-  "footerText": "Copyright © 2026 - All Rights Reserved - JB ITE\n    Designed by www.dineshdesign.in",
+  "footerText": "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com",
   "contactInfo": {
-    "email": "jawaharbharathitti@gmail.com"
+    "email": "johnsonlccedk@gmail.com",
+    "phone": "9744064081"
   },
   "processed": {
     "features": {
-      "heading": "General Facilities",
-      "description": "Key facilities and services provided by the institute to support students.",
+      "heading": "Excellence in Every Step",
+      "description": "Key offerings and services provided by the organization.",
       "items": [
         {
-          "title": "Government Supported Admissions",
-          "description": "50% of seats are filled by the Deputy Director of Education through district-wise interviews as per State Government norms, including Community Quota."
+          "title": "LCC CAMPUS",
+          "description": "Educational campus facilities."
         },
         {
-          "title": "Campus Facilities",
-          "description": "The college provides a library, reading room, ladies' hostel, and college bus service."
+          "title": "DEPARTMENTS",
+          "description": "Various academic or organizational departments."
         }
       ]
     },
     "about": {
-      "title": "Welcome to Jawahar Bharathi ITE",
-      "description": "Jawahar Bharathi ITE is a complete teachers training institute. It is run by the Jawahar Bharathi Educational and Charitable Trust, which was registered on October 28, 2001, with the objective of establishing educational institutions. The institute provides strong training for teaching.",
+      "title": "About Us",
+      "description": "LCC Campus operates across multiple locations in Kerala, providing educational services and maintaining a strong community presence.",
       "companies": [],
       "achievements": [],
       "breakout": {
         "title": "Key Message",
-        "description": "Complete teachers training institute providing strong training for teaching."
+        "description": "Excellence in Every Step"
       }
     },
     "footer": {
-      "brandName": "JB ITE",
-      "description": "Jawaharbharathiite Complete teachers training institute.",
+      "brandName": "LCC Campus",
+      "description": "Educational campus with multiple locations in Kerala.",
       "contactInfo": {
-        "email": "jawaharbharathitti@gmail.com",
-        "phone": "04931 241444",
-        "address": ""
+        "email": "johnsonlccedk@gmail.com",
+        "phone": "9744064081",
+        "address": "Edakkara, Nilambur, Pothukal, Karulai - Kerala"
       },
-      "copyright": "Copyright © 2026 - All Rights Reserved - JB ITE"
+      "copyright": "© 2024 LCC Campus. All rights reserved."
     }
   }
 }

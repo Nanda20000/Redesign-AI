@@ -19,13 +19,13 @@ interface GalleryItem {
   image: string;
 }
 
-interface Gallery6Props {
+interface FeaturesImageProps {
   heading?: string;
   demoUrl?: string;
   items?: GalleryItem[];
 }
 
-const Gallery6 = ({
+const FeaturesImage = ({
   heading = "Gallery",
   demoUrl = "https://www.shadcnblocks.com",
   items = [
@@ -70,7 +70,7 @@ const Gallery6 = ({
       image: "/images/block/placeholder-dark-1.svg",
     },
   ],
-}: Gallery6Props) => {
+}: FeaturesImageProps) => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -182,4 +182,4 @@ const Gallery6 = ({
   );
 };
 
-export { Gallery6 };
+export { FeaturesImage };

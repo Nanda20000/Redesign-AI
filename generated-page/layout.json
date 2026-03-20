@@ -9,20 +9,16 @@
       "component": "hero-modern"
     },
     {
+      "section": "about",
+      "component": "about-two-column"
+    },
+    {
       "section": "features",
       "component": "features-grid"
     },
     {
-      "section": "services",
-      "component": "about-two-column"
-    },
-    {
-      "section": "contact",
-      "component": "contact-form"
-    },
-    {
       "section": "footer",
-      "component": "footer-simple"
+      "component": "footer-modern"
     }
   ]
 }

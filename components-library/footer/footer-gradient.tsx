@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
 
-function StackedCircularFooter() {
+function FooterGradient() {
   return (
     <footer className="bg-background py-12">
       <div className="container mx-auto px-4 md:px-6">
@@ -57,4 +57,4 @@ function StackedCircularFooter() {
   )
 }
 
-export { StackedCircularFooter }
+export { FooterGradient };

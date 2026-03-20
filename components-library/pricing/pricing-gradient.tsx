@@ -30,7 +30,7 @@ interface PricingProps {
   description?: string;
 }
 
-export function Pricing({
+export function PricingGradient({
   plans,
   title = "Simple, Transparent Pricing",
   description = "Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support.",

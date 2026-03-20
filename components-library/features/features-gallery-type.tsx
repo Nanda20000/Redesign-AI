@@ -11,7 +11,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
-export interface Gallery4Item {
+export interface FeaturesGalleryTypeItem {
   id: string;
   title: string;
   description: string;
@@ -19,10 +19,10 @@ export interface Gallery4Item {
   image: string;
 }
 
-export interface Gallery4Props {
+export interface FeaturesGalleryTypeProps {
   title?: string;
   description?: string;
-  items: Gallery4Item[];
+  items: FeaturesGalleryTypeItem[];
 }
 
 const data = [
@@ -73,11 +73,11 @@ const data = [
   },
 ];
 
-const Gallery4 = ({
+const FeaturesGalleryType = ({
   title = "Case Studies",
   description = "Discover how leading companies and developers are leveraging modern web technologies to build exceptional digital experiences. These case studies showcase real-world applications and success stories.",
   items = data,
-}: Gallery4Props) => {
+}: FeaturesGalleryTypeProps) => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -195,4 +195,4 @@ const Gallery4 = ({
   );
 };
 
-export { Gallery4 };
+export { FeaturesGalleryType };

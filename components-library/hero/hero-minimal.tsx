@@ -111,7 +111,7 @@ interface HeroSectionProps {
   showThemeToggle?: boolean
 }
 
-export const HeroSection = ({
+export const HeroMinimal = ({
   badgeText = "✨ Introducing Sparkles",
   badgeIcon,
   title = (

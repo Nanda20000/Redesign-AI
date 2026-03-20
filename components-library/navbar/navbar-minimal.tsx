@@ -54,7 +54,7 @@ interface NavItem {
   }[]
 }
 
-interface HeaderProps {
+interface NavbarMinimalProps {
   className?: string
   theme?: 'light' | 'dark'
   isSticky?: boolean
@@ -192,7 +192,7 @@ const MobileMenuButton: React.FC<{ onClick: () => void; isDarkTheme?: boolean }>
   </button>
 )
 
-export const Header: React.FC<HeaderProps> = ({
+export const NavbarMinimal: React.FC<NavbarMinimalProps> = ({
   className,
   theme = 'light',
   isSticky = false,
@@ -242,4 +242,4 @@ export const Header: React.FC<HeaderProps> = ({
 }
 
 export { Button }
-export default Header
+export default NavbarMinimal

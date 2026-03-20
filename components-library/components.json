@@ -1,52 +1,10 @@
 {
   "components": [
     {
-      "name": "navbar-modern",
-      "category": "navbar",
-      "file": "navbar/navbar-modern.tsx",
-      "description": "A modern navigation bar with logo, links, and CTA button"
-    },
-    {
-      "name": "navbar-minimal",
-      "category": "navbar",
-      "file": "navbar/navbar-minimal.tsx",
-      "description": "A minimal navigation bar with logo, links, and CTA button"
-    },
-    {
-      "name": "navbar-elegant",
-      "category": "navbar",
-      "file": "navbar/navbar-elegant.tsx",
-      "description": "A elegant navigation bar with logo, links, and CTA button"
-    },
-    {
-      "name": "hero-modern",
-      "category": "hero",
-      "file": "hero/hero-modern.tsx",
-      "description": "A hero section with modern background and dual CTAs"
-    },
-    {
-      "name": "hero-gradient",
-      "category": "hero",
-      "file": "hero/hero-gradient.tsx",
-      "description": "A hero section with gradient background and dual CTAs"
-    },
-    {
-      "name": "hero-minimal",
-      "category": "hero",
-      "file": "hero/hero-minimal.tsx",
-      "description": "A hero section with minimal background and dual CTAs"
-    },
-    {
-      "name": "features-grid",
-      "category": "features",
-      "file": "features/features-grid.tsx",
-      "description": "A grid layout for displaying feature cards"
-    },
-    {
-      "name": "testimonial-cards",
-      "category": "testimonials",
-      "file": "testimonials/testimonial-cards.tsx",
-      "description": "Cards displaying customer testimonials with avatars"
+      "name": "about-two-column",
+      "category": "about",
+      "file": "about/about-two-column.tsx",
+      "description": "A two-column about section with image and text"
     },
     {
       "name": "contact-form",
@@ -55,23 +13,212 @@
       "description": "A contact form with name, email, and message fields"
     },
     {
+      "name": "features-image",
+      "category": "features",
+      "file": "features/features- Image.tsx",
+      "description": "A grid layout for displaying feature cards"
+    },
+    {
+      "name": "features-coursel",
+      "category": "features",
+      "file": "features/features-coursel.tsx",
+      "description": "A carousel layout for showcasing features"
+    },
+    {
+      "name": "features-gallery-type",
+      "category": "features",
+      "file": "features/features-gallery-type.tsx",
+      "description": "A gallery-style section with visual content"
+    },
+    {
+      "name": "features-grid",
+      "category": "features",
+      "file": "features/features-grid.tsx",
+      "description": "A grid layout for displaying content cards"
+    },
+    {
+      "name": "features-image-new",
+      "category": "features",
+      "file": "features/features-Image-new.tsx",
+      "description": "A grid layout for displaying feature cards"
+    },
+    {
+      "name": "features-slideshow",
+      "category": "features",
+      "file": "features/features-slideshow.tsx",
+      "description": "A slideshow layout for dynamic content presentation"
+    },
+    {
+      "name": "footer-corporate",
+      "category": "footer",
+      "file": "footer/footer-corporate.tsx",
+      "description": "A corporate section with business-focused design"
+    },
+    {
+      "name": "footer-elegant",
+      "category": "footer",
+      "file": "footer/footer-elegant.tsx",
+      "description": "A minimal footer with essential information"
+    },
+    {
+      "name": "footer-gradient",
+      "category": "footer",
+      "file": "footer/footer-gradient.tsx",
+      "description": "A gradient footer with stylish design"
+    },
+    {
+      "name": "footer-minimal",
+      "category": "footer",
+      "file": "footer/footer-minimal.tsx",
+      "description": "A modern footer with comprehensive navigation"
+    },
+    {
+      "name": "footer-modern",
+      "category": "footer",
+      "file": "footer/footer-modern.tsx",
+      "description": "A simple footer with brand info and social links"
+    },
+    {
       "name": "footer-simple",
       "category": "footer",
       "file": "footer/footer-simple.tsx",
-      "description": "A simple footer with brand info, links, and social icons"
+      "description": "A simple footer with brand info and social links"
     },
     {
-      "name": "about-two-column",
-      "category": "about",
-      "file": "about/about-two-column.tsx",
-      "description": "A two-column About section with image, heading, paragraph, and CTA button"
+      "name": "footer-startup",
+      "category": "footer",
+      "file": "footer/footer-startup.tsx",
+      "description": "A startup-focused section with modern elements"
+    },
+    {
+      "name": "hero-elegant",
+      "category": "hero",
+      "file": "hero/hero-elegant.tsx",
+      "description": "An elegant hero section with sophisticated styling"
+    },
+    {
+      "name": "hero-minimal",
+      "category": "hero",
+      "file": "hero/hero-minimal.tsx",
+      "description": "A minimal hero section with clean design and focused messaging"
+    },
+    {
+      "name": "hero-modern",
+      "category": "hero",
+      "file": "hero/hero-modern.tsx",
+      "description": "A modern hero section with engaging headline and call-to-action"
+    },
+    {
+      "name": "hero-simple",
+      "category": "hero",
+      "file": "hero/hero-simple.tsx",
+      "description": "A modern hero section with engaging headline and call-to-action"
+    },
+    {
+      "name": "hero-stylish",
+      "category": "hero",
+      "file": "hero/hero-stylish.tsx",
+      "description": "A stylish hero section with contemporary design"
+    },
+    {
+      "name": "navbar-elegant",
+      "category": "navbar",
+      "file": "navbar/navbar-elegant.tsx",
+      "description": "An elegant navigation bar with sophisticated layout"
+    },
+    {
+      "name": "navbar-gradient",
+      "category": "navbar",
+      "file": "navbar/navbar-gradient.tsx",
+      "description": "A gradient navigation bar with colorful styling"
+    },
+    {
+      "name": "navbar-minimal",
+      "category": "navbar",
+      "file": "navbar/navbar-minimal.tsx",
+      "description": "A minimal navigation bar with clean and simple design"
+    },
+    {
+      "name": "navbar-modern",
+      "category": "navbar",
+      "file": "navbar/navbar-modern.tsx",
+      "description": "A modern navigation bar with logo, links, and CTA buttons"
+    },
+    {
+      "name": "navbar-stylish",
+      "category": "navbar",
+      "file": "navbar/navbar-stylish.tsx",
+      "description": "A stylish navigation bar with contemporary design"
     },
     {
       "name": "pricing-cards",
       "category": "pricing",
       "file": "pricing/pricing-cards.tsx",
-      "description": "Three pricing cards with plan name, price, feature list, and CTA button"
+      "description": "Cards layout with clean and organized design"
+    },
+    {
+      "name": "pricing-elegant",
+      "category": "pricing",
+      "file": "pricing/pricing-elegant.tsx",
+      "description": "An elegant pricing layout with sophisticated styling"
+    },
+    {
+      "name": "pricing-gradient",
+      "category": "pricing",
+      "file": "pricing/pricing-gradient.tsx",
+      "description": "A gradient pricing section with stylish design"
+    },
+    {
+      "name": "pricing-modern",
+      "category": "pricing",
+      "file": "pricing/pricing-modern.tsx",
+      "description": "Pricing cards with plan details and CTA buttons"
+    },
+    {
+      "name": "pricing-simple",
+      "category": "pricing",
+      "file": "pricing/pricing-simple.tsx",
+      "description": "Pricing cards with plan details and CTA buttons"
+    },
+    {
+      "name": "testimonials-cards",
+      "category": "testimonials",
+      "file": "testimonials/testimonial-cards.tsx",
+      "description": "Cards layout with clean and organized design"
+    },
+    {
+      "name": "testimonials-gradient",
+      "category": "testimonials",
+      "file": "testimonials/testimonial-gradient.tsx",
+      "description": "A modern testimonial layout with clean design"
+    },
+    {
+      "name": "testimonials-modern",
+      "category": "testimonials",
+      "file": "testimonials/testimonial-modern.tsx",
+      "description": "Cards displaying customer testimonials with avatars"
+    },
+    {
+      "name": "testimonials-section4",
+      "category": "testimonials",
+      "file": "testimonials/testimonial-section4.tsx",
+      "description": "A versatile section with flexible layout"
+    },
+    {
+      "name": "testimonials-section5",
+      "category": "testimonials",
+      "file": "testimonials/testimonial-section5.tsx",
+      "description": "A versatile section with flexible layout"
     }
   ],
-  "categories": ["navbar", "hero", "features", "testimonials", "contact", "footer", "about", "pricing"]
+  "categories": [
+    "about",
+    "contact",
+    "features",
+    "footer",
+    "hero",
+    "navbar",
+    "pricing",
+    "testimonials"
+  ]
 }

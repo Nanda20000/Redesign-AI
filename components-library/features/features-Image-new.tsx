@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 
-function Feature() {
+function FeaturesImageNew() {
   return (
     <div className="w-full py-20 lg:py-40">
       <div className="container mx-auto">
@@ -28,4 +28,4 @@ function Feature() {
   );
 }
 
-export { Feature };
+export { FeaturesImageNew };

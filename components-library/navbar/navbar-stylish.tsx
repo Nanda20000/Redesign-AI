@@ -37,7 +37,7 @@ type LinkItem = {
 	description?: string;
 };
 
-export function Header() {
+export function NavbarStylish() {
 	const [open, setOpen] = React.useState(false);
 	const scrolled = useScroll(10);
 

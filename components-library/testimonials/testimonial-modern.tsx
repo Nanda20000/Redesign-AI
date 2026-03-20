@@ -85,7 +85,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 };
 
 
-const TestimonialSection = React.forwardRef<
+const TestimonialsModern = React.forwardRef<
   HTMLElement,
   TestimonialSectionProps
 >(({ title, testimonials, className, ...props }, ref) => {
@@ -132,6 +132,6 @@ const TestimonialSection = React.forwardRef<
   );
 });
 
-TestimonialSection.displayName = "TestimonialSection";
+TestimonialsModern.displayName = "TestimonialsModern";
 
-export { TestimonialSection };
+export { TestimonialsModern };

@@ -19,7 +19,7 @@ interface TestimonialsCarouselProps {
   className?: string;
 }
 
-export const TestimonialsGradient: React.FC<TestimonialsCarouselProps> = ({
+export const TestimonialsSection4: React.FC<TestimonialsCarouselProps> = ({
   testimonials,
   speed = 20,
   direction = "left",

@@ -20,7 +20,7 @@ interface Tab {
   content: TabContent;
 }
 
-interface Feature108Props {
+interface FeaturesGridProps {
   badge?: string;
   heading?: string;
   description?: string;
@@ -35,13 +35,13 @@ interface Feature108Props {
 // Default icons for feature tabs
 const FEATURE_ICONS = [Zap, Pointer, Layout];
 
-const Feature108 = ({
+const FeaturesGrid = ({
   badge = "Features",
   heading = "Our Features",
   description = "Discover what we offer",
   tabs,
   featureItems,
-}: Feature108Props) => {
+}: FeaturesGridProps) => {
   // Use injected featureItems to build tabs if provided
   const generatedTabs: Tab[] = featureItems && featureItems.length > 0
     ? featureItems.map((item, index) => ({
@@ -164,4 +164,4 @@ const Feature108 = ({
   );
 };
 
-export { Feature108 };
+export { FeaturesGrid };

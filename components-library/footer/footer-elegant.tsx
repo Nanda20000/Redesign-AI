@@ -67,7 +67,7 @@ const defaultLegalLinks = [
   { name: "Privacy Policy", href: "#" },
 ];
 
-export const Footer7 = ({
+export const FooterElegant = ({
   logo = {
     url: "https://www.shadcnblocks.com",
     src: "https://www.shadcnblocks.com/images/block/logos/shadcnblockscom-icon.svg",
