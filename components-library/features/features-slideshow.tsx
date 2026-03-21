@@ -23,19 +23,25 @@ interface FeaturesSlideshowProps {
   heading?: string;
   demoUrl?: string;
   items?: GalleryItem[];
+  // Content injection prop for dynamic images
+  images?: string[];
 }
 
 const FeaturesSlideshow = ({
   heading = "Gallery",
   demoUrl = "https://www.shadcnblocks.com",
-  items = [
+  items,
+  images = [],
+}: FeaturesSlideshowProps) => {
+  // Generate items with dynamic images if provided
+  const defaultItems: GalleryItem[] = [
     {
       id: "item-1",
       title: "Build Modern UIs",
       summary:
         "Create stunning user interfaces with our comprehensive design system.",
       url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
+      image: images[0] || "/images/block/placeholder-dark-1.svg",
     },
     {
       id: "item-2",
@@ -43,7 +49,7 @@ const FeaturesSlideshow = ({
       summary:
         "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
       url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
+      image: images[1] || "/images/block/placeholder-dark-1.svg",
     },
     {
       id: "item-3",
@@ -51,7 +57,7 @@ const FeaturesSlideshow = ({
       summary:
         "Self-improving algorithms that learn from data patterns to automate complex tasks and make intelligent decisions with minimal human intervention.",
       url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
+      image: images[2] || "/images/block/placeholder-dark-1.svg",
     },
     {
       id: "item-4",
@@ -59,7 +65,7 @@ const FeaturesSlideshow = ({
       summary:
         "Advanced forecasting capabilities that analyze historical data to predict future trends and outcomes, helping businesses make data-driven decisions.",
       url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
+      image: images[3] || "/images/block/placeholder-dark-1.svg",
     },
     {
       id: "item-5",
@@ -67,10 +73,16 @@ const FeaturesSlideshow = ({
       summary:
         "Sophisticated AI models inspired by human brain structure, capable of solving complex problems through deep learning and pattern recognition.",
       url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
+      image: images[4] || "/images/block/placeholder-dark-1.svg",
     },
-  ],
-}: FeaturesSlideshowProps) => {
+  ];
+
+  const finalItems = items || defaultItems;
+
+  // Debug log
+  console.log("[FeaturesSlideshow] Images received:", images.length);
+  console.log("[FeaturesSlideshow] Items count:", finalItems.length);
+  
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -143,7 +155,7 @@ const FeaturesSlideshow = ({
           className="relative left-[-1rem]"
         >
           <CarouselContent className="-mr-4 ml-8 2xl:ml-[max(8rem,calc(50vw-700px+1rem))] 2xl:mr-[max(0rem,calc(50vw-700px-1rem))]">
-            {items.map((item) => (
+            {finalItems.map((item) => (
               <CarouselItem key={item.id} className="pl-4 md:max-w-[452px]">
                 <a
                   href={item.url}

@@ -22,7 +22,9 @@ export interface FeaturesGalleryTypeItem {
 export interface FeaturesGalleryTypeProps {
   title?: string;
   description?: string;
-  items: FeaturesGalleryTypeItem[];
+  items?: FeaturesGalleryTypeItem[];
+  // Content injection prop for dynamic images
+  images?: string[];
 }
 
 const data = [
@@ -73,11 +75,37 @@ const data = [
   },
 ];
 
+// Default placeholder images
+const placeholderImages = [
+  "/images/block/placeholder-dark-1.svg",
+  "/images/block/placeholder-dark-2.svg",
+  "/images/block/placeholder-dark-3.svg",
+  "/images/block/placeholder-dark-4.svg",
+  "/images/block/placeholder-dark-5.svg",
+];
+
 const FeaturesGalleryType = ({
   title = "Case Studies",
   description = "Discover how leading companies and developers are leveraging modern web technologies to build exceptional digital experiences. These case studies showcase real-world applications and success stories.",
-  items = data,
+  items,
+  images = [],
 }: FeaturesGalleryTypeProps) => {
+  // Debug log
+  console.log("[FeaturesGalleryType] Images received:", images.length);
+
+  // Generate items with dynamic images if provided
+  const generatedItems: FeaturesGalleryTypeItem[] = images.length > 0
+    ? images.map((img, idx) => ({
+        id: `item-${idx}`,
+        title: `Feature ${idx + 1}`,
+        description: "Discover more about this amazing feature.",
+        href: "#",
+        image: img,
+      }))
+    : data;
+
+  // Safe images array for mapping
+  const safeItems = generatedItems || data;
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -147,7 +175,7 @@ const FeaturesGalleryType = ({
           }}
         >
           <CarouselContent className="ml-0 2xl:ml-[max(8rem,calc(50vw-700px))] 2xl:mr-[max(0rem,calc(50vw-700px))]">
-            {items.map((item) => (
+            {safeItems.map((item) => (
               <CarouselItem
                 key={item.id}
                 className="max-w-[320px] pl-[20px] lg:max-w-[360px]"
@@ -179,7 +207,7 @@ const FeaturesGalleryType = ({
           </CarouselContent>
         </Carousel>
         <div className="mt-8 flex justify-center gap-2">
-          {items.map((_, index) => (
+          {safeItems.map((_, index) => (
             <button
               key={index}
               className={`h-2 w-2 rounded-full transition-colors ${

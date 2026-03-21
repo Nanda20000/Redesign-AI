@@ -6,7 +6,7 @@
     },
     {
       "section": "hero",
-      "component": "hero-simple"
+      "component": "hero-ab"
     },
     {
       "section": "about",
@@ -14,7 +14,7 @@
     },
     {
       "section": "features",
-      "component": "features-grid"
+      "component": "features-slideshow"
     },
     {
       "section": "footer",

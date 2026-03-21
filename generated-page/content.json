@@ -21,6 +21,92 @@
     "email": "johnsonlccedk@gmail.com",
     "phone": "9744064081"
   },
+  "images": [
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg",
+      "alt": "annie spratt qckxruozjrg unsplash (1)",
+      "title": "annie spratt qckxruozjrg unsplash (1)",
+      "width": 1024,
+      "height": 683
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_s8c5qys8c5qys8c.jpeg",
+      "alt": "gemini generated image s8c5qys8c5qys8c",
+      "title": "gemini generated image s8c5qys8c5qys8c",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
+      "alt": "pexels karola g 6954850 1024x683 (1)",
+      "title": "pexels karola g 6954850 1024x683 (1)",
+      "width": 1024,
+      "height": 683
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-8527897-1-1024x683.jpg",
+      "alt": "pexels karola g 8527897 (1)",
+      "title": "pexels karola g 8527897 (1)",
+      "width": 1024,
+      "height": 683
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg",
+      "alt": "pexels rdne 7092350 scaled (1)",
+      "title": "pexels rdne 7092350 scaled (1)",
+      "width": 1024,
+      "height": 683
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg",
+      "alt": "business colleagues banner concept with copy space (1)",
+      "title": "business colleagues banner concept with copy space (1)",
+      "width": 1024,
+      "height": 683
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int1-768x1024.jpeg",
+      "alt": "int1",
+      "title": "int1",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int6-2-768x1024.jpeg",
+      "alt": "int6",
+      "title": "int6",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int3-1-768x1024.jpeg",
+      "alt": "int3",
+      "title": "int3",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int5-1-768x1024.jpeg",
+      "alt": "int5",
+      "title": "int5",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int4-2-768x1024.jpeg",
+      "alt": "int4",
+      "title": "int4",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int2-2-768x1024.jpeg",
+      "alt": "int2",
+      "title": "int2",
+      "width": 768,
+      "height": 1024
+    }
+  ],
   "processed": {
     "features": {
       "heading": "Excellence in Every Step",
@@ -28,7 +114,7 @@
       "items": [
         {
           "title": "LCC CAMPUS",
-          "description": "Educational campus facilities."
+          "description": "Educational campus providing learning facilities."
         },
         {
           "title": "DEPARTMENTS",
@@ -38,12 +124,12 @@
     },
     "about": {
       "title": "About Us",
-      "description": "LCC Campus operates across multiple locations in Kerala, providing educational services. The organization is focused on delivering excellence through its campus and departmental structure.",
+      "description": "LCC Campus is an educational institution with multiple locations in Kerala, dedicated to providing quality education and services.",
       "companies": [],
       "achievements": [],
       "breakout": {
-        "title": "Key Message",
-        "description": "Excellence in Every Step"
+        "title": "Excellence in Every Step",
+        "description": "Commitment to quality in all aspects of education and service."
       }
     },
     "footer": {

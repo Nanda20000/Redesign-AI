@@ -30,6 +30,8 @@ interface FeaturesGridProps {
     title: string;
     description: string;
   }>;
+  // Dynamic images prop
+  images?: string[];
 }
 
 // Default icons for feature tabs
@@ -41,7 +43,11 @@ const FeaturesGrid = ({
   description = "Discover what we offer",
   tabs,
   featureItems,
+  images = [],
 }: FeaturesGridProps) => {
+  // Debug log
+  console.log("[FeaturesGrid Component] Images received:", images.length);
+
   // Use injected featureItems to build tabs if provided
   const generatedTabs: Tab[] = featureItems && featureItems.length > 0
     ? featureItems.map((item, index) => ({
@@ -53,8 +59,8 @@ const FeaturesGrid = ({
           title: item.title,
           description: item.description,
           buttonText: "Learn More",
-          imageSrc: "https://shadcnblocks.com/images/block/placeholder-dark-1.svg",
-          imageAlt: "placeholder",
+          imageSrc: images[index % images.length] || "https://shadcnblocks.com/images/block/placeholder-dark-1.svg",
+          imageAlt: "Feature image",
         },
       }))
     : tabs || [
@@ -68,9 +74,8 @@ const FeaturesGrid = ({
             description:
               "Discover new web trends that help you craft sleek, highly functional sites that drive traffic and convert leads into customers.",
             buttonText: "See Plans",
-            imageSrc:
-              "https://shadcnblocks.com/images/block/placeholder-dark-1.svg",
-            imageAlt: "placeholder",
+            imageSrc: images[0] || "https://shadcnblocks.com/images/block/placeholder-dark-1.svg",
+            imageAlt: "Feature image 1",
           },
         },
         {
@@ -83,9 +88,8 @@ const FeaturesGrid = ({
             description:
               "Use stellar design to easily engage users and strengthen their loyalty. Create a seamless experience that keeps them coming back for more.",
             buttonText: "See Tools",
-            imageSrc:
-              "https://shadcnblocks.com/images/block/placeholder-dark-2.svg",
-            imageAlt: "placeholder",
+            imageSrc: images[1] || "https://shadcnblocks.com/images/block/placeholder-dark-2.svg",
+            imageAlt: "Feature image 2",
           },
         },
         {
@@ -98,9 +102,8 @@ const FeaturesGrid = ({
             description:
               "Lift your brand with modern tech that grabs attention and drives action. Create a digital experience that stands out from the crowd.",
             buttonText: "See Options",
-            imageSrc:
-              "https://shadcnblocks.com/images/block/placeholder-dark-3.svg",
-            imageAlt: "placeholder",
+            imageSrc: images[2] || "https://shadcnblocks.com/images/block/placeholder-dark-3.svg",
+            imageAlt: "Feature image 3",
           },
         },
       ];

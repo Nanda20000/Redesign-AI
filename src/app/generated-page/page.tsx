@@ -53,7 +53,9 @@ export default function GeneratedPage() {
     async function loadLayout() {
       try {
         console.log("[GeneratedPage] Loading layout and content...");
-        const response = await fetch("/api/generate-layout");
+        const response = await fetch("/api/generate-layout", {
+          cache: "no-store",
+        });
 
         if (!response.ok) {
           const errorData = await response.json();
@@ -62,16 +64,54 @@ export default function GeneratedPage() {
 
         const data = await response.json();
         console.log("[GeneratedPage] Layout loaded:", data);
+        console.log("[GeneratedPage] data.content exists:", !!data.content);
+        console.log("[GeneratedPage] Raw content images:", data.content?.images?.length || 0);
+        console.log("[GeneratedPage] Sections:", data.layout?.map((l: LayoutItem) => l.section));
         setLayout(data);
 
         // Map extracted content to component props
-        if (data.content) {
-          console.log("[GeneratedPage] Using extracted content from website");
+        if (data.layout) {
+          const content = data.content || {};
           const sectionTypes = data.layout.map((item: LayoutItem) => item.section);
-          const mapped = mapContentToSections(data.content, sectionTypes);
-          setMappedContent(mapped);
+
+          if (data.content) {
+            console.log("[GeneratedPage] Using extracted content from website");
+            console.log("[GeneratedPage] Content has images:", data.content.images?.length || 0);
+            const mapped = mapContentToSections(content, sectionTypes);
+            console.log("[GeneratedPage] Mapped hero image:", mapped.hero?.image);
+            console.log("[GeneratedPage] Mapped features images:", mapped.features?.images?.length || 0);
+            setMappedContent(mapped);
+          } else {
+            // Content not ready yet - retry after delay
+            console.warn("[GeneratedPage] Content not ready yet, retrying...");
+
+            setTimeout(async () => {
+              try {
+                const retryRes = await fetch("/api/generate-layout", { cache: "no-store" });
+                const retryData = await retryRes.json();
+
+                if (retryData.content) {
+                  console.log("[GeneratedPage] Retry successful, content loaded");
+                  console.log("[GeneratedPage] Retry content images:", retryData.content?.images?.length || 0);
+                  const mapped = mapContentToSections(retryData.content, sectionTypes);
+                  console.log("[GeneratedPage] Mapped hero image (retry):", mapped.hero?.image);
+                  setMappedContent(mapped);
+                } else {
+                  console.warn("[GeneratedPage] Retry failed, using defaults");
+                  setMappedContent(getDefaultMappedContent());
+                }
+              } catch (retryErr: any) {
+                console.error("[GeneratedPage] Retry error:", retryErr.message);
+                setMappedContent(getDefaultMappedContent());
+              }
+            }, 1000); // retry after 1 second
+
+            // Use defaults temporarily
+            console.log("[GeneratedPage] Using default content temporarily");
+            setMappedContent(getDefaultMappedContent());
+          }
         } else {
-          console.log("[GeneratedPage] No extracted content, using defaults");
+          console.log("[GeneratedPage] No layout found, using defaults");
           setMappedContent(getDefaultMappedContent());
         }
 

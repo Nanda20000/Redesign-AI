@@ -16,6 +16,13 @@ export interface ExtractedContent {
     address?: string;
   };
   processed?: ProcessedSectionContent; // AI-processed content
+  images: Array<{
+    src: string;
+    alt: string;
+    title: string;
+    width?: number;
+    height?: number;
+  }>;
 }
 
 export interface MappedContent {
@@ -38,6 +45,7 @@ export interface MappedContent {
   hero?: {
     title: string;
     description: string;
+    image?: string;
     primaryAction?: {
       label: string;
       onClick: () => void;
@@ -51,6 +59,7 @@ export interface MappedContent {
     badge: string;
     heading: string;
     description: string;
+    images?: string[];
     items?: Array<{
       title: string;
       description: string;
@@ -65,6 +74,7 @@ export interface MappedContent {
       label: string;
       value: string;
     }>;
+    images?: string[];
   };
   testimonials?: {
     title: string;
@@ -116,10 +126,18 @@ export function extractContentFromStructure(structure: {
   }>;
   navigation?: string[];
   hasFooter?: boolean;
+  images?: Array<{
+    src: string;
+    alt: string;
+    title: string;
+    width?: number;
+    height?: number;
+  }>;
 }): ExtractedContent {
   const headings = structure.headings || [];
   const paragraphs = structure.sections.map((s) => s.textPreview).filter((t) => t && t.length > 20);
   const navigationLinks = structure.navigation || [];
+  const images = structure.images || [];
 
   // Try to extract footer text from sections
   let footerText: string | undefined;
@@ -156,6 +174,7 @@ export function extractContentFromStructure(structure: {
     navigationLinks,
     footerText,
     contactInfo: Object.keys(contactInfo).length > 0 ? contactInfo : undefined,
+    images,
   };
 }
 
@@ -169,17 +188,39 @@ export function mapContentToSections(
 ): MappedContent {
   const mapped: MappedContent = {};
 
+  // Safe handling of empty/null content
+  // Create a copy of images for intelligent distribution
+  const images = [...(content.images || [])];
+  const headings = content.headings || [];
+  const paragraphs = content.paragraphs || [];
+  const navigationLinks = content.navigationLinks || [];
+
+  // Log received images
+  console.log("[ContentMapper] Images received:", images.length || 0);
+  if (images.length) {
+    console.log("[ContentMapper] First image:", images[0]?.src?.slice(0, 50));
+  }
+
+  // Helper function to get random images from the pool
+  function getRandomImages(count: number) {
+    if (!images || images.length === 0) {
+      return [];
+    }
+    const shuffled = [...images].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  }
+
   // Use AI-processed content if available
   const processed = content.processed;
-  
+
   // Use first heading as potential brand/hero title
-  const mainHeading = content.headings[0] || 'Welcome';
-  const subHeading = content.headings[1] || content.paragraphs[0]?.slice(0, 100) || 'Discover more';
+  const mainHeading = headings[0] || 'Welcome';
+  const subHeading = headings[1] || paragraphs[0]?.slice(0, 100) || 'Discover more';
 
   // Map navbar content
-  if (sections.includes('navbar') && content.navigationLinks.length > 0) {
+  if (sections.includes('navbar') && navigationLinks.length > 0) {
     mapped.navbar = {
-      menu: content.navigationLinks.slice(0, 6).map((link) => ({
+      menu: navigationLinks.slice(0, 6).map((link) => ({
         title: link,
         url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
       })),
@@ -190,8 +231,10 @@ export function mapContentToSections(
     };
   }
 
-  // Map hero content
+  // Map hero content - Assign 1 image
   if (sections.includes('hero')) {
+    const heroImage = images[0] || null;
+
     mapped.hero = {
       title: mainHeading,
       description: subHeading,
@@ -203,42 +246,21 @@ export function mapContentToSections(
         label: 'Learn More',
         onClick: () => console.log('Secondary action clicked'),
       },
+      image: heroImage?.src || "",
     };
   }
 
-  // Map features content - Use AI-processed if available
-  if (sections.includes('features')) {
-    if (processed?.features) {
-      mapped.features = {
-        badge: 'Features',
-        heading: processed.features.heading || 'Our Features',
-        description: processed.features.description || 'Discover what we offer',
-      };
-    } else {
-      // Fallback to basic extraction
-      const featureItems = content.headings.slice(1, 4).map((heading) => ({
-        title: heading,
-        description: content.paragraphs.find((p) => p.length < 200) || 'Learn more about our features',
-      }));
-
-      mapped.features = {
-        badge: 'Features',
-        heading: content.headings.find((h) => h.toLowerCase().includes('feature')) || 'Our Features',
-        description: content.paragraphs.find((p) => p.toLowerCase().includes('feature') || p.toLowerCase().includes('service')) || 
-                     'Discover what we offer',
-        items: featureItems.length > 0 ? featureItems : undefined,
-      };
-    }
-  }
-
-  // Map about content - Use AI-processed if available
+  // Map about content - Use AI-processed if available, assign 2 random images
   if (sections.includes('about')) {
+    const aboutImages = getRandomImages(2);
+
     if (processed?.about) {
       mapped.about = {
         title: processed.about.title || 'About Us',
         description: processed.about.description || 'Learn more about our organization',
         companies: processed.about.companies || [],
         achievements: processed.about.achievements || [],
+        images: aboutImages.map(img => img.src),
       };
     } else {
       // Fallback to basic extraction
@@ -254,38 +276,79 @@ export function mapContentToSections(
         description: aboutParagraph.slice(0, 300),
         companies: [],
         achievements: [],
+        images: aboutImages.map(img => img.src),
       };
     }
   }
 
-  // Map testimonials content
+  // Map features content - Use AI-processed if available, assign 4 random images
+  if (sections.includes('features')) {
+    const featureImages = getRandomImages(4);
+
+    if (processed?.features) {
+      mapped.features = {
+        badge: 'Features',
+        heading: processed.features.heading || 'Our Features',
+        description: processed.features.description || 'Discover what we offer',
+        images: featureImages.map(img => img.src),
+      };
+    } else {
+      // Fallback to basic extraction
+      const featureItems = headings.slice(1, 4).map((heading) => ({
+        title: heading,
+        description: paragraphs.find((p) => p.length < 200) || 'Learn more about our features',
+      }));
+
+      mapped.features = {
+        badge: 'Features',
+        heading: headings.find((h) => h.toLowerCase().includes('feature')) || 'Our Features',
+        description: paragraphs.find((p) => p.toLowerCase().includes('feature') || p.toLowerCase().includes('service')) ||
+                     'Discover what we offer',
+        items: featureItems.length > 0 ? featureItems : undefined,
+        images: featureImages.map(img => img.src),
+      };
+    }
+  }
+
+  // Map testimonials content - Assign images using modulo for distribution
   if (sections.includes('testimonials')) {
+    // Get 3 random images for testimonials, or use fallback avatars
+    const testimonialImages = getRandomImages(3);
+
     mapped.testimonials = {
       title: 'What Our Clients Say',
       description: 'Real feedback from our valued customers',
-      testimonials: [
-        {
-          image: 'https://avatars.githubusercontent.com/u/1?v=4',
-          name: 'Happy Customer',
-          username: '@customer1',
-          text: content.paragraphs[0]?.slice(0, 100) || 'Great service and excellent support!',
-          social: 'https://twitter.com',
-        },
-        {
-          image: 'https://avatars.githubusercontent.com/u/2?v=4',
-          name: 'Satisfied Client',
-          username: '@client2',
-          text: content.paragraphs[1]?.slice(0, 100) || 'Highly recommended for quality work',
-          social: 'https://twitter.com',
-        },
-        {
-          image: 'https://avatars.githubusercontent.com/u/3?v=4',
-          name: 'Regular User',
-          username: '@user3',
-          text: content.paragraphs[2]?.slice(0, 100) || 'Amazing experience overall',
-          social: 'https://twitter.com',
-        },
-      ],
+      testimonials: testimonialImages.length > 0
+        ? testimonialImages.map((img, i) => ({
+            image: img.src,
+            name: `User ${i + 1}`,
+            username: `@user${i + 1}`,
+            text: paragraphs[i]?.slice(0, 100) || 'Sample feedback',
+            social: 'https://twitter.com',
+          }))
+        : [
+            {
+              image: 'https://avatars.githubusercontent.com/u/1?v=4',
+              name: 'Happy Customer',
+              username: '@customer1',
+              text: paragraphs[0]?.slice(0, 100) || 'Great service and excellent support!',
+              social: 'https://twitter.com',
+            },
+            {
+              image: 'https://avatars.githubusercontent.com/u/2?v=4',
+              name: 'Satisfied Client',
+              username: '@client2',
+              text: paragraphs[1]?.slice(0, 100) || 'Highly recommended for quality work',
+              social: 'https://twitter.com',
+            },
+            {
+              image: 'https://avatars.githubusercontent.com/u/3?v=4',
+              name: 'Regular User',
+              username: '@user3',
+              text: paragraphs[2]?.slice(0, 100) || 'Amazing experience overall',
+              social: 'https://twitter.com',
+            },
+          ],
     };
   }
 
@@ -368,6 +431,14 @@ export function mapContentToSections(
     };
   }
 
+  // Debug logs for image distribution
+  console.log('[Image Distribution]', {
+    hero: mapped.hero?.image ? 'yes' : 'no',
+    about: mapped.about?.images?.length || 0,
+    features: mapped.features?.images?.length || 0,
+    testimonials: mapped.testimonials?.testimonials?.filter((t) => t.image).length || 0,
+  });
+
   return mapped;
 }
 
@@ -431,7 +502,24 @@ export function getComponentContentProps(
       };
 
     // Hero components
+    case 'hero-ab':
+      // HeroSlide component supports images prop
+      const heroAbProps = {
+        content: {
+          title: (mappedContent.hero as any)?.title || 'Welcome',
+          subtitle: (mappedContent.hero as any)?.description,
+          description: (mappedContent.hero as any)?.description,
+          buttonText: (mappedContent.hero as any)?.primaryAction?.label,
+        },
+        ...(mappedContent.hero?.image && { images: [mappedContent.hero.image] }),
+      };
+      if (heroAbProps.images) {
+        console.log("[getComponentContentProps] hero-ab: passing", heroAbProps.images.length, "image(s)");
+      }
+      return heroAbProps;
+
     case 'hero-modern':
+      // OceanHero does NOT support image prop - omit it
       return {
         title: (mappedContent.hero as any)?.title || 'Welcome',
         description: (mappedContent.hero as any)?.description || 'Discover more about us',
@@ -453,6 +541,30 @@ export function getComponentContentProps(
         heading: featuresContent?.heading || 'Our Features',
         description: featuresContent?.description || 'Discover what we offer',
         featureItems: featuresContent?.items || [],
+        images: featuresContent?.images || [],
+      };
+
+    case 'features-slideshow':
+      const featuresSlideshowContent = mappedContent.features as any;
+      return {
+        heading: featuresSlideshowContent?.heading || 'Gallery',
+        images: featuresSlideshowContent?.images || [],
+      };
+
+    case 'features-gallery-type':
+      const featuresGalleryTypeContent = mappedContent.features as any;
+      return {
+        title: featuresGalleryTypeContent?.heading || 'Case Studies',
+        description: featuresGalleryTypeContent?.description || 'Discover more',
+        images: featuresGalleryTypeContent?.images || [],
+      };
+
+    case 'features-coursel':
+      const featuresCourselContent = mappedContent.features as any;
+      return {
+        title: featuresCourselContent?.heading || 'Case Studies',
+        description: featuresCourselContent?.description || 'Discover more',
+        images: featuresCourselContent?.images || [],
       };
 
     // About components
@@ -463,6 +575,7 @@ export function getComponentContentProps(
         description: aboutContent?.description || 'Learn more about our organization',
         injectedCompanies: aboutContent?.companies || [],
         injectedAchievements: aboutContent?.achievements || [],
+        images: aboutContent?.images || [],
       };
 
     // Testimonials components

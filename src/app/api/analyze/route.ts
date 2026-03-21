@@ -367,6 +367,22 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
           };
         });
 
+        // === IMAGE EXTRACTION ===
+        const images = Array.from(document.querySelectorAll("img"))
+          .map((img) => ({
+            src: img.src,
+            alt: img.alt || "",
+            title: img.title || "",
+            width: img.naturalWidth,
+            height: img.naturalHeight,
+          }))
+          .filter(
+            (img) =>
+              img.src &&
+              !img.src.startsWith("data:") &&
+              img.src.trim() !== ""
+          );
+
         return {
           headings,
           navigation: uniqueNav,
@@ -378,6 +394,7 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
           hasNavbar,
           hasFooter,
           navbarLinks: uniqueNav,
+          images,
         };
       });
 
@@ -501,6 +518,18 @@ async function fetchWithFallback(url: string) {
       }
     }
 
+    // Extract images from HTML (fallback)
+    const imgMatches = html.matchAll(/<img[^>]*src=["']([^"']+)["'][^>]*(?:alt=["']([^"']*)["'])?[^>]*(?:title=["']([^"']*)["'])?[^>]*>/gi);
+    const images: Array<{ src: string; alt: string; title: string; width: number; height: number }> = [];
+    for (const match of imgMatches) {
+      const src = match[1];
+      const alt = match[2] || "";
+      const title = match[3] || "";
+      if (src && !src.startsWith("data:") && src.trim() !== "") {
+        images.push({ src, alt, title, width: 0, height: 0 });
+      }
+    }
+
     return {
       success: true,
       structure: {
@@ -510,6 +539,7 @@ async function fetchWithFallback(url: string) {
         hasNavbar,
         hasFooter,
         navbarLinks: navLinks.slice(0, 10),
+        images,
       },
       screenshotPath: null,
       fallback: true,
@@ -564,6 +594,10 @@ export async function POST(request: NextRequest) {
     }
 
     const { structure, screenshotPath } = result;
+    const { images } = structure;
+
+    // Log extracted images
+    console.log("[Analyze] Extracted images:", images.length);
 
     // Extract content from structure
     const extractedContent = extractContentFromStructure({
@@ -571,12 +605,14 @@ export async function POST(request: NextRequest) {
       sections: structure.sections,
       navigation: structure.navigation,
       hasFooter: structure.hasFooter,
+      images,
     });
 
     console.log('[Analyze] Extracted content:', {
       headings: extractedContent.headings.length,
       paragraphs: extractedContent.paragraphs.length,
       navigationLinks: extractedContent.navigationLinks.length,
+      images: images.length,
     });
 
     // Process content with AI for better section-specific extraction
@@ -592,6 +628,7 @@ export async function POST(request: NextRequest) {
     const enrichedContent = {
       ...extractedContent,
       processed: processedContent,
+      images,
     };
 
     console.log('[Analyze] AI content processing complete');

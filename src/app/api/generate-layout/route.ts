@@ -21,13 +21,19 @@ export async function POST(request: NextRequest) {
     // Save content if provided
     if (content) {
       console.log('[API /generate-layout] Saving extracted content...');
+      console.log('[API /generate-layout] Content images count:', content.images?.length || 0);
       saveContent(content as ExtractedContent);
+      console.log('[API /generate-layout] Content saved successfully');
     }
 
     // If regenerate is true, generate new layout. Otherwise, try to load existing.
     if (regenerate === true) {
       console.log('[API /generate-layout] Generating new layout with AI...');
-      const layout = await generateLayoutWithAI(pageStructure);
+      console.log('[API /generate-layout] Passing content to generateLayoutWithAI:', {
+        hasImages: content?.images?.length > 0,
+        imageCount: content?.images?.length || 0
+      });
+      const layout = await generateLayoutWithAI(pageStructure, content as ExtractedContent);
 
       return NextResponse.json({
         status: 'success',
@@ -74,6 +80,8 @@ export async function GET() {
   try {
     const layout = await loadLayout();
     const content = await loadContent();
+
+    console.log("[API /generate-layout] Returning images:", content?.images?.length || 0);
 
     return NextResponse.json({
       status: 'success',

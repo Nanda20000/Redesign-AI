@@ -12,18 +12,37 @@ import {
   getComponentRecommendations,
   ComponentRecommendations
 } from './website-analyzer';
-import { ComponentsManifest, LayoutItem } from './ai-layout-generator';
+import { ComponentsManifest, LayoutItem, ExtractedContent } from './ai-layout-generator';
 
 export interface ComponentSelectionOptions {
   manifest: ComponentsManifest;
   analysis: WebsiteAnalysis;
   sections: string[];
+  content?: ExtractedContent;
 }
 
 export interface ComponentSelectionResult {
   layout: LayoutItem[];
   selectionReasons: Record<string, string>;
   varietyScore: number;
+}
+
+/**
+ * Component capability map - which components support images
+ */
+const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
+  hero: ['hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
+  features: ['features-image', 'features-gallery-type', 'features-slideshow', 'features- Image', 'features-Image-new'],
+  testimonials: ['testimonial-cards', 'testimonial-modern', 'testimonial-gradient'],
+  about: ['about-two-column'],
+};
+
+/**
+ * Check if a component supports images
+ */
+export function componentSupportsImages(componentName: string, section: string): boolean {
+  const capableComponents = IMAGE_CAPABLE_COMPONENTS[section] || [];
+  return capableComponents.includes(componentName);
 }
 
 /**
@@ -161,7 +180,8 @@ function scoreComponent(
   componentName: string,
   analysis: WebsiteAnalysis,
   recommendations: ComponentRecommendations,
-  category: string
+  category: string,
+  content?: ExtractedContent
 ): number {
   let score = 0;
 
@@ -195,11 +215,11 @@ function scoreComponent(
   // Content richness adjustment
   if (analysis.contentRichness === 'low') {
     // Prefer simpler components
-    if (componentMatchesStyle(componentName, 'minimal') || 
+    if (componentMatchesStyle(componentName, 'minimal') ||
         componentMatchesStyle(componentName, 'simple')) {
       score += 5;
     }
-    if (componentMatchesStyle(componentName, 'visual') || 
+    if (componentMatchesStyle(componentName, 'visual') ||
         componentMatchesStyle(componentName, 'modern')) {
       score -= 3;
     }
@@ -207,6 +227,13 @@ function scoreComponent(
     // Can handle more complex components
     if (componentMatchesStyle(componentName, 'visual')) {
       score += 3;
+    }
+  }
+
+  // IMAGE-AWARE SCORING: Boost components that support images when images exist
+  if (content?.images && content.images.length > 0) {
+    if (componentSupportsImages(componentName, category)) {
+      score += 15; // Significant boost for image-capable components
     }
   }
 
@@ -221,11 +248,12 @@ function selectBestComponent(
   availableComponents: string[],
   analysis: WebsiteAnalysis,
   recommendations: ComponentRecommendations,
-  usedStyles: Set<string>
+  usedStyles: Set<string>,
+  content?: ExtractedContent
 ): { component: string; score: number; reason: string } {
   const scoredComponents = availableComponents.map(name => ({
     name,
-    score: scoreComponent(name, analysis, recommendations, category),
+    score: scoreComponent(name, analysis, recommendations, category, content),
     description: ''
   }));
 
@@ -347,7 +375,12 @@ function determineSections(
 export function selectComponents(
   options: ComponentSelectionOptions
 ): ComponentSelectionResult {
-  const { manifest, analysis, sections: detectedSections } = options;
+  const { manifest, analysis, sections: detectedSections, content } = options;
+
+  console.log('[Component Selector] Received content:', {
+    hasImages: content?.images?.length > 0,
+    imageCount: content?.images?.length || 0
+  });
 
   console.log('[Component Selector] Starting intelligent component selection...');
   console.log('[Component Selector] Analysis:', {
@@ -355,6 +388,10 @@ export function selectComponents(
     tone: analysis.tone,
     contentRichness: analysis.contentRichness,
     confidence: analysis.confidence
+  });
+  console.log('[Component Selector] Image-aware selection:', {
+    hasImages: content?.images && content.images.length > 0,
+    imageCount: content?.images?.length || 0
   });
 
   // Get components by category
@@ -384,13 +421,14 @@ export function selectComponents(
 
     const availableComponents = componentsByCategory[category];
 
-    // Select best component
+    // Select best component (with image awareness)
     const selection = selectBestComponent(
       category,
       availableComponents,
       analysis,
       recommendations,
-      usedStyles
+      usedStyles,
+      content
     );
 
     layout.push({
@@ -398,7 +436,8 @@ export function selectComponents(
       component: selection.component
     });
 
-    selectionReasons[section] = `${selection.reason}. ${reason}`;
+    const supportsImages = componentSupportsImages(selection.component, section);
+    selectionReasons[section] = `${selection.reason}. ${reason}${content?.images && content.images.length > 0 ? ` (Image support: ${supportsImages ? 'YES' : 'NO'})` : ''}`;
 
     // Track the style used
     for (const [style, keywords] of Object.entries(COMPONENT_STYLES)) {
@@ -408,7 +447,7 @@ export function selectComponents(
       }
     }
 
-    console.log(`[Component Selector] ${section}: ${selection.component} (${selection.score} pts)`);
+    console.log(`[Component Selector] ${section}: ${selection.component} (${selection.score} pts)${supportsImages && content?.images?.length ? ' [IMAGE-CAPABLE]' : ''}`);
   }
 
   // Calculate variety score (0-100)

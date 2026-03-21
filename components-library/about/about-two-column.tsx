@@ -36,6 +36,8 @@ interface About3Props {
     label: string;
     value: string;
   }>;
+  // Dynamic images prop
+  images?: string[];
 }
 
 const defaultCompanies = [
@@ -85,17 +87,23 @@ export const About3 = ({
   achievements,
   injectedCompanies,
   injectedAchievements,
+  images = [],
 }: About3Props) => {
+  // Debug log
+  console.log("[About Component] Images received:", images.length);
+
   // Use injected content if provided, otherwise use defaults
   const finalTitle = title || "About Us";
   const finalDescription = description || "We are dedicated to providing excellence in everything we do.";
+  
+  // Use dynamic images if provided, otherwise use placeholders
   const finalMainImage = mainImage || {
-    src: "https://shadcnblocks.com/images/block/placeholder-1.svg",
-    alt: "placeholder",
+    src: images[0] || "https://shadcnblocks.com/images/block/placeholder-1.svg",
+    alt: "About main image",
   };
   const finalSecondaryImage = secondaryImage || {
-    src: "https://shadcnblocks.com/images/block/placeholder-2.svg",
-    alt: "placeholder",
+    src: images[1] || "https://shadcnblocks.com/images/block/placeholder-2.svg",
+    alt: "About secondary image",
   };
   const finalBreakout = breakout || {
     src: "https://shadcnblocks.com/images/block/block-1.svg",

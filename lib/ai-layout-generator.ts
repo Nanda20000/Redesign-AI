@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
 import { analyzeWebsite, getComponentRecommendations } from './website-analyzer';
-import { buildEnhancedPrompt, selectComponents } from './component-selector';
+import { buildEnhancedPrompt, selectComponents, componentSupportsImages } from './component-selector';
 
 // DeepSeek API endpoints (try primary, fallback to OpenRouter)
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
@@ -278,6 +278,7 @@ export function saveContent(content: ExtractedContent): void {
       console.log('[AI Layout Generator] Created generated-page directory');
     }
 
+    console.log('[AI Layout Generator] Saving content with images:', content.images?.length || 0);
     fs.writeFileSync(CONTENT_JSON_PATH, JSON.stringify(content, null, 2), 'utf-8');
     console.log('[AI Layout Generator] Content saved to:', CONTENT_JSON_PATH);
   } catch (error) {
@@ -322,7 +323,7 @@ export function loadContent(): Promise<ExtractedContent | null> {
 
       const fileContent = fs.readFileSync(CONTENT_JSON_PATH, 'utf-8');
       const content: ExtractedContent = JSON.parse(fileContent);
-      console.log('[AI Layout Generator] Loaded existing content');
+      console.log('[AI Layout Generator] Loaded existing content, images:', content.images?.length || 0);
       resolve(content);
     } catch (error) {
       console.error('[AI Layout Generator] Failed to load content:', error);
@@ -351,6 +352,61 @@ export function loadGeneratedPageData(): Promise<GeneratedPageData> {
 }
 
 /**
+ * Get default image-capable component for a section
+ */
+function getDefaultImageComponent(section: string): string | null {
+  switch (section) {
+    case 'hero':
+      return 'hero-ab';
+    case 'features':
+      return 'features-slideshow';
+    case 'about':
+      return 'about-two-column';
+    case 'testimonials':
+      return 'testimonial-cards';
+    default:
+      return null;
+  }
+}
+
+/**
+ * Force image-capable components when images exist
+ */
+function enforceImageComponents(
+  layout: LayoutResponse,
+  hasImages: boolean
+): LayoutResponse {
+  if (!hasImages) {
+    return layout;
+  }
+
+  const enhancedLayout: LayoutItem[] = [];
+
+  for (const item of layout.layout) {
+    const newItem = { ...item };
+
+    // Check if this section should have images
+    if (['hero', 'features', 'about', 'testimonials'].includes(item.section)) {
+      if (!componentSupportsImages(item.component, item.section)) {
+        const replacement = getDefaultImageComponent(item.section);
+        if (replacement) {
+          console.log('[FORCE FIX] Replacing non-image component:', {
+            section: item.section,
+            old: item.component,
+            new: replacement
+          });
+          newItem.component = replacement;
+        }
+      }
+    }
+
+    enhancedLayout.push(newItem);
+  }
+
+  return { layout: enhancedLayout };
+}
+
+/**
  * Main function: Generate layout with AI based on page structure
  * Uses intelligent content analysis for component selection
  *
@@ -364,6 +420,9 @@ export async function generateLayoutWithAI(
 ): Promise<LayoutResponse> {
   console.log('[AI Layout Generator] Starting intelligent layout generation...');
   console.log('[AI Layout Generator] Page structure sections:', pageStructure.sections);
+
+  // Track if we have images for enforcement
+  const hasImages = extractedContent?.images && extractedContent.images.length > 0;
 
   try {
     // Step 1: Load available components
@@ -409,14 +468,25 @@ export async function generateLayoutWithAI(
 
     // Step 7: Parse the response
     console.log('[AI Layout Generator] Parsing AI response...');
-    const layout = parseLayoutResponse(aiResponse);
+    let layout = parseLayoutResponse(aiResponse);
 
-    // Step 8: Validate and enhance selection with rules engine
+    // FORCE IMAGE-CAPABLE COMPONENTS when images exist
+    if (hasImages) {
+      console.log('[AI Layout Generator] Enforcing image-capable components...');
+      layout = enforceImageComponents(layout, hasImages);
+    }
+
+    // Step 8: Validate and enhance selection with rules engine (image-aware)
     console.log('[AI Layout Generator] Validating component selection...');
+    console.log('[AI Layout Generator] Passing content to selector:', {
+      hasImages: extractedContent?.images?.length > 0,
+      imageCount: extractedContent?.images?.length || 0
+    });
     const selectionResult = selectComponents({
       manifest,
       analysis,
-      sections: pageStructure.sections
+      sections: pageStructure.sections,
+      content: extractedContent
     });
 
     // Log selection reasoning
@@ -430,15 +500,20 @@ export async function generateLayoutWithAI(
     console.log('[AI Layout Generator] Saving layout...');
     saveLayout(layout);
 
-    // Step 10: Log selected components
-    console.log('[AI Layout Generator] === AI Component Selection Complete ===');
+    // Step 10: Log selected components (after enforcement)
+    console.log('[AI Layout Generator] === AI Component Selection Complete (After Image Enforcement) ===');
     console.log('[AI Layout Generator] Website Analysis:');
     console.log(`  - Business Type: ${analysis.businessType} (${Math.round(analysis.confidence * 100)}% confidence)`);
     console.log(`  - Tone: ${analysis.tone}`);
     console.log(`  - Content Richness: ${analysis.contentRichness}`);
-    console.log('[AI Layout Generator] Selected components:');
+    console.log('[AI Layout Generator] Image enforcement:');
+    console.log(`  - Has images: ${extractedContent?.images && extractedContent.images.length > 0}`);
+    console.log(`  - Image count: ${extractedContent?.images?.length || 0}`);
+    console.log('[AI Layout Generator] Final component selection:');
     layout.layout.forEach((item) => {
-      console.log(`  - ${item.section}: ${item.component}`);
+      const supportsImages = componentSupportsImages(item.component, item.section);
+      const wasEnforced = hasImages && ['hero', 'features', 'about', 'testimonials'].includes(item.section) && supportsImages;
+      console.log(`  - ${item.section}: ${item.component}${wasEnforced ? ' [IMAGE-CAPABLE ✓]' : supportsImages ? ' [IMAGE-CAPABLE]' : ''}`);
     });
     console.log('[AI Layout Generator] =========================================');
 
