@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { analyzeWebsite, getComponentRecommendations } from './website-analyzer';
 import { buildEnhancedPrompt, selectComponents, componentSupportsImages } from './component-selector';
+import { SAFE_COMPONENTS } from './component-registry';
 
 // DeepSeek API endpoints (try primary, fallback to OpenRouter)
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
@@ -407,6 +408,22 @@ function enforceImageComponents(
 }
 
 /**
+ * Force AI-selected components to safe ones from SAFE_COMPONENTS
+ */
+function enforceSafeComponents(layout: LayoutItem[]): LayoutItem[] {
+  return layout.map((item) => {
+    const safeList = SAFE_COMPONENTS[item.section as keyof typeof SAFE_COMPONENTS];
+
+    if (!safeList) return item;
+
+    return {
+      ...item,
+      component: safeList[0]
+    };
+  });
+}
+
+/**
  * Main function: Generate layout with AI based on page structure
  * Uses intelligent content analysis for component selection
  *
@@ -517,7 +534,10 @@ export async function generateLayoutWithAI(
     });
     console.log('[AI Layout Generator] =========================================');
 
-    return layout;
+    return {
+      ...layout,
+      layout: enforceSafeComponents(layout.layout)
+    };
   } catch (error) {
     console.error('[AI Layout Generator] Error generating layout:', error);
     throw error;
