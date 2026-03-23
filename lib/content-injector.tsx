@@ -5,6 +5,35 @@
 
 import type { ProcessedSectionContent } from './ai-content-processor';
 
+// Global cursor for sequential image distribution
+let imageCursor = 0;
+
+function getNextImages(images: Array<{ src: string; alt: string; title: string }>, count: number): string[] {
+  const result: string[] = [];
+
+  for (let i = 0; i < count; i++) {
+    if (images && images.length > 0) {
+      result.push(images[imageCursor % images.length].src);
+      imageCursor++;
+    }
+  }
+
+  // Fallback images if array empty
+  if (result.length === 0) {
+    const fallbacks = [
+      'https://images.unsplash.com/photo-1557683316-973673baf926',
+      'https://images.unsplash.com/photo-1557682250-33bd709cbe85',
+      'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5',
+      'https://images.unsplash.com/photo-1557682260-940c94d5340c',
+    ];
+    for (let i = 0; i < count; i++) {
+      result.push(fallbacks[i % fallbacks.length]);
+    }
+  }
+
+  return result;
+}
+
 export interface ExtractedContent {
   headings: string[];
   paragraphs: string[];
@@ -201,14 +230,8 @@ export function mapContentToSections(
     console.log("[ContentMapper] First image:", images[0]?.src?.slice(0, 50));
   }
 
-  // Helper function to get random images from the pool
-  function getRandomImages(count: number) {
-    if (!images || images.length === 0) {
-      return [];
-    }
-    const shuffled = [...images].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-  }
+  // Reset image cursor for fresh distribution
+  imageCursor = 0;
 
   // Use AI-processed content if available
   const processed = content.processed;
@@ -250,9 +273,9 @@ export function mapContentToSections(
     };
   }
 
-  // Map about content - Use AI-processed if available, assign 2 random images
+  // Map about content - Use AI-processed if available, assign 2 images
   if (sections.includes('about')) {
-    const aboutImages = getRandomImages(2);
+    const aboutImages = getNextImages(images, 2);
 
     if (processed?.about) {
       mapped.about = {
@@ -260,7 +283,7 @@ export function mapContentToSections(
         description: processed.about.description || 'Learn more about our organization',
         companies: processed.about.companies || [],
         achievements: processed.about.achievements || [],
-        images: aboutImages.map(img => img.src),
+        images: aboutImages,
       };
     } else {
       // Fallback to basic extraction
@@ -276,21 +299,21 @@ export function mapContentToSections(
         description: aboutParagraph.slice(0, 300),
         companies: [],
         achievements: [],
-        images: aboutImages.map(img => img.src),
+        images: aboutImages,
       };
     }
   }
 
-  // Map features content - Use AI-processed if available, assign 4 random images
+  // Map features content - Use AI-processed if available, assign 4 images
   if (sections.includes('features')) {
-    const featureImages = getRandomImages(4);
+    const featureImages = getNextImages(images, 4);
 
     if (processed?.features) {
       mapped.features = {
         badge: 'Features',
         heading: processed.features.heading || 'Our Features',
         description: processed.features.description || 'Discover what we offer',
-        images: featureImages.map(img => img.src),
+        images: featureImages,
       };
     } else {
       // Fallback to basic extraction
@@ -305,22 +328,21 @@ export function mapContentToSections(
         description: paragraphs.find((p) => p.toLowerCase().includes('feature') || p.toLowerCase().includes('service')) ||
                      'Discover what we offer',
         items: featureItems.length > 0 ? featureItems : undefined,
-        images: featureImages.map(img => img.src),
+        images: featureImages,
       };
     }
   }
 
-  // Map testimonials content - Assign images using modulo for distribution
+  // Map testimonials content - Assign 3 images sequentially
   if (sections.includes('testimonials')) {
-    // Get 3 random images for testimonials, or use fallback avatars
-    const testimonialImages = getRandomImages(3);
+    const testimonialImages = getNextImages(images, 3);
 
     mapped.testimonials = {
       title: 'What Our Clients Say',
       description: 'Real feedback from our valued customers',
       testimonials: testimonialImages.length > 0
-        ? testimonialImages.map((img, i) => ({
-            image: img.src,
+        ? testimonialImages.map((imgSrc, i) => ({
+            image: imgSrc,
             name: `User ${i + 1}`,
             username: `@user${i + 1}`,
             text: paragraphs[i]?.slice(0, 100) || 'Sample feedback',
