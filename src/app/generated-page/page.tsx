@@ -221,6 +221,14 @@ export default function GeneratedPage() {
           contentToUse
         );
 
+        // Debug log before rendering each component
+        console.log("[FINAL DEBUG]", {
+          section: item.section,
+          component: componentName,
+          images: contentProps.images?.length,
+          items: contentProps.items?.length
+        });
+
         // Render component with injected content props
         return (
           <div key={`${item.section}-${index}`}>
