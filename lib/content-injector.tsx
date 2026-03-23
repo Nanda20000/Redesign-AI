@@ -240,10 +240,14 @@ export function mapContentToSections(
   const mainHeading = headings[0] || 'Welcome';
   const subHeading = headings[1] || paragraphs[0]?.slice(0, 100) || 'Discover more';
 
-  // Map navbar content
-  if (sections.includes('navbar') && navigationLinks.length > 0) {
+  // Map navbar content - Always ensure navbar has menu items
+  if (sections.includes('navbar')) {
+    const menuLinks = navigationLinks.length > 0 
+      ? navigationLinks.slice(0, 6)
+      : ["Home", "About", "Services", "Contact"];
+
     mapped.navbar = {
-      menu: navigationLinks.slice(0, 6).map((link) => ({
+      menu: menuLinks.map((link) => ({
         title: link,
         url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
       })),
@@ -497,13 +501,25 @@ export function getComponentContentProps(
       };
 
     case 'navbar-minimal':
+      const menuItems = mappedContent.navbar?.menu?.map((item) => ({
+        to: item.url,
+        text: item.title,
+      })) || [];
+      
+      // Ensure menuItems is NEVER empty
+      const safeMenuItems = menuItems.length > 0 
+        ? menuItems 
+        : [
+            { to: '#home', text: 'Home' },
+            { to: '#about', text: 'About' },
+            { to: '#services', text: 'Services' },
+            { to: '#contact', text: 'Contact' },
+          ];
+
       return {
         theme: 'light' as const,
         logo: <span className="text-xl font-bold">{mappedContent.navbar?.menu?.[0]?.title || 'Brand'}</span>,
-        menuItems: mappedContent.navbar?.menu?.map((item) => ({
-          to: item.url,
-          text: item.title,
-        })) || [],
+        menuItems: safeMenuItems,
         rightContent: (
           <>
             <button className="text-sm font-medium hover:underline">Sign In</button>
@@ -533,9 +549,9 @@ export function getComponentContentProps(
           description: (mappedContent.hero as any)?.description,
           buttonText: (mappedContent.hero as any)?.primaryAction?.label,
         },
-        ...(mappedContent.hero?.image && { images: [mappedContent.hero.image] }),
+        images: mappedContent.hero?.image ? [mappedContent.hero.image] : [],
       };
-      if (heroAbProps.images) {
+      if (heroAbProps.images && heroAbProps.images.length > 0) {
         console.log("[getComponentContentProps] hero-ab: passing", heroAbProps.images.length, "image(s)");
       }
       return heroAbProps;

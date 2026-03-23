@@ -424,6 +424,21 @@ function enforceSafeComponents(layout: LayoutItem[]): LayoutItem[] {
 }
 
 /**
+ * Force hero section to always use image-supported component (hero-ab)
+ */
+function enforceHeroComponent(layout: LayoutItem[]): LayoutItem[] {
+  return layout.map((item) => {
+    if (item.section === 'hero') {
+      return {
+        ...item,
+        component: 'hero-ab'
+      };
+    }
+    return item;
+  });
+}
+
+/**
  * Main function: Generate layout with AI based on page structure
  * Uses intelligent content analysis for component selection
  *
@@ -536,7 +551,7 @@ export async function generateLayoutWithAI(
 
     return {
       ...layout,
-      layout: enforceSafeComponents(layout.layout)
+      layout: enforceHeroComponent(enforceSafeComponents(layout.layout))
     };
   } catch (error) {
     console.error('[AI Layout Generator] Error generating layout:', error);
