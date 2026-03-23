@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { analyzeWebsite, getComponentRecommendations } from './website-analyzer';
 import { buildEnhancedPrompt, selectComponents, componentSupportsImages } from './component-selector';
-import { SAFE_COMPONENTS } from './component-registry';
+import { COMPONENT_META } from './component-meta';
 
 // DeepSeek API endpoints (try primary, fallback to OpenRouter)
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
@@ -408,33 +408,48 @@ function enforceImageComponents(
 }
 
 /**
- * Force AI-selected components to safe ones from SAFE_COMPONENTS
+ * Select the best component for a section based on metadata and content
  */
-function enforceSafeComponents(layout: LayoutItem[]): LayoutItem[] {
-  return layout.map((item) => {
-    const safeList = SAFE_COMPONENTS[item.section as keyof typeof SAFE_COMPONENTS];
+function selectBestComponent(section: string, content?: ExtractedContent): string | null {
+  const candidates = Object.entries(COMPONENT_META)
+    .filter(([_, meta]) => meta.section === section);
 
-    if (!safeList) return item;
+  if (candidates.length === 0) return null;
 
-    return {
-      ...item,
-      component: safeList[0]
-    };
-  });
+  let best = candidates[0];
+
+  for (const candidate of candidates) {
+    const [name, meta] = candidate;
+
+    // Rule 1: prefer image components if images exist
+    if (content?.images?.length && content.images.length > 0 && meta.supportsImages) {
+      best = candidate;
+    }
+
+    // Rule 2: prefer item components if items exist
+    if (content?.items?.length && content.items.length > 0 && meta.supportsItems) {
+      best = candidate;
+    }
+
+    // Rule 3: higher priority wins
+    if (meta.priority > best[1].priority) {
+      best = candidate;
+    }
+  }
+
+  return best[0];
 }
 
 /**
- * Force hero section to always use image-supported component (hero-ab)
+ * Apply intelligent component selection based on metadata and content
  */
-function enforceHeroComponent(layout: LayoutItem[]): LayoutItem[] {
+function applyIntelligentSelection(layout: LayoutItem[], content?: ExtractedContent): LayoutItem[] {
   return layout.map((item) => {
-    if (item.section === 'hero') {
-      return {
-        ...item,
-        component: 'hero-ab'
-      };
-    }
-    return item;
+    const bestComponent = selectBestComponent(item.section, content);
+    return {
+      ...item,
+      component: bestComponent || item.component
+    };
   });
 }
 
@@ -549,9 +564,12 @@ export async function generateLayoutWithAI(
     });
     console.log('[AI Layout Generator] =========================================');
 
+    // Apply intelligent component selection based on metadata and content
+    const finalLayout = applyIntelligentSelection(layout.layout, extractedContent);
+
     return {
       ...layout,
-      layout: enforceHeroComponent(enforceSafeComponents(layout.layout))
+      layout: finalLayout
     };
   } catch (error) {
     console.error('[AI Layout Generator] Error generating layout:', error);
