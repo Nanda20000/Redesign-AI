@@ -9,28 +9,16 @@
       "component": "hero-ab"
     },
     {
-      "section": "features",
-      "component": "features-slideshow"
-    },
-    {
       "section": "about",
       "component": "about-two-column"
     },
     {
-      "section": "services",
-      "component": "features-Image"
-    },
-    {
-      "section": "testimonials",
-      "component": "testimonial-cards"
-    },
-    {
-      "section": "contact",
-      "component": "contact-form"
+      "section": "features",
+      "component": "features-slideshow"
     },
     {
       "section": "footer",
-      "component": "footer-simple"
+      "component": "footer-minimal"
     }
   ]
 }

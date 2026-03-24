@@ -623,22 +623,6 @@ export function getComponentContentProps(
         testimonials: (mappedContent.testimonials as any)?.testimonials || [],
       };
 
-    case 'features-gallery-type':
-      const featuresGalleryTypeContent = mappedContent.features as any;
-      return {
-        title: featuresGalleryTypeContent?.heading || 'Case Studies',
-        description: featuresGalleryTypeContent?.description || 'Discover more',
-        images: featuresGalleryTypeContent?.images || [],
-      };
-
-    case 'features-coursel':
-      const featuresCourselContent = mappedContent.features as any;
-      return {
-        title: featuresCourselContent?.heading || 'Case Studies',
-        description: featuresCourselContent?.description || 'Discover more',
-        images: featuresCourselContent?.images || [],
-      };
-
     case 'testimonial-gradient':
     case 'testimonial-section4':
     case 'testimonial-section5': {
