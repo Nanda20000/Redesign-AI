@@ -1,3 +1,4 @@
+import React from "react";
 import { Warp } from "@paper-design/shaders-react"
 
 interface WarpShaderHeroProps {

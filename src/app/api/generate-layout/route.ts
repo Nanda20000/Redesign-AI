@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateLayoutWithAI, loadLayout, loadContent, saveContent, type PageStructure, type ExtractedContent } from '@/../lib/ai-layout-generator';
+import { generatePropsForLayout, type ExtractedWebsiteContent } from '@/../lib/ai-prop-injector';
+import * as fs from 'fs';
+import * as path from 'path';
+
+const AI_PROPS_PATH = path.join(process.cwd(), 'generated-page', 'ai-props.json');
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,6 +39,33 @@ export async function POST(request: NextRequest) {
         imageCount: content?.images?.length || 0
       });
       const layout = await generateLayoutWithAI(pageStructure, content as ExtractedContent);
+
+      // Generate AI props for all components in parallel
+      if (content) {
+        try {
+          console.log('[generate-layout] Starting AI prop injection...');
+          const aiContent: ExtractedWebsiteContent = {
+            headings: content.headings || [],
+            paragraphs: content.paragraphs || [],
+            navigationLinks: content.navigationLinks || [],
+            footerText: content.footerText,
+            contactInfo: content.contactInfo,
+            processed: content.processed as any,
+          };
+          const aiProps = await generatePropsForLayout(layout.layout, aiContent);
+          
+          // Save AI props to file for the page renderer to use
+          fs.writeFileSync(
+            AI_PROPS_PATH,
+            JSON.stringify(aiProps, null, 2),
+            'utf-8'
+          );
+          console.log('[generate-layout] AI props saved to ai-props.json');
+        } catch (err: any) {
+          console.error('[generate-layout] AI prop injection failed:', err.message);
+          // Continue without AI props — page will use fallback content
+        }
+      }
 
       return NextResponse.json({
         status: 'success',
@@ -80,6 +112,16 @@ export async function GET() {
   try {
     const layout = await loadLayout();
     const content = await loadContent();
+    
+    // Load AI-generated props if available
+    let aiProps = null;
+    if (fs.existsSync(AI_PROPS_PATH)) {
+      try {
+        aiProps = JSON.parse(fs.readFileSync(AI_PROPS_PATH, 'utf-8'));
+      } catch {
+        console.warn('[generate-layout] Could not load ai-props.json');
+      }
+    }
 
     console.log("[API /generate-layout] Returning images:", content?.images?.length || 0);
 
@@ -87,6 +129,7 @@ export async function GET() {
       status: 'success',
       layout: layout.layout,
       content: content || null,
+      aiProps: aiProps || null,
     });
   } catch (error: any) {
     console.error('[API /generate-layout] Error loading layout:', error);

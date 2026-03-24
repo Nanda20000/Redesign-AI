@@ -6,7 +6,6 @@
 import type { ProcessedSectionContent } from './ai-content-processor';
 import { distributeImages } from './image-distributor';
 import { getComponentImageConfig } from './component-image-map';
-import { summariseContent, type SectionTextContent } from './content-summariser';
 import { isComponentDynamic } from './component-content-map';
 
 /**
@@ -229,16 +228,6 @@ export function mapContentToSections(
   const mainHeading = headings[0] ?? '';
   const subHeading = headings[1] ?? paragraphs[0]?.slice(0, 100) ?? '';
 
-  // Summarise all text content once — used across all sections
-  const summarised: SectionTextContent = summariseContent({
-    headings,
-    paragraphs,
-    navigationLinks,
-    footerText: content.footerText,
-    contactInfo: content.contactInfo,
-    processed: content.processed,
-  });
-
   // Use the image distributor if layout is provided, otherwise fall back
   // to sequential distribution
   const imageAllocation = layout
@@ -269,8 +258,9 @@ export function mapContentToSections(
 
   // Map navbar content - Always ensure navbar has menu items
   if (sections.includes('navbar')) {
+    const navLinks = processed?.footer?.description ? navigationLinks : navigationLinks.slice(0, 5);
     mapped.navbar = {
-      menu: (summarised.navLinks ?? []).map(link => ({
+      menu: navLinks.map(link => ({
         title: link,
         url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
       })),
@@ -285,9 +275,9 @@ export function mapContentToSections(
   if (sections.includes('hero')) {
     const heroImgs = getImages('hero', 1);
     mapped.hero = {
-      title: summarised.heroTitle ?? '',
-      description: summarised.heroDescription ?? summarised.heroSubtitle ?? '',
-      primaryAction: { label: summarised.heroCta ?? '', onClick: () => {} },
+      title: processed?.about?.title ?? headings[0] ?? '',
+      description: processed?.about?.description ?? paragraphs[0]?.slice(0, 150) ?? '',
+      primaryAction: { label: 'Get Started', onClick: () => {} },
       secondaryAction: { label: 'Learn More', onClick: () => {} },
       image: heroImgs[0] ?? '',
     };
@@ -297,10 +287,10 @@ export function mapContentToSections(
   if (sections.includes('about')) {
     const aboutImages = getImages('about', 2);
     mapped.about = {
-      title: summarised.aboutTitle ?? '',
-      description: summarised.aboutDescription ?? '',
-      companies: summarised.companies ?? [],
-      achievements: summarised.achievements ?? [],
+      title: processed?.about?.title ?? 'About Us',
+      description: processed?.about?.description ?? paragraphs[1]?.slice(0, 200) ?? '',
+      companies: processed?.about?.companies ?? [],
+      achievements: processed?.about?.achievements ?? [],
       images: aboutImages,
     };
   }
@@ -309,11 +299,11 @@ export function mapContentToSections(
   if (sections.includes('features')) {
     const featureImages = getImages('features', 4);
     mapped.features = {
-      badge: summarised.featureBadge ?? '',
-      heading: summarised.featuresHeading ?? '',
-      description: summarised.featuresDescription ?? '',
-      items: summarised.featureItems && summarised.featureItems.length > 0
-        ? summarised.featureItems
+      badge: processed?.features?.heading ? 'Features' : '',
+      heading: processed?.features?.heading ?? 'Our Features',
+      description: processed?.features?.description ?? paragraphs[2]?.slice(0, 100) ?? '',
+      items: processed?.features?.items && processed.features.items.length > 0
+        ? processed.features.items
         : undefined,
       images: featureImages,
     };
@@ -324,15 +314,14 @@ export function mapContentToSections(
     const testimonialImages = getImages('testimonials', 3);
     const builtTestimonials = testimonialImages.map((imgSrc, i) => ({
       image: imgSrc,
-      name: summarised.testimonialItems?.[i]?.name ?? '',
+      name: headings[i + 2] || `Customer ${i + 1}`,
       username: `@customer${i + 1}`,
-      text: summarised.testimonialItems?.[i]?.text ??
-            paragraphs[i]?.slice(0, 120) ?? '',
+      text: paragraphs[i]?.slice(0, 120) ?? 'Great service!',
       social: 'https://twitter.com',
     }));
     mapped.testimonials = {
-      title: summarised.testimonialsTitle ?? '',
-      description: summarised.testimonialsDescription ?? '',
+      title: 'What Our Clients Say',
+      description: 'Real feedback from real customers',
       testimonials: builtTestimonials.length > 0
         ? builtTestimonials
         : [],
@@ -342,23 +331,23 @@ export function mapContentToSections(
   // Map contact content
   if (sections.includes('contact')) {
     mapped.contact = {
-      title: summarised.contactTitle ?? '',
-      subtitle: summarised.contactDescription ?? '',
+      title: 'Get In Touch',
+      subtitle: 'We\'d love to hear from you',
       submitText: 'Send Message',
     };
   }
 
   // Map footer content - Use AI-processed if available
   if (sections.includes('footer')) {
-    const brandName = summarised.brandName ?? mainHeading.split(' ')[0] ?? '';
+    const brandName = processed?.footer?.brandName ?? mainHeading.split(' ')[0] ?? 'Brand';
     mapped.footer = {
-      brandName: summarised.footerBrand ?? brandName,
-      description: summarised.footerDescription ?? '',
-      links: (summarised.footerLinks ?? []).slice(0, 5).map(link => ({
+      brandName: brandName,
+      description: processed?.footer?.description ?? paragraphs[paragraphs.length - 1]?.slice(0, 100) ?? '',
+      links: navigationLinks.slice(0, 5).map(link => ({
         name: link,
         url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
       })),
-      copyright: summarised.footerCopyright ?? '',
+      copyright: processed?.footer?.copyright ?? `© ${new Date().getFullYear()} ${brandName}. All rights reserved.`,
     };
   }
 
@@ -388,8 +377,7 @@ export function mapContentToSections(
 export function getComponentContentProps(
   componentName: string,
   sectionType: string,
-  mappedContent: MappedContent,
-  summarised?: SectionTextContent
+  mappedContent: MappedContent
 ): Record<string, any> {
   const sectionContent = mappedContent[sectionType as keyof MappedContent];
 
@@ -423,7 +411,7 @@ export function getComponentContentProps(
 
       return {
         theme: 'light' as const,
-        logo: <span className="text-xl font-bold">{summarised?.brandName ?? mappedContent.navbar?.menu?.[0]?.title ?? ''}</span>,
+        logo: <span className="text-xl font-bold">{mappedContent.navbar?.menu?.[0]?.title ?? ''}</span>,
         menuItems: menuItems,
         rightContent: (
           <>
@@ -449,10 +437,10 @@ export function getComponentContentProps(
       // HeroSlide component supports images prop
       const heroAbProps = {
         content: {
-          title: summarised?.heroTitle ?? (mappedContent.hero as any)?.title ?? '',
-          subtitle: summarised?.heroSubtitle ?? '',
-          description: summarised?.heroDescription ?? (mappedContent.hero as any)?.description ?? '',
-          buttonText: summarised?.heroCta ?? '',
+          title: (mappedContent.hero as any)?.title ?? '',
+          subtitle: '',
+          description: (mappedContent.hero as any)?.description ?? '',
+          buttonText: 'Get Started',
         },
         images: (mappedContent.hero as any)?.image
           ? [(mappedContent.hero as any).image]
@@ -481,48 +469,48 @@ export function getComponentContentProps(
     // Features components
     case 'features- Image':
       return {
-        heading: summarised?.featuresHeading ?? (mappedContent.features as any)?.heading ?? '',
+        heading: (mappedContent.features as any)?.heading ?? '',
         images: (mappedContent.features as any)?.images ?? [],
       };
 
     case 'features-Image-new':
       return {
-        badge: summarised?.featureBadge ?? '',
-        title: summarised?.featuresHeading ?? '',
-        description: summarised?.featuresDescription ?? '',
+        badge: (mappedContent.features as any)?.badge ?? '',
+        title: (mappedContent.features as any)?.heading ?? '',
+        description: (mappedContent.features as any)?.description ?? '',
         images: (mappedContent.features as any)?.images ?? [],
       };
 
     case 'features-grid':
       const featuresContent = mappedContent.features as any;
       return {
-        badge: summarised?.featureBadge ?? featuresContent?.badge ?? '',
-        heading: summarised?.featuresHeading ?? featuresContent?.heading ?? '',
-        description: summarised?.featuresDescription ?? featuresContent?.description ?? '',
-        featureItems: summarised?.featureItems ?? featuresContent?.items ?? [],
+        badge: featuresContent?.badge ?? '',
+        heading: featuresContent?.heading ?? '',
+        description: featuresContent?.description ?? '',
+        featureItems: featuresContent?.items ?? [],
         images: featuresContent?.images ?? [],
       };
 
     case 'features-slideshow':
       const featuresSlideshowContent = mappedContent.features as any;
       return {
-        heading: summarised?.featuresHeading ?? featuresSlideshowContent?.heading ?? '',
+        heading: featuresSlideshowContent?.heading ?? '',
         images: featuresSlideshowContent?.images ?? [],
       };
 
     case 'features-gallery-type':
       const featuresGalleryTypeContent = mappedContent.features as any;
       return {
-        title: summarised?.featuresHeading ?? featuresGalleryTypeContent?.heading ?? '',
-        description: summarised?.featuresDescription ?? '',
+        title: featuresGalleryTypeContent?.heading ?? '',
+        description: featuresGalleryTypeContent?.description ?? '',
         images: featuresGalleryTypeContent?.images ?? [],
       };
 
     case 'features-coursel':
       const featuresCourselContent = mappedContent.features as any;
       return {
-        title: summarised?.featuresHeading ?? featuresCourselContent?.heading ?? '',
-        description: summarised?.featuresDescription ?? '',
+        title: featuresCourselContent?.heading ?? '',
+        description: featuresCourselContent?.description ?? '',
         images: featuresCourselContent?.images ?? [],
       };
 
@@ -530,13 +518,13 @@ export function getComponentContentProps(
     case 'about-two-column':
       const aboutContent = mappedContent.about as any;
       return {
-        title: summarised?.aboutTitle ?? aboutContent?.title ?? '',
-        description: summarised?.aboutDescription ?? aboutContent?.description ?? '',
-        achievementsTitle: summarised?.achievementsTitle ?? '',
-        achievementsDescription: summarised?.achievementsDescription ?? '',
-        companiesTitle: summarised?.companiesTitle ?? '',
-        injectedCompanies: summarised?.companies ?? [],
-        injectedAchievements: summarised?.achievements ?? [],
+        title: aboutContent?.title ?? '',
+        description: aboutContent?.description ?? '',
+        achievementsTitle: 'Our Achievements',
+        achievementsDescription: '',
+        companiesTitle: 'Trusted By',
+        injectedCompanies: aboutContent?.companies ?? [],
+        injectedAchievements: aboutContent?.achievements ?? [],
         images: aboutContent?.images ?? [],
       };
 
@@ -544,8 +532,8 @@ export function getComponentContentProps(
     case 'testimonial-cards':
     case 'testimonial-section5':
       return {
-        title: summarised?.testimonialsTitle ?? '',
-        description: summarised?.testimonialsDescription ?? '',
+        title: (mappedContent.testimonials as any)?.title ?? '',
+        description: (mappedContent.testimonials as any)?.description ?? '',
         testimonials: (mappedContent.testimonials as any)?.testimonials ?? [],
       };
 
@@ -582,12 +570,12 @@ export function getComponentContentProps(
     case 'contact-form':
       const contactContent = mappedContent.contact as any;
       return {
-        title: summarised?.contactTitle ?? '',
-        description: summarised?.contactDescription ?? '',
+        title: contactContent?.title ?? '',
+        description: contactContent?.subtitle ?? '',
         contactInfo: [
-          { icon: 'Mail',   label: 'Email',   value: summarised?.contactEmail   ?? '' },
-          { icon: 'Phone',  label: 'Phone',   value: summarised?.contactPhone   ?? '' },
-          { icon: 'MapPin', label: 'Address', value: summarised?.contactAddress ?? '' },
+          { icon: 'Mail',   label: 'Email',   value: mappedContent.footer?.brandName ?? '' },
+          { icon: 'Phone',  label: 'Phone',   value: '' },
+          { icon: 'MapPin', label: 'Address', value: '' },
         ],
         children: (
           <form className="flex w-full flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
@@ -637,18 +625,15 @@ export function getComponentContentProps(
     // Footer components - Now accepts props
     case 'footer-simple':
       return {
-        brandName:   summarised?.footerBrand       ?? (mappedContent.footer as any)?.brandName    ?? '',
-        description: summarised?.footerDescription ?? (mappedContent.footer as any)?.description  ?? '',
+        brandName:   (mappedContent.footer as any)?.brandName    ?? '',
+        description: (mappedContent.footer as any)?.description  ?? '',
         contactInfo: {
-          email:   summarised?.contactEmail   ?? '',
-          phone:   summarised?.contactPhone   ?? '',
-          address: summarised?.contactAddress ?? '',
+          email:   '',
+          phone:   '',
+          address: '',
         },
-        copyright: summarised?.footerCopyright ?? '',
-        links: (summarised?.footerLinks ?? []).slice(0, 5).map(link => ({
-          name: link,
-          url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
-        })),
+        copyright: (mappedContent.footer as any)?.copyright ?? '',
+        links: (mappedContent.footer as any)?.links ?? [],
       };
 
     // Pricing components

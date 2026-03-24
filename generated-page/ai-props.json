@@ -1,0 +1,78 @@
+{
+  "navbar-minimal": {
+    "menuItems": [
+      {
+        "to": "/about-us",
+        "text": "About Us"
+      },
+      {
+        "to": "/treatments",
+        "text": "Treatments"
+      },
+      {
+        "to": "/departments",
+        "text": "Departments"
+      },
+      {
+        "to": "/doctors",
+        "text": "Doctors"
+      },
+      {
+        "to": "/contact",
+        "text": "Contact"
+      }
+    ]
+  },
+  "hero-ae": {
+    "content": {
+      "title": "Your Smile is Our Priority",
+      "subtitle": "World-Class Dentistry in Kerala",
+      "description": "Experience unmatched dental care with our gentle, expert procedures for a confident smile.",
+      "buttonText": "Book an Appointment"
+    }
+  },
+  "about-two-column": {
+    "title": "About MIDAC Dental Centre",
+    "description": "MIDAC is a world-class centre for dentistry, implants, and cosmetic dentistry in Kerala. We provide unmatched, gentle care with a simple priority: your confident smile.",
+    "achievementsTitle": null,
+    "achievementsDescription": null,
+    "companiesTitle": null,
+    "injectedCompanies": null,
+    "injectedAchievements": null
+  },
+  "features-grid": {
+    "badge": "Treatments",
+    "heading": "Our Dental Treatments",
+    "description": "Gentle, expert procedures for a confident, healthy smile.",
+    "featureItems": [
+      {
+        "title": "Dental Implants",
+        "description": "World-class tooth replacement for a natural, lasting smile."
+      },
+      {
+        "title": "Root Canal Treatment",
+        "description": "Save and restore infected or damaged teeth effectively."
+      },
+      {
+        "title": "Dental Abscess Care",
+        "description": "Relieve pain and treat infection with expert care."
+      },
+      {
+        "title": "Decayed Teeth Restoration",
+        "description": "Procedures to address and restore severely decayed teeth."
+      }
+    ]
+  },
+  "features-slideshow": {
+    "heading": "Our Gentle Dental Procedures"
+  },
+  "testimonial-section5": {
+    "title": "What Our Clients Say",
+    "description": "Rediscover your radiant and unshakable smile with us."
+  },
+  "contact-form": {
+    "title": "Contact Our Dental Clinic",
+    "description": "Reach out to schedule your appointment or make an enquiry. Your smile is our priority."
+  },
+  "footer-modern": {}
+}

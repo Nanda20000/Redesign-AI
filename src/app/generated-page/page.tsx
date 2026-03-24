@@ -10,12 +10,12 @@ import {
   type MappedContent,
   type ExtractedContent
 } from "@/../lib/content-injector";
-import { summariseContent, type SectionTextContent } from "@/../lib/content-summariser";
 import { isComponentDynamic } from "@/../lib/component-content-map";
 
 export interface LayoutData {
   layout: LayoutItem[];
   content?: ExtractedContent | null;
+  aiProps?: Record<string, Record<string, any>> | null;
 }
 
 // Whitelist of dynamic components that accept props
@@ -70,10 +70,56 @@ function getFallbackComponent(section: string): string {
   return defaultFallbacks[0];
 }
 
+/**
+ * Merge base props with AI-generated props.
+ * AI props win over base props for text fields.
+ * Base props are kept for non-text fields (images, functions, JSX).
+ */
+function mergeProps(
+  base: Record<string, any>,
+  aiGenerated: Record<string, any>,
+  componentName: string
+): Record<string, any> {
+  const merged = { ...base };
+  
+  for (const [key, value] of Object.entries(aiGenerated)) {
+    // Skip null/undefined AI values
+    if (value === null || value === undefined) continue;
+    
+    // Handle nested content object (hero components use content.title etc.)
+    if (key.includes('.')) {
+      const [parent, child] = key.split('.');
+      if (merged[parent] && typeof merged[parent] === 'object') {
+        merged[parent] = { ...merged[parent], [child]: value };
+      }
+      continue;
+    }
+    
+    // Only override with AI value if it's a non-empty string or array
+    if (typeof value === 'string' && value.trim().length > 0) {
+      merged[key] = value;
+    } else if (Array.isArray(value) && value.length > 0) {
+      // For arrays like featureItems, menuItems — merge carefully
+      // Keep images from base (AI doesn't generate image URLs)
+      if (key !== 'images' && key !== 'testimonials') {
+        merged[key] = value;
+      }
+    } else if (typeof value === 'object' && !Array.isArray(value)) {
+      merged[key] = { ...(merged[key] || {}), ...value };
+    }
+  }
+  
+  console.log(`[mergeProps] ${componentName} — AI overrode:`, 
+    Object.keys(aiGenerated).filter(k => aiGenerated[k] !== null)
+  );
+  
+  return merged;
+}
+
 export default function GeneratedPage() {
   const [layout, setLayout] = useState<LayoutData | null>(null);
   const [mappedContent, setMappedContent] = useState<MappedContent | null>(null);
-  const [summarisedContent, setSummarisedContent] = useState<SectionTextContent | null>(null);
+  const [aiProps, setAiProps] = useState<Record<string, Record<string, any>> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -108,6 +154,12 @@ export default function GeneratedPage() {
         const layoutData = { ...data, layout: deduplicatedLayout };
         setLayout(layoutData);
 
+        // Set AI props if available
+        if (data.aiProps) {
+          console.log('[GeneratedPage] AI props loaded for components:', Object.keys(data.aiProps));
+          setAiProps(data.aiProps);
+        }
+
         // Map extracted content to component props
         if (layoutData.layout) {
           const content = data.content || {};
@@ -120,17 +172,6 @@ export default function GeneratedPage() {
             console.log("[GeneratedPage] Mapped hero image:", mapped.hero?.image);
             console.log("[GeneratedPage] Mapped features images:", mapped.features?.images?.length || 0);
             setMappedContent(mapped);
-
-            // Compute summarised text content for dynamic prop injection
-            const rawForSummarise = {
-              headings: data.content?.headings || [],
-              paragraphs: data.content?.paragraphs || [],
-              navigationLinks: data.content?.navigationLinks || [],
-              footerText: data.content?.footerText,
-              contactInfo: data.content?.contactInfo,
-              processed: data.content?.processed,
-            };
-            setSummarisedContent(summariseContent(rawForSummarise));
           } else {
             // Content not ready yet - retry after delay
             console.warn("[GeneratedPage] Content not ready yet, retrying...");
@@ -146,17 +187,6 @@ export default function GeneratedPage() {
                   const mapped = mapContentToSections(retryData.content, sectionTypes);
                   console.log("[GeneratedPage] Mapped hero image (retry):", mapped.hero?.image);
                   setMappedContent(mapped);
-
-                  // Compute summarised text content for dynamic prop injection
-                  const rawForSummarise = {
-                    headings: retryData.content?.headings || [],
-                    paragraphs: retryData.content?.paragraphs || [],
-                    navigationLinks: retryData.content?.navigationLinks || [],
-                    footerText: retryData.content?.footerText,
-                    contactInfo: retryData.content?.contactInfo,
-                    processed: retryData.content?.processed,
-                  };
-                  setSummarisedContent(summariseContent(rawForSummarise));
                 } else {
                   console.warn("[GeneratedPage] Retry failed, using defaults");
                   setMappedContent(getDefaultMappedContent());
@@ -305,13 +335,16 @@ export default function GeneratedPage() {
           `[GeneratedPage] Rendering ${componentName}${usedFallback ? " (fallback)" : ""} for ${item.section}`
         );
 
-        // Get content props for this component
-        const contentProps = getComponentContentProps(
+        // Merge: AI props take priority over rule-based props
+        const baseProps = getComponentContentProps(
           componentName,
           item.section,
-          contentToUse,
-          summarisedContent || undefined
+          contentToUse
         );
+        const componentAiProps = aiProps?.[componentName] || {};
+        
+        // Deep merge: AI props override base props
+        const contentProps = mergeProps(baseProps, componentAiProps, componentName);
 
         // Debug log before rendering each component
         console.log("[FINAL DEBUG]", {
