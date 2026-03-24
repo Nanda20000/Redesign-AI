@@ -4,34 +4,35 @@
  */
 
 import type { ProcessedSectionContent } from './ai-content-processor';
+import { distributeImages } from './image-distributor';
+import { getComponentImageConfig } from './component-image-map';
 
-// Global cursor for sequential image distribution
-let imageCursor = 0;
-
-function getNextImages(images: Array<{ src: string; alt: string; title: string }>, count: number): string[] {
-  const result: string[] = [];
-
-  for (let i = 0; i < count; i++) {
-    if (images && images.length > 0) {
-      result.push(images[imageCursor % images.length].src);
-      imageCursor++;
-    }
-  }
-
-  // Fallback images if array empty
-  if (result.length === 0) {
-    const fallbacks = [
-      'https://images.unsplash.com/photo-1557683316-973673baf926',
-      'https://images.unsplash.com/photo-1557682250-33bd709cbe85',
-      'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5',
-      'https://images.unsplash.com/photo-1557682260-940c94d5340c',
+/**
+ * Build testimonial objects from images and text content.
+ */
+function buildTestimonialItems(
+  images: string[],
+  paragraphs: string[],
+  headings: string[]
+): Array<{ image: string; name: string; username: string; text: string; social: string }> {
+  if (images.length === 0) {
+    return [
+      {
+        image: 'https://avatars.githubusercontent.com/u/1?v=4',
+        name: 'Happy Customer',
+        username: '@customer1',
+        text: paragraphs[0]?.slice(0, 120) || 'Great service and excellent support!',
+        social: 'https://twitter.com',
+      },
     ];
-    for (let i = 0; i < count; i++) {
-      result.push(fallbacks[i % fallbacks.length]);
-    }
   }
-
-  return result;
+  return images.map((imgSrc, i) => ({
+    image: imgSrc,
+    name: headings[i + 2] || `Customer ${i + 1}`,
+    username: `@customer${i + 1}`,
+    text: paragraphs[i]?.slice(0, 120) || 'Excellent service and outstanding results.',
+    social: 'https://twitter.com',
+  }));
 }
 
 export interface ExtractedContent {
@@ -213,32 +214,46 @@ export function extractContentFromStructure(structure: {
  */
 export function mapContentToSections(
   content: ExtractedContent,
-  sections: string[]
+  sections: string[],
+  layout?: Array<{ section: string; component: string }>
 ): MappedContent {
   const mapped: MappedContent = {};
 
-  // Safe handling of empty/null content
-  // Create a copy of images for intelligent distribution
-  const images = [...(content.images || [])];
+  const images = content.images || [];
   const headings = content.headings || [];
   const paragraphs = content.paragraphs || [];
   const navigationLinks = content.navigationLinks || [];
+  const processed = content.processed;
+  const mainHeading = headings[0] || 'Welcome';
+  const subHeading = headings[1] || paragraphs[0]?.slice(0, 100) || 'Discover more';
+
+  // Use the image distributor if layout is provided, otherwise fall back
+  // to sequential distribution
+  const imageAllocation = layout
+    ? distributeImages(images, layout)
+    : {};
+
+  // Helper: get images for a section from allocation or fall back to slice
+  let fallbackCursor = 0;
+  function getImages(section: string, count: number): string[] {
+    if (layout && imageAllocation[section]) {
+      return imageAllocation[section];
+    }
+    // Fallback: sequential slice
+    const srcs = images
+      .slice(fallbackCursor, fallbackCursor + count)
+      .map(img => img.src);
+    fallbackCursor += count;
+    // If not enough images, fill with empty strings
+    while (srcs.length < count) srcs.push('');
+    return srcs;
+  }
 
   // Log received images
   console.log("[ContentMapper] Images received:", images.length || 0);
   if (images.length) {
     console.log("[ContentMapper] First image:", images[0]?.src?.slice(0, 50));
   }
-
-  // Reset image cursor for fresh distribution
-  imageCursor = 0;
-
-  // Use AI-processed content if available
-  const processed = content.processed;
-
-  // Use first heading as potential brand/hero title
-  const mainHeading = headings[0] || 'Welcome';
-  const subHeading = headings[1] || paragraphs[0]?.slice(0, 100) || 'Discover more';
 
   // Map navbar content - Always ensure navbar has menu items
   if (sections.includes('navbar')) {
@@ -260,8 +275,8 @@ export function mapContentToSections(
 
   // Map hero content - Assign 1 image
   if (sections.includes('hero')) {
-    const heroImage = images[0] || null;
-
+    const heroImgs = getImages('hero', 1);
+    const heroImg = heroImgs[0] ? { src: heroImgs[0], alt: mainHeading, title: '' } : null;
     mapped.hero = {
       title: mainHeading,
       description: subHeading,
@@ -273,13 +288,13 @@ export function mapContentToSections(
         label: 'Learn More',
         onClick: () => console.log('Secondary action clicked'),
       },
-      image: heroImage?.src || "",
+      image: heroImg?.src || '',
     };
   }
 
   // Map about content - Use AI-processed if available, assign 2 images
   if (sections.includes('about')) {
-    const aboutImages = getNextImages(images, 2);
+    const aboutImages = getImages('about', 2);
 
     if (processed?.about) {
       mapped.about = {
@@ -310,7 +325,7 @@ export function mapContentToSections(
 
   // Map features content - Use AI-processed if available, assign 4 images
   if (sections.includes('features')) {
-    const featureImages = getNextImages(images, 4);
+    const featureImages = getImages('features', 4);
 
     if (processed?.features) {
       mapped.features = {
@@ -339,42 +354,12 @@ export function mapContentToSections(
 
   // Map testimonials content - Assign 3 images sequentially
   if (sections.includes('testimonials')) {
-    const testimonialImages = getNextImages(images, 3);
+    const testimonialImages = getImages('testimonials', 3);
 
     mapped.testimonials = {
       title: 'What Our Clients Say',
       description: 'Real feedback from our valued customers',
-      testimonials: testimonialImages.length > 0
-        ? testimonialImages.map((imgSrc, i) => ({
-            image: imgSrc,
-            name: `User ${i + 1}`,
-            username: `@user${i + 1}`,
-            text: paragraphs[i]?.slice(0, 100) || 'Sample feedback',
-            social: 'https://twitter.com',
-          }))
-        : [
-            {
-              image: 'https://avatars.githubusercontent.com/u/1?v=4',
-              name: 'Happy Customer',
-              username: '@customer1',
-              text: paragraphs[0]?.slice(0, 100) || 'Great service and excellent support!',
-              social: 'https://twitter.com',
-            },
-            {
-              image: 'https://avatars.githubusercontent.com/u/2?v=4',
-              name: 'Satisfied Client',
-              username: '@client2',
-              text: paragraphs[1]?.slice(0, 100) || 'Highly recommended for quality work',
-              social: 'https://twitter.com',
-            },
-            {
-              image: 'https://avatars.githubusercontent.com/u/3?v=4',
-              name: 'Regular User',
-              username: '@user3',
-              text: paragraphs[2]?.slice(0, 100) || 'Amazing experience overall',
-              social: 'https://twitter.com',
-            },
-          ],
+      testimonials: buildTestimonialItems(testimonialImages, paragraphs, headings),
     };
   }
 
@@ -572,6 +557,20 @@ export function getComponentContentProps(
       return {}; // Shader-based hero, no content props
 
     // Features components
+    case 'features- Image':
+      return {
+        heading: (mappedContent.features as any)?.heading || 'Our Features',
+        images: (mappedContent.features as any)?.images || [],
+      };
+
+    case 'features-Image-new':
+      return {
+        badge: 'Features',
+        title: (mappedContent.features as any)?.heading || 'Make your site a true standout.',
+        description: (mappedContent.features as any)?.description || 'Discover what we offer.',
+        images: (mappedContent.features as any)?.images || [],
+      };
+
     case 'features-grid':
       const featuresContent = mappedContent.features as any;
       return {
@@ -623,6 +622,55 @@ export function getComponentContentProps(
         description: (mappedContent.testimonials as any)?.description || 'What our clients say',
         testimonials: (mappedContent.testimonials as any)?.testimonials || [],
       };
+
+    case 'features-gallery-type':
+      const featuresGalleryTypeContent = mappedContent.features as any;
+      return {
+        title: featuresGalleryTypeContent?.heading || 'Case Studies',
+        description: featuresGalleryTypeContent?.description || 'Discover more',
+        images: featuresGalleryTypeContent?.images || [],
+      };
+
+    case 'features-coursel':
+      const featuresCourselContent = mappedContent.features as any;
+      return {
+        title: featuresCourselContent?.heading || 'Case Studies',
+        description: featuresCourselContent?.description || 'Discover more',
+        images: featuresCourselContent?.images || [],
+      };
+
+    case 'testimonial-gradient':
+    case 'testimonial-section4':
+    case 'testimonial-section5': {
+      const t = mappedContent.testimonials as any;
+      const items = (t?.testimonials || []).map((item: any) => ({
+        text: item.text || 'Great service!',
+        image: item.image || 'https://avatars.githubusercontent.com/u/1?v=4',
+        name: item.name || 'Customer',
+        role: item.username || '@customer',
+      }));
+      return { testimonials: items.length > 0 ? items : [
+        { text: 'Excellent service!', image: 'https://avatars.githubusercontent.com/u/1?v=4', name: 'Customer', role: '@customer' }
+      ]};
+    }
+
+    case 'testimonial-modern': {
+      const t = mappedContent.testimonials as any;
+      const items = (t?.testimonials || []).map((item: any, i: number) => ({
+        type: i === 1 ? 'quote' : 'user',
+        quote: item.text || 'Great service!',
+        name: item.name || 'Customer',
+        role: item.username || '@customer',
+        avatarSrc: item.image || 'https://avatars.githubusercontent.com/u/1?v=4',
+        avatarFallback: (item.name || 'C').charAt(0),
+      }));
+      return {
+        title: t?.title || 'What Our Clients Say',
+        testimonials: items.length > 0 ? items : [
+          { type: 'user', quote: 'Great service!', name: 'Customer', role: '@customer', avatarSrc: 'https://avatars.githubusercontent.com/u/1?v=4', avatarFallback: 'C' }
+        ],
+      };
+    }
 
     // Contact components
     case 'contact-form':

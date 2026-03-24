@@ -67,17 +67,28 @@ export default function GeneratedPage() {
         console.log("[GeneratedPage] data.content exists:", !!data.content);
         console.log("[GeneratedPage] Raw content images:", data.content?.images?.length || 0);
         console.log("[GeneratedPage] Sections:", data.layout?.map((l: LayoutItem) => l.section));
-        setLayout(data);
+
+        const seen = new Set<string>();
+        const deduplicatedLayout = (data.layout || []).filter((item: LayoutItem) => {
+          if (seen.has(item.section)) {
+            console.warn(`[GeneratedPage] Duplicate section removed: ${item.section}`);
+            return false;
+          }
+          seen.add(item.section);
+          return true;
+        });
+        const layoutData = { ...data, layout: deduplicatedLayout };
+        setLayout(layoutData);
 
         // Map extracted content to component props
-        if (data.layout) {
+        if (layoutData.layout) {
           const content = data.content || {};
-          const sectionTypes = data.layout.map((item: LayoutItem) => item.section);
+          const sectionTypes = layoutData.layout.map((item: LayoutItem) => item.section);
 
           if (data.content) {
             console.log("[GeneratedPage] Using extracted content from website");
             console.log("[GeneratedPage] Content has images:", data.content.images?.length || 0);
-            const mapped = mapContentToSections(content, sectionTypes);
+            const mapped = mapContentToSections(content, sectionTypes, layoutData.layout);
             console.log("[GeneratedPage] Mapped hero image:", mapped.hero?.image);
             console.log("[GeneratedPage] Mapped features images:", mapped.features?.images?.length || 0);
             setMappedContent(mapped);

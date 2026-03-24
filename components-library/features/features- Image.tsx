@@ -23,54 +23,66 @@ interface FeaturesImageProps {
   heading?: string;
   demoUrl?: string;
   items?: GalleryItem[];
+  images?: string[];
 }
 
 const FeaturesImage = ({
   heading = "Gallery",
   demoUrl = "https://www.shadcnblocks.com",
-  items = [
-    {
-      id: "item-1",
-      title: "Build Modern UIs",
-      summary:
-        "Create stunning user interfaces with our comprehensive design system.",
-      url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
-    },
-    {
-      id: "item-2",
-      title: "Computer Vision Technology",
-      summary:
-        "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
-      url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
-    },
-    {
-      id: "item-3",
-      title: "Machine Learning Automation",
-      summary:
-        "Self-improving algorithms that learn from data patterns to automate complex tasks and make intelligent decisions with minimal human intervention.",
-      url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
-    },
-    {
-      id: "item-4",
-      title: "Predictive Analytics",
-      summary:
-        "Advanced forecasting capabilities that analyze historical data to predict future trends and outcomes, helping businesses make data-driven decisions.",
-      url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
-    },
-    {
-      id: "item-5",
-      title: "Neural Network Architecture",
-      summary:
-        "Sophisticated AI models inspired by human brain structure, capable of solving complex problems through deep learning and pattern recognition.",
-      url: "#",
-      image: "/images/block/placeholder-dark-1.svg",
-    },
-  ],
+  items,
+  images = [],
 }: FeaturesImageProps) => {
+  // Build final items: use injected items first, then build from images prop,
+  // then fall back to hardcoded defaults
+  const finalItems: GalleryItem[] = items && items.length > 0
+    ? items
+    : (images && images.length > 0
+        ? images.map((img, idx) => ({
+            id: `item-${idx + 1}`,
+            title: `Feature ${idx + 1}`,
+            summary: "Discover more about this amazing feature.",
+            url: "#",
+            image: img,
+          }))
+        : [
+            {
+              id: "item-1",
+              title: "Build Modern UIs",
+              summary: "Create stunning user interfaces with our comprehensive design system.",
+              url: "#",
+              image: "/images/block/placeholder-dark-1.svg",
+            },
+            {
+              id: "item-2",
+              title: "Computer Vision Technology",
+              summary: "Powerful image recognition and processing capabilities.",
+              url: "#",
+              image: "/images/block/placeholder-dark-1.svg",
+            },
+            {
+              id: "item-3",
+              title: "Machine Learning Automation",
+              summary: "Self-improving algorithms that learn from data patterns.",
+              url: "#",
+              image: "/images/block/placeholder-dark-1.svg",
+            },
+            {
+              id: "item-4",
+              title: "Predictive Analytics",
+              summary: "Advanced forecasting capabilities for data-driven decisions.",
+              url: "#",
+              image: "/images/block/placeholder-dark-1.svg",
+            },
+            {
+              id: "item-5",
+              title: "Neural Network Architecture",
+              summary: "Sophisticated AI models for complex problem solving.",
+              url: "#",
+              image: "/images/block/placeholder-dark-1.svg",
+            },
+          ]
+      );
+
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -143,7 +155,7 @@ const FeaturesImage = ({
           className="relative left-[-1rem]"
         >
           <CarouselContent className="-mr-4 ml-8 2xl:ml-[max(8rem,calc(50vw-700px+1rem))] 2xl:mr-[max(0rem,calc(50vw-700px-1rem))]">
-            {items.map((item) => (
+            {finalItems.map((item) => (
               <CarouselItem key={item.id} className="pl-4 md:max-w-[452px]">
                 <a
                   href={item.url}
