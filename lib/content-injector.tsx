@@ -221,13 +221,13 @@ export function mapContentToSections(
 ): MappedContent {
   const mapped: MappedContent = {};
 
-  const images = content.images || [];
-  const headings = content.headings || [];
-  const paragraphs = content.paragraphs || [];
-  const navigationLinks = content.navigationLinks || [];
+  const images = content.images ?? [];
+  const headings = content.headings ?? [];
+  const paragraphs = content.paragraphs ?? [];
+  const navigationLinks = content.navigationLinks ?? [];
   const processed = content.processed;
-  const mainHeading = headings[0] || 'Welcome';
-  const subHeading = headings[1] || paragraphs[0]?.slice(0, 100) || 'Discover more';
+  const mainHeading = headings[0] ?? '';
+  const subHeading = headings[1] ?? paragraphs[0]?.slice(0, 100) ?? '';
 
   // Summarise all text content once — used across all sections
   const summarised: SectionTextContent = summariseContent({
@@ -270,7 +270,7 @@ export function mapContentToSections(
   // Map navbar content - Always ensure navbar has menu items
   if (sections.includes('navbar')) {
     mapped.navbar = {
-      menu: (summarised.navLinks || []).map(link => ({
+      menu: (summarised.navLinks ?? []).map(link => ({
         title: link,
         url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
       })),
@@ -285,11 +285,11 @@ export function mapContentToSections(
   if (sections.includes('hero')) {
     const heroImgs = getImages('hero', 1);
     mapped.hero = {
-      title: summarised.heroTitle || 'Welcome',
-      description: summarised.heroDescription || summarised.heroSubtitle || '',
-      primaryAction: { label: summarised.heroCta || 'Get Started', onClick: () => {} },
+      title: summarised.heroTitle ?? '',
+      description: summarised.heroDescription ?? summarised.heroSubtitle ?? '',
+      primaryAction: { label: summarised.heroCta ?? '', onClick: () => {} },
       secondaryAction: { label: 'Learn More', onClick: () => {} },
-      image: heroImgs[0] || '',
+      image: heroImgs[0] ?? '',
     };
   }
 
@@ -297,10 +297,10 @@ export function mapContentToSections(
   if (sections.includes('about')) {
     const aboutImages = getImages('about', 2);
     mapped.about = {
-      title: summarised.aboutTitle || 'About Us',
-      description: summarised.aboutDescription || 'We are dedicated to excellence.',
-      companies: summarised.companies || [],
-      achievements: summarised.achievements || [],
+      title: summarised.aboutTitle ?? '',
+      description: summarised.aboutDescription ?? '',
+      companies: summarised.companies ?? [],
+      achievements: summarised.achievements ?? [],
       images: aboutImages,
     };
   }
@@ -309,9 +309,9 @@ export function mapContentToSections(
   if (sections.includes('features')) {
     const featureImages = getImages('features', 4);
     mapped.features = {
-      badge: summarised.featureBadge || 'Features',
-      heading: summarised.featuresHeading || 'Our Features',
-      description: summarised.featuresDescription || 'Discover what we offer',
+      badge: summarised.featureBadge ?? '',
+      heading: summarised.featuresHeading ?? '',
+      description: summarised.featuresDescription ?? '',
       items: summarised.featureItems && summarised.featureItems.length > 0
         ? summarised.featureItems
         : undefined,
@@ -324,84 +324,50 @@ export function mapContentToSections(
     const testimonialImages = getImages('testimonials', 3);
     const builtTestimonials = testimonialImages.map((imgSrc, i) => ({
       image: imgSrc,
-      name: summarised.testimonialItems?.[i]?.name || `Customer ${i + 1}`,
+      name: summarised.testimonialItems?.[i]?.name ?? '',
       username: `@customer${i + 1}`,
-      text: summarised.testimonialItems?.[i]?.text ||
-            paragraphs[i]?.slice(0, 120) || 'Excellent service!',
+      text: summarised.testimonialItems?.[i]?.text ??
+            paragraphs[i]?.slice(0, 120) ?? '',
       social: 'https://twitter.com',
     }));
     mapped.testimonials = {
-      title: summarised.testimonialsTitle || 'What Our Clients Say',
-      description: summarised.testimonialsDescription || 'Real feedback from our customers.',
+      title: summarised.testimonialsTitle ?? '',
+      description: summarised.testimonialsDescription ?? '',
       testimonials: builtTestimonials.length > 0
         ? builtTestimonials
-        : [{ image: 'https://avatars.githubusercontent.com/u/1?v=4',
-              name: 'Happy Customer', username: '@customer1',
-              text: 'Great service!', social: 'https://twitter.com' }],
+        : [],
     };
   }
 
   // Map contact content
   if (sections.includes('contact')) {
     mapped.contact = {
-      title: summarised.contactTitle || 'Get In Touch',
-      subtitle: summarised.contactDescription || "We'd love to hear from you.",
+      title: summarised.contactTitle ?? '',
+      subtitle: summarised.contactDescription ?? '',
       submitText: 'Send Message',
     };
   }
 
   // Map footer content - Use AI-processed if available
   if (sections.includes('footer')) {
-    const brandName = summarised.brandName || mainHeading.split(' ')[0];
+    const brandName = summarised.brandName ?? mainHeading.split(' ')[0] ?? '';
     mapped.footer = {
-      brandName: summarised.footerBrand || brandName,
-      description: summarised.footerDescription || '',
-      links: (summarised.footerLinks || []).slice(0, 5).map(link => ({
+      brandName: summarised.footerBrand ?? brandName,
+      description: summarised.footerDescription ?? '',
+      links: (summarised.footerLinks ?? []).slice(0, 5).map(link => ({
         name: link,
         url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
       })),
-      copyright: summarised.footerCopyright ||
-        `© ${new Date().getFullYear()} ${brandName}. All rights reserved.`,
+      copyright: summarised.footerCopyright ?? '',
     };
   }
 
   // Map pricing content (uses defaults as pricing is usually specific)
   if (sections.includes('pricing')) {
     mapped.pricing = {
-      heading: 'Simple, Transparent Pricing',
-      subheading: 'Choose the plan that works best for you',
-      plans: [
-        {
-          name: 'Starter',
-          price: '0',
-          period: 'month',
-          features: ['Basic Features', 'Limited Support', '1 User'],
-          description: 'Perfect for getting started',
-          buttonText: 'Get Started',
-          href: '#',
-          isPopular: false,
-        },
-        {
-          name: 'Professional',
-          price: '29',
-          period: 'month',
-          features: ['All Features', 'Priority Support', 'Unlimited Users'],
-          description: 'Best for growing teams',
-          buttonText: 'Start Free Trial',
-          href: '#',
-          isPopular: true,
-        },
-        {
-          name: 'Enterprise',
-          price: '99',
-          period: 'month',
-          features: ['Custom Solutions', '24/7 Support', 'Dedicated Manager'],
-          description: 'For large organizations',
-          buttonText: 'Contact Sales',
-          href: '#',
-          isPopular: false,
-        },
-      ],
+      heading: '',
+      subheading: '',
+      plans: [],
     };
   }
 
@@ -440,12 +406,12 @@ export function getComponentContentProps(
           url: '/',
           src: 'https://www.shadcnblocks.com/images/block/block-1.svg',
           alt: 'Logo',
-          title: mappedContent.navbar?.menu?.[0]?.title || 'Brand',
+          title: mappedContent.navbar?.menu?.[0]?.title ?? '',
         },
         menu: mappedContent.navbar?.menu?.map((item) => ({
           title: item.title,
           url: item.url,
-        })) || [],
+        })) ?? [],
         auth: mappedContent.navbar?.auth,
       };
 
@@ -453,22 +419,12 @@ export function getComponentContentProps(
       const menuItems = mappedContent.navbar?.menu?.map((item) => ({
         to: item.url,
         text: item.title,
-      })) || [];
-
-      // Ensure menuItems is NEVER empty
-      const safeMenuItems = menuItems.length > 0
-        ? menuItems
-        : [
-            { to: '#home', text: 'Home' },
-            { to: '#about', text: 'About' },
-            { to: '#services', text: 'Services' },
-            { to: '#contact', text: 'Contact' },
-          ];
+      })) ?? [];
 
       return {
         theme: 'light' as const,
-        logo: <span className="text-xl font-bold">{summarised?.brandName || mappedContent.navbar?.menu?.[0]?.title || 'Brand'}</span>,
-        menuItems: safeMenuItems,
+        logo: <span className="text-xl font-bold">{summarised?.brandName ?? mappedContent.navbar?.menu?.[0]?.title ?? ''}</span>,
+        menuItems: menuItems,
         rightContent: (
           <>
             <button className="text-sm font-medium hover:underline">Sign In</button>
@@ -485,7 +441,7 @@ export function getComponentContentProps(
           name: item.title,
           link: item.url,
           icon: <span>{['🏠', '✨', '💰', '📞', 'ℹ️'][index % 5]}</span>,
-        })) || [],
+        })) ?? [],
       };
 
     // Hero components
@@ -493,10 +449,10 @@ export function getComponentContentProps(
       // HeroSlide component supports images prop
       const heroAbProps = {
         content: {
-          title: summarised?.heroTitle || (mappedContent.hero as any)?.title || 'Welcome',
-          subtitle: summarised?.heroSubtitle || '',
-          description: summarised?.heroDescription || (mappedContent.hero as any)?.description || '',
-          buttonText: summarised?.heroCta || 'Get Started',
+          title: summarised?.heroTitle ?? (mappedContent.hero as any)?.title ?? '',
+          subtitle: summarised?.heroSubtitle ?? '',
+          description: summarised?.heroDescription ?? (mappedContent.hero as any)?.description ?? '',
+          buttonText: summarised?.heroCta ?? '',
         },
         images: (mappedContent.hero as any)?.image
           ? [(mappedContent.hero as any).image]
@@ -510,8 +466,8 @@ export function getComponentContentProps(
     case 'hero-modern':
       // OceanHero does NOT support image prop - omit it
       return {
-        title: (mappedContent.hero as any)?.title || 'Welcome',
-        description: (mappedContent.hero as any)?.description || 'Discover more about us',
+        title: (mappedContent.hero as any)?.title ?? '',
+        description: (mappedContent.hero as any)?.description ?? '',
         primaryAction: (mappedContent.hero as any)?.primaryAction,
         secondaryAction: (mappedContent.hero as any)?.secondaryAction,
       };
@@ -525,104 +481,100 @@ export function getComponentContentProps(
     // Features components
     case 'features- Image':
       return {
-        heading: summarised?.featuresHeading || (mappedContent.features as any)?.heading || 'Our Features',
-        images: (mappedContent.features as any)?.images || [],
+        heading: summarised?.featuresHeading ?? (mappedContent.features as any)?.heading ?? '',
+        images: (mappedContent.features as any)?.images ?? [],
       };
 
     case 'features-Image-new':
       return {
-        badge: summarised?.featureBadge || 'Features',
-        title: summarised?.featuresHeading || 'Make your site a true standout.',
-        description: summarised?.featuresDescription || 'Discover what we offer.',
-        images: (mappedContent.features as any)?.images || [],
+        badge: summarised?.featureBadge ?? '',
+        title: summarised?.featuresHeading ?? '',
+        description: summarised?.featuresDescription ?? '',
+        images: (mappedContent.features as any)?.images ?? [],
       };
 
     case 'features-grid':
       const featuresContent = mappedContent.features as any;
       return {
-        badge: summarised?.featureBadge || featuresContent?.badge || 'Features',
-        heading: summarised?.featuresHeading || featuresContent?.heading || 'Our Features',
-        description: summarised?.featuresDescription || featuresContent?.description || '',
-        featureItems: summarised?.featureItems || featuresContent?.items || [],
-        images: featuresContent?.images || [],
+        badge: summarised?.featureBadge ?? featuresContent?.badge ?? '',
+        heading: summarised?.featuresHeading ?? featuresContent?.heading ?? '',
+        description: summarised?.featuresDescription ?? featuresContent?.description ?? '',
+        featureItems: summarised?.featureItems ?? featuresContent?.items ?? [],
+        images: featuresContent?.images ?? [],
       };
 
     case 'features-slideshow':
       const featuresSlideshowContent = mappedContent.features as any;
       return {
-        heading: summarised?.featuresHeading || featuresSlideshowContent?.heading || 'Our Features',
-        images: featuresSlideshowContent?.images || [],
+        heading: summarised?.featuresHeading ?? featuresSlideshowContent?.heading ?? '',
+        images: featuresSlideshowContent?.images ?? [],
       };
 
     case 'features-gallery-type':
       const featuresGalleryTypeContent = mappedContent.features as any;
       return {
-        title: summarised?.featuresHeading || featuresGalleryTypeContent?.heading || 'Our Features',
-        description: summarised?.featuresDescription || '',
-        images: featuresGalleryTypeContent?.images || [],
+        title: summarised?.featuresHeading ?? featuresGalleryTypeContent?.heading ?? '',
+        description: summarised?.featuresDescription ?? '',
+        images: featuresGalleryTypeContent?.images ?? [],
       };
 
     case 'features-coursel':
       const featuresCourselContent = mappedContent.features as any;
       return {
-        title: summarised?.featuresHeading || featuresCourselContent?.heading || 'Our Features',
-        description: summarised?.featuresDescription || '',
-        images: featuresCourselContent?.images || [],
+        title: summarised?.featuresHeading ?? featuresCourselContent?.heading ?? '',
+        description: summarised?.featuresDescription ?? '',
+        images: featuresCourselContent?.images ?? [],
       };
 
     // About components
     case 'about-two-column':
       const aboutContent = mappedContent.about as any;
       return {
-        title: summarised?.aboutTitle || aboutContent?.title || 'About Us',
-        description: summarised?.aboutDescription || aboutContent?.description || '',
-        achievementsTitle: summarised?.achievementsTitle || 'Our Achievements',
-        achievementsDescription: summarised?.achievementsDescription || '',
-        companiesTitle: summarised?.companiesTitle || 'Trusted by organisations worldwide',
-        injectedCompanies: summarised?.companies || [],
-        injectedAchievements: summarised?.achievements || [],
-        images: aboutContent?.images || [],
+        title: summarised?.aboutTitle ?? aboutContent?.title ?? '',
+        description: summarised?.aboutDescription ?? aboutContent?.description ?? '',
+        achievementsTitle: summarised?.achievementsTitle ?? '',
+        achievementsDescription: summarised?.achievementsDescription ?? '',
+        companiesTitle: summarised?.companiesTitle ?? '',
+        injectedCompanies: summarised?.companies ?? [],
+        injectedAchievements: summarised?.achievements ?? [],
+        images: aboutContent?.images ?? [],
       };
 
     // Testimonials components
     case 'testimonial-cards':
     case 'testimonial-section5':
       return {
-        title: summarised?.testimonialsTitle || 'What Our Clients Say',
-        description: summarised?.testimonialsDescription || '',
-        testimonials: (mappedContent.testimonials as any)?.testimonials || [],
+        title: summarised?.testimonialsTitle ?? '',
+        description: summarised?.testimonialsDescription ?? '',
+        testimonials: (mappedContent.testimonials as any)?.testimonials ?? [],
       };
 
     case 'testimonial-gradient':
     case 'testimonial-section4':
     case 'testimonial-section5': {
       const t = mappedContent.testimonials as any;
-      const items = (t?.testimonials || []).map((item: any) => ({
-        text: item.text || 'Great service!',
-        image: item.image || 'https://avatars.githubusercontent.com/u/1?v=4',
-        name: item.name || 'Customer',
-        role: item.username || '@customer',
+      const items = (t?.testimonials ?? []).map((item: any) => ({
+        text: item.text ?? '',
+        image: item.image ?? '',
+        name: item.name ?? '',
+        role: item.username ?? '',
       }));
-      return { testimonials: items.length > 0 ? items : [
-        { text: 'Excellent service!', image: 'https://avatars.githubusercontent.com/u/1?v=4', name: 'Customer', role: '@customer' }
-      ]};
+      return { testimonials: items };
     }
 
     case 'testimonial-modern': {
       const t = mappedContent.testimonials as any;
-      const items = (t?.testimonials || []).map((item: any, i: number) => ({
+      const items = (t?.testimonials ?? []).map((item: any, i: number) => ({
         type: i === 1 ? 'quote' : 'user',
-        quote: item.text || 'Great service!',
-        name: item.name || 'Customer',
-        role: item.username || '@customer',
-        avatarSrc: item.image || 'https://avatars.githubusercontent.com/u/1?v=4',
-        avatarFallback: (item.name || 'C').charAt(0),
+        quote: item.text ?? '',
+        name: item.name ?? '',
+        role: item.username ?? '',
+        avatarSrc: item.image ?? '',
+        avatarFallback: (item.name ?? 'C').charAt(0),
       }));
       return {
-        title: t?.title || 'What Our Clients Say',
-        testimonials: items.length > 0 ? items : [
-          { type: 'user', quote: 'Great service!', name: 'Customer', role: '@customer', avatarSrc: 'https://avatars.githubusercontent.com/u/1?v=4', avatarFallback: 'C' }
-        ],
+        title: t?.title ?? '',
+        testimonials: items,
       };
     }
 
@@ -630,12 +582,12 @@ export function getComponentContentProps(
     case 'contact-form':
       const contactContent = mappedContent.contact as any;
       return {
-        title: summarised?.contactTitle || 'Get In Touch',
-        description: summarised?.contactDescription || "We'd love to hear from you.",
+        title: summarised?.contactTitle ?? '',
+        description: summarised?.contactDescription ?? '',
         contactInfo: [
-          { icon: 'Mail',   label: 'Email',   value: summarised?.contactEmail   || 'contact@example.com' },
-          { icon: 'Phone',  label: 'Phone',   value: summarised?.contactPhone   || '+1 (555) 123-4567'   },
-          { icon: 'MapPin', label: 'Address', value: summarised?.contactAddress || '123 Business St'     },
+          { icon: 'Mail',   label: 'Email',   value: summarised?.contactEmail   ?? '' },
+          { icon: 'Phone',  label: 'Phone',   value: summarised?.contactPhone   ?? '' },
+          { icon: 'MapPin', label: 'Address', value: summarised?.contactAddress ?? '' },
         ],
         children: (
           <form className="flex w-full flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
@@ -676,7 +628,7 @@ export function getComponentContentProps(
               type="submit"
               className="mt-2 w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
             >
-              {contactContent?.submitText || 'Send Message'}
+              {contactContent?.submitText ?? ''}
             </button>
           </form>
         ),
@@ -685,15 +637,15 @@ export function getComponentContentProps(
     // Footer components - Now accepts props
     case 'footer-simple':
       return {
-        brandName:   summarised?.footerBrand       || (mappedContent.footer as any)?.brandName    || 'Brand',
-        description: summarised?.footerDescription || (mappedContent.footer as any)?.description  || '',
+        brandName:   summarised?.footerBrand       ?? (mappedContent.footer as any)?.brandName    ?? '',
+        description: summarised?.footerDescription ?? (mappedContent.footer as any)?.description  ?? '',
         contactInfo: {
-          email:   summarised?.contactEmail   || '',
-          phone:   summarised?.contactPhone   || '',
-          address: summarised?.contactAddress || '',
+          email:   summarised?.contactEmail   ?? '',
+          phone:   summarised?.contactPhone   ?? '',
+          address: summarised?.contactAddress ?? '',
         },
-        copyright: summarised?.footerCopyright || `© ${new Date().getFullYear()}. All rights reserved.`,
-        links: (summarised?.footerLinks || []).slice(0, 5).map(link => ({
+        copyright: summarised?.footerCopyright ?? '',
+        links: (summarised?.footerLinks ?? []).slice(0, 5).map(link => ({
           name: link,
           url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
         })),
@@ -702,9 +654,9 @@ export function getComponentContentProps(
     // Pricing components
     case 'pricing-cards':
       return {
-        heading: (mappedContent.pricing as any)?.heading || 'Pricing',
-        subheading: (mappedContent.pricing as any)?.subheading || 'Choose your plan',
-        plans: (mappedContent.pricing as any)?.plans || [],
+        heading: (mappedContent.pricing as any)?.heading ?? '',
+        subheading: (mappedContent.pricing as any)?.subheading ?? '',
+        plans: (mappedContent.pricing as any)?.plans ?? [],
       };
 
     default:

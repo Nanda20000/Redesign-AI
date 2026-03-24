@@ -11,15 +11,41 @@ import {
   type ExtractedContent
 } from "@/../lib/content-injector";
 import { summariseContent, type SectionTextContent } from "@/../lib/content-summariser";
+import { isComponentDynamic } from "@/../lib/component-content-map";
 
 export interface LayoutData {
   layout: LayoutItem[];
   content?: ExtractedContent | null;
 }
 
-// Fallback components for each section type
+// Whitelist of dynamic components that accept props
+const DYNAMIC_COMPONENTS = [
+  'hero-ab',
+  'hero-ac',
+  'hero-ad',
+  'hero-ae',
+  'features-slideshow',
+  'features-gallery-type',
+  'features-coursel',
+  'features-grid',
+  'features- Image',
+  'features-Image-new',
+  'about-two-column',
+  'testimonial-cards',
+  'testimonial-gradient',
+  'testimonial-modern',
+  'testimonial-section4',
+  'testimonial-section5',
+  'contact-form',
+  'navbar-modern',
+  'navbar-minimal',
+  'navbar-elegant',
+  'footer-simple',
+];
+
+// Fallback components for each section type (only dynamic ones)
 const FALLBACK_COMPONENTS: Record<string, string> = {
-  hero: "hero-simple",
+  hero: "hero-ab",
   navbar: "navbar-minimal",
   features: "features-grid",
   testimonials: "testimonial-cards",
@@ -38,9 +64,9 @@ function getFallbackComponent(section: string): string {
   if (fallback) {
     return fallback;
   }
-  
-  // Default fallbacks in order of preference
-  const defaultFallbacks = ["features-grid", "hero-simple", "navbar-minimal", "footer-simple"];
+
+  // Default fallbacks in order of preference (only dynamic components)
+  const defaultFallbacks = ["features-grid", "hero-ab", "navbar-minimal", "footer-simple"];
   return defaultFallbacks[0];
 }
 
@@ -204,9 +230,39 @@ export default function GeneratedPage() {
   // Use default content if not available
   const contentToUse = mappedContent || getDefaultMappedContent();
 
+  // Filter out non-dynamic components (components that don't accept props)
+  const filteredLayout = layout.layout.filter((item) => {
+    const isDynamic = DYNAMIC_COMPONENTS.includes(item.component) || isComponentDynamic(item.component);
+    if (!isDynamic) {
+      console.warn(`[GeneratedPage] Skipping non-dynamic component: ${item.component} for section ${item.section}`);
+    }
+    return isDynamic;
+  });
+
+  if (filteredLayout.length === 0) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="max-w-md rounded-lg border border-yellow-200 bg-yellow-50 p-6 text-center dark:border-yellow-800 dark:bg-yellow-900/20">
+          <h2 className="mb-2 text-xl font-semibold text-yellow-600 dark:text-yellow-400">
+            No Dynamic Components
+          </h2>
+          <p className="text-muted-foreground">
+            The generated layout contains only static components. Please try analyzing a different website.
+          </p>
+          <a
+            href="/"
+            className="mt-4 inline-block rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          >
+            Go to Home
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
-      {layout.layout.map((item, index) => {
+      {filteredLayout.map((item, index) => {
         // Try to get the requested component
         let Component = getComponentByName(item.component);
         let usedFallback = false;

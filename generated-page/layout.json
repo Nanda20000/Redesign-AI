@@ -9,12 +9,20 @@
       "component": "hero-ab"
     },
     {
+      "section": "features",
+      "component": "features-slideshow"
+    },
+    {
       "section": "about",
       "component": "about-two-column"
     },
     {
-      "section": "features",
-      "component": "features-slideshow"
+      "section": "services",
+      "component": "features-Image"
+    },
+    {
+      "section": "testimonials",
+      "component": "testimonial-cards"
     },
     {
       "section": "footer",

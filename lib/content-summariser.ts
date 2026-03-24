@@ -124,9 +124,9 @@ export function summariseContent(raw: {
   const { headings, paragraphs, navigationLinks, footerText, contactInfo, processed } = raw;
 
   // ── HERO ────────────────────────────────────────────────────────────
-  const heroRawTitle = headings[0] || 'Welcome';
+  const heroRawTitle = headings[0] ?? '';
   const heroTitle = trimToWords(capitalise(heroRawTitle), 8);
-  const heroSubtitle = trimToWords(headings[1] || headings[2] || '', 6);
+  const heroSubtitle = trimToWords(headings[1] ?? headings[2] ?? '', 6);
   const heroDesc = findRelevantParagraph(
     paragraphs,
     ['welcome', 'leading', 'best', 'trusted', 'gateway', 'premier', 'pioneer'],
@@ -142,9 +142,9 @@ export function summariseContent(raw: {
   const brandName = heroRawTitle.split(' ').slice(0, 3).join(' ');
 
   // ── FEATURES ────────────────────────────────────────────────────────
-  let featuresHeading = 'Our Features';
-  let featuresDescription = 'Discover what we offer';
-  let featureBadge = 'Features';
+  let featuresHeading = '';
+  let featuresDescription = '';
+  let featureBadge = '';
   let featureItems: Array<{ title: string; description: string }> = [];
 
   if (processed?.features) {
@@ -159,29 +159,29 @@ export function summariseContent(raw: {
     const featureHeadingsRaw = headings.slice(1, 5);
     featureItems = featureHeadingsRaw.map((h, i) => ({
       title: trimToWords(h, 5),
-      description: trimToWords(paragraphs[i + 1] || 'Learn more about this feature.', 15),
+      description: trimToWords(paragraphs[i + 1] ?? '', 15),
     }));
     featuresHeading = trimToWords(
-      headings.find(h => /course|feature|service|program|offer/i.test(h)) || 'Our Features',
+      headings.find(h => /course|feature|service|program|offer/i.test(h)) ?? '',
       6
     );
-    featureBadge = featureItems.length > 0 ? 'Courses' : 'Features';
+    featureBadge = featureItems.length > 0 ? 'Courses' : '';
   }
 
   // ── ABOUT ───────────────────────────────────────────────────────────
-  let aboutTitle = 'About Us';
-  let aboutDescription = 'We are dedicated to excellence.';
-  let achievementsTitle = 'Our Achievements';
-  let achievementsDescription = 'We take pride in our accomplishments.';
+  let aboutTitle = '';
+  let aboutDescription = '';
+  let achievementsTitle = '';
+  let achievementsDescription = '';
   let companies: string[] = [];
   let achievements: Array<{ label: string; value: string }> = [];
-  const companiesTitle = 'Trusted by organisations worldwide';
+  const companiesTitle = '';
 
   if (processed?.about) {
     aboutTitle = trimToWords(processed.about.title, 6);
     aboutDescription = trimToWords(processed.about.description, 40);
-    companies = processed.about.companies || [];
-    achievements = processed.about.achievements || [];
+    companies = processed.about.companies ?? [];
+    achievements = processed.about.achievements ?? [];
     if (processed.about.breakout) {
       achievementsTitle = trimToWords(processed.about.breakout.title, 5);
       achievementsDescription = trimToWords(processed.about.breakout.description, 20);
@@ -193,7 +193,7 @@ export function summariseContent(raw: {
       1
     );
     aboutTitle = trimToWords(
-      headings.find(h => /about/i.test(h)) || 'About Us',
+      headings.find(h => /about/i.test(h)) ?? '',
       6
     );
     aboutDescription = trimToWords(aboutPara, 40);
@@ -201,13 +201,11 @@ export function summariseContent(raw: {
 
   // ── TESTIMONIALS ────────────────────────────────────────────────────
   const testimonialsTitle = trimToWords(
-    headings.find(h => /testimonial|client|review|say|feedback/i.test(h)) ||
-    'What Our Clients Say',
+    headings.find(h => /testimonial|client|review|say|feedback/i.test(h)) ?? '',
     6
   );
   const testimonialsDescription = trimToWords(
-    paragraphs.find(p => /testimonial|client|review|feedback/i.test(p)) ||
-    'Real feedback from our valued customers.',
+    paragraphs.find(p => /testimonial|client|review|feedback/i.test(p)) ?? '',
     15
   );
 
@@ -217,30 +215,29 @@ export function summariseContent(raw: {
     .slice(0, 3)
     .map((p, i) => ({
       text: trimToWords(p, 20),
-      name: headings[i + 3] || `Customer ${i + 1}`,
-      role: navLinks[i] || 'Verified Customer',
+      name: headings[i + 3] ?? '',
+      role: navLinks[i] ?? '',
     }));
 
   // ── CONTACT ─────────────────────────────────────────────────────────
   const contactTitle = trimToWords(
-    headings.find(h => /contact|touch|reach/i.test(h)) || 'Get In Touch',
+    headings.find(h => /contact|touch|reach/i.test(h)) ?? '',
     5
   );
   const contactDescription = trimToWords(
-    paragraphs.find(p => /contact|reach|question|help/i.test(p)) ||
-    "Have a question? We'd love to hear from you.",
+    paragraphs.find(p => /contact|reach|question|help/i.test(p)) ?? '',
     20
   );
 
   // ── FOOTER ──────────────────────────────────────────────────────────
   let footerBrand = brandName;
   let footerDescription = trimToWords(aboutDescription, 20);
-  let footerCopyright = `© ${new Date().getFullYear()} ${brandName}. All rights reserved.`;
+  let footerCopyright = '';
 
   if (processed?.footer) {
-    footerBrand = processed.footer.brandName || brandName;
+    footerBrand = processed.footer.brandName ?? brandName;
     footerDescription = trimToWords(processed.footer.description, 20);
-    footerCopyright = processed.footer.copyright || footerCopyright;
+    footerCopyright = processed.footer.copyright ?? '';
   } else if (footerText) {
     const copyrightMatch = footerText.match(/©.*$/);
     if (copyrightMatch) footerCopyright = copyrightMatch[0];
@@ -251,7 +248,7 @@ export function summariseContent(raw: {
     heroTitle,
     heroSubtitle,
     heroDescription,
-    heroCta: 'Get Started',
+    heroCta: '',
 
     // Navbar
     navLinks,
@@ -280,9 +277,9 @@ export function summariseContent(raw: {
     // Contact
     contactTitle,
     contactDescription,
-    contactEmail: contactInfo?.email || processed?.footer?.contactInfo?.email || '',
-    contactPhone: contactInfo?.phone || processed?.footer?.contactInfo?.phone || '',
-    contactAddress: contactInfo?.address || processed?.footer?.contactInfo?.address || '',
+    contactEmail: contactInfo?.email ?? processed?.footer?.contactInfo?.email ?? '',
+    contactPhone: contactInfo?.phone ?? processed?.footer?.contactInfo?.phone ?? '',
+    contactAddress: contactInfo?.address ?? processed?.footer?.contactInfo?.address ?? '',
 
     // Footer
     footerBrand,
