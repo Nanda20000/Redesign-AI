@@ -6,6 +6,8 @@
 import type { ProcessedSectionContent } from './ai-content-processor';
 import { distributeImages } from './image-distributor';
 import { getComponentImageConfig } from './component-image-map';
+import { summariseContent, type SectionTextContent } from './content-summariser';
+import { isComponentDynamic } from './component-content-map';
 
 /**
  * Build testimonial objects from images and text content.
@@ -227,6 +229,16 @@ export function mapContentToSections(
   const mainHeading = headings[0] || 'Welcome';
   const subHeading = headings[1] || paragraphs[0]?.slice(0, 100) || 'Discover more';
 
+  // Summarise all text content once — used across all sections
+  const summarised: SectionTextContent = summariseContent({
+    headings,
+    paragraphs,
+    navigationLinks,
+    footerText: content.footerText,
+    contactInfo: content.contactInfo,
+    processed: content.processed,
+  });
+
   // Use the image distributor if layout is provided, otherwise fall back
   // to sequential distribution
   const imageAllocation = layout
@@ -257,12 +269,8 @@ export function mapContentToSections(
 
   // Map navbar content - Always ensure navbar has menu items
   if (sections.includes('navbar')) {
-    const menuLinks = navigationLinks.length > 0 
-      ? navigationLinks.slice(0, 6)
-      : ["Home", "About", "Services", "Contact"];
-
     mapped.navbar = {
-      menu: menuLinks.map((link) => ({
+      menu: (summarised.navLinks || []).map(link => ({
         title: link,
         url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
       })),
@@ -276,130 +284,85 @@ export function mapContentToSections(
   // Map hero content - Assign 1 image
   if (sections.includes('hero')) {
     const heroImgs = getImages('hero', 1);
-    const heroImg = heroImgs[0] ? { src: heroImgs[0], alt: mainHeading, title: '' } : null;
     mapped.hero = {
-      title: mainHeading,
-      description: subHeading,
-      primaryAction: {
-        label: 'Get Started',
-        onClick: () => console.log('Primary action clicked'),
-      },
-      secondaryAction: {
-        label: 'Learn More',
-        onClick: () => console.log('Secondary action clicked'),
-      },
-      image: heroImg?.src || '',
+      title: summarised.heroTitle || 'Welcome',
+      description: summarised.heroDescription || summarised.heroSubtitle || '',
+      primaryAction: { label: summarised.heroCta || 'Get Started', onClick: () => {} },
+      secondaryAction: { label: 'Learn More', onClick: () => {} },
+      image: heroImgs[0] || '',
     };
   }
 
   // Map about content - Use AI-processed if available, assign 2 images
   if (sections.includes('about')) {
     const aboutImages = getImages('about', 2);
-
-    if (processed?.about) {
-      mapped.about = {
-        title: processed.about.title || 'About Us',
-        description: processed.about.description || 'Learn more about our organization',
-        companies: processed.about.companies || [],
-        achievements: processed.about.achievements || [],
-        images: aboutImages,
-      };
-    } else {
-      // Fallback to basic extraction
-      const aboutHeading = content.headings.find((h) => h.toLowerCase().includes('about')) || 'About Us';
-      const aboutParagraph = content.paragraphs.find((p) =>
-        p.toLowerCase().includes('about') ||
-        p.toLowerCase().includes('mission') ||
-        p.toLowerCase().includes('vision')
-      ) || content.paragraphs[0] || 'Learn more about our organization';
-
-      mapped.about = {
-        title: aboutHeading,
-        description: aboutParagraph.slice(0, 300),
-        companies: [],
-        achievements: [],
-        images: aboutImages,
-      };
-    }
+    mapped.about = {
+      title: summarised.aboutTitle || 'About Us',
+      description: summarised.aboutDescription || 'We are dedicated to excellence.',
+      companies: summarised.companies || [],
+      achievements: summarised.achievements || [],
+      images: aboutImages,
+    };
   }
 
   // Map features content - Use AI-processed if available, assign 4 images
   if (sections.includes('features')) {
     const featureImages = getImages('features', 4);
-
-    if (processed?.features) {
-      mapped.features = {
-        badge: 'Features',
-        heading: processed.features.heading || 'Our Features',
-        description: processed.features.description || 'Discover what we offer',
-        images: featureImages,
-      };
-    } else {
-      // Fallback to basic extraction
-      const featureItems = headings.slice(1, 4).map((heading) => ({
-        title: heading,
-        description: paragraphs.find((p) => p.length < 200) || 'Learn more about our features',
-      }));
-
-      mapped.features = {
-        badge: 'Features',
-        heading: headings.find((h) => h.toLowerCase().includes('feature')) || 'Our Features',
-        description: paragraphs.find((p) => p.toLowerCase().includes('feature') || p.toLowerCase().includes('service')) ||
-                     'Discover what we offer',
-        items: featureItems.length > 0 ? featureItems : undefined,
-        images: featureImages,
-      };
-    }
+    mapped.features = {
+      badge: summarised.featureBadge || 'Features',
+      heading: summarised.featuresHeading || 'Our Features',
+      description: summarised.featuresDescription || 'Discover what we offer',
+      items: summarised.featureItems && summarised.featureItems.length > 0
+        ? summarised.featureItems
+        : undefined,
+      images: featureImages,
+    };
   }
 
   // Map testimonials content - Assign 3 images sequentially
   if (sections.includes('testimonials')) {
     const testimonialImages = getImages('testimonials', 3);
-
+    const builtTestimonials = testimonialImages.map((imgSrc, i) => ({
+      image: imgSrc,
+      name: summarised.testimonialItems?.[i]?.name || `Customer ${i + 1}`,
+      username: `@customer${i + 1}`,
+      text: summarised.testimonialItems?.[i]?.text ||
+            paragraphs[i]?.slice(0, 120) || 'Excellent service!',
+      social: 'https://twitter.com',
+    }));
     mapped.testimonials = {
-      title: 'What Our Clients Say',
-      description: 'Real feedback from our valued customers',
-      testimonials: buildTestimonialItems(testimonialImages, paragraphs, headings),
+      title: summarised.testimonialsTitle || 'What Our Clients Say',
+      description: summarised.testimonialsDescription || 'Real feedback from our customers.',
+      testimonials: builtTestimonials.length > 0
+        ? builtTestimonials
+        : [{ image: 'https://avatars.githubusercontent.com/u/1?v=4',
+              name: 'Happy Customer', username: '@customer1',
+              text: 'Great service!', social: 'https://twitter.com' }],
     };
   }
 
   // Map contact content
   if (sections.includes('contact')) {
     mapped.contact = {
-      title: 'Get In Touch',
-      subtitle: content.contactInfo 
-        ? `Email: ${content.contactInfo.email || 'N/A'} | Phone: ${content.contactInfo.phone || 'N/A'}`
-        : 'Have a question? We\'d love to hear from you.',
+      title: summarised.contactTitle || 'Get In Touch',
+      subtitle: summarised.contactDescription || "We'd love to hear from you.",
       submitText: 'Send Message',
     };
   }
 
   // Map footer content - Use AI-processed if available
   if (sections.includes('footer')) {
-    const brandName = mainHeading.split(' ')[0];
-    const copyrightYear = new Date().getFullYear();
-    
-    if (processed?.footer) {
-      mapped.footer = {
-        brandName: processed.footer.brandName || brandName,
-        description: processed.footer.description || subHeading.slice(0, 150),
-        links: content.navigationLinks.slice(0, 5).map((link) => ({
-          name: link,
-          url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
-        })),
-        copyright: processed.footer.copyright || `© ${copyrightYear} ${brandName}. All rights reserved.`,
-      };
-    } else {
-      mapped.footer = {
-        brandName: brandName,
-        description: content.footerText?.slice(0, 150) || subHeading.slice(0, 150),
-        links: content.navigationLinks.slice(0, 5).map((link) => ({
-          name: link,
-          url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
-        })),
-        copyright: `${content.footerText?.match(/©|copyright/i) ? content.footerText : `© ${copyrightYear} ${brandName}. All rights reserved.`}`,
-      };
-    }
+    const brandName = summarised.brandName || mainHeading.split(' ')[0];
+    mapped.footer = {
+      brandName: summarised.footerBrand || brandName,
+      description: summarised.footerDescription || '',
+      links: (summarised.footerLinks || []).slice(0, 5).map(link => ({
+        name: link,
+        url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
+      })),
+      copyright: summarised.footerCopyright ||
+        `© ${new Date().getFullYear()} ${brandName}. All rights reserved.`,
+    };
   }
 
   // Map pricing content (uses defaults as pricing is usually specific)
@@ -459,7 +422,8 @@ export function mapContentToSections(
 export function getComponentContentProps(
   componentName: string,
   sectionType: string,
-  mappedContent: MappedContent
+  mappedContent: MappedContent,
+  summarised?: SectionTextContent
 ): Record<string, any> {
   const sectionContent = mappedContent[sectionType as keyof MappedContent];
 
@@ -490,10 +454,10 @@ export function getComponentContentProps(
         to: item.url,
         text: item.title,
       })) || [];
-      
+
       // Ensure menuItems is NEVER empty
-      const safeMenuItems = menuItems.length > 0 
-        ? menuItems 
+      const safeMenuItems = menuItems.length > 0
+        ? menuItems
         : [
             { to: '#home', text: 'Home' },
             { to: '#about', text: 'About' },
@@ -503,7 +467,7 @@ export function getComponentContentProps(
 
       return {
         theme: 'light' as const,
-        logo: <span className="text-xl font-bold">{mappedContent.navbar?.menu?.[0]?.title || 'Brand'}</span>,
+        logo: <span className="text-xl font-bold">{summarised?.brandName || mappedContent.navbar?.menu?.[0]?.title || 'Brand'}</span>,
         menuItems: safeMenuItems,
         rightContent: (
           <>
@@ -529,12 +493,14 @@ export function getComponentContentProps(
       // HeroSlide component supports images prop
       const heroAbProps = {
         content: {
-          title: (mappedContent.hero as any)?.title || 'Welcome',
-          subtitle: (mappedContent.hero as any)?.description,
-          description: (mappedContent.hero as any)?.description,
-          buttonText: (mappedContent.hero as any)?.primaryAction?.label,
+          title: summarised?.heroTitle || (mappedContent.hero as any)?.title || 'Welcome',
+          subtitle: summarised?.heroSubtitle || '',
+          description: summarised?.heroDescription || (mappedContent.hero as any)?.description || '',
+          buttonText: summarised?.heroCta || 'Get Started',
         },
-        images: mappedContent.hero?.image ? [mappedContent.hero.image] : [],
+        images: (mappedContent.hero as any)?.image
+          ? [(mappedContent.hero as any).image]
+          : [],
       };
       if (heroAbProps.images && heroAbProps.images.length > 0) {
         console.log("[getComponentContentProps] hero-ab: passing", heroAbProps.images.length, "image(s)");
@@ -559,48 +525,48 @@ export function getComponentContentProps(
     // Features components
     case 'features- Image':
       return {
-        heading: (mappedContent.features as any)?.heading || 'Our Features',
+        heading: summarised?.featuresHeading || (mappedContent.features as any)?.heading || 'Our Features',
         images: (mappedContent.features as any)?.images || [],
       };
 
     case 'features-Image-new':
       return {
-        badge: 'Features',
-        title: (mappedContent.features as any)?.heading || 'Make your site a true standout.',
-        description: (mappedContent.features as any)?.description || 'Discover what we offer.',
+        badge: summarised?.featureBadge || 'Features',
+        title: summarised?.featuresHeading || 'Make your site a true standout.',
+        description: summarised?.featuresDescription || 'Discover what we offer.',
         images: (mappedContent.features as any)?.images || [],
       };
 
     case 'features-grid':
       const featuresContent = mappedContent.features as any;
       return {
-        badge: featuresContent?.badge || 'Features',
-        heading: featuresContent?.heading || 'Our Features',
-        description: featuresContent?.description || 'Discover what we offer',
-        featureItems: featuresContent?.items || [],
+        badge: summarised?.featureBadge || featuresContent?.badge || 'Features',
+        heading: summarised?.featuresHeading || featuresContent?.heading || 'Our Features',
+        description: summarised?.featuresDescription || featuresContent?.description || '',
+        featureItems: summarised?.featureItems || featuresContent?.items || [],
         images: featuresContent?.images || [],
       };
 
     case 'features-slideshow':
       const featuresSlideshowContent = mappedContent.features as any;
       return {
-        heading: featuresSlideshowContent?.heading || 'Gallery',
+        heading: summarised?.featuresHeading || featuresSlideshowContent?.heading || 'Our Features',
         images: featuresSlideshowContent?.images || [],
       };
 
     case 'features-gallery-type':
       const featuresGalleryTypeContent = mappedContent.features as any;
       return {
-        title: featuresGalleryTypeContent?.heading || 'Case Studies',
-        description: featuresGalleryTypeContent?.description || 'Discover more',
+        title: summarised?.featuresHeading || featuresGalleryTypeContent?.heading || 'Our Features',
+        description: summarised?.featuresDescription || '',
         images: featuresGalleryTypeContent?.images || [],
       };
 
     case 'features-coursel':
       const featuresCourselContent = mappedContent.features as any;
       return {
-        title: featuresCourselContent?.heading || 'Case Studies',
-        description: featuresCourselContent?.description || 'Discover more',
+        title: summarised?.featuresHeading || featuresCourselContent?.heading || 'Our Features',
+        description: summarised?.featuresDescription || '',
         images: featuresCourselContent?.images || [],
       };
 
@@ -608,18 +574,22 @@ export function getComponentContentProps(
     case 'about-two-column':
       const aboutContent = mappedContent.about as any;
       return {
-        title: aboutContent?.title || 'About Us',
-        description: aboutContent?.description || 'Learn more about our organization',
-        injectedCompanies: aboutContent?.companies || [],
-        injectedAchievements: aboutContent?.achievements || [],
+        title: summarised?.aboutTitle || aboutContent?.title || 'About Us',
+        description: summarised?.aboutDescription || aboutContent?.description || '',
+        achievementsTitle: summarised?.achievementsTitle || 'Our Achievements',
+        achievementsDescription: summarised?.achievementsDescription || '',
+        companiesTitle: summarised?.companiesTitle || 'Trusted by organisations worldwide',
+        injectedCompanies: summarised?.companies || [],
+        injectedAchievements: summarised?.achievements || [],
         images: aboutContent?.images || [],
       };
 
     // Testimonials components
     case 'testimonial-cards':
+    case 'testimonial-section5':
       return {
-        title: (mappedContent.testimonials as any)?.title || 'Testimonials',
-        description: (mappedContent.testimonials as any)?.description || 'What our clients say',
+        title: summarised?.testimonialsTitle || 'What Our Clients Say',
+        description: summarised?.testimonialsDescription || '',
         testimonials: (mappedContent.testimonials as any)?.testimonials || [],
       };
 
@@ -659,27 +629,13 @@ export function getComponentContentProps(
     // Contact components
     case 'contact-form':
       const contactContent = mappedContent.contact as any;
-      const contactEmail = contactContent?.email || 'contact@example.com';
-      const contactPhone = contactContent?.phone || '+1 (555) 123-4567';
       return {
-        title: contactContent?.title || 'Get In Touch',
-        description: contactContent?.subtitle || 'We\'d love to hear from you',
+        title: summarised?.contactTitle || 'Get In Touch',
+        description: summarised?.contactDescription || "We'd love to hear from you.",
         contactInfo: [
-          {
-            icon: 'Mail',
-            label: 'Email',
-            value: contactEmail,
-          },
-          {
-            icon: 'Phone',
-            label: 'Phone',
-            value: contactPhone,
-          },
-          {
-            icon: 'MapPin',
-            label: 'Address',
-            value: contactContent?.address || '123 Business St, City, State 12345',
-          },
+          { icon: 'Mail',   label: 'Email',   value: summarised?.contactEmail   || 'contact@example.com' },
+          { icon: 'Phone',  label: 'Phone',   value: summarised?.contactPhone   || '+1 (555) 123-4567'   },
+          { icon: 'MapPin', label: 'Address', value: summarised?.contactAddress || '123 Business St'     },
         ],
         children: (
           <form className="flex w-full flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
@@ -729,10 +685,18 @@ export function getComponentContentProps(
     // Footer components - Now accepts props
     case 'footer-simple':
       return {
-        brandName: (mappedContent.footer as any)?.brandName || 'Brand',
-        description: (mappedContent.footer as any)?.description || 'Providing quality services',
-        contactInfo: (mappedContent.footer as any)?.contactInfo || {},
-        copyright: (mappedContent.footer as any)?.copyright || `© ${new Date().getFullYear()}. All rights reserved.`,
+        brandName:   summarised?.footerBrand       || (mappedContent.footer as any)?.brandName    || 'Brand',
+        description: summarised?.footerDescription || (mappedContent.footer as any)?.description  || '',
+        contactInfo: {
+          email:   summarised?.contactEmail   || '',
+          phone:   summarised?.contactPhone   || '',
+          address: summarised?.contactAddress || '',
+        },
+        copyright: summarised?.footerCopyright || `© ${new Date().getFullYear()}. All rights reserved.`,
+        links: (summarised?.footerLinks || []).slice(0, 5).map(link => ({
+          name: link,
+          url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
+        })),
       };
 
     // Pricing components

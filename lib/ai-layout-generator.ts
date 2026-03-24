@@ -4,6 +4,7 @@ import * as path from 'path';
 import { analyzeWebsite, getComponentRecommendations } from './website-analyzer';
 import { buildEnhancedPrompt, selectComponents, componentSupportsImages } from './component-selector';
 import { COMPONENT_META } from './component-meta';
+import { getStaticOnlyComponents } from './component-content-map';
 
 // DeepSeek API endpoints (try primary, fallback to OpenRouter)
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
@@ -496,6 +497,18 @@ export async function generateLayoutWithAI(
 
     // Step 3: Build components map by category
     const componentsByCategory = buildComponentsByCategory(manifest);
+
+    // Exclude static-only components from AI selection
+    const staticComponents = getStaticOnlyComponents();
+    console.log('[AI Layout] Excluding static-only components:', staticComponents);
+
+    // After building componentsByCategory, filter out static components
+    for (const category of Object.keys(componentsByCategory)) {
+      componentsByCategory[category] = componentsByCategory[category].filter(
+        name => !staticComponents.includes(name)
+      );
+    }
+    console.log('[AI Layout] Dynamic-only components by category:', componentsByCategory);
 
     // Step 4: Get intelligent recommendations
     const recommendations = getComponentRecommendations(analysis);

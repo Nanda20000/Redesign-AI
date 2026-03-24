@@ -10,6 +10,7 @@ import {
   type MappedContent,
   type ExtractedContent
 } from "@/../lib/content-injector";
+import { summariseContent, type SectionTextContent } from "@/../lib/content-summariser";
 
 export interface LayoutData {
   layout: LayoutItem[];
@@ -46,6 +47,7 @@ function getFallbackComponent(section: string): string {
 export default function GeneratedPage() {
   const [layout, setLayout] = useState<LayoutData | null>(null);
   const [mappedContent, setMappedContent] = useState<MappedContent | null>(null);
+  const [summarisedContent, setSummarisedContent] = useState<SectionTextContent | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -92,6 +94,17 @@ export default function GeneratedPage() {
             console.log("[GeneratedPage] Mapped hero image:", mapped.hero?.image);
             console.log("[GeneratedPage] Mapped features images:", mapped.features?.images?.length || 0);
             setMappedContent(mapped);
+
+            // Compute summarised text content for dynamic prop injection
+            const rawForSummarise = {
+              headings: data.content?.headings || [],
+              paragraphs: data.content?.paragraphs || [],
+              navigationLinks: data.content?.navigationLinks || [],
+              footerText: data.content?.footerText,
+              contactInfo: data.content?.contactInfo,
+              processed: data.content?.processed,
+            };
+            setSummarisedContent(summariseContent(rawForSummarise));
           } else {
             // Content not ready yet - retry after delay
             console.warn("[GeneratedPage] Content not ready yet, retrying...");
@@ -107,6 +120,17 @@ export default function GeneratedPage() {
                   const mapped = mapContentToSections(retryData.content, sectionTypes);
                   console.log("[GeneratedPage] Mapped hero image (retry):", mapped.hero?.image);
                   setMappedContent(mapped);
+
+                  // Compute summarised text content for dynamic prop injection
+                  const rawForSummarise = {
+                    headings: retryData.content?.headings || [],
+                    paragraphs: retryData.content?.paragraphs || [],
+                    navigationLinks: retryData.content?.navigationLinks || [],
+                    footerText: retryData.content?.footerText,
+                    contactInfo: retryData.content?.contactInfo,
+                    processed: retryData.content?.processed,
+                  };
+                  setSummarisedContent(summariseContent(rawForSummarise));
                 } else {
                   console.warn("[GeneratedPage] Retry failed, using defaults");
                   setMappedContent(getDefaultMappedContent());
@@ -229,7 +253,8 @@ export default function GeneratedPage() {
         const contentProps = getComponentContentProps(
           componentName,
           item.section,
-          contentToUse
+          contentToUse,
+          summarisedContent || undefined
         );
 
         // Debug log before rendering each component

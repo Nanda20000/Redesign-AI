@@ -110,31 +110,31 @@
   "processed": {
     "features": {
       "heading": "Excellence in Every Step",
-      "description": "Key offerings and services provided by the campus.",
+      "description": "Key offerings and services provided by the organization.",
       "items": [
         {
           "title": "LCC CAMPUS",
-          "description": "Educational campus providing learning facilities."
+          "description": "Educational campus facilities."
         },
         {
           "title": "DEPARTMENTS",
-          "description": "Various academic departments offering specialized courses."
+          "description": "Various academic or organizational departments."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "LCC Campus is an educational institution located across multiple centers in Kerala, dedicated to providing quality education and training.",
+      "description": "LCC Campus is an educational institution located across multiple areas in Kerala, including Edakkara, Nilambur, Pothukal, and Karulai. It provides academic programs and services to its community.",
       "companies": [],
       "achievements": [],
       "breakout": {
-        "title": "Excellence in Every Step",
-        "description": "Committed to delivering quality education at every stage."
+        "title": "Key Message",
+        "description": "Excellence in Every Step"
       }
     },
     "footer": {
       "brandName": "LCC Campus",
-      "description": "Educational campus with multiple centers in Kerala.",
+      "description": "Educational institution with multiple campus locations.",
       "contactInfo": {
         "email": "johnsonlccedk@gmail.com",
         "phone": "9744064081",
