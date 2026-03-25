@@ -17,14 +17,6 @@
       "component": "features-grid"
     },
     {
-      "section": "features",
-      "component": "features-slideshow"
-    },
-    {
-      "section": "testimonials",
-      "component": "testimonial-modern"
-    },
-    {
       "section": "contact",
       "component": "contact-form"
     },

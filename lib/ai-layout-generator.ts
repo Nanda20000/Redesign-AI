@@ -5,6 +5,7 @@ import { analyzeWebsite, getComponentRecommendations } from './website-analyzer'
 import { buildEnhancedPrompt, selectComponents, componentSupportsImages } from './component-selector';
 import { COMPONENT_META } from './component-meta';
 import { getStaticOnlyComponents } from './component-content-map';
+import { isComponentDynamic } from './component-content-map';
 
 // DeepSeek API endpoints (try primary, fallback to OpenRouter)
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
@@ -52,6 +53,8 @@ export interface ExtractedContent {
     phone?: string;
     address?: string;
   };
+  images?: string[];
+  items?: string[];
 }
 
 export interface GeneratedPageData {
@@ -409,6 +412,58 @@ function enforceImageComponents(
 }
 
 /**
+ * AI-safe component whitelist - ONLY these components can be selected
+ * All components listed here are dynamic (prop-driven) and AI-compatible
+ * First item in each category is highest priority
+ */
+const AI_SAFE_COMPONENTS: Record<string, string[]> = {
+  hero: ['hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
+  features: ['features-dynamic', 'features-coursel', 'features-gallery-type', 'features-Image-new'],
+  about: ['about-two-column'],
+  testimonials: ['testimonial-cards', 'testimonial-modern'],
+  contact: ['contact-form'],
+  footer: ['footer-simple'],
+  navbar: ['navbar-minimal', 'navbar-modern']
+};
+
+/**
+ * Check if a component is in the AI-safe whitelist
+ */
+function isComponentAICompatible(componentName: string, section: string): boolean {
+  const safeComponents = AI_SAFE_COMPONENTS[section] || [];
+  return safeComponents.includes(componentName);
+}
+
+/**
+ * Enforce AI-safe component whitelist on layout AFTER AI generation
+ * Replaces any non-whitelisted components with the first valid AI-safe component
+ * This runs AFTER AI layout generation to ensure only dynamic-safe components are used
+ */
+function enforceAICompatibleComponents(layout: LayoutResponse): LayoutResponse {
+  const enhancedLayout: LayoutItem[] = [];
+
+  for (const item of layout.layout) {
+    const newItem = { ...item };
+    const safeComponents = AI_SAFE_COMPONENTS[item.section] || [];
+
+    if (!isComponentAICompatible(item.component, item.section)) {
+      const oldComponent = item.component;
+      // Replace with first valid AI-safe component for this section
+      if (safeComponents.length > 0) {
+        newItem.component = safeComponents[0];
+        console.log(`[Component Filter] ${item.section}: ${oldComponent} → ${newItem.component}`);
+      } else {
+        console.warn(`[Component Filter] No AI-safe components available for section: ${item.section}`);
+      }
+    }
+
+    enhancedLayout.push(newItem);
+  }
+
+  return { layout: enhancedLayout };
+}
+
+/**
  * Select the best component for a section based on metadata and content
  */
 function selectBestComponent(section: string, content?: ExtractedContent): string | null {
@@ -535,6 +590,11 @@ export async function generateLayoutWithAI(
       console.log('[AI Layout Generator] Enforcing image-capable components...');
       layout = enforceImageComponents(layout, hasImages);
     }
+
+    // ENFORCE AI-SAFE COMPONENTS: Replace any non-whitelisted components
+    // This runs AFTER AI layout generation to ensure only dynamic-safe components are used
+    console.log('[AI Layout Generator] Enforcing AI-safe component whitelist...');
+    layout = enforceAICompatibleComponents(layout);
 
     // Step 8: Validate and enhance selection with rules engine (image-aware)
     console.log('[AI Layout Generator] Validating component selection...');

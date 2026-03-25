@@ -11,6 +11,7 @@ export const COMPONENT_META = {
 
   "features- Image":    { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 9  },
   "features-coursel":   { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 9  },
+  "features-dynamic":   { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 11 },
   "features-gallery-type": { section: "features", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 9 },
   "features-grid":      { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
   "features-Image-new": { section: "features", supportsImages: true,  supportsItems: false, contentLevel: "low",    priority: 7  },

@@ -54,6 +54,7 @@ export interface ExtractedContent {
     width?: number;
     height?: number;
   }>;
+  items?: string[];
 }
 
 export interface MappedContent {

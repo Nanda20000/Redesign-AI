@@ -80,6 +80,14 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'description', type: 'paragraph', maxWords: 20 },
     ],
   },
+  'features-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title',        type: 'heading',   maxWords: 8  },
+      { prop: 'description',  type: 'paragraph', maxWords: 25 },
+      { prop: 'items',        type: 'list',     maxWords: 50 },
+    ],
+  },
   'features-gallery-type': {
     isDynamic: true,
     contentSlots: [

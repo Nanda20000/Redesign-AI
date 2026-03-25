@@ -2,77 +2,71 @@
   "navbar-minimal": {
     "menuItems": [
       {
-        "to": "/about-us",
-        "text": "About Us"
+        "to": "home",
+        "text": "Home"
       },
       {
-        "to": "/treatments",
-        "text": "Treatments"
+        "to": "about",
+        "text": "About"
       },
       {
-        "to": "/departments",
-        "text": "Departments"
+        "to": "courses",
+        "text": "Courses"
       },
       {
-        "to": "/doctors",
-        "text": "Doctors"
-      },
-      {
-        "to": "/contact",
+        "to": "contact",
         "text": "Contact"
       }
     ]
   },
   "hero-ae": {
     "content": {
-      "title": "Your Smile is Our Priority",
-      "subtitle": "World-Class Dentistry in Kerala",
-      "description": "Experience unmatched dental care with our gentle, expert procedures for a confident smile.",
-      "buttonText": "Book an Appointment"
+      "title": "Unlock Your Career with Heavy Vehicle Training",
+      "subtitle": "Kerala's No.1 Heavy Equipment Institute",
+      "description": "Get tons of hands-on experience in our job-oriented heavy-equipment operator programs.",
+      "buttonText": "Call Now"
     }
   },
   "about-two-column": {
-    "title": "About MIDAC Dental Centre",
-    "description": "MIDAC is a world-class centre for dentistry, implants, and cosmetic dentistry in Kerala. We provide unmatched, gentle care with a simple priority: your confident smile.",
-    "achievementsTitle": null,
-    "achievementsDescription": null,
+    "title": "About A2Z Heavy Equipment Institute",
+    "description": "Kerala's premier training institute, providing a one-stop solution for skilled heavy equipment operators and drivers through hands-on, job-oriented programs.",
+    "achievementsTitle": "Our Key Achievement",
+    "achievementsDescription": "Training over a thousand students monthly.",
     "companiesTitle": null,
     "injectedCompanies": null,
-    "injectedAchievements": null
-  },
-  "features-grid": {
-    "badge": "Treatments",
-    "heading": "Our Dental Treatments",
-    "description": "Gentle, expert procedures for a confident, healthy smile.",
-    "featureItems": [
+    "injectedAchievements": [
       {
-        "title": "Dental Implants",
-        "description": "World-class tooth replacement for a natural, lasting smile."
-      },
-      {
-        "title": "Root Canal Treatment",
-        "description": "Save and restore infected or damaged teeth effectively."
-      },
-      {
-        "title": "Dental Abscess Care",
-        "description": "Relieve pain and treat infection with expert care."
-      },
-      {
-        "title": "Decayed Teeth Restoration",
-        "description": "Procedures to address and restore severely decayed teeth."
+        "label": "Students Per Month",
+        "value": "1000+"
       }
     ]
   },
-  "features-slideshow": {
-    "heading": "Our Gentle Dental Procedures"
-  },
-  "testimonial-section5": {
-    "title": "What Our Clients Say",
-    "description": "Rediscover your radiant and unshakable smile with us."
+  "features-grid": {
+    "badge": "Courses",
+    "heading": "Our Course Packages",
+    "description": "Specialized, job-oriented training programs for heavy equipment operators.",
+    "featureItems": [
+      {
+        "title": "Advanced Diploma in Automobile Engineering",
+        "description": "A comprehensive program in automobile engineering principles."
+      },
+      {
+        "title": "JCB Operator Training Program",
+        "description": "Hands-on training for operating JCB Backhoe Loaders."
+      },
+      {
+        "title": "Tower Crane Operator Training",
+        "description": "Specialized training for safe tower crane operation."
+      },
+      {
+        "title": "Zoomlion Imported Crane Course",
+        "description": "Focused training on operating imported Zoomlion cranes."
+      }
+    ]
   },
   "contact-form": {
-    "title": "Contact Our Dental Clinic",
-    "description": "Reach out to schedule your appointment or make an enquiry. Your smile is our priority."
+    "title": "Get In Touch Today",
+    "description": "Contact Kerala's top heavy equipment institute for course details and enrollment."
   },
   "footer-modern": {}
 }

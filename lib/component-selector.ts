@@ -13,6 +13,7 @@ import {
   ComponentRecommendations
 } from './website-analyzer';
 import { ComponentsManifest, LayoutItem, ExtractedContent } from './ai-layout-generator';
+import { isComponentDynamic } from './component-content-map';
 
 export interface ComponentSelectionOptions {
   manifest: ComponentsManifest;
@@ -35,6 +36,21 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
   features: ['features-image', 'features-gallery-type', 'features-slideshow', 'features- Image', 'features-Image-new'],
   testimonials: ['testimonial-cards', 'testimonial-modern', 'testimonial-gradient'],
   about: ['about-two-column'],
+};
+
+/**
+ * AI-safe component whitelist - ONLY these components can be selected
+ * All components listed here are dynamic (prop-driven) and AI-compatible
+ * First item in each category is highest priority
+ */
+const AI_SAFE_COMPONENTS: Record<string, string[]> = {
+  hero: ['hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
+  features: ['features-dynamic', 'features-coursel', 'features-gallery-type', 'features-Image-new'],
+  about: ['about-two-column'],
+  testimonials: ['testimonial-cards', 'testimonial-modern'],
+  contact: ['contact-form'],
+  footer: ['footer-simple'],
+  navbar: ['navbar-minimal', 'navbar-modern']
 };
 
 /**
@@ -370,6 +386,42 @@ function determineSections(
 }
 
 /**
+ * Check if a component is in the AI-safe whitelist
+ */
+function isComponentAICompatible(componentName: string, section: string): boolean {
+  const safeComponents = AI_SAFE_COMPONENTS[section] || [];
+  return safeComponents.includes(componentName);
+}
+
+/**
+ * Enforce AI-safe component whitelist on layout
+ * Replaces any non-whitelisted components with the first valid AI-safe component
+ */
+function enforceAICompatibleComponents(layout: LayoutItem[]): LayoutItem[] {
+  const enhancedLayout: LayoutItem[] = [];
+
+  for (const item of layout) {
+    const newItem = { ...item };
+    const safeComponents = AI_SAFE_COMPONENTS[item.section] || [];
+
+    if (!isComponentAICompatible(item.component, item.section)) {
+      const oldComponent = item.component;
+      // Replace with first valid AI-safe component for this section
+      if (safeComponents.length > 0) {
+        newItem.component = safeComponents[0];
+        console.log(`[Component Filter] ${item.section}: ${oldComponent} → ${newItem.component}`);
+      } else {
+        console.warn(`[Component Filter] No AI-safe components available for section: ${item.section}`);
+      }
+    }
+
+    enhancedLayout.push(newItem);
+  }
+
+  return enhancedLayout;
+}
+
+/**
  * Main component selection function
  */
 export function selectComponents(
@@ -466,8 +518,12 @@ export function selectComponents(
   console.log('[Component Selector] Selection complete. Variety score:', varietyScore);
   console.log('[Component Selector] Styles used:', Array.from(usedStyles));
 
+  // ENFORCE AI-SAFE COMPONENTS: Replace any non-whitelisted components
+  console.log('[Component Selector] Enforcing AI-safe component whitelist...');
+  const filteredLayout = enforceAICompatibleComponents(layout);
+
   return {
-    layout,
+    layout: filteredLayout,
     selectionReasons,
     varietyScore
   };
