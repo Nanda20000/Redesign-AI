@@ -46,8 +46,8 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
 const AI_SAFE_COMPONENTS: Record<string, string[]> = {
   hero: ['hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
   features: ['features-dynamic', 'features-coursel', 'features-gallery-type', 'features-Image-new'],
-  about: ['about-two-column'],
-  testimonials: ['testimonial-cards', 'testimonial-modern'],
+  about: ['about-dynamic'],
+  testimonials: ['testimonials-dynamic'],
   contact: ['contact-form'],
   footer: ['footer-simple'],
   navbar: ['navbar-minimal', 'navbar-modern']

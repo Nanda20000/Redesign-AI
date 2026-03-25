@@ -120,6 +120,15 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
   },
 
   // ── ABOUT ───────────────────────────────────────────────────────────
+  'about-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title',        type: 'heading',   maxWords: 6  },
+      { prop: 'description',  type: 'paragraph', maxWords: 40 },
+      { prop: 'stats',        type: 'list',     maxWords: 10 },
+      { prop: 'companies',    type: 'list',     maxWords: 15 },
+    ],
+  },
   'about-two-column': {
     isDynamic: true,
     contentSlots: [
@@ -132,6 +141,14 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
   },
 
   // ── TESTIMONIALS ────────────────────────────────────────────────────
+  'testimonials-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title',        type: 'heading',   maxWords: 6  },
+      { prop: 'description',  type: 'paragraph', maxWords: 15 },
+      { prop: 'testimonials', type: 'list',     maxWords: 60 },
+    ],
+  },
   'testimonial-cards': {
     isDynamic: true,
     contentSlots: [

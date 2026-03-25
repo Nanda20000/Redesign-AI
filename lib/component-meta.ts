@@ -17,8 +17,10 @@ export const COMPONENT_META = {
   "features-Image-new": { section: "features", supportsImages: true,  supportsItems: false, contentLevel: "low",    priority: 7  },
   "features-slideshow": { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 10 },
 
+  "about-dynamic":      { section: "about", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 11 },
   "about-two-column": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "low", priority: 9 },
 
+  "testimonials-dynamic": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 11 },
   "testimonial-cards":    { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 9 },
   "testimonial-gradient": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 8 },
   "testimonial-modern":   { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 8 },

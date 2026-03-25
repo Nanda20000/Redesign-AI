@@ -2,7 +2,9 @@ import { HeroSlide } from '@/components-library/hero/hero-ab';
 import { FeaturesSlideshow } from '@/components-library/features/features-slideshow';
 import { FeaturesDynamic } from '@/components-library/features/features-dynamic';
 import { About3 } from '@/components-library/about/about-two-column';
+import { AboutDynamic } from '@/components-library/about/about-dynamic';
 import { TestimonialsCards } from '@/components-library/testimonials/testimonial-cards';
+import { TestimonialsDynamic } from '@/components-library/testimonials/testimonials-dynamic';
 import { ContactCard } from '@/components-library/contact/contact-form';
 import { FooterSimple } from '@/components-library/footer/footer-simple';
 import NavbarMinimal from '@/components-library/navbar/navbar-minimal';
@@ -12,7 +14,9 @@ const components = {
   "features-slideshow": FeaturesSlideshow,
   "features-dynamic": FeaturesDynamic,
   "about-two-column": About3,
+  "about-dynamic": AboutDynamic,
   "testimonial-cards": TestimonialsCards,
+  "testimonials-dynamic": TestimonialsDynamic,
   "contact-form": ContactCard,
   "footer-simple": FooterSimple,
   "navbar-minimal": NavbarMinimal
@@ -21,8 +25,8 @@ const components = {
 export const SAFE_COMPONENTS = {
   hero: ["hero-ab"],
   features: ["features-dynamic", "features-slideshow"],
-  about: ["about-two-column"],
-  testimonials: ["testimonial-cards"],
+  about: ["about-dynamic", "about-two-column"],
+  testimonials: ["testimonials-dynamic", "testimonial-cards"],
   contact: ["contact-form"],
   footer: ["footer-simple"],
   navbar: ["navbar-minimal"]

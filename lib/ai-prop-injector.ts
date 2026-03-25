@@ -111,6 +111,15 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
   },
 
   // ── FEATURES ──────────────────────────────────────────────────────
+  'features-dynamic': {
+    componentName: 'features-dynamic',
+    section: 'features',
+    props: [
+      { name: 'title',       type: 'string', description: 'Section title, max 8 words',       maxWords: 8,  required: true  },
+      { name: 'description', type: 'string', description: 'Short description, max 25 words',  maxWords: 25, required: false },
+      { name: 'items',       type: 'Array<{title:string,description:string,image?:string}>', description: 'List of 2-6 feature cards. Each title max 6 words, each description max 20 words. Include image URLs if available from content.', required: true },
+    ],
+  },
   'features-slideshow': {
     componentName: 'features-slideshow',
     section: 'features',
@@ -162,6 +171,16 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
   },
 
   // ── ABOUT ─────────────────────────────────────────────────────────
+  'about-dynamic': {
+    componentName: 'about-dynamic',
+    section: 'about',
+    props: [
+      { name: 'title',       type: 'string', description: 'About section heading, max 6 words',                    maxWords: 6,  required: true  },
+      { name: 'description', type: 'string', description: 'About paragraph summarised in max 40 words',            maxWords: 40, required: true  },
+      { name: 'stats',       type: 'Array<{label:string,value:string}>', description: 'Key statistics like years, students, courses. Extract real numbers from content if available (e.g. "28+", "1000+")', required: false },
+      { name: 'companies',   type: 'string[]', description: 'List of partner/client company names if mentioned in content', required: false },
+    ],
+  },
   'about-two-column': {
     componentName: 'about-two-column',
     section: 'about',
@@ -177,19 +196,21 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
   },
 
   // ── TESTIMONIALS ──────────────────────────────────────────────────
+  'testimonials-dynamic': {
+    componentName: 'testimonials-dynamic',
+    section: 'testimonials',
+    props: [
+      { name: 'title',       type: 'string', description: 'Section title, max 6 words',       maxWords: 6,  required: true  },
+      { name: 'description', type: 'string', description: 'Subtitle text, max 15 words',      maxWords: 15, required: false },
+      { name: 'testimonials',type: 'Array<{text:string,name?:string,role?:string,image?:string}>', description: 'Real feedback content summarised from site. Each text max 25 words. If no real testimonials exist, generate realistic domain-specific feedback with contextual roles (e.g. "Accounting Student", "Course Graduate") - NOT generic names like John Doe.', required: true },
+    ],
+  },
   'testimonial-cards': {
     componentName: 'testimonial-cards',
     section: 'testimonials',
     props: [
       { name: 'title',       type: 'string', description: 'Section heading, max 6 words',       maxWords: 6,  required: true  },
       { name: 'description', type: 'string', description: 'Subtitle text, max 15 words',        maxWords: 15, required: false },
-    ],
-  },
-  'testimonial-modern': {
-    componentName: 'testimonial-modern',
-    section: 'testimonials',
-    props: [
-      { name: 'title', type: 'string', description: 'Section heading, max 6 words', maxWords: 6, required: true },
     ],
   },
   'testimonial-section5': {
