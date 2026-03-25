@@ -69,6 +69,18 @@ export interface ComponentPropSchema {
 export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
 
   // ── HERO ──────────────────────────────────────────────────────────
+  'hero-dynamic': {
+    componentName: 'hero-dynamic',
+    section: 'hero',
+    props: [
+      { name: 'subtitle',              type: 'string', description: 'Small label above title, max 6 words', maxWords: 6,  required: false },
+      { name: 'title',                 type: 'string', description: 'Main headline — bold, impactful, max 8 words', maxWords: 8,  required: true  },
+      { name: 'description',           type: 'string', description: 'Supporting paragraph, max 25 words',   maxWords: 25, required: false },
+      { name: 'buttonText',            type: 'string', description: 'Primary CTA button label, max 4 words', maxWords: 4,  required: false },
+      { name: 'secondaryButtonText',   type: 'string', description: 'Secondary CTA button, max 4 words',    maxWords: 4,  required: false },
+      { name: 'image',                 type: 'string', description: 'Hero section image URL — select most relevant image from Available Images list', required: false },
+    ],
+  },
   'hero-ab': {
     componentName: 'hero-ab',
     section: 'hero',
@@ -117,7 +129,7 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
     props: [
       { name: 'title',       type: 'string', description: 'Section title, max 8 words',       maxWords: 8,  required: true  },
       { name: 'description', type: 'string', description: 'Short description, max 25 words',  maxWords: 25, required: false },
-      { name: 'items',       type: 'Array<{title:string,description:string,image?:string}>', description: 'List of 2-6 feature cards. Each title max 6 words, each description max 20 words. Include image URLs if available from content.', required: true },
+      { name: 'items',       type: 'Array<{title:string,description:string,image?:string}>', description: 'List of 2-6 feature cards. Each title max 6 words, each description max 20 words. For each item, select the most relevant image from Available Images list if applicable.', required: true },
     ],
   },
   'features-slideshow': {
@@ -179,6 +191,7 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'description', type: 'string', description: 'About paragraph summarised in max 40 words',            maxWords: 40, required: true  },
       { name: 'stats',       type: 'Array<{label:string,value:string}>', description: 'Key statistics like years, students, courses. Extract real numbers from content if available (e.g. "28+", "1000+")', required: false },
       { name: 'companies',   type: 'string[]', description: 'List of partner/client company names if mentioned in content', required: false },
+      { name: 'image',       type: 'string', description: 'About section image URL — select most relevant image from Available Images list (e.g. team photo, office, campus)', required: false },
     ],
   },
   'about-two-column': {
@@ -202,7 +215,7 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
     props: [
       { name: 'title',       type: 'string', description: 'Section title, max 6 words',       maxWords: 6,  required: true  },
       { name: 'description', type: 'string', description: 'Subtitle text, max 15 words',      maxWords: 15, required: false },
-      { name: 'testimonials',type: 'Array<{text:string,name?:string,role?:string,image?:string}>', description: 'Real feedback content summarised from site. Each text max 25 words. If no real testimonials exist, generate realistic domain-specific feedback with contextual roles (e.g. "Accounting Student", "Course Graduate") - NOT generic names like John Doe.', required: true },
+      { name: 'testimonials',type: 'Array<{text:string,name?:string,role?:string,image?:string}>', description: 'Real feedback content summarised from site. Each text max 25 words. If no real testimonials exist, generate realistic domain-specific feedback with contextual roles (e.g. "Accounting Student", "Course Graduate") - NOT generic names like John Doe. For each testimonial, optionally include a portrait image URL from Available Images if relevant.', required: true },
     ],
   },
   'testimonial-cards': {
@@ -298,6 +311,8 @@ function buildPropPrompt(
     .map(p => `  - "${p.name}" (${p.type}): ${p.description}${p.required ? ' [REQUIRED]' : ' [OPTIONAL]'}`)
     .join('\n');
 
+  const availableImages = (content.images || []).slice(0, 20).map(img => img.src).join('\n') || 'No images available';
+
   return `You are an expert web content writer. Your job is to write content for a website component using extracted content from a real website.
 
 ## Website Content Extracted:
@@ -309,6 +324,9 @@ Contact Info: ${JSON.stringify(content.contactInfo || {})}
 AI-Processed Features: ${JSON.stringify(content.processed?.features || {})}
 AI-Processed About: ${JSON.stringify(content.processed?.about || {})}
 AI-Processed Footer: ${JSON.stringify(content.processed?.footer || {})}
+
+## Available Images (select most relevant ones for this section):
+${availableImages}
 
 ## Component: ${schema.componentName} (${schema.section} section)
 
@@ -324,6 +342,8 @@ ${propsDescription}
 6. For menuItems/menu: use the actual navigation links from the website.
 7. All text must be professional, clean, and ready to display on a live website.
 8. If a prop is OPTIONAL and there is no relevant content, set it to null.
+9. **IMAGE SELECTION**: Select the MOST relevant image(s) for this section from the "Available Images" list above. Return the selected image URL(s) in the 'image' or 'items[].image' field if the component supports it. Do NOT use images not listed above.
+10. If no relevant image exists for this section, leave image fields as null/undefined — do NOT force an image.
 
 ## Response Format:
 Return ONLY a valid JSON object. No markdown, no explanations, no extra text.
@@ -335,7 +355,7 @@ Example for features-grid:
   "heading": "Our Featured Programs",
   "description": "Explore our industry-recognised certifications",
   "featureItems": [
-    { "title": "Tally Certification", "description": "Master accounting software used by thousands of businesses" },
+    { "title": "Tally Certification", "description": "Master accounting software used by thousands of businesses", "image": "https://example.com/image1.jpg" },
     { "title": "US CPA Program", "description": "Globally recognised accounting credential for professionals" }
   ]
 }

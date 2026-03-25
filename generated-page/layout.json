@@ -6,15 +6,23 @@
     },
     {
       "section": "hero",
-      "component": "hero-ab"
+      "component": "hero-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-dynamic"
     },
     {
       "section": "about",
-      "component": "about-two-column"
+      "component": "about-dynamic"
     },
     {
       "section": "services",
-      "component": "features-grid"
+      "component": "features-Image"
+    },
+    {
+      "section": "testimonials",
+      "component": "testimonials-dynamic"
     },
     {
       "section": "contact",

@@ -26,6 +26,16 @@ export interface ComponentContentConfig {
 export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
 
   // ── HERO ────────────────────────────────────────────────────────────
+  'hero-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'subtitle',       type: 'label',     maxWords: 6  },
+      { prop: 'title',         type: 'heading',   maxWords: 8  },
+      { prop: 'description',   type: 'paragraph', maxWords: 25 },
+      { prop: 'buttonText',    type: 'cta',       maxWords: 4  },
+      { prop: 'secondaryButtonText', type: 'cta', maxWords: 4  },
+    ],
+  },
   'hero-ab': {
     isDynamic: true,
     contentSlots: [

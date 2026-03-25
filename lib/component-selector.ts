@@ -44,7 +44,7 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
  * First item in each category is highest priority
  */
 const AI_SAFE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
+  hero: ['hero-dynamic'],
   features: ['features-dynamic', 'features-coursel', 'features-gallery-type', 'features-Image-new'],
   about: ['about-dynamic'],
   testimonials: ['testimonials-dynamic'],

@@ -10,63 +10,87 @@
         "text": "About"
       },
       {
-        "to": "courses",
-        "text": "Courses"
+        "to": "career",
+        "text": "Career"
       },
       {
-        "to": "contact",
-        "text": "Contact"
+        "to": "exam",
+        "text": "Exam"
+      },
+      {
+        "to": "gallery",
+        "text": "Gallery"
+      },
+      {
+        "to": "contact-us",
+        "text": "Contact Us"
+      },
+      {
+        "to": "partnership",
+        "text": "Partnership"
+      },
+      {
+        "to": "sign-in",
+        "text": "Sign In"
+      },
+      {
+        "to": "register-now",
+        "text": "Register Now"
       }
     ]
   },
   "hero-ae": {
     "content": {
-      "title": "Unlock Your Career with Heavy Vehicle Training",
-      "subtitle": "Kerala's No.1 Heavy Equipment Institute",
-      "description": "Get tons of hands-on experience in our job-oriented heavy-equipment operator programs.",
-      "buttonText": "Call Now"
+      "title": "India's Premier Professional Accounting Institute",
+      "subtitle": "The Gateway to Financial Success",
+      "description": "Elevate your accounting career with expert support, continuous practice, and NSDC-authorized programs.",
+      "buttonText": "Explore Courses"
     }
   },
+  "features-slideshow": {
+    "heading": "Premier Accounting & Finance Certifications",
+    "description": "Advance your career with our industry-leading professional programs, designed for mastery and global recognition.",
+    "featureItems": [
+      {
+        "title": "US CPA - Certified Public Accountant",
+        "description": "Attain the prestigious US CPA credential for a top-tier career in public accounting."
+      },
+      {
+        "title": "US CMA - Certified Management Accountant",
+        "description": "Specialize in strategic financial management and corporate decision-making with the US CMA."
+      },
+      {
+        "title": "Diploma in Financial Accounting & Taxation",
+        "description": "Build a solid foundation in core accounting principles and taxation systems."
+      },
+      {
+        "title": "US EA - Enrolled Agent",
+        "description": "Become a federally licensed tax expert empowered to represent clients before the IRS."
+      }
+    ]
+  },
   "about-two-column": {
-    "title": "About A2Z Heavy Equipment Institute",
-    "description": "Kerala's premier training institute, providing a one-stop solution for skilled heavy equipment operators and drivers through hands-on, job-oriented programs.",
-    "achievementsTitle": "Our Key Achievement",
-    "achievementsDescription": "Training over a thousand students monthly.",
+    "title": "About IBS Academy",
+    "description": "A premier ISO 9001:2015 certified and NSDC authorized accounting institute in India, elevating the profession with expert support and continuous practice.",
+    "achievementsTitle": "Our Legacy of Excellence",
+    "achievementsDescription": "Decades of shaping successful accounting careers.",
     "companiesTitle": null,
     "injectedCompanies": null,
     "injectedAchievements": [
       {
-        "label": "Students Per Month",
-        "value": "1000+"
+        "label": "Years Experience",
+        "value": "28+"
       }
     ]
   },
-  "features-grid": {
-    "badge": "Courses",
-    "heading": "Our Course Packages",
-    "description": "Specialized, job-oriented training programs for heavy equipment operators.",
-    "featureItems": [
-      {
-        "title": "Advanced Diploma in Automobile Engineering",
-        "description": "A comprehensive program in automobile engineering principles."
-      },
-      {
-        "title": "JCB Operator Training Program",
-        "description": "Hands-on training for operating JCB Backhoe Loaders."
-      },
-      {
-        "title": "Tower Crane Operator Training",
-        "description": "Specialized training for safe tower crane operation."
-      },
-      {
-        "title": "Zoomlion Imported Crane Course",
-        "description": "Focused training on operating imported Zoomlion cranes."
-      }
-    ]
+  "features-Image": {},
+  "testimonial-section5": {
+    "title": "What Our Students Say",
+    "description": "Hear from our students about their success stories."
   },
   "contact-form": {
     "title": "Get In Touch Today",
-    "description": "Contact Kerala's top heavy equipment institute for course details and enrollment."
+    "description": "Reach out to our premier accounting institute for expert guidance and support."
   },
   "footer-modern": {}
 }

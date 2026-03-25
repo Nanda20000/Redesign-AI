@@ -1,37 +1,32 @@
 /**
  * Content Injection System
  * Maps extracted webpage content to component props
+ * 
+ * NOTE: Image distribution is now handled by AI prop injector.
+ * Dynamic components receive images directly from AI-generated props.
  */
 
 import type { ProcessedSectionContent } from './ai-content-processor';
-import { distributeImages } from './image-distributor';
 import { getComponentImageConfig } from './component-image-map';
 import { isComponentDynamic } from './component-content-map';
 
 /**
- * Build testimonial objects from images and text content.
+ * Build testimonial objects from text content.
+ * NOTE: Images are now handled by AI prop injector - no automatic fallback images.
  */
 function buildTestimonialItems(
   images: string[],
   paragraphs: string[],
   headings: string[]
-): Array<{ image: string; name: string; username: string; text: string; social: string }> {
-  if (images.length === 0) {
-    return [
-      {
-        image: 'https://avatars.githubusercontent.com/u/1?v=4',
-        name: 'Happy Customer',
-        username: '@customer1',
-        text: paragraphs[0]?.slice(0, 120) || 'Great service and excellent support!',
-        social: 'https://twitter.com',
-      },
-    ];
+): Array<{ image?: string; name: string; username: string; text: string; social: string }> {
+  if (paragraphs.length === 0) {
+    return [];
   }
-  return images.map((imgSrc, i) => ({
-    image: imgSrc,
+  return paragraphs.slice(0, 3).map((para, i) => ({
+    // No automatic image - AI handles image selection
     name: headings[i + 2] || `Customer ${i + 1}`,
     username: `@customer${i + 1}`,
-    text: paragraphs[i]?.slice(0, 120) || 'Excellent service and outstanding results.',
+    text: para.slice(0, 120),
     social: 'https://twitter.com',
   }));
 }
@@ -112,11 +107,11 @@ export interface MappedContent {
     title: string;
     description: string;
     testimonials: Array<{
-      image: string;
+      image?: string;
       name: string;
       username: string;
       text: string;
-      social: string;
+      social?: string;
     }>;
   };
   contact?: {
@@ -229,27 +224,9 @@ export function mapContentToSections(
   const mainHeading = headings[0] ?? '';
   const subHeading = headings[1] ?? paragraphs[0]?.slice(0, 100) ?? '';
 
-  // Use the image distributor if layout is provided, otherwise fall back
-  // to sequential distribution
-  const imageAllocation = layout
-    ? distributeImages(images, layout)
-    : {};
-
-  // Helper: get images for a section from allocation or fall back to slice
-  let fallbackCursor = 0;
-  function getImages(section: string, count: number): string[] {
-    if (layout && imageAllocation[section]) {
-      return imageAllocation[section];
-    }
-    // Fallback: sequential slice
-    const srcs = images
-      .slice(fallbackCursor, fallbackCursor + count)
-      .map(img => img.src);
-    fallbackCursor += count;
-    // If not enough images, fill with empty strings
-    while (srcs.length < count) srcs.push('');
-    return srcs;
-  }
+  // NOTE: Image distribution is now handled by AI prop injector.
+  // Dynamic components receive images directly from AI-generated props.
+  // This function only provides fallback content for non-dynamic components.
 
   // Log received images
   console.log("[ContentMapper] Images received:", images.length || 0);
@@ -272,33 +249,30 @@ export function mapContentToSections(
     };
   }
 
-  // Map hero content - Assign 1 image
+  // Map hero content - NO automatic image assignment (AI handles it)
   if (sections.includes('hero')) {
-    const heroImgs = getImages('hero', 1);
     mapped.hero = {
       title: processed?.about?.title ?? headings[0] ?? '',
       description: processed?.about?.description ?? paragraphs[0]?.slice(0, 150) ?? '',
       primaryAction: { label: 'Get Started', onClick: () => {} },
       secondaryAction: { label: 'Learn More', onClick: () => {} },
-      image: heroImgs[0] ?? '',
+      // image field removed - AI prop injector handles image selection
     };
   }
 
-  // Map about content - Use AI-processed if available, assign 2 images
+  // Map about content - NO automatic image assignment (AI handles it)
   if (sections.includes('about')) {
-    const aboutImages = getImages('about', 2);
     mapped.about = {
       title: processed?.about?.title ?? 'About Us',
       description: processed?.about?.description ?? paragraphs[1]?.slice(0, 200) ?? '',
       companies: processed?.about?.companies ?? [],
       achievements: processed?.about?.achievements ?? [],
-      images: aboutImages,
+      // images field removed - AI prop injector handles image selection
     };
   }
 
-  // Map features content - Use AI-processed if available, assign 4 images
+  // Map features content - NO automatic image assignment (AI handles it)
   if (sections.includes('features')) {
-    const featureImages = getImages('features', 4);
     mapped.features = {
       badge: processed?.features?.heading ? 'Features' : '',
       heading: processed?.features?.heading ?? 'Our Features',
@@ -306,26 +280,22 @@ export function mapContentToSections(
       items: processed?.features?.items && processed.features.items.length > 0
         ? processed.features.items
         : undefined,
-      images: featureImages,
+      // images field removed - AI prop injector handles image selection
     };
   }
 
-  // Map testimonials content - Assign 3 images sequentially
+  // Map testimonials content - NO automatic image assignment (AI handles it)
   if (sections.includes('testimonials')) {
-    const testimonialImages = getImages('testimonials', 3);
-    const builtTestimonials = testimonialImages.map((imgSrc, i) => ({
-      image: imgSrc,
+    const builtTestimonials = (paragraphs.slice(0, 3) || []).map((para, i) => ({
+      text: para.slice(0, 120),
       name: headings[i + 2] || `Customer ${i + 1}`,
       username: `@customer${i + 1}`,
-      text: paragraphs[i]?.slice(0, 120) ?? 'Great service!',
-      social: 'https://twitter.com',
     }));
     mapped.testimonials = {
-      title: 'What Our Clients Say',
-      description: 'Real feedback from real customers',
-      testimonials: builtTestimonials.length > 0
-        ? builtTestimonials
-        : [],
+      title: 'What Our Customers Say',
+      description: 'Real feedback from our valued clients',
+      testimonials: builtTestimonials,
+      // No image field - AI prop injector handles testimonial image selection
     };
   }
 
@@ -334,7 +304,6 @@ export function mapContentToSections(
     mapped.contact = {
       title: 'Get In Touch',
       subtitle: 'We\'d love to hear from you',
-      submitText: 'Send Message',
     };
   }
 
@@ -434,6 +403,21 @@ export function getComponentContentProps(
       };
 
     // Hero components
+    case 'hero-dynamic':
+      // Dynamic hero - image comes from AI props
+      const heroDynamicProps = {
+        title: (mappedContent.hero as any)?.title ?? '',
+        subtitle: (mappedContent.hero as any)?.subtitle ?? '',
+        description: (mappedContent.hero as any)?.description ?? '',
+        buttonText: (mappedContent.hero as any)?.buttonText ?? '',
+        secondaryButtonText: (mappedContent.hero as any)?.secondaryButtonText ?? '',
+        image: (mappedContent.hero as any)?.image ?? undefined,
+      };
+      if (heroDynamicProps.image) {
+        console.log('[HERO COMPONENT] hero-dynamic: AI-selected image:', heroDynamicProps.image?.slice(0, 80));
+      }
+      return heroDynamicProps;
+
     case 'hero-ab':
       // HeroSlide component supports images prop
       const heroAbProps = {
@@ -468,6 +452,19 @@ export function getComponentContentProps(
       return {}; // Shader-based hero, no content props
 
     // Features components
+    case 'features-dynamic':
+      // Dynamic features - images come from AI props in items array
+      const featuresDynamicProps = {
+        title: (mappedContent.features as any)?.heading ?? '',
+        description: (mappedContent.features as any)?.description ?? '',
+        items: (mappedContent.features as any)?.items ?? [],
+      };
+      const itemsWithImages = featuresDynamicProps.items?.filter((item: any) => item.image) || [];
+      if (itemsWithImages.length > 0) {
+        console.log('[FEATURES COMPONENT] features-dynamic: AI-selected', itemsWithImages.length, 'image(s) for items');
+      }
+      return featuresDynamicProps;
+
     case 'features- Image':
       return {
         heading: (mappedContent.features as any)?.heading ?? '',
@@ -516,6 +513,20 @@ export function getComponentContentProps(
       };
 
     // About components
+    case 'about-dynamic':
+      // Dynamic about - image comes from AI props
+      const aboutDynamicProps = {
+        title: (mappedContent.about as any)?.title ?? '',
+        description: (mappedContent.about as any)?.description ?? '',
+        stats: (mappedContent.about as any)?.achievements ?? [],
+        companies: (mappedContent.about as any)?.companies ?? [],
+        image: (mappedContent.about as any)?.image ?? undefined,
+      };
+      if (aboutDynamicProps.image) {
+        console.log('[ABOUT COMPONENT] about-dynamic: AI-selected image:', aboutDynamicProps.image?.slice(0, 80));
+      }
+      return aboutDynamicProps;
+
     case 'about-two-column':
       const aboutContent = mappedContent.about as any;
       return {
@@ -530,6 +541,19 @@ export function getComponentContentProps(
       };
 
     // Testimonials components
+    case 'testimonials-dynamic':
+      // Dynamic testimonials - images come from AI props in testimonials array
+      const testimonialsDynamicProps = {
+        title: (mappedContent.testimonials as any)?.title ?? '',
+        description: (mappedContent.testimonials as any)?.description ?? '',
+        testimonials: (mappedContent.testimonials as any)?.testimonials ?? [],
+      };
+      const testimonialsWithImages = testimonialsDynamicProps.testimonials?.filter((t: any) => t.image) || [];
+      if (testimonialsWithImages.length > 0) {
+        console.log('[TESTIMONIALS COMPONENT] testimonials-dynamic: AI-selected', testimonialsWithImages.length, 'image(s)');
+      }
+      return testimonialsDynamicProps;
+
     case 'testimonial-cards':
     case 'testimonial-section5':
       return {
@@ -709,7 +733,6 @@ export function getDefaultMappedContent(): MappedContent {
     contact: {
       title: 'Get In Touch',
       subtitle: 'We\'d love to hear from you',
-      submitText: 'Send Message',
     },
     footer: {
       brandName: 'Brand',
