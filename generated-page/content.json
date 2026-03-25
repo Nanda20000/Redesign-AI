@@ -403,50 +403,50 @@
   "processed": {
     "features": {
       "heading": "Our Featured Courses",
-      "description": "A selection of premier professional accounting and finance certifications and diplomas offered by the institute.",
+      "description": "A selection of premier professional accounting and finance certifications offered by the institute.",
       "items": [
         {
           "title": "US CPA - Certified Public Accountant",
-          "description": "Certification for professional public accounting in the United States."
+          "description": "Certification for professional public accounting standards."
         },
         {
           "title": "US CMA - Certified Management Accountant",
-          "description": "Certification focused on management accounting and financial management."
+          "description": "Certification focused on management accounting and financial strategy."
         },
         {
           "title": "Diploma in Financial Accounting & Taxation",
-          "description": "A comprehensive diploma program covering financial accounting and taxation principles."
+          "description": "Diploma program covering financial accounting and taxation principles."
         },
         {
-          "title": "Diploma in Master of Professional Accounting (MPA)",
-          "description": "An advanced diploma program for mastering professional accounting practices."
+          "title": "Certification in Professional Accounting (CPA)",
+          "description": "Professional accounting certification program."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in India. It elevates the accounting profession to new heights with expert support and continuous practice and is an NSDC Authorized institute.",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute. It is a No.1 Tally Institute in India that elevates the accounting profession with expert support and continuous practice, and is NSDC Authorized.",
       "companies": [],
       "achievements": [
         {
-          "label": "Years Experience",
+          "label": "Years of Operation",
           "value": "28+"
         }
       ],
       "breakout": {
         "title": "Numbers Tell a Story of Success",
-        "description": "The key message highlighting the institute's success and results-driven approach."
+        "description": "The institute's key message highlighting its proven track record and success in professional accounting education."
       }
     },
     "footer": {
       "brandName": "IBS Academy",
       "description": "A premier professional accounting institute.",
       "contactInfo": {
-        "email": "Not provided",
-        "phone": "Not provided",
-        "address": "Not provided"
+        "email": "Not Provided",
+        "phone": "Not Provided",
+        "address": "Not Provided"
       },
-      "copyright": "© 2024 IBS Academy. All rights reserved."
+      "copyright": "Not Provided"
     }
   }
 }

@@ -25,10 +25,6 @@
       "component": "testimonials-dynamic"
     },
     {
-      "section": "contact",
-      "component": "contact-form"
-    },
-    {
       "section": "footer",
       "component": "footer-simple"
     }

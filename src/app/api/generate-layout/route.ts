@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
             footerText: content.footerText,
             contactInfo: content.contactInfo,
             processed: content.processed as any,
+            images: content.images || [],  // ADD THIS LINE
           };
           const aiProps = await generatePropsForLayout(layout.layout, aiContent);
           

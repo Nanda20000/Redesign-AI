@@ -598,9 +598,10 @@ export async function generateLayoutWithAI(
 
     // Step 8: Validate and enhance selection with rules engine (image-aware)
     console.log('[AI Layout Generator] Validating component selection...');
+    const imageCount = extractedContent?.images?.length ?? 0;
     console.log('[AI Layout Generator] Passing content to selector:', {
-      hasImages: extractedContent?.images?.length > 0,
-      imageCount: extractedContent?.images?.length || 0
+      hasImages: imageCount > 0,
+      imageCount: imageCount
     });
     const selectionResult = selectComponents({
       manifest,
@@ -637,13 +638,8 @@ export async function generateLayoutWithAI(
     });
     console.log('[AI Layout Generator] =========================================');
 
-    // Apply intelligent component selection based on metadata and content
-    const finalLayout = applyIntelligentSelection(layout.layout, extractedContent);
-
-    return {
-      ...layout,
-      layout: finalLayout
-    };
+    // Return layout directly — enforceAICompatibleComponents above already ensures only dynamic components are selected
+    return layout;
   } catch (error) {
     console.error('[AI Layout Generator] Error generating layout:', error);
     throw error;

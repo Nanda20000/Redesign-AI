@@ -27,6 +27,7 @@ export interface ExtractedWebsiteContent {
     phone?: string;
     address?: string;
   };
+  images?: Array<{ src: string; alt?: string; title?: string; width?: number; height?: number }>;
   processed?: {
     features?: {
       heading: string;
@@ -311,7 +312,12 @@ function buildPropPrompt(
     .map(p => `  - "${p.name}" (${p.type}): ${p.description}${p.required ? ' [REQUIRED]' : ' [OPTIONAL]'}`)
     .join('\n');
 
-  const availableImages = (content.images || []).slice(0, 20).map(img => img.src).join('\n') || 'No images available';
+  const rawImages = content.images || [];
+  const availableImages = rawImages
+    .slice(0, 20)
+    .map(img => typeof img === 'string' ? img : img.src)
+    .filter(Boolean)
+    .join('\n') || 'No images available';
 
   return `You are an expert web content writer. Your job is to write content for a website component using extracted content from a real website.
 

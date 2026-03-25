@@ -5,6 +5,10 @@ import type { ComponentType } from "react";
 
 // About components
 import { About3 as AboutTwoColumn } from '../../components-library/about/about-two-column';
+import { AboutDynamic } from '../../components-library/about/about-dynamic';
+
+// Features components
+import { FeaturesDynamic } from '../../components-library/features/features-dynamic';
 
 // Contact components
 import { ContactCard as ContactForm } from '../../components-library/contact/contact-form';
@@ -27,6 +31,7 @@ import { FooterSimple } from '../../components-library/footer/footer-simple';
 import { FooterStartup } from '../../components-library/footer/footer-startup';
 
 // Hero components
+import { HeroDynamic } from '../../components-library/hero/hero-dynamic';
 import { HeroSlide as HeroAb } from '../../components-library/hero/hero-ab';
 import { HeroSection as HeroAc } from '../../components-library/hero/hero-ac';
 import HeroAd from '../../components-library/hero/hero-ad';
@@ -52,6 +57,7 @@ import { PricingModern } from '../../components-library/pricing/pricing-modern';
 import { PricingSimple } from '../../components-library/pricing/pricing-simple';
 
 // Testimonials components
+import { TestimonialsDynamic } from '../../components-library/testimonials/testimonials-dynamic';
 import { TestimonialsCards as TestimonialCards } from '../../components-library/testimonials/testimonial-cards';
 import { TestimonialsGradient as TestimonialGradient } from '../../components-library/testimonials/testimonial-gradient';
 import { TestimonialsModern as TestimonialModern } from '../../components-library/testimonials/testimonial-modern';
@@ -61,11 +67,13 @@ import { TestimonialsSection5 as TestimonialSection5 } from '../../components-li
 export const componentRegistry: Record<string, ComponentType<any>> = {
   // About components
   'about-two-column': AboutTwoColumn,
+  'about-dynamic': AboutDynamic,
 
   // Contact components
   'contact-form': ContactForm,
 
   // Features components
+  'features-dynamic': FeaturesDynamic,
   'features- Image': FeaturesImage,
   'features-coursel': FeaturesCoursel,
   'features-gallery-type': FeaturesGalleryType,
@@ -83,6 +91,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'footer-startup': FooterStartup,
 
   // Hero components
+  'hero-dynamic': HeroDynamic,
   'hero-ab': HeroAb,
   'hero-ac': HeroAc,
   'hero-ad': HeroAd,
@@ -108,6 +117,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'pricing-simple': PricingSimple,
 
   // Testimonials components
+  'testimonials-dynamic': TestimonialsDynamic,
   'testimonial-cards': TestimonialCards,
   'testimonial-gradient': TestimonialGradient,
   'testimonial-modern': TestimonialModern,

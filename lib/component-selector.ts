@@ -429,9 +429,10 @@ export function selectComponents(
 ): ComponentSelectionResult {
   const { manifest, analysis, sections: detectedSections, content } = options;
 
+  const imageCount = content?.images?.length ?? 0;
   console.log('[Component Selector] Received content:', {
-    hasImages: content?.images?.length > 0,
-    imageCount: content?.images?.length || 0
+    hasImages: imageCount > 0,
+    imageCount: imageCount
   });
 
   console.log('[Component Selector] Starting intelligent component selection...');

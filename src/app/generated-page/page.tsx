@@ -99,11 +99,8 @@ function mergeProps(
     if (typeof value === 'string' && value.trim().length > 0) {
       merged[key] = value;
     } else if (Array.isArray(value) && value.length > 0) {
-      // For arrays like featureItems, menuItems — merge carefully
-      // Keep images from base (AI doesn't generate image URLs)
-      if (key !== 'images' && key !== 'testimonials') {
-        merged[key] = value;
-      }
+      // Allow AI to inject all arrays including images and testimonials
+      merged[key] = value;
     } else if (typeof value === 'object' && !Array.isArray(value)) {
       merged[key] = { ...(merged[key] || {}), ...value };
     }
