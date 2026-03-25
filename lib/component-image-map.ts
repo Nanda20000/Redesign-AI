@@ -64,6 +64,7 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
 
   // ── CONTACT ───────────────────────────────────────────────────────────
   'contact-form': { imageCount: 0, imageProp: '', imageMode: 'none' },
+  'contact-split-dynamic': { imageCount: 0, imageProp: '', imageMode: 'none' },
 
   // ── PRICING ───────────────────────────────────────────────────────────
   'pricing-cards':    { imageCount: 0, imageProp: '', imageMode: 'none' },

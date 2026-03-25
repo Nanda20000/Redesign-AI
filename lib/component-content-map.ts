@@ -226,6 +226,23 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'description', type: 'paragraph', maxWords: 20 },
     ],
   },
+  'contact-split-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title',            type: 'heading',   maxWords: 8  },
+      { prop: 'description',      type: 'paragraph', maxWords: 20 },
+      { prop: 'formTitle',        type: 'heading',   maxWords: 6  },
+      { prop: 'nameLabel',        type: 'label',     maxWords: 3  },
+      { prop: 'namePlaceholder',  type: 'label',     maxWords: 5  },
+      { prop: 'emailLabel',       type: 'label',     maxWords: 3  },
+      { prop: 'emailPlaceholder', type: 'label',     maxWords: 5  },
+      { prop: 'phoneLabel',       type: 'label',     maxWords: 3  },
+      { prop: 'phonePlaceholder', type: 'label',     maxWords: 5  },
+      { prop: 'messageLabel',     type: 'label',     maxWords: 3  },
+      { prop: 'messagePlaceholder', type: 'label',   maxWords: 8  },
+      { prop: 'submitButtonText', type: 'cta',       maxWords: 4  },
+    ],
+  },
 
   // ── PRICING ─────────────────────────────────────────────────────────
   'pricing-cards':    { isDynamic: false, contentSlots: [] },

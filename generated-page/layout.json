@@ -9,20 +9,16 @@
       "component": "hero-dynamic"
     },
     {
-      "section": "features",
-      "component": "features-dynamic"
-    },
-    {
       "section": "about",
       "component": "about-dynamic"
     },
     {
       "section": "services",
-      "component": "features-Image"
+      "component": "features-grid"
     },
     {
-      "section": "testimonials",
-      "component": "testimonials-dynamic"
+      "section": "contact",
+      "component": "contact-split-dynamic"
     },
     {
       "section": "footer",

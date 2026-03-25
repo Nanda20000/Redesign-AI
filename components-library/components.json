@@ -13,6 +13,12 @@
       "description": "A contact form with name, email, and message fields"
     },
     {
+      "name": "contact-split-dynamic",
+      "category": "contact",
+      "file": "contact/contact-split-dynamic.tsx",
+      "description": "A split-layout contact section with contact info and form"
+    },
+    {
       "name": "features- Image",
       "category": "features",
       "file": "features/features- Image.tsx",

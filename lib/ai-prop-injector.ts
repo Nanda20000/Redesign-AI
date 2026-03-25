@@ -261,6 +261,24 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'description', type: 'string', description: 'Contact description, max 20 words',     maxWords: 20, required: false },
     ],
   },
+  'contact-split-dynamic': {
+    componentName: 'contact-split-dynamic',
+    section: 'contact',
+    props: [
+      { name: 'title', type: 'string', description: 'Main heading for the contact section', maxWords: 8, required: true },
+      { name: 'description', type: 'string', description: 'Subtext explaining the contact purpose', maxWords: 20 },
+      { name: 'formTitle', type: 'string', description: 'Heading for the contact form', maxWords: 6 },
+      { name: 'nameLabel', type: 'string', description: 'Label for the name input field', maxWords: 3 },
+      { name: 'namePlaceholder', type: 'string', description: 'Placeholder for the name input field', maxWords: 5 },
+      { name: 'emailLabel', type: 'string', description: 'Label for the email input field', maxWords: 3 },
+      { name: 'emailPlaceholder', type: 'string', description: 'Placeholder for the email input field', maxWords: 5 },
+      { name: 'phoneLabel', type: 'string', description: 'Label for the phone input field', maxWords: 3 },
+      { name: 'phonePlaceholder', type: 'string', description: 'Placeholder for the phone input field', maxWords: 5 },
+      { name: 'messageLabel', type: 'string', description: 'Label for the message textarea', maxWords: 3 },
+      { name: 'messagePlaceholder', type: 'string', description: 'Placeholder for the message textarea', maxWords: 8 },
+      { name: 'submitButtonText', type: 'string', description: 'Text for the form submission button', maxWords: 4 }
+    ],
+  },
 
   // ── FOOTER ────────────────────────────────────────────────────────
   'footer-simple': {

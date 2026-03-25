@@ -37,6 +37,7 @@ const DYNAMIC_COMPONENTS = [
   'testimonial-section4',
   'testimonial-section5',
   'contact-form',
+  'contact-split-dynamic',
   'navbar-modern',
   'navbar-minimal',
   'navbar-elegant',

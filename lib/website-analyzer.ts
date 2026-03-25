@@ -713,7 +713,7 @@ function getContactRecommendation(businessType: BusinessType, tone: Tone): Compo
     reasons.push('Contact information for user communication');
   }
 
-  preferred.push('contact-form');
+  preferred.push('contact-split-dynamic', 'contact-form');
 
   return {
     preferred: deduplicate(preferred),

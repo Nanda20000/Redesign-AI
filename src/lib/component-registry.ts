@@ -12,6 +12,7 @@ import { FeaturesDynamic } from '../../components-library/features/features-dyna
 
 // Contact components
 import { ContactCard as ContactForm } from '../../components-library/contact/contact-form';
+import { ContactSplit as ContactSplitDynamic } from '../../components-library/contact/contact-split-dynamic';
 
 // Features components
 import { FeaturesImage } from '../../components-library/features/features- Image';
@@ -71,6 +72,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Contact components
   'contact-form': ContactForm,
+  'contact-split-dynamic': ContactSplitDynamic,
 
   // Features components
   'features-dynamic': FeaturesDynamic,

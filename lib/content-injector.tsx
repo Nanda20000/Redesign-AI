@@ -647,6 +647,23 @@ export function getComponentContentProps(
         ),
       };
 
+    case 'contact-split-dynamic':
+      const contactSplitContent = mappedContent.contact as any;
+      return {
+        title: contactSplitContent?.title ?? "Let's Talk",
+        description: contactSplitContent?.subtitle ?? "Have a project in mind? We would love to hear from you.",
+        formTitle: "Send a Message",
+        nameLabel: "Name",
+        namePlaceholder: "Your name",
+        emailLabel: "Email",
+        emailPlaceholder: "you@example.com",
+        phoneLabel: "Phone",
+        phonePlaceholder: "+1 (555) 000-0000",
+        messageLabel: "Message",
+        messagePlaceholder: "Tell us about your project...",
+        submitButtonText: "Send Message",
+      };
+
     // Footer components - Now accepts props
     case 'footer-simple':
       return {

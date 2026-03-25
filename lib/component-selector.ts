@@ -48,7 +48,7 @@ const AI_SAFE_COMPONENTS: Record<string, string[]> = {
   features: ['features-dynamic', 'features-coursel', 'features-gallery-type', 'features-Image-new'],
   about: ['about-dynamic'],
   testimonials: ['testimonials-dynamic'],
-  contact: ['contact-form'],
+  contact: ['contact-split-dynamic', 'contact-form'],
   footer: ['footer-simple'],
   navbar: ['navbar-minimal', 'navbar-modern']
 };

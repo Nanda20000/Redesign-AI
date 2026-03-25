@@ -43,6 +43,7 @@ export const COMPONENT_META = {
   "footer-startup":   { section: "footer", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 7 },
 
   "contact-form": { section: "contact", supportsImages: false, supportsItems: false, contentLevel: "low", priority: 8 },
+  "contact-split-dynamic": { section: "contact", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 10 },
 
   "pricing-cards":    { section: "pricing", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 9 },
   "pricing-elegant":  { section: "pricing", supportsImages: false, supportsItems: true, contentLevel: "high",   priority: 8 },
