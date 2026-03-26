@@ -7,124 +7,119 @@
     "navItems": [
       {
         "label": "Home",
-        "href": "/"
+        "href": "home"
       },
       {
         "label": "About",
-        "href": "/about"
+        "href": "about"
       },
       {
         "label": "Career",
-        "href": "/career"
+        "href": "career"
       },
       {
         "label": "Exam",
-        "href": "/exam"
+        "href": "exam"
       },
       {
         "label": "Gallery",
-        "href": "/gallery"
+        "href": "gallery"
       },
       {
         "label": "Contact Us",
-        "href": "/contact"
+        "href": "contact us"
       },
       {
         "label": "Partnership",
-        "href": "/partnership"
+        "href": "partnership"
       }
     ],
     "actions": [
       {
         "label": "Sign In",
-        "href": "/signin",
+        "href": "sign in",
         "variant": "outline"
       },
       {
         "label": "Register Now",
-        "href": "/register",
+        "href": "register now",
         "variant": "primary"
       }
     ]
   },
-  "hero-simple-dynamic": {
-    "badge": "NSDC Authorized",
-    "titlePart1": "The Gateway to Success",
-    "titlePart2": "The Cornerstone of Financial Mastery",
-    "description": "A premier ISO 9001:2015 certified institute elevating the accounting profession with expert support and continuous practice.",
-    "primaryCtaText": "Register Now",
+  "hero-elegant-dynamic": {
+    "label": "PREMIER ACCOUNTING INSTITUTE",
+    "title": "The Gateway to Financial Mastery & Success",
+    "description": "An ISO 9001:2015 certified institute elevating careers with expert-led training and continuous practice.",
+    "primaryCtaText": "Explore Courses",
     "secondaryCtaText": "Sign In",
-    "image": "https://ibsacademy.co/public/assets/web/images/bg/1.png",
-    "imageAlt": "IBS Academy - Professional Accounting Institute"
+    "mediaUrl": "https://ibsacademy.co/public/assets/web/images/bg/1.png",
+    "mediaType": "image",
+    "posterUrl": null
   },
   "features-dynamic": {
     "title": "Our Premier Accounting Certifications",
-    "description": "A curated selection of globally recognized and industry-leading finance credentials.",
+    "description": "A curated selection of globally recognized and industry-leading professional accounting and finance programs.",
     "items": [
       {
         "title": "US CPA - Certified Public Accountant",
-        "description": "The premier certification for public accounting and auditing professionals worldwide.",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930687.jpg"
+        "description": "The premier global credential for public accounting and financial expertise.",
+        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762929871.jpg"
       },
       {
         "title": "US CMA - Certified Management Accountant",
-        "description": "Advanced certification focused on strategic management accounting and financial analysis.",
+        "description": "Advanced certification focused on strategic management accounting and financial decision-making.",
         "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg"
       },
       {
         "title": "Diploma in Financial Accounting & Taxation",
-        "description": "Comprehensive program covering core accounting principles and taxation frameworks.",
+        "description": "Comprehensive program covering core financial accounting and taxation principles.",
         "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930486.jpg"
       },
       {
-        "title": "Certification in Professional Accounting",
-        "description": "A foundational program designed to build core professional accounting expertise."
+        "title": "US EA - Enrolled Agent",
+        "description": "A federally authorized tax practitioner credential for representing taxpayers.",
+        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930687.jpg"
       }
     ]
   },
-  "about-dynamic": {
-    "title": "About IBS Academy",
-    "description": "A premier ISO 9001:2015 certified accounting institute, elevating the profession with expert support and continuous practice. NSDC Authorized.",
-    "stats": [
-      {
-        "label": "Years Experience",
-        "value": "28+"
-      }
-    ],
-    "companies": null,
-    "image": "https://ibsacademy.co/public/assets/web/images/about/1.png"
+  "about-simple-dynamic": {
+    "headline": "The Cornerstone of Financial Mastery",
+    "topIntro": "A premier ISO 9001:2015 certified institute, elevating the accounting profession with expert support and continuous practice.",
+    "heroImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
+    "label": "Numbers Tell a Story of Success",
+    "subIntro": "As the No.1 Tally Institute in India and an NSDC Authorized partner, we are the gateway to professional success.",
+    "avatarImage": null,
+    "avatarName": null,
+    "avatarTitle": null,
+    "mainStatement": "IBS Academy is a premier professional accounting institute dedicated to shaping the future of finance. With over 28 years of experience, we provide the expert guidance and rigorous practice needed to master global certifications like the US CPA, CMA, and specialized diplomas. Our mission is to transform aspiring professionals into industry leaders, building a foundation of excellence and integrity in financial management."
   },
   "testimonials-dynamic": {
     "title": "What Our Students Say",
-    "description": "Real feedback from our accounting and finance graduates.",
+    "description": "Hear from our accounting and finance graduates.",
     "testimonials": [
       {
-        "text": "The US CPA course structure and expert support were instrumental in passing my exams on the first attempt.",
+        "text": "The US CPA course structure was excellent and the expert support was instrumental in my success.",
         "name": "Priya Sharma",
         "role": "US CPA Graduate",
         "image": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg"
       },
       {
-        "text": "IBS Academy's practical approach to Tally and taxation gave me the confidence to excel in my accounting role.",
+        "text": "IBS Academy's practical approach to Tally and financial accounting gave me the confidence for my career.",
         "name": "Rohan Mehta",
         "role": "Diploma in Financial Accounting Graduate",
         "image": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg"
       },
       {
-        "text": "The Certified Management Accountant program provided deep insights into strategic financial management.",
+        "text": "The guidance for the US CMA exam was top-notch, perfectly blending theory with real-world application.",
         "name": "Anjali Patel",
-        "role": "US CMA Student"
-      },
-      {
-        "text": "As a career changer, the professional accounting certification was perfectly structured and highly supportive.",
-        "name": "Vikram Singh",
-        "role": "Career Transition Graduate"
+        "role": "Certified Management Accountant"
       }
     ]
   },
   "footer-simple": {
     "brandName": "IBS Academy",
     "description": "A premier ISO 9001:2015 certified professional accounting institute.",
-    "copyright": "© 2025 IBS Academy. All rights reserved."
+    "copyright": "© 2024 IBS Academy. All rights reserved."
   }
 }

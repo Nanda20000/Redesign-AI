@@ -5,6 +5,7 @@ import type { ComponentType } from "react";
 
 // About components
 import { About3 as AboutTwoColumn } from '../../components-library/about/about-two-column';
+import { AboutSimpleDynamic } from '../../components-library/about/about-simple-dynamic';
 import { AboutDynamic } from '../../components-library/about/about-dynamic';
 
 // Features components
@@ -34,6 +35,7 @@ import { FooterStartup } from '../../components-library/footer/footer-startup';
 // Hero components
 import { HeroDynamic } from '../../components-library/hero/hero-dynamic';
 import { HeroSimpleDynamic } from '../../components-library/hero/hero-simple-dynamic';
+import { HeroElegantDynamic } from '../../components-library/hero/hero-elegant-dynamic';
 import { HeroSlide as HeroAb } from '../../components-library/hero/hero-ab';
 import { HeroSection as HeroAc } from '../../components-library/hero/hero-ac';
 import HeroAd from '../../components-library/hero/hero-ad';
@@ -70,6 +72,7 @@ import { TestimonialsSection5 as TestimonialSection5 } from '../../components-li
 export const componentRegistry: Record<string, ComponentType<any>> = {
   // About components
   'about-two-column': AboutTwoColumn,
+  'about-simple-dynamic': AboutSimpleDynamic,
   'about-dynamic': AboutDynamic,
 
   // Contact components
@@ -97,6 +100,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   // Hero components
   'hero-dynamic': HeroDynamic,
   'hero-simple-dynamic': HeroSimpleDynamic,
+  'hero-elegant-dynamic': HeroElegantDynamic,
   'hero-ab': HeroAb,
   'hero-ac': HeroAc,
   'hero-ad': HeroAd,

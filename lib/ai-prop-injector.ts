@@ -142,6 +142,65 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       },
     ],
   },
+  'hero-elegant-dynamic': {
+    componentName: 'hero-elegant-dynamic',
+    section: 'hero',
+    props: [
+      {
+        name: 'label',
+        type: 'string',
+        description: 'A small uppercase label above the main heading. Max 15 words.',
+        maxWords: 15,
+        required: false,
+      },
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main hero headline. Should be bold and impactful. Max 12 words.',
+        maxWords: 12,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A supporting sub-headline or paragraph. Max 25 words.',
+        maxWords: 25,
+        required: false,
+      },
+      {
+        name: 'primaryCtaText',
+        type: 'string',
+        description: 'Text for the primary action button. Max 4 words.',
+        maxWords: 4,
+        required: false,
+      },
+      {
+        name: 'secondaryCtaText',
+        type: 'string',
+        description: 'Text for the secondary action button. Max 4 words.',
+        maxWords: 4,
+        required: false,
+      },
+      {
+        name: 'mediaUrl',
+        type: 'string',
+        description: 'URL for the hero video or image.',
+        required: true,
+      },
+      {
+        name: 'mediaType',
+        type: 'string',
+        description: 'Type of media to display: "video" or "image".',
+        required: false,
+      },
+      {
+        name: 'posterUrl',
+        type: 'string',
+        description: 'Optional poster image URL for the video.',
+        required: false,
+      }
+    ],
+  },
 
   // ── FEATURES ──────────────────────────────────────────────────────
   'features-dynamic': {
@@ -164,6 +223,73 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'stats',       type: 'Array<{label:string,value:string}>', description: 'Key statistics like years, students, courses. Extract real numbers from content if available (e.g. "28+", "1000+")', required: false },
       { name: 'companies',   type: 'string[]', description: 'List of partner/client company names if mentioned in content', required: false },
       { name: 'image',       type: 'string', description: 'About section image URL — select most relevant image from Available Images list (e.g. team photo, office, campus)', required: false },
+    ],
+  },
+  'about-simple-dynamic': {
+    componentName: 'about-simple-dynamic',
+    section: 'about',
+    props: [
+      {
+        name: 'headline',
+        type: 'string',
+        description: 'The main headline for the about section. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'topIntro',
+        type: 'string',
+        description: 'A brief introductory text or philosophy snippet at the top right. Max 40 words.',
+        maxWords: 40,
+        required: false,
+      },
+      {
+        name: 'heroImage',
+        type: 'string',
+        description: 'The main hero image URL for the about section.',
+        required: true,
+      },
+      {
+        name: 'label',
+        type: 'string',
+        description: 'A small label or category text for the bottom section. Max 10 words.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'subIntro',
+        type: 'string',
+        description: 'Secondary introductory text placed above the avatar. Max 50 words.',
+        maxWords: 50,
+        required: false,
+      },
+      {
+        name: 'avatarImage',
+        type: 'string',
+        description: 'The profile picture URL for the featured person.',
+        required: false,
+      },
+      {
+        name: 'avatarName',
+        type: 'string',
+        description: 'The name of the featured person. Max 10 words.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'avatarTitle',
+        type: 'string',
+        description: 'The job title or role of the featured person. Max 15 words.',
+        maxWords: 15,
+        required: false,
+      },
+      {
+        name: 'mainStatement',
+        type: 'string',
+        description: 'The main philosophy, mission, or summary statement. Max 80 words.',
+        maxWords: 80,
+        required: true,
+      },
     ],
   },
 

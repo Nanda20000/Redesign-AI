@@ -418,9 +418,9 @@ function enforceImageComponents(
  * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
  */
 const AI_SAFE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-simple-dynamic', 'hero-dynamic'],
+  hero: ['hero-elegant-dynamic', 'hero-simple-dynamic', 'hero-dynamic'],
   features: ['features-dynamic'],
-  about: ['about-dynamic'],
+  about: ['about-simple-dynamic', 'about-dynamic'],
   testimonials: ['testimonials-dynamic'],
   contact: ['contact-split-dynamic'],
   footer: ['footer-simple'],  // exception: no footer-dynamic exists yet

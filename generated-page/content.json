@@ -425,7 +425,7 @@
     },
     "about": {
       "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute. It is a No.1 Tally Institute in India that elevates the accounting profession with expert support and continuous practice, and is NSDC Authorized.",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute. It is described as the No.1 Tally Institute in India, elevating the accounting profession with expert support and continuous practice, and is NSDC Authorized.",
       "companies": [],
       "achievements": [
         {
@@ -435,7 +435,7 @@
       ],
       "breakout": {
         "title": "Numbers Tell a Story of Success",
-        "description": "Key message about the institute's success and impact."
+        "description": "Key message highlighting the institute's success and impact."
       }
     },
     "footer": {
@@ -446,7 +446,7 @@
         "phone": "N/A",
         "address": "N/A"
       },
-      "copyright": "N/A"
+      "copyright": "© 2024 IBS Academy. All rights reserved."
     }
   }
 }

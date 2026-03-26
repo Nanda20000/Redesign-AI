@@ -24,6 +24,7 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   'hero-ae':      { imageCount: 1, imageProp: 'images',      imageMode: 'array'  },
   'hero-dynamic': { imageCount: 1, imageProp: 'image',       imageMode: 'single' },
   'hero-simple-dynamic': { imageCount: 1, imageProp: 'image', imageMode: 'single' },
+  'hero-elegant-dynamic': { imageCount: 1, imageProp: 'mediaUrl', imageMode: 'single' },
   'hero-elegant': { imageCount: 0, imageProp: '',             imageMode: 'none'   },
   'hero-minimal': { imageCount: 0, imageProp: '',             imageMode: 'none'   },
   'hero-modern':  { imageCount: 0, imageProp: '',             imageMode: 'none'   },
@@ -40,6 +41,7 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
 
   // ── ABOUT ─────────────────────────────────────────────────────────────
   'about-two-column': { imageCount: 2, imageProp: 'images', imageMode: 'array' },
+  'about-simple-dynamic': { imageCount: 2, imageProp: 'heroImage', imageMode: 'single' },
 
   // ── TESTIMONIALS ──────────────────────────────────────────────────────
   'testimonial-cards':    { imageCount: 3, imageProp: 'testimonials', imageMode: 'items' },

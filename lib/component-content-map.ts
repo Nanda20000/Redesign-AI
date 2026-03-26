@@ -47,6 +47,16 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'secondaryCtaText', type: 'cta', maxWords: 4 },
     ],
   },
+  'hero-elegant-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'label', type: 'label', maxWords: 15 },
+      { prop: 'title', type: 'heading', maxWords: 12 },
+      { prop: 'description', type: 'paragraph', maxWords: 25 },
+      { prop: 'primaryCtaText', type: 'cta', maxWords: 4 },
+      { prop: 'secondaryCtaText', type: 'cta', maxWords: 4 }
+    ],
+  },
   'hero-ab': {
     isDynamic: true,
     contentSlots: [
@@ -148,6 +158,18 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'description',  type: 'paragraph', maxWords: 40 },
       { prop: 'stats',        type: 'list',     maxWords: 10 },
       { prop: 'companies',    type: 'list',     maxWords: 15 },
+    ],
+  },
+  'about-simple-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'headline', type: 'heading', maxWords: 10 },
+      { prop: 'topIntro', type: 'paragraph', maxWords: 40 },
+      { prop: 'label', type: 'label', maxWords: 10 },
+      { prop: 'subIntro', type: 'paragraph', maxWords: 50 },
+      { prop: 'avatarName', type: 'label', maxWords: 10 },
+      { prop: 'avatarTitle', type: 'label', maxWords: 15 },
+      { prop: 'mainStatement', type: 'paragraph', maxWords: 80 },
     ],
   },
   'about-two-column': {

@@ -456,6 +456,20 @@ export function getComponentContentProps(
       };
     }
 
+    case 'hero-elegant-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        label: sectionContent?.topLabel ?? '',
+        title: sectionContent?.heading ?? '',
+        description: sectionContent?.subtext ?? '',
+        primaryCtaText: sectionContent?.primaryButtonText ?? '',
+        secondaryCtaText: sectionContent?.secondaryButtonText ?? '',
+        mediaUrl: sectionContent?.mediaUrl ?? sectionContent?.videoUrl ?? '',
+        mediaType: sectionContent?.mediaType ?? 'video',
+        posterUrl: sectionContent?.posterUrl ?? '',
+      };
+    }
+
     case 'hero-ab':
       // HeroSlide component supports images prop
       const heroAbProps = {
@@ -564,6 +578,21 @@ export function getComponentContentProps(
         console.log('[ABOUT COMPONENT] about-dynamic: AI-selected image:', aboutDynamicProps.image?.slice(0, 80));
       }
       return aboutDynamicProps;
+
+    case 'about-simple-dynamic': {
+      const sectionContent = mappedContent.about as any;
+      return {
+        headline: sectionContent?.headline ?? '',
+        topIntro: sectionContent?.topIntro ?? '',
+        heroImage: sectionContent?.heroImage ?? '',
+        label: sectionContent?.label ?? '',
+        subIntro: sectionContent?.subIntro ?? '',
+        avatarImage: sectionContent?.avatarImage ?? '',
+        avatarName: sectionContent?.avatarName ?? '',
+        avatarTitle: sectionContent?.avatarTitle ?? '',
+        mainStatement: sectionContent?.mainStatement ?? '',
+      };
+    }
 
     case 'about-two-column':
       const aboutContent = mappedContent.about as any;

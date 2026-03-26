@@ -1,6 +1,7 @@
 export const COMPONENT_META = {
   "hero-dynamic":   { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 11 },
   "hero-simple-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 12 },
+  "hero-elegant-dynamic": { section: "hero",   supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 12 },
   "hero-ab":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
   "hero-ac":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 9  },
   "hero-ad":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 9  },
@@ -20,6 +21,7 @@ export const COMPONENT_META = {
   "features-slideshow": { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 10 },
 
   "about-dynamic":      { section: "about", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 11 },
+  "about-simple-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 12 },
   "about-two-column": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "low", priority: 9 },
 
   "testimonials-dynamic": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 11 },

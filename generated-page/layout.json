@@ -6,19 +6,19 @@
     },
     {
       "section": "hero",
-      "component": "hero-simple-dynamic"
+      "component": "hero-elegant-dynamic"
     },
     {
       "section": "features",
       "component": "features-dynamic"
     },
     {
-      "section": "about",
-      "component": "about-dynamic"
+      "section": "services",
+      "component": "about-simple-dynamic"
     },
     {
-      "section": "services",
-      "component": "navbar-dynamic"
+      "section": "about",
+      "component": "about-simple-dynamic"
     },
     {
       "section": "testimonials",

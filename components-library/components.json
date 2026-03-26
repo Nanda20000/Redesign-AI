@@ -7,6 +7,12 @@
       "description": "A two-column about section with image and text"
     },
     {
+      "name": "about-simple-dynamic",
+      "category": "about",
+      "file": "about/about-simple-dynamic.tsx",
+      "description": "Six-column about section with headline, hero image, avatar profile, and philosophy statement."
+    },
+    {
       "name": "contact-form",
       "category": "contact",
       "file": "contact/contact-form.tsx",
@@ -155,6 +161,12 @@
       "category": "hero",
       "file": "hero/hero-simple-dynamic.tsx",
       "description": "A clean dual-column hero section with a badge, dual-color heading, two buttons, and a featured graphic."
+    },
+    {
+      "name": "hero-elegant-dynamic",
+      "category": "hero",
+      "file": "hero/hero-elegant-dynamic.tsx",
+      "description": "Elegant two-column hero with bold typography and a circular media element."
     },
     {
       "name": "navbar-elegant",

@@ -23,8 +23,10 @@ export interface LayoutData {
 const DYNAMIC_COMPONENTS = [
   'hero-dynamic',
   'hero-simple-dynamic',
+  'hero-elegant-dynamic',
   'features-dynamic',
   'about-dynamic',
+  'about-simple-dynamic',
   'testimonials-dynamic',
   'navbar-dynamic',
   'contact-split-dynamic',
@@ -33,13 +35,13 @@ const DYNAMIC_COMPONENTS = [
 
 // Fallback components for each section type (only dynamic ones)
 const FALLBACK_COMPONENTS: Record<string, string> = {
-  hero: "hero-simple-dynamic",
+  hero: "hero-elegant-dynamic",
   navbar: "navbar-dynamic",
   features: "features-dynamic",
   testimonials: "testimonials-dynamic",
   contact: "contact-split-dynamic",
   footer: "footer-simple",
-  about: "about-dynamic",
+  about: "about-simple-dynamic",
 };
 
 /**
