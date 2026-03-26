@@ -52,6 +52,7 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   'navbar-minimal':  { imageCount: 0, imageProp: '', imageMode: 'none' },
   'navbar-modern':   { imageCount: 0, imageProp: '', imageMode: 'none' },
   'navbar-stylish':  { imageCount: 0, imageProp: '', imageMode: 'none' },
+  'navbar-dynamic':  { imageCount: 0, imageProp: '', imageMode: 'none' },
 
   // ── FOOTER ────────────────────────────────────────────────────────────
   'footer-corporate': { imageCount: 0, imageProp: '', imageMode: 'none' },

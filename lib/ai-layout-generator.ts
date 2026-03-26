@@ -423,7 +423,7 @@ const AI_SAFE_COMPONENTS: Record<string, string[]> = {
   testimonials: ['testimonials-dynamic'],
   contact: ['contact-split-dynamic', 'contact-form'],
   footer: ['footer-simple'],
-  navbar: ['navbar-minimal', 'navbar-modern']
+  navbar: ['navbar-dynamic', 'navbar-modern', 'navbar-minimal']
 };
 
 /**

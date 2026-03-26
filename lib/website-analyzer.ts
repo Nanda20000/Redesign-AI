@@ -458,36 +458,36 @@ function getNavbarRecommendation(businessType: BusinessType, tone: Tone, richnes
 
   // Business type preferences
   if (businessType === 'corporate' || businessType === 'education') {
-    preferred.push('navbar-minimal', 'navbar-elegant');
+    preferred.push('navbar-dynamic', 'navbar-minimal', 'navbar-elegant');
     reasons.push('Professional appearance preferred');
   } else if (businessType === 'saas' || businessType === 'startup') {
-    preferred.push('navbar-modern', 'navbar-minimal');
+    preferred.push('navbar-dynamic', 'navbar-modern', 'navbar-minimal');
     reasons.push('Modern tech aesthetic');
   } else if (businessType === 'portfolio' || businessType === 'agency') {
-    preferred.push('navbar-stylish', 'navbar-elegant');
+    preferred.push('navbar-dynamic', 'navbar-stylish', 'navbar-elegant');
     reasons.push('Creative expression balanced with usability');
   } else if (businessType === 'ecommerce') {
-    preferred.push('navbar-modern', 'navbar-stylish');
+    preferred.push('navbar-dynamic', 'navbar-modern', 'navbar-stylish');
     reasons.push('Clear navigation for shopping');
   } else {
-    preferred.push('navbar-minimal', 'navbar-modern');
+    preferred.push('navbar-dynamic', 'navbar-minimal', 'navbar-modern');
   }
 
   // Tone adjustments
   if (tone === 'minimal' || tone === 'corporate') {
-    preferred.unshift('navbar-minimal');
+    preferred.unshift('navbar-dynamic');
     avoid.push('navbar-gradient');
     reasons.push('Clean, professional style matches tone');
   } else if (tone === 'modern') {
-    preferred.unshift('navbar-modern');
+    preferred.unshift('navbar-dynamic');
   } else if (tone === 'creative' || tone === 'playful') {
-    preferred.unshift('navbar-stylish', 'navbar-gradient');
+    preferred.unshift('navbar-dynamic', 'navbar-stylish', 'navbar-gradient');
   }
 
   // Richness adjustments - avoid heavy nav for simple sites
   if (richness === 'low') {
     avoid.push('navbar-gradient', 'navbar-stylish');
-    preferred.push('navbar-minimal');
+    preferred.push('navbar-dynamic');
     reasons.push('Simple site needs simple navigation');
   }
 

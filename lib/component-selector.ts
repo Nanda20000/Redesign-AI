@@ -50,7 +50,7 @@ const AI_SAFE_COMPONENTS: Record<string, string[]> = {
   testimonials: ['testimonials-dynamic'],
   contact: ['contact-split-dynamic', 'contact-form'],
   footer: ['footer-simple'],
-  navbar: ['navbar-minimal', 'navbar-modern']
+  navbar: ['navbar-dynamic', 'navbar-modern', 'navbar-minimal']
 };
 
 /**
@@ -69,35 +69,36 @@ const COMPONENT_STYLES: Record<string, string[]> = {
   modern: ['modern', 'gradient', 'stylish'],
   visual: ['gallery', 'slideshow', 'coursel'],
   structured: ['grid', 'cards', 'two-column'],
-  corporate: ['corporate', 'professional']
+  corporate: ['corporate', 'professional'],
+  dynamic: ['dynamic', 'advanced', 'interactive']
 };
 
 /**
  * Business type to component style mapping
  */
 const BUSINESS_STYLE_PREFERENCES: Record<BusinessType, string[]> = {
-  education: ['structured', 'minimal'],
-  saas: ['modern', 'visual'],
-  ecommerce: ['modern', 'visual', 'structured'],
+  education: ['structured', 'minimal', 'dynamic'],
+  saas: ['modern', 'visual', 'dynamic'],
+  ecommerce: ['modern', 'visual', 'structured', 'dynamic'],
   portfolio: ['visual', 'minimal', 'modern'],
-  corporate: ['minimal', 'corporate', 'structured'],
-  startup: ['modern', 'visual'],
-  agency: ['modern', 'visual', 'minimal'],
+  corporate: ['minimal', 'corporate', 'structured', 'dynamic'],
+  startup: ['modern', 'visual', 'dynamic'],
+  agency: ['modern', 'visual', 'minimal', 'dynamic'],
   nonprofit: ['minimal', 'structured'],
   restaurant: ['visual', 'modern'],
   healthcare: ['minimal', 'structured', 'corporate'],
-  general: ['minimal', 'modern']
+  general: ['minimal', 'modern', 'dynamic']
 };
 
 /**
  * Tone to component style mapping
  */
 const TONE_STYLE_PREFERENCES: Record<Tone, string[]> = {
-  modern: ['modern'],
-  corporate: ['corporate', 'minimal', 'structured'],
+  modern: ['modern', 'dynamic'],
+  corporate: ['corporate', 'minimal', 'structured', 'dynamic'],
   minimal: ['minimal'],
   creative: ['visual', 'modern'],
-  professional: ['structured', 'corporate', 'minimal'],
+  professional: ['structured', 'corporate', 'minimal', 'dynamic'],
   friendly: ['modern', 'minimal'],
   luxury: ['minimal', 'elegant'],
   playful: ['visual', 'modern']

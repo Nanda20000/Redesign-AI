@@ -2,11 +2,15 @@
   "layout": [
     {
       "section": "navbar",
-      "component": "navbar-minimal"
+      "component": "navbar-dynamic"
     },
     {
       "section": "hero",
       "component": "hero-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-dynamic"
     },
     {
       "section": "about",
@@ -14,11 +18,11 @@
     },
     {
       "section": "services",
-      "component": "features-grid"
+      "component": "features-Image"
     },
     {
-      "section": "contact",
-      "component": "contact-split-dynamic"
+      "section": "testimonials",
+      "component": "testimonials-dynamic"
     },
     {
       "section": "footer",

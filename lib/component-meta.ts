@@ -33,6 +33,7 @@ export const COMPONENT_META = {
   "navbar-minimal":  { section: "navbar", supportsImages: false, supportsItems: false, contentLevel: "low", priority: 10 },
   "navbar-modern":   { section: "navbar", supportsImages: false, supportsItems: false, contentLevel: "low", priority: 9  },
   "navbar-stylish":  { section: "navbar", supportsImages: false, supportsItems: false, contentLevel: "low", priority: 7  },
+  "navbar-dynamic":  { section: "navbar", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 11 },
 
   "footer-corporate": { section: "footer", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 8 },
   "footer-elegant":   { section: "footer", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 8 },

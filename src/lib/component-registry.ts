@@ -49,6 +49,7 @@ import { TruncatingNavbar as NavbarGradient } from '../../components-library/nav
 import NavbarMinimal from '../../components-library/navbar/navbar-minimal';
 import { NavbarModern } from '../../components-library/navbar/navbar-modern';
 import { NavbarStylish } from '../../components-library/navbar/navbar-stylish';
+import { NavbarDynamic } from '../../components-library/navbar/navbar-dynamic';
 
 // Pricing components
 import { PricingCards } from '../../components-library/pricing/pricing-cards';
@@ -110,6 +111,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'navbar-minimal': NavbarMinimal,
   'navbar-modern': NavbarModern,
   'navbar-stylish': NavbarStylish,
+  'navbar-dynamic': NavbarDynamic,
 
   // Pricing components
   'pricing-cards': PricingCards,

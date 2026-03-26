@@ -1,88 +1,125 @@
 {
-  "navbar-minimal": {
-    "menuItems": [
+  "navbar-dynamic": {
+    "logo": {
+      "src": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
+      "alt": "IBS Academy Logo"
+    },
+    "navItems": [
       {
-        "to": "home",
-        "text": "Home"
+        "label": "Home",
+        "href": "home"
       },
       {
-        "to": "about",
-        "text": "About"
+        "label": "About",
+        "href": "about"
       },
       {
-        "to": "courses",
-        "text": "Courses"
+        "label": "Career",
+        "href": "career"
       },
       {
-        "to": "contact",
-        "text": "Contact"
+        "label": "Exam",
+        "href": "exam"
       },
       {
-        "to": "tel:+919633579475",
-        "text": "Call Now"
+        "label": "Gallery",
+        "href": "gallery"
+      },
+      {
+        "label": "Contact Us",
+        "href": "contact us"
+      },
+      {
+        "label": "Partnership",
+        "href": "partnership"
+      }
+    ],
+    "actions": [
+      {
+        "label": "Sign In",
+        "href": "sign in",
+        "variant": "outline"
+      },
+      {
+        "label": "Register Now",
+        "href": "register now",
+        "variant": "primary"
       }
     ]
   },
   "hero-dynamic": {
-    "subtitle": "KERALA'S No.1 Training Institute",
-    "title": "Unlock Your Career in Heavy Equipment",
-    "description": "Get job-oriented training with tons of hands-on experience. Over 1000+ students trained monthly.",
+    "subtitle": "No.1 Tally Institute In India",
+    "title": "The Gateway to Financial Mastery",
+    "description": "A premier ISO certified institute elevating the accounting profession with expert support and continuous practice.",
     "buttonText": "Explore Courses",
-    "secondaryButtonText": "Call Now",
-    "image": "https://a2zinstitute.in/wp-content/uploads/2025/02/ATO-Z-WEB-image-1.png.webp"
+    "secondaryButtonText": "Register Now",
+    "image": "https://ibsacademy.co/public/assets/web/images/bg/1.png"
   },
-  "about-dynamic": {
-    "title": "About A2Z International Heavy Equipment Institute",
-    "description": "Kerala's premier training institute, providing a one-stop solution for skilled heavy vehicle operators with hands-on, job-oriented programs.",
-    "stats": [
+  "features-dynamic": {
+    "title": "Our Premier Accounting Certifications",
+    "description": "A selection of top-tier professional accounting and finance certifications designed for career success.",
+    "items": [
       {
-        "label": "Students Per Month",
-        "value": "1000+"
-      }
-    ],
-    "companies": null,
-    "image": "https://a2zinstitute.in/wp-content/uploads/2025/02/About-2.jpg.webp"
-  },
-  "features-grid": {
-    "badge": "Why Choose Us",
-    "heading": "Our Key Advantages",
-    "description": "Discover what makes us Kerala's leading training institute.",
-    "featureItems": [
-      {
-        "title": "Massive Student Intake",
-        "description": "Training over 1000 students every single month."
+        "title": "US CPA - Certified Public Accountant",
+        "description": "Globally recognized certification for professional public accounting standards.",
+        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930895.jpg"
       },
       {
-        "title": "Hands-On Experience",
-        "description": "Students get extensive practical, real-world equipment training."
+        "title": "US CMA - Certified Management Accountant",
+        "description": "Certification focused on advanced management accounting and financial strategy.",
+        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762931137.jpg"
       },
       {
-        "title": "Job-Oriented Courses",
-        "description": "Path-breaking diploma programs designed for immediate employment."
+        "title": "Diploma in Financial Accounting & Taxation",
+        "description": "Comprehensive program covering core financial accounting and taxation principles.",
+        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762931274.jpg"
       },
       {
-        "title": "Comprehensive Solution",
-        "description": "A one-stop answer to the industry's skilled operator shortage."
+        "title": "US EA - Enrolled Agent",
+        "description": "A premier credential for tax professionals representing clients before the IRS.",
+        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg"
       }
     ]
   },
-  "contact-split-dynamic": {
-    "title": "Get in Touch with A2Z International",
-    "description": "Ready to unlock your career in heavy equipment operation? Contact Kerala's No.1 training institute today for course details, fees, and enrollment.",
-    "formTitle": "Send Us a Message",
-    "nameLabel": "Your Full Name",
-    "namePlaceholder": "Enter your name",
-    "emailLabel": "Email Address",
-    "emailPlaceholder": "Enter your email",
-    "phoneLabel": "Phone Number",
-    "phonePlaceholder": "Enter your phone number",
-    "messageLabel": "Your Message",
-    "messagePlaceholder": "Tell us about your interest in our courses...",
-    "submitButtonText": "Send Enquiry"
+  "about-dynamic": {
+    "title": "About IBS Academy",
+    "description": "A premier ISO 9001:2015 certified professional accounting institute, elevating careers with expert support and continuous practice. NSDC Authorized.",
+    "stats": [
+      {
+        "label": "Years of Operation",
+        "value": "28+"
+      }
+    ],
+    "companies": null,
+    "image": "https://ibsacademy.co/public/assets/web/images/about/1.png"
+  },
+  "features-Image": {},
+  "testimonials-dynamic": {
+    "title": "What Our Students Say",
+    "description": "Hear from our accounting and finance graduates.",
+    "testimonials": [
+      {
+        "text": "The US CPA course structure and expert support were instrumental in my career transition.",
+        "name": "Priya Sharma",
+        "role": "US CPA Candidate",
+        "image": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg"
+      },
+      {
+        "text": "The Diploma in Financial Accounting provided a strong, practical foundation for my job.",
+        "name": "Rohan Mehta",
+        "role": "Accounting Graduate"
+      },
+      {
+        "text": "IBS Academy's guidance was key to passing my CMA exams and securing a promotion.",
+        "name": "Anjali Patel",
+        "role": "Certified Management Accountant",
+        "image": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg"
+      }
+    ]
   },
   "footer-simple": {
-    "brandName": "A2Z International Heavy Equipment Institute",
-    "description": "Kerala's premier institute for job-oriented heavy equipment operator training.",
-    "copyright": "© 2025 A2Z International Heavy Equipment Institute. All Rights Reserved."
+    "brandName": "IBS Academy",
+    "description": "A premier ISO 9001:2015 certified professional accounting institute.",
+    "copyright": "© 2024 IBS Academy. All rights reserved."
   }
 }

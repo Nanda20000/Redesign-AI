@@ -402,6 +402,30 @@ export function getComponentContentProps(
         })) ?? [],
       };
 
+    case 'navbar-dynamic':
+      return {
+        logo: {
+          text: mappedContent.navbar?.menu?.[0]?.title ?? 'Brand',
+          href: '/',
+        },
+        navItems: mappedContent.navbar?.menu?.map((item, index) => ({
+          label: item.title,
+          href: item.url,
+          subItems: index < 2 ? [
+            { label: `${item.title} Option 1`, href: `${item.url}/option-1` },
+            { label: `${item.title} Option 2`, href: `${item.url}/option-2` },
+          ] : undefined,
+        })) ?? [],
+        actions: [
+          { label: 'Contact', href: '/contact', variant: 'outline' },
+          { label: 'Log in', href: '/login', variant: 'outline' },
+          { label: 'Sign up', href: '/signup', variant: 'primary' },
+        ],
+        mobileMenuIcon: <span>Menu</span>,
+        closeMenuIcon: <span>Close</span>,
+        chevronIcon: <span>▼</span>,
+      };
+
     // Hero components
     case 'hero-dynamic':
       // Dynamic hero - image comes from AI props

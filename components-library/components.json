@@ -181,6 +181,12 @@
       "description": "A stylish navigation bar with contemporary design"
     },
     {
+      "name": "navbar-dynamic",
+      "category": "navbar",
+      "file": "navbar/navbar-dynamic.tsx",
+      "description": "A responsive navigation bar with desktop dropdowns and mobile expandable menus"
+    },
+    {
       "name": "pricing-cards",
       "category": "pricing",
       "file": "pricing/pricing-cards.tsx",

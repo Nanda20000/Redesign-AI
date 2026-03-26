@@ -201,6 +201,13 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
   'navbar-stylish': { isDynamic: false, contentSlots: [] },
+  'navbar-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'navItems', type: 'list', maxWords: 5 },
+      { prop: 'actions', type: 'list', maxWords: 3 },
+    ],
+  },
 
   // ── FOOTER ──────────────────────────────────────────────────────────
   'footer-corporate': { isDynamic: false, contentSlots: [] },

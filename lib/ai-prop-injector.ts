@@ -251,6 +251,50 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'menu', type: 'Array<{title:string,url:string}>', description: 'Navigation links from the website', required: true },
     ],
   },
+  'navbar-dynamic': {
+    componentName: 'navbar-dynamic',
+    section: 'navbar',
+    props: [
+      { name: 'logo',
+        type: 'object',
+        properties: {
+          text: { type: 'string', description: 'The brand name text' },
+          href: { type: 'string', description: 'The link for the logo' }
+        }
+      },
+      { name: 'navItems',
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            label: { type: 'string' },
+            href: { type: 'string' },
+            subItems: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  label: { type: 'string' },
+                  href: { type: 'string' }
+                }
+              }
+            }
+          }
+        }
+      },
+      { name: 'actions',
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            label: { type: 'string' },
+            href: { type: 'string' },
+            variant: { type: 'string', enum: ['primary', 'secondary', 'outline'] }
+          }
+        }
+      },
+    ],
+  },
 
   // ── CONTACT ───────────────────────────────────────────────────────
   'contact-form': {

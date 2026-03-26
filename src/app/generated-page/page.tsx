@@ -41,6 +41,7 @@ const DYNAMIC_COMPONENTS = [
   'navbar-modern',
   'navbar-minimal',
   'navbar-elegant',
+  'navbar-dynamic',
   'footer-simple',
 ];
 
