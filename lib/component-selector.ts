@@ -46,7 +46,7 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
  */
 const AI_SAFE_COMPONENTS: Record<string, string[]> = {
   hero: ['hero-elegant-dynamic', 'hero-simple-dynamic', 'hero-dynamic'],
-  features: ['features-dynamic'],
+  features: ['features-simple-dynamic', 'features-dynamic'],
   about: ['about-simple-dynamic', 'about-dynamic'],
   testimonials: ['testimonials-dynamic'],
   contact: ['contact-split-dynamic'],

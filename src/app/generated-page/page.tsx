@@ -25,6 +25,7 @@ const DYNAMIC_COMPONENTS = [
   'hero-simple-dynamic',
   'hero-elegant-dynamic',
   'features-dynamic',
+  'features-simple-dynamic',
   'about-dynamic',
   'about-simple-dynamic',
   'testimonials-dynamic',

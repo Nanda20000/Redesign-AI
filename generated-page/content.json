@@ -403,11 +403,11 @@
   "processed": {
     "features": {
       "heading": "Our Featured Courses",
-      "description": "A selection of premier professional accounting and finance certifications offered by the institute.",
+      "description": "A selection of premier professional accounting and finance certifications and diplomas offered by the institute.",
       "items": [
         {
           "title": "US CPA - Certified Public Accountant",
-          "description": "Certification for public accounting professionals."
+          "description": "Certification for professional public accounting standards in the United States."
         },
         {
           "title": "US CMA - Certified Management Accountant",
@@ -415,17 +415,17 @@
         },
         {
           "title": "Diploma in Financial Accounting & Taxation",
-          "description": "Diploma program covering financial accounting and taxation principles."
+          "description": "Diploma program covering core financial accounting and taxation principles."
         },
         {
-          "title": "Certification in Professional Accounting (CPA)",
-          "description": "Professional accounting certification program."
+          "title": "SAP S/4 HANA",
+          "description": "Certification in the professional use of the SAP S/4 HANA enterprise resource planning system."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute. It is described as the No.1 Tally Institute in India, elevating the accounting profession with expert support and continuous practice, and is NSDC Authorized.",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in India. It is a No.1 Tally Institute and NSDC Authorized, aiming to elevate the accounting profession with expert support and continuous practice.",
       "companies": [],
       "achievements": [
         {
@@ -435,16 +435,16 @@
       ],
       "breakout": {
         "title": "Numbers Tell a Story of Success",
-        "description": "Key message highlighting the institute's success and impact."
+        "description": "The institute's key message emphasizes its success and authority in professional accounting education."
       }
     },
     "footer": {
       "brandName": "IBS Academy",
       "description": "A premier professional accounting institute.",
       "contactInfo": {
-        "email": "N/A",
-        "phone": "N/A",
-        "address": "N/A"
+        "email": "Not provided",
+        "phone": "Not provided",
+        "address": "Not provided"
       },
       "copyright": "© 2024 IBS Academy. All rights reserved."
     }

@@ -19,6 +19,7 @@ export const COMPONENT_META = {
   "features-grid":      { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
   "features-Image-new": { section: "features", supportsImages: true,  supportsItems: false, contentLevel: "low",    priority: 7  },
   "features-slideshow": { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 10 },
+  "features-simple-dynamic": { section: "features", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 8 },
 
   "about-dynamic":      { section: "about", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 11 },
   "about-simple-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 12 },

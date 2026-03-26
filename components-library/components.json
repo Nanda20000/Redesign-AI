@@ -61,6 +61,12 @@
       "description": "A slideshow layout for dynamic content presentation"
     },
     {
+      "name": "features-simple-dynamic",
+      "category": "features",
+      "file": "features/features-simple-dynamic.tsx",
+      "description": "Clean features section with dashed dividers, two-column header, and three feature cards."
+    },
+    {
       "name": "footer-corporate",
       "category": "footer",
       "file": "footer/footer-corporate.tsx",

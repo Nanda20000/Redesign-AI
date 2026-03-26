@@ -38,6 +38,11 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   'features-grid':      { imageCount: 3, imageProp: 'images', imageMode: 'array' },
   'features-Image-new': { imageCount: 1, imageProp: 'images', imageMode: 'array' },
   'features-slideshow': { imageCount: 5, imageProp: 'images', imageMode: 'array' },
+  'features-simple-dynamic': {
+    imageCount: 3,
+    imageProp: 'features',
+    imageMode: 'items',
+  },
 
   // ── ABOUT ─────────────────────────────────────────────────────────────
   'about-two-column': { imageCount: 2, imageProp: 'images', imageMode: 'array' },

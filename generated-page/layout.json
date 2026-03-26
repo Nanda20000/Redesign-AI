@@ -10,19 +10,11 @@
     },
     {
       "section": "features",
-      "component": "features-dynamic"
-    },
-    {
-      "section": "services",
-      "component": "about-simple-dynamic"
+      "component": "features-simple-dynamic"
     },
     {
       "section": "about",
       "component": "about-simple-dynamic"
-    },
-    {
-      "section": "testimonials",
-      "component": "testimonials-dynamic"
     },
     {
       "section": "footer",

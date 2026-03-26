@@ -149,6 +149,15 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'heading', type: 'heading', maxWords: 6 },
     ],
   },
+  'features-simple-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'tagline', type: 'label', maxWords: 10 },
+      { prop: 'heading', type: 'heading', maxWords: 15 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'features', type: 'list', maxWords: 0 },
+    ],
+  },
 
   // ── ABOUT ───────────────────────────────────────────────────────────
   'about-dynamic': {

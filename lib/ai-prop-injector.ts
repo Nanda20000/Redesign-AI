@@ -212,6 +212,39 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'items',       type: 'Array<{title:string,description:string,image?:string}>', description: 'List of 2-6 feature cards. Each title max 6 words, each description max 20 words. For each item, select the most relevant image from Available Images list if applicable.', required: true },
     ],
   },
+  'features-simple-dynamic': {
+    componentName: 'features-simple-dynamic',
+    section: 'features',
+    props: [
+      {
+        name: 'tagline',
+        type: 'string',
+        description: 'A short, uppercase tagline for the top of the section. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'The main heading for the features section. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A supporting paragraph explaining the features. Max 40 words.',
+        maxWords: 40,
+        required: true,
+      },
+      {
+        name: 'features',
+        type: 'array',
+        description: 'An array of 3 feature objects, each with a title and image.',
+        required: true,
+      },
+    ],
+  },
 
   // ── ABOUT ─────────────────────────────────────────────────────────
   'about-dynamic': {

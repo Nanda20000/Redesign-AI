@@ -22,6 +22,7 @@ import { FeaturesGalleryType } from '../../components-library/features/features-
 import { FeaturesGrid } from '../../components-library/features/features-grid';
 import { FeaturesImageNew } from '../../components-library/features/features-Image-new';
 import { FeaturesSlideshow } from '../../components-library/features/features-slideshow';
+import { FeaturesSimpleDynamic } from '../../components-library/features/features-simple-dynamic';
 
 // Footer components
 import { FooterCorporate } from '../../components-library/footer/footer-corporate';
@@ -87,6 +88,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'features-grid': FeaturesGrid,
   'features-Image-new': FeaturesImageNew,
   'features-slideshow': FeaturesSlideshow,
+  'features-simple-dynamic': FeaturesSimpleDynamic,
 
   // Footer components
   'footer-corporate': FooterCorporate,

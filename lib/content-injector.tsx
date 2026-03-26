@@ -9,6 +9,7 @@
 import type { ProcessedSectionContent } from './ai-content-processor';
 import { getComponentImageConfig } from './component-image-map';
 import { isComponentDynamic } from './component-content-map';
+import { ArrowRight } from 'lucide-react';
 
 /**
  * Build testimonial objects from text content.
@@ -563,6 +564,20 @@ export function getComponentContentProps(
         description: featuresCourselContent?.description ?? '',
         images: featuresCourselContent?.images ?? [],
       };
+
+    case 'features-simple-dynamic': {
+      const sectionContent = mappedContent.features as any;
+      return {
+        tagline: sectionContent?.tagline ?? '',
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        features: (sectionContent?.items ?? []).map((item: any) => ({
+          title: item?.title ?? '',
+          image: item?.image ?? '',
+          icon: <ArrowRight className="w-4 h-4" />,
+        })),
+      };
+    }
 
     // About components
     case 'about-dynamic':
