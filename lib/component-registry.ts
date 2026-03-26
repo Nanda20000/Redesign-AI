@@ -7,31 +7,40 @@ import { AboutDynamic } from '@/components-library/about/about-dynamic';
 import { TestimonialsCards } from '@/components-library/testimonials/testimonial-cards';
 import { TestimonialsDynamic } from '@/components-library/testimonials/testimonials-dynamic';
 import { ContactCard } from '@/components-library/contact/contact-form';
+import { ContactSplitDynamic } from '@/components-library/contact/contact-split-dynamic';
 import { FooterSimple } from '@/components-library/footer/footer-simple';
 import NavbarMinimal from '@/components-library/navbar/navbar-minimal';
+import { NavbarDynamic } from '@/components-library/navbar/navbar-dynamic';
 
+// Main component registry - includes all components (dynamic + fallback-only)
 const components = {
-  "hero-ab": HeroSlide,
+  // Dynamic components (AI-selectable)
   "hero-dynamic": HeroDynamic,
-  "features-slideshow": FeaturesSlideshow,
   "features-dynamic": FeaturesDynamic,
-  "about-two-column": About3,
   "about-dynamic": AboutDynamic,
-  "testimonial-cards": TestimonialsCards,
   "testimonials-dynamic": TestimonialsDynamic,
-  "contact-form": ContactCard,
+  "contact-split-dynamic": ContactSplitDynamic,
+  "navbar-dynamic": NavbarDynamic,
   "footer-simple": FooterSimple,
+  
+  // Fallback-only components (not AI-selectable, kept for compatibility)
+  "hero-ab": HeroSlide,
+  "features-slideshow": FeaturesSlideshow,
+  "about-two-column": About3,
+  "testimonial-cards": TestimonialsCards,
+  "contact-form": ContactCard,
   "navbar-minimal": NavbarMinimal
 };
 
+// AI-safe component whitelist - ONLY -dynamic components (plus footer-simple exception)
 export const SAFE_COMPONENTS = {
-  hero: ["hero-dynamic", "hero-ab"],
-  features: ["features-dynamic", "features-slideshow"],
-  about: ["about-dynamic", "about-two-column"],
-  testimonials: ["testimonials-dynamic", "testimonial-cards"],
-  contact: ["contact-form"],
+  hero: ["hero-dynamic"],
+  features: ["features-dynamic"],
+  about: ["about-dynamic"],
+  testimonials: ["testimonials-dynamic"],
+  contact: ["contact-split-dynamic"],
   footer: ["footer-simple"],
-  navbar: ["navbar-minimal"]
+  navbar: ["navbar-dynamic"]
 };
 
 export function getComponentByName(name: string) {

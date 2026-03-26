@@ -151,6 +151,12 @@
       "description": "A stylish hero section with contemporary design"
     },
     {
+      "name": "hero-simple-dynamic",
+      "category": "hero",
+      "file": "hero/hero-simple-dynamic.tsx",
+      "description": "A clean dual-column hero section with a badge, dual-color heading, two buttons, and a featured graphic."
+    },
+    {
       "name": "navbar-elegant",
       "category": "navbar",
       "file": "navbar/navbar-elegant.tsx",

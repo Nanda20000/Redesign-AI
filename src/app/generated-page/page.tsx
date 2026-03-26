@@ -19,42 +19,27 @@ export interface LayoutData {
 }
 
 // Whitelist of dynamic components that accept props
+// STRICT: Only -dynamic components are AI-selectable (exception: footer-simple)
 const DYNAMIC_COMPONENTS = [
-  'hero-ab',
-  'hero-ac',
-  'hero-ad',
-  'hero-ae',
-  'features-slideshow',
-  'features-gallery-type',
-  'features-coursel',
-  'features-grid',
-  'features- Image',
-  'features-Image-new',
-  'about-two-column',
-  'testimonial-cards',
-  'testimonial-gradient',
-  'testimonial-modern',
-  'testimonial-section4',
-  'testimonial-section5',
-  'contact-form',
-  'contact-split-dynamic',
-  'navbar-modern',
-  'navbar-minimal',
-  'navbar-elegant',
+  'hero-dynamic',
+  'hero-simple-dynamic',
+  'features-dynamic',
+  'about-dynamic',
+  'testimonials-dynamic',
   'navbar-dynamic',
-  'footer-simple',
+  'contact-split-dynamic',
+  'footer-simple', // exception
 ];
 
 // Fallback components for each section type (only dynamic ones)
 const FALLBACK_COMPONENTS: Record<string, string> = {
-  hero: "hero-ab",
-  navbar: "navbar-minimal",
-  features: "features-grid",
-  testimonials: "testimonial-cards",
-  pricing: "pricing-cards",
-  contact: "contact-form",
+  hero: "hero-simple-dynamic",
+  navbar: "navbar-dynamic",
+  features: "features-dynamic",
+  testimonials: "testimonials-dynamic",
+  contact: "contact-split-dynamic",
   footer: "footer-simple",
-  about: "about-two-column",
+  about: "about-dynamic",
 };
 
 /**
@@ -68,7 +53,7 @@ function getFallbackComponent(section: string): string {
   }
 
   // Default fallbacks in order of preference (only dynamic components)
-  const defaultFallbacks = ["features-grid", "hero-ab", "navbar-minimal", "footer-simple"];
+  const defaultFallbacks = ["features-dynamic", "hero-dynamic", "navbar-dynamic", "footer-simple"];
   return defaultFallbacks[0];
 }
 

@@ -1,5 +1,6 @@
 export const COMPONENT_META = {
   "hero-dynamic":   { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 11 },
+  "hero-simple-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 12 },
   "hero-ab":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
   "hero-ac":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 9  },
   "hero-ad":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 9  },

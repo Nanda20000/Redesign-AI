@@ -33,6 +33,7 @@ import { FooterStartup } from '../../components-library/footer/footer-startup';
 
 // Hero components
 import { HeroDynamic } from '../../components-library/hero/hero-dynamic';
+import { HeroSimpleDynamic } from '../../components-library/hero/hero-simple-dynamic';
 import { HeroSlide as HeroAb } from '../../components-library/hero/hero-ab';
 import { HeroSection as HeroAc } from '../../components-library/hero/hero-ac';
 import HeroAd from '../../components-library/hero/hero-ad';
@@ -95,6 +96,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Hero components
   'hero-dynamic': HeroDynamic,
+  'hero-simple-dynamic': HeroSimpleDynamic,
   'hero-ab': HeroAb,
   'hero-ac': HeroAc,
   'hero-ad': HeroAd,

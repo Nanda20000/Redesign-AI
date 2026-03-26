@@ -65,7 +65,7 @@ export interface ComponentPropSchema {
 /**
  * Registry of every component's prop schema.
  * AI uses this to know what to write for each component.
- * Add one entry per component.
+ * STRICT: Only -dynamic components are included (plus footer-simple and contact-split-dynamic)
  */
 export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
 
@@ -82,44 +82,64 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'image',                 type: 'string', description: 'Hero section image URL — select most relevant image from Available Images list', required: false },
     ],
   },
-  'hero-ab': {
-    componentName: 'hero-ab',
+  'hero-simple-dynamic': {
+    componentName: 'hero-simple-dynamic',
     section: 'hero',
     props: [
-      { name: 'content.title',       type: 'string',   description: 'Main hero headline — bold, impactful, max 8 words',    maxWords: 8,  required: true  },
-      { name: 'content.subtitle',    type: 'string',   description: 'Tagline below headline, max 6 words',                  maxWords: 6,  required: false },
-      { name: 'content.description', type: 'string',   description: 'Supporting paragraph, max 20 words',                  maxWords: 20, required: false },
-      { name: 'content.buttonText',  type: 'string',   description: 'Primary CTA button label, max 4 words',               maxWords: 4,  required: false },
-    ],
-  },
-  'hero-ac': {
-    componentName: 'hero-ac',
-    section: 'hero',
-    props: [
-      { name: 'content.title',       type: 'string',   description: 'Main hero headline, max 8 words',  maxWords: 8,  required: true  },
-      { name: 'content.description', type: 'string',   description: 'Supporting text, max 25 words',    maxWords: 25, required: false },
-      { name: 'content.buttonText',  type: 'string',   description: 'CTA button label, max 4 words',    maxWords: 4,  required: false },
-    ],
-  },
-  'hero-ad': {
-    componentName: 'hero-ad',
-    section: 'hero',
-    props: [
-      { name: 'content.title',              type: 'string', description: 'Main headline, max 8 words',    maxWords: 8,  required: true  },
-      { name: 'content.subtitle',           type: 'string', description: 'Small label above title, max 6 words', maxWords: 6, required: false },
-      { name: 'content.description',        type: 'string', description: 'Paragraph text, max 25 words',  maxWords: 25, required: false },
-      { name: 'content.buttonText',         type: 'string', description: 'Primary CTA, max 4 words',      maxWords: 4,  required: false },
-      { name: 'content.secondaryButtonText',type: 'string', description: 'Secondary CTA, max 4 words',    maxWords: 4,  required: false },
-    ],
-  },
-  'hero-ae': {
-    componentName: 'hero-ae',
-    section: 'hero',
-    props: [
-      { name: 'content.title',       type: 'string', description: 'Main headline, max 8 words',    maxWords: 8,  required: true  },
-      { name: 'content.subtitle',    type: 'string', description: 'Small label, max 6 words',      maxWords: 6,  required: false },
-      { name: 'content.description', type: 'string', description: 'Paragraph, max 25 words',       maxWords: 25, required: false },
-      { name: 'content.buttonText',  type: 'string', description: 'CTA button, max 4 words',       maxWords: 4,  required: false },
+      {
+        name: 'badge',
+        type: 'string',
+        description: 'A small label above the heading, e.g., "Coming Soon" or "New Feature". Max 3 words.',
+        maxWords: 3,
+        required: false,
+      },
+      {
+        name: 'titlePart1',
+        type: 'string',
+        description: 'The first part of the main heading, rendered in a lighter grey color. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'titlePart2',
+        type: 'string',
+        description: 'The second part of the main heading, rendered in solid black. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A short paragraph explaining the value proposition. Max 30 words.',
+        maxWords: 30,
+        required: true,
+      },
+      {
+        name: 'primaryCtaText',
+        type: 'string',
+        description: 'Text for the main action button (dark background). Max 4 words.',
+        maxWords: 4,
+        required: true,
+      },
+      {
+        name: 'secondaryCtaText',
+        type: 'string',
+        description: 'Text for the secondary action button (light background). Max 4 words.',
+        maxWords: 4,
+        required: false,
+      },
+      {
+        name: 'image',
+        type: 'string',
+        description: 'URL for the featured graphic or product image.',
+        required: true,
+      },
+      {
+        name: 'imageAlt',
+        type: 'string',
+        description: 'Alt text for the featured image.',
+        required: false,
+      },
     ],
   },
 
@@ -131,55 +151,6 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'title',       type: 'string', description: 'Section title, max 8 words',       maxWords: 8,  required: true  },
       { name: 'description', type: 'string', description: 'Short description, max 25 words',  maxWords: 25, required: false },
       { name: 'items',       type: 'Array<{title:string,description:string,image?:string}>', description: 'List of 2-6 feature cards. Each title max 6 words, each description max 20 words. For each item, select the most relevant image from Available Images list if applicable.', required: true },
-    ],
-  },
-  'features-slideshow': {
-    componentName: 'features-slideshow',
-    section: 'features',
-    props: [
-      { name: 'heading', type: 'string', description: 'Section heading, max 6 words', maxWords: 6, required: true },
-    ],
-  },
-  'features- Image': {
-    componentName: 'features- Image',
-    section: 'features',
-    props: [
-      { name: 'heading', type: 'string', description: 'Section heading, max 6 words', maxWords: 6, required: true },
-    ],
-  },
-  'features-coursel': {
-    componentName: 'features-coursel',
-    section: 'features',
-    props: [
-      { name: 'title',       type: 'string', description: 'Section title, max 6 words',       maxWords: 6,  required: true  },
-      { name: 'description', type: 'string', description: 'Short description, max 20 words',  maxWords: 20, required: false },
-    ],
-  },
-  'features-gallery-type': {
-    componentName: 'features-gallery-type',
-    section: 'features',
-    props: [
-      { name: 'title',       type: 'string', description: 'Section title, max 6 words',       maxWords: 6,  required: true  },
-      { name: 'description', type: 'string', description: 'Short description, max 20 words',  maxWords: 20, required: false },
-    ],
-  },
-  'features-grid': {
-    componentName: 'features-grid',
-    section: 'features',
-    props: [
-      { name: 'badge',        type: 'string', description: 'Small badge label, 1-3 words',                    maxWords: 3,  required: false },
-      { name: 'heading',      type: 'string', description: 'Section heading, max 6 words',                    maxWords: 6,  required: true  },
-      { name: 'description',  type: 'string', description: 'Subtitle paragraph, max 15 words',               maxWords: 15, required: false },
-      { name: 'featureItems', type: 'Array<{title:string,description:string}>', description: 'List of 2-4 feature cards. Each title max 5 words, each description max 15 words', required: false },
-    ],
-  },
-  'features-Image-new': {
-    componentName: 'features-Image-new',
-    section: 'features',
-    props: [
-      { name: 'badge',        type: 'string', description: 'Badge label, 1-3 words',          maxWords: 3,  required: false },
-      { name: 'title',        type: 'string', description: 'Section heading, max 8 words',    maxWords: 8,  required: true  },
-      { name: 'description',  type: 'string', description: 'Paragraph text, max 25 words',   maxWords: 25, required: false },
     ],
   },
 
@@ -195,19 +166,6 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'image',       type: 'string', description: 'About section image URL — select most relevant image from Available Images list (e.g. team photo, office, campus)', required: false },
     ],
   },
-  'about-two-column': {
-    componentName: 'about-two-column',
-    section: 'about',
-    props: [
-      { name: 'title',                  type: 'string',  description: 'About section heading, max 6 words',                    maxWords: 6,  required: true  },
-      { name: 'description',            type: 'string',  description: 'About paragraph summarised in max 40 words',            maxWords: 40, required: true  },
-      { name: 'achievementsTitle',      type: 'string',  description: 'Achievements section heading, max 5 words',             maxWords: 5,  required: false },
-      { name: 'achievementsDescription',type: 'string',  description: 'Short achievements description, max 15 words',         maxWords: 15, required: false },
-      { name: 'companiesTitle',         type: 'string',  description: 'Trusted by label, max 6 words',                        maxWords: 6,  required: false },
-      { name: 'injectedCompanies',      type: 'string[]',description: 'List of partner/client company names if mentioned',    required: false },
-      { name: 'injectedAchievements',   type: 'Array<{label:string,value:string}>', description: 'Stats like years experience, students enrolled etc. Extract real numbers from content if available', required: false },
-    ],
-  },
 
   // ── TESTIMONIALS ──────────────────────────────────────────────────
   'testimonials-dynamic': {
@@ -219,38 +177,8 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'testimonials',type: 'Array<{text:string,name?:string,role?:string,image?:string}>', description: 'Real feedback content summarised from site. Each text max 25 words. If no real testimonials exist, generate realistic domain-specific feedback with contextual roles (e.g. "Accounting Student", "Course Graduate") - NOT generic names like John Doe. For each testimonial, optionally include a portrait image URL from Available Images if relevant.', required: true },
     ],
   },
-  'testimonial-cards': {
-    componentName: 'testimonial-cards',
-    section: 'testimonials',
-    props: [
-      { name: 'title',       type: 'string', description: 'Section heading, max 6 words',       maxWords: 6,  required: true  },
-      { name: 'description', type: 'string', description: 'Subtitle text, max 15 words',        maxWords: 15, required: false },
-    ],
-  },
-  'testimonial-section5': {
-    componentName: 'testimonial-section5',
-    section: 'testimonials',
-    props: [
-      { name: 'title',       type: 'string', description: 'Section heading, max 6 words',  maxWords: 6,  required: true  },
-      { name: 'description', type: 'string', description: 'Subtitle text, max 15 words',   maxWords: 15, required: false },
-    ],
-  },
 
   // ── NAVBAR ────────────────────────────────────────────────────────
-  'navbar-minimal': {
-    componentName: 'navbar-minimal',
-    section: 'navbar',
-    props: [
-      { name: 'menuItems', type: 'Array<{to:string,text:string}>', description: 'Navigation links extracted from the website nav menu', required: true },
-    ],
-  },
-  'navbar-modern': {
-    componentName: 'navbar-modern',
-    section: 'navbar',
-    props: [
-      { name: 'menu', type: 'Array<{title:string,url:string}>', description: 'Navigation links from the website', required: true },
-    ],
-  },
   'navbar-dynamic': {
     componentName: 'navbar-dynamic',
     section: 'navbar',
@@ -297,14 +225,6 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
   },
 
   // ── CONTACT ───────────────────────────────────────────────────────
-  'contact-form': {
-    componentName: 'contact-form',
-    section: 'contact',
-    props: [
-      { name: 'title',       type: 'string', description: 'Contact section heading, max 5 words',  maxWords: 5,  required: true  },
-      { name: 'description', type: 'string', description: 'Contact description, max 20 words',     maxWords: 20, required: false },
-    ],
-  },
   'contact-split-dynamic': {
     componentName: 'contact-split-dynamic',
     section: 'contact',
@@ -332,33 +252,6 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'brandName',   type: 'string',   description: 'Brand or company name',                     maxWords: 4,  required: true  },
       { name: 'description', type: 'string',   description: 'Short brand description, max 20 words',     maxWords: 20, required: false },
       { name: 'copyright',   type: 'string',   description: 'Copyright text with year and brand name',   maxWords: 10, required: false },
-    ],
-  },
-
-  // ── ADDITIONAL TESTIMONIALS ───────────────────────────────────────
-  'testimonial-gradient': {
-    componentName: 'testimonial-gradient',
-    section: 'testimonials',
-    props: [
-      { name: 'testimonials', type: 'Array<{text:string,image:string,name:string,role:string}>', description: 'Write 3 realistic testimonials based on the type of business this website represents. Each text max 20 words, name should be a realistic person name, role should be relevant to the business.', required: true },
-    ],
-  },
-  'testimonial-section4': {
-    componentName: 'testimonial-section4',
-    section: 'testimonials',
-    props: [
-      { name: 'testimonials', type: 'Array<{text:string,image:string,name:string,role:string}>', description: 'Write 3 realistic testimonials for this business type. Each text max 20 words.', required: true },
-    ],
-  },
-
-  // ── ADDITIONAL FOOTER ─────────────────────────────────────────────
-  'footer-corporate': {
-    componentName: 'footer-corporate',
-    section: 'footer',
-    props: [
-      { name: 'companyName',   type: 'string',   description: 'Brand name, max 4 words',              maxWords: 4,  required: true  },
-      { name: 'description',   type: 'string',   description: 'Brand description, max 20 words',      maxWords: 20, required: false },
-      { name: 'newsletterTitle', type: 'string', description: 'Newsletter CTA heading, max 5 words',  maxWords: 5,  required: false },
     ],
   },
 };
@@ -392,6 +285,16 @@ Contact Info: ${JSON.stringify(content.contactInfo || {})}
 AI-Processed Features: ${JSON.stringify(content.processed?.features || {})}
 AI-Processed About: ${JSON.stringify(content.processed?.about || {})}
 AI-Processed Footer: ${JSON.stringify(content.processed?.footer || {})}
+
+## Source Website Section Analysis (use this to write relevant content):
+- The source website appears to be a ${content.processed?.about?.title ?? 'business'} site
+- Key headings found: ${content.headings.slice(0, 5).join(' | ')}
+- Navigation structure: ${content.navigationLinks.join(', ')}
+- AI-detected business content: ${JSON.stringify(content.processed?.features?.items?.map(i => i.title) ?? [])}
+- About/company info: ${content.processed?.about?.description?.slice(0, 100) ?? 'N/A'}
+
+Use this context to write props that closely mirror the PURPOSE and CONTENT TYPE of the source website,
+but rewritten in fresh, professional language suitable for the redesigned page.
 
 ## Available Images (select most relevant ones for this section):
 ${availableImages}

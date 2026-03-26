@@ -442,6 +442,20 @@ export function getComponentContentProps(
       }
       return heroDynamicProps;
 
+    case 'hero-simple-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        badge: sectionContent?.badge ?? '',
+        titlePart1: sectionContent?.titlePart1 ?? '',
+        titlePart2: sectionContent?.titlePart2 ?? '',
+        description: sectionContent?.description ?? '',
+        primaryCtaText: sectionContent?.primaryCtaText ?? '',
+        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
+        image: sectionContent?.image ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+      };
+    }
+
     case 'hero-ab':
       // HeroSlide component supports images prop
       const heroAbProps = {

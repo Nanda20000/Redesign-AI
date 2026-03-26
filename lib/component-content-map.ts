@@ -36,6 +36,17 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'secondaryButtonText', type: 'cta', maxWords: 4  },
     ],
   },
+  'hero-simple-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badge', type: 'label', maxWords: 3 },
+      { prop: 'titlePart1', type: 'heading', maxWords: 10 },
+      { prop: 'titlePart2', type: 'heading', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 30 },
+      { prop: 'primaryCtaText', type: 'cta', maxWords: 4 },
+      { prop: 'secondaryCtaText', type: 'cta', maxWords: 4 },
+    ],
+  },
   'hero-ab': {
     isDynamic: true,
     contentSlots: [
@@ -280,11 +291,20 @@ export function getDynamicComponents(category: string): string[] {
 }
 
 /**
+ * Get all dynamic-only component names (components ending with -dynamic).
+ * These are the ONLY components that should be selected by the AI layout generator.
+ */
+export function getDynamicOnlyComponents(): string[] {
+  return Object.entries(COMPONENT_CONTENT_MAP)
+    .filter(([name, config]) => name.endsWith('-dynamic') && config.isDynamic)
+    .map(([name]) => name);
+}
+
+/**
  * Get all static-only component names.
  * These should never be selected by the AI layout generator.
+ * ANY component NOT ending in '-dynamic' is treated as static/excluded.
  */
 export function getStaticOnlyComponents(): string[] {
-  return Object.entries(COMPONENT_CONTENT_MAP)
-    .filter(([, config]) => !config.isDynamic)
-    .map(([name]) => name);
+  return Object.keys(COMPONENT_CONTENT_MAP).filter(name => !name.endsWith('-dynamic'));
 }

@@ -6,7 +6,7 @@
     },
     {
       "section": "hero",
-      "component": "hero-dynamic"
+      "component": "hero-simple-dynamic"
     },
     {
       "section": "features",
@@ -18,7 +18,7 @@
     },
     {
       "section": "services",
-      "component": "features-Image"
+      "component": "navbar-dynamic"
     },
     {
       "section": "testimonials",

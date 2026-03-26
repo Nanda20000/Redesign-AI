@@ -407,11 +407,11 @@
       "items": [
         {
           "title": "US CPA - Certified Public Accountant",
-          "description": "Certification for professional public accounting standards."
+          "description": "Certification for public accounting professionals."
         },
         {
           "title": "US CMA - Certified Management Accountant",
-          "description": "Certification focused on management accounting and financial strategy."
+          "description": "Certification focused on management accounting and financial management."
         },
         {
           "title": "Diploma in Financial Accounting & Taxation",
@@ -425,17 +425,17 @@
     },
     "about": {
       "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute. It is described as the No.1 Tally Institute in India, elevating the accounting profession with expert support and continuous practice, and is NSDC Authorized.",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute. It is a No.1 Tally Institute in India that elevates the accounting profession with expert support and continuous practice, and is NSDC Authorized.",
       "companies": [],
       "achievements": [
         {
-          "label": "Years of Operation",
+          "label": "Years Experience",
           "value": "28+"
         }
       ],
       "breakout": {
         "title": "Numbers Tell a Story of Success",
-        "description": "Key message highlighting the institute's success and impact."
+        "description": "Key message about the institute's success and impact."
       }
     },
     "footer": {

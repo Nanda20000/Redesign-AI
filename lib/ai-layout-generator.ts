@@ -415,15 +415,16 @@ function enforceImageComponents(
  * AI-safe component whitelist - ONLY these components can be selected
  * All components listed here are dynamic (prop-driven) and AI-compatible
  * First item in each category is highest priority
+ * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
  */
 const AI_SAFE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-dynamic'],
-  features: ['features-dynamic', 'features-coursel', 'features-gallery-type', 'features-Image-new'],
+  hero: ['hero-simple-dynamic', 'hero-dynamic'],
+  features: ['features-dynamic'],
   about: ['about-dynamic'],
   testimonials: ['testimonials-dynamic'],
-  contact: ['contact-split-dynamic', 'contact-form'],
-  footer: ['footer-simple'],
-  navbar: ['navbar-dynamic', 'navbar-modern', 'navbar-minimal']
+  contact: ['contact-split-dynamic'],
+  footer: ['footer-simple'],  // exception: no footer-dynamic exists yet
+  navbar: ['navbar-dynamic'],
 };
 
 /**
@@ -438,6 +439,7 @@ function isComponentAICompatible(componentName: string, section: string): boolea
  * Enforce AI-safe component whitelist on layout AFTER AI generation
  * Replaces any non-whitelisted components with the first valid AI-safe component
  * This runs AFTER AI layout generation to ensure only dynamic-safe components are used
+ * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
  */
 function enforceAICompatibleComponents(layout: LayoutResponse): LayoutResponse {
   const enhancedLayout: LayoutItem[] = [];
@@ -448,10 +450,11 @@ function enforceAICompatibleComponents(layout: LayoutResponse): LayoutResponse {
 
     if (!isComponentAICompatible(item.component, item.section)) {
       const oldComponent = item.component;
+      const isDynamic = oldComponent.endsWith('-dynamic');
       // Replace with first valid AI-safe component for this section
       if (safeComponents.length > 0) {
         newItem.component = safeComponents[0];
-        console.log(`[Component Filter] ${item.section}: ${oldComponent} → ${newItem.component}`);
+        console.log(`[Component Filter] ${item.section}: Replaced non-dynamic "${oldComponent}" with dynamic "${newItem.component}"`);
       } else {
         console.warn(`[Component Filter] No AI-safe components available for section: ${item.section}`);
       }
@@ -553,17 +556,17 @@ export async function generateLayoutWithAI(
     // Step 3: Build components map by category
     const componentsByCategory = buildComponentsByCategory(manifest);
 
-    // Exclude static-only components from AI selection
+    // STRICT: Exclude ALL components that do not end with -dynamic
+    // Only footer-simple is allowed as an exception (no footer-dynamic exists yet)
     const staticComponents = getStaticOnlyComponents();
     console.log('[AI Layout] Excluding static-only components:', staticComponents);
 
-    // After building componentsByCategory, filter out static components
     for (const category of Object.keys(componentsByCategory)) {
       componentsByCategory[category] = componentsByCategory[category].filter(
-        name => !staticComponents.includes(name)
+        name => name.endsWith('-dynamic') || name === 'footer-simple' // footer-simple exception
       );
     }
-    console.log('[AI Layout] Dynamic-only components by category:', componentsByCategory);
+    console.log('[AI Layout] Dynamic-only filtered components:', componentsByCategory);
 
     // Step 4: Get intelligent recommendations
     const recommendations = getComponentRecommendations(analysis);

@@ -42,15 +42,16 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
  * AI-safe component whitelist - ONLY these components can be selected
  * All components listed here are dynamic (prop-driven) and AI-compatible
  * First item in each category is highest priority
+ * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
  */
 const AI_SAFE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-dynamic'],
-  features: ['features-dynamic', 'features-coursel', 'features-gallery-type', 'features-Image-new'],
+  hero: ['hero-simple-dynamic', 'hero-dynamic'],
+  features: ['features-dynamic'],
   about: ['about-dynamic'],
   testimonials: ['testimonials-dynamic'],
-  contact: ['contact-split-dynamic', 'contact-form'],
-  footer: ['footer-simple'],
-  navbar: ['navbar-dynamic', 'navbar-modern', 'navbar-minimal']
+  contact: ['contact-split-dynamic'],
+  footer: ['footer-simple'],  // exception: no footer-dynamic exists yet
+  navbar: ['navbar-dynamic'],
 };
 
 /**
@@ -397,6 +398,7 @@ function isComponentAICompatible(componentName: string, section: string): boolea
 /**
  * Enforce AI-safe component whitelist on layout
  * Replaces any non-whitelisted components with the first valid AI-safe component
+ * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
  */
 function enforceAICompatibleComponents(layout: LayoutItem[]): LayoutItem[] {
   const enhancedLayout: LayoutItem[] = [];
@@ -407,10 +409,11 @@ function enforceAICompatibleComponents(layout: LayoutItem[]): LayoutItem[] {
 
     if (!isComponentAICompatible(item.component, item.section)) {
       const oldComponent = item.component;
+      const isDynamic = oldComponent.endsWith('-dynamic');
       // Replace with first valid AI-safe component for this section
       if (safeComponents.length > 0) {
         newItem.component = safeComponents[0];
-        console.log(`[Component Filter] ${item.section}: ${oldComponent} → ${newItem.component}`);
+        console.log(`[Component Filter] ${item.section}: Replaced non-dynamic "${oldComponent}" with dynamic "${newItem.component}"`);
       } else {
         console.warn(`[Component Filter] No AI-safe components available for section: ${item.section}`);
       }
@@ -534,6 +537,7 @@ export function selectComponents(
 /**
  * Build enhanced prompt with analysis context for AI
  * This provides the AI with intelligent recommendations while letting it make final decisions
+ * STRICT: Only shows -dynamic components to ensure AI selects dynamic-only components
  */
 export function buildEnhancedPrompt(
   sections: string[],
@@ -543,67 +547,64 @@ export function buildEnhancedPrompt(
 ): string {
   const { businessType, tone, contentRichness } = analysis;
 
-  return `You are an expert UI/UX designer and web developer. Your task is to select the best components from a component library to build a website layout.
+  // Filter to ONLY dynamic components for the prompt
+  const dynamicOnlyByCategory: Record<string, string[]> = {};
+  for (const [category, comps] of Object.entries(componentsByCategory)) {
+    const dynamic = comps.filter(name => name.endsWith('-dynamic'));
+    if (dynamic.length > 0) {
+      dynamicOnlyByCategory[category] = dynamic;
+    }
+  }
 
-## Website Analysis Results:
-- **Business Type**: ${businessType} (detected from content patterns)
-- **Tone**: ${tone} (based on language and style indicators)
-- **Content Richness**: ${contentRichness} (based on content volume and complexity)
-- **Analysis Confidence**: ${Math.round(analysis.confidence * 100)}%
+  return `You are an expert UI/UX designer. Your job is to select the best dynamic components to rebuild a website.
 
-## Detected Website Sections:
+## STRICT RULE — DYNAMIC COMPONENTS ONLY
+You MUST only select components whose name ends with "-dynamic".
+Never select components like hero-modern, hero-minimal, navbar-gradient, footer-elegant etc.
+Only valid selections end with: -dynamic (e.g. hero-dynamic, features-dynamic, about-dynamic)
+
+## Source Website Analysis:
+- Business Type: ${businessType} (confidence: ${Math.round(analysis.confidence * 100)}%)
+- Detected Tone: ${tone}
+- Content Richness: ${contentRichness}
+- Key Business Signals: ${analysis.signals.businessTypeSignals.join(', ')}
+- Tone Signals: ${analysis.signals.toneSignals.join(', ')}
+
+## Detected Sections from Source Website:
 ${sections.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 
-## Available Components by Category:
-${JSON.stringify(componentsByCategory, null, 2)}
+## Available DYNAMIC-ONLY Components (ONLY choose from these):
+${JSON.stringify(dynamicOnlyByCategory, null, 2)}
 
-## Intelligent Component Recommendations:
-Based on the analysis, here are the recommended component styles:
+## How to Choose the Best Dynamic Component:
+Analyze the source website's detected sections and content:
+- If the source hero has a large background image → hero-dynamic (supports image prop)
+- If the source has a services/courses grid → features-dynamic (supports items[] with image)
+- If the source has an about/history section → about-dynamic (supports stats, companies, image)
+- If the source has student/customer reviews → testimonials-dynamic (supports testimonials[])
+- If the source has a contact form → contact-split-dynamic
+- For navbar → navbar-dynamic (supports full nav items and CTA actions)
+- For footer → footer-simple (only option currently)
 
-${Object.entries(recommendations).map(([category, rec]) => `
-### ${category.toUpperCase()}
-- **Preferred**: ${rec.preferred.join(', ') || 'N/A'}
-- **Avoid**: ${rec.avoid.join(', ') || 'N/A'}
-- **Reason**: ${rec.reason}
-`).join('\n')}
+## Business Type Guidance:
+- education/academy → prioritize about-dynamic (show stats like years, students), features-dynamic (courses)
+- saas/startup → prioritize features-dynamic (product features), hero-dynamic (strong CTA)
+- corporate → prioritize about-dynamic (company info), contact-split-dynamic
+- portfolio/agency → prioritize features-dynamic (gallery/work items), hero-dynamic (visual)
 
-## Component Selection Rules:
-1. **HERO section is MANDATORY** - Every website must have a hero section
-2. **FOOTER is MANDATORY** - Every website must have a footer
-3. **NAVBAR** - Keep it clean and minimal (avoid overly complex navigation)
-4. **Variety** - Don't use the same style everywhere (e.g., not all "modern" or all "minimal")
-5. **Content Matching** - For low-content sites, prefer simpler components
-6. **Business Type Matching**:
-   - Education → clean, structured, readable components
-   - SaaS → modern, gradient, feature-heavy components
-   - Portfolio → visual-heavy, elegant components
-   - Corporate → minimal, professional components
-   - E-commerce → modern, product-focused components
-
-## Response Format:
-Return ONLY a valid JSON object with this exact structure (no additional text, no markdown):
+## Response Format — Return ONLY this JSON, no markdown, no explanation:
 {
   "layout": [
-    {"section": "section_name", "component": "component_name"},
-    ...
+    {"section": "navbar", "component": "navbar-dynamic"},
+    {"section": "hero", "component": "hero-dynamic"},
+    {"section": "features", "component": "features-dynamic"},
+    {"section": "about", "component": "about-dynamic"},
+    {"section": "testimonials", "component": "testimonials-dynamic"},
+    {"section": "footer", "component": "footer-simple"}
   ]
 }
 
-## Rules:
-1. Each section must be mapped to exactly one component from the same category
-2. Use only component names from the availableComponents list
-3. Include all detected sections in your response
-4. ALWAYS include hero and footer sections
-5. Return ONLY the JSON, no explanations or additional text
-
-Example response:
-{
-  "layout": [
-    {"section": "navbar", "component": "navbar-minimal"},
-    {"section": "hero", "component": "hero-modern"},
-    {"section": "features", "component": "features-grid"},
-    {"section": "testimonials", "component": "testimonial-cards"},
-    {"section": "footer", "component": "footer-simple"}
-  ]
-}`;
+IMPORTANT: Only include sections that were detected. Always include navbar, hero, and footer.
+Every component name you return MUST end with "-dynamic" (exception: footer-simple).
+`;
 }
