@@ -201,6 +201,231 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       }
     ],
   },
+  'hero-banner-dynamic': {
+    componentName: 'hero-banner-dynamic',
+    section: 'hero',
+    props: [
+      {
+        name: 'backgroundImage',
+        type: 'string',
+        description: 'Full-width background image URL for the banner',
+        required: false,
+      },
+      {
+        name: 'breadcrumb',
+        type: 'string',
+        description: 'Breadcrumb navigation text (e.g., "Home > About"). Max 10 words.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'title',
+        type: 'string',
+        description: 'Large bold page title. Max 10 words.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'Short description paragraph below the title. Max 30 words.',
+        maxWords: 30,
+        required: false,
+      },
+    ],
+  },
+
+  // ── GALLERY ────────────────────────────────────────────────────────
+  'gallery-dynamic': {
+    componentName: 'gallery-dynamic',
+    section: 'gallery',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'Main heading for the gallery section. maxWords: 10',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        description: 'Optional descriptive text below the title. maxWords: 30',
+        maxWords: 30,
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'Array of gallery items, each with imageUrl, optional caption (maxWords: 8), and optional category label (maxWords: 3)',
+        maxWords: 100,
+        required: true,
+      },
+    ],
+  },
+  'gallery-elegant-dynamic': {
+    componentName: 'gallery-elegant-dynamic',
+    section: 'gallery',
+    props: [
+      {
+        name: 'label',
+        type: 'string',
+        description: 'A small uppercase label identifying the category or collection. Max 3 words.',
+        maxWords: 3,
+        required: false,
+      },
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'The main title of the gallery section. Max 8 words.',
+        maxWords: 8,
+        required: true,
+      },
+      {
+        name: 'subheading',
+        type: 'string',
+        description: 'A brief description or context for the displayed items. Max 25 words.',
+        maxWords: 25,
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'An array of 5 gallery items. Each item must have an image and alt text. Title and description are optional for hover effects.',
+        required: true,
+      },
+    ],
+  },
+
+  // ── CTA ────────────────────────────────────────────────────────────
+  'cta-dynamic': {
+    componentName: 'cta-dynamic',
+    section: 'cta',
+    props: [
+      {
+        name: 'badge',
+        type: 'string',
+        description: 'Optional label displayed above the headline. maxWords: 5',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'headline',
+        type: 'string',
+        description: 'Main bold headline for the CTA section. maxWords: 12',
+        maxWords: 12,
+        required: false,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'Supporting paragraph text below the headline. maxWords: 40',
+        maxWords: 40,
+        required: false,
+      },
+      {
+        name: 'primaryButtonText',
+        type: 'string',
+        description: 'Text for the primary call-to-action button. maxWords: 4',
+        maxWords: 4,
+        required: false,
+      },
+      {
+        name: 'primaryButtonHref',
+        type: 'string',
+        description: 'URL link for the primary button',
+        required: false,
+      },
+      {
+        name: 'secondaryButtonText',
+        type: 'string',
+        description: 'Text for the secondary call-to-action button. maxWords: 4',
+        maxWords: 4,
+        required: false,
+      },
+      {
+        name: 'secondaryButtonHref',
+        type: 'string',
+        description: 'URL link for the secondary button',
+        required: false,
+      },
+      {
+        name: 'backgroundImage',
+        type: 'string',
+        description: 'Optional background image URL displayed behind an overlay',
+        required: false,
+      },
+    ],
+  },
+  'cta-simple-dynamic': {
+    componentName: 'cta-simple-dynamic',
+    section: 'cta',
+    props: [
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'The main punchy headline for the CTA card. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'Supporting text explaining the value proposition. Max 25 words.',
+        maxWords: 25,
+        required: true,
+      },
+      {
+        name: 'primaryCtaText',
+        type: 'string',
+        description: 'Text for the primary action button. Max 3 words.',
+        maxWords: 3,
+        required: true,
+      },
+      {
+        name: 'secondaryCtaText',
+        type: 'string',
+        description: 'Text for the secondary action button. Max 3 words.',
+        maxWords: 3,
+        required: false,
+      },
+      {
+        name: 'stats',
+        type: 'array',
+        description: 'A list of 3 key statistics with a value (e.g. 99.9%) and a label (e.g. uptime).',
+        required: true,
+      }
+    ],
+  },
+
+  // ── BLOG ───────────────────────────────────────────────────────────
+  'blog-dynamic': {
+    componentName: 'blog-dynamic',
+    section: 'blog',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'Main heading for the blog section. maxWords: 10',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        description: 'Optional descriptive text below the title. maxWords: 30',
+        maxWords: 30,
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'Array of blog articles, each with imageUrl, category (maxWords: 3), title (maxWords: 12), excerpt (maxWords: 25), author (maxWords: 4), date string, readMoreText (maxWords: 3), and href',
+        maxWords: 150,
+        required: true,
+      },
+    ],
+  },
 
   // ── FEATURES ──────────────────────────────────────────────────────
   'features-dynamic': {

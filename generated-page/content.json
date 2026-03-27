@@ -407,7 +407,7 @@
       "items": [
         {
           "title": "US CPA - Certified Public Accountant",
-          "description": "Certification for professional public accounting standards in the United States."
+          "description": "Certification for professional public accounting in the United States."
         },
         {
           "title": "US CMA - Certified Management Accountant",
@@ -415,11 +415,11 @@
         },
         {
           "title": "Diploma in Financial Accounting & Taxation",
-          "description": "Diploma program covering core financial accounting and taxation principles."
+          "description": "Diploma program covering financial accounting and taxation principles."
         },
         {
           "title": "SAP S/4 HANA",
-          "description": "Certification in the professional use of the SAP S/4 HANA enterprise resource planning system."
+          "description": "Certification in the SAP S/4 HANA enterprise resource planning system."
         }
       ]
     },
@@ -435,7 +435,7 @@
       ],
       "breakout": {
         "title": "Numbers Tell a Story of Success",
-        "description": "The institute's key message emphasizes its success and authority in professional accounting education."
+        "description": "The key message highlighting the institute's success and results-driven approach."
       }
     },
     "footer": {

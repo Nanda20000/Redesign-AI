@@ -25,11 +25,43 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   'hero-dynamic': { imageCount: 1, imageProp: 'image',       imageMode: 'single' },
   'hero-simple-dynamic': { imageCount: 1, imageProp: 'image', imageMode: 'single' },
   'hero-elegant-dynamic': { imageCount: 1, imageProp: 'mediaUrl', imageMode: 'single' },
+  'hero-banner-dynamic': { imageCount: 1, imageProp: 'backgroundImage', imageMode: 'single' },
   'hero-elegant': { imageCount: 0, imageProp: '',             imageMode: 'none'   },
   'hero-minimal': { imageCount: 0, imageProp: '',             imageMode: 'none'   },
   'hero-modern':  { imageCount: 0, imageProp: '',             imageMode: 'none'   },
   'hero-simple':  { imageCount: 0, imageProp: '',             imageMode: 'none'   },
   'hero-stylish': { imageCount: 0, imageProp: '',             imageMode: 'none'   },
+
+  // ── GALLERY ───────────────────────────────────────────────────────────
+  'gallery-dynamic': {
+    imageCount: 6,
+    imageProp: 'items',
+    imageMode: 'items',
+  },
+  'gallery-elegant-dynamic': {
+    imageCount: 5,
+    imageProp: 'items',
+    imageMode: 'items',
+  },
+
+  // ── CTA ───────────────────────────────────────────────────────────────
+  'cta-dynamic': {
+    imageCount: 1,
+    imageProp: 'backgroundImage',
+    imageMode: 'single',
+  },
+  'cta-simple-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  // ── BLOG ──────────────────────────────────────────────────────────────
+  'blog-dynamic': {
+    imageCount: 6,
+    imageProp: 'items',
+    imageMode: 'items',
+  },
 
   // ── FEATURES ──────────────────────────────────────────────────────────
   'features- Image':    { imageCount: 5, imageProp: 'images', imageMode: 'array' },

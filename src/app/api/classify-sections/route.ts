@@ -27,6 +27,9 @@ const VALID_SECTION_TYPES = [
   'testimonials',
   'contact',
   'footer',
+  'gallery',
+  'cta',
+  'blog',
 ];
 
 function createPrompt(headings: string[], sections: string[], hasNavbar?: boolean, hasFooter?: boolean, navbarLinks?: string[]): string {
@@ -193,5 +196,8 @@ function inferSectionType(text: string): string {
   if (lower.includes('testimon') || lower.includes('review')) return 'testimonials';
   if (lower.includes('contact')) return 'contact';
   if (lower.includes('footer')) return 'footer';
+  if (lower.includes('gallery') || lower.includes('photo') || lower.includes('image')) return 'gallery';
+  if (lower.includes('cta') || lower.includes('get started') || lower.includes('sign up') || lower.includes('join')) return 'cta';
+  if (lower.includes('blog') || lower.includes('article') || lower.includes('news') || lower.includes('post')) return 'blog';
   return 'features';
 }

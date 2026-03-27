@@ -24,6 +24,7 @@ const DYNAMIC_COMPONENTS = [
   'hero-dynamic',
   'hero-simple-dynamic',
   'hero-elegant-dynamic',
+  'hero-banner-dynamic',
   'features-dynamic',
   'features-simple-dynamic',
   'about-dynamic',
@@ -32,6 +33,11 @@ const DYNAMIC_COMPONENTS = [
   'navbar-dynamic',
   'contact-split-dynamic',
   'footer-simple', // exception
+  'gallery-dynamic',
+  'gallery-elegant-dynamic',
+  'cta-dynamic',
+  'cta-simple-dynamic',
+  'blog-dynamic',
 ];
 
 // Fallback components for each section type (only dynamic ones)
@@ -43,6 +49,9 @@ const FALLBACK_COMPONENTS: Record<string, string> = {
   contact: "contact-split-dynamic",
   footer: "footer-simple",
   about: "about-simple-dynamic",
+  gallery: "gallery-dynamic",
+  cta: "cta-simple-dynamic",
+  blog: "blog-dynamic",
 };
 
 /**

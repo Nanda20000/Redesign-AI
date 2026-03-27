@@ -2,6 +2,7 @@ export const COMPONENT_META = {
   "hero-dynamic":   { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 11 },
   "hero-simple-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 12 },
   "hero-elegant-dynamic": { section: "hero",   supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 12 },
+  "hero-banner-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "low",    priority: 9 },
   "hero-ab":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
   "hero-ac":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 9  },
   "hero-ad":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 9  },
@@ -11,6 +12,15 @@ export const COMPONENT_META = {
   "hero-modern":  { section: "hero",         supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 7  },
   "hero-simple":  { section: "hero",         supportsImages: false, supportsItems: false, contentLevel: "low",    priority: 5  },
   "hero-stylish": { section: "hero",         supportsImages: false, supportsItems: false, contentLevel: "low",    priority: 5  },
+
+  "gallery-dynamic": { section: "gallery",   supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 5 },
+  "gallery-elegant-dynamic": { section: "gallery", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 12 },
+
+  "cta-dynamic":     { section: "cta",       supportsImages: true,  supportsItems: false, contentLevel: "low",    priority: 8 },
+
+  "cta-simple-dynamic": { section: "cta",    supportsImages: false, supportsItems: true,  contentLevel: "medium", priority: 12 },
+
+  "blog-dynamic":    { section: "blog",      supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 6 },
 
   "features- Image":    { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 9  },
   "features-coursel":   { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 9  },

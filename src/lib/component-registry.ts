@@ -8,6 +8,13 @@ import { About3 as AboutTwoColumn } from '../../components-library/about/about-t
 import { AboutSimpleDynamic } from '../../components-library/about/about-simple-dynamic';
 import { AboutDynamic } from '../../components-library/about/about-dynamic';
 
+// Blog components
+import { BlogDynamic } from '../../components-library/blog/blog-dynamic';
+
+// CTA components
+import { CtaDynamic } from '../../components-library/cta/cta-dynamic';
+import { CtaSimpleDynamic } from '../../components-library/cta/cta-simple-dynamic';
+
 // Features components
 import { FeaturesDynamic } from '../../components-library/features/features-dynamic';
 
@@ -33,10 +40,15 @@ import FooterModern from '../../components-library/footer/footer-modern';
 import { FooterSimple } from '../../components-library/footer/footer-simple';
 import { FooterStartup } from '../../components-library/footer/footer-startup';
 
+// Gallery components
+import { GalleryDynamic } from '../../components-library/gallery/gallery-dynamic';
+import { GalleryElegantDynamic } from '../../components-library/gallery/gallery-elegant-dynamic';
+
 // Hero components
 import { HeroDynamic } from '../../components-library/hero/hero-dynamic';
 import { HeroSimpleDynamic } from '../../components-library/hero/hero-simple-dynamic';
 import { HeroElegantDynamic } from '../../components-library/hero/hero-elegant-dynamic';
+import { HeroBannerDynamic } from '../../components-library/hero/hero-banner-dynamic';
 import { HeroSlide as HeroAb } from '../../components-library/hero/hero-ab';
 import { HeroSection as HeroAc } from '../../components-library/hero/hero-ac';
 import HeroAd from '../../components-library/hero/hero-ad';
@@ -76,6 +88,13 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'about-simple-dynamic': AboutSimpleDynamic,
   'about-dynamic': AboutDynamic,
 
+  // Blog components
+  'blog-dynamic': BlogDynamic,
+
+  // CTA components
+  'cta-dynamic': CtaDynamic,
+  'cta-simple-dynamic': CtaSimpleDynamic,
+
   // Contact components
   'contact-form': ContactForm,
   'contact-split-dynamic': ContactSplitDynamic,
@@ -99,10 +118,15 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'footer-simple': FooterSimple,
   'footer-startup': FooterStartup,
 
+  // Gallery components
+  'gallery-dynamic': GalleryDynamic,
+  'gallery-elegant-dynamic': GalleryElegantDynamic,
+
   // Hero components
   'hero-dynamic': HeroDynamic,
   'hero-simple-dynamic': HeroSimpleDynamic,
   'hero-elegant-dynamic': HeroElegantDynamic,
+  'hero-banner-dynamic': HeroBannerDynamic,
   'hero-ab': HeroAb,
   'hero-ac': HeroAc,
   'hero-ad': HeroAd,

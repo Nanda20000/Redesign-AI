@@ -57,6 +57,14 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'secondaryCtaText', type: 'cta', maxWords: 4 }
     ],
   },
+  'hero-banner-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'breadcrumb', type: 'label', maxWords: 10 },
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 30 },
+    ],
+  },
   'hero-ab': {
     isDynamic: true,
     contentSlots: [
@@ -96,6 +104,57 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
   'hero-modern':  { isDynamic: false, contentSlots: [] },
   'hero-simple':  { isDynamic: false, contentSlots: [] },
   'hero-stylish': { isDynamic: false, contentSlots: [] },
+
+  // ── GALLERY ─────────────────────────────────────────────────────────
+  'gallery-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 30 },
+      { prop: 'items', type: 'list', maxWords: 100 },
+    ],
+  },
+  'gallery-elegant-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'label', type: 'label', maxWords: 3 },
+      { prop: 'heading', type: 'heading', maxWords: 8 },
+      { prop: 'subheading', type: 'paragraph', maxWords: 25 },
+      { prop: 'items', type: 'list', maxWords: 60 },
+    ],
+  },
+
+  // ── CTA ─────────────────────────────────────────────────────────────
+  'cta-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badge', type: 'label', maxWords: 5 },
+      { prop: 'headline', type: 'heading', maxWords: 12 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'primaryButtonText', type: 'cta', maxWords: 4 },
+      { prop: 'secondaryButtonText', type: 'cta', maxWords: 4 },
+    ],
+  },
+  'cta-simple-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 25 },
+      { prop: 'primaryCtaText', type: 'cta', maxWords: 3 },
+      { prop: 'secondaryCtaText', type: 'cta', maxWords: 3 },
+      { prop: 'stats', type: 'list', maxWords: 15 }
+    ],
+  },
+
+  // ── BLOG ────────────────────────────────────────────────────────────
+  'blog-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 30 },
+      { prop: 'items', type: 'list', maxWords: 150 },
+    ],
+  },
 
   // ── FEATURES ────────────────────────────────────────────────────────
   'features- Image': {

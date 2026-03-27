@@ -45,13 +45,16 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
  * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
  */
 const AI_SAFE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-elegant-dynamic', 'hero-simple-dynamic', 'hero-dynamic'],
+  hero: ['hero-elegant-dynamic', 'hero-simple-dynamic', 'hero-dynamic', 'hero-banner-dynamic'],
   features: ['features-simple-dynamic', 'features-dynamic'],
   about: ['about-simple-dynamic', 'about-dynamic'],
   testimonials: ['testimonials-dynamic'],
   contact: ['contact-split-dynamic'],
   footer: ['footer-simple'],  // exception: no footer-dynamic exists yet
   navbar: ['navbar-dynamic'],
+  gallery: ['gallery-elegant-dynamic', 'gallery-dynamic'],
+  cta: ['cta-simple-dynamic', 'cta-dynamic'],
+  blog: ['blog-dynamic'],
 };
 
 /**
@@ -152,7 +155,27 @@ const CONDITIONAL_SECTIONS: Record<string, {
       return contactHeavyTypes.includes(analysis.businessType) || analysis.contentRichness === 'high';
     },
     reason: 'Contact section for user communication'
-  }
+  },
+  gallery: {
+    shouldInclude: (analysis) => {
+      const visualTypes: BusinessType[] = ['portfolio', 'agency', 'restaurant', 'ecommerce', 'education'];
+      return visualTypes.includes(analysis.businessType);
+    },
+    reason: 'Gallery section for visual content showcase'
+  },
+  cta: {
+    shouldInclude: (analysis) => {
+      return analysis.contentRichness !== 'low';
+    },
+    reason: 'CTA section to drive conversions'
+  },
+  blog: {
+    shouldInclude: (analysis) => {
+      const blogTypes: BusinessType[] = ['education', 'saas', 'agency', 'corporate', 'startup'];
+      return blogTypes.includes(analysis.businessType) || analysis.contentRichness === 'high';
+    },
+    reason: 'Blog section for content and news'
+  },
 };
 
 /**

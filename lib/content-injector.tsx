@@ -83,6 +83,26 @@ export interface MappedContent {
       onClick: () => void;
     };
   };
+  gallery?: {
+    title: string;
+    subtitle?: string;
+    items?: any[];
+  };
+  cta?: {
+    badge?: string;
+    headline?: string;
+    description?: string;
+    primaryButtonText?: string;
+    primaryButtonHref?: string;
+    secondaryButtonText?: string;
+    secondaryButtonHref?: string;
+    backgroundImage?: string;
+  };
+  blog?: {
+    title: string;
+    subtitle?: string;
+    items?: any[];
+  };
   features?: {
     badge: string;
     heading: string;
@@ -258,6 +278,38 @@ export function mapContentToSections(
       primaryAction: { label: 'Get Started', onClick: () => {} },
       secondaryAction: { label: 'Learn More', onClick: () => {} },
       // image field removed - AI prop injector handles image selection
+    };
+  }
+
+  // Map gallery content
+  if (sections.includes('gallery')) {
+    mapped.gallery = {
+      title: headings[0] ?? 'Gallery',
+      subtitle: paragraphs[0]?.slice(0, 100) ?? '',
+      items: [],
+    };
+  }
+
+  // Map CTA content
+  if (sections.includes('cta')) {
+    mapped.cta = {
+      badge: '',
+      headline: headings[0] ?? 'Get Started',
+      description: paragraphs[0]?.slice(0, 150) ?? '',
+      primaryButtonText: 'Learn More',
+      primaryButtonHref: '#',
+      secondaryButtonText: 'Contact Us',
+      secondaryButtonHref: '#contact',
+      backgroundImage: '',
+    };
+  }
+
+  // Map blog content
+  if (sections.includes('blog')) {
+    mapped.blog = {
+      title: headings[0] ?? 'Latest Articles',
+      subtitle: paragraphs[0]?.slice(0, 100) ?? '',
+      items: [],
     };
   }
 
@@ -443,6 +495,16 @@ export function getComponentContentProps(
       }
       return heroDynamicProps;
 
+    case 'hero-banner-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        backgroundImage: sectionContent?.backgroundImage ?? '',
+        breadcrumb: sectionContent?.breadcrumb ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+      };
+    }
+
     case 'hero-simple-dynamic': {
       const sectionContent = mappedContent.hero as any;
       return {
@@ -503,6 +565,70 @@ export function getComponentContentProps(
 
     case 'hero-elegant':
       return {}; // Shader-based hero, no content props
+
+    // Gallery components
+    case 'gallery-dynamic': {
+      const sectionContent = mappedContent.gallery as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        items: sectionContent?.items ?? [],
+      };
+    }
+
+    case 'gallery-elegant-dynamic': {
+      const sectionContent = mappedContent.gallery as any;
+      return {
+        label: sectionContent?.label ?? '',
+        heading: sectionContent?.heading ?? '',
+        subheading: sectionContent?.subheading ?? '',
+        items: sectionContent?.items?.map((item: any) => ({
+          image: item.image,
+          alt: item.alt,
+          title: item.title,
+          description: item.description,
+        })) ?? [],
+      };
+    }
+
+    // CTA components
+    case 'cta-dynamic': {
+      const sectionContent = mappedContent.cta as any;
+      return {
+        badge: sectionContent?.badge ?? '',
+        headline: sectionContent?.headline ?? '',
+        description: sectionContent?.description ?? '',
+        primaryButtonText: sectionContent?.primaryButtonText ?? '',
+        primaryButtonHref: sectionContent?.primaryButtonHref ?? '',
+        secondaryButtonText: sectionContent?.secondaryButtonText ?? '',
+        secondaryButtonHref: sectionContent?.secondaryButtonHref ?? '',
+        backgroundImage: sectionContent?.backgroundImage ?? '',
+      };
+    }
+
+    case 'cta-simple-dynamic': {
+      const sectionContent = mappedContent.cta as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        primaryCtaText: sectionContent?.primaryCtaText ?? '',
+        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
+        stats: sectionContent?.items?.map((item: any) => ({
+          value: item?.title ?? '',
+          label: item?.description ?? '',
+        })) ?? [],
+      };
+    }
+
+    // Blog components
+    case 'blog-dynamic': {
+      const sectionContent = mappedContent.blog as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        items: sectionContent?.items ?? [],
+      };
+    }
 
     // Features components
     case 'features-dynamic':

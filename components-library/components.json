@@ -13,6 +13,42 @@
       "description": "Six-column about section with headline, hero image, avatar profile, and philosophy statement."
     },
     {
+      "name": "blog-dynamic",
+      "category": "blog",
+      "file": "blog/blog-dynamic.tsx",
+      "description": "Blog articles listing section with section header and responsive grid of article cards"
+    },
+    {
+      "name": "cta-dynamic",
+      "category": "cta",
+      "file": "cta/cta-dynamic.tsx",
+      "description": "Full-width call-to-action section with headline, description, optional badge, and up to two CTA buttons"
+    },
+    {
+      "name": "cta-simple-dynamic",
+      "category": "cta",
+      "file": "cta/cta-simple-dynamic.tsx",
+      "description": "A split CTA section with a grid-patterned card and a vertical list of key statistics."
+    },
+    {
+      "name": "gallery-dynamic",
+      "category": "gallery",
+      "file": "gallery/gallery-dynamic.tsx",
+      "description": "Responsive image gallery with section title, subtitle, and grid of images with captions and category labels"
+    },
+    {
+      "name": "gallery-elegant-dynamic",
+      "category": "gallery",
+      "file": "gallery/gallery-elegant-dynamic.tsx",
+      "description": "Elegant product showcase with a dynamic bento-style grid layout and hover effects."
+    },
+    {
+      "name": "hero-banner-dynamic",
+      "category": "hero",
+      "file": "hero/hero-banner-dynamic.tsx",
+      "description": "Full-width banner hero for inner pages with background image, breadcrumb, title, and description"
+    },
+    {
       "name": "contact-form",
       "category": "contact",
       "file": "contact/contact-form.tsx",
@@ -273,9 +309,12 @@
   ],
   "categories": [
     "about",
+    "blog",
     "contact",
+    "cta",
     "features",
     "footer",
+    "gallery",
     "hero",
     "navbar",
     "pricing",
