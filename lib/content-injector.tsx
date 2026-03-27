@@ -9,7 +9,7 @@
 import type { ProcessedSectionContent } from './ai-content-processor';
 import { getComponentImageConfig } from './component-image-map';
 import { isComponentDynamic } from './component-content-map';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Plus } from 'lucide-react';
 
 /**
  * Build testimonial objects from text content.
@@ -629,6 +629,23 @@ export function getComponentContentProps(
         items: sectionContent?.items ?? [],
       };
     }
+    case 'blog-elegant-dynamic': {
+      const sectionContent = mappedContent.blog as any;
+      return {
+        tagline: sectionContent?.tagline ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        posts: sectionContent?.items?.map((item: any) => ({
+          image: item?.image ?? '',
+          title: item?.title ?? '',
+          author: item?.author ?? '',
+          date: item?.date ?? '',
+          summary: item?.description ?? '',
+          readMoreText: item?.ctaText ?? '',
+        })) ?? [],
+        readMoreIcon: <ArrowRight className="w-4 h-4" />,
+      };
+    }
 
     // Features components
     case 'features-dynamic':
@@ -761,6 +778,21 @@ export function getComponentContentProps(
         console.log('[TESTIMONIALS COMPONENT] testimonials-dynamic: AI-selected', testimonialsWithImages.length, 'image(s)');
       }
       return testimonialsDynamicProps;
+
+    case 'testimonials-elegant-dynamic': {
+      const sectionContent = mappedContent.testimonials as any;
+      return {
+        title: sectionContent?.title ?? '',
+        testimonials: sectionContent?.items?.map((item: any) => ({
+          name: item.title ?? '',
+          text: item.description ?? '',
+          avatar: item.image ?? '',
+        })) ?? [],
+        plusIcon: <Plus size={16} />,
+        prevIcon: <ArrowLeft size={20} />,
+        nextIcon: <ArrowRight size={20} />,
+      };
+    }
 
     case 'testimonial-cards':
     case 'testimonial-section5':

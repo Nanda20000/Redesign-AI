@@ -62,6 +62,11 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageProp: 'items',
     imageMode: 'items',
   },
+  'blog-elegant-dynamic': {
+    imageCount: 3,
+    imageProp: 'posts',
+    imageMode: 'items',
+  },
 
   // ── FEATURES ──────────────────────────────────────────────────────────
   'features- Image':    { imageCount: 5, imageProp: 'images', imageMode: 'array' },
@@ -81,6 +86,7 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   'about-simple-dynamic': { imageCount: 2, imageProp: 'heroImage', imageMode: 'single' },
 
   // ── TESTIMONIALS ──────────────────────────────────────────────────────
+  'testimonials-elegant-dynamic': { imageCount: 5, imageProp: 'testimonials', imageMode: 'items' },
   'testimonial-cards':    { imageCount: 3, imageProp: 'testimonials', imageMode: 'items' },
   'testimonial-gradient': { imageCount: 3, imageProp: 'testimonials', imageMode: 'items' },
   'testimonial-modern':   { imageCount: 3, imageProp: 'testimonials', imageMode: 'items' },

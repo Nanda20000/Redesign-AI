@@ -10,6 +10,7 @@ import { AboutDynamic } from '../../components-library/about/about-dynamic';
 
 // Blog components
 import { BlogDynamic } from '../../components-library/blog/blog-dynamic';
+import { BlogElegantDynamic } from '../../components-library/blog/blog-elegant-dynamic';
 
 // CTA components
 import { CtaDynamic } from '../../components-library/cta/cta-dynamic';
@@ -76,6 +77,7 @@ import { PricingSimple } from '../../components-library/pricing/pricing-simple';
 
 // Testimonials components
 import { TestimonialsDynamic } from '../../components-library/testimonials/testimonials-dynamic';
+import { TestimonialsElegantDynamic } from '../../components-library/testimonials/testimonials-elegant-dynamic';
 import { TestimonialsCards as TestimonialCards } from '../../components-library/testimonials/testimonial-cards';
 import { TestimonialsGradient as TestimonialGradient } from '../../components-library/testimonials/testimonial-gradient';
 import { TestimonialsModern as TestimonialModern } from '../../components-library/testimonials/testimonial-modern';
@@ -90,6 +92,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Blog components
   'blog-dynamic': BlogDynamic,
+  'blog-elegant-dynamic': BlogElegantDynamic,
 
   // CTA components
   'cta-dynamic': CtaDynamic,
@@ -154,6 +157,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Testimonials components
   'testimonials-dynamic': TestimonialsDynamic,
+  'testimonials-elegant-dynamic': TestimonialsElegantDynamic,
   'testimonial-cards': TestimonialCards,
   'testimonial-gradient': TestimonialGradient,
   'testimonial-modern': TestimonialModern,

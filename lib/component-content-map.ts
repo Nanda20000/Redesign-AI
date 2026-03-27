@@ -155,6 +155,15 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'items', type: 'list', maxWords: 150 },
     ],
   },
+  'blog-elegant-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'tagline', type: 'label', maxWords: 5 },
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'posts', type: 'list', maxWords: 100 }
+    ],
+  },
 
   // ── FEATURES ────────────────────────────────────────────────────────
   'features- Image': {
@@ -258,6 +267,13 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'title',        type: 'heading',   maxWords: 6  },
       { prop: 'description',  type: 'paragraph', maxWords: 15 },
       { prop: 'testimonials', type: 'list',     maxWords: 60 },
+    ],
+  },
+  'testimonials-elegant-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'testimonials', type: 'list', maxWords: 100 },
     ],
   },
   'testimonial-cards': {

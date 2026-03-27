@@ -421,13 +421,13 @@ const AI_SAFE_COMPONENTS: Record<string, string[]> = {
   hero: ['hero-elegant-dynamic', 'hero-simple-dynamic', 'hero-dynamic', 'hero-banner-dynamic'],
   features: ['features-simple-dynamic', 'features-dynamic'],
   about: ['about-simple-dynamic', 'about-dynamic'],
-  testimonials: ['testimonials-dynamic'],
+  testimonials: ['testimonials-elegant-dynamic', 'testimonials-dynamic'],
   contact: ['contact-split-dynamic'],
   footer: ['footer-simple'],  // exception: no footer-dynamic exists yet
   navbar: ['navbar-dynamic'],
   gallery: ['gallery-elegant-dynamic', 'gallery-dynamic'],
   cta: ['cta-simple-dynamic', 'cta-dynamic'],
-  blog: ['blog-dynamic'],
+  blog: ['blog-elegant-dynamic', 'blog-dynamic'],
 };
 
 /**

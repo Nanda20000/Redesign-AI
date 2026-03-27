@@ -19,6 +19,12 @@
       "description": "Blog articles listing section with section header and responsive grid of article cards"
     },
     {
+      "name": "blog-elegant-dynamic",
+      "category": "blog",
+      "file": "blog/blog-elegant-dynamic.tsx",
+      "description": "A refined blog showcase with a header, description, and a 3-column grid of posts featuring images and summaries."
+    },
+    {
       "name": "cta-dynamic",
       "category": "cta",
       "file": "cta/cta-dynamic.tsx",
@@ -305,6 +311,12 @@
       "category": "testimonials",
       "file": "testimonials/testimonial-section5.tsx",
       "description": "Testimonials section component"
+    },
+    {
+      "name": "testimonials-elegant-dynamic",
+      "category": "testimonials",
+      "file": "testimonials/testimonials-elegant-dynamic.tsx",
+      "description": "Elegant minimalist testimonials carousel with dashed borders and corner accents."
     }
   ],
   "categories": [

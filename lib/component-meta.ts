@@ -21,6 +21,7 @@ export const COMPONENT_META = {
   "cta-simple-dynamic": { section: "cta",    supportsImages: false, supportsItems: true,  contentLevel: "medium", priority: 12 },
 
   "blog-dynamic":    { section: "blog",      supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 6 },
+  "blog-elegant-dynamic": { section: "blog",  supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
 
   "features- Image":    { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 9  },
   "features-coursel":   { section: "features", supportsImages: true,  supportsItems: true,  contentLevel: "medium", priority: 9  },
@@ -36,6 +37,7 @@ export const COMPONENT_META = {
   "about-two-column": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "low", priority: 9 },
 
   "testimonials-dynamic": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 11 },
+  "testimonials-elegant-dynamic": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 10 },
   "testimonial-cards":    { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 9 },
   "testimonial-gradient": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 8 },
   "testimonial-modern":   { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 8 },

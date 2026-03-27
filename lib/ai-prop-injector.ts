@@ -426,6 +426,39 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       },
     ],
   },
+  'blog-elegant-dynamic': {
+    componentName: 'blog-elegant-dynamic',
+    section: 'blog',
+    props: [
+      {
+        name: 'tagline',
+        type: 'string',
+        description: 'A small label above the main heading. Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the blog section. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A brief overview of the blog content. Max 40 words.',
+        maxWords: 40,
+        required: false,
+      },
+      {
+        name: 'posts',
+        type: 'array',
+        description: 'An array of blog post objects. Each object should have image, title, author, date, summary, and readMoreText.',
+        required: true,
+      },
+    ],
+  },
 
   // ── FEATURES ──────────────────────────────────────────────────────
   'features-dynamic': {
@@ -559,6 +592,43 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       { name: 'title',       type: 'string', description: 'Section title, max 6 words',       maxWords: 6,  required: true  },
       { name: 'description', type: 'string', description: 'Subtitle text, max 15 words',      maxWords: 15, required: false },
       { name: 'testimonials',type: 'Array<{text:string,name?:string,role?:string,image?:string}>', description: 'Real feedback content summarised from site. Each text max 25 words. If no real testimonials exist, generate realistic domain-specific feedback with contextual roles (e.g. "Accounting Student", "Course Graduate") - NOT generic names like John Doe. For each testimonial, optionally include a portrait image URL from Available Images if relevant.', required: true },
+    ],
+  },
+  'testimonials-elegant-dynamic': {
+    componentName: 'testimonials-elegant-dynamic',
+    section: 'testimonials',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the testimonials section. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'testimonials',
+        type: 'array',
+        description: 'A list of testimonial objects, each containing name, text, and avatar URL.',
+        required: true,
+      },
+      {
+        name: 'plusIcon',
+        type: 'icon',
+        description: 'A plus or cross icon to be placed at the corners of the testimonial box.',
+        required: false,
+      },
+      {
+        name: 'prevIcon',
+        type: 'icon',
+        description: 'An arrow icon for the previous button.',
+        required: false,
+      },
+      {
+        name: 'nextIcon',
+        type: 'icon',
+        description: 'An arrow icon for the next button.',
+        required: false,
+      },
     ],
   },
 
