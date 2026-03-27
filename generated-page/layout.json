@@ -13,16 +13,24 @@
       "component": "features-simple-dynamic"
     },
     {
+      "section": "about",
+      "component": "about-simple-dynamic"
+    },
+    {
       "section": "services",
       "component": "features-simple-dynamic"
     },
     {
       "section": "cta",
-      "component": "cta-dynamic"
+      "component": "cta-simple-dynamic"
+    },
+    {
+      "section": "testimonials",
+      "component": "testimonials-dynamic"
     },
     {
       "section": "gallery",
-      "component": "gallery-dynamic"
+      "component": "gallery-elegant-dynamic"
     },
     {
       "section": "footer",

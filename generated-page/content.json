@@ -418,14 +418,14 @@
           "description": "Diploma program covering core financial accounting and taxation principles."
         },
         {
-          "title": "Diploma in Master of Professional Accounting (MPA)",
-          "description": "Advanced diploma program for comprehensive professional accounting mastery."
+          "title": "Diploma in Financial & Foreign Accounting SAP S/4 HANA",
+          "description": "Diploma integrating financial and foreign accounting with SAP S/4 HANA enterprise software."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute. It is described as the No.1 Tally Institute in India, elevating the accounting profession with expert support and continuous practice, and is NSDC Authorized.",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in India. It is a No.1 Tally Institute and NSDC Authorized, aiming to elevate the accounting profession with expert support and continuous practice.",
       "companies": [],
       "achievements": [
         {
@@ -435,7 +435,7 @@
       ],
       "breakout": {
         "title": "Numbers Tell a Story of Success",
-        "description": "The key message highlighting the institute's proven track record and success metrics."
+        "description": "The key message highlighting the institute's data-driven approach to success and professional mastery."
       }
     },
     "footer": {

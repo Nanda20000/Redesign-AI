@@ -291,7 +291,7 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       {
         name: 'items',
         type: 'array',
-        description: 'An array of 5 gallery items. Each item must have an image and alt text. Title and description are optional for hover effects.',
+        description: 'An array of exactly 5 gallery items. Each item must have: "image" (URL selected from Available Images list — pick the most visually rich images), "alt" (short alt text), and optionally "title" (max 5 words) and "description" (max 15 words) for hover overlay. Select images that best represent the website content.',
         required: true,
       },
     ],
@@ -392,9 +392,9 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       {
         name: 'stats',
         type: 'array',
-        description: 'A list of 3 key statistics with a value (e.g. 99.9%) and a label (e.g. uptime).',
+        description: 'A list of exactly 3 key statistics. Each item must have a "value" field (e.g. "99.9%", "500+", "28+") and a "label" field (e.g. "uptime", "students", "years experience"). Extract real numbers from the website content if available.',
         required: true,
-      }
+      },
     ],
   },
 

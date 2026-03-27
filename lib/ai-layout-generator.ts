@@ -440,8 +440,8 @@ function isComponentAICompatible(componentName: string, section: string): boolea
 
 /**
  * Enforce AI-safe component whitelist on layout AFTER AI generation
- * Replaces any non-whitelisted components with the first valid AI-safe component
- * This runs AFTER AI layout generation to ensure only dynamic-safe components are used
+ * Always uses the first (highest priority) component for each section
+ * This runs AFTER AI layout generation to ensure preferred dynamic components are used
  * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
  */
 function enforceAICompatibleComponents(layout: LayoutResponse): LayoutResponse {
@@ -451,16 +451,9 @@ function enforceAICompatibleComponents(layout: LayoutResponse): LayoutResponse {
     const newItem = { ...item };
     const safeComponents = AI_SAFE_COMPONENTS[item.section] || [];
 
-    if (!isComponentAICompatible(item.component, item.section)) {
-      const oldComponent = item.component;
-      const isDynamic = oldComponent.endsWith('-dynamic');
-      // Replace with first valid AI-safe component for this section
-      if (safeComponents.length > 0) {
-        newItem.component = safeComponents[0];
-        console.log(`[Component Filter] ${item.section}: Replaced non-dynamic "${oldComponent}" with dynamic "${newItem.component}"`);
-      } else {
-        console.warn(`[Component Filter] No AI-safe components available for section: ${item.section}`);
-      }
+    if (safeComponents.length > 0) {
+      // Always use the first (highest priority) component for this section
+      newItem.component = safeComponents[0];
     }
 
     enhancedLayout.push(newItem);
