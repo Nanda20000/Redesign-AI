@@ -407,7 +407,7 @@
       "items": [
         {
           "title": "US CPA - Certified Public Accountant",
-          "description": "Certification for professional public accounting in the United States."
+          "description": "Certification for professional public accounting standards in the United States."
         },
         {
           "title": "US CMA - Certified Management Accountant",
@@ -415,17 +415,17 @@
         },
         {
           "title": "Diploma in Financial Accounting & Taxation",
-          "description": "Diploma program covering financial accounting and taxation principles."
+          "description": "Diploma program covering core financial accounting and taxation principles."
         },
         {
-          "title": "SAP S/4 HANA",
-          "description": "Certification in the SAP S/4 HANA enterprise resource planning system."
+          "title": "Diploma in Master of Professional Accounting (MPA)",
+          "description": "Advanced diploma program for comprehensive professional accounting mastery."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in India. It is a No.1 Tally Institute and NSDC Authorized, aiming to elevate the accounting profession with expert support and continuous practice.",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute. It is described as the No.1 Tally Institute in India, elevating the accounting profession with expert support and continuous practice, and is NSDC Authorized.",
       "companies": [],
       "achievements": [
         {
@@ -435,7 +435,7 @@
       ],
       "breakout": {
         "title": "Numbers Tell a Story of Success",
-        "description": "The key message highlighting the institute's success and results-driven approach."
+        "description": "The key message highlighting the institute's proven track record and success metrics."
       }
     },
     "footer": {

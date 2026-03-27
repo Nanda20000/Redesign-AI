@@ -433,7 +433,10 @@ export function getComponentRecommendations(analysis: WebsiteAnalysis): Componen
     footer: getFooterRecommendation(businessType, tone, contentRichness),
     about: getAboutRecommendation(businessType, tone),
     contact: getContactRecommendation(businessType, tone),
-    pricing: getPricingRecommendation(businessType, tone)
+    pricing: getPricingRecommendation(businessType, tone),
+    gallery: getGalleryRecommendation(businessType, tone),
+    cta: getCtaRecommendation(businessType, tone, contentRichness),
+    blog: getBlogRecommendation(businessType, tone, contentRichness),
   };
 
   return recommendations;
@@ -448,6 +451,9 @@ export interface ComponentRecommendations {
   about: { preferred: string[]; avoid: string[]; reason: string };
   contact: { preferred: string[]; avoid: string[]; reason: string };
   pricing: { preferred: string[]; avoid: string[]; reason: string };
+  gallery: { preferred: string[]; avoid: string[]; reason: string };
+  cta: { preferred: string[]; avoid: string[]; reason: string };
+  blog: { preferred: string[]; avoid: string[]; reason: string };
 }
 
 function getNavbarRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['navbar'] {
@@ -753,3 +759,106 @@ function getPricingRecommendation(businessType: BusinessType, tone: Tone): Compo
     reason: reasons.join('. ')
   };
 }
+
+function getGalleryRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['gallery'] {
+  const preferred: string[] = [];
+  const avoid: string[] = [];
+  const reasons: string[] = [];
+
+  // Gallery recommendations based on business type
+  if (businessType === 'portfolio' || businessType === 'agency') {
+    preferred.push('gallery-elegant-dynamic', 'gallery-dynamic');
+    reasons.push('Elegant bento grid layout ideal for showcasing creative work');
+  } else if (businessType === 'ecommerce') {
+    preferred.push('gallery-elegant-dynamic', 'gallery-dynamic');
+    reasons.push('Product showcase with hover effects for ecommerce');
+  } else if (businessType === 'restaurant') {
+    preferred.push('gallery-elegant-dynamic', 'gallery-dynamic');
+    reasons.push('Visual menu and ambiance showcase');
+  } else {
+    preferred.push('gallery-elegant-dynamic', 'gallery-dynamic');
+    reasons.push('Elegant gallery layout for visual content');
+  }
+
+  // Tone adjustments
+  if (tone === 'minimal' || tone === 'luxury') {
+    preferred.unshift('gallery-elegant-dynamic');
+    reasons.push('Clean, sophisticated layout matches tone');
+  }
+
+  return {
+    preferred: deduplicate(preferred),
+    avoid: deduplicate(avoid),
+    reason: reasons.join('. ')
+  };
+}
+
+function getCtaRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['cta'] {
+  const preferred: string[] = [];
+  const avoid: string[] = [];
+  const reasons: string[] = [];
+
+  // CTA recommendations based on business type
+  if (businessType === 'saas' || businessType === 'startup') {
+    preferred.push('cta-simple-dynamic', 'cta-dynamic');
+    reasons.push('Split layout with stats for conversion-focused CTA');
+  } else if (businessType === 'corporate' || businessType === 'education') {
+    preferred.push('cta-simple-dynamic', 'cta-dynamic');
+    reasons.push('Professional CTA with key metrics');
+  } else if (businessType === 'agency') {
+    preferred.push('cta-simple-dynamic', 'cta-dynamic');
+    reasons.push('CTA with social proof elements');
+  } else {
+    preferred.push('cta-simple-dynamic', 'cta-dynamic');
+    reasons.push('Effective CTA layout for lead generation');
+  }
+
+  // Tone adjustments
+  if (tone === 'minimal' || tone === 'corporate') {
+    preferred.unshift('cta-simple-dynamic');
+    reasons.push('Clean layout with statistics matches professional tone');
+  }
+
+  // Richness adjustments
+  if (richness === 'low') {
+    preferred.push('cta-dynamic');
+    reasons.push('Simpler CTA for content-light sites');
+  }
+
+  return {
+    preferred: deduplicate(preferred),
+    avoid: deduplicate(avoid),
+    reason: reasons.join('. ')
+  };
+}
+
+function getBlogRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['blog'] {
+  const preferred: string[] = [];
+  const avoid: string[] = [];
+  const reasons: string[] = [];
+
+  // Blog is only recommended for content-rich sites
+  if (businessType === 'education' || businessType === 'saas') {
+    preferred.push('blog-dynamic');
+    reasons.push('Article listing for content marketing and education');
+  } else if (businessType === 'agency' || businessType === 'corporate') {
+    preferred.push('blog-dynamic');
+    reasons.push('News and insights section for thought leadership');
+  } else {
+    preferred.push('blog-dynamic');
+    reasons.push('Blog section for content updates');
+  }
+
+  // Only show blog for content-rich sites
+  if (richness === 'low') {
+    avoid.push('blog-dynamic');
+    reasons.push('Blog may not be needed for content-light sites');
+  }
+
+  return {
+    preferred: deduplicate(preferred),
+    avoid: deduplicate(avoid),
+    reason: reasons.join('. ')
+  };
+}
+

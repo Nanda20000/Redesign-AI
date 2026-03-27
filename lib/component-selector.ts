@@ -608,6 +608,8 @@ Analyze the source website's detected sections and content:
 - If the source has a contact form → contact-split-dynamic
 - For navbar → navbar-dynamic (supports full nav items and CTA actions)
 - For footer → footer-simple (only option currently)
+- For gallery/portfolio showcase → gallery-elegant-dynamic (bento grid layout with hover effects)
+- For CTA with statistics → cta-simple-dynamic (split layout with key metrics)
 
 ## Business Type Guidance:
 - education/academy → prioritize about-dynamic (show stats like years, students), features-dynamic (courses)
