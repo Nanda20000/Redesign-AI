@@ -6,7 +6,7 @@
     },
     {
       "section": "hero",
-      "component": "hero-elegant-dynamic"
+      "component": "hero-banner-dynamic"
     },
     {
       "section": "features",

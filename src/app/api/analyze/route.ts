@@ -653,7 +653,22 @@ export async function POST(request: NextRequest) {
 
     console.log('[Analyze] AI content processing complete');
 
-    // Call classify-sections API to get AI-classified sections
+    // Infer page type from URL
+    const inferPageType = (url: string, slug: string): string => {
+      const urlLower = url.toLowerCase();
+      if (slug === 'index' || urlLower.match(/\/(?:index|home)?$/) || urlLower.match(/\/$/)) return 'home';
+      if (urlLower.includes('/about')) return 'about';
+      if (urlLower.includes('/contact')) return 'contact';
+      if (urlLower.includes('/service') || urlLower.includes('/product')) return 'services';
+      if (urlLower.includes('/blog') || urlLower.includes('/news')) return 'blog';
+      if (urlLower.includes('/gallery') || urlLower.includes('/portfolio') || urlLower.includes('/work')) return 'gallery';
+      if (urlLower.includes('/pricing') || urlLower.includes('/price')) return 'pricing';
+      return 'other';
+    };
+
+    const pageType = inferPageType(url, pageSlug);
+
+    // Call classify-sections API to get AI-classified sections with page type context
     const classifyResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/classify-sections`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -663,6 +678,8 @@ export async function POST(request: NextRequest) {
         hasNavbar: structure.hasNavbar,
         hasFooter: structure.hasFooter,
         navbarLinks: structure.navbarLinks,
+        pageType,
+        sourceUrl: url,
       }),
     });
 

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateLayoutWithAI, loadLayout, loadContent, saveContent, type PageStructure, type ExtractedContent } from '@/../lib/ai-layout-generator';
 import { generatePropsForLayout, type ExtractedWebsiteContent } from '@/../lib/ai-prop-injector';
+import { capturePreviewScreenshot } from '@/../lib/screenshot-capture';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -9,6 +10,38 @@ const AI_PROPS_DIR = path.join(process.cwd(), 'generated-pages');
 function getAiPropsPath(pageSlug: string): string {
   const safe = pageSlug.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-') || 'index';
   return path.join(AI_PROPS_DIR, safe, 'ai-props.json');
+}
+
+/**
+ * Get shared navbar and footer props from the index (homepage) ai-props
+ * This ensures all pages share the same navbar and footer
+ */
+function getSharedNavbarFooterProps(indexSlug: string = 'index'): { 'navbar-dynamic'?: any; 'footer-simple'?: any } {
+  const indexPath = getAiPropsPath(indexSlug);
+  
+  if (!fs.existsSync(indexPath)) {
+    return {};
+  }
+  
+  try {
+    const indexProps = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
+    const shared: { 'navbar-dynamic'?: any; 'footer-simple'?: any } = {};
+    
+    // Extract navbar-dynamic props
+    if (indexProps['navbar-dynamic']) {
+      shared['navbar-dynamic'] = indexProps['navbar-dynamic'];
+    }
+    
+    // Extract footer-simple props
+    if (indexProps['footer-simple']) {
+      shared['footer-simple'] = indexProps['footer-simple'];
+    }
+    
+    return shared;
+  } catch (err) {
+    console.error('[generate-layout] Failed to load shared navbar/footer props:', err);
+    return {};
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -50,6 +83,17 @@ export async function POST(request: NextRequest) {
       if (content) {
         try {
           console.log('[generate-layout] Starting AI prop injection...');
+          
+          // Collect list of all generated page slugs for navbar filtering
+          const generatedPagesDir = path.join(process.cwd(), 'generated-pages');
+          let availablePages: string[] = [];
+          if (fs.existsSync(generatedPagesDir)) {
+            availablePages = fs.readdirSync(generatedPagesDir)
+              .filter(name => fs.statSync(path.join(generatedPagesDir, name)).isDirectory())
+              .filter(slug => fs.existsSync(path.join(generatedPagesDir, slug, 'layout.json')));
+          }
+          console.log('[generate-layout] Available pages for navbar:', availablePages);
+          
           const aiContent: ExtractedWebsiteContent = {
             headings: content.headings || [],
             paragraphs: content.paragraphs || [],
@@ -57,7 +101,8 @@ export async function POST(request: NextRequest) {
             footerText: content.footerText,
             contactInfo: content.contactInfo,
             processed: content.processed as any,
-            images: content.images || [],  // ADD THIS LINE
+            images: content.images || [],
+            availablePages, // Pass available pages for navbar filtering
           };
           const aiProps = await generatePropsForLayout(layout.layout, aiContent);
 
@@ -68,6 +113,15 @@ export async function POST(request: NextRequest) {
             'utf-8'
           );
           console.log('[generate-layout] AI props saved to:', getAiPropsPath(pageSlug));
+          
+          // Capture screenshot of the preview page (non-blocking, don't await)
+          capturePreviewScreenshot({ pageSlug }).then(screenshotPath => {
+            if (screenshotPath) {
+              console.log('[generate-layout] Screenshot captured:', screenshotPath);
+            }
+          }).catch(err => {
+            console.error('[generate-layout] Screenshot capture failed:', err.message);
+          });
         } catch (err: any) {
           console.error('[generate-layout] AI prop injection failed:', err.message);
           // Continue without AI props — page will use fallback content
@@ -156,6 +210,18 @@ export async function GET(request: NextRequest) {
         aiProps = JSON.parse(fs.readFileSync(aiPropsPath, 'utf-8'));
       } catch {
         console.warn('[generate-layout] Could not load ai-props.json for page:', slug);
+      }
+    }
+
+    // For non-index pages, merge shared navbar/footer from index page
+    if (slug !== 'index' && aiProps) {
+      const sharedProps = getSharedNavbarFooterProps('index');
+      if (Object.keys(sharedProps).length > 0) {
+        aiProps = {
+          ...aiProps,
+          ...sharedProps,
+        };
+        console.log('[generate-layout] Merged shared navbar/footer props for page:', slug);
       }
     }
 

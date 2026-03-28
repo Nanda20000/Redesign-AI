@@ -469,6 +469,21 @@ const AI_SAFE_COMPONENTS: Record<string, string[]> = {
 };
 
 /**
+ * Get AI-safe components for a section, with page-specific overrides
+ * For non-home pages, force hero-banner-dynamic for hero section
+ */
+function getAIComponentsForSection(section: string, pageSlug: string): string[] {
+  const safeComponents = AI_SAFE_COMPONENTS[section] || [];
+  
+  // For non-home pages, force hero-banner-dynamic for hero section
+  if (section === 'hero' && pageSlug !== 'index') {
+    return ['hero-banner-dynamic'];
+  }
+  
+  return safeComponents;
+}
+
+/**
  * Check if a component is in the AI-safe whitelist
  */
 function isComponentAICompatible(componentName: string, section: string): boolean {
@@ -479,15 +494,16 @@ function isComponentAICompatible(componentName: string, section: string): boolea
 /**
  * Enforce AI-safe component whitelist on layout AFTER AI generation
  * Always uses the first (highest priority) component for each section
+ * For non-home pages, hero section always uses hero-banner-dynamic
  * This runs AFTER AI layout generation to ensure preferred dynamic components are used
  * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
  */
-function enforceAICompatibleComponents(layout: LayoutResponse): LayoutResponse {
+function enforceAICompatibleComponents(layout: LayoutResponse, pageSlug: string = 'index'): LayoutResponse {
   const enhancedLayout: LayoutItem[] = [];
 
   for (const item of layout.layout) {
     const newItem = { ...item };
-    const safeComponents = AI_SAFE_COMPONENTS[item.section] || [];
+    const safeComponents = getAIComponentsForSection(item.section, pageSlug);
 
     if (safeComponents.length > 0) {
       // Always use the first (highest priority) component for this section
@@ -613,7 +629,8 @@ export async function generateLayoutWithAI(
       pageStructure.sections,
       componentsByCategory,
       analysis,
-      recommendations
+      recommendations,
+      pageSlug
     );
 
     // Step 6: Call DeepSeek API
@@ -633,7 +650,7 @@ export async function generateLayoutWithAI(
     // ENFORCE AI-SAFE COMPONENTS: Replace any non-whitelisted components
     // This runs AFTER AI layout generation to ensure only dynamic-safe components are used
     console.log('[AI Layout Generator] Enforcing AI-safe component whitelist...');
-    layout = enforceAICompatibleComponents(layout);
+    layout = enforceAICompatibleComponents(layout, pageSlug);
 
     // Step 8: Validate and enhance selection with rules engine (image-aware)
     console.log('[AI Layout Generator] Validating component selection...');
@@ -646,7 +663,8 @@ export async function generateLayoutWithAI(
       manifest,
       analysis,
       sections: pageStructure.sections,
-      content: extractedContent
+      content: extractedContent,
+      pageSlug
     });
 
     // Log selection reasoning

@@ -28,6 +28,7 @@ export interface ExtractedWebsiteContent {
     address?: string;
   };
   images?: Array<{ src: string; alt?: string; title?: string; width?: number; height?: number }>;
+  availablePages?: string[]; // List of generated page slugs for navbar filtering
   processed?: {
     features?: {
       heading: string;
@@ -208,7 +209,7 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       {
         name: 'backgroundImage',
         type: 'string',
-        description: 'Full-width background image URL for the banner',
+        description: 'Select the most prominent banner/hero image from the source page\'s Available Images list — prefer wide landscape images over portraits or logos',
         required: false,
       },
       {
@@ -639,13 +640,16 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
     props: [
       { name: 'logo',
         type: 'object',
+        description: 'Brand logo with text and link',
         properties: {
           text: { type: 'string', description: 'The brand name text' },
           href: { type: 'string', description: 'The link for the logo' }
-        }
+        },
+        required: false
       },
       { name: 'navItems',
         type: 'array',
+        description: 'Navigation links - must only include pages that have been redesigned. The available redesigned pages are provided in the content. Map each slug to a human-readable label and href like /preview/[slug].',
         items: {
           type: 'object',
           properties: {
@@ -662,10 +666,12 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
               }
             }
           }
-        }
+        },
+        required: false
       },
       { name: 'actions',
         type: 'array',
+        description: 'Call-to-action buttons in the navbar',
         items: {
           type: 'object',
           properties: {
@@ -673,7 +679,8 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
             href: { type: 'string' },
             variant: { type: 'string', enum: ['primary', 'secondary', 'outline'] }
           }
-        }
+        },
+        required: false
       },
     ],
   },
@@ -684,17 +691,17 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
     section: 'contact',
     props: [
       { name: 'title', type: 'string', description: 'Main heading for the contact section', maxWords: 8, required: true },
-      { name: 'description', type: 'string', description: 'Subtext explaining the contact purpose', maxWords: 20 },
-      { name: 'formTitle', type: 'string', description: 'Heading for the contact form', maxWords: 6 },
-      { name: 'nameLabel', type: 'string', description: 'Label for the name input field', maxWords: 3 },
-      { name: 'namePlaceholder', type: 'string', description: 'Placeholder for the name input field', maxWords: 5 },
-      { name: 'emailLabel', type: 'string', description: 'Label for the email input field', maxWords: 3 },
-      { name: 'emailPlaceholder', type: 'string', description: 'Placeholder for the email input field', maxWords: 5 },
-      { name: 'phoneLabel', type: 'string', description: 'Label for the phone input field', maxWords: 3 },
-      { name: 'phonePlaceholder', type: 'string', description: 'Placeholder for the phone input field', maxWords: 5 },
-      { name: 'messageLabel', type: 'string', description: 'Label for the message textarea', maxWords: 3 },
-      { name: 'messagePlaceholder', type: 'string', description: 'Placeholder for the message textarea', maxWords: 8 },
-      { name: 'submitButtonText', type: 'string', description: 'Text for the form submission button', maxWords: 4 }
+      { name: 'description', type: 'string', description: 'Subtext explaining the contact purpose', maxWords: 20, required: false },
+      { name: 'formTitle', type: 'string', description: 'Heading for the contact form', maxWords: 6, required: false },
+      { name: 'nameLabel', type: 'string', description: 'Label for the name input field', maxWords: 3, required: false },
+      { name: 'namePlaceholder', type: 'string', description: 'Placeholder for the name input field', maxWords: 5, required: false },
+      { name: 'emailLabel', type: 'string', description: 'Label for the email input field', maxWords: 3, required: false },
+      { name: 'emailPlaceholder', type: 'string', description: 'Placeholder for the email input field', maxWords: 5, required: false },
+      { name: 'phoneLabel', type: 'string', description: 'Label for the phone input field', maxWords: 3, required: false },
+      { name: 'phonePlaceholder', type: 'string', description: 'Placeholder for the phone input field', maxWords: 5, required: false },
+      { name: 'messageLabel', type: 'string', description: 'Label for the message textarea', maxWords: 3, required: false },
+      { name: 'messagePlaceholder', type: 'string', description: 'Placeholder for the message textarea', maxWords: 8, required: false },
+      { name: 'submitButtonText', type: 'string', description: 'Text for the form submission button', maxWords: 4, required: false }
     ],
   },
 
@@ -739,6 +746,7 @@ Contact Info: ${JSON.stringify(content.contactInfo || {})}
 AI-Processed Features: ${JSON.stringify(content.processed?.features || {})}
 AI-Processed About: ${JSON.stringify(content.processed?.about || {})}
 AI-Processed Footer: ${JSON.stringify(content.processed?.footer || {})}
+${content.availablePages && content.availablePages.length > 0 ? `Available Redesigned Pages: ${content.availablePages.join(', ')}` : ''}
 
 ## Source Website Section Analysis (use this to write relevant content):
 - The source website appears to be a ${content.processed?.about?.title ?? 'business'} site
@@ -746,9 +754,16 @@ AI-Processed Footer: ${JSON.stringify(content.processed?.footer || {})}
 - Navigation structure: ${content.navigationLinks.join(', ')}
 - AI-detected business content: ${JSON.stringify(content.processed?.features?.items?.map(i => i.title) ?? [])}
 - About/company info: ${content.processed?.about?.description?.slice(0, 100) ?? 'N/A'}
+${content.availablePages && content.availablePages.length > 0 ? `- Only these pages have been redesigned and should appear in navigation: ${content.availablePages.map(p => p === 'index' ? 'Home (/preview/index)' : `${p.replace(/-/g, ' ')} (/preview/${p})`).join(', ')}` : ''}
 
 Use this context to write props that closely mirror the PURPOSE and CONTENT TYPE of the source website,
 but rewritten in fresh, professional language suitable for the redesigned page.
+${schema.componentName === 'navbar-dynamic' && content.availablePages ? `\n## NAVBAR-SPECIFIC RULES:
+- navItems must ONLY include pages from the "Available Redesigned Pages" list above
+- Do NOT include pages that are not in the list
+- Map each slug to a human-readable label: "index" → "Home", "about-us" → "About Us", etc.
+- Use href format: /preview/[slug] (e.g., /preview/index, /preview/about-us)
+` : ''}
 
 ## Available Images (select most relevant ones for this section):
 ${availableImages}

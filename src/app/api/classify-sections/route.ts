@@ -12,6 +12,8 @@ interface ClassifyRequest {
   hasNavbar?: boolean;
   hasFooter?: boolean;
   navbarLinks?: string[];
+  pageType?: string;
+  sourceUrl?: string;
 }
 
 interface ClassifyResponse {
@@ -32,10 +34,23 @@ const VALID_SECTION_TYPES = [
   'blog',
 ];
 
-function createPrompt(headings: string[], sections: string[], hasNavbar?: boolean, hasFooter?: boolean, navbarLinks?: string[]): string {
+function createPrompt(headings: string[], sections: string[], hasNavbar?: boolean, hasFooter?: boolean, navbarLinks?: string[], pageType?: string, sourceUrl?: string): string {
   const headingsText = headings.length > 0 ? headings.join('\n') : 'None';
   const sectionsText = sections.length > 0 ? sections.join('\n') : 'None';
   const navbarText = navbarLinks && navbarLinks.length > 0 ? navbarLinks.join(', ') : 'None detected';
+
+  // Determine expected sections based on page type
+  const pageTypeInstructions = pageType ? `
+IMPORTANT: This is a ${pageType.toUpperCase()} page${sourceUrl ? ` at ${sourceUrl}` : ''}.
+Only include sections that would appear on this specific page type:
+- A contact page should have: navbar, hero (with contact title), contact form, footer
+- An about page should have: navbar, hero, about, team/gallery, testimonials (if mentioned), footer
+- A services page should have: navbar, hero, features/services, testimonials (if mentioned), cta, footer
+- A homepage can have: navbar, hero, features, about, testimonials, gallery, cta, blog, footer
+- A blog page should have: navbar, hero (with blog title), blog posts, footer
+- A gallery/portfolio page should have: navbar, hero, gallery, footer
+
+DO NOT include irrelevant sections. A contact page should NOT have a features section unless services are explicitly mentioned. An about page should NOT have a testimonials section unless content explicitly mentions client feedback.` : '';
 
   return `You are an expert web designer.
 
@@ -43,11 +58,13 @@ Your job is to classify website content into common landing page sections.
 
 Possible section types:
 ${VALID_SECTION_TYPES.join('\n')}
+${pageTypeInstructions}
 
 IMPORTANT RULES:
 1. If navigation links are detected (hasNavbar=true), ALWAYS include "navbar" as the FIRST section
 2. If footer is detected (hasFooter=true), ALWAYS include "footer" as the LAST section
-3. Classify remaining sections based on their content
+3. Classify remaining sections based on their content and the page type
+4. Match sections to what users expect on this type of page
 
 Navigation links detected: ${navbarText}
 
@@ -73,13 +90,15 @@ ${sectionsText}
 
 Detection flags:
 - hasNavbar: ${hasNavbar || false}
-- hasFooter: ${hasFooter || false}`;
+- hasFooter: ${hasFooter || false}
+- pageType: ${pageType || 'unknown'}
+- sourceUrl: ${sourceUrl || 'unknown'}`;
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { headings, sections, hasNavbar, hasFooter, navbarLinks }: ClassifyRequest = body;
+    const { headings, sections, hasNavbar, hasFooter, navbarLinks, pageType, sourceUrl }: ClassifyRequest = body;
 
     if (!headings || !Array.isArray(headings)) {
       return NextResponse.json(
@@ -95,8 +114,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create prompt for AI with navbar/footer detection info
-    const prompt = createPrompt(headings, sections, hasNavbar, hasFooter, navbarLinks);
+    // Create prompt for AI with navbar/footer detection info and page type context
+    const prompt = createPrompt(headings, sections, hasNavbar, hasFooter, navbarLinks, pageType, sourceUrl);
 
     // Send to DeepSeek AI
     let aiResponse: string;

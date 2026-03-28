@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface PreviewPageMeta {
   slug: string;
@@ -102,71 +103,44 @@ export default function PreviewSitemap() {
             <Link
               key={page.slug}
               href={`/preview/${page.slug}`}
-              className="group flex flex-col rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-zinc-300"
+              className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition-all hover:shadow-md hover:border-zinc-300"
             >
-              {/* Page type badge + icon */}
-              <div className="mb-4 flex items-center justify-between">
-                <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${TYPE_COLORS[page.type] || TYPE_COLORS.other}`}>
-                  <span>{TYPE_ICONS[page.type] || '📄'}</span>
-                  {page.type.charAt(0).toUpperCase() + page.type.slice(1)}
-                </span>
-                <span className="text-xs text-zinc-400">
-                  {page.sections.length} section{page.sections.length !== 1 ? 's' : ''}
-                </span>
+              {/* Screenshot Image */}
+              <div className="relative aspect-video w-full overflow-hidden bg-zinc-100">
+                <img
+                  src={`/screenshots/preview-${page.slug}.png`}
+                  alt={`${page.title} preview`}
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  onError={(e) => {
+                    // Fallback placeholder if screenshot doesn't exist
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const parent = target.parentElement;
+                    if (parent && !parent.querySelector('.fallback-placeholder')) {
+                      parent.innerHTML = `
+                        <div class="fallback-placeholder flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 text-zinc-400">
+                          <span class="text-4xl">📄</span>
+                          <span class="mt-2 text-sm font-medium">No screenshot yet</span>
+                        </div>
+                      `;
+                    }
+                  }}
+                />
               </div>
 
-              {/* Title */}
-              <h2 className="mb-1 text-lg font-semibold text-zinc-900 group-hover:text-zinc-600 transition-colors">
-                {page.title}
-              </h2>
-
-              {/* Source URL */}
-              {page.url && (
-                <p className="mb-4 truncate text-xs text-zinc-400" title={page.url}>
-                  {page.url}
-                </p>
-              )}
-
-              {/* Sections list */}
-              <div className="mt-auto">
-                <p className="mb-2 text-xs font-medium text-zinc-500 uppercase tracking-wide">Sections</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {page.sections.map((section, i) => (
-                    <span
-                      key={i}
-                      className="rounded-md bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600"
-                    >
-                      {section}
-                    </span>
-                  ))}
+              {/* Bottom strip with title and link */}
+              <div className="flex items-center justify-between border-t border-zinc-100 bg-white px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_COLORS[page.type] || TYPE_COLORS.other}`}>
+                    {TYPE_ICONS[page.type] || '📄'}
+                  </span>
+                  <h2 className="text-sm font-semibold text-zinc-900 group-hover:text-zinc-600 transition-colors">
+                    {page.title}
+                  </h2>
                 </div>
-              </div>
-
-              {/* Components list */}
-              <div className="mt-4">
-                <p className="mb-2 text-xs font-medium text-zinc-500 uppercase tracking-wide">Components</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {page.components.map((comp, i) => (
-                    <span
-                      key={i}
-                      className="rounded-md bg-indigo-50 px-2 py-0.5 text-xs text-indigo-600"
-                    >
-                      {comp}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Generated at */}
-              {page.generatedAt && (
-                <p className="mt-4 text-xs text-zinc-400">
-                  Generated {new Date(page.generatedAt).toLocaleDateString()}
-                </p>
-              )}
-
-              {/* Arrow */}
-              <div className="mt-4 flex items-center gap-1 text-sm font-medium text-zinc-900 group-hover:gap-2 transition-all">
-                Preview page <span>→</span>
+                <span className="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors">
+                  Preview →
+                </span>
               </div>
             </Link>
           ))}

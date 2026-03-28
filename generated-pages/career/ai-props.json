@@ -13,6 +13,10 @@
       {
         "label": "About",
         "href": "/preview/about"
+      },
+      {
+        "label": "Career",
+        "href": "/preview/career"
       }
     ],
     "actions": [
@@ -23,24 +27,19 @@
       },
       {
         "label": "Register Now",
-        "href": "#",
-        "variant": "primary"
+        "href": "#"
       }
     ]
   },
-  "hero-elegant-dynamic": {
-    "label": "CAREER OPPORTUNITIES",
-    "title": "Build Your Future With Us",
-    "description": "Explore teaching positions and roles that match your qualifications and experience.",
-    "primaryCtaText": "View Openings",
-    "secondaryCtaText": "Learn More",
-    "mediaUrl": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
-    "mediaType": "image",
-    "posterUrl": null
+  "hero-banner-dynamic": {
+    "backgroundImage": null,
+    "breadcrumb": "Home > Career",
+    "title": "Career Opportunities",
+    "description": "Explore our current job openings, required qualifications, and experience needed to join our team."
   },
   "features-simple-dynamic": {
-    "tagline": "BUILD YOUR FUTURE",
-    "heading": "Explore Career Opportunities",
+    "tagline": "CAREER OPPORTUNITIES",
+    "heading": "Explore Your Professional Path",
     "description": "Discover available positions, understand the required qualifications, and learn about the experience needed to join our team.",
     "features": [
       {
@@ -49,17 +48,16 @@
       },
       {
         "title": "Qualifications",
-        "image": "https://ibsacademy.co/public/assets//web/images/logo/logo.png"
+        "image": "https://ibsacademy.co/public/assets/web/images/logo/footer.png"
       },
       {
-        "title": "Experience",
-        "image": "https://ibsacademy.co/public/assets//web/images/logo/logo.png"
+        "title": "Experience"
       }
     ]
   },
   "footer-simple": {
     "brandName": "IBS Academy",
     "description": "Connecting qualified candidates with rewarding career and educational opportunities.",
-    "copyright": "© 2023 IBS Academy. All rights reserved."
+    "copyright": "© 2024 IBS Academy. All rights reserved."
   }
 }

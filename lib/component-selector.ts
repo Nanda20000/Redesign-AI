@@ -58,6 +58,21 @@ const AI_SAFE_COMPONENTS: Record<string, string[]> = {
 };
 
 /**
+ * Get AI-safe components for a section, with page-specific overrides
+ * For non-home pages, force hero-banner-dynamic for hero section
+ */
+function getAIComponentsForSection(section: string, pageSlug: string): string[] {
+  const safeComponents = AI_SAFE_COMPONENTS[section] || [];
+  
+  // For non-home pages, force hero-banner-dynamic for hero section
+  if (section === 'hero' && pageSlug !== 'index') {
+    return ['hero-banner-dynamic'];
+  }
+  
+  return safeComponents;
+}
+
+/**
  * Check if a component supports images
  */
 export function componentSupportsImages(componentName: string, section: string): boolean {
@@ -421,14 +436,15 @@ function isComponentAICompatible(componentName: string, section: string): boolea
 /**
  * Enforce AI-safe component whitelist on layout
  * Always uses the first (highest priority) component for each section
+ * For non-home pages, hero section always uses hero-banner-dynamic
  * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
  */
-function enforceAICompatibleComponents(layout: LayoutItem[]): LayoutItem[] {
+function enforceAICompatibleComponents(layout: LayoutItem[], pageSlug: string = 'index'): LayoutItem[] {
   const enhancedLayout: LayoutItem[] = [];
 
   for (const item of layout) {
     const newItem = { ...item };
-    const safeComponents = AI_SAFE_COMPONENTS[item.section] || [];
+    const safeComponents = getAIComponentsForSection(item.section, pageSlug);
 
     if (safeComponents.length > 0) {
       // Always use the first (highest priority) component for this section
@@ -445,9 +461,9 @@ function enforceAICompatibleComponents(layout: LayoutItem[]): LayoutItem[] {
  * Main component selection function
  */
 export function selectComponents(
-  options: ComponentSelectionOptions
+  options: ComponentSelectionOptions & { pageSlug?: string }
 ): ComponentSelectionResult {
-  const { manifest, analysis, sections: detectedSections, content } = options;
+  const { manifest, analysis, sections: detectedSections, content, pageSlug = 'index' } = options;
 
   const imageCount = content?.images?.length ?? 0;
   console.log('[Component Selector] Received content:', {
@@ -541,7 +557,7 @@ export function selectComponents(
 
   // ENFORCE AI-SAFE COMPONENTS: Replace any non-whitelisted components
   console.log('[Component Selector] Enforcing AI-safe component whitelist...');
-  const filteredLayout = enforceAICompatibleComponents(layout);
+  const filteredLayout = enforceAICompatibleComponents(layout, pageSlug);
 
   return {
     layout: filteredLayout,
@@ -559,7 +575,8 @@ export function buildEnhancedPrompt(
   sections: string[],
   componentsByCategory: Record<string, string[]>,
   analysis: WebsiteAnalysis,
-  recommendations: ComponentRecommendations
+  recommendations: ComponentRecommendations,
+  pageSlug: string = 'index'
 ): string {
   const { businessType, tone, contentRichness } = analysis;
 
@@ -572,12 +589,19 @@ export function buildEnhancedPrompt(
     }
   }
 
+  // For non-home pages, hero must only be hero-banner-dynamic
+  const isNonHomePage = pageSlug !== 'index';
+  if (isNonHomePage && dynamicOnlyByCategory.hero) {
+    dynamicOnlyByCategory.hero = ['hero-banner-dynamic'];
+  }
+
   return `You are an expert UI/UX designer. Your job is to select the best dynamic components to rebuild a website.
 
 ## STRICT RULE — DYNAMIC COMPONENTS ONLY
 You MUST only select components whose name ends with "-dynamic".
 Never select components like hero-modern, hero-minimal, navbar-gradient, footer-elegant etc.
 Only valid selections end with: -dynamic (e.g. hero-dynamic, features-dynamic, about-dynamic)
+${isNonHomePage ? '\n## CRITICAL: NON-HOME PAGE RULE\nThis is NOT the homepage. The hero section MUST use "hero-banner-dynamic" only.\nDo NOT use hero-elegant-dynamic, hero-simple-dynamic, or hero-dynamic for this page.\n' : ''}
 
 ## Source Website Analysis:
 - Business Type: ${businessType} (confidence: ${Math.round(analysis.confidence * 100)}%)
@@ -603,6 +627,7 @@ Analyze the source website's detected sections and content:
 - For footer → footer-simple (only option currently)
 - For gallery/portfolio showcase → gallery-elegant-dynamic (bento grid layout with hover effects)
 - For CTA with statistics → cta-simple-dynamic (split layout with key metrics)
+${isNonHomePage ? '- For ALL non-home pages → hero-banner-dynamic (page banner with breadcrumb and title)' : ''}
 
 ## Business Type Guidance:
 - education/academy → prioritize about-dynamic (show stats like years, students), features-dynamic (courses)
@@ -614,7 +639,7 @@ Analyze the source website's detected sections and content:
 {
   "layout": [
     {"section": "navbar", "component": "navbar-dynamic"},
-    {"section": "hero", "component": "hero-dynamic"},
+    {"section": "hero", "component": "${isNonHomePage ? 'hero-banner-dynamic' : 'hero-dynamic'}"},
     {"section": "features", "component": "features-dynamic"},
     {"section": "about", "component": "about-dynamic"},
     {"section": "testimonials", "component": "testimonials-dynamic"},
@@ -624,5 +649,6 @@ Analyze the source website's detected sections and content:
 
 IMPORTANT: Only include sections that were detected. Always include navbar, hero, and footer.
 Every component name you return MUST end with "-dynamic" (exception: footer-simple).
+${isNonHomePage ? 'CRITICAL: This is NOT the homepage. Use hero-banner-dynamic for the hero section.' : ''}
 `;
 }

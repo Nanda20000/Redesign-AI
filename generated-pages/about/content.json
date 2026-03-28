@@ -50,7 +50,7 @@
   "processed": {
     "features": {
       "heading": "Services",
-      "description": "Key professional services offered by the institute.",
+      "description": "Key professional services offered by the organization.",
       "items": [
         {
           "title": "Professional Accounting Institute",
@@ -64,7 +64,7 @@
     },
     "about": {
       "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in Kerala. Operating as INTERNATIONAL BUSINESS SOLUTIONS, it provides Tally and ERP solutions to a wide client base.",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in Kerala. As INTERNATIONAL BUSINESS SOLUTIONS, they provide Tally and ERP solutions.",
       "companies": [
         "INTERNATIONAL BUSINESS SOLUTIONS"
       ],
@@ -80,12 +80,12 @@
       ],
       "breakout": {
         "title": "Numbers Tell a Story of Success",
-        "description": "Highlights the institute's achievement of aligning with over 5000 clients through its solutions."
+        "description": "Highlights the institute's certification and large client base as markers of success."
       }
     },
     "footer": {
-      "brandName": "IBS Academy / INTERNATIONAL BUSINESS SOLUTIONS",
-      "description": "A premier professional accounting institute and provider of Tally & ERP solutions.",
+      "brandName": "INTERNATIONAL BUSINESS SOLUTIONS",
+      "description": "Provider of Tally software and ERP solutions, aligned with over 5000 clients.",
       "contactInfo": {
         "email": "N/A",
         "phone": "N/A",
