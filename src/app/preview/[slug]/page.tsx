@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { getComponentByName } from "@/lib/component-registry";
 import type { LayoutItem } from "@/../lib/ai-layout-generator";
 import {
@@ -83,11 +82,11 @@ function mergeProps(
   componentName: string
 ): Record<string, any> {
   const merged = { ...base };
-  
+
   for (const [key, value] of Object.entries(aiGenerated)) {
     // Skip null/undefined AI values
     if (value === null || value === undefined) continue;
-    
+
     // Handle nested content object (hero components use content.title etc.)
     if (key.includes('.')) {
       const [parent, child] = key.split('.');
@@ -96,7 +95,7 @@ function mergeProps(
       }
       continue;
     }
-    
+
     // Only override with AI value if it's a non-empty string or array
     if (typeof value === 'string' && value.trim().length > 0) {
       merged[key] = value;
@@ -107,18 +106,20 @@ function mergeProps(
       merged[key] = { ...(merged[key] || {}), ...value };
     }
   }
-  
-  console.log(`[mergeProps] ${componentName} — AI overrode:`, 
+
+  console.log(`[mergeProps] ${componentName} — AI overrode:`,
     Object.keys(aiGenerated).filter(k => aiGenerated[k] !== null)
   );
-  
+
   return merged;
 }
 
-export default function GeneratedPage() {
-  const searchParams = useSearchParams();
-  const pageSlug = searchParams.get('pageSlug') || 'index';
-  
+interface PreviewPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default function PreviewPage({ params }: PreviewPageProps) {
+  const [slug, setSlug] = useState<string>('index');
   const [layout, setLayout] = useState<LayoutData | null>(null);
   const [mappedContent, setMappedContent] = useState<MappedContent | null>(null);
   const [aiProps, setAiProps] = useState<Record<string, Record<string, any>> | null>(null);
@@ -126,10 +127,18 @@ export default function GeneratedPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    params.then(({ slug }) => {
+      setSlug(slug || 'index');
+    });
+  }, [params]);
+
+  useEffect(() => {
+    if (!slug) return;
+
     async function loadLayout() {
       try {
-        console.log("[GeneratedPage] Loading layout and content for page:", pageSlug);
-        const response = await fetch(`/api/generate-layout?pageSlug=${pageSlug}`, {
+        console.log("[PreviewPage] Loading layout and content for page:", slug);
+        const response = await fetch(`/api/generate-layout?slug=${slug}`, {
           cache: "no-store",
         });
 
@@ -139,15 +148,15 @@ export default function GeneratedPage() {
         }
 
         const data = await response.json();
-        console.log("[GeneratedPage] Layout loaded:", data);
-        console.log("[GeneratedPage] data.content exists:", !!data.content);
-        console.log("[GeneratedPage] Raw content images:", data.content?.images?.length || 0);
-        console.log("[GeneratedPage] Sections:", data.layout?.map((l: LayoutItem) => l.section));
+        console.log("[PreviewPage] Layout loaded:", data);
+        console.log("[PreviewPage] data.content exists:", !!data.content);
+        console.log("[PreviewPage] Raw content images:", data.content?.images?.length || 0);
+        console.log("[PreviewPage] Sections:", data.layout?.map((l: LayoutItem) => l.section));
 
         const seen = new Set<string>();
         const deduplicatedLayout = (data.layout || []).filter((item: LayoutItem) => {
           if (seen.has(item.section)) {
-            console.warn(`[GeneratedPage] Duplicate section removed: ${item.section}`);
+            console.warn(`[PreviewPage] Duplicate section removed: ${item.section}`);
             return false;
           }
           seen.add(item.section);
@@ -158,7 +167,7 @@ export default function GeneratedPage() {
 
         // Set AI props if available
         if (data.aiProps) {
-          console.log('[GeneratedPage] AI props loaded for components:', Object.keys(data.aiProps));
+          console.log('[PreviewPage] AI props loaded for components:', Object.keys(data.aiProps));
           setAiProps(data.aiProps);
         }
 
@@ -168,56 +177,56 @@ export default function GeneratedPage() {
           const sectionTypes = layoutData.layout.map((item: LayoutItem) => item.section);
 
           if (data.content) {
-            console.log("[GeneratedPage] Using extracted content from website");
-            console.log("[GeneratedPage] Content has images:", data.content.images?.length || 0);
+            console.log("[PreviewPage] Using extracted content from website");
+            console.log("[PreviewPage] Content has images:", data.content.images?.length || 0);
             const mapped = mapContentToSections(content, sectionTypes, layoutData.layout);
-            console.log("[GeneratedPage] Mapped hero image:", mapped.hero?.image);
-            console.log("[GeneratedPage] Mapped features images:", mapped.features?.images?.length || 0);
+            console.log("[PreviewPage] Mapped hero image:", mapped.hero?.image);
+            console.log("[PreviewPage] Mapped features images:", mapped.features?.images?.length || 0);
             setMappedContent(mapped);
           } else {
             // Content not ready yet - retry after delay
-            console.warn("[GeneratedPage] Content not ready yet, retrying...");
+            console.warn("[PreviewPage] Content not ready yet, retrying...");
 
             setTimeout(async () => {
               try {
-                const retryRes = await fetch(`/api/generate-layout?pageSlug=${pageSlug}`, { cache: "no-store" });
+                const retryRes = await fetch(`/api/generate-layout?slug=${slug}`, { cache: "no-store" });
                 const retryData = await retryRes.json();
 
                 if (retryData.content) {
-                  console.log("[GeneratedPage] Retry successful, content loaded");
-                  console.log("[GeneratedPage] Retry content images:", retryData.content?.images?.length || 0);
+                  console.log("[PreviewPage] Retry successful, content loaded");
+                  console.log("[PreviewPage] Retry content images:", retryData.content?.images?.length || 0);
                   const mapped = mapContentToSections(retryData.content, sectionTypes);
-                  console.log("[GeneratedPage] Mapped hero image (retry):", mapped.hero?.image);
+                  console.log("[PreviewPage] Mapped hero image (retry):", mapped.hero?.image);
                   setMappedContent(mapped);
                 } else {
-                  console.warn("[GeneratedPage] Retry failed, using defaults");
+                  console.warn("[PreviewPage] Retry failed, using defaults");
                   setMappedContent(getDefaultMappedContent());
                 }
               } catch (retryErr: any) {
-                console.error("[GeneratedPage] Retry error:", retryErr.message);
+                console.error("[PreviewPage] Retry error:", retryErr.message);
                 setMappedContent(getDefaultMappedContent());
               }
             }, 1000); // retry after 1 second
 
             // Use defaults temporarily
-            console.log("[GeneratedPage] Using default content temporarily");
+            console.log("[PreviewPage] Using default content temporarily");
             setMappedContent(getDefaultMappedContent());
           }
         } else {
-          console.log("[GeneratedPage] No layout found, using defaults");
+          console.log("[PreviewPage] No layout found, using defaults");
           setMappedContent(getDefaultMappedContent());
         }
 
         // Log AI-selected components
         if (data.layout) {
-          console.log("[GeneratedPage] === AI-Selected Components ===");
+          console.log("[PreviewPage] === AI-Selected Components ===");
           data.layout.forEach((item: LayoutItem) => {
             console.log(`  Section: ${item.section} → Component: ${item.component}`);
           });
-          console.log("[GeneratedPage] =========================================");
+          console.log("[PreviewPage] =========================================");
         }
       } catch (err: any) {
-        console.error("[GeneratedPage] Error loading layout:", err);
+        console.error("[PreviewPage] Error loading layout:", err);
         setError(err.message || "Failed to load generated page");
       } finally {
         setLoading(false);
@@ -225,7 +234,7 @@ export default function GeneratedPage() {
     }
 
     loadLayout();
-  }, []);
+  }, [slug]);
 
   if (loading) {
     return (
@@ -249,7 +258,7 @@ export default function GeneratedPage() {
             {error || "Please analyze a website first to generate a layout."}
           </p>
           <a
-            href="/"
+            href="/preview"
             className="mt-4 inline-block rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
             Go to Home
@@ -266,7 +275,7 @@ export default function GeneratedPage() {
   const filteredLayout = layout.layout.filter((item) => {
     const isDynamic = DYNAMIC_COMPONENTS.includes(item.component) || isComponentDynamic(item.component);
     if (!isDynamic) {
-      console.warn(`[GeneratedPage] Skipping non-dynamic component: ${item.component} for section ${item.section}`);
+      console.warn(`[PreviewPage] Skipping non-dynamic component: ${item.component} for section ${item.section}`);
     }
     return isDynamic;
   });
@@ -282,7 +291,7 @@ export default function GeneratedPage() {
             The generated layout contains only static components. Please try analyzing a different website.
           </p>
           <a
-            href="/"
+            href="/preview"
             className="mt-4 inline-block rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
             Go to Home
@@ -302,7 +311,7 @@ export default function GeneratedPage() {
 
         // If component not found, try fallback
         if (!Component) {
-          console.warn(`[GeneratedPage] Component "${item.component}" not found, using fallback`);
+          console.warn(`[PreviewPage] Component "${item.component}" not found, using fallback`);
           const fallbackComponent = getFallbackComponent(item.section);
           Component = getComponentByName(fallbackComponent);
           usedFallback = true;
@@ -313,13 +322,13 @@ export default function GeneratedPage() {
             const defaultFallback = getFallbackComponent("default");
             Component = getComponentByName(defaultFallback);
             componentName = defaultFallback;
-            console.warn(`[GeneratedPage] Using default fallback: ${defaultFallback}`);
+            console.warn(`[PreviewPage] Using default fallback: ${defaultFallback}`);
           }
         }
 
         // If still no component, render error placeholder
         if (!Component) {
-          console.error(`[GeneratedPage] All fallbacks failed for "${item.component}"`);
+          console.error(`[PreviewPage] All fallbacks failed for "${item.component}"`);
           return (
             <div
               key={`${item.section}-${index}`}
@@ -334,7 +343,7 @@ export default function GeneratedPage() {
         }
 
         console.log(
-          `[GeneratedPage] Rendering ${componentName}${usedFallback ? " (fallback)" : ""} for ${item.section}`
+          `[PreviewPage] Rendering ${componentName}${usedFallback ? " (fallback)" : ""} for ${item.section}`
         );
 
         // Merge: AI props take priority over rule-based props
@@ -344,7 +353,7 @@ export default function GeneratedPage() {
           contentToUse
         );
         const componentAiProps = aiProps?.[componentName] || {};
-        
+
         // Deep merge: AI props override base props
         const contentProps = mergeProps(baseProps, componentAiProps, componentName);
 

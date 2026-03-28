@@ -553,7 +553,7 @@ async function fetchWithFallback(url: string) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { url } = body;
+    const { url, pageSlug = 'index' } = body;
 
     if (!url) {
       return NextResponse.json(
@@ -563,6 +563,7 @@ export async function POST(request: NextRequest) {
     }
 
     console.log(`[Analyze] Received request to analyze: ${url}`);
+    console.log(`[Analyze] Page slug: ${pageSlug}`);
 
     // Validate URL format
     try {
@@ -663,6 +664,7 @@ export async function POST(request: NextRequest) {
           sections: sectionTypes,
           content: enrichedContent,
           regenerate: true,
+          pageSlug: pageSlug,
         }),
       });
 

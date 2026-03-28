@@ -14,9 +14,23 @@ const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 // Path to components library
 const COMPONENTS_LIBRARY_PATH = path.join(process.cwd(), 'components-library');
 const COMPONENTS_JSON_PATH = path.join(COMPONENTS_LIBRARY_PATH, 'components.json');
-const GENERATED_PAGE_DIR = path.join(process.cwd(), 'generated-page');
-const LAYOUT_JSON_PATH = path.join(GENERATED_PAGE_DIR, 'layout.json');
-const CONTENT_JSON_PATH = path.join(GENERATED_PAGE_DIR, 'content.json');
+const GENERATED_PAGES_DIR = path.join(process.cwd(), 'generated-pages');
+const LEGACY_GENERATED_PAGE_DIR = path.join(process.cwd(), 'generated-page');
+
+/**
+ * Get the directory path for a specific page slug
+ * Sanitizes slug to prevent path traversal and ensure valid folder names
+ */
+function getPageDir(pageSlug: string): string {
+  // Sanitize slug: lowercase, replace spaces and slashes with hyphens, remove special chars
+  const safe = pageSlug
+    .toLowerCase()
+    .replace(/[\/\\]/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '') || 'index';
+  return path.join(GENERATED_PAGES_DIR, safe);
+}
 
 export interface ComponentInfo {
   name: string;
@@ -254,18 +268,20 @@ function parseLayoutResponse(response: string): LayoutResponse {
 }
 
 /**
- * Save layout to generated-page/layout.json
+ * Save layout to generated-pages/[pageSlug]/layout.json
  */
-function saveLayout(layout: LayoutResponse): void {
+export function saveLayout(layout: LayoutResponse, pageSlug: string = 'index'): void {
   try {
+    const pageDir = getPageDir(pageSlug);
     // Ensure directory exists
-    if (!fs.existsSync(GENERATED_PAGE_DIR)) {
-      fs.mkdirSync(GENERATED_PAGE_DIR, { recursive: true });
-      console.log('[AI Layout Generator] Created generated-page directory');
+    if (!fs.existsSync(pageDir)) {
+      fs.mkdirSync(pageDir, { recursive: true });
+      console.log('[AI Layout Generator] Created page directory:', pageDir);
     }
 
-    fs.writeFileSync(LAYOUT_JSON_PATH, JSON.stringify(layout, null, 2), 'utf-8');
-    console.log('[AI Layout Generator] Layout saved to:', LAYOUT_JSON_PATH);
+    const layoutPath = path.join(pageDir, 'layout.json');
+    fs.writeFileSync(layoutPath, JSON.stringify(layout, null, 2), 'utf-8');
+    console.log(`[AI Layout Generator] Layout saved for page: ${pageSlug}`);
   } catch (error) {
     console.error('[AI Layout Generator] Failed to save layout:', error);
     throw error;
@@ -273,19 +289,21 @@ function saveLayout(layout: LayoutResponse): void {
 }
 
 /**
- * Save extracted content to generated-page/content.json
+ * Save extracted content to generated-pages/[pageSlug]/content.json
  */
-export function saveContent(content: ExtractedContent): void {
+export function saveContent(content: ExtractedContent, pageSlug: string = 'index'): void {
   try {
+    const pageDir = getPageDir(pageSlug);
     // Ensure directory exists
-    if (!fs.existsSync(GENERATED_PAGE_DIR)) {
-      fs.mkdirSync(GENERATED_PAGE_DIR, { recursive: true });
-      console.log('[AI Layout Generator] Created generated-page directory');
+    if (!fs.existsSync(pageDir)) {
+      fs.mkdirSync(pageDir, { recursive: true });
+      console.log('[AI Layout Generator] Created page directory:', pageDir);
     }
 
+    const contentPath = path.join(pageDir, 'content.json');
     console.log('[AI Layout Generator] Saving content with images:', content.images?.length || 0);
-    fs.writeFileSync(CONTENT_JSON_PATH, JSON.stringify(content, null, 2), 'utf-8');
-    console.log('[AI Layout Generator] Content saved to:', CONTENT_JSON_PATH);
+    fs.writeFileSync(contentPath, JSON.stringify(content, null, 2), 'utf-8');
+    console.log(`[AI Layout Generator] Content saved for page: ${pageSlug}`);
   } catch (error) {
     console.error('[AI Layout Generator] Failed to save content:', error);
     throw error;
@@ -293,20 +311,30 @@ export function saveContent(content: ExtractedContent): void {
 }
 
 /**
- * Load layout from generated-page/layout.json
+ * Load layout from generated-pages/[pageSlug]/layout.json
+ * Falls back to legacy generated-page/layout.json for backward compatibility
  */
-export function loadLayout(): Promise<LayoutResponse> {
+export function loadLayout(pageSlug: string = 'index'): Promise<LayoutResponse> {
   return new Promise((resolve, reject) => {
     try {
-      if (!fs.existsSync(LAYOUT_JSON_PATH)) {
-        reject(new Error('layout.json does not exist. Run generateLayoutWithAI first.'));
+      const layoutPath = path.join(getPageDir(pageSlug), 'layout.json');
+      
+      if (!fs.existsSync(layoutPath)) {
+        // Fallback: try old single generated-page/ directory for backward compatibility
+        const legacyPath = path.join(LEGACY_GENERATED_PAGE_DIR, 'layout.json');
+        if (fs.existsSync(legacyPath) && pageSlug === 'index') {
+          const fileContent = fs.readFileSync(legacyPath, 'utf-8');
+          console.log('[AI Layout Generator] Loaded legacy layout for index page');
+          resolve(JSON.parse(fileContent));
+          return;
+        }
+        reject(new Error(`No layout found for page: ${pageSlug}`));
         return;
       }
 
-      const fileContent = fs.readFileSync(LAYOUT_JSON_PATH, 'utf-8');
-      const layout: LayoutResponse = JSON.parse(fileContent);
-      console.log('[AI Layout Generator] Loaded existing layout:', layout);
-      resolve(layout);
+      const fileContent = fs.readFileSync(layoutPath, 'utf-8');
+      console.log('[AI Layout Generator] Loaded layout for page:', pageSlug);
+      resolve(JSON.parse(fileContent));
     } catch (error) {
       console.error('[AI Layout Generator] Failed to load layout:', error);
       reject(error);
@@ -315,21 +343,31 @@ export function loadLayout(): Promise<LayoutResponse> {
 }
 
 /**
- * Load content from generated-page/content.json
+ * Load content from generated-pages/[pageSlug]/content.json
+ * Falls back to legacy generated-page/content.json for backward compatibility
  */
-export function loadContent(): Promise<ExtractedContent | null> {
-  return new Promise((resolve, reject) => {
+export function loadContent(pageSlug: string = 'index'): Promise<ExtractedContent | null> {
+  return new Promise((resolve) => {
     try {
-      if (!fs.existsSync(CONTENT_JSON_PATH)) {
-        console.log('[AI Layout Generator] No content.json found, content will use defaults');
+      const contentPath = path.join(getPageDir(pageSlug), 'content.json');
+      
+      if (!fs.existsSync(contentPath)) {
+        // Fallback: try old path for index page
+        const legacyPath = path.join(LEGACY_GENERATED_PAGE_DIR, 'content.json');
+        if (fs.existsSync(legacyPath) && pageSlug === 'index') {
+          const fileContent = fs.readFileSync(legacyPath, 'utf-8');
+          console.log('[AI Layout Generator] Loaded legacy content for index page');
+          resolve(JSON.parse(fileContent));
+          return;
+        }
+        console.log('[AI Layout Generator] No content.json found for page:', pageSlug);
         resolve(null);
         return;
       }
 
-      const fileContent = fs.readFileSync(CONTENT_JSON_PATH, 'utf-8');
-      const content: ExtractedContent = JSON.parse(fileContent);
-      console.log('[AI Layout Generator] Loaded existing content, images:', content.images?.length || 0);
-      resolve(content);
+      const fileContent = fs.readFileSync(contentPath, 'utf-8');
+      console.log('[AI Layout Generator] Loaded content for page:', pageSlug);
+      resolve(JSON.parse(fileContent));
     } catch (error) {
       console.error('[AI Layout Generator] Failed to load content:', error);
       resolve(null);
@@ -514,11 +552,13 @@ function applyIntelligentSelection(layout: LayoutItem[], content?: ExtractedCont
  *
  * @param pageStructure - The detected page structure with sections
  * @param extractedContent - Optional extracted content for deeper analysis
+ * @param pageSlug - The page slug for saving (default: 'index')
  * @returns The AI-selected layout mapping sections to components
  */
 export async function generateLayoutWithAI(
   pageStructure: PageStructure,
-  extractedContent?: ExtractedContent
+  extractedContent?: ExtractedContent,
+  pageSlug: string = 'index'
 ): Promise<LayoutResponse> {
   console.log('[AI Layout Generator] Starting intelligent layout generation...');
   console.log('[AI Layout Generator] Page structure sections:', pageStructure.sections);
@@ -618,7 +658,7 @@ export async function generateLayoutWithAI(
 
     // Step 9: Save the layout
     console.log('[AI Layout Generator] Saving layout...');
-    saveLayout(layout);
+    saveLayout(layout, pageSlug);
 
     // Step 10: Log selected components (after enforcement)
     console.log('[AI Layout Generator] === AI Component Selection Complete (After Image Enforcement) ===');
@@ -643,4 +683,18 @@ export async function generateLayoutWithAI(
     console.error('[AI Layout Generator] Error generating layout:', error);
     throw error;
   }
+}
+
+/**
+ * List all generated pages with their available data
+ */
+export function listGeneratedPages(): Array<{ slug: string; hasLayout: boolean; hasContent: boolean }> {
+  if (!fs.existsSync(GENERATED_PAGES_DIR)) return [];
+  return fs.readdirSync(GENERATED_PAGES_DIR)
+    .filter(name => fs.statSync(path.join(GENERATED_PAGES_DIR, name)).isDirectory())
+    .map(slug => ({
+      slug,
+      hasLayout: fs.existsSync(path.join(GENERATED_PAGES_DIR, slug, 'layout.json')),
+      hasContent: fs.existsSync(path.join(GENERATED_PAGES_DIR, slug, 'content.json')),
+    }));
 }
