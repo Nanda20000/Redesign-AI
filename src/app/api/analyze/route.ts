@@ -398,9 +398,26 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
         };
       });
 
+      // Extract internal links from the page
+      const internalLinks = await page.evaluate((baseUrl) => {
+        const links = Array.from(document.querySelectorAll('a[href]'))
+          .map(a => a.getAttribute('href'))
+          .filter(href => href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:'))
+          .map(href => {
+            try {
+              const resolved = new URL(href, baseUrl).href;
+              // Strip query strings and fragments for cleaner URLs
+              const url = new URL(resolved);
+              return url.origin + url.pathname;
+            } catch { return null; }
+          })
+          .filter((href): href is string => href !== null && href.startsWith(baseUrl));
+        return [...new Set(links)].slice(0, 20);
+      }, url);
+
       await browser.close();
 
-      return { success: true, structure, screenshotPath: `/screenshots/${filename}` };
+      return { success: true, structure, screenshotPath: `/screenshots/${filename}`, internalLinks };
     } catch (error: any) {
       lastError = error;
       console.error(`[Analyze] Attempt ${attempt} failed:`, error.message);
@@ -543,6 +560,7 @@ async function fetchWithFallback(url: string) {
       },
       screenshotPath: null,
       fallback: true,
+      internalLinks: [],
     };
   } catch (error: any) {
     console.error("[Analyze] Fallback fetch failed:", error.message);
@@ -630,6 +648,7 @@ export async function POST(request: NextRequest) {
       ...extractedContent,
       processed: processedContent,
       images,
+      sourceUrl: url,
     };
 
     console.log('[Analyze] AI content processing complete');
@@ -679,6 +698,7 @@ export async function POST(request: NextRequest) {
       classifiedSections,
       fallback: usedFallback,
       content: enrichedContent,
+      internalLinks: result.internalLinks || [],
     };
 
     if (screenshotPath) {

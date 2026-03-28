@@ -74,6 +74,22 @@ export async function POST(request: NextRequest) {
         }
       }
 
+      // Save meta.json for the preview sitemap
+      const pageDir = path.join(process.cwd(), 'generated-pages', pageSlug);
+      const metaPath = path.join(pageDir, 'meta.json');
+      const meta = {
+        slug: pageSlug,
+        title: pageSlug === 'index' ? 'Home' : pageSlug.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
+        type: pageSlug === 'index' ? 'home' : 'other',
+        sourceUrl: (content as any)?.sourceUrl || null,
+        generatedAt: new Date().toISOString(),
+      };
+      if (!fs.existsSync(pageDir)) {
+        fs.mkdirSync(pageDir, { recursive: true });
+      }
+      fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2), 'utf-8');
+      console.log('[generate-layout] Meta saved to:', metaPath);
+
       return NextResponse.json({
         status: 'success',
         layout: layout.layout,

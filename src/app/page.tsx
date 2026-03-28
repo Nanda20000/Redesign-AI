@@ -1,204 +1,365 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import type { ExtractedContent } from "@/../lib/content-injector";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-interface PageStructure {
-  headings: string[];
-  navigation: string[];
-  sections: Array<{
-    index: number;
-    class?: string;
-    id?: string;
-    textPreview: string;
-  }>;
+interface DiscoveredPage {
+  url: string;
+  slug: string;
+  type: 'home' | 'about' | 'contact' | 'services' | 'blog' | 'gallery' | 'pricing' | 'other';
+  title: string;
 }
 
-interface ClassifiedSection {
-  type: string;
-  text: string;
+interface AnalyzeResult {
+  status: string;
+  classifiedSections?: Array<{ type: string; text: string }>;
+  content?: any;
+  internalLinks?: string[];
+  screenshot?: string;
+  message?: string;
+  fallback?: boolean;
 }
 
-interface LayoutItem {
-  section: string;
-  component: string;
-}
+type Step = 'input' | 'discovering' | 'select' | 'generating' | 'done' | 'error';
+
+const TYPE_ICONS: Record<string, string> = {
+  home: '🏠', about: '👥', contact: '✉️',
+  services: '⚙️', blog: '📝', gallery: '🖼️',
+  pricing: '💰', other: '📄',
+};
 
 export default function Home() {
   const router = useRouter();
-  const [url, setUrl] = useState("");
-  const [response, setResponse] = useState<{
-    status: string;
-    message?: string;
-    screenshot?: string;
-    classifiedSections?: ClassifiedSection[];
-    content?: ExtractedContent;
-  } | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [generatingLayout, setGeneratingLayout] = useState(false);
+  const [url, setUrl] = useState('');
+  const [step, setStep] = useState<Step>('input');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [discoveredPages, setDiscoveredPages] = useState<DiscoveredPage[]>([]);
+  const [selectedSlugs, setSelectedSlugs] = useState<Set<string>>(new Set());
+  const [progress, setProgress] = useState<{ current: number; total: number; currentPage: string }>({
+    current: 0, total: 0, currentPage: '',
+  });
+  const [generatedSlugs, setGeneratedSlugs] = useState<string[]>([]);
 
-  const handleAnalyze = async () => {
-    if (!url) return;
+  // ── Step 1: Analyze homepage + discover all pages ──
+  const handleDiscover = async () => {
+    if (!url.trim()) return;
+    setStep('discovering');
+    setErrorMessage('');
 
-    setLoading(true);
     try {
-      const res = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      // Analyze the main page first
+      const analyzeRes = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url }),
       });
-      const data = await res.json();
-      setResponse(data);
-    } catch (error) {
-      setResponse({ status: "error", message: "Failed to analyze URL" });
-    } finally {
-      setLoading(false);
-    }
-  };
+      const analyzeData: AnalyzeResult = await analyzeRes.json();
 
-  const handleGenerateLayout = async () => {
-    if (!response?.classifiedSections?.length) return;
+      if (analyzeData.status !== 'success') {
+        throw new Error(analyzeData.message || 'Failed to analyze website');
+      }
 
-    setGeneratingLayout(true);
-    try {
-      // Extract unique section types from classified sections
-      const sections = Array.from(
-        new Set(response.classifiedSections.map((s) => s.type))
-      );
-
-      console.log("[Home] Generating layout for sections:", sections);
-      console.log("[Home] Content to inject:", response.content ? "yes" : "no");
-
-      const res = await fetch("/api/generate-layout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          sections, 
-          content: response.content,
-          regenerate: true 
+      // Discover pages from internal links
+      const discoverRes = await fetch('/api/discover-pages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          baseUrl: url,
+          internalLinks: analyzeData.internalLinks || [],
         }),
       });
+      const discoverData = await discoverRes.json();
+      const pages: DiscoveredPage[] = discoverData.pages || [];
 
-      const data = await res.json();
-
-      if (data.status === "success") {
-        console.log("[Home] Layout generated successfully!");
-        console.log("[Home] AI-selected components:");
-        data.layout.forEach((item: LayoutItem) => {
-          console.log(`  - ${item.section}: ${item.component}`);
-        });
-
-        // Navigate to the generated page
-        router.push("/generated-page");
-      } else {
-        setResponse({
-          status: "error",
-          message: data.error || "Failed to generate layout",
-        });
-      }
-    } catch (error: any) {
-      console.error("[Home] Error generating layout:", error);
-      setResponse({
-        status: "error",
-        message: error.message || "Failed to generate layout",
-      });
-    } finally {
-      setGeneratingLayout(false);
+      setDiscoveredPages(pages);
+      // Pre-select all pages
+      setSelectedSlugs(new Set(pages.map(p => p.slug)));
+      setStep('select');
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Something went wrong');
+      setStep('error');
     }
   };
 
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-4xl flex-col items-center justify-center gap-8 py-16 px-4">
-        <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100">
-          AI Website Redesign Tool
-        </h1>
+  // ── Step 2: Toggle page selection ──
+  const togglePage = (slug: string) => {
+    setSelectedSlugs(prev => {
+      const next = new Set(prev);
+      if (next.has(slug)) next.delete(slug);
+      else next.add(slug);
+      return next;
+    });
+  };
 
-        <div className="flex w-full max-w-md flex-col gap-4">
-          <input
-            type="url"
-            placeholder="Enter website URL (e.g., https://example.com)"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 placeholder-zinc-400 outline-none focus:border-zinc-500 focus:ring-2 focus:ring-zinc-200 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-zinc-500 dark:focus:ring-zinc-800"
-          />
-          <button
-            onClick={handleAnalyze}
-            disabled={loading || !url}
-            className="w-full rounded-lg bg-zinc-900 px-4 py-3 font-medium text-white transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+  const toggleAll = () => {
+    if (selectedSlugs.size === discoveredPages.length) {
+      setSelectedSlugs(new Set());
+    } else {
+      setSelectedSlugs(new Set(discoveredPages.map(p => p.slug)));
+    }
+  };
+
+  // ── Step 3: Generate redesigns for all selected pages ──
+  const handleGenerateAll = async () => {
+    const pagesToGenerate = discoveredPages.filter(p => selectedSlugs.has(p.slug));
+    if (pagesToGenerate.length === 0) return;
+
+    setStep('generating');
+    setProgress({ current: 0, total: pagesToGenerate.length, currentPage: '' });
+    const generated: string[] = [];
+
+    for (let i = 0; i < pagesToGenerate.length; i++) {
+      const page = pagesToGenerate[i];
+      setProgress({ current: i + 1, total: pagesToGenerate.length, currentPage: page.title });
+
+      try {
+        // 1. Analyze the page
+        const analyzeRes = await fetch('/api/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: page.url }),
+        });
+        const analyzeData: AnalyzeResult = await analyzeRes.json();
+        if (analyzeData.status !== 'success') continue;
+
+        // 2. Generate layout with slug
+        const sections = Array.from(
+          new Set((analyzeData.classifiedSections || []).map((s: any) => s.type))
+        );
+        const layoutRes = await fetch('/api/generate-layout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sections,
+            content: analyzeData.content,
+            regenerate: true,
+            pageSlug: page.slug,
+          }),
+        });
+        const layoutData = await layoutRes.json();
+        if (layoutData.status === 'success') {
+          generated.push(page.slug);
+        }
+      } catch (err) {
+        console.error(`Failed to generate page: ${page.slug}`, err);
+        // Continue to next page even if one fails
+      }
+    }
+
+    setGeneratedSlugs(generated);
+    setStep('done');
+  };
+
+  // ── Render ──
+
+  if (step === 'input' || step === 'discovering') {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4">
+        <main className="flex w-full max-w-xl flex-col items-center gap-8">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-zinc-900">AI Website Redesign</h1>
+            <p className="mt-2 text-zinc-500">Enter any website URL to discover and redesign all its pages</p>
+          </div>
+
+          <div className="flex w-full flex-col gap-3">
+            <input
+              type="url"
+              placeholder="https://example.com"
+              value={url}
+              onChange={e => setUrl(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleDiscover()}
+              disabled={step === 'discovering'}
+              className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 placeholder-zinc-400 outline-none focus:border-zinc-500 focus:ring-2 focus:ring-zinc-200 disabled:opacity-50"
+            />
+            <button
+              onClick={handleDiscover}
+              disabled={step === 'discovering' || !url.trim()}
+              className="w-full rounded-lg bg-zinc-900 px-4 py-3 font-medium text-white transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {step === 'discovering' ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  Discovering pages...
+                </span>
+              ) : 'Discover All Pages →'}
+            </button>
+          </div>
+
+          {/* Link to existing previews */}
+          <a
+            href="/preview"
+            className="text-sm text-zinc-400 hover:text-zinc-600 transition-colors"
           >
-            {loading ? "Analyzing..." : "Analyze Website"}
+            View previously redesigned pages →
+          </a>
+        </main>
+      </div>
+    );
+  }
+
+  if (step === 'error') {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4">
+        <div className="max-w-md w-full rounded-xl border border-red-200 bg-red-50 p-6 text-center">
+          <p className="text-lg font-semibold text-red-600">Something went wrong</p>
+          <p className="mt-2 text-sm text-red-500">{errorMessage}</p>
+          <button
+            onClick={() => setStep('input')}
+            className="mt-4 rounded-lg bg-zinc-900 px-6 py-2 text-sm font-medium text-white hover:bg-zinc-700"
+          >
+            Try Again
           </button>
         </div>
+      </div>
+    );
+  }
 
-        {response && response.status === "success" && (
-          <div className="mt-4 w-full space-y-6">
-            {response.screenshot ? (
-              <div className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
-                <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">Screenshot captured:</p>
-                <img
-                  src={response.screenshot}
-                  alt="Website screenshot"
-                  className="mt-2 w-full rounded-lg border border-zinc-200 dark:border-zinc-700"
-                />
-              </div>
-            ) : response.fallback ? (
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-900/20">
-                <p className="text-sm font-medium text-amber-700 dark:text-amber-400">
-                  ⚠️ Screenshot unavailable
-                </p>
-                <p className="mt-1 text-sm text-amber-600 dark:text-amber-500">
-                  {response.message || "Website blocked screenshot capture. Extracted structure from HTML instead."}
-                </p>
-              </div>
-            ) : null}
-
-            {response.classifiedSections && (
-              <div className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
-                <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">Detected Website Sections:</p>
-                <div className="mt-2 space-y-2">
-                  {response.classifiedSections.map((section, index) => (
-                    <div
-                      key={index}
-                      className="rounded border border-zinc-200 bg-zinc-50 p-3 text-sm dark:border-zinc-700 dark:bg-zinc-800"
-                    >
-                      <p className="font-medium text-zinc-700 dark:text-zinc-300">
-                        {index + 1}. <span className="rounded bg-zinc-200 px-2 py-0.5 text-xs font-semibold text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200">{section.type}</span>
-                      </p>
-                      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                        {section.text}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {response && response.status === "error" && (
-          <div className="mt-4 w-full max-w-md rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
-            <p className="text-sm font-medium text-red-600 dark:text-red-400">Error:</p>
-            <p className="mt-1 text-sm text-red-500 dark:text-red-300">{response.message}</p>
-          </div>
-        )}
-
-        {response && response.status === "success" && response.classifiedSections && (
-          <div className="w-full max-w-md">
+  if (step === 'select') {
+    return (
+      <div className="min-h-screen bg-zinc-50">
+        <header className="border-b border-zinc-200 bg-white px-6 py-4">
+          <div className="mx-auto flex max-w-4xl items-center justify-between">
+            <div>
+              <h1 className="text-xl font-bold text-zinc-900">Pages Discovered</h1>
+              <p className="text-sm text-zinc-500">{discoveredPages.length} pages found at {url}</p>
+            </div>
             <button
-              onClick={handleGenerateLayout}
-              disabled={generatingLayout}
-              className="w-full rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 font-medium text-white transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+              onClick={() => setStep('input')}
+              className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
             >
-              {generatingLayout ? "Generating Layout with AI..." : "✨ Generate AI Layout"}
+              ← Start over
             </button>
-            <p className="mt-2 text-center text-xs text-muted-foreground">
-              AI will select the best components for your website
-            </p>
           </div>
-        )}
-      </main>
-    </div>
-  );
+        </header>
+
+        <main className="mx-auto max-w-4xl px-6 py-8">
+          {/* Select all toggle */}
+          <div className="mb-6 flex items-center justify-between">
+            <button
+              onClick={toggleAll}
+              className="text-sm font-medium text-zinc-600 hover:text-zinc-900 underline"
+            >
+              {selectedSlugs.size === discoveredPages.length ? 'Deselect all' : 'Select all'}
+            </button>
+            <span className="text-sm text-zinc-500">
+              {selectedSlugs.size} of {discoveredPages.length} selected
+            </span>
+          </div>
+
+          {/* Page selection grid */}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {discoveredPages.map(page => {
+              const selected = selectedSlugs.has(page.slug);
+              return (
+                <button
+                  key={page.slug}
+                  onClick={() => togglePage(page.slug)}
+                  className={`flex items-center gap-4 rounded-xl border p-4 text-left transition-all ${
+                    selected
+                      ? 'border-zinc-900 bg-zinc-900 text-white'
+                      : 'border-zinc-200 bg-white text-zinc-900 hover:border-zinc-400'
+                  }`}
+                >
+                  <span className="text-2xl">{TYPE_ICONS[page.type] || '📄'}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold">{page.title}</p>
+                    <p className={`truncate text-xs mt-0.5 ${selected ? 'text-zinc-400' : 'text-zinc-400'}`}>
+                      {page.url}
+                    </p>
+                  </div>
+                  <div className={`h-5 w-5 flex-shrink-0 rounded-full border-2 flex items-center justify-center ${
+                    selected ? 'border-white bg-white' : 'border-zinc-400'
+                  }`}>
+                    {selected && <span className="text-zinc-900 text-xs font-bold">✓</span>}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Generate button */}
+          <div className="mt-8">
+            <button
+              onClick={handleGenerateAll}
+              disabled={selectedSlugs.size === 0}
+              className="w-full rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 font-semibold text-white text-lg transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              ✨ Redesign {selectedSlugs.size} Page{selectedSlugs.size !== 1 ? 's' : ''} with AI
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (step === 'generating') {
+    const percentage = progress.total > 0
+      ? Math.round((progress.current / progress.total) * 100)
+      : 0;
+
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4">
+        <div className="w-full max-w-md text-center">
+          <div className="mb-6 text-5xl">✨</div>
+          <h2 className="mb-2 text-2xl font-bold text-zinc-900">Redesigning Pages</h2>
+          <p className="mb-8 text-zinc-500">
+            {progress.current} of {progress.total} pages complete
+          </p>
+
+          {/* Progress bar */}
+          <div className="mb-4 h-3 w-full overflow-hidden rounded-full bg-zinc-200">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-500"
+              style={{ width: `${percentage}%` }}
+            />
+          </div>
+
+          <p className="text-sm text-zinc-500">
+            {progress.currentPage && `Currently redesigning: ${progress.currentPage}`}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (step === 'done') {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-4">
+        <div className="w-full max-w-md text-center">
+          <div className="mb-4 text-6xl">🎉</div>
+          <h2 className="mb-2 text-2xl font-bold text-zinc-900">
+            {generatedSlugs.length} Page{generatedSlugs.length !== 1 ? 's' : ''} Redesigned
+          </h2>
+          <p className="mb-8 text-zinc-500">
+            Your AI-generated redesigns are ready to preview.
+          </p>
+
+          <div className="flex flex-col gap-3">
+            <a
+              href="/preview"
+              className="w-full rounded-lg bg-zinc-900 px-6 py-3 font-semibold text-white hover:bg-zinc-700 transition-colors"
+            >
+              Browse All Pages →
+            </a>
+            {generatedSlugs[0] && (
+              <a
+                href={`/preview/${generatedSlugs[0]}`}
+                className="w-full rounded-lg border border-zinc-300 px-6 py-3 font-medium text-zinc-700 hover:bg-zinc-100 transition-colors"
+              >
+                Preview Homepage First
+              </a>
+            )}
+            <button
+              onClick={() => { setStep('input'); setUrl(''); setDiscoveredPages([]); }}
+              className="text-sm text-zinc-400 hover:text-zinc-600 transition-colors"
+            >
+              Redesign another website
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 }

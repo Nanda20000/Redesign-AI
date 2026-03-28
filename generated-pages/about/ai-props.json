@@ -50,7 +50,7 @@
   "hero-elegant-dynamic": {
     "label": "PREMIER ACCOUNTING INSTITUTE",
     "title": "Shaping Future Accounting Professionals",
-    "description": "A premier ISO 9001:2015 certified institute providing world-class accounting education and ERP solutions.",
+    "description": "A premier ISO 9001:2015 certified institute providing Tally & ERP solutions to over 5000 clients.",
     "primaryCtaText": "Explore Courses",
     "secondaryCtaText": "Contact Us",
     "mediaUrl": "https://ibsacademy.co/public/assets/web/images/about/1.png",
@@ -61,16 +61,16 @@
     "topIntro": "A premier ISO 9001:2015 certified institute shaping the future of accounting professionals in Kerala.",
     "heroImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
     "label": "Our Story of Success",
-    "subIntro": "We are more than an academy; we are a comprehensive business solutions partner.",
+    "subIntro": "We are more than an academy; we are a comprehensive business solutions partner dedicated to excellence.",
     "avatarImage": null,
     "avatarName": null,
     "avatarTitle": null,
-    "mainStatement": "IBS Academy is a leading professional accounting institute, also operating as INTERNATIONAL BUSINESS SOLUTIONS. We have empowered over 5000 clients by providing expert Tally partnerships and robust ERP solutions, building a legacy of trust and excellence in financial education and business technology."
+    "mainStatement": "IBS Academy stands as a leading professional accounting institute, certified to the highest international standards. Operating as INTERNATIONAL BUSINESS SOLUTIONS, our mission extends beyond education to providing robust Tally and ERP solutions. We take pride in having aligned with over 5000 clients, empowering businesses and building successful careers through trusted expertise and innovative technology."
   },
   "features-simple-dynamic": {
     "tagline": "OUR SERVICES",
     "heading": "Key Professional Services",
-    "description": "We offer premier accounting education and comprehensive business software solutions to empower professionals and enterprises.",
+    "description": "We offer premier accounting education and comprehensive business solutions, backed by ISO certification and a proven track record.",
     "features": [
       {
         "title": "Professional Accounting Institute",
@@ -81,7 +81,7 @@
         "image": "https://ibsacademy.co/public/assets//web/images/logo/logo.png"
       },
       {
-        "title": "ISO 9001:2015 Certified",
+        "title": "ISO 9001:2015 Certified Excellence",
         "image": "https://ibsacademy.co/public/assets/web/images/logo/footer.png"
       }
     ]
