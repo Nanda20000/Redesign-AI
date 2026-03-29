@@ -522,13 +522,13 @@ export function getComponentContentProps(
     case 'hero-elegant-dynamic': {
       const sectionContent = mappedContent.hero as any;
       return {
-        label: sectionContent?.topLabel ?? '',
-        title: sectionContent?.heading ?? '',
-        description: sectionContent?.subtext ?? '',
-        primaryCtaText: sectionContent?.primaryButtonText ?? '',
-        secondaryCtaText: sectionContent?.secondaryButtonText ?? '',
-        mediaUrl: sectionContent?.mediaUrl ?? sectionContent?.videoUrl ?? '',
-        mediaType: sectionContent?.mediaType ?? 'video',
+        label: sectionContent?.label ?? sectionContent?.topLabel ?? '',
+        title: sectionContent?.title ?? sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? sectionContent?.subtext ?? '',
+        primaryCtaText: sectionContent?.primaryCtaText ?? sectionContent?.primaryButtonText ?? '',
+        secondaryCtaText: sectionContent?.secondaryCtaText ?? sectionContent?.secondaryButtonText ?? '',
+        mediaUrl: sectionContent?.mediaUrl ?? sectionContent?.videoUrl ?? sectionContent?.image ?? '',
+        mediaType: sectionContent?.mediaType ?? 'image',
         posterUrl: sectionContent?.posterUrl ?? '',
       };
     }
@@ -739,16 +739,17 @@ export function getComponentContentProps(
 
     case 'about-simple-dynamic': {
       const sectionContent = mappedContent.about as any;
+      const aboutImages = (sectionContent as any)?.images || [];
       return {
-        headline: sectionContent?.headline ?? '',
-        topIntro: sectionContent?.topIntro ?? '',
-        heroImage: sectionContent?.heroImage ?? '',
+        headline: sectionContent?.title ?? '',
+        topIntro: sectionContent?.description ?? '',
+        heroImage: sectionContent?.heroImage ?? aboutImages[0] ?? '',
         label: sectionContent?.label ?? '',
-        subIntro: sectionContent?.subIntro ?? '',
+        subIntro: sectionContent?.description ?? '',
         avatarImage: sectionContent?.avatarImage ?? '',
         avatarName: sectionContent?.avatarName ?? '',
         avatarTitle: sectionContent?.avatarTitle ?? '',
-        mainStatement: sectionContent?.mainStatement ?? '',
+        mainStatement: sectionContent?.description ?? '',
       };
     }
 
@@ -783,11 +784,11 @@ export function getComponentContentProps(
       const sectionContent = mappedContent.testimonials as any;
       return {
         title: sectionContent?.title ?? '',
-        testimonials: sectionContent?.items?.map((item: any) => ({
-          name: item.title ?? '',
-          text: item.description ?? '',
-          avatar: item.image ?? '',
-        })) ?? [],
+        testimonials: (sectionContent?.testimonials ?? []).map((item: any) => ({
+          name: item.name ?? '',
+          text: item.text ?? '',
+          avatar: item.image ?? item.avatar ?? '',
+        })),
         plusIcon: <Plus size={16} />,
         prevIcon: <ArrowLeft size={20} />,
         nextIcon: <ArrowRight size={20} />,

@@ -47,7 +47,13 @@ function getSharedNavbarFooterProps(indexSlug: string = 'index'): { 'navbar-dyna
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { sections, content, regenerate, pageSlug = 'index' } = body;
+    const { 
+      sections, 
+      content, 
+      regenerate, 
+      pageSlug = 'index',
+      allPageSlugs,
+    } = body;
 
     if (!sections || !Array.isArray(sections)) {
       return NextResponse.json(
@@ -85,14 +91,26 @@ export async function POST(request: NextRequest) {
           console.log('[generate-layout] Starting AI prop injection...');
           
           // Collect list of all generated page slugs for navbar filtering
-          const generatedPagesDir = path.join(process.cwd(), 'generated-pages');
           let availablePages: string[] = [];
-          if (fs.existsSync(generatedPagesDir)) {
-            availablePages = fs.readdirSync(generatedPagesDir)
-              .filter(name => fs.statSync(path.join(generatedPagesDir, name)).isDirectory())
-              .filter(slug => fs.existsSync(path.join(generatedPagesDir, slug, 'layout.json')));
+          if (allPageSlugs && Array.isArray(allPageSlugs) && allPageSlugs.length > 0) {
+            // Use the full list passed by the caller — includes pages not yet 
+            // written to disk, so the navbar will have all tabs from the start.
+            availablePages = allPageSlugs;
+            console.log('[generate-layout] availablePages from caller:', availablePages);
+          } else {
+            // Fallback: scan disk
+            const generatedPagesDir = path.join(process.cwd(), 'generated-pages');
+            if (fs.existsSync(generatedPagesDir)) {
+              availablePages = fs.readdirSync(generatedPagesDir)
+                .filter(name => 
+                  fs.statSync(path.join(generatedPagesDir, name)).isDirectory()
+                )
+                .filter(slug => 
+                  fs.existsSync(path.join(generatedPagesDir, slug, 'layout.json'))
+                );
+            }
+            console.log('[generate-layout] availablePages from disk:', availablePages);
           }
-          console.log('[generate-layout] Available pages for navbar:', availablePages);
           
           const aiContent: ExtractedWebsiteContent = {
             headings: content.headings || [],
@@ -113,15 +131,31 @@ export async function POST(request: NextRequest) {
             'utf-8'
           );
           console.log('[generate-layout] AI props saved to:', getAiPropsPath(pageSlug));
-          
-          // Capture screenshot of the preview page (non-blocking, don't await)
-          capturePreviewScreenshot({ pageSlug }).then(screenshotPath => {
-            if (screenshotPath) {
-              console.log('[generate-layout] Screenshot captured:', screenshotPath);
+
+          // Capture screenshot with delay and retry mechanism for pages 3+
+          const screenshotDelay = 8000; // 8 seconds for page to be ready
+          setTimeout(async () => {
+            let attempts = 0;
+            const maxAttempts = 3;
+            while (attempts < maxAttempts) {
+              attempts++;
+              try {
+                const screenshotPath = await capturePreviewScreenshot({ 
+                  pageSlug,
+                  timeout: 45000 
+                });
+                if (screenshotPath) {
+                  console.log(`[generate-layout] Screenshot captured on attempt ${attempts}:`, screenshotPath);
+                  break;
+                }
+              } catch (err: any) {
+                console.error(`[generate-layout] Screenshot attempt ${attempts} failed:`, err.message);
+                if (attempts < maxAttempts) {
+                  await new Promise(resolve => setTimeout(resolve, 5000 * attempts));
+                }
+              }
             }
-          }).catch(err => {
-            console.error('[generate-layout] Screenshot capture failed:', err.message);
-          });
+          }, screenshotDelay);
         } catch (err: any) {
           console.error('[generate-layout] AI prop injection failed:', err.message);
           // Continue without AI props — page will use fallback content
@@ -243,6 +277,86 @@ export async function GET(request: NextRequest) {
         message: 'No layout has been generated yet. Call POST first.',
       },
       { status: 404 }
+    );
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { allPageSlugs } = body;
+
+    if (!allPageSlugs || !Array.isArray(allPageSlugs)) {
+      return NextResponse.json(
+        { error: 'allPageSlugs array is required' },
+        { status: 400 }
+      );
+    }
+
+    console.log('[generate-layout PATCH] Regenerating navbars for:', allPageSlugs);
+
+    const { generatePropsForComponent } = await import('@/../lib/ai-prop-injector');
+
+    for (const slug of allPageSlugs) {
+      const aiPropsPath = getAiPropsPath(slug);
+      const contentPath = path.join(
+        process.cwd(), 'generated-pages', slug, 'content.json'
+      );
+
+      if (!fs.existsSync(aiPropsPath) || !fs.existsSync(contentPath)) {
+        console.warn('[PATCH] Missing files for slug:', slug);
+        continue;
+      }
+
+      try {
+        const existingAiProps = JSON.parse(
+          fs.readFileSync(aiPropsPath, 'utf-8')
+        );
+        const content = JSON.parse(
+          fs.readFileSync(contentPath, 'utf-8')
+        );
+
+        // Regenerate navbar props with the full allPageSlugs list
+        const freshNavbarProps = await generatePropsForComponent(
+          'navbar-dynamic',
+          {
+            headings: content.headings || [],
+            paragraphs: content.paragraphs || [],
+            navigationLinks: content.navigationLinks || [],
+            footerText: content.footerText,
+            contactInfo: content.contactInfo,
+            processed: content.processed,
+            images: content.images || [],
+            availablePages: allPageSlugs,
+          }
+        );
+
+        // Merge fresh navbar into existing ai-props
+        const updatedAiProps = {
+          ...existingAiProps,
+          'navbar-dynamic': freshNavbarProps,
+        };
+
+        fs.writeFileSync(
+          aiPropsPath,
+          JSON.stringify(updatedAiProps, null, 2),
+          'utf-8'
+        );
+        console.log('[PATCH] Navbar regenerated for:', slug);
+      } catch (err: any) {
+        console.error('[PATCH] Failed for slug:', slug, err.message);
+      }
+    }
+
+    return NextResponse.json({
+      status: 'success',
+      message: `Navbar regenerated for ${allPageSlugs.length} pages`,
+    });
+  } catch (error: any) {
+    console.error('[generate-layout PATCH] Error:', error);
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
     );
   }
 }

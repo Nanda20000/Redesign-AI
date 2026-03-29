@@ -62,8 +62,24 @@ export async function capturePreviewScreenshot(options: ScreenshotOptions): Prom
       waitUntil: 'networkidle',
       timeout,
     });
-    
-    // Wait for content to render
+
+    // Wait for loading spinner to disappear (max 20 seconds)
+    try {
+      await page.waitForSelector('.animate-spin', { state: 'hidden', timeout: 20000 });
+    } catch {
+      // Spinner may not exist or already gone
+    }
+
+    // Check if page shows error state
+    const hasError = await page.evaluate(() => {
+      return document.body.innerText.includes('No Layout Found') || 
+             document.body.innerText.includes('Loading your AI-generated page');
+    });
+    if (hasError) {
+      throw new Error('Page not ready yet - still loading or showing error');
+    }
+
+    // Wait additional time for images to load
     await page.waitForTimeout(3000);
     
     // Scroll to load any lazy content

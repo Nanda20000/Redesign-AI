@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { getComponentByName } from "@/lib/component-registry";
 import type { LayoutItem } from "@/../lib/ai-layout-generator";
@@ -115,7 +115,7 @@ function mergeProps(
   return merged;
 }
 
-export default function GeneratedPage() {
+function GeneratedPageContent() {
   const searchParams = useSearchParams();
   const pageSlug = searchParams.get('pageSlug') || 'index';
   
@@ -343,7 +343,8 @@ export default function GeneratedPage() {
           item.section,
           contentToUse
         );
-        const componentAiProps = aiProps?.[componentName] || {};
+        // Try original component name first (from layout), then the possibly-fallback componentName
+        const componentAiProps = aiProps?.[item.component] || aiProps?.[componentName] || {};
         
         // Deep merge: AI props override base props
         const contentProps = mergeProps(baseProps, componentAiProps, componentName);
@@ -364,5 +365,20 @@ export default function GeneratedPage() {
         );
       })}
     </div>
+  );
+}
+
+export default function GeneratedPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="text-center">
+          <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent mx-auto"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    }>
+      <GeneratedPageContent />
+    </Suspense>
   );
 }

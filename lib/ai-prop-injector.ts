@@ -60,6 +60,11 @@ export interface ComponentPropSchema {
     description: string;
     maxWords?: number;
     required: boolean;
+    properties?: Record<string, { type: string; description?: string }>;
+    items?: {
+      type: string;
+      properties: Record<string, { type: string; enum?: string[]; items?: { type: string; properties: Record<string, { type: string }> } }>;
+    };
   }>;
 }
 
@@ -499,7 +504,7 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       {
         name: 'features',
         type: 'array',
-        description: 'An array of 3 feature objects, each with a title and image.',
+        description: 'An array of EXACTLY 3 feature objects. Each object MUST have: "title" (string, max 8 words) and "image" (string, URL selected from Available Images list - pick the most relevant image for each feature). Example: [{"title": "Feature Name", "image": "https://example.com/img.jpg"}, ...]',
         required: true,
       },
     ],
@@ -649,7 +654,7 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       },
       { name: 'navItems',
         type: 'array',
-        description: 'Navigation links - must only include pages that have been redesigned. The available redesigned pages are provided in the content. Map each slug to a human-readable label and href like /preview/[slug].',
+        description: 'Navigation links. IMPORTANT: You MUST create one navItem for EACH page in the "Available Redesigned Pages" list. Map each slug to a human-readable label using these rules: "index" → "Home", "about" → "About", "career" → "Career", "exam" → "Exam", "gallery" → "Gallery", "contact-us" or "contact us" → "Contact", "partnership" → "Partnership". Use href format exactly: "/preview/[slug]" (e.g., "/preview/index", "/preview/about", "/preview/career"). Do NOT skip any page from the list. Do NOT add pages not in the list.',
         items: {
           type: 'object',
           properties: {
@@ -746,7 +751,16 @@ Contact Info: ${JSON.stringify(content.contactInfo || {})}
 AI-Processed Features: ${JSON.stringify(content.processed?.features || {})}
 AI-Processed About: ${JSON.stringify(content.processed?.about || {})}
 AI-Processed Footer: ${JSON.stringify(content.processed?.footer || {})}
-${content.availablePages && content.availablePages.length > 0 ? `Available Redesigned Pages: ${content.availablePages.join(', ')}` : ''}
+${content.availablePages && content.availablePages.length > 0 
+  ? `\n## AVAILABLE REDESIGNED PAGES (navbar MUST link to ALL of these):\n${
+      content.availablePages.map(p => 
+        `  - slug: "${p}" → href: "/preview/${p}" → label: "${
+          p === 'index' ? 'Home' 
+          : p.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+        }"`
+      ).join('\n')
+    }\n`
+  : ''}
 
 ## Source Website Section Analysis (use this to write relevant content):
 - The source website appears to be a ${content.processed?.about?.title ?? 'business'} site
@@ -758,11 +772,17 @@ ${content.availablePages && content.availablePages.length > 0 ? `- Only these pa
 
 Use this context to write props that closely mirror the PURPOSE and CONTENT TYPE of the source website,
 but rewritten in fresh, professional language suitable for the redesigned page.
-${schema.componentName === 'navbar-dynamic' && content.availablePages ? `\n## NAVBAR-SPECIFIC RULES:
-- navItems must ONLY include pages from the "Available Redesigned Pages" list above
-- Do NOT include pages that are not in the list
-- Map each slug to a human-readable label: "index" → "Home", "about-us" → "About Us", etc.
-- Use href format: /preview/[slug] (e.g., /preview/index, /preview/about-us)
+${schema.componentName === 'navbar-dynamic' ? `\n## NAVBAR-SPECIFIC RULES (CRITICAL — FOLLOW EXACTLY):
+- You MUST create one navItem for EVERY slug listed in "AVAILABLE REDESIGNED PAGES" above
+- If there are 7 pages listed, navItems array MUST have 7 items
+- href format is EXACTLY "/preview/[slug]" — no trailing slash, no domain
+- Label mapping: "index"→"Home", "about"→"About", "career"→"Career", 
+  "exam"→"Exam", "gallery"→"Gallery", "contact-us"→"Contact Us", 
+  "partnership"→"Partnership", "contact"→"Contact"
+- For any other slug: capitalize each word and replace hyphens with spaces
+- Include a logo object: {"text": "[brand name from content]", "href": "/preview/index"}
+- Include actions array with at least one CTA button from the source website
+  (e.g., Sign In / Register Now)
 ` : ''}
 
 ## Available Images (select most relevant ones for this section):

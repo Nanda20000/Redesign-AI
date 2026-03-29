@@ -2,7 +2,6 @@
   "navbar-dynamic": {
     "logo": {
       "text": "IBS Academy",
-      "image": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
       "href": "/preview/index"
     },
     "navItems": [
@@ -11,8 +10,12 @@
         "href": "/preview/index"
       },
       {
-        "label": "About Us",
+        "label": "About",
         "href": "/preview/about"
+      },
+      {
+        "label": "Contact",
+        "href": "/preview/contact"
       }
     ],
     "actions": [
@@ -20,35 +23,30 @@
         "label": "Register Now",
         "href": "#",
         "variant": "primary"
-      },
-      {
-        "label": "Sign In",
-        "href": "#",
-        "variant": "secondary"
       }
     ]
   },
   "hero-banner-dynamic": {
     "backgroundImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
-    "breadcrumb": "Home > About Us",
+    "breadcrumb": "Home > About",
     "title": "About IBS Academy",
-    "description": "A premier ISO 9001:2015 certified professional accounting institute and Tally solutions provider in Kerala."
+    "description": "A premier ISO 9001:2015 certified professional accounting institute and business solutions provider in Kerala."
   },
   "about-simple-dynamic": {
-    "headline": "About IBS Academy",
-    "topIntro": "A premier ISO 9001:2015 certified institute, shaping the future of accounting professionals in Kerala.",
+    "headline": "Numbers Tell a Story of Success",
+    "topIntro": "A premier ISO 9001:2015 certified institute, IBS Academy is a leader in professional accounting education and business solutions in Kerala.",
     "heroImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
-    "label": "Our Story of Success",
-    "subIntro": "We are more than an academy; we are a comprehensive business solutions partner.",
+    "label": "Our Mission",
+    "subIntro": "As INTERNATIONAL BUSINESS SOLUTIONS, we have forged lasting partnerships with over 5000 clients, providing trusted Tally and ERP solutions.",
     "avatarImage": null,
     "avatarName": null,
     "avatarTitle": null,
-    "mainStatement": "IBS Academy stands as a leading professional accounting institute, certified to the highest international quality standards. As INTERNATIONAL BUSINESS SOLUTIONS, our mission extends beyond education to providing robust Tally and ERP solutions, having successfully partnered with over 5000 clients to drive their business growth and efficiency."
+    "mainStatement": "IBS Academy stands as a premier professional accounting institute and business solutions provider. We are dedicated to empowering professionals and businesses through excellence in accounting education and by delivering robust Tally and ERP solutions. Our mission is to build success stories, one client and one student at a time."
   },
   "features-simple-dynamic": {
-    "tagline": "OUR CORE OFFERINGS",
-    "heading": "Professional Education & Business Solutions",
-    "description": "We are a premier certified institute and a leading provider of integrated Tally and ERP solutions for businesses.",
+    "tagline": "OUR STORY",
+    "heading": "Numbers Tell a Story of Success",
+    "description": "A premier ISO 9001:2015 certified institute in Kerala, providing professional accounting education and business solutions.",
     "features": [
       {
         "title": "Professional Accounting Institute",
@@ -56,16 +54,16 @@
       },
       {
         "title": "Tally Partner & ERP Solutions",
-        "image": "https://ibsacademy.co/public/assets/web/images/logo/logo.png"
+        "image": "https://ibsacademy.co/public/assets/web/images/about/1.png"
       },
       {
-        "title": "ISO 9001:2015 Certified",
-        "image": "https://ibsacademy.co/public/assets/web/images/logo/footer.png"
+        "title": "5000+ Clients Aligned",
+        "image": "https://ibsacademy.co/public/assets/web/images/about/1.png"
       }
     ]
   },
   "footer-simple": {
-    "brandName": "IBS Academy",
+    "brandName": "IBS Academy / INTERNATIONAL BUSINESS SOLUTIONS",
     "description": "A premier ISO 9001:2015 certified accounting institute and provider of Tally & ERP solutions.",
     "copyright": "© 2024 IBS Academy. All rights reserved."
   }

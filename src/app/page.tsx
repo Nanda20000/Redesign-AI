@@ -8,6 +8,7 @@ interface DiscoveredPage {
   slug: string;
   type: 'home' | 'about' | 'contact' | 'services' | 'blog' | 'gallery' | 'pricing' | 'other';
   title: string;
+  navbarLabel?: string; // Original text from source website navbar
 }
 
 interface AnalyzeResult {
@@ -66,6 +67,7 @@ export default function Home() {
         body: JSON.stringify({
           baseUrl: url,
           internalLinks: analyzeData.internalLinks || [],
+          navbarLinks: analyzeData.content?.navigationLinks || [],
         }),
       });
       const discoverData = await discoverRes.json();
@@ -134,6 +136,7 @@ export default function Home() {
             content: analyzeData.content,
             regenerate: true,
             pageSlug: page.slug,
+            allPageSlugs: pagesToGenerate.map(p => p.slug),
           }),
         });
         const layoutData = await layoutRes.json();
@@ -143,6 +146,22 @@ export default function Home() {
       } catch (err) {
         console.error(`Failed to generate page: ${page.slug}`, err);
         // Continue to next page even if one fails
+      }
+    }
+
+    // Second pass: refresh all navbars now that all pages are generated
+    // so every page's navbar shows links to all other redesigned pages.
+    if (generated.length > 1) {
+      try {
+        console.log('[Navbar refresh] Regenerating navbars for all pages...');
+        await fetch('/api/generate-layout', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ allPageSlugs: generated }),
+        });
+        console.log('[Navbar refresh] Done');
+      } catch (err) {
+        console.warn('[Navbar refresh] Failed (non-critical):', err);
       }
     }
 
@@ -262,9 +281,9 @@ export default function Home() {
                 >
                   <span className="text-2xl">{TYPE_ICONS[page.type] || '📄'}</span>
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold">{page.title}</p>
+                    <p className="font-semibold">{page.navbarLabel || page.title}</p>
                     <p className={`truncate text-xs mt-0.5 ${selected ? 'text-zinc-400' : 'text-zinc-400'}`}>
-                      {page.url}
+                      {page.navbarLabel ? page.title : page.url}
                     </p>
                   </div>
                   <div className={`h-5 w-5 flex-shrink-0 rounded-full border-2 flex items-center justify-center ${

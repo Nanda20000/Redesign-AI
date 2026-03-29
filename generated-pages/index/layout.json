@@ -9,12 +9,8 @@
       "component": "hero-elegant-dynamic"
     },
     {
-      "section": "features",
-      "component": "features-simple-dynamic"
-    },
-    {
-      "section": "footer",
-      "component": "footer-simple"
+      "section": "contact",
+      "component": "contact-split-dynamic"
     }
   ]
 }

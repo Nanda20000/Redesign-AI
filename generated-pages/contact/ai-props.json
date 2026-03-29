@@ -21,8 +21,7 @@
     "actions": [
       {
         "label": "Sign In",
-        "href": "#",
-        "variant": "outline"
+        "href": "#"
       },
       {
         "label": "Register Now",
@@ -31,18 +30,15 @@
       }
     ]
   },
-  "hero-elegant-dynamic": {
-    "label": "GET IN TOUCH",
-    "title": "We're Here to Listen",
-    "description": "Reach out to our dedicated team for support and inquiries.",
-    "primaryCtaText": "Contact Support",
-    "secondaryCtaText": "View Branches",
-    "mediaUrl": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
-    "mediaType": "image"
+  "hero-banner-dynamic": {
+    "backgroundImage": null,
+    "breadcrumb": "Home > Contact",
+    "title": "Contact IBS Academy",
+    "description": "Reach out to our support team or visit one of our branches for assistance with your educational journey."
   },
   "contact-split-dynamic": {
     "title": "Get in Touch - We're Here to Listen",
-    "description": "Reach out to us for inquiries, support, or to learn more about our educational programs. Our team is ready to assist you.",
+    "description": "Reach out to IBS Academy with your inquiries. Our dedicated team is ready to assist you with information about our courses and services.",
     "formTitle": "Leave A Message",
     "nameLabel": "Your Name",
     "namePlaceholder": "Enter your full name",
@@ -53,5 +49,10 @@
     "messageLabel": "Your Message",
     "messagePlaceholder": "How can we help you today?",
     "submitButtonText": "Send Message"
+  },
+  "footer-simple": {
+    "brandName": "IBS Academy",
+    "description": "An educational institution offering professional courses across multiple branches.",
+    "copyright": "© 2024 IBS Academy. All rights reserved."
   }
 }

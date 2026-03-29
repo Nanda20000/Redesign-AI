@@ -49,22 +49,22 @@
   ],
   "processed": {
     "features": {
-      "heading": "Services",
-      "description": "Key professional services offered by the organization.",
+      "heading": "Numbers Tell a Story of Success",
+      "description": "IBS Academy is a premier professional accounting institute and business solutions provider.",
       "items": [
         {
           "title": "Professional Accounting Institute",
-          "description": "A premier ISO 9001:2015 certified institute providing accounting education."
+          "description": "Premier ISO 9001:2015 certified institute in Kerala."
         },
         {
           "title": "Tally Partner & ERP Solutions",
-          "description": "Provider of Tally software and Enterprise Resource Planning (ERP) solutions for businesses."
+          "description": "Provider of Tally and ERP business solutions."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in Kerala. As INTERNATIONAL BUSINESS SOLUTIONS, they provide Tally and ERP solutions.",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in Kerala. As INTERNATIONAL BUSINESS SOLUTIONS, it provides Tally and ERP solutions.",
       "companies": [
         "INTERNATIONAL BUSINESS SOLUTIONS"
       ],
@@ -72,23 +72,19 @@
         {
           "label": "Clients Aligned",
           "value": "5000+"
-        },
-        {
-          "label": "Certification",
-          "value": "ISO 9001:2015"
         }
       ],
       "breakout": {
-        "title": "Numbers Tell a Story of Success",
-        "description": "Highlights the institute's certification and large client base as markers of success."
+        "title": "Mission",
+        "description": "Aligned with over 5000 clients as a Tally partner and ERP solutions provider."
       }
     },
     "footer": {
-      "brandName": "INTERNATIONAL BUSINESS SOLUTIONS",
-      "description": "Provider of Tally software and ERP solutions, aligned with over 5000 clients.",
+      "brandName": "IBS Academy / INTERNATIONAL BUSINESS SOLUTIONS",
+      "description": "A premier professional accounting institute and provider of Tally and ERP business solutions.",
       "contactInfo": {
-        "email": "N/A",
-        "phone": "N/A",
+        "email": "Not provided",
+        "phone": "Not provided",
         "address": "Kerala, India"
       },
       "copyright": "© 2024 IBS Academy. All rights reserved."

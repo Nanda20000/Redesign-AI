@@ -9,8 +9,8 @@
       "component": "hero-banner-dynamic"
     },
     {
-      "section": "features",
-      "component": "features-simple-dynamic"
+      "section": "contact",
+      "component": "contact-split-dynamic"
     },
     {
       "section": "footer",

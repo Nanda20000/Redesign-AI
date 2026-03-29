@@ -352,7 +352,8 @@ export default function PreviewPage({ params }: PreviewPageProps) {
           item.section,
           contentToUse
         );
-        const componentAiProps = aiProps?.[componentName] || {};
+        // Try original component name first (from layout), then the possibly-fallback componentName
+        const componentAiProps = aiProps?.[item.component] || aiProps?.[componentName] || {};
 
         // Deep merge: AI props override base props
         const contentProps = mergeProps(baseProps, componentAiProps, componentName);
