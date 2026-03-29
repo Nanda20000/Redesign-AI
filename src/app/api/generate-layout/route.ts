@@ -120,6 +120,8 @@ export async function POST(request: NextRequest) {
             contactInfo: content.contactInfo,
             processed: content.processed as any,
             images: content.images || [],
+            sectionSequence: content.sectionSequence || [],
+            sectionBuckets: content.sectionBuckets || {},
             availablePages, // Pass available pages for navbar filtering
           };
           const aiProps = await generatePropsForLayout(layout.layout, aiContent);
@@ -327,6 +329,8 @@ export async function PATCH(request: NextRequest) {
             contactInfo: content.contactInfo,
             processed: content.processed,
             images: content.images || [],
+            sectionSequence: content.sectionSequence || [],
+            sectionBuckets: content.sectionBuckets || {},
             availablePages: allPageSlugs,
           }
         );

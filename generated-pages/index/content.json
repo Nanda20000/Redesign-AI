@@ -1,83 +1,164 @@
 {
   "headings": [
-    "Contact Us",
-    "Leave A Message",
-    "Get in Touch - We're Here to Listen",
-    "Our Branches",
-    "Quick Links",
-    "Quick Links"
+    "Excellence in Every Step",
+    "LCC CAMPUS",
+    "DEPARTMENTS",
+    "About Us"
   ],
   "paragraphs": [
-    "Contact Us\n            \n                \n                    Home\n                    Contact Us",
-    "IBS Academy\n                    Calicut Mall, Stadium Junction\nPuthiyara Road, Kozhikode-673004\n            \n            \n            \n                \n                +91 7594062999 +91 7594014999\n  ",
-    "Our Branches\n            \n        \n        \n                        \n                \n                    \n                    KOTTAKKAL - Parappur Road :\n                    9544 549 428\n            "
+    "Excellence in Every StepLCC CAMPUSLearn More “At LCC Campus, we believe in empowering every learner to reach their fullest potential. Our commitment to excellence drives us to create an environment where innovation and growth thrive. Together, we shape futures built on knowledge, integrity, and purpose.” DEPARTMENTS Computer CoursesOur institution provides skill development courses which are relat",
+    "Home About Courses Blog Gallery Contact Take Action Take Action Main Menu Home About Courses Blog Gallery Contact",
+    "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com",
+    "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com"
   ],
   "navigationLinks": [
     "home",
     "about",
-    "career",
-    "exam",
+    "courses",
+    "blog",
     "gallery",
-    "contact us",
-    "partnership",
-    "sign in",
-    "register now"
+    "contact"
   ],
-  "footerText": "Our Branches\n            \n        \n        \n                        \n                \n                    \n                    KOTTAKKAL - Parappur Road :\n                    9544 549 428\n            ",
+  "footerText": "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com",
   "contactInfo": {
-    "phone": "7594062999"
+    "email": "johnsonlccedk@gmail.com",
+    "phone": "9744064081"
   },
   "images": [
     {
-      "src": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
-      "alt": "Logo",
-      "title": "Logo",
-      "width": 342,
-      "height": 97
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg",
+      "alt": "annie spratt qckxruozjrg unsplash (1)",
+      "title": "annie spratt qckxruozjrg unsplash (1)",
+      "width": 1024,
+      "height": 683
     },
     {
-      "src": "https://ibsacademy.co/public/assets/web/images/logo/footer.png",
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_s8c5qys8c5qys8c.jpeg",
+      "alt": "gemini generated image s8c5qys8c5qys8c",
+      "title": "gemini generated image s8c5qys8c5qys8c",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
+      "alt": "pexels karola g 6954850 1024x683 (1)",
+      "title": "pexels karola g 6954850 1024x683 (1)",
+      "width": 1024,
+      "height": 683
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-8527897-1-1024x683.jpg",
+      "alt": "pexels karola g 8527897 (1)",
+      "title": "pexels karola g 8527897 (1)",
+      "width": 1024,
+      "height": 683
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg",
+      "alt": "pexels rdne 7092350 scaled (1)",
+      "title": "pexels rdne 7092350 scaled (1)",
+      "width": 1024,
+      "height": 683
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg",
+      "alt": "business colleagues banner concept with copy space (1)",
+      "title": "business colleagues banner concept with copy space (1)",
+      "width": 1024,
+      "height": 683
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int1-768x1024.jpeg",
+      "alt": "int1",
+      "title": "int1",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int6-2-768x1024.jpeg",
+      "alt": "int6",
+      "title": "int6",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int3-1-768x1024.jpeg",
+      "alt": "int3",
+      "title": "int3",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int5-1-768x1024.jpeg",
+      "alt": "int5",
+      "title": "int5",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int4-2-768x1024.jpeg",
+      "alt": "int4",
+      "title": "int4",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/int2-2-768x1024.jpeg",
+      "alt": "int2",
+      "title": "int2",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
       "alt": "",
       "title": "",
-      "width": 170,
-      "height": 44
+      "width": 1920,
+      "height": 774
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7942467-scaled.jpg",
+      "alt": "",
+      "title": "",
+      "width": 1920,
+      "height": 340
     }
   ],
   "processed": {
     "features": {
-      "heading": "Contact Us",
-      "description": "Provides contact information and branch details for reaching the academy.",
+      "heading": "Excellence in Every Step",
+      "description": "Key offerings from LCC Campus focused on skill development and empowering learners.",
       "items": [
         {
-          "title": "Contact Support",
-          "description": "Reach the academy via phone at +91 7594062999 or +91 7594014999 for inquiries."
+          "title": "Computer Courses",
+          "description": "Skill development courses related to computing and technology."
         },
         {
-          "title": "Branch Network",
-          "description": "Access services through multiple branches, including locations in Kozhikode and Kottakkal."
+          "title": "LCC CAMPUS",
+          "description": "An educational environment dedicated to innovation, growth, and shaping futures."
         }
       ]
     },
     "about": {
-      "title": "About",
-      "description": "IBS Academy is an educational institution with multiple branches. The content focuses on contact details and navigation to key site sections.",
+      "title": "About Us",
+      "description": "LCC Campus is committed to empowering every learner to reach their fullest potential. They create an environment where innovation and growth thrive, shaping futures built on knowledge, integrity, and purpose.",
       "companies": [],
       "achievements": [],
       "breakout": {
-        "title": "We're Here to Listen",
-        "description": "A key message inviting communication and engagement from visitors."
+        "title": "Key Message",
+        "description": "Together, we shape futures built on knowledge, integrity, and purpose."
       }
     },
     "footer": {
-      "brandName": "IBS Academy",
-      "description": "An educational academy with multiple branches.",
+      "brandName": "LCC Campus",
+      "description": "Educational institution located in Edakkara, Nilambur.",
       "contactInfo": {
-        "email": "Not provided",
-        "phone": "+91 7594062999, +91 7594014999",
-        "address": "Calicut Mall, Stadium Junction, Puthiyara Road, Kozhikode-673004"
+        "email": "johnsonlccedk@gmail.com",
+        "phone": "9744064081",
+        "address": "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala"
       },
-      "copyright": "© 2024 IBS Academy. All rights reserved."
+      "copyright": "Copyright © 2026 lcccampus.com"
     }
   },
-  "sourceUrl": "https://ibsacademy.co/contact"
+  "sourceUrl": "https://lcccampus.com/"
 }

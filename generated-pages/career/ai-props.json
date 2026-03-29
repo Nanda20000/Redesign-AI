@@ -1,0 +1,64 @@
+{
+  "navbar-dynamic": {
+    "logo": {
+      "text": "IBS Academy",
+      "href": "/preview/index"
+    },
+    "navItems": [
+      {
+        "label": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "label": "About",
+        "href": "/preview/about"
+      },
+      {
+        "label": "Career",
+        "href": "/preview/career"
+      }
+    ],
+    "actions": [
+      {
+        "label": "Sign In",
+        "href": "#",
+        "variant": "outline"
+      },
+      {
+        "label": "Register Now",
+        "href": "#",
+        "variant": "primary"
+      }
+    ]
+  },
+  "hero-banner-dynamic": {
+    "backgroundImage": "https://ibsacademy.co/public/assets/web/images/bg/bg2.png",
+    "breadcrumb": "Home > About",
+    "title": "About IBS Academy",
+    "description": "A premier ISO 9001:2015 certified accounting institute in Kerala with over 20 years of experience, offering direct certifications from industry leaders."
+  },
+  "features-simple-dynamic": {
+    "tagline": "CURRENT OPENINGS",
+    "heading": "Join Our Team of Accounting Professionals",
+    "description": "Explore career opportunities at a premier certified institute. We seek passionate individuals to help shape the next generation of finance experts.",
+    "features": [
+      {
+        "title": "Teaching Faculty",
+        "image": "https://ibsacademy.co/public/assets/web/images/bg/bg2.png"
+      },
+      {
+        "title": "Accountant (Female)",
+        "image": "https://ibsacademy.co/public/assets/web/images/bg/bg2.png"
+      },
+      {
+        "title": "Billing Executive (Male)",
+        "image": "https://ibsacademy.co/public/assets/web/images/bg/bg2.png"
+      }
+    ]
+  },
+  "footer-simple": {
+    "brandName": "IBS Academy",
+    "description": "A premier ISO 9001:2015 certified professional accounting institute.",
+    "copyright": "© 2024 IBS Academy. All rights reserved."
+  }
+}

@@ -32,10 +32,13 @@ export interface ComponentSelectionResult {
  * Component capability map - which components support images
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
-  features: ['features-image', 'features-gallery-type', 'features-slideshow', 'features- Image', 'features-Image-new'],
-  testimonials: ['testimonial-cards', 'testimonial-modern', 'testimonial-gradient'],
-  about: ['about-two-column'],
+  hero: ['hero-dynamic', 'hero-simple-dynamic', 'hero-elegant-dynamic', 'hero-banner-dynamic', 'hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
+  features: ['features-dynamic', 'features-simple-dynamic', 'features-image', 'features-gallery-type', 'features-slideshow', 'features- Image', 'features-Image-new'],
+  testimonials: ['testimonials-dynamic', 'testimonials-elegant-dynamic', 'testimonial-cards', 'testimonial-modern', 'testimonial-gradient'],
+  about: ['about-dynamic', 'about-simple-dynamic', 'about-two-column'],
+  gallery: ['gallery-dynamic', 'gallery-elegant-dynamic'],
+  cta: ['cta-dynamic'],
+  blog: ['blog-dynamic', 'blog-elegant-dynamic'],
 };
 
 /**
@@ -447,8 +450,10 @@ function enforceAICompatibleComponents(layout: LayoutItem[], pageSlug: string = 
     const safeComponents = getAIComponentsForSection(item.section, pageSlug);
 
     if (safeComponents.length > 0) {
-      // Always use the first (highest priority) component for this section
-      newItem.component = safeComponents[0];
+      const isSafe = safeComponents.includes(item.component);
+      if (!isSafe) {
+        newItem.component = safeComponents[0];
+      }
     }
 
     enhancedLayout.push(newItem);

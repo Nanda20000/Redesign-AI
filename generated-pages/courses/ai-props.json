@@ -1,0 +1,75 @@
+{
+  "navbar-dynamic": {
+    "logo": {
+      "text": "LCC Campus",
+      "href": "/preview/index"
+    },
+    "navItems": [
+      {
+        "label": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "label": "About",
+        "href": "/preview/about"
+      },
+      {
+        "label": "Courses",
+        "href": "/preview/courses"
+      },
+      {
+        "label": "Blog",
+        "href": "/preview/blog"
+      },
+      {
+        "label": "Gallery",
+        "href": "/preview/gallery"
+      },
+      {
+        "label": "Contact",
+        "href": "/preview/contact"
+      },
+      {
+        "label": "Services",
+        "href": "/preview/services"
+      }
+    ],
+    "actions": [
+      {
+        "label": "Explore Courses",
+        "href": "/preview/courses",
+        "variant": "primary"
+      }
+    ]
+  },
+  "hero-banner-dynamic": {
+    "backgroundImage": "https://lcccampus.com/wp-content/uploads/2025/11/ChatGPTImageNov18202512_39_26P-1024x683.jpeg",
+    "breadcrumb": null,
+    "title": "Welcome to LCC Campus",
+    "description": "A premier educational institution in Kerala offering career-focused diploma courses in fields like computerized accounting and business administration."
+  },
+  "features-simple-dynamic": {
+    "tagline": "EXPLORE COURSES",
+    "heading": "Our Career-Oriented Diploma Programs",
+    "description": "We offer practical, industry-focused training designed to equip students with the skills needed for successful careers in finance and business administration.",
+    "features": [
+      {
+        "title": "Diploma in Computerized Industrial Accounting",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_5e7ozv5e7ozv5e7.jpeg"
+      },
+      {
+        "title": "Financial Accounting & Taxation",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_9gc5379gc5379gc-1.jpeg"
+      },
+      {
+        "title": "Payroll, GST & Software Training",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_62uufu62uufu62u.jpeg"
+      }
+    ]
+  },
+  "footer-simple": {
+    "brandName": "LCC Campus",
+    "description": "An educational institution in Kerala offering career-focused diploma courses.",
+    "copyright": "Copyright © 2026 lcccampus.com"
+  }
+}

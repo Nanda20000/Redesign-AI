@@ -29,6 +29,16 @@ export interface ExtractedWebsiteContent {
   };
   images?: Array<{ src: string; alt?: string; title?: string; width?: number; height?: number }>;
   availablePages?: string[]; // List of generated page slugs for navbar filtering
+  sectionSequence?: string[];
+  sectionBuckets?: Record<string, Array<{
+    sourceIndex?: number;
+    heading?: string;
+    text: string;
+    className?: string;
+    id?: string;
+    links?: string[];
+    images?: Array<{ src: string; alt?: string; title?: string; width?: number; height?: number }>;
+  }>>;
   processed?: {
     features?: {
       heading: string;
@@ -49,6 +59,54 @@ export interface ExtractedWebsiteContent {
       copyright: string;
     };
   };
+}
+
+function uniqueBySrc(
+  images: Array<{ src: string; alt?: string; title?: string; width?: number; height?: number }>
+) {
+  const seen = new Set<string>();
+  return images.filter((image) => {
+    if (!image?.src || seen.has(image.src)) {
+      return false;
+    }
+    seen.add(image.src);
+    return true;
+  });
+}
+
+function getSectionSpecificContext(content: ExtractedWebsiteContent, section: string) {
+  const buckets = content.sectionBuckets?.[section] || [];
+  const sectionImages = uniqueBySrc(buckets.flatMap(bucket => bucket.images || []));
+
+  return {
+    buckets,
+    sectionImages,
+    summary: buckets.length > 0
+      ? buckets.slice(0, 4).map((bucket, index) =>
+          `[${index + 1}] heading="${bucket.heading || ''}" text="${bucket.text.slice(0, 500)}" links="${(bucket.links || []).join(', ')}"`
+        ).join('\n')
+      : 'No section-specific content captured.',
+  };
+}
+
+function formatImageList(
+  images: Array<{ src: string; alt?: string; title?: string; width?: number; height?: number }>
+) {
+  const candidates = uniqueBySrc(images).slice(0, 20);
+  if (candidates.length === 0) {
+    return 'No images available';
+  }
+
+  return candidates.map((image, index) => {
+    const labelParts = [
+      image.alt ? `alt="${image.alt}"` : '',
+      image.title ? `title="${image.title}"` : '',
+      image.width ? `width=${image.width}` : '',
+      image.height ? `height=${image.height}` : '',
+    ].filter(Boolean);
+
+    return `${index + 1}. ${image.src}${labelParts.length ? ` (${labelParts.join(', ')})` : ''}`;
+  }).join('\n');
 }
 
 export interface ComponentPropSchema {
@@ -729,16 +787,15 @@ function buildPropPrompt(
   schema: ComponentPropSchema,
   content: ExtractedWebsiteContent
 ): string {
+  const sectionContext = getSectionSpecificContext(content, schema.section);
   const propsDescription = schema.props
     .map(p => `  - "${p.name}" (${p.type}): ${p.description}${p.required ? ' [REQUIRED]' : ' [OPTIONAL]'}`)
     .join('\n');
 
-  const rawImages = content.images || [];
-  const availableImages = rawImages
-    .slice(0, 20)
-    .map(img => typeof img === 'string' ? img : img.src)
-    .filter(Boolean)
-    .join('\n') || 'No images available';
+  const availableImages = formatImageList([
+    ...sectionContext.sectionImages,
+    ...(content.images || []),
+  ]);
 
   return `You are an expert web content writer. Your job is to write content for a website component using extracted content from a real website.
 
@@ -769,6 +826,14 @@ ${content.availablePages && content.availablePages.length > 0
 - AI-detected business content: ${JSON.stringify(content.processed?.features?.items?.map(i => i.title) ?? [])}
 - About/company info: ${content.processed?.about?.description?.slice(0, 100) ?? 'N/A'}
 ${content.availablePages && content.availablePages.length > 0 ? `- Only these pages have been redesigned and should appear in navigation: ${content.availablePages.map(p => p === 'index' ? 'Home (/preview/index)' : `${p.replace(/-/g, ' ')} (/preview/${p})`).join(', ')}` : ''}
+
+## Section-Specific Content For "${schema.section}":
+${sectionContext.summary}
+
+## Section-Specific Guidance:
+- Base the copy primarily on the section-specific content above.
+- Preserve the original section's purpose and information hierarchy.
+- Prefer images that came from this specific section when available.
 
 Use this context to write props that closely mirror the PURPOSE and CONTENT TYPE of the source website,
 but rewritten in fresh, professional language suitable for the redesigned page.
@@ -804,6 +869,9 @@ ${propsDescription}
 8. If a prop is OPTIONAL and there is no relevant content, set it to null.
 9. **IMAGE SELECTION**: Select the MOST relevant image(s) for this section from the "Available Images" list above. Return the selected image URL(s) in the 'image' or 'items[].image' field if the component supports it. Do NOT use images not listed above.
 10. If no relevant image exists for this section, leave image fields as null/undefined — do NOT force an image.
+
+12. Prefer section-specific images first and avoid logos/icons unless this is navbar/footer or no better image exists.
+13. Do not write generic filler. If the section mentions specific programs, services, qualifications, outcomes, locations, or audiences, reflect them in the props.
 
 ## Response Format:
 Return ONLY a valid JSON object. No markdown, no explanations, no extra text.

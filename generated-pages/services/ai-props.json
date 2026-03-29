@@ -1,0 +1,86 @@
+{
+  "navbar-dynamic": {
+    "logo": {
+      "text": "LCC Campus",
+      "href": "/preview/index"
+    },
+    "navItems": [
+      {
+        "label": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "label": "About",
+        "href": "/preview/about"
+      },
+      {
+        "label": "Courses",
+        "href": "/preview/courses"
+      },
+      {
+        "label": "Blog",
+        "href": "/preview/blog"
+      },
+      {
+        "label": "Gallery",
+        "href": "/preview/gallery"
+      },
+      {
+        "label": "Contact",
+        "href": "/preview/contact"
+      },
+      {
+        "label": "Services",
+        "href": "/preview/services"
+      }
+    ],
+    "actions": [
+      {
+        "label": "Learn More",
+        "href": "/preview/courses",
+        "variant": "primary"
+      }
+    ]
+  },
+  "hero-banner-dynamic": {
+    "backgroundImage": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
+    "breadcrumb": null,
+    "title": "Excellence in Every Step",
+    "description": "Empowering learners to reach their fullest potential in an environment where innovation and growth thrive."
+  },
+  "features-simple-dynamic": {
+    "tagline": "OUR COMMITMENT",
+    "heading": "Excellence in Every Step",
+    "description": "We empower every learner to reach their fullest potential through an environment where innovation and growth thrive.",
+    "features": [
+      {
+        "title": "Computer Courses",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg"
+      },
+      {
+        "title": "Empowering Environment",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
+      },
+      {
+        "title": "Future-Focused Learning",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg"
+      }
+    ]
+  },
+  "about-simple-dynamic": {
+    "headline": "About LCC Campus",
+    "topIntro": "We are dedicated to empowering every learner to achieve their fullest potential through a commitment to excellence.",
+    "heroImage": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
+    "label": "Our Mission",
+    "subIntro": "At LCC Campus, we foster an environment where innovation, growth, and personal development are at the heart of everything we do.",
+    "avatarImage": null,
+    "avatarName": null,
+    "avatarTitle": null,
+    "mainStatement": "LCC Campus is committed to empowering every learner to reach their fullest potential. We create a dynamic educational environment where innovation and growth thrive. Together, we are dedicated to shaping futures built on a strong foundation of knowledge, integrity, and purpose, guiding students toward meaningful and successful careers."
+  },
+  "footer-simple": {
+    "brandName": "LCC Campus",
+    "description": "An educational institution empowering learners in Kerala through skill development.",
+    "copyright": "Copyright © 2026 lcccampus.com"
+  }
+}

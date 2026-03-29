@@ -4,11 +4,21 @@ import { generateAIResponse } from '../../../../lib/ai';
 interface ClassifiedSection {
   type: string;
   text: string;
+  sourceIndex?: number;
+}
+
+interface InputSection {
+  textPreview?: string;
+  text?: string;
+  heading?: string;
+  class?: string;
+  id?: string;
+  sourceIndex?: number;
 }
 
 interface ClassifyRequest {
   headings: string[];
-  sections: string[];
+  sections: Array<string | InputSection>;
   hasNavbar?: boolean;
   hasFooter?: boolean;
   navbarLinks?: string[];
@@ -34,9 +44,33 @@ const VALID_SECTION_TYPES = [
   'blog',
 ];
 
-function createPrompt(headings: string[], sections: string[], hasNavbar?: boolean, hasFooter?: boolean, navbarLinks?: string[], pageType?: string, sourceUrl?: string): string {
+function normalizeSections(sections: Array<string | InputSection>): InputSection[] {
+  return sections.map((section, index) => {
+    if (typeof section === 'string') {
+      return {
+        textPreview: section,
+        sourceIndex: index,
+      };
+    }
+
+    return {
+      ...section,
+      sourceIndex: typeof section.sourceIndex === 'number' ? section.sourceIndex : index,
+    };
+  });
+}
+
+function createPrompt(headings: string[], sections: InputSection[], hasNavbar?: boolean, hasFooter?: boolean, navbarLinks?: string[], pageType?: string, sourceUrl?: string): string {
   const headingsText = headings.length > 0 ? headings.join('\n') : 'None';
-  const sectionsText = sections.length > 0 ? sections.join('\n') : 'None';
+  const sectionsText = sections.length > 0
+    ? sections.map((section, index) => {
+        const heading = section.heading ? ` heading="${section.heading}"` : '';
+        const className = section.class ? ` class="${section.class}"` : '';
+        const id = section.id ? ` id="${section.id}"` : '';
+        const text = section.textPreview || section.text || 'No text';
+        return `[${typeof section.sourceIndex === 'number' ? section.sourceIndex : index}]${heading}${className}${id} text="${text}"`;
+      }).join('\n')
+    : 'None';
   const navbarText = navbarLinks && navbarLinks.length > 0 ? navbarLinks.join(', ') : 'None detected';
 
   // Determine expected sections based on page type
@@ -115,7 +149,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Create prompt for AI with navbar/footer detection info and page type context
-    const prompt = createPrompt(headings, sections, hasNavbar, hasFooter, navbarLinks, pageType, sourceUrl);
+    const normalizedSections = normalizeSections(sections);
+    const prompt = createPrompt(headings, normalizedSections, hasNavbar, hasFooter, navbarLinks, pageType, sourceUrl);
 
     // Send to DeepSeek AI
     let aiResponse: string;
@@ -133,10 +168,11 @@ export async function POST(request: NextRequest) {
       }
       
       // Add sections based on headings
-      headings.forEach((heading) => {
+      normalizedSections.forEach((section, index) => {
         fallbackSections.push({
-          type: inferSectionType(heading),
-          text: heading,
+          type: inferSectionType(section.heading || section.textPreview || section.text || headings[index] || ''),
+          text: section.textPreview || section.text || section.heading || 'Content section',
+          sourceIndex: section.sourceIndex,
         });
       });
       
@@ -165,9 +201,10 @@ export async function POST(request: NextRequest) {
       console.error('Failed to parse AI response:', parseError);
       
       // Fallback to basic classification
-      const fallbackSections: ClassifiedSection[] = headings.map((heading) => ({
-        type: inferSectionType(heading),
-        text: heading,
+      const fallbackSections: ClassifiedSection[] = normalizedSections.map((section, index) => ({
+        type: inferSectionType(section.heading || section.textPreview || section.text || headings[index] || ''),
+        text: section.textPreview || section.text || section.heading || 'Content section',
+        sourceIndex: section.sourceIndex,
       }));
       
       return NextResponse.json({ sections: fallbackSections });
@@ -181,6 +218,7 @@ export async function POST(request: NextRequest) {
           ? s.type.toLowerCase()
           : 'features',
         text: s.text,
+        sourceIndex: typeof s.sourceIndex === 'number' ? s.sourceIndex : undefined,
       }));
 
     // Ensure navbar is first if detected but not in response

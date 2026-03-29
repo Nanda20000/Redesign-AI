@@ -119,7 +119,10 @@ export default function Home() {
         const analyzeRes = await fetch('/api/analyze', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: page.url }),
+          body: JSON.stringify({
+            url: page.url,
+            pageSlug: page.slug,
+          }),
         });
         const analyzeData: AnalyzeResult = await analyzeRes.json();
         if (analyzeData.status !== 'success') continue;

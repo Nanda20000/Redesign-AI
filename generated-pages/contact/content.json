@@ -1,83 +1,92 @@
 {
   "headings": [
-    "Contact Us",
-    "Leave A Message",
-    "Get in Touch - We're Here to Listen",
-    "Our Branches",
-    "Quick Links",
-    "Quick Links"
+    "Get In Touch With Us!",
+    "Phone",
+    "Email",
+    "Address",
+    "Send a message"
   ],
   "paragraphs": [
-    "Contact Us\n            \n                \n                    Home\n                    Contact Us",
-    "IBS Academy\n                    Calicut Mall, Stadium Junction\nPuthiyara Road, Kozhikode-673004\n            \n            \n            \n                \n                +91 7594062999 +91 7594014999\n  ",
-    "Our Branches\n            \n        \n        \n                        \n                \n                    \n                    KOTTAKKAL - Parappur Road :\n                    9544 549 428\n            "
+    "“Contact LCC Campus to start your career journey with expert-led courses in Accounting & Finance, Multimedia & Animation, PGDCA, DCA, DTP, and MS Office. Our team is here to guide you with admissions, course details, and learning support. Reach out today and take the next step toward your professional growth. Get In Touch With Us! Phone 04931278212 Email johnsonlccedk@gmail.com Address LCC campus,",
+    "Home About Courses Blog Gallery Contact Take Action Take Action Main Menu Home About Courses Blog Gallery Contact",
+    "“Contact LCC Campus to start your career journey with expert-led courses in Accounting & Finance, Multimedia & Animation, PGDCA, DCA, DTP, and MS Office. Our team is here to guide you with admissions, course details, and learning support. Reach out today and take the next step toward your professional growth.",
+    "“Contact LCC Campus to start your career journey with expert-led courses in Accounting & Finance, Multimedia & Animation, PGDCA, DCA, DTP, and MS Office. Our team is here to guide you with admissions, course details, and learning support. Reach out today and take the next step toward your professional growth.",
+    "Get In Touch With Us! Phone 04931278212 Email johnsonlccedk@gmail.com Address LCC campus, Edakkara, Kerala 679331, India Send a message Please enable JavaScript in your browser to complete this form.Name *Email *Subject *Comment or Message *WebsiteSend Message",
+    "Facebook Instagram Whatsapp",
+    "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com",
+    "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com"
   ],
   "navigationLinks": [
     "home",
     "about",
-    "career",
-    "exam",
+    "courses",
+    "blog",
     "gallery",
-    "contact us",
-    "partnership",
-    "sign in",
-    "register now"
+    "contact"
   ],
-  "footerText": "Our Branches\n            \n        \n        \n                        \n                \n                    \n                    KOTTAKKAL - Parappur Road :\n                    9544 549 428\n            ",
+  "footerText": "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com",
   "contactInfo": {
-    "phone": "7594062999"
+    "email": "johnsonlccedk@gmail.com",
+    "phone": "04931278212"
   },
   "images": [
     {
-      "src": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
-      "alt": "Logo",
-      "title": "Logo",
-      "width": 342,
-      "height": 97
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/businessman-touching-email-service-1-2048x1365.jpg",
+      "alt": "Businessman Touching Email Service 1 2048x1365",
+      "title": "lcc campus",
+      "width": 1919,
+      "height": 1279
     },
     {
-      "src": "https://ibsacademy.co/public/assets/web/images/logo/footer.png",
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/143341-scaled.jpg",
       "alt": "",
       "title": "",
-      "width": 170,
-      "height": 44
+      "width": 1920,
+      "height": 765
+    },
+    {
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/tower-img.jpg",
+      "alt": "",
+      "title": "",
+      "width": 331,
+      "height": 525
     }
   ],
   "processed": {
     "features": {
-      "heading": "Contact Us",
-      "description": "Provides contact information and branch details for reaching the academy.",
+      "heading": "Get In Touch With Us!",
+      "description": "Contact LCC Campus to start your career journey with expert-led courses. Our team is here to guide you with admissions, course details, and learning support.",
       "items": [
         {
-          "title": "Contact Support",
-          "description": "Reach the academy via phone at +91 7594062999 or +91 7594014999 for inquiries."
+          "title": "Expert-Led Courses",
+          "description": "Courses in Accounting & Finance, Multimedia & Animation, PGDCA, DCA, DTP, and MS Office."
         },
         {
-          "title": "Branch Network",
-          "description": "Access services through multiple branches, including locations in Kozhikode and Kottakkal."
+          "title": "Admissions & Learning Support",
+          "description": "Guidance with admissions, course details, and ongoing learning support for professional growth."
         }
       ]
     },
     "about": {
       "title": "About",
-      "description": "IBS Academy is an educational institution with multiple branches. The content focuses on contact details and navigation to key site sections.",
+      "description": "LCC Campus offers expert-led courses to help students start their career journey. The team provides guidance on admissions, course details, and learning support to facilitate professional growth.",
       "companies": [],
       "achievements": [],
       "breakout": {
-        "title": "We're Here to Listen",
-        "description": "A key message inviting communication and engagement from visitors."
+        "title": "Take the Next Step",
+        "description": "Reach out today and take the next step toward your professional growth."
       }
     },
     "footer": {
-      "brandName": "IBS Academy",
-      "description": "An educational academy with multiple branches.",
+      "brandName": "LCC Campus",
+      "description": "LCC Campus located in Edakkara, Nilambur, Pothukal, Karulai, Kerala.",
       "contactInfo": {
-        "email": "Not provided",
-        "phone": "+91 7594062999, +91 7594014999",
-        "address": "Calicut Mall, Stadium Junction, Puthiyara Road, Kozhikode-673004"
+        "email": "johnsonlccedk@gmail.com",
+        "phone": "9744064081",
+        "address": "LCC campus, Edakkara, Kerala 679331, India"
       },
-      "copyright": "© 2024 IBS Academy. All rights reserved."
+      "copyright": "Copyright © 2026 lcccampus.com"
     }
   },
-  "sourceUrl": "https://ibsacademy.co/contact"
+  "sourceUrl": "https://lcccampus.com/contact/"
 }

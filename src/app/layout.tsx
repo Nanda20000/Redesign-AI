@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "../../lib/env-config";
 
 export const metadata: Metadata = {
   title: "AI Website Redesign Tool",

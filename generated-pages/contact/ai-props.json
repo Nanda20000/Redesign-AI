@@ -1,7 +1,7 @@
 {
   "navbar-dynamic": {
     "logo": {
-      "text": "IBS Academy",
+      "text": "LCC Campus",
       "href": "/preview/index"
     },
     "navItems": [
@@ -14,45 +14,56 @@
         "href": "/preview/about"
       },
       {
+        "label": "Courses",
+        "href": "/preview/courses"
+      },
+      {
+        "label": "Blog",
+        "href": "/preview/blog"
+      },
+      {
+        "label": "Gallery",
+        "href": "/preview/gallery"
+      },
+      {
         "label": "Contact",
         "href": "/preview/contact"
+      },
+      {
+        "label": "Services",
+        "href": "/preview/services"
       }
     ],
     "actions": [
       {
-        "label": "Sign In",
-        "href": "#"
-      },
-      {
-        "label": "Register Now",
-        "href": "#",
-        "variant": "primary"
+        "label": "Contact Us",
+        "href": "/preview/contact"
       }
     ]
   },
   "hero-banner-dynamic": {
-    "backgroundImage": null,
-    "breadcrumb": "Home > Contact",
-    "title": "Contact IBS Academy",
-    "description": "Reach out to our support team or visit one of our branches for assistance with your educational journey."
+    "backgroundImage": "https://lcccampus.com/wp-content/uploads/2025/11/143341-scaled.jpg",
+    "breadcrumb": null,
+    "title": "Get In Touch With Us!",
+    "description": "Start your career journey with expert-led courses. Our team provides guidance on admissions, course details, and learning support."
   },
   "contact-split-dynamic": {
-    "title": "Get in Touch - We're Here to Listen",
-    "description": "Reach out to IBS Academy with your inquiries. Our dedicated team is ready to assist you with information about our courses and services.",
-    "formTitle": "Leave A Message",
-    "nameLabel": "Your Name",
-    "namePlaceholder": "Enter your full name",
-    "emailLabel": "Email Address",
-    "emailPlaceholder": "Enter your email",
-    "phoneLabel": "Phone Number",
-    "phonePlaceholder": "Enter your phone number",
-    "messageLabel": "Your Message",
-    "messagePlaceholder": "How can we help you today?",
+    "title": "Get In Touch With Us!",
+    "description": "Contact LCC Campus to begin your career journey with our expert-led courses. Our dedicated team is ready to assist you with admissions, detailed course information, and personalised learning support. Reach out today to take your next step toward professional growth.",
+    "formTitle": "Send a message",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your full name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Your email address",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "Your phone number",
+    "messageLabel": "Comment or Message",
+    "messagePlaceholder": "How can we help you?",
     "submitButtonText": "Send Message"
   },
   "footer-simple": {
-    "brandName": "IBS Academy",
-    "description": "An educational institution offering professional courses across multiple branches.",
-    "copyright": "© 2024 IBS Academy. All rights reserved."
+    "brandName": "LCC Campus",
+    "description": "A premier institute in Kerala offering expert-led career courses and learning support.",
+    "copyright": "Copyright © 2026 lcccampus.com"
   }
 }

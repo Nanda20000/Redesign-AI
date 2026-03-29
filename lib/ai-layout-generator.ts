@@ -67,8 +67,31 @@ export interface ExtractedContent {
     phone?: string;
     address?: string;
   };
-  images?: string[];
+  images?: Array<{
+    src: string;
+    alt?: string;
+    title?: string;
+    width?: number;
+    height?: number;
+  }>;
   items?: string[];
+  sourceUrl?: string;
+  sectionSequence?: string[];
+  sectionBuckets?: Record<string, Array<{
+    sourceIndex?: number;
+    heading?: string;
+    text: string;
+    className?: string;
+    id?: string;
+    links?: string[];
+    images?: Array<{
+      src: string;
+      alt?: string;
+      title?: string;
+      width?: number;
+      height?: number;
+    }>;
+  }>>;
 }
 
 export interface GeneratedPageData {
@@ -400,13 +423,15 @@ export function loadGeneratedPageData(): Promise<GeneratedPageData> {
 function getDefaultImageComponent(section: string): string | null {
   switch (section) {
     case 'hero':
-      return 'hero-ab';
+      return 'hero-dynamic';
     case 'features':
-      return 'features-slideshow';
+      return 'features-dynamic';
     case 'about':
-      return 'about-two-column';
+      return 'about-simple-dynamic';
     case 'testimonials':
-      return 'testimonial-cards';
+      return 'testimonials-dynamic';
+    case 'gallery':
+      return 'gallery-elegant-dynamic';
     default:
       return null;
   }
@@ -506,14 +531,46 @@ function enforceAICompatibleComponents(layout: LayoutResponse, pageSlug: string 
     const safeComponents = getAIComponentsForSection(item.section, pageSlug);
 
     if (safeComponents.length > 0) {
-      // Always use the first (highest priority) component for this section
-      newItem.component = safeComponents[0];
+      const isSafe = safeComponents.includes(item.component);
+      if (!isSafe) {
+        newItem.component = safeComponents[0];
+      }
     }
 
     enhancedLayout.push(newItem);
   }
 
   return { layout: enhancedLayout };
+}
+
+function getUniqueSectionsInOrder(sections: string[]): string[] {
+  const seen = new Set<string>();
+  const ordered: string[] = [];
+
+  for (const section of sections) {
+    if (!seen.has(section)) {
+      seen.add(section);
+      ordered.push(section);
+    }
+  }
+
+  return ordered;
+}
+
+function mergeLayoutsByDetectedSections(
+  detectedSections: string[],
+  aiLayout: LayoutResponse,
+  selectedLayout: LayoutItem[]
+): LayoutResponse {
+  const orderedSections = getUniqueSectionsInOrder(detectedSections);
+  const aiBySection = new Map(aiLayout.layout.map(item => [item.section, item]));
+  const selectedBySection = new Map(selectedLayout.map(item => [item.section, item]));
+
+  return {
+    layout: orderedSections
+      .map(section => aiBySection.get(section) || selectedBySection.get(section))
+      .filter((item): item is LayoutItem => Boolean(item)),
+  };
 }
 
 /**
@@ -641,17 +698,6 @@ export async function generateLayoutWithAI(
     console.log('[AI Layout Generator] Parsing AI response...');
     let layout = parseLayoutResponse(aiResponse);
 
-    // FORCE IMAGE-CAPABLE COMPONENTS when images exist
-    if (hasImages) {
-      console.log('[AI Layout Generator] Enforcing image-capable components...');
-      layout = enforceImageComponents(layout, hasImages);
-    }
-
-    // ENFORCE AI-SAFE COMPONENTS: Replace any non-whitelisted components
-    // This runs AFTER AI layout generation to ensure only dynamic-safe components are used
-    console.log('[AI Layout Generator] Enforcing AI-safe component whitelist...');
-    layout = enforceAICompatibleComponents(layout, pageSlug);
-
     // Step 8: Validate and enhance selection with rules engine (image-aware)
     console.log('[AI Layout Generator] Validating component selection...');
     const imageCount = extractedContent?.images?.length ?? 0;
@@ -673,6 +719,24 @@ export async function generateLayoutWithAI(
       console.log(`  - ${section}: ${reason}`);
     });
     console.log(`[AI Layout Generator] Variety score: ${selectionResult.varietyScore}/100`);
+
+    // Merge AI output with rule-based selection so we keep all detected sections
+    // while preserving valid AI choices where they exist.
+    layout = mergeLayoutsByDetectedSections(
+      pageStructure.sections,
+      layout,
+      selectionResult.layout
+    );
+
+    // FORCE IMAGE-CAPABLE COMPONENTS when images exist
+    if (hasImages) {
+      console.log('[AI Layout Generator] Enforcing image-capable components...');
+      layout = enforceImageComponents(layout, hasImages);
+    }
+
+    // ENFORCE AI-SAFE COMPONENTS after merging so invalid selections are corrected
+    console.log('[AI Layout Generator] Enforcing AI-safe component whitelist...');
+    layout = enforceAICompatibleComponents(layout, pageSlug);
 
     // Step 9: Save the layout
     console.log('[AI Layout Generator] Saving layout...');

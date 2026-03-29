@@ -1,94 +1,109 @@
 {
   "headings": [
-    "About Us",
-    "About Us",
-    "Mission",
-    "Vision",
-    "Quick Links",
-    "Quick Links"
+    "ABOUT US",
+    "LCC CAMPUS",
+    "PSC Approved Institution",
+    "Our Vision",
+    "Our Mission",
+    "12+",
+    "22",
+    "25+",
+    "10K"
   ],
   "paragraphs": [
-    "About Us\n            \n                \n                    Home\n                    About Us",
-    "About Us\n                        Numbers Tell a Story of Success\n                    \n                    IBS Academy is a premier ISO 9001: 2015 certified professional accounting institute in Kerala\n",
-    "Mission\n                        \n                        As INTERNATIONAL BUSINESS SOLUTIONS, we have been aligned with more than 5000 clients by being the Tally partner and provider of ERP solutions."
+    "ABOUT US LCC CAMPUSLCC Campus is a leading educational institution dedicated to shaping confident, skilled, and career-ready individuals. We proudly offer the best job oriented courses such as best fashion designing course, best computer courses, best pre-primary TTC courses,best accounting courses, best hospital administration course, and best beautician courses, all crafted to meet the evolving ",
+    "Home About Courses Blog Gallery Contact Take Action Take Action Main Menu Home About Courses Blog Gallery Contact",
+    "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com",
+    "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com"
   ],
   "navigationLinks": [
     "home",
     "about",
-    "career",
-    "exam",
+    "courses",
+    "blog",
     "gallery",
-    "contact us",
-    "partnership",
-    "sign in",
-    "register now"
+    "contact"
   ],
-  "footerText": "Mission\n                        \n                        As INTERNATIONAL BUSINESS SOLUTIONS, we have been aligned with more than 5000 clients by being the Tally partner and provider of ERP solutions.",
+  "footerText": "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com",
+  "contactInfo": {
+    "email": "johnsonlccedk@gmail.com",
+    "phone": "9744064081"
+  },
   "images": [
     {
-      "src": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
-      "alt": "Logo",
-      "title": "Logo",
-      "width": 342,
-      "height": 97
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_qgqkfcqgqkfcqgq.jpeg",
+      "alt": "gemini generated image qgqkfcqgqkfcqgq",
+      "title": "gemini generated image qgqkfcqgqkfcqgq",
+      "width": 1024,
+      "height": 1024
     },
     {
-      "src": "https://ibsacademy.co/public/assets/web/images/about/1.png",
-      "alt": "About",
-      "title": "",
-      "width": 633,
-      "height": 585
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_39uryf39uryf39u-1.jpeg",
+      "alt": "gemini generated image 39uryf39uryf39u",
+      "title": "gemini generated image 39uryf39uryf39u",
+      "width": 1024,
+      "height": 1024
     },
     {
-      "src": "https://ibsacademy.co/public/assets/web/images/logo/footer.png",
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944238-1.jpg",
       "alt": "",
       "title": "",
-      "width": 170,
-      "height": 44
+      "width": 1920,
+      "height": 560
     }
   ],
   "processed": {
     "features": {
-      "heading": "Numbers Tell a Story of Success",
-      "description": "IBS Academy is a premier professional accounting institute and business solutions provider.",
+      "heading": "Best Job Oriented Courses",
+      "description": "LCC Campus offers a range of specialized, career-focused courses designed to equip students with practical skills for the modern workforce.",
       "items": [
         {
-          "title": "Professional Accounting Institute",
-          "description": "Premier ISO 9001:2015 certified institute in Kerala."
+          "title": "Fashion Designing Course",
+          "description": "A top-rated program for aspiring fashion professionals."
         },
         {
-          "title": "Tally Partner & ERP Solutions",
-          "description": "Provider of Tally and ERP business solutions."
+          "title": "Computer Courses",
+          "description": "Comprehensive IT and computer skill development programs."
+        },
+        {
+          "title": "Pre-primary TTC Courses",
+          "description": "Teacher training courses specializing in early childhood education."
+        },
+        {
+          "title": "Hospital Administration Course",
+          "description": "Training for managing and operating healthcare facilities."
         }
       ]
     },
     "about": {
-      "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in Kerala. As INTERNATIONAL BUSINESS SOLUTIONS, it provides Tally and ERP solutions.",
-      "companies": [
-        "INTERNATIONAL BUSINESS SOLUTIONS"
-      ],
+      "title": "ABOUT US",
+      "description": "LCC Campus is a leading educational institution dedicated to shaping confident, skilled, and career-ready individuals. It offers job-oriented courses crafted to meet evolving industry demands.",
+      "companies": [],
       "achievements": [
         {
-          "label": "Clients Aligned",
-          "value": "5000+"
+          "label": "Years Experience",
+          "value": "12+"
+        },
+        {
+          "label": "Students",
+          "value": "10K+"
         }
       ],
       "breakout": {
-        "title": "Mission",
-        "description": "Aligned with over 5000 clients as a Tally partner and ERP solutions provider."
+        "title": "Our Vision",
+        "description": "Information not explicitly provided in the input content."
       }
     },
     "footer": {
-      "brandName": "IBS Academy / INTERNATIONAL BUSINESS SOLUTIONS",
-      "description": "A premier professional accounting institute and provider of Tally and ERP business solutions.",
+      "brandName": "LCC Campus",
+      "description": "A leading educational institution offering job-oriented courses.",
       "contactInfo": {
-        "email": "Not provided",
-        "phone": "Not provided",
-        "address": "Kerala, India"
+        "email": "johnsonlccedk@gmail.com",
+        "phone": "9744064081",
+        "address": "Edakkara, Nilambur, Pothukal, Karulai - Kerala"
       },
-      "copyright": "© 2024 IBS Academy. All rights reserved."
+      "copyright": "Copyright © 2026 lcccampus.com"
     }
   },
-  "sourceUrl": "https://ibsacademy.co/about"
+  "sourceUrl": "https://lcccampus.com/about/"
 }

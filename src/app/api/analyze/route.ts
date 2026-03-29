@@ -18,6 +18,96 @@ const MAX_RETRIES = 3;
 const BASE_DELAY = 2000; // 2 seconds
 const NAVIGATION_TIMEOUT = 30000; // 30 seconds
 
+interface ExtractedImage {
+  src: string;
+  alt: string;
+  title: string;
+  width: number;
+  height: number;
+}
+
+interface ExtractedSection {
+  sourceIndex?: number;
+  class?: string;
+  id?: string;
+  heading?: string;
+  textPreview: string;
+  text?: string;
+  links?: string[];
+  images?: ExtractedImage[];
+}
+
+function uniqueInOrder<T>(items: T[]): T[] {
+  const seen = new Set<T>();
+  const output: T[] = [];
+
+  for (const item of items) {
+    if (!seen.has(item)) {
+      seen.add(item);
+      output.push(item);
+    }
+  }
+
+  return output;
+}
+
+function buildSectionBuckets(
+  classifiedSections: Array<{ type: string; text: string; sourceIndex?: number }>,
+  rawSections: ExtractedSection[],
+  pageImages: ExtractedImage[]
+) {
+  const buckets: Record<string, Array<{
+    sourceIndex?: number;
+    heading?: string;
+    text: string;
+    className?: string;
+    id?: string;
+    links?: string[];
+    images?: ExtractedImage[];
+  }>> = {};
+
+  for (const classified of classifiedSections) {
+    const sourceSection = typeof classified.sourceIndex === 'number'
+      ? rawSections[classified.sourceIndex]
+      : undefined;
+
+    const bucketItem = {
+      sourceIndex: classified.sourceIndex,
+      heading: sourceSection?.heading,
+      text: sourceSection?.text || sourceSection?.textPreview || classified.text,
+      className: sourceSection?.class,
+      id: sourceSection?.id,
+      links: sourceSection?.links || [],
+      images: sourceSection?.images || [],
+    };
+
+    if (!buckets[classified.type]) {
+      buckets[classified.type] = [];
+    }
+
+    buckets[classified.type].push(bucketItem);
+  }
+
+  if (!buckets.navbar) {
+    buckets.navbar = [];
+  }
+
+  if (!buckets.footer) {
+    buckets.footer = [];
+  }
+
+  if (!buckets.gallery && pageImages.length > 0) {
+    buckets.gallery = [
+      {
+        text: 'Gallery content derived from page images',
+        images: pageImages,
+      },
+    ];
+  }
+
+  return buckets;
+}
+
 async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
   let lastError: Error | null = null;
   
@@ -85,7 +175,7 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
 
       // Fully scroll page to load lazy images - scroll down
       await page.evaluate(async () => {
-        await new Promise((resolve) => {
+        await new Promise<void>((resolve) => {
           let totalHeight = 0;
           const distance = 200;
 
@@ -177,6 +267,77 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
 
       // Extract page structure with improved navbar and footer detection
       const structure = await page.evaluate(() => {
+        const extractUrls = (value: string | null | undefined) => {
+          if (!value) return [];
+          const matches = Array.from(value.matchAll(/url\((['"]?)(.*?)\1\)/g));
+          return matches
+            .map(match => match[2])
+            .filter(url => url && !url.startsWith('data:'))
+            .map(url => {
+              try {
+                return new URL(url, window.location.href).href;
+              } catch {
+                return '';
+              }
+            })
+            .filter(Boolean);
+        };
+
+        const extractVisualAssets = (root: ParentNode) => {
+          const imageMap = new Map<string, { src: string; alt: string; title: string; width: number; height: number }>();
+
+          Array.from(root.querySelectorAll('img')).forEach((img) => {
+            const candidateSrc =
+              img.currentSrc ||
+              img.getAttribute('src') ||
+              img.getAttribute('data-src') ||
+              img.getAttribute('data-lazy') ||
+              '';
+
+            if (!candidateSrc || candidateSrc.startsWith('data:')) {
+              return;
+            }
+
+            try {
+              const resolved = new URL(candidateSrc, window.location.href).href;
+              if (!imageMap.has(resolved)) {
+                imageMap.set(resolved, {
+                  src: resolved,
+                  alt: img.alt || '',
+                  title: img.title || '',
+                  width: img.naturalWidth || 0,
+                  height: img.naturalHeight || 0,
+                });
+              }
+            } catch {
+              // Ignore malformed URLs
+            }
+          });
+
+          Array.from(root.querySelectorAll<HTMLElement>('*')).forEach((element) => {
+            const candidates = [
+              window.getComputedStyle(element).backgroundImage,
+              element.style.backgroundImage,
+              element.getAttribute('data-background'),
+              element.getAttribute('data-bg'),
+            ];
+
+            candidates.flatMap(extractUrls).forEach((url) => {
+              if (!imageMap.has(url)) {
+                imageMap.set(url, {
+                  src: url,
+                  alt: element.getAttribute('aria-label') || '',
+                  title: element.getAttribute('title') || '',
+                  width: element.clientWidth || 0,
+                  height: element.clientHeight || 0,
+                });
+              }
+            });
+          });
+
+          return Array.from(imageMap.values());
+        };
+
         // Common navigation link keywords
         const NAV_KEYWORDS = ['home', 'about', 'services', 'products', 'contact', 'pricing', 'features', 'blog', 'faq', 'login', 'sign', 'register', 'portfolio', 'team', 'careers'];
         
@@ -338,59 +499,112 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
         const hasFooter = footerElement !== null;
 
         // === SECTION DETECTION ===
-        let sectionElements = document.querySelectorAll("section");
+        const primaryContainers = [
+          document.querySelector('main'),
+          document.querySelector('[role="main"]'),
+          document.querySelector('article'),
+        ].filter((element): element is Element => Boolean(element));
 
-        if (sectionElements.length === 0) {
-          const potentialSections = document.querySelectorAll(
-            "main > div, .container, .wrapper, [class*='section'], [class*='hero'], [class*='banner'], [class*='content'], [class*='feature'], [class*='about'], [class*='service'], [class*='testimonial'], [class*='pricing']"
-          );
+        const topLevelCandidates = primaryContainers.flatMap(container =>
+          Array.from(container.children)
+        );
 
-          const filteredSections = Array.from(potentialSections).filter((el) => {
-            const text = el.textContent?.trim() || "";
-            return text.length > 50;
-          });
+        const candidateSelectors = [
+          'main > *',
+          '[role="main"] > *',
+          'article > *',
+          'body > header',
+          'body > nav',
+          'body > section',
+          'body > footer',
+          'section',
+          'header',
+          'footer',
+          '[class*="section"]',
+          '[class*="hero"]',
+          '[class*="banner"]',
+          '[class*="feature"]',
+          '[class*="service"]',
+          '[class*="about"]',
+          '[class*="testimonial"]',
+          '[class*="gallery"]',
+          '[class*="contact"]',
+          '[class*="pricing"]',
+          '[class*="blog"]',
+        ];
 
-          sectionElements = filteredSections as NodeListOf<Element>;
-        }
+        const candidateElements = [
+          ...topLevelCandidates,
+          ...candidateSelectors.flatMap(selector =>
+            Array.from(document.querySelectorAll(selector))
+          ),
+        ];
 
-        const sections = Array.from(sectionElements).map((section, index) => {
+        const seen = new Set<Element>();
+        const uniqueCandidates = candidateElements.filter((element) => {
+          if (seen.has(element)) return false;
+          seen.add(element);
+          return true;
+        });
+
+        const meaningfulSections = uniqueCandidates
+          .filter((element) => {
+            const rect = element.getBoundingClientRect();
+            const text = (element.textContent || '').replace(/\s+/g, ' ').trim();
+            const imageCount = element.querySelectorAll('img').length;
+            const headingCount = element.querySelectorAll('h1, h2, h3, h4').length;
+            const linkCount = element.querySelectorAll('a').length;
+            const meaningfulChildren = Array.from(element.children).filter((child) => {
+              const childText = (child.textContent || '').replace(/\s+/g, ' ').trim();
+              return childText.length > 40 || child.querySelectorAll('img').length > 0;
+            }).length;
+
+            if (rect.width < 80 || rect.height < 40) return false;
+            if (['script', 'style', 'noscript'].includes(element.tagName.toLowerCase())) return false;
+            if (meaningfulChildren >= 3 && text.length > 800 && element.tagName.toLowerCase() === 'div') return false;
+
+            return text.length >= 40 || imageCount > 0 || headingCount > 0 || linkCount >= 3;
+          })
+          .filter((element, _, elements) => {
+            return !elements.some(other =>
+              other !== element &&
+              other.contains(element) &&
+              other.getBoundingClientRect().height <= element.getBoundingClientRect().height * 1.35
+            );
+          })
+          .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+
+        const sections = meaningfulSections.map((section, index) => {
           const classList = Array.from(section.classList);
           const id = section.id;
-          const fullText = section.textContent?.trim() || "";
-          const textPreview = fullText.slice(0, 200);
+          const fullText = (section.textContent || '').replace(/\s+/g, ' ').trim();
+          const heading = section.querySelector('h1, h2, h3, h4')?.textContent?.replace(/\s+/g, ' ').trim();
+          const textPreview = fullText.slice(0, 400);
+          const sectionImages = extractVisualAssets(section);
+          const links = Array.from(section.querySelectorAll('a'))
+            .map(link => link.textContent?.replace(/\s+/g, ' ').trim() || '')
+            .filter(Boolean)
+            .slice(0, 8);
 
           return {
-            index: index + 1,
+            sourceIndex: index,
             class: classList.length > 0 ? classList.join(" ") : undefined,
             id: id || undefined,
-            textPreview: textPreview,
+            heading: heading || undefined,
+            textPreview,
+            text: fullText.slice(0, 2000),
+            links,
+            images: sectionImages,
           };
         });
 
         // === IMAGE EXTRACTION ===
-        const images = Array.from(document.querySelectorAll("img"))
-          .map((img) => ({
-            src: img.src,
-            alt: img.alt || "",
-            title: img.title || "",
-            width: img.naturalWidth,
-            height: img.naturalHeight,
-          }))
-          .filter(
-            (img) =>
-              img.src &&
-              !img.src.startsWith("data:") &&
-              img.src.trim() !== ""
-          );
+        const images = extractVisualAssets(document);
 
         return {
           headings,
           navigation: uniqueNav,
-          sections: sections.map(s => ({
-            class: s.class,
-            id: s.id,
-            textPreview: s.textPreview,
-          })),
+        sections,
           hasNavbar,
           hasFooter,
           navbarLinks: uniqueNav,
@@ -401,8 +615,8 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
       // Extract internal links from the page
       const internalLinks = await page.evaluate((baseUrl) => {
         const links = Array.from(document.querySelectorAll('a[href]'))
-          .map(a => a.getAttribute('href'))
-          .filter(href => href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:'))
+          .map(a => a.getAttribute('href') || '')
+          .filter(href => href !== '' && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:'))
           .map(href => {
             try {
               const resolved = new URL(href, baseUrl).href;
@@ -674,7 +888,14 @@ export async function POST(request: NextRequest) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         headings: structure.headings,
-        sections: structure.sections.map(s => s.class || s.id || ''),
+        sections: structure.sections.map((s: ExtractedSection, index: number) => ({
+          sourceIndex: typeof s.sourceIndex === 'number' ? s.sourceIndex : index,
+          heading: s.heading,
+          class: s.class,
+          id: s.id,
+          textPreview: s.textPreview,
+          text: s.text,
+        })),
         hasNavbar: structure.hasNavbar,
         hasFooter: structure.hasFooter,
         navbarLinks: structure.navbarLinks,
@@ -683,22 +904,40 @@ export async function POST(request: NextRequest) {
       }),
     });
 
-    let classifiedSections = structure.sections;
+    let classifiedSections: Array<{ type: string; text: string; sourceIndex?: number }> = [];
     if (classifyResponse.ok) {
       const classifyData = await classifyResponse.json();
       classifiedSections = classifyData.sections || [];
+    } else {
+      classifiedSections = (structure.sections as ExtractedSection[]).map((section, index) => ({
+        type: 'features',
+        text: section.textPreview || section.text || '',
+        sourceIndex: typeof section.sourceIndex === 'number' ? section.sourceIndex : index,
+      }));
     }
+
+    const sectionBuckets = buildSectionBuckets(
+      classifiedSections,
+      structure.sections as ExtractedSection[],
+      images as ExtractedImage[]
+    );
+
+    const orderedSectionTypes = uniqueInOrder(
+      classifiedSections.map((s) => s.type).filter(Boolean)
+    );
 
     // Call generate-layout API to create layout with content
     try {
-      const sectionTypes = Array.from(new Set(classifiedSections.map((s: any) => s.type)));
-
       await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/generate-layout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          sections: sectionTypes,
-          content: enrichedContent,
+          sections: orderedSectionTypes,
+          content: {
+            ...enrichedContent,
+            sectionBuckets,
+            sectionSequence: classifiedSections.map((s) => s.type),
+          },
           regenerate: true,
           pageSlug: pageSlug,
         }),
