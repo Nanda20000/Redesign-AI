@@ -5,8 +5,32 @@
       "component": "navbar-dynamic"
     },
     {
-      "section": "hero",
-      "component": "hero-simple-dynamic"
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
     },
     {
       "section": "features",
@@ -15,6 +39,54 @@
     {
       "section": "about",
       "component": "about-simple-dynamic"
+    },
+    {
+      "section": "about",
+      "component": "about-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "blog",
+      "component": "blog-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
     },
     {
       "section": "footer",

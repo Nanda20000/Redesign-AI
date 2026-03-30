@@ -3,7 +3,7 @@ export const COMPONENT_META = {
   "hero-simple-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 12 },
   "hero-elegant-dynamic": { section: "hero",   supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 12 },
   "hero-elegant-coloured-dynamic": { section: "hero", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
-  "hero-stylish-coloured-dynamic": { section: "hero", supportsImages: false, supportsItems: true, contentLevel: "high", priority: 10 },
+  "hero-stylish-coloured-dynamic": { section: "hero", supportsImages: false, supportsItems: true, contentLevel: "high", priority: 14 },
   "hero-banner-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "low",    priority: 9 },
   "hero-ab":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
   "hero-ac":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 9  },

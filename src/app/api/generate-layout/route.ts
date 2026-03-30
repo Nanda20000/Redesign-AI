@@ -12,6 +12,63 @@ function getAiPropsPath(pageSlug: string): string {
   return path.join(AI_PROPS_DIR, safe, 'ai-props.json');
 }
 
+function getGeneratedPageSlugsFromDisk(): string[] {
+  const generatedPagesDir = path.join(process.cwd(), 'generated-pages');
+  if (!fs.existsSync(generatedPagesDir)) return [];
+
+  return fs.readdirSync(generatedPagesDir)
+    .filter(name => {
+      const fullPath = path.join(generatedPagesDir, name);
+      return fs.statSync(fullPath).isDirectory() &&
+        fs.existsSync(path.join(fullPath, 'layout.json'));
+    })
+    .sort((a, b) => {
+      if (a === 'index') return -1;
+      if (b === 'index') return 1;
+      return a.localeCompare(b);
+    });
+}
+
+function slugToNavLabel(slug: string): string {
+  return slug === 'index'
+    ? 'Home'
+    : slug
+      .split('-')
+      .filter(Boolean)
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ');
+}
+
+function sanitizeNavbarPropsForGeneratedPages(navbarProps: any, availablePages: string[]) {
+  if (!navbarProps || !Array.isArray(availablePages) || availablePages.length === 0) {
+    return navbarProps;
+  }
+
+  const uniqueSlugs = Array.from(new Set(
+    availablePages
+      .map((slug) => String(slug || '').toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-'))
+      .filter(Boolean)
+  )).sort((a, b) => {
+    if (a === 'index') return -1;
+    if (b === 'index') return 1;
+    return a.localeCompare(b);
+  });
+
+  const navItems = uniqueSlugs.map((slug) => ({
+    label: slugToNavLabel(slug),
+    href: `/preview/${slug}`,
+  }));
+
+  return {
+    ...navbarProps,
+    logo: {
+      ...(navbarProps.logo || {}),
+      href: '/preview/index',
+    },
+    navItems,
+  };
+}
+
 /**
  * Get shared navbar and footer props from the index (homepage) ai-props
  * This ensures all pages share the same navbar and footer
@@ -125,6 +182,12 @@ export async function POST(request: NextRequest) {
             availablePages, // Pass available pages for navbar filtering
           };
           const aiProps = await generatePropsForLayout(layout.layout, aiContent);
+          if (aiProps['navbar-dynamic']) {
+            aiProps['navbar-dynamic'] = sanitizeNavbarPropsForGeneratedPages(
+              aiProps['navbar-dynamic'],
+              availablePages
+            );
+          }
 
           // Save AI props to file for the page renderer to use
           fs.writeFileSync(
@@ -261,6 +324,14 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    // Always ensure navbar only links to actually generated pages.
+    if (aiProps?.['navbar-dynamic']) {
+      aiProps['navbar-dynamic'] = sanitizeNavbarPropsForGeneratedPages(
+        aiProps['navbar-dynamic'],
+        getGeneratedPageSlugsFromDisk()
+      );
+    }
+
     console.log("[API /generate-layout] Returning images:", content?.images?.length || 0);
     console.log("[API /generate-layout] Page slug:", slug);
 
@@ -335,10 +406,15 @@ export async function PATCH(request: NextRequest) {
           }
         );
 
+        const sanitizedNavbarProps = sanitizeNavbarPropsForGeneratedPages(
+          freshNavbarProps,
+          allPageSlugs
+        );
+
         // Merge fresh navbar into existing ai-props
         const updatedAiProps = {
           ...existingAiProps,
-          'navbar-dynamic': freshNavbarProps,
+          'navbar-dynamic': sanitizedNavbarProps,
         };
 
         fs.writeFileSync(

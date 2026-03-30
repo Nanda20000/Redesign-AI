@@ -51,6 +51,21 @@ function uniqueInOrder<T>(items: T[]): T[] {
   return output;
 }
 
+function normalizeStructuralSections(sectionTypes: string[]): string[] {
+  const cleaned = sectionTypes.filter(Boolean);
+  if (cleaned.length === 0) return [];
+
+  const firstNavbarIndex = cleaned.findIndex((section) => section === 'navbar');
+  const lastFooterIndex = [...cleaned].reverse().findIndex((section) => section === 'footer');
+  const resolvedLastFooterIndex = lastFooterIndex >= 0 ? cleaned.length - 1 - lastFooterIndex : -1;
+
+  return cleaned.filter((section, index) => {
+    if (section === 'navbar') return index === firstNavbarIndex;
+    if (section === 'footer') return index === resolvedLastFooterIndex;
+    return true;
+  });
+}
+
 function buildSectionBuckets(
   classifiedSections: Array<{ type: string; text: string; sourceIndex?: number }>,
   rawSections: ExtractedSection[],
@@ -547,7 +562,7 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
           return true;
         });
 
-        const meaningfulSections = uniqueCandidates
+        const baseMeaningfulSections = uniqueCandidates
           .filter((element) => {
             const rect = element.getBoundingClientRect();
             const text = (element.textContent || '').replace(/\s+/g, ' ').trim();
@@ -565,6 +580,9 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
 
             return text.length >= 40 || imageCount > 0 || headingCount > 0 || linkCount >= 3;
           })
+          .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+
+        let meaningfulSections = baseMeaningfulSections
           .filter((element, _, elements) => {
             return !elements.some(other =>
               other !== element &&
@@ -573,6 +591,13 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
             );
           })
           .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+
+        // Homepage-specific fallback:
+        // if section detection is too sparse, keep more candidates from Playwright scraping
+        // so we don't collapse to only navbar/hero/footer.
+        if (meaningfulSections.length < 5) {
+          meaningfulSections = baseMeaningfulSections.slice(0, 18);
+        }
 
         const sections = meaningfulSections.map((section, index) => {
           const classList = Array.from(section.classList);
@@ -922,9 +947,12 @@ export async function POST(request: NextRequest) {
       images as ExtractedImage[]
     );
 
-    const orderedSectionTypes = uniqueInOrder(
+    const classifiedTypeSequence = normalizeStructuralSections(
       classifiedSections.map((s) => s.type).filter(Boolean)
     );
+    const orderedSectionTypes = pageSlug === 'index'
+      ? classifiedTypeSequence
+      : uniqueInOrder(classifiedTypeSequence);
 
     if (structure.hasNavbar && !orderedSectionTypes.includes('navbar')) {
       orderedSectionTypes.unshift('navbar');

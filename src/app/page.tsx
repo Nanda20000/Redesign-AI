@@ -29,6 +29,21 @@ const TYPE_ICONS: Record<string, string> = {
   pricing: '💰', other: '📄',
 };
 
+function normalizeStructuralSections(sectionTypes: string[]): string[] {
+  const cleaned = sectionTypes.filter(Boolean);
+  if (cleaned.length === 0) return [];
+
+  const firstNavbarIndex = cleaned.findIndex((section) => section === 'navbar');
+  const lastFooterIndex = [...cleaned].reverse().findIndex((section) => section === 'footer');
+  const resolvedLastFooterIndex = lastFooterIndex >= 0 ? cleaned.length - 1 - lastFooterIndex : -1;
+
+  return cleaned.filter((section, index) => {
+    if (section === 'navbar') return index === firstNavbarIndex;
+    if (section === 'footer') return index === resolvedLastFooterIndex;
+    return true;
+  });
+}
+
 export default function Home() {
   const router = useRouter();
   const [url, setUrl] = useState('');
@@ -128,9 +143,9 @@ export default function Home() {
         if (analyzeData.status !== 'success') continue;
 
         // 2. Generate layout with slug
-        const sections = Array.from(
-          new Set((analyzeData.classifiedSections || []).map((s: any) => s.type))
-        );
+        const sections = normalizeStructuralSections((analyzeData.classifiedSections || [])
+          .map((s: any) => s.type)
+          .filter(Boolean));
         const layoutRes = await fetch('/api/generate-layout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

@@ -496,6 +496,7 @@ function getAIComponentsForSection(
 
 /**
  * Enforce AI-compatible components on layout AFTER AI generation.
+ * Uses token-overlap scoring to pick the best match instead of blind fallback.
  */
 function enforceAICompatibleComponents(
   layout: LayoutResponse,
@@ -512,11 +513,17 @@ function enforceAICompatibleComponents(
       pageSlug
     );
 
-    if (safeComponents.length > 0) {
-      const isSafe = safeComponents.includes(item.component);
-      if (!isSafe) {
-        newItem.component = safeComponents[0];
-      }
+    if (safeComponents.length > 0 && !safeComponents.includes(item.component)) {
+      // Score candidates: prefer names that share tokens with the AI's original pick
+      const aiTokens = item.component.toLowerCase().split('-');
+      const scored = safeComponents.map(name => {
+        const tokens = name.toLowerCase().split('-');
+        const overlap = tokens.filter(t => aiTokens.includes(t)).length;
+        return { name, overlap };
+      });
+      scored.sort((a, b) => b.overlap - a.overlap);
+      newItem.component = scored[0].name;
+      console.log(`[enforceAI] ${item.section}: replaced "${item.component}" → "${newItem.component}" (token-scored)`);
     }
 
     enhancedLayout.push(newItem);
@@ -539,19 +546,70 @@ function getUniqueSectionsInOrder(sections: string[]): string[] {
   return ordered;
 }
 
+function normalizeStructuralSections(sections: string[]): string[] {
+  const cleaned = sections.filter(Boolean);
+  if (cleaned.length === 0) return [];
+
+  const firstNavbarIndex = cleaned.findIndex((section) => section === 'navbar');
+  const lastFooterIndexFromEnd = [...cleaned].reverse().findIndex((section) => section === 'footer');
+  const lastFooterIndex = lastFooterIndexFromEnd >= 0
+    ? cleaned.length - 1 - lastFooterIndexFromEnd
+    : -1;
+
+  return cleaned.filter((section, index) => {
+    if (section === 'navbar') return index === firstNavbarIndex;
+    if (section === 'footer') return index === lastFooterIndex;
+    return true;
+  });
+}
+
 function mergeLayoutsByDetectedSections(
   detectedSections: string[],
   aiLayout: LayoutResponse,
-  selectedLayout: LayoutItem[]
+  selectedLayout: LayoutItem[],
+  options?: { preserveDuplicates?: boolean }
 ): LayoutResponse {
-  const orderedSections = getUniqueSectionsInOrder(detectedSections);
-  const aiBySection = new Map(aiLayout.layout.map(item => [item.section, item]));
-  const selectedBySection = new Map(selectedLayout.map(item => [item.section, item]));
+  const orderedSections = options?.preserveDuplicates
+    ? normalizeStructuralSections(detectedSections)
+    : getUniqueSectionsInOrder(detectedSections);
+
+  const aiBySection = new Map<string, LayoutItem[]>();
+  for (const item of aiLayout.layout) {
+    if (!aiBySection.has(item.section)) aiBySection.set(item.section, []);
+    aiBySection.get(item.section)!.push(item);
+  }
+
+  const selectedBySection = new Map<string, LayoutItem[]>();
+  for (const item of selectedLayout) {
+    if (!selectedBySection.has(item.section)) selectedBySection.set(item.section, []);
+    selectedBySection.get(item.section)!.push(item);
+  }
+
+  const fallbackBySection = new Map<string, LayoutItem>();
+  const mergedLayout: LayoutItem[] = [];
+
+  for (const section of orderedSections) {
+    const aiCandidates = aiBySection.get(section) || [];
+    const selectedCandidates = selectedBySection.get(section) || [];
+
+    let candidate: LayoutItem | undefined;
+    if (aiCandidates.length > 0) {
+      candidate = aiCandidates.shift();
+    } else if (selectedCandidates.length > 0) {
+      candidate = selectedCandidates[0];
+    } else {
+      candidate = fallbackBySection.get(section);
+    }
+
+    if (!candidate) continue;
+
+    const normalized = { section, component: candidate.component };
+    fallbackBySection.set(section, normalized);
+    mergedLayout.push(normalized);
+  }
 
   return {
-    layout: orderedSections
-      .map(section => aiBySection.get(section) || selectedBySection.get(section))
-      .filter((item): item is LayoutItem => Boolean(item)),
+    layout: mergedLayout,
   };
 }
 
@@ -659,6 +717,23 @@ export async function generateLayoutWithAI(
     }
     console.log('[AI Layout] Dynamic-only filtered components:', componentsByCategory);
 
+    // Merge in any -dynamic components from components.json not yet in the manifest
+    try {
+      const { getDynamicComponentsBySection } = await import('./component-registry');
+      const liveComponents = getDynamicComponentsBySection();
+      for (const [category, names] of Object.entries(liveComponents)) {
+        if (!componentsByCategory[category]) componentsByCategory[category] = [];
+        for (const name of names) {
+          if (!componentsByCategory[category].includes(name)) {
+            componentsByCategory[category].push(name);
+            console.log(`[AI Layout] Added newly registered component: ${name}`);
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('[AI Layout] Could not merge live component registry:', e);
+    }
+
     // Step 4: Get intelligent recommendations
     const recommendations = getComponentRecommendations(analysis);
 
@@ -707,7 +782,8 @@ export async function generateLayoutWithAI(
     layout = mergeLayoutsByDetectedSections(
       pageStructure.sections,
       layout,
-      selectionResult.layout
+      selectionResult.layout,
+      { preserveDuplicates: pageSlug === 'index' }
     );
 
     // FORCE IMAGE-CAPABLE COMPONENTS when images exist

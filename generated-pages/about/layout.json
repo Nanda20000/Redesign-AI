@@ -1,0 +1,20 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "navbar-dynamic"
+    },
+    {
+      "section": "about",
+      "component": "about-simple-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
+      "section": "footer",
+      "component": "footer-simple"
+    }
+  ]
+}

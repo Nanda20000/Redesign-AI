@@ -407,7 +407,13 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
  * Check if a component can accept dynamic content.
  */
 export function isComponentDynamic(componentName: string): boolean {
-  return COMPONENT_CONTENT_MAP[componentName]?.isDynamic ?? false;
+  // Explicit map entry takes priority
+  if (componentName in COMPONENT_CONTENT_MAP) {
+    return COMPONENT_CONTENT_MAP[componentName].isDynamic;
+  }
+  // Any component whose name ends with -dynamic is implicitly dynamic
+  // (it accepts AI-generated props even without a manual content slot declaration)
+  return componentName.endsWith('-dynamic');
 }
 
 /**

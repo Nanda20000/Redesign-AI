@@ -14,6 +14,7 @@ import {
 } from './website-analyzer';
 import { ComponentsManifest, LayoutItem, ExtractedContent } from './ai-layout-generator';
 import { isComponentDynamic } from './component-content-map';
+import { COMPONENT_META } from './component-meta';
 
 export interface ComponentSelectionOptions {
   manifest: ComponentsManifest;
@@ -233,6 +234,7 @@ function scoreComponent(
   content?: ExtractedContent
 ): number {
   let score = 0;
+  const meta = COMPONENT_META[componentName];
 
   // Check if in preferred list
   const categoryRec = recommendations[category as keyof ComponentRecommendations];
@@ -275,6 +277,27 @@ function scoreComponent(
   } else if (analysis.contentRichness === 'high') {
     // Can handle more complex components
     if (componentMatchesStyle(componentName, 'visual')) {
+      score += 3;
+    }
+  }
+
+  // Metadata-driven scoring so newly registered components can influence selection
+  if (meta) {
+    score += meta.priority;
+
+    if (analysis.contentRichness === 'high') {
+      if (meta.contentLevel === 'high') score += 6;
+      if (meta.contentLevel === 'medium') score += 2;
+    } else if (analysis.contentRichness === 'low') {
+      if (meta.contentLevel === 'low') score += 4;
+      if (meta.contentLevel === 'high') score -= 3;
+    }
+
+    if (content?.images && content.images.length > 0 && meta.supportsImages) {
+      score += 5;
+    }
+
+    if (meta.supportsItems && analysis.contentRichness !== 'low') {
       score += 3;
     }
   }
@@ -615,30 +638,38 @@ ${sections.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 ## Available DYNAMIC-ONLY Components (ONLY choose from these):
 ${JSON.stringify(dynamicOnlyByCategory, null, 2)}
 
+## IMPORTANT: All components listed above are valid choices. Prefer newly added components (check full list above) over the examples below.
+
 ## How to Choose the Best Dynamic Component:
-Analyze the source website's detected sections and content:
-- If the source hero has a large background image → hero-dynamic (supports image prop)
-- If the source has a services/courses grid → features-dynamic (supports items[] with image)
-- If the source has an about/history section → about-dynamic (supports stats, companies, image)
-- If the source has student/customer reviews → testimonials-dynamic (supports testimonials[])
-- If the source has a contact form → contact-split-dynamic
-- For navbar → navbar-dynamic (supports full nav items and CTA actions)
-- For footer → footer-simple (only option currently)
-- For gallery/portfolio showcase → gallery-elegant-dynamic (bento grid layout with hover effects)
-- For CTA with statistics → cta-simple-dynamic (split layout with key metrics)
-${isNonHomePage ? '- For ALL non-home pages → hero-banner-dynamic (page banner with breadcrumb and title)' : ''}
+Analyze the source website's detected sections and match them to the best available component.
+ALWAYS check the full "Available DYNAMIC-ONLY Components" list above before deciding.
+New components may have been added — do not assume only the examples listed below are valid.
+
+Selection guidelines (use Available Components list as the authoritative source):
+- Large background image hero → any hero-*-dynamic that accepts mediaUrl or image prop
+- Course/service grid with images → features-simple-dynamic or features-dynamic  
+- About/history with stats → about-simple-dynamic or about-dynamic
+- Student/customer reviews → testimonials-elegant-dynamic or testimonials-dynamic
+- Contact form → contact-split-dynamic
+- Image gallery/portfolio → gallery-elegant-dynamic or gallery-dynamic
+- Stats + CTA card → cta-simple-dynamic
+- Full-width CTA with background → cta-dynamic
+- News/blog articles → blog-elegant-dynamic or blog-dynamic
+- Navigation → navbar-dynamic
+- Page footer → footer-simple
+${isNonHomePage ? '- Inner page header → hero-banner-dynamic (REQUIRED for non-homepage)' : ''}
 
 ## Business Type Guidance:
 - education/academy → prioritize about-dynamic (show stats like years, students), features-dynamic (courses)
-- saas/startup → prioritize features-dynamic (product features), hero-dynamic (strong CTA)
+- saas/startup → prioritize features-dynamic (product features), hero-stylish-coloured-dynamic (email capture + feature cards)
 - corporate → prioritize about-dynamic (company info), contact-split-dynamic
-- portfolio/agency → prioritize features-dynamic (gallery/work items), hero-dynamic (visual)
+- portfolio/agency → prioritize features-dynamic (gallery/work items), hero-stylish-coloured-dynamic (visual service cards)
 
 ## Response Format — Return ONLY this JSON, no markdown, no explanation:
 {
   "layout": [
     {"section": "navbar", "component": "navbar-dynamic"},
-    {"section": "hero", "component": "${isNonHomePage ? 'hero-banner-dynamic' : 'hero-dynamic'}"},
+    {"section": "hero", "component": "${isNonHomePage ? 'hero-banner-dynamic' : 'hero-stylish-coloured-dynamic'}"},
     {"section": "features", "component": "features-dynamic"},
     {"section": "about", "component": "about-dynamic"},
     {"section": "testimonials", "component": "testimonials-dynamic"},

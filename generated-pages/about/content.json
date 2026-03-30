@@ -1,0 +1,129 @@
+{
+  "headings": [
+    "About Us",
+    "About Us",
+    "Mission",
+    "Vision",
+    "Quick Links",
+    "Quick Links"
+  ],
+  "paragraphs": [
+    "Home About Career Exam Gallery Contact Us Partnership Sign In Register Now",
+    "About Us Home About Us",
+    "About Us Home About Us",
+    "About Us Numbers Tell a Story of Success IBS Academy is a premier ISO 9001: 2015 certified professional accounting institute in Kerala with over 20 years of experience in the industry. We provide direct certifications from leading accounting software providers, SAP and Tally. Our dedication to delivering the finest academic achievement is reflected in our Industry-relevant syllabus, which is craft",
+    "About Us Numbers Tell a Story of Success",
+    "Mission As INTERNATIONAL BUSINESS SOLUTIONS, we have been aligned with more than 5000 clients by being the Tally partner and provider of ERP solutions. However, we've recognized a substantial shortage of highly skilled and knowledgeable accounting professionals in the industry. Our mission through the IBS Academy is to enable state-of-the-art training in accounting, inventory, and taxation for a w",
+    "IBS Academy is a premier ISO 9001: 2015 certified professional accounting institute in Kerala with over 20 years of experience in the industry. We provide direct certifications from leading accounting software providers, SAP and Tally. Quick Links Home About Career Blog Games Quick Links Gallery Contact Us Achievement Help Call Us +91 75940 62999 +91 75940 14999 Location 3rd floor, calicut mall, s",
+    "Location 3rd floor, calicut mall, stadium jn., Puthiyara road, Kozhikode - 673004"
+  ],
+  "navigationLinks": [
+    "home",
+    "about",
+    "career",
+    "exam",
+    "gallery",
+    "contact us",
+    "partnership",
+    "sign in",
+    "register now"
+  ],
+  "footerText": "Location 3rd floor, calicut mall, stadium jn., Puthiyara road, Kozhikode - 673004",
+  "images": [
+    {
+      "src": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
+      "alt": "Logo",
+      "title": "Logo",
+      "width": 342,
+      "height": 97
+    },
+    {
+      "src": "https://ibsacademy.co/public/assets/web/images/about/1.png",
+      "alt": "About",
+      "title": "",
+      "width": 633,
+      "height": 585
+    },
+    {
+      "src": "https://ibsacademy.co/public/assets/web/images/logo/footer.png",
+      "alt": "",
+      "title": "",
+      "width": 170,
+      "height": 44
+    },
+    {
+      "src": "https://ibsacademy.co/public/assets/web/images/bg/bg1.png",
+      "alt": "",
+      "title": "",
+      "width": 1920,
+      "height": 440
+    },
+    {
+      "src": "https://ibsacademy.co/public/assets/web/images/bg/exm.png",
+      "alt": "",
+      "title": "",
+      "width": 1920,
+      "height": 412
+    },
+    {
+      "src": "https://ibsacademy.co/public/assets/web/images/bg/footerbg.png",
+      "alt": "",
+      "title": "",
+      "width": 1920,
+      "height": 427
+    }
+  ],
+  "processed": {
+    "features": {
+      "heading": "Key Services",
+      "description": "IBS Academy provides professional accounting training and certifications.",
+      "items": [
+        {
+          "title": "Professional Accounting Training",
+          "description": "State-of-the-art training in accounting, inventory, and taxation to address the industry's skill shortage."
+        },
+        {
+          "title": "Direct Software Certifications",
+          "description": "Provides direct certifications from leading accounting software providers, including SAP and Tally."
+        },
+        {
+          "title": "ERP Solutions Partnership",
+          "description": "Acts as a Tally partner and provider of ERP solutions, having served over 5000 clients."
+        }
+      ]
+    },
+    "about": {
+      "title": "About Us",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in Kerala with over 20 years of experience. It provides direct certifications from leading software providers like SAP and Tally and focuses on an industry-relevant syllabus.",
+      "companies": [
+        "SAP",
+        "Tally"
+      ],
+      "achievements": [
+        {
+          "label": "Years Experience",
+          "value": "20+"
+        },
+        {
+          "label": "Clients Served",
+          "value": "5000+"
+        }
+      ],
+      "breakout": {
+        "title": "Numbers Tell a Story of Success",
+        "description": "A story of success built on over two decades of experience and service to thousands of clients."
+      }
+    },
+    "footer": {
+      "brandName": "IBS Academy",
+      "description": "A premier ISO 9001:2015 certified professional accounting institute.",
+      "contactInfo": {
+        "email": "Not provided",
+        "phone": "+91 75940 62999, +91 75940 14999",
+        "address": "3rd floor, calicut mall, stadium jn., Puthiyara road, Kozhikode - 673004"
+      },
+      "copyright": "© 2024 IBS Academy. All rights reserved."
+    }
+  },
+  "sourceUrl": "https://ibsacademy.co/about"
+}

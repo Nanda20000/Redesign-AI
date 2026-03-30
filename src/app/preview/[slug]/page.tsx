@@ -129,16 +129,7 @@ export default function PreviewPage({ params }: PreviewPageProps) {
         console.log("[PreviewPage] Raw content images:", data.content?.images?.length || 0);
         console.log("[PreviewPage] Sections:", data.layout?.map((l: LayoutItem) => l.section));
 
-        const seen = new Set<string>();
-        const deduplicatedLayout = (data.layout || []).filter((item: LayoutItem) => {
-          if (seen.has(item.section)) {
-            console.warn(`[PreviewPage] Duplicate section removed: ${item.section}`);
-            return false;
-          }
-          seen.add(item.section);
-          return true;
-        });
-        const layoutData = { ...data, layout: deduplicatedLayout };
+        const layoutData = { ...data, layout: data.layout || [] };
         setLayout(layoutData);
 
         // Set AI props if available

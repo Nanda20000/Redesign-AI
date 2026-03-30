@@ -14,6 +14,8 @@ interface InputSection {
   class?: string;
   id?: string;
   sourceIndex?: number;
+  links?: string[];
+  images?: Array<{ src: string; alt?: string; title?: string; width?: number; height?: number }>;
 }
 
 interface ClassifyRequest {
@@ -60,6 +62,23 @@ function normalizeSections(sections: Array<string | InputSection>): InputSection
   });
 }
 
+function normalizeSectionType(type: string): string {
+  const lower = (type || '').toLowerCase();
+  return VALID_SECTION_TYPES.includes(lower) ? lower : 'features';
+}
+
+function normalizeStructuralSections(sections: ClassifiedSection[]): ClassifiedSection[] {
+  const firstNavbarIndex = sections.findIndex((section) => section.type === 'navbar');
+  const lastFooterIndexFromEnd = [...sections].reverse().findIndex((section) => section.type === 'footer');
+  const lastFooterIndex = lastFooterIndexFromEnd >= 0 ? sections.length - 1 - lastFooterIndexFromEnd : -1;
+
+  return sections.filter((section, index) => {
+    if (section.type === 'navbar') return index === firstNavbarIndex;
+    if (section.type === 'footer') return index === lastFooterIndex;
+    return true;
+  });
+}
+
 function createPrompt(headings: string[], sections: InputSection[], hasNavbar?: boolean, hasFooter?: boolean, navbarLinks?: string[], pageType?: string, sourceUrl?: string): string {
   const headingsText = headings.length > 0 ? headings.join('\n') : 'None';
   const sectionsText = sections.length > 0
@@ -68,23 +87,36 @@ function createPrompt(headings: string[], sections: InputSection[], hasNavbar?: 
         const className = section.class ? ` class="${section.class}"` : '';
         const id = section.id ? ` id="${section.id}"` : '';
         const text = section.textPreview || section.text || 'No text';
-        return `[${typeof section.sourceIndex === 'number' ? section.sourceIndex : index}]${heading}${className}${id} text="${text}"`;
+        const linkCount = (section.links || []).length;
+        const imageCount = (section.images || []).length;
+        return `[${typeof section.sourceIndex === 'number' ? section.sourceIndex : index}]${heading}${className}${id} links=${linkCount} images=${imageCount} text="${text}"`;
       }).join('\n')
     : 'None';
   const navbarText = navbarLinks && navbarLinks.length > 0 ? navbarLinks.join(', ') : 'None detected';
 
-  // Determine expected sections based on page type
-  const pageTypeInstructions = pageType ? `
-IMPORTANT: This is a ${pageType.toUpperCase()} page${sourceUrl ? ` at ${sourceUrl}` : ''}.
-Only include sections that would appear on this specific page type:
-- A contact page should have: navbar, hero (with contact title), contact form, footer
-- An about page should have: navbar, hero, about, team/gallery, testimonials (if mentioned), footer
-- A services page should have: navbar, hero, features/services, testimonials (if mentioned), cta, footer
-- A homepage can have: navbar, hero, features, about, testimonials, gallery, cta, blog, footer
-- A blog page should have: navbar, hero (with blog title), blog posts, footer
-- A gallery/portfolio page should have: navbar, hero, gallery, footer
+  const pageTypeInstructions = `
+CRITICAL INSTRUCTION: You MUST classify EVERY section provided. Do not skip or merge sections.
+Each [N] in the Sections list below is a distinct detected section and must produce exactly one entry in your output array.
+If a section's purpose is unclear, classify it as "features" — never omit it.
 
-DO NOT include irrelevant sections. A contact page should NOT have a features section unless services are explicitly mentioned. An about page should NOT have a testimonials section unless content explicitly mentions client feedback.` : '';
+Page type detected: ${pageType?.toUpperCase() || 'UNKNOWN'}${sourceUrl ? ` (${sourceUrl})` : ''}
+
+Section classification rules:
+- navbar: top navigation with links (check hasNavbar flag — if true, ALWAYS add navbar as first item)
+- hero: large introductory banner, slideshow, or welcome section at the top of the page
+- about: company info, history, mission, team description, "who we are" content  
+- features: services, courses, programs, products, capabilities, what-we-offer sections
+- services: same as features — use this if the word "service" appears in the section
+- testimonials: student/customer reviews, quotes, feedback, "what they say" sections
+- gallery: photo grids, image collections, campus/event photos, portfolio items
+- cta: call-to-action banners, "register now", "get started", enrollment prompts
+- blog: news articles, blog posts, announcements, latest updates
+- contact: contact forms, address/phone/email info, "reach us" sections
+- footer: bottom of page with copyright, links, social media (check hasFooter flag)
+
+IMPORTANT: A homepage for an education/academy site should typically have:
+navbar → hero → features (courses) → about → testimonials → gallery → cta → footer
+Do not omit sections that clearly exist in the input.`;
 
   return `You are an expert web designer.
 
@@ -126,7 +158,14 @@ Detection flags:
 - hasNavbar: ${hasNavbar || false}
 - hasFooter: ${hasFooter || false}
 - pageType: ${pageType || 'unknown'}
-- sourceUrl: ${sourceUrl || 'unknown'}`;
+- sourceUrl: ${sourceUrl || 'unknown'}
+
+RESPONSE RULES:
+1. Output array length MUST equal the number of [N] sections listed above PLUS navbar (if hasNavbar=true) PLUS footer (if hasFooter=true)
+2. Never output fewer sections than detected
+3. Use "sourceIndex" field to match each output to its input [N] index
+4. If hasNavbar is true and no navbar section is detected, prepend {"type":"navbar","text":"Navigation","sourceIndex":-1}
+5. If hasFooter is true and no footer section is detected, append {"type":"footer","text":"Footer","sourceIndex":-2}`;
 }
 
 export async function POST(request: NextRequest) {
@@ -187,7 +226,7 @@ export async function POST(request: NextRequest) {
         if (hasFooter) fallbackSections.push({ type: 'footer', text: 'Footer' });
       }
 
-      return NextResponse.json({ sections: fallbackSections });
+      return NextResponse.json({ sections: normalizeStructuralSections(fallbackSections) });
     }
 
     // Parse AI response as JSON
@@ -206,34 +245,73 @@ export async function POST(request: NextRequest) {
         text: section.textPreview || section.text || section.heading || 'Content section',
         sourceIndex: section.sourceIndex,
       }));
+
+      if (hasNavbar) {
+        fallbackSections.unshift({ type: 'navbar', text: 'Navigation menu', sourceIndex: -1 });
+      }
+      if (pageType === 'home' && !fallbackSections.some(s => s.type === 'hero')) {
+        const insertAt = hasNavbar ? 1 : 0;
+        fallbackSections.splice(insertAt, 0, { type: 'hero', text: headings[0] || 'Welcome', sourceIndex: -3 });
+      }
+      if (hasFooter) {
+        fallbackSections.push({ type: 'footer', text: 'Footer content', sourceIndex: -2 });
+      }
       
-      return NextResponse.json({ sections: fallbackSections });
+      return NextResponse.json({ sections: normalizeStructuralSections(fallbackSections) });
     }
 
     // Validate and normalize the response
-    let validatedSections: ClassifiedSection[] = result.sections
+    const validatedSections: ClassifiedSection[] = result.sections
       .filter((s) => s && typeof s.type === 'string' && typeof s.text === 'string')
       .map((s) => ({
-        type: VALID_SECTION_TYPES.includes(s.type.toLowerCase())
-          ? s.type.toLowerCase()
-          : 'features',
+        type: normalizeSectionType(s.type),
         text: s.text,
         sourceIndex: typeof s.sourceIndex === 'number' ? s.sourceIndex : undefined,
       }));
 
-    // Ensure navbar is first if detected but not in response
-    const hasNavbarInResponse = validatedSections.some(s => s.type === 'navbar');
-    const hasFooterInResponse = validatedSections.some(s => s.type === 'footer');
-    
-    if (hasNavbar && !hasNavbarInResponse) {
-      validatedSections.unshift({ type: 'navbar', text: 'Navigation menu' });
-    }
-    
-    if (hasFooter && !hasFooterInResponse) {
-      validatedSections.push({ type: 'footer', text: 'Footer content' });
+    const bySourceIndex = new Map<number, ClassifiedSection>();
+    for (const section of validatedSections) {
+      if (typeof section.sourceIndex === 'number' && section.sourceIndex >= 0) {
+        if (!bySourceIndex.has(section.sourceIndex)) {
+          bySourceIndex.set(section.sourceIndex, section);
+        }
+      }
     }
 
-    return NextResponse.json({ sections: validatedSections });
+    // Guarantee one classified output per scraped section index.
+    const sourceAlignedSections: ClassifiedSection[] = normalizedSections.map((section, index) => {
+      const sourceIndex = typeof section.sourceIndex === 'number' ? section.sourceIndex : index;
+      const existing = bySourceIndex.get(sourceIndex);
+      if (existing) return existing;
+
+      const fallbackText = section.textPreview || section.text || section.heading || 'Content section';
+      const inferred = inferSectionType([section.heading, section.class, section.id, section.textPreview].filter(Boolean).join(' '));
+      return {
+        type: normalizeSectionType(inferred),
+        text: fallbackText,
+        sourceIndex,
+      };
+    });
+
+    const finalSections: ClassifiedSection[] = [];
+
+    if (hasNavbar) {
+      finalSections.push({ type: 'navbar', text: 'Navigation menu', sourceIndex: -1 });
+    }
+
+    finalSections.push(...sourceAlignedSections);
+
+    // Homepages should always have a hero slot near the top.
+    if (pageType === 'home' && !sourceAlignedSections.some(s => s.type === 'hero')) {
+      const insertAt = hasNavbar ? 1 : 0;
+      finalSections.splice(insertAt, 0, { type: 'hero', text: headings[0] || 'Welcome', sourceIndex: -3 });
+    }
+
+    if (hasFooter) {
+      finalSections.push({ type: 'footer', text: 'Footer content', sourceIndex: -2 });
+    }
+
+    return NextResponse.json({ sections: normalizeStructuralSections(finalSections) });
   } catch (error) {
     console.error('Error classifying sections:', error);
     return NextResponse.json(

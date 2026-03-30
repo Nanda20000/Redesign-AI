@@ -1101,11 +1101,22 @@ export async function generatePropsForComponent(
   componentName: string,
   content: ExtractedWebsiteContent
 ): Promise<Record<string, any>> {
-  const schema = COMPONENT_PROP_SCHEMAS[componentName];
+  let schema = COMPONENT_PROP_SCHEMAS[componentName];
 
   if (!schema) {
-    console.log(`[AI Prop Injector] No schema for ${componentName}, skipping AI injection`);
-    return {};
+    // Build a generic schema from the component name so new components
+    // still receive AI-generated props rather than being silently skipped.
+    const section = componentName.replace(/-dynamic$/, '').split('-')[0];
+    console.log(`[AI Prop Injector] No explicit schema for ${componentName}, using generic fallback schema`);
+    schema = {
+      componentName,
+      section,
+      props: [
+        { name: 'title', type: 'string', description: 'Main section heading. Max 10 words.', maxWords: 10, required: true },
+        { name: 'description', type: 'string', description: 'Supporting paragraph. Max 40 words.', maxWords: 40, required: false },
+        { name: 'items', type: 'array', description: 'Array of content items relevant to this section, each with title and description fields.', required: false },
+      ],
+    };
   }
 
   try {
