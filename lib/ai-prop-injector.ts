@@ -1128,6 +1128,10 @@ export async function generatePropsForComponent(
     return props;
   } catch (error: any) {
     console.error(`[AI Prop Injector] Failed for ${componentName}:`, error.message);
+    // Log full error details for debugging
+    if (error.stack) {
+      console.error(`[AI Prop Injector] Stack trace for ${componentName}:`, error.stack);
+    }
     return {};
   }
 }
@@ -1159,6 +1163,9 @@ export async function generatePropsForLayout(
     if (result.status === 'fulfilled') {
       const { component, props } = result.value;
       propMap[component] = props;
+    } else {
+      // Log rejected errors for debugging
+      console.error('[AI Prop Injector] Promise rejected:', result.reason);
     }
   }
 

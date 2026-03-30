@@ -8,52 +8,49 @@
       {
         "label": "Home",
         "href": "/preview/index"
-      },
-      {
-        "label": "About",
-        "href": "/preview/about"
       }
     ],
     "actions": [
       {
         "label": "Learn More",
-        "href": "/preview/about",
+        "href": "#",
         "variant": "primary"
       }
     ]
   },
-  "hero-elegant-dynamic": {
-    "label": "WELCOME TO LCC CAMPUS",
-    "title": "Excellence in Every Step",
-    "description": "Empowering learners to reach their fullest potential through innovation and growth.",
-    "primaryCtaText": "Explore Courses",
-    "secondaryCtaText": "Learn More",
-    "mediaUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
-    "mediaType": "image",
-    "posterUrl": null
-  },
   "features-simple-dynamic": {
-    "tagline": "OUR COMMITMENT",
-    "heading": "Excellence in Every Step",
-    "description": "We empower every learner to reach their fullest potential through an environment where innovation and growth thrive.",
+    "tagline": "OUR DEPARTMENTS",
+    "heading": "Skill Development Courses",
+    "description": "We offer a range of practical courses designed to provide essential knowledge and create valuable career opportunities for our students.",
     "features": [
       {
-        "title": "Computer & Technology Courses",
+        "title": "Computer Courses",
         "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg"
       },
       {
-        "title": "An Empowering Learning Environment",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
+        "title": "Hospital Administration",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg"
       },
       {
-        "title": "Futures Built on Integrity",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg"
+        "title": "Fashion Designing",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
       }
     ]
   },
+  "about-simple-dynamic": {
+    "headline": "About LCC Campus",
+    "topIntro": "A leading educational institution in Kerala, empowering learners through practical skill development and modern training.",
+    "heroImage": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg",
+    "label": "Our Mission & Vision",
+    "subIntro": "We are dedicated to providing accessible, high-quality education that bridges the gap between learning and real-world application.",
+    "avatarImage": null,
+    "avatarName": null,
+    "avatarTitle": null,
+    "mainStatement": "At LCC Campus, we empower every learner to achieve their fullest potential. Our commitment to excellence fosters an environment where innovation and personal growth thrive. We are dedicated to shaping futures built on a foundation of practical knowledge, professional integrity, and clear purpose, preparing students for successful careers."
+  },
   "footer-simple": {
     "brandName": "LCC Campus",
-    "description": "An educational institution empowering learners in Edakkara, Nilambur, Kerala.",
-    "copyright": "Copyright © 2026 lcccampus.com"
+    "description": "A leading educational institution offering skill development courses in Kerala.",
+    "copyright": "Copyright © 2026 LCC Campus. All rights reserved."
   }
 }

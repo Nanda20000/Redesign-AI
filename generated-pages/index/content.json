@@ -6,9 +6,22 @@
     "About Us"
   ],
   "paragraphs": [
-    "Excellence in Every StepLCC CAMPUSLearn More “At LCC Campus, we believe in empowering every learner to reach their fullest potential. Our commitment to excellence drives us to create an environment where innovation and growth thrive. Together, we shape futures built on knowledge, integrity, and purpose.” DEPARTMENTS Computer CoursesOur institution provides skill development courses which are relat",
+    "Skip to content Home About Courses Blog Gallery Contact Take Action Take Action Main Menu Home About Courses Blog Gallery Contact Excellence in Every StepLCC CAMPUSLearn More “At LCC Campus, we believe in empowering every learner to reach their fullest potential. Our commitment to excellence drives us to create an environment where innovation and growth thrive. Together, we shape futures built on ",
     "Home About Courses Blog Gallery Contact Take Action Take Action Main Menu Home About Courses Blog Gallery Contact",
-    "Home About Courses Blog Gallery Contact Take Action Take Action",
+    "Excellence in Every StepLCC CAMPUSLearn More",
+    "Excellence in Every StepLCC CAMPUSLearn More",
+    "Excellence in Every StepLCC CAMPUS",
+    "“At LCC Campus, we believe in empowering every learner to reach their fullest potential. Our commitment to excellence drives us to create an environment where innovation and growth thrive. Together, we shape futures built on knowledge, integrity, and purpose.”",
+    "“At LCC Campus, we believe in empowering every learner to reach their fullest potential. Our commitment to excellence drives us to create an environment where innovation and growth thrive. Together, we shape futures built on knowledge, integrity, and purpose.”",
+    "DEPARTMENTS Computer CoursesOur institution provides skill development courses which are related to computer courses that teach skills and knowledge about computers, technology, and digital systems. They cover topics such as how computers work, how software is built, how data is managed, and how technology is used in real-world applications.Learn More Hospital Administration CourseHospital adminis",
+    "Computer CoursesOur institution provides skill development courses which are related to computer courses that teach skills and knowledge about computers, technology, and digital systems. They cover topics such as how computers work, how software is built, how data is managed, and how technology is used in real-world applications.Learn More",
+    "Fashion Designing CourseFashion designing courses are educational programs that teach students how to create clothing, accessories, and fashion concepts, combining creativity with technical skills. These courses help aspiring designers understand the fashion industry from sketching and garment construction to marketing and brand development.Learn More",
+    "Hospital Administration CourseHospital administration involves coordinating the complex systems that keep a healthcare facility running smoothly. It includes overseeing staff, managing budgets, ensuring regulatory compliance, improving patient services, and supporting clinical operations. Effective hospital administrators balance strategic planning with day-to-day problem-solving to create an envi",
+    "Pre-primary TTC CourseA Pre-Primary Teacher Training (TTC) course is a professional certification program designed to prepare individuals for teaching young children between the ages of 2 to 6 years. The course focuses on developing the skills, knowledge, and teaching methodologies required to support early childhood education.Learn More",
+    "Career GuidanceCareer guidance helps individuals understand their strengths, interests, and values so they can make informed decisions about their professional paths. It involves exploring different careers, learning about required skills, and setting realistic goals. With the right guidance, people can identify opportunities, build confidence, and create a clear plan for growth, whether they’re c",
+    "Beautician CourseBeautician courses are professional training programs designed to teach skills in beauty care, personal grooming, and cosmetic techniques. These courses prepare students to work in salons, spas, skin clinics, wellness centers, or even start their own beauty business.Learn More",
+    "About UsLCC Campus is a reputed educational institution offering skill development courses like best fashion designing course, best computer courses, best pre-primary TTC courses, and best beautician courses in Kerala. With multiple branches in Edakkara, Nilambur, Pothukal, Karulai. we are committed to making quality education accessible to students across the region. Our expert faculty, modern in",
+    "About UsLCC Campus is a reputed educational institution offering skill development courses like best fashion designing course, best computer courses, best pre-primary TTC courses, and best beautician courses in Kerala. With multiple branches in Edakkara, Nilambur, Pothukal, Karulai. we are committed to making quality education accessible to students across the region. Our expert faculty, modern in",
     "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com",
     "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com"
   ],
@@ -127,36 +140,44 @@
   ],
   "processed": {
     "features": {
-      "heading": "Excellence in Every Step",
-      "description": "Key offerings from LCC Campus focused on skill development and empowering learners.",
+      "heading": "DEPARTMENTS",
+      "description": "The institution offers a range of skill development courses designed to provide practical knowledge and career opportunities.",
       "items": [
         {
           "title": "Computer Courses",
-          "description": "Skill development courses related to computing and technology."
+          "description": "Courses teaching skills and knowledge about computers, technology, and digital systems, covering topics like how computers work, software development, data management, and real-world applications."
         },
         {
-          "title": "Empowering Environment",
-          "description": "An environment where innovation and growth thrive to help learners reach their potential."
+          "title": "Hospital Administration Course",
+          "description": "A course focused on coordinating complex healthcare systems, including overseeing staff, managing budgets, ensuring regulatory compliance, and improving patient services and clinical operations."
+        },
+        {
+          "title": "Fashion Designing Course",
+          "description": "Programs that teach students how to create clothing, accessories, and fashion concepts, combining creativity with technical skills like sketching, garment construction, marketing, and brand development."
+        },
+        {
+          "title": "Pre-primary TTC Course",
+          "description": "A professional certification program designed to prepare individuals for teaching young children (ages 2-6), focusing on skills, knowledge, and methodologies for early childhood education."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "LCC Campus is committed to empowering every learner to reach their fullest potential. They create an environment where innovation and growth thrive, shaping futures built on knowledge, integrity, and purpose.",
+      "description": "LCC Campus is a reputed educational institution in Kerala offering skill development courses including fashion designing, computer courses, pre-primary TTC, and beautician courses. With multiple branches across the region, it is committed to making quality education accessible through expert faculty and modern infrastructure.",
       "companies": [],
       "achievements": [],
       "breakout": {
-        "title": "Key Message",
-        "description": "Together, we shape futures built on knowledge, integrity, and purpose."
+        "title": "Excellence in Every Step",
+        "description": "Empowering every learner to reach their fullest potential by creating an environment where innovation and growth thrive, shaping futures built on knowledge, integrity, and purpose."
       }
     },
     "footer": {
       "brandName": "LCC Campus",
-      "description": "Educational institution located in Edakkara, Nilambur, Pothukal, Karulai, Kerala.",
+      "description": "A reputed educational institution offering skill development courses in Kerala.",
       "contactInfo": {
         "email": "johnsonlccedk@gmail.com",
         "phone": "9744064081",
-        "address": "LCC Campus - Edakkara, Nilambur, Pothukal, Karulai, Kerala"
+        "address": "Edakkara, Nilambur, Pothukal, Karulai - Kerala"
       },
       "copyright": "Copyright © 2026 lcccampus.com"
     }

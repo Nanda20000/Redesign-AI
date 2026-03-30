@@ -35,6 +35,7 @@ interface ExtractedSection {
   text?: string;
   links?: string[];
   images?: ExtractedImage[];
+  detectedType?: string | null;
 }
 
 function uniqueInOrder<T>(items: T[]): T[] {
@@ -280,7 +281,7 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
 
       console.log("Screenshot captured after scroll and image load");
 
-      // Extract page structure with improved navbar and footer detection
+      // Extract page structure with HTML-parsing-based section classification
       const structure = await page.evaluate(() => {
         const extractUrls = (value: string | null | undefined) => {
           if (!value) return [];
@@ -353,154 +354,182 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
           return Array.from(imageMap.values());
         };
 
-        // Common navigation link keywords
+        // === SECTION TYPE DETECTION PATTERNS ===
+        const SECTION_PATTERNS: Record<string, string[]> = {
+          navbar: ['navbar', 'nav-', 'navigation', 'header', 'top-bar', 'menu', 'main-nav', 'primary-nav'],
+          hero: ['hero', 'banner', 'slider', 'carousel', 'jumbotron', 'intro', 'cover', 'masthead', 'hero-section'],
+          about: ['about', 'who-we-are', 'our-story', 'team', 'mission', 'vision', 'about-us'],
+          features: ['feature', 'service', 'solution', 'offer', 'what-we-do', 'department', 'course', 'program', 'services', 'what-we-offer'],
+          testimonials: ['testimonial', 'review', 'feedback', 'client', 'what-they-say', 'customer', 'success-story'],
+          blog: ['blog', 'news', 'article', 'post', 'insight', 'update', 'press', 'latest-news'],
+          contact: ['contact', 'reach', 'touch', 'enquiry', 'get-in-touch', 'location', 'map', 'contact-us'],
+          cta: ['cta', 'call-to-action', 'get-started', 'signup', 'register', 'enroll', 'action', 'start-now'],
+          gallery: ['gallery', 'portfolio', 'work', 'project', 'photo', 'image-grid', 'our-work'],
+          pricing: ['pricing', 'price', 'plan', 'package', 'subscription', 'cost', 'pricing-plan'],
+          footer: ['footer', 'bottom', 'copyright', 'sitemap', 'site-footer'],
+        };
+
         const NAV_KEYWORDS = ['home', 'about', 'services', 'products', 'contact', 'pricing', 'features', 'blog', 'faq', 'login', 'sign', 'register', 'portfolio', 'team', 'careers'];
-        
-        // Common footer keywords
         const FOOTER_KEYWORDS = ['copyright', 'privacy', 'terms', 'contact', 'address', 'phone', 'email', 'subscribe', 'newsletter', 'follow us', 'all rights reserved', '©'];
+
+        // Helper: detect section type from class/id/text
+        const detectSectionType = (element: Element): string | null => {
+          const tagName = element.tagName.toLowerCase();
+          const className = (element.className || '').toLowerCase();
+          const id = (element.id || '').toLowerCase();
+          const textContent = (element.textContent || '').toLowerCase();
+
+          // Priority 1: Semantic HTML elements
+          if (tagName === 'nav') return 'navbar';
+          if (tagName === 'header') {
+            // Check if header contains nav
+            if (element.querySelector('nav')) return 'navbar';
+            // Check if it's likely a hero
+            const hasHeroPattern = className.split(/\s+/).some(c => 
+              SECTION_PATTERNS.hero.some(p => c.includes(p))
+            );
+            if (hasHeroPattern) return 'hero';
+          }
+          if (tagName === 'footer') return 'footer';
+          if (tagName === 'main') return null; // main is a container, not a section type
+          if (tagName === 'section') {
+            // Check class/id for specific type
+            for (const [type, patterns] of Object.entries(SECTION_PATTERNS)) {
+              for (const pattern of patterns) {
+                if (className.includes(pattern) || id.includes(pattern)) {
+                  return type;
+                }
+              }
+            }
+          }
+          if (tagName === 'article') return 'blog';
+          if (tagName === 'aside') return 'cta';
+
+          // Priority 2: Class/ID pattern matching
+          for (const [type, patterns] of Object.entries(SECTION_PATTERNS)) {
+            for (const pattern of patterns) {
+              if (className.includes(pattern) || id.includes(pattern)) {
+                return type;
+              }
+            }
+          }
+
+          // Priority 3: Content-based heuristics
+          // Navbar: contains <nav> child or many navigation-like links
+          if (element.querySelector('nav')) return 'navbar';
+          
+          // Hero: first large element with h1
+          const heading = element.querySelector('h1, h2, h3');
+          if (heading && element.getBoundingClientRect().top < 500) {
+            const rect = element.getBoundingClientRect();
+            if (rect.height > 300 && rect.width > 800) {
+              return 'hero';
+            }
+          }
+
+          // Gallery: contains multiple images
+          const imgCount = element.querySelectorAll('img').length;
+          if (imgCount >= 3) return 'gallery';
+
+          // Contact: contains email/phone patterns
+          if (/\d{3}[-.\s]?\d{3}[-.\s]?\d{4}/.test(textContent) || /@/.test(textContent)) {
+            return 'contact';
+          }
+
+          // Pricing: contains "$" or price text
+          if (/[$£€]\d+|\d+[$£€]|\d+\s*(USD|EUR|GBP)/i.test(textContent)) {
+            return 'pricing';
+          }
+
+          // Footer: contains copyright
+          if (/©|copyright/i.test(textContent)) {
+            return 'footer';
+          }
+
+          return null;
+        };
 
         const headings = Array.from(document.querySelectorAll("h1, h2, h3"))
           .map((el) => el.textContent?.trim())
           .filter((text): text is string => !!text);
 
-        // === IMPROVED NAVBAR DETECTION ===
-        const navbarSelectors = [
-          'nav',
-          'header nav',
-          '.navbar',
-          '.nav',
-          '.navigation',
-          '.main-nav',
-          '.primary-nav',
-          '[role="navigation"]',
-          'header[role="banner"]',
-          '.header-nav',
-          '.top-nav',
-        ];
+        // === IMPROVED NAVBAR DETECTION (Priority-based) ===
+        // Check in priority order:
+        // 1. <header> element containing <nav>
+        // 2. First <nav> element
+        // 3. Element with class/id matching navbar patterns
+        // 4. Any element with 3+ links that are navigation-keyword links near top of page
 
         let navbarElement: Element | null = null;
         let navbarLinks: string[] = [];
 
-        for (const selector of navbarSelectors) {
-          const element = document.querySelector(selector);
-          if (element) {
-            const links = Array.from(element.querySelectorAll('a'))
-              .map(link => link.textContent?.trim().toLowerCase() || '')
-              .filter(text => text.length > 0);
-            
-            // Check if this element has navigation-like content
-            const hasNavKeywords = links.some(link => 
-              NAV_KEYWORDS.some(keyword => link.includes(keyword))
-            );
-            
-            // Also check if it's a <nav> or has nav-like class
-            const isNavTag = element.tagName.toLowerCase() === 'nav';
-            const hasNavClass = Array.from(element.classList).some(cls => 
-              cls.toLowerCase().includes('nav')
-            );
-
-            if (hasNavKeywords || isNavTag || hasNavClass) {
-              navbarElement = element;
-              navbarLinks = links;
-              break;
-            }
-          }
+        // Priority 1: header containing nav
+        navbarElement = document.querySelector('header nav');
+        
+        // Priority 2: first nav element
+        if (!navbarElement) {
+          navbarElement = document.querySelector('nav');
         }
 
-        // Fallback: Look for header with many links
+        // Priority 3: element with navbar class/id patterns
         if (!navbarElement) {
-          const header = document.querySelector('header');
-          if (header) {
-            const links = Array.from(header.querySelectorAll('a'))
-              .map(link => link.textContent?.trim().toLowerCase() || '')
-              .filter(text => text.length > 0);
-            
-            if (links.length >= 2) {
-              const hasNavKeywords = links.some(link => 
-                NAV_KEYWORDS.some(keyword => link.includes(keyword))
-              );
-              
-              if (hasNavKeywords || links.length >= 4) {
-                navbarElement = header;
-                navbarLinks = links;
-              }
-            }
-          }
+          navbarElement = document.querySelector('[class*="navbar"],[class*="nav-"],[id*="navbar"],[id*="nav"]');
         }
 
-        // Fallback: Look for ul with many links at top of page
+        // Priority 4: element with 3+ nav keyword links near top
         if (!navbarElement) {
-          const ulElements = Array.from(document.querySelectorAll('ul'));
-          for (const ul of ulElements) {
-            const links = Array.from(ul.querySelectorAll('a'));
-            if (links.length >= 3) {
-              const linkTexts = links.map(link => link.textContent?.trim().toLowerCase() || '');
-              const hasNavKeywords = linkTexts.some(link => 
-                NAV_KEYWORDS.some(keyword => link.includes(keyword))
+          const candidates = Array.from(document.querySelectorAll('div, section, header, ul'));
+          for (const candidate of candidates) {
+            const rect = candidate.getBoundingClientRect();
+            if (rect.top < 200) {
+              const links = Array.from(candidate.querySelectorAll('a'))
+                .map(a => a.textContent?.trim().toLowerCase() || '');
+              const hasNavKeywords = links.some(link =>
+                NAV_KEYWORDS.some(kw => link.includes(kw))
               );
-              
-              // Check if ul is near top of page
-              const rect = ul.getBoundingClientRect();
-              const isNearTop = rect.top < 200;
-
-              if (hasNavKeywords || isNearTop) {
-                navbarElement = ul;
-                navbarLinks = linkTexts;
+              if (hasNavKeywords && links.length >= 3) {
+                navbarElement = candidate;
                 break;
               }
             }
           }
         }
 
+        // Extract navbar links
+        if (navbarElement) {
+          navbarLinks = Array.from(navbarElement.querySelectorAll('a'))
+            .map(link => link.textContent?.trim().toLowerCase() || '')
+            .filter(text => text.length > 0);
+        }
+
         const uniqueNav = Array.from(new Set(navbarLinks));
         const hasNavbar = navbarElement !== null && uniqueNav.length >= 2;
 
         // === IMPROVED FOOTER DETECTION ===
-        const footerSelectors = [
-          'footer',
-          '.footer',
-          '.site-footer',
-          '.page-footer',
-          '[role="contentinfo"]',
-          'footer[role="contentinfo"]',
-          '.footer-main',
-          '.footer-content',
-          '#footer',
-          '#site-footer',
-        ];
-
         let footerElement: Element | null = null;
 
-        for (const selector of footerSelectors) {
-          const element = document.querySelector(selector);
-          if (element) {
-            footerElement = element;
-            break;
-          }
+        // Priority 1: <footer> element
+        footerElement = document.querySelector('footer');
+
+        // Priority 2: element with footer class/id patterns
+        if (!footerElement) {
+          footerElement = document.querySelector('[class*="footer"],[id*="footer"],[id*="site-footer"]');
         }
 
-        // Fallback: Look for elements near bottom with footer-like content
+        // Priority 3: element near bottom with footer-like content
         if (!footerElement) {
           const allElements = Array.from(document.querySelectorAll('div, section'));
           const viewportHeight = window.innerHeight;
-          
+
           for (const element of allElements) {
             const rect = element.getBoundingClientRect();
             const documentHeight = document.documentElement.scrollHeight;
-            
-            // Check if element is in bottom 30% of page
             const isNearBottom = rect.top > (documentHeight - viewportHeight) * 0.7;
-            
+
             if (isNearBottom) {
               const text = element.textContent?.toLowerCase() || '';
               const hasFooterKeywords = FOOTER_KEYWORDS.some(keyword => text.includes(keyword));
-              
-              // Check for contact info patterns
-              const hasContactInfo = /\d{3}[-.\s]?\d{3}[-.\s]?\d{4}/.test(text) || // phone
-                                     /@/.test(text) || // email
-                                     /\d+\s+\w+\s+(street|st|avenue|ave|road|rd|boulevard|blvd)/i.test(text); // address
-              
-              // Check for copyright
+              const hasContactInfo = /\d{3}[-.\s]?\d{3}[-.\s]?\d{4}/.test(text) || /@/.test(text);
               const hasCopyright = /©|copyright/i.test(text);
 
               if (hasFooterKeywords || hasContactInfo || hasCopyright) {
@@ -513,48 +542,70 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
 
         const hasFooter = footerElement !== null;
 
-        // === SECTION DETECTION ===
-        const primaryContainers = [
-          document.querySelector('main'),
-          document.querySelector('[role="main"]'),
-          document.querySelector('article'),
-        ].filter((element): element is Element => Boolean(element));
-
-        const topLevelCandidates = primaryContainers.flatMap(container =>
-          Array.from(container.children)
-        );
-
+        // === HTML-PARSING-BASED SECTION DETECTION ===
+        // Collect all candidate elements using semantic and pattern-based selectors
         const candidateSelectors = [
-          'main > *',
-          '[role="main"] > *',
-          'article > *',
-          'body > header',
-          'body > nav',
-          'body > section',
-          'body > footer',
-          'section',
-          'header',
-          'footer',
-          '[class*="section"]',
-          '[class*="hero"]',
-          '[class*="banner"]',
-          '[class*="feature"]',
-          '[class*="service"]',
-          '[class*="about"]',
-          '[class*="testimonial"]',
-          '[class*="gallery"]',
-          '[class*="contact"]',
-          '[class*="pricing"]',
-          '[class*="blog"]',
+          // Semantic HTML elements
+          'section', 'article', 'aside',
+          // Direct children of body (excluding script/style/nav/header/footer which are handled separately)
+          'body > div:not(:first-child):not(:last-child)',
+          'body > main > *',
+          // Common layout containers
+          '[class*="container"], [class*="wrapper"], [class*="inner"]',
+          '[class*="row"], [class*="col-"], [class*="grid"]',
+          // Section-specific patterns
+          '[class*="section"], [class*="block"], [class*="area"], [class*="zone"]',
+          '[class*="hero"], [class*="banner"], [class*="intro"], [class*="cover"]',
+          '[class*="feature"], [class*="service"], [class*="offer"], [class*="solution"]',
+          '[class*="about"], [class*="story"], [class*="team"], [class*="mission"]',
+          '[class*="testimonial"], [class*="review"], [class*="client"], [class*="success"]',
+          '[class*="blog"], [class*="news"], [class*="post"], [class*="article"]',
+          '[class*="contact"], [class*="reach"], [class*="location"], [class*="map"]',
+          '[class*="cta"], [class*="call-to-action"], [class*="signup"], [class*="subscribe"]',
+          '[class*="gallery"], [class*="portfolio"], [class*="work"], [class*="project"]',
+          '[class*="pricing"], [class*="price"], [class*="plan"], [class*="package"]',
+          '[class*="content"], [class*="main"], [class*="primary"], [class*="secondary"]',
+          // ID-based patterns
+          '[id*="section"], [id*="block"], [id*="area"]',
+          '[id*="hero"], [id*="banner"], [id*="intro"]',
+          '[id*="feature"], [id*="service"], [id*="offer"]',
+          '[id*="about"], [id*="team"], [id*="story"]',
+          '[id*="testimonial"], [id*="review"], [id*="client"]',
+          '[id*="blog"], [id*="news"], [id*="post"]',
+          '[id*="contact"], [id*="location"], [id*="map"]',
+          '[id*="cta"], [id*="signup"], [id*="subscribe"]',
+          '[id*="gallery"], [id*="portfolio"], [id*="work"]',
+          '[id*="pricing"], [id*="price"], [id*="plan"]',
+          // Large div containers that might be sections
+          'div[class]:not([class=""])',
         ];
 
-        const candidateElements = [
-          ...topLevelCandidates,
-          ...candidateSelectors.flatMap(selector =>
-            Array.from(document.querySelectorAll(selector))
-          ),
-        ];
+        const candidateElements = Array.from(document.querySelectorAll(candidateSelectors.join(', ')));
 
+        // Also include direct children of main/article containers
+        const mainContainers = Array.from(document.querySelectorAll('main, [role="main"], article'));
+        for (const container of mainContainers) {
+          for (const child of Array.from(container.children)) {
+            if (!candidateElements.includes(child)) {
+              candidateElements.push(child);
+            }
+          }
+        }
+
+        // Include direct children of body that are large divs
+        const bodyChildren = Array.from(document.body.children);
+        for (const child of bodyChildren) {
+          const tagName = child.tagName.toLowerCase();
+          // Skip script, style, nav, header, footer (handled separately)
+          if (['script', 'style', 'noscript', 'nav', 'header', 'footer'].includes(tagName)) {
+            continue;
+          }
+          if (!candidateElements.includes(child)) {
+            candidateElements.push(child);
+          }
+        }
+
+        // Filter and deduplicate candidates
         const seen = new Set<Element>();
         const uniqueCandidates = candidateElements.filter((element) => {
           if (seen.has(element)) return false;
@@ -562,6 +613,7 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
           return true;
         });
 
+        // Filter meaningful sections
         const baseMeaningfulSections = uniqueCandidates
           .filter((element) => {
             const rect = element.getBoundingClientRect();
@@ -574,31 +626,42 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
               return childText.length > 40 || child.querySelectorAll('img').length > 0;
             }).length;
 
-            if (rect.width < 80 || rect.height < 40) return false;
+            // Exclude too small elements
+            if (rect.width < 100 || rect.height < 60) return false;
+            // Exclude script/style/noscript
             if (['script', 'style', 'noscript'].includes(element.tagName.toLowerCase())) return false;
-            if (meaningfulChildren >= 3 && text.length > 800 && element.tagName.toLowerCase() === 'div') return false;
+            // Only exclude overly large generic divs if they have very little unique content
+            // (relaxed to allow more sections through)
+            if (meaningfulChildren >= 5 && text.length > 1500 && element.tagName.toLowerCase() === 'div') {
+              // But still include if it has images or headings
+              if (imageCount > 0 || headingCount > 0) {
+                return true;
+              }
+              return false;
+            }
 
-            return text.length >= 40 || imageCount > 0 || headingCount > 0 || linkCount >= 3;
+            // Must have meaningful content (lowered thresholds)
+            return text.length >= 20 || imageCount > 0 || headingCount > 0 || linkCount >= 2;
           })
           .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
 
+        // Remove nested duplicates (keep outermost meaningful container)
         let meaningfulSections = baseMeaningfulSections
           .filter((element, _, elements) => {
             return !elements.some(other =>
               other !== element &&
               other.contains(element) &&
-              other.getBoundingClientRect().height <= element.getBoundingClientRect().height * 1.35
+              other.getBoundingClientRect().height <= element.getBoundingClientRect().height * 1.5
             );
           })
           .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
 
-        // Homepage-specific fallback:
-        // if section detection is too sparse, keep more candidates from Playwright scraping
-        // so we don't collapse to only navbar/hero/footer.
-        if (meaningfulSections.length < 5) {
-          meaningfulSections = baseMeaningfulSections.slice(0, 18);
+        // Homepage fallback: if too few sections, include more candidates
+        if (meaningfulSections.length < 8) {
+          meaningfulSections = baseMeaningfulSections.slice(0, 30);
         }
 
+        // Build sections array with detectedType
         const sections = meaningfulSections.map((section, index) => {
           const classList = Array.from(section.classList);
           const id = section.id;
@@ -611,6 +674,9 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
             .filter(Boolean)
             .slice(0, 8);
 
+          // Detect section type from HTML patterns
+          const detectedType = detectSectionType(section);
+
           return {
             sourceIndex: index,
             class: classList.length > 0 ? classList.join(" ") : undefined,
@@ -620,6 +686,7 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
             text: fullText.slice(0, 2000),
             links,
             images: sectionImages,
+            detectedType,
           };
         });
 
@@ -629,7 +696,7 @@ async function captureWithRetry(url: string, maxRetries = MAX_RETRIES) {
         return {
           headings,
           navigation: uniqueNav,
-        sections,
+          sections,
           hasNavbar,
           hasFooter,
           navbarLinks: uniqueNav,
@@ -738,7 +805,7 @@ async function fetchWithFallback(url: string) {
     const hasFooter = hasFooterTag || hasFooterClass || hasCopyright;
 
     // Extract sections by looking for common patterns
-    const sections: Array<{ class?: string; id?: string; textPreview: string }> = [];
+    const sections: Array<{ class?: string; id?: string; textPreview: string; detectedType?: null }> = [];
     const sectionPatterns = [
       /<section[^>]*>([\s\S]*?)<\/section>/gi,
       /<div[^>]*class=["'][^"']*(?:hero|banner|content|main)[^"']*["'][^>]*>([\s\S]*?)<\/div>/gi,
@@ -758,6 +825,7 @@ async function fetchWithFallback(url: string) {
             class: classMatch?.[1],
             id: idMatch?.[1],
             textPreview: textContent,
+            detectedType: null,
           });
         }
       }
@@ -770,6 +838,7 @@ async function fetchWithFallback(url: string) {
         const bodyText = bodyMatch[1].replace(/<[^>]+>/g, ' ').trim().slice(0, 500);
         sections.push({
           textPreview: bodyText,
+          detectedType: null,
         });
       }
     }
@@ -920,12 +989,14 @@ export async function POST(request: NextRequest) {
           id: s.id,
           textPreview: s.textPreview,
           text: s.text,
+          detectedType: s.detectedType,
         })),
         hasNavbar: structure.hasNavbar,
         hasFooter: structure.hasFooter,
         navbarLinks: structure.navbarLinks,
         pageType,
         sourceUrl: url,
+        htmlHints: structure.sections.map(s => s.detectedType || null),
       }),
     });
 
