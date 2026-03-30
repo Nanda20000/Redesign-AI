@@ -57,6 +57,33 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'secondaryCtaText', type: 'cta', maxWords: 4 }
     ],
   },
+  'hero-elegant-coloured-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 12 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 30 },
+      { prop: 'primaryButtonText', type: 'cta', maxWords: 3 },
+      { prop: 'secondaryButtonText', type: 'cta', maxWords: 3 },
+      { prop: 'missionText', type: 'paragraph', maxWords: 20 },
+      { prop: 'stat1Value', type: 'heading', maxWords: 2 },
+      { prop: 'stat1Label', type: 'label', maxWords: 8 },
+      { prop: 'stat2Value', type: 'heading', maxWords: 2 },
+      { prop: 'stat2Label', type: 'label', maxWords: 8 },
+      { prop: 'centerImageLabel', type: 'label', maxWords: 4 }
+    ],
+  },
+  'hero-stylish-coloured-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 25 },
+      { prop: 'emailPlaceholder', type: 'label', maxWords: 5 },
+      { prop: 'buttonText', type: 'cta', maxWords: 3 },
+      { prop: 'sectionTitle', type: 'heading', maxWords: 5 },
+      { prop: 'exploreText', type: 'cta', maxWords: 3 },
+      { prop: 'items', type: 'list', maxWords: 100 },
+    ],
+  },
   'hero-banner-dynamic': {
     isDynamic: true,
     contentSlots: [

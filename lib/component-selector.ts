@@ -32,7 +32,7 @@ export interface ComponentSelectionResult {
  * Component capability map - which components support images
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-dynamic', 'hero-simple-dynamic', 'hero-elegant-dynamic', 'hero-banner-dynamic', 'hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
+  hero: ['hero-elegant-coloured-dynamic', 'hero-dynamic', 'hero-simple-dynamic', 'hero-elegant-dynamic', 'hero-banner-dynamic', 'hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
   features: ['features-dynamic', 'features-simple-dynamic', 'features-image', 'features-gallery-type', 'features-slideshow', 'features- Image', 'features-Image-new'],
   testimonials: ['testimonials-dynamic', 'testimonials-elegant-dynamic', 'testimonial-cards', 'testimonial-modern', 'testimonial-gradient'],
   about: ['about-dynamic', 'about-simple-dynamic', 'about-two-column'],
@@ -41,37 +41,27 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
   blog: ['blog-dynamic', 'blog-elegant-dynamic'],
 };
 
-/**
- * AI-safe component whitelist - ONLY these components can be selected
- * All components listed here are dynamic (prop-driven) and AI-compatible
- * First item in each category is highest priority
- * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
- */
-const AI_SAFE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-elegant-dynamic', 'hero-simple-dynamic', 'hero-dynamic', 'hero-banner-dynamic'],
-  features: ['features-simple-dynamic', 'features-dynamic'],
-  about: ['about-simple-dynamic', 'about-dynamic'],
-  testimonials: ['testimonials-elegant-dynamic', 'testimonials-dynamic'],
-  contact: ['contact-split-dynamic'],
-  footer: ['footer-simple'],  // exception: no footer-dynamic exists yet
-  navbar: ['navbar-dynamic'],
-  gallery: ['gallery-elegant-dynamic', 'gallery-dynamic'],
-  cta: ['cta-simple-dynamic', 'cta-dynamic'],
-  blog: ['blog-elegant-dynamic', 'blog-dynamic'],
-};
+function isSelectableAIComponent(componentName: string): boolean {
+  return componentName.endsWith('-dynamic') || componentName === 'footer-simple';
+}
 
 /**
- * Get AI-safe components for a section, with page-specific overrides
- * For non-home pages, force hero-banner-dynamic for hero section
+ * Get AI-selectable components for a section using the manifest instead of a hardcoded whitelist.
+ * For non-home pages, still force hero-banner-dynamic when available.
  */
-function getAIComponentsForSection(section: string, pageSlug: string): string[] {
-  const safeComponents = AI_SAFE_COMPONENTS[section] || [];
-  
-  // For non-home pages, force hero-banner-dynamic for hero section
+function getAIComponentsForSection(
+  section: string,
+  availableComponents: string[],
+  pageSlug: string
+): string[] {
+  const safeComponents = availableComponents.filter(isSelectableAIComponent);
+
   if (section === 'hero' && pageSlug !== 'index') {
-    return ['hero-banner-dynamic'];
+    return safeComponents.includes('hero-banner-dynamic')
+      ? ['hero-banner-dynamic']
+      : safeComponents;
   }
-  
+
   return safeComponents;
 }
 
@@ -377,20 +367,18 @@ function determineSections(
   const sections: { section: string; required: boolean; reason: string }[] = [];
   const processedSections = new Set<string>();
 
-  // Always include required sections if detected or generally needed
+  // Always include required sections, even if classification missed them.
   for (const requiredSection of REQUIRED_SECTIONS) {
-    if (detectedSections.includes(requiredSection)) {
-      sections.push({
-        section: requiredSection,
-        required: true,
-        reason: `${requiredSection} is essential for all websites`
-      });
-      processedSections.add(requiredSection);
-    }
+    sections.push({
+      section: requiredSection,
+      required: true,
+      reason: `${requiredSection} is essential for all websites`
+    });
+    processedSections.add(requiredSection);
   }
 
-  // Add navbar if detected
-  if (detectedSections.includes('navbar')) {
+  // Add navbar for structural consistency, especially on homepages.
+  if (!processedSections.has('navbar')) {
     sections.unshift({
       section: 'navbar',
       required: true,
@@ -429,25 +417,22 @@ function determineSections(
 }
 
 /**
- * Check if a component is in the AI-safe whitelist
+ * Enforce AI-compatible components from the current manifest.
  */
-function isComponentAICompatible(componentName: string, section: string): boolean {
-  const safeComponents = AI_SAFE_COMPONENTS[section] || [];
-  return safeComponents.includes(componentName);
-}
-
-/**
- * Enforce AI-safe component whitelist on layout
- * Always uses the first (highest priority) component for each section
- * For non-home pages, hero section always uses hero-banner-dynamic
- * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
- */
-function enforceAICompatibleComponents(layout: LayoutItem[], pageSlug: string = 'index'): LayoutItem[] {
+function enforceAICompatibleComponents(
+  layout: LayoutItem[],
+  componentsByCategory: Record<string, string[]>,
+  pageSlug: string = 'index'
+): LayoutItem[] {
   const enhancedLayout: LayoutItem[] = [];
 
   for (const item of layout) {
     const newItem = { ...item };
-    const safeComponents = getAIComponentsForSection(item.section, pageSlug);
+    const safeComponents = getAIComponentsForSection(
+      item.section,
+      componentsByCategory[item.section] || [],
+      pageSlug
+    );
 
     if (safeComponents.length > 0) {
       const isSafe = safeComponents.includes(item.component);
@@ -513,7 +498,16 @@ export function selectComponents(
       continue;
     }
 
-    const availableComponents = componentsByCategory[category];
+    const availableComponents = getAIComponentsForSection(
+      category,
+      componentsByCategory[category],
+      pageSlug
+    );
+
+    if (availableComponents.length === 0) {
+      console.warn(`[Component Selector] No AI-selectable components found for category: ${category}`);
+      continue;
+    }
 
     // Select best component (with image awareness)
     const selection = selectBestComponent(
@@ -560,9 +554,9 @@ export function selectComponents(
   console.log('[Component Selector] Selection complete. Variety score:', varietyScore);
   console.log('[Component Selector] Styles used:', Array.from(usedStyles));
 
-  // ENFORCE AI-SAFE COMPONENTS: Replace any non-whitelisted components
+  // ENFORCE AI-COMPATIBLE COMPONENTS from the current manifest
   console.log('[Component Selector] Enforcing AI-safe component whitelist...');
-  const filteredLayout = enforceAICompatibleComponents(layout, pageSlug);
+  const filteredLayout = enforceAICompatibleComponents(layout, componentsByCategory, pageSlug);
 
   return {
     layout: filteredLayout,
@@ -585,18 +579,18 @@ export function buildEnhancedPrompt(
 ): string {
   const { businessType, tone, contentRichness } = analysis;
 
-  // Filter to ONLY dynamic components for the prompt
+  // Filter to manifest-backed AI-selectable components for the prompt
   const dynamicOnlyByCategory: Record<string, string[]> = {};
   for (const [category, comps] of Object.entries(componentsByCategory)) {
-    const dynamic = comps.filter(name => name.endsWith('-dynamic'));
-    if (dynamic.length > 0) {
-      dynamicOnlyByCategory[category] = dynamic;
+    const selectable = getAIComponentsForSection(category, comps, pageSlug);
+    if (selectable.length > 0) {
+      dynamicOnlyByCategory[category] = selectable;
     }
   }
 
   // For non-home pages, hero must only be hero-banner-dynamic
   const isNonHomePage = pageSlug !== 'index';
-  if (isNonHomePage && dynamicOnlyByCategory.hero) {
+  if (isNonHomePage && dynamicOnlyByCategory.hero?.includes('hero-banner-dynamic')) {
     dynamicOnlyByCategory.hero = ['hero-banner-dynamic'];
   }
 

@@ -126,36 +126,32 @@
   ],
   "processed": {
     "features": {
-      "heading": "Excellence in Every Step",
-      "description": "Key offerings from LCC Campus focused on skill development and empowering learners.",
+      "heading": "DEPARTMENTS",
+      "description": "Our institution provides skill development courses.",
       "items": [
         {
           "title": "Computer Courses",
-          "description": "Skill development courses related to computing and technology."
-        },
-        {
-          "title": "LCC CAMPUS",
-          "description": "An educational environment dedicated to innovation, growth, and shaping futures."
+          "description": "Skill development courses related to computing."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "LCC Campus is committed to empowering every learner to reach their fullest potential. They create an environment where innovation and growth thrive, shaping futures built on knowledge, integrity, and purpose.",
+      "description": "At LCC Campus, we believe in empowering every learner to reach their fullest potential. Our commitment to excellence drives us to create an environment where innovation and growth thrive. Together, we shape futures built on knowledge, integrity, and purpose.",
       "companies": [],
       "achievements": [],
       "breakout": {
-        "title": "Key Message",
-        "description": "Together, we shape futures built on knowledge, integrity, and purpose."
+        "title": "Excellence in Every Step",
+        "description": "Empowering learners to reach their fullest potential through excellence, innovation, and growth."
       }
     },
     "footer": {
       "brandName": "LCC Campus",
-      "description": "Educational institution located in Edakkara, Nilambur.",
+      "description": "Educational institution located in Edakkara, Nilambur, Pothukal, Karulai, Kerala.",
       "contactInfo": {
         "email": "johnsonlccedk@gmail.com",
         "phone": "9744064081",
-        "address": "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala"
+        "address": "LCC Campus - Edakkara, Nilambur, Pothukal, Karulai, Kerala"
       },
       "copyright": "Copyright © 2026 lcccampus.com"
     }

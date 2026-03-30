@@ -533,6 +533,45 @@ export function getComponentContentProps(
       };
     }
 
+    case 'hero-elegant-coloured-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        primaryButtonText: sectionContent?.primaryActionText ?? '',
+        secondaryButtonText: sectionContent?.secondaryActionText ?? '',
+        missionText: sectionContent?.missionText ?? '',
+        stat1Value: sectionContent?.stats?.[0]?.value ?? '',
+        stat1Label: sectionContent?.stats?.[0]?.label ?? '',
+        stat2Value: sectionContent?.stats?.[1]?.value ?? '',
+        stat2Label: sectionContent?.stats?.[1]?.label ?? '',
+        centerImageSrc: sectionContent?.images?.[0] ?? '',
+        centerImageLabel: sectionContent?.centerImageLabel ?? '',
+        rightImageSrc: sectionContent?.images?.[1] ?? '',
+      };
+    }
+
+    case 'hero-stylish-coloured-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
+        buttonText: sectionContent?.buttonText ?? '',
+        sectionTitle: sectionContent?.sectionTitle ?? '',
+        exploreText: sectionContent?.exploreText ?? '',
+        exploreLink: sectionContent?.exploreLink ?? '',
+        items: sectionContent?.items?.map((item: any) => ({
+          label: item?.label ?? '',
+          title: item?.title ?? '',
+          description: item?.description ?? '',
+          footerLabel: item?.footerLabel ?? '',
+          footerValue: item?.footerValue ?? '',
+          color: item?.color ?? 'bg-gray-100',
+        })) ?? [],
+      };
+    }
+
     case 'hero-ab':
       // HeroSlide component supports images prop
       const heroAbProps = {

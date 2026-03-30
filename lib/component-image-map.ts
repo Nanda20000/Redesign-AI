@@ -25,6 +25,16 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   'hero-dynamic': { imageCount: 1, imageProp: 'image',       imageMode: 'single' },
   'hero-simple-dynamic': { imageCount: 1, imageProp: 'image', imageMode: 'single' },
   'hero-elegant-dynamic': { imageCount: 1, imageProp: 'mediaUrl', imageMode: 'single' },
+  'hero-elegant-coloured-dynamic': {
+    imageCount: 2,
+    imageProp: 'images',
+    imageMode: 'array',
+  },
+  'hero-stylish-coloured-dynamic': {
+    imageCount: 0,
+    imageProp: 'none',
+    imageMode: 'none',
+  },
   'hero-banner-dynamic': { imageCount: 1, imageProp: 'backgroundImage', imageMode: 'single' },
   'hero-elegant': { imageCount: 0, imageProp: '',             imageMode: 'none'   },
   'hero-minimal': { imageCount: 0, imageProp: '',             imageMode: 'none'   },

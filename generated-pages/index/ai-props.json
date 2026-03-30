@@ -8,81 +8,58 @@
       {
         "label": "Home",
         "href": "/preview/index"
-      },
-      {
-        "label": "About",
-        "href": "/preview/about"
-      },
-      {
-        "label": "Courses",
-        "href": "/preview/courses"
-      },
-      {
-        "label": "Blog",
-        "href": "/preview/blog"
-      },
-      {
-        "label": "Gallery",
-        "href": "/preview/gallery"
-      },
-      {
-        "label": "Contact",
-        "href": "/preview/contact"
-      },
-      {
-        "label": "Services",
-        "href": "/preview/services"
       }
     ],
     "actions": [
       {
         "label": "Learn More",
-        "href": "/preview/courses"
+        "href": "/preview/index"
       }
     ]
   },
-  "hero-elegant-dynamic": {
-    "label": "WELCOME TO LCC CAMPUS",
-    "title": "Excellence in Every Step",
-    "description": "Empowering learners to reach their fullest potential through innovation, growth, and purpose.",
-    "primaryCtaText": "Explore Courses",
-    "secondaryCtaText": "Learn More",
-    "mediaUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
-    "mediaType": "image"
+  "hero-simple-dynamic": {
+    "badge": null,
+    "titlePart1": "Excellence in",
+    "titlePart2": "Every Step",
+    "description": "Empowering learners to reach their fullest potential through a commitment to excellence, innovation, and growth.",
+    "primaryCtaText": "Learn More",
+    "secondaryCtaText": null,
+    "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
+    "imageAlt": "Students collaborating in a modern educational environment"
   },
   "features-simple-dynamic": {
-    "tagline": "OUR COMMITMENT",
-    "heading": "Excellence in Every Step",
-    "description": "We empower every learner to reach their fullest potential through an environment dedicated to innovation, growth, and purpose-driven education.",
+    "tagline": "OUR DEPARTMENTS",
+    "heading": "Skill Development Courses",
+    "description": "We provide practical, career-focused courses designed to empower learners with the skills needed for today's digital world.",
     "features": [
       {
-        "title": "Computer & Technology Courses",
+        "title": "Computer Courses",
         "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg"
       },
       {
-        "title": "Empowering Learning Environment",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
+        "title": "Professional Training",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg"
       },
       {
-        "title": "Skill Development Programs",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-8527897-1-1024x683.jpg"
+        "title": "Practical Learning",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
       }
     ]
   },
   "about-simple-dynamic": {
-    "headline": "About LCC Campus",
-    "topIntro": "We are dedicated to empowering every learner to achieve their fullest potential through innovation and growth.",
-    "heroImage": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
-    "label": "Our Mission",
-    "subIntro": "At LCC Campus, we create an educational environment where knowledge, integrity, and purpose converge to shape the future.",
+    "headline": "Excellence in Every Step",
+    "topIntro": "We empower every learner to reach their fullest potential through a commitment to excellence, innovation, and growth.",
+    "heroImage": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
+    "label": "About LCC Campus",
+    "subIntro": "Located in Edakkara, Nilambur, we are dedicated to shaping futures built on knowledge, integrity, and purpose.",
     "avatarImage": null,
     "avatarName": null,
     "avatarTitle": null,
-    "mainStatement": "LCC Campus is committed to empowering every learner to reach their fullest potential. We believe in creating a dynamic environment where innovation and personal growth are paramount. Our mission is to shape futures built on a solid foundation of knowledge, unwavering integrity, and a clear sense of purpose, preparing students for success in their chosen fields."
+    "mainStatement": "At LCC Campus, we believe in empowering every learner to achieve their fullest potential. Our commitment to excellence drives us to create a dynamic environment where innovation and personal growth thrive. Together, we are dedicated to building futures grounded in knowledge, integrity, and a clear sense of purpose."
   },
   "footer-simple": {
     "brandName": "LCC Campus",
-    "description": "An educational institution empowering learners through skill development in Edakkara, Kerala.",
+    "description": "An educational institution empowering learners in Edakkara, Nilambur, Kerala.",
     "copyright": "Copyright © 2026 lcccampus.com"
   }
 }

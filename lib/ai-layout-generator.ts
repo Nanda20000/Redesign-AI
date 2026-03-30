@@ -474,61 +474,43 @@ function enforceImageComponents(
   return { layout: enhancedLayout };
 }
 
-/**
- * AI-safe component whitelist - ONLY these components can be selected
- * All components listed here are dynamic (prop-driven) and AI-compatible
- * First item in each category is highest priority
- * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
- */
-const AI_SAFE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-elegant-dynamic', 'hero-simple-dynamic', 'hero-dynamic', 'hero-banner-dynamic'],
-  features: ['features-simple-dynamic', 'features-dynamic'],
-  about: ['about-simple-dynamic', 'about-dynamic'],
-  testimonials: ['testimonials-elegant-dynamic', 'testimonials-dynamic'],
-  contact: ['contact-split-dynamic'],
-  footer: ['footer-simple'],  // exception: no footer-dynamic exists yet
-  navbar: ['navbar-dynamic'],
-  gallery: ['gallery-elegant-dynamic', 'gallery-dynamic'],
-  cta: ['cta-simple-dynamic', 'cta-dynamic'],
-  blog: ['blog-elegant-dynamic', 'blog-dynamic'],
-};
+function isSelectableAIComponent(componentName: string): boolean {
+  return componentName.endsWith('-dynamic') || componentName === 'footer-simple';
+}
 
-/**
- * Get AI-safe components for a section, with page-specific overrides
- * For non-home pages, force hero-banner-dynamic for hero section
- */
-function getAIComponentsForSection(section: string, pageSlug: string): string[] {
-  const safeComponents = AI_SAFE_COMPONENTS[section] || [];
-  
-  // For non-home pages, force hero-banner-dynamic for hero section
+function getAIComponentsForSection(
+  section: string,
+  availableComponents: string[],
+  pageSlug: string
+): string[] {
+  const safeComponents = availableComponents.filter(isSelectableAIComponent);
+
   if (section === 'hero' && pageSlug !== 'index') {
-    return ['hero-banner-dynamic'];
+    return safeComponents.includes('hero-banner-dynamic')
+      ? ['hero-banner-dynamic']
+      : safeComponents;
   }
-  
+
   return safeComponents;
 }
 
 /**
- * Check if a component is in the AI-safe whitelist
+ * Enforce AI-compatible components on layout AFTER AI generation.
  */
-function isComponentAICompatible(componentName: string, section: string): boolean {
-  const safeComponents = AI_SAFE_COMPONENTS[section] || [];
-  return safeComponents.includes(componentName);
-}
-
-/**
- * Enforce AI-safe component whitelist on layout AFTER AI generation
- * Always uses the first (highest priority) component for each section
- * For non-home pages, hero section always uses hero-banner-dynamic
- * This runs AFTER AI layout generation to ensure preferred dynamic components are used
- * STRICT: Only components ending with '-dynamic' are allowed (exception: footer-simple)
- */
-function enforceAICompatibleComponents(layout: LayoutResponse, pageSlug: string = 'index'): LayoutResponse {
+function enforceAICompatibleComponents(
+  layout: LayoutResponse,
+  componentsByCategory: Record<string, string[]>,
+  pageSlug: string = 'index'
+): LayoutResponse {
   const enhancedLayout: LayoutItem[] = [];
 
   for (const item of layout.layout) {
     const newItem = { ...item };
-    const safeComponents = getAIComponentsForSection(item.section, pageSlug);
+    const safeComponents = getAIComponentsForSection(
+      item.section,
+      componentsByCategory[item.section] || [],
+      pageSlug
+    );
 
     if (safeComponents.length > 0) {
       const isSafe = safeComponents.includes(item.component);
@@ -734,9 +716,9 @@ export async function generateLayoutWithAI(
       layout = enforceImageComponents(layout, hasImages);
     }
 
-    // ENFORCE AI-SAFE COMPONENTS after merging so invalid selections are corrected
+    // ENFORCE AI-COMPATIBLE COMPONENTS after merging so invalid selections are corrected
     console.log('[AI Layout Generator] Enforcing AI-safe component whitelist...');
-    layout = enforceAICompatibleComponents(layout, pageSlug);
+    layout = enforceAICompatibleComponents(layout, componentsByCategory, pageSlug);
 
     // Step 9: Save the layout
     console.log('[AI Layout Generator] Saving layout...');

@@ -18,30 +18,6 @@ export interface LayoutData {
   aiProps?: Record<string, Record<string, any>> | null;
 }
 
-// Whitelist of dynamic components that accept props
-// STRICT: Only -dynamic components are AI-selectable (exception: footer-simple)
-const DYNAMIC_COMPONENTS = [
-  'hero-dynamic',
-  'hero-simple-dynamic',
-  'hero-elegant-dynamic',
-  'hero-banner-dynamic',
-  'features-dynamic',
-  'features-simple-dynamic',
-  'about-dynamic',
-  'about-simple-dynamic',
-  'testimonials-dynamic',
-  'testimonials-elegant-dynamic',
-  'navbar-dynamic',
-  'contact-split-dynamic',
-  'footer-simple', // exception
-  'gallery-dynamic',
-  'gallery-elegant-dynamic',
-  'cta-dynamic',
-  'cta-simple-dynamic',
-  'blog-dynamic',
-  'blog-elegant-dynamic',
-];
-
 // Fallback components for each section type (only dynamic ones)
 const FALLBACK_COMPONENTS: Record<string, string> = {
   hero: "hero-elegant-dynamic",
@@ -273,7 +249,7 @@ export default function PreviewPage({ params }: PreviewPageProps) {
 
   // Filter out non-dynamic components (components that don't accept props)
   const filteredLayout = layout.layout.filter((item) => {
-    const isDynamic = DYNAMIC_COMPONENTS.includes(item.component) || isComponentDynamic(item.component);
+    const isDynamic = isComponentDynamic(item.component);
     if (!isDynamic) {
       console.warn(`[PreviewPage] Skipping non-dynamic component: ${item.component} for section ${item.section}`);
     }

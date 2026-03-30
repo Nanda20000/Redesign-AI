@@ -1,5 +1,7 @@
 import { HeroSlide } from '@/components-library/hero/hero-ab';
 import { HeroDynamic } from '@/components-library/hero/hero-dynamic';
+import { HeroElegantColouredDynamic } from '../../components-library/hero/hero-elegant-coloured-dynamic';
+import { HeroStylishColouredDynamic } from '../../components-library/hero/hero-stylish-coloured-dynamic';
 import { FeaturesSlideshow } from '@/components-library/features/features-slideshow';
 import { FeaturesDynamic } from '@/components-library/features/features-dynamic';
 import { About3 } from '@/components-library/about/about-two-column';
@@ -16,6 +18,8 @@ import { NavbarDynamic } from '@/components-library/navbar/navbar-dynamic';
 const components = {
   // Dynamic components (AI-selectable)
   "hero-dynamic": HeroDynamic,
+  "hero-elegant-coloured-dynamic": HeroElegantColouredDynamic,
+  "hero-stylish-coloured-dynamic": HeroStylishColouredDynamic,
   "features-dynamic": FeaturesDynamic,
   "about-dynamic": AboutDynamic,
   "testimonials-dynamic": TestimonialsDynamic,
@@ -34,7 +38,7 @@ const components = {
 
 // AI-safe component whitelist - ONLY -dynamic components (plus footer-simple exception)
 export const SAFE_COMPONENTS = {
-  hero: ["hero-dynamic"],
+  hero: ["hero-stylish-coloured-dynamic", "hero-elegant-coloured-dynamic", "hero-dynamic"],
   features: ["features-dynamic"],
   about: ["about-dynamic"],
   testimonials: ["testimonials-dynamic"],

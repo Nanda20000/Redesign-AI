@@ -217,6 +217,18 @@
       "description": "Elegant two-column hero with bold typography and a circular media element."
     },
     {
+      "name": "hero-elegant-coloured-dynamic",
+      "category": "hero",
+      "file": "hero/hero-elegant-coloured-dynamic.tsx",
+      "description": "Elegant hero section with centered text, dual CTAs, and a dynamic grid of stats and images."
+    },
+    {
+      "name": "hero-stylish-coloured-dynamic",
+      "category": "hero",
+      "file": "hero/hero-stylish-coloured-dynamic.tsx",
+      "description": "A stylish hero section with a large heading, email signup, and a grid of colorful featured plan cards."
+    },
+    {
       "name": "navbar-elegant",
       "category": "navbar",
       "file": "navbar/navbar-elegant.tsx",

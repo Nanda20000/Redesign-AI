@@ -926,6 +926,23 @@ export async function POST(request: NextRequest) {
       classifiedSections.map((s) => s.type).filter(Boolean)
     );
 
+    if (structure.hasNavbar && !orderedSectionTypes.includes('navbar')) {
+      orderedSectionTypes.unshift('navbar');
+    }
+
+    if (pageSlug === 'index' && !orderedSectionTypes.includes('hero')) {
+      const navbarIndex = orderedSectionTypes.indexOf('navbar');
+      if (navbarIndex >= 0) {
+        orderedSectionTypes.splice(navbarIndex + 1, 0, 'hero');
+      } else {
+        orderedSectionTypes.unshift('hero');
+      }
+    }
+
+    if (structure.hasFooter && !orderedSectionTypes.includes('footer')) {
+      orderedSectionTypes.push('footer');
+    }
+
     // Call generate-layout API to create layout with content
     try {
       await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/generate-layout`, {
