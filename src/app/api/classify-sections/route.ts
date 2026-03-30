@@ -249,7 +249,7 @@ export async function POST(request: NextRequest) {
       if (hasNavbar) {
         fallbackSections.unshift({ type: 'navbar', text: 'Navigation menu', sourceIndex: -1 });
       }
-      if (pageType === 'home' && !fallbackSections.some(s => s.type === 'hero')) {
+      if (!fallbackSections.some(s => s.type === 'hero')) {
         const insertAt = hasNavbar ? 1 : 0;
         fallbackSections.splice(insertAt, 0, { type: 'hero', text: headings[0] || 'Welcome', sourceIndex: -3 });
       }
@@ -301,8 +301,8 @@ export async function POST(request: NextRequest) {
 
     finalSections.push(...sourceAlignedSections);
 
-    // Homepages should always have a hero slot near the top.
-    if (pageType === 'home' && !sourceAlignedSections.some(s => s.type === 'hero')) {
+    // All pages should generally have a hero slot near the top.
+    if (!sourceAlignedSections.some(s => s.type === 'hero')) {
       const insertAt = hasNavbar ? 1 : 0;
       finalSections.splice(insertAt, 0, { type: 'hero', text: headings[0] || 'Welcome', sourceIndex: -3 });
     }

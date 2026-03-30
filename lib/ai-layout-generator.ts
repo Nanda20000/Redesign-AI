@@ -779,12 +779,12 @@ export async function generateLayoutWithAI(
 
     // Merge AI output with rule-based selection so we keep all detected sections
     // while preserving valid AI choices where they exist.
-    // Note: preserveDuplicates is now false to prevent section bloat on homepage
+    // Note: preserveDuplicates is now true to allow multiple section types (e.g. multiple features or about)
     layout = mergeLayoutsByDetectedSections(
       pageStructure.sections,
       layout,
       selectionResult.layout,
-      { preserveDuplicates: false }
+      { preserveDuplicates: true }
     );
 
     // FORCE IMAGE-CAPABLE COMPONENTS when images exist
@@ -797,22 +797,25 @@ export async function generateLayoutWithAI(
     console.log('[AI Layout Generator] Enforcing AI-safe component whitelist...');
     layout = enforceAICompatibleComponents(layout, componentsByCategory, pageSlug);
 
-    // FINAL GUARD: Cap total layout length for homepage to prevent bloat
-    if (pageSlug === 'index' && layout.layout.length > 10) {
-      console.warn(`[AI Layout Generator] Homepage layout has ${layout.layout.length} items — trimming to 10`);
+    // FINAL GUARD: Catch runaway layouts without severely restricting real duplicates
+    if (layout.layout.length > 20) {
+      console.warn(`[AI Layout Generator] Layout has ${layout.layout.length} items — trimming to 20`);
       
       // Keep first navbar, last footer, and best middle sections
       const navbar = layout.layout.find(i => i.section === 'navbar');
-      const footer = layout.layout.find(i => i.section === 'footer');
+      const reversedLayout = [...layout.layout].reverse();
+      const footer = reversedLayout.find(i => i.section === 'footer');
       const middle = layout.layout.filter(i => i.section !== 'navbar' && i.section !== 'footer');
       
-      // Deduplicate middle sections, keeping first occurrence of each type
-      // except features which can appear twice
+      // Deduplicate middle sections with the same generous limits
       const seen: Record<string, number> = {};
-      const maxMid: Record<string, number> = { features: 2 };
+      const maxMid: Record<string, number> = { 
+        features: 6, about: 3, testimonials: 3, gallery: 3, 
+        blog: 3, cta: 4, services: 4, hero: 1
+      };
       const dedupedMiddle = middle.filter(item => {
         const count = seen[item.section] || 0;
-        const max = maxMid[item.section] ?? 1;
+        const max = maxMid[item.section] ?? 6;
         if (count < max) { seen[item.section] = count + 1; return true; }
         return false;
       });
@@ -820,7 +823,7 @@ export async function generateLayoutWithAI(
       layout = {
         layout: [
           ...(navbar ? [navbar] : []),
-          ...dedupedMiddle.slice(0, 8),
+          ...dedupedMiddle.slice(0, 18),
           ...(footer ? [footer] : []),
         ]
       };

@@ -9,8 +9,16 @@
       "component": "features-simple-dynamic"
     },
     {
+      "section": "features",
+      "component": "features-simple-dynamic"
+    },
+    {
       "section": "about",
       "component": "about-simple-dynamic"
+    },
+    {
+      "section": "blog",
+      "component": "blog-dynamic"
     },
     {
       "section": "footer",

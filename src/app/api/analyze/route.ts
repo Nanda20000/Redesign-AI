@@ -1021,56 +1021,44 @@ export async function POST(request: NextRequest) {
     const classifiedTypeSequence = normalizeStructuralSections(
       classifiedSections.map((s) => s.type).filter(Boolean)
     );
-    let orderedSectionTypes = pageSlug === 'index'
-      ? classifiedTypeSequence
-      : uniqueInOrder(classifiedTypeSequence);
+    let orderedSectionTypes = classifiedTypeSequence;
 
-    // Homepage-specific deduplication to prevent section repetition
-    if (pageSlug === 'index') {
-      const sectionTypeCounts: Record<string, number> = {};
-      const MAX_PER_TYPE: Record<string, number> = {
-        navbar: 1,
-        hero: 1,
-        footer: 1,
-        cta: 1,
-        contact: 1,
-        about: 1,
-        testimonials: 1,
-        gallery: 1,
-        blog: 1,
-        features: 2,
-        services: 1,
-      };
-      
-      const deduplicatedSections = orderedSectionTypes.filter((type: string) => {
-        const count = sectionTypeCounts[type] || 0;
-        const max = MAX_PER_TYPE[type] ?? 1;
-        if (count < max) {
-          sectionTypeCounts[type] = count + 1;
-          return true;
-        }
-        return false;
-      });
-
-      if (!deduplicatedSections.includes('navbar')) deduplicatedSections.unshift('navbar');
-      if (!deduplicatedSections.includes('hero')) {
-        const navIdx = deduplicatedSections.indexOf('navbar');
-        if (navIdx >= 0) {
-          deduplicatedSections.splice(navIdx + 1, 0, 'hero');
-        } else {
-          deduplicatedSections.unshift('hero');
-        }
+    // Deduplication to prevent excessive section repetition, but generous enough for real sites
+    const sectionTypeCounts: Record<string, number> = {};
+    const MAX_PER_TYPE: Record<string, number> = {
+      navbar: 1,
+      hero: 1,
+      footer: 1,
+      cta: 4,
+      contact: 1,
+      about: 3,
+      testimonials: 3,
+      gallery: 3,
+      blog: 3,
+      features: 6,
+      services: 4,
+    };
+    
+    const deduplicatedSections = orderedSectionTypes.filter((type: string) => {
+      const count = sectionTypeCounts[type] || 0;
+      const max = MAX_PER_TYPE[type] ?? 6;
+      if (count < max) {
+        sectionTypeCounts[type] = count + 1;
+        return true;
       }
-      if (!deduplicatedSections.includes('footer')) deduplicatedSections.push('footer');
+      return false;
+    });
 
-      orderedSectionTypes = deduplicatedSections;
-    }
+    if (!deduplicatedSections.includes('navbar')) deduplicatedSections.unshift('navbar');
+    if (!deduplicatedSections.includes('footer')) deduplicatedSections.push('footer');
+
+    orderedSectionTypes = deduplicatedSections;
 
     if (structure.hasNavbar && !orderedSectionTypes.includes('navbar')) {
       orderedSectionTypes.unshift('navbar');
     }
 
-    if (pageSlug === 'index' && !orderedSectionTypes.includes('hero')) {
+    if (!orderedSectionTypes.includes('hero')) {
       const navbarIndex = orderedSectionTypes.indexOf('navbar');
       if (navbarIndex >= 0) {
         orderedSectionTypes.splice(navbarIndex + 1, 0, 'hero');
