@@ -779,11 +779,12 @@ export async function generateLayoutWithAI(
 
     // Merge AI output with rule-based selection so we keep all detected sections
     // while preserving valid AI choices where they exist.
+    // Note: preserveDuplicates is now false to prevent section bloat on homepage
     layout = mergeLayoutsByDetectedSections(
       pageStructure.sections,
       layout,
       selectionResult.layout,
-      { preserveDuplicates: pageSlug === 'index' }
+      { preserveDuplicates: false }
     );
 
     // FORCE IMAGE-CAPABLE COMPONENTS when images exist
@@ -795,6 +796,37 @@ export async function generateLayoutWithAI(
     // ENFORCE AI-COMPATIBLE COMPONENTS after merging so invalid selections are corrected
     console.log('[AI Layout Generator] Enforcing AI-safe component whitelist...');
     layout = enforceAICompatibleComponents(layout, componentsByCategory, pageSlug);
+
+    // FINAL GUARD: Cap total layout length for homepage to prevent bloat
+    if (pageSlug === 'index' && layout.layout.length > 10) {
+      console.warn(`[AI Layout Generator] Homepage layout has ${layout.layout.length} items — trimming to 10`);
+      
+      // Keep first navbar, last footer, and best middle sections
+      const navbar = layout.layout.find(i => i.section === 'navbar');
+      const footer = layout.layout.find(i => i.section === 'footer');
+      const middle = layout.layout.filter(i => i.section !== 'navbar' && i.section !== 'footer');
+      
+      // Deduplicate middle sections, keeping first occurrence of each type
+      // except features which can appear twice
+      const seen: Record<string, number> = {};
+      const maxMid: Record<string, number> = { features: 2 };
+      const dedupedMiddle = middle.filter(item => {
+        const count = seen[item.section] || 0;
+        const max = maxMid[item.section] ?? 1;
+        if (count < max) { seen[item.section] = count + 1; return true; }
+        return false;
+      });
+      
+      layout = {
+        layout: [
+          ...(navbar ? [navbar] : []),
+          ...dedupedMiddle.slice(0, 8),
+          ...(footer ? [footer] : []),
+        ]
+      };
+      
+      saveLayout(layout, pageSlug);
+    }
 
     // Step 9: Save the layout
     console.log('[AI Layout Generator] Saving layout...');

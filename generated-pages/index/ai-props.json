@@ -1,7 +1,7 @@
 {
   "navbar-dynamic": {
     "logo": {
-      "text": "IBS Academy",
+      "text": "LCC Campus",
       "href": "/preview/index"
     },
     "navItems": [
@@ -16,91 +16,44 @@
     ],
     "actions": [
       {
-        "label": "Register Now",
-        "href": "#",
+        "label": "Learn More",
+        "href": "/preview/about",
         "variant": "primary"
       }
     ]
   },
+  "hero-elegant-dynamic": {
+    "label": "WELCOME TO LCC CAMPUS",
+    "title": "Excellence in Every Step",
+    "description": "Empowering learners to reach their fullest potential through innovation and growth.",
+    "primaryCtaText": "Explore Courses",
+    "secondaryCtaText": "Learn More",
+    "mediaUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
+    "mediaType": "image",
+    "posterUrl": null
+  },
   "features-simple-dynamic": {
-    "tagline": "OUR PROGRAMS",
-    "heading": "The Gateway to Professional Accounting Success",
-    "description": "Our featured courses are designed to equip you with a deep understanding of key accounting concepts and practices, leading to globally recognized certifications.",
+    "tagline": "OUR COMMITMENT",
+    "heading": "Excellence in Every Step",
+    "description": "We empower every learner to reach their fullest potential through an environment where innovation and growth thrive.",
     "features": [
       {
-        "title": "US CPA - Certified Public Accountant",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930895.jpg"
+        "title": "Computer & Technology Courses",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg"
       },
       {
-        "title": "US CMA - Certified Management Accountant",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930687.jpg"
+        "title": "An Empowering Learning Environment",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
       },
       {
-        "title": "Diploma in Financial Accounting & Taxation",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930486.jpg"
-      }
-    ]
-  },
-  "about-simple-dynamic": {
-    "headline": "The Cornerstone of Financial Mastery",
-    "topIntro": "A premier ISO 9001:2015 certified institute, elevating the accounting profession with expert support and continuous practice.",
-    "heroImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
-    "label": "Our Story of Success",
-    "subIntro": "With over 28 years of excellence, we provide direct certifications from leading software providers like Tally and SAP.",
-    "avatarImage": null,
-    "avatarName": null,
-    "avatarTitle": null,
-    "mainStatement": "IBS Academy is Kerala's leading professional accounting institute. For over two decades, we have been dedicated to shaping the next generation of finance professionals. Our mission is to equip students with a deep, practical understanding of key accounting concepts through an industry-relevant syllabus. We are proud to offer 100% placement assistance and direct pathways to globally recognized certifications, making us the gateway to your success in the financial world."
-  },
-  "blog-dynamic": {
-    "title": "Insights & Updates",
-    "subtitle": "Explore expert articles, student success stories, and industry news from IBS Academy.",
-    "items": [
-      {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg",
-        "category": "Student Success",
-        "title": "From Student to CPA",
-        "excerpt": "How our structured program helped a graduate achieve the US CPA credential.",
-        "author": "IBS Team",
-        "date": "2024-05-15",
-        "readMoreText": "Read More",
-        "href": "/blog/from-student-to-cpa"
-      },
-      {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg",
-        "category": "Career Advice",
-        "title": "Mastering Tally in 2024",
-        "excerpt": "Essential tips and updates for finance professionals using Tally software.",
-        "author": "Faculty",
-        "date": "2024-04-22",
-        "readMoreText": "Read More",
-        "href": "/blog/mastering-tally-2024"
-      },
-      {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367452.jpg",
-        "category": "Industry News",
-        "title": "Future of Accounting",
-        "excerpt": "Key trends shaping the finance and auditing profession globally.",
-        "author": "Guest Expert",
-        "date": "2024-03-10",
-        "readMoreText": "Read More",
-        "href": "/blog/future-of-accounting"
-      },
-      {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367376.jpg",
-        "category": "Program Guide",
-        "title": "CMA vs CPA Paths",
-        "excerpt": "A detailed comparison to help you choose the right certification for your goals.",
-        "author": "IBS Advisors",
-        "date": "2024-02-28",
-        "readMoreText": "Learn More",
-        "href": "/blog/cma-vs-cpa-paths"
+        "title": "Futures Built on Integrity",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg"
       }
     ]
   },
   "footer-simple": {
-    "brandName": "IBS Academy",
-    "description": "A premier ISO 9001:2015 certified professional accounting institute.",
-    "copyright": "© 2024 IBS Academy. All rights reserved."
+    "brandName": "LCC Campus",
+    "description": "An educational institution empowering learners in Edakkara, Nilambur, Kerala.",
+    "copyright": "Copyright © 2026 lcccampus.com"
   }
 }

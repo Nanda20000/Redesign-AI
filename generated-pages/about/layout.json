@@ -5,8 +5,8 @@
       "component": "navbar-dynamic"
     },
     {
-      "section": "about",
-      "component": "about-simple-dynamic"
+      "section": "hero",
+      "component": "hero-banner-dynamic"
     },
     {
       "section": "features",

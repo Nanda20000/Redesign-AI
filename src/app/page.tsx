@@ -143,14 +143,31 @@ export default function Home() {
         if (analyzeData.status !== 'success') continue;
 
         // 2. Generate layout with slug
-        const sections = normalizeStructuralSections((analyzeData.classifiedSections || [])
+        let finalSections = normalizeStructuralSections((analyzeData.classifiedSections || [])
           .map((s: any) => s.type)
           .filter(Boolean));
+        
+        // Homepage-specific deduplication
+        if (page.slug === 'index') {
+          const counts: Record<string, number> = {};
+          const maxPerType: Record<string, number> = {
+            navbar: 1, hero: 1, footer: 1, cta: 1,
+            contact: 1, about: 1, testimonials: 1,
+            gallery: 1, blog: 1, features: 2, services: 1,
+          };
+          finalSections = finalSections.filter((type: string) => {
+            const count = counts[type] || 0;
+            const max = maxPerType[type] ?? 1;
+            if (count < max) { counts[type] = count + 1; return true; }
+            return false;
+          });
+        }
+        
         const layoutRes = await fetch('/api/generate-layout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            sections,
+            sections: finalSections,
             content: analyzeData.content,
             regenerate: true,
             pageSlug: page.slug,

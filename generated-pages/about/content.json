@@ -1,129 +1,110 @@
 {
   "headings": [
-    "About Us",
-    "About Us",
-    "Mission",
-    "Vision",
-    "Quick Links",
-    "Quick Links"
+    "ABOUT US",
+    "LCC CAMPUS",
+    "PSC Approved Institution",
+    "Our Vision",
+    "Our Mission",
+    "12+",
+    "22",
+    "25+",
+    "10K"
   ],
   "paragraphs": [
-    "Home About Career Exam Gallery Contact Us Partnership Sign In Register Now",
-    "About Us Home About Us",
-    "About Us Home About Us",
-    "About Us Numbers Tell a Story of Success IBS Academy is a premier ISO 9001: 2015 certified professional accounting institute in Kerala with over 20 years of experience in the industry. We provide direct certifications from leading accounting software providers, SAP and Tally. Our dedication to delivering the finest academic achievement is reflected in our Industry-relevant syllabus, which is craft",
-    "About Us Numbers Tell a Story of Success",
-    "Mission As INTERNATIONAL BUSINESS SOLUTIONS, we have been aligned with more than 5000 clients by being the Tally partner and provider of ERP solutions. However, we've recognized a substantial shortage of highly skilled and knowledgeable accounting professionals in the industry. Our mission through the IBS Academy is to enable state-of-the-art training in accounting, inventory, and taxation for a w",
-    "IBS Academy is a premier ISO 9001: 2015 certified professional accounting institute in Kerala with over 20 years of experience in the industry. We provide direct certifications from leading accounting software providers, SAP and Tally. Quick Links Home About Career Blog Games Quick Links Gallery Contact Us Achievement Help Call Us +91 75940 62999 +91 75940 14999 Location 3rd floor, calicut mall, s",
-    "Location 3rd floor, calicut mall, stadium jn., Puthiyara road, Kozhikode - 673004"
+    "ABOUT US LCC CAMPUSLCC Campus is a leading educational institution dedicated to shaping confident, skilled, and career-ready individuals. We proudly offer the best job oriented courses such as best fashion designing course, best computer courses, best pre-primary TTC courses,best accounting courses, best hospital administration course, and best beautician courses, all crafted to meet the evolving ",
+    "Home About Courses Blog Gallery Contact Take Action Take Action Main Menu Home About Courses Blog Gallery Contact",
+    "Home About Courses Blog Gallery Contact Take Action Take Action",
+    "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com",
+    "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com"
   ],
   "navigationLinks": [
     "home",
     "about",
-    "career",
-    "exam",
+    "courses",
+    "blog",
     "gallery",
-    "contact us",
-    "partnership",
-    "sign in",
-    "register now"
+    "contact"
   ],
-  "footerText": "Location 3rd floor, calicut mall, stadium jn., Puthiyara road, Kozhikode - 673004",
+  "footerText": "LCC Campus - Edakkara,Nilambur,Pothukal.Karulai-Kerala | Phone: 9744064081 | Email: johnsonlccedk@gmail.com Copyright © 2026 lcccampus.com",
+  "contactInfo": {
+    "email": "johnsonlccedk@gmail.com",
+    "phone": "9744064081"
+  },
   "images": [
     {
-      "src": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
-      "alt": "Logo",
-      "title": "Logo",
-      "width": 342,
-      "height": 97
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_qgqkfcqgqkfcqgq.jpeg",
+      "alt": "gemini generated image qgqkfcqgqkfcqgq",
+      "title": "gemini generated image qgqkfcqgqkfcqgq",
+      "width": 1024,
+      "height": 1024
     },
     {
-      "src": "https://ibsacademy.co/public/assets/web/images/about/1.png",
-      "alt": "About",
-      "title": "",
-      "width": 633,
-      "height": 585
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_39uryf39uryf39u-1.jpeg",
+      "alt": "gemini generated image 39uryf39uryf39u",
+      "title": "gemini generated image 39uryf39uryf39u",
+      "width": 1024,
+      "height": 1024
     },
     {
-      "src": "https://ibsacademy.co/public/assets/web/images/logo/footer.png",
-      "alt": "",
-      "title": "",
-      "width": 170,
-      "height": 44
-    },
-    {
-      "src": "https://ibsacademy.co/public/assets/web/images/bg/bg1.png",
+      "src": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944238-1.jpg",
       "alt": "",
       "title": "",
       "width": 1920,
-      "height": 440
-    },
-    {
-      "src": "https://ibsacademy.co/public/assets/web/images/bg/exm.png",
-      "alt": "",
-      "title": "",
-      "width": 1920,
-      "height": 412
-    },
-    {
-      "src": "https://ibsacademy.co/public/assets/web/images/bg/footerbg.png",
-      "alt": "",
-      "title": "",
-      "width": 1920,
-      "height": 427
+      "height": 560
     }
   ],
   "processed": {
     "features": {
-      "heading": "Key Services",
-      "description": "IBS Academy provides professional accounting training and certifications.",
+      "heading": "Our Courses",
+      "description": "LCC Campus offers a range of job-oriented courses designed to build confident, skilled, and career-ready individuals.",
       "items": [
         {
-          "title": "Professional Accounting Training",
-          "description": "State-of-the-art training in accounting, inventory, and taxation to address the industry's skill shortage."
+          "title": "Fashion Designing Course",
+          "description": "A leading program for aspiring fashion professionals."
         },
         {
-          "title": "Direct Software Certifications",
-          "description": "Provides direct certifications from leading accounting software providers, including SAP and Tally."
+          "title": "Computer Courses",
+          "description": "Comprehensive training in essential and advanced computer skills."
         },
         {
-          "title": "ERP Solutions Partnership",
-          "description": "Acts as a Tally partner and provider of ERP solutions, having served over 5000 clients."
+          "title": "Pre-primary TTC Courses",
+          "description": "Teacher training courses focused on early childhood education."
+        },
+        {
+          "title": "Hospital Administration Course",
+          "description": "Specialized training for careers in healthcare management."
         }
       ]
     },
     "about": {
-      "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in Kerala with over 20 years of experience. It provides direct certifications from leading software providers like SAP and Tally and focuses on an industry-relevant syllabus.",
-      "companies": [
-        "SAP",
-        "Tally"
-      ],
+      "title": "ABOUT US",
+      "description": "LCC Campus is a leading educational institution dedicated to shaping confident, skilled, and career-ready individuals. We offer the best job-oriented courses crafted to meet the evolving demands of the industry.",
+      "companies": [],
       "achievements": [
         {
           "label": "Years Experience",
-          "value": "20+"
+          "value": "12+"
         },
         {
-          "label": "Clients Served",
-          "value": "5000+"
+          "label": "Students Trained",
+          "value": "10K+"
         }
       ],
       "breakout": {
-        "title": "Numbers Tell a Story of Success",
-        "description": "A story of success built on over two decades of experience and service to thousands of clients."
+        "title": "Our Vision",
+        "description": "To be a premier institution shaping future-ready professionals."
       }
     },
     "footer": {
-      "brandName": "IBS Academy",
-      "description": "A premier ISO 9001:2015 certified professional accounting institute.",
+      "brandName": "LCC Campus",
+      "description": "A leading educational institution in Kerala offering job-oriented courses.",
       "contactInfo": {
-        "email": "Not provided",
-        "phone": "+91 75940 62999, +91 75940 14999",
-        "address": "3rd floor, calicut mall, stadium jn., Puthiyara road, Kozhikode - 673004"
+        "email": "johnsonlccedk@gmail.com",
+        "phone": "9744064081",
+        "address": "Edakkara, Nilambur, Pothukal, Karulai - Kerala"
       },
-      "copyright": "© 2024 IBS Academy. All rights reserved."
+      "copyright": "Copyright © 2026 lcccampus.com"
     }
   },
-  "sourceUrl": "https://ibsacademy.co/about"
+  "sourceUrl": "https://lcccampus.com/about/"
 }

@@ -950,9 +950,50 @@ export async function POST(request: NextRequest) {
     const classifiedTypeSequence = normalizeStructuralSections(
       classifiedSections.map((s) => s.type).filter(Boolean)
     );
-    const orderedSectionTypes = pageSlug === 'index'
+    let orderedSectionTypes = pageSlug === 'index'
       ? classifiedTypeSequence
       : uniqueInOrder(classifiedTypeSequence);
+
+    // Homepage-specific deduplication to prevent section repetition
+    if (pageSlug === 'index') {
+      const sectionTypeCounts: Record<string, number> = {};
+      const MAX_PER_TYPE: Record<string, number> = {
+        navbar: 1,
+        hero: 1,
+        footer: 1,
+        cta: 1,
+        contact: 1,
+        about: 1,
+        testimonials: 1,
+        gallery: 1,
+        blog: 1,
+        features: 2,
+        services: 1,
+      };
+      
+      const deduplicatedSections = orderedSectionTypes.filter((type: string) => {
+        const count = sectionTypeCounts[type] || 0;
+        const max = MAX_PER_TYPE[type] ?? 1;
+        if (count < max) {
+          sectionTypeCounts[type] = count + 1;
+          return true;
+        }
+        return false;
+      });
+
+      if (!deduplicatedSections.includes('navbar')) deduplicatedSections.unshift('navbar');
+      if (!deduplicatedSections.includes('hero')) {
+        const navIdx = deduplicatedSections.indexOf('navbar');
+        if (navIdx >= 0) {
+          deduplicatedSections.splice(navIdx + 1, 0, 'hero');
+        } else {
+          deduplicatedSections.unshift('hero');
+        }
+      }
+      if (!deduplicatedSections.includes('footer')) deduplicatedSections.push('footer');
+
+      orderedSectionTypes = deduplicatedSections;
+    }
 
     if (structure.hasNavbar && !orderedSectionTypes.includes('navbar')) {
       orderedSectionTypes.unshift('navbar');

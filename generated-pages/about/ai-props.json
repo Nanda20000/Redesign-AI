@@ -1,7 +1,7 @@
 {
   "navbar-dynamic": {
     "logo": {
-      "text": "IBS Academy",
+      "text": "LCC Campus",
       "href": "/preview/index"
     },
     "navItems": [
@@ -16,50 +16,40 @@
     ],
     "actions": [
       {
-        "label": "Sign In",
-        "href": "#",
-        "variant": "outline"
-      },
-      {
-        "label": "Register Now",
+        "label": "Contact Us",
         "href": "#",
         "variant": "primary"
       }
     ]
   },
-  "about-simple-dynamic": {
-    "headline": "About IBS Academy",
-    "topIntro": "A premier ISO 9001:2015 certified institute with over two decades of excellence in professional accounting education.",
-    "heroImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
-    "label": "Our Story of Success",
-    "subIntro": "For over 20 years, we have been bridging the skill gap in the industry by providing direct certifications from global leaders.",
-    "avatarImage": null,
-    "avatarName": null,
-    "avatarTitle": null,
-    "mainStatement": "As INTERNATIONAL BUSINESS SOLUTIONS, our mission is to empower the next generation of accounting professionals. We address the industry's critical shortage of skilled talent by delivering state-of-the-art training in accounting, inventory, and taxation. Our industry-relevant syllabus and partnerships with software giants like SAP and Tally ensure our students are career-ready. Our story is one of success, built on serving over 5000 clients and a steadfast commitment to academic excellence."
+  "hero-banner-dynamic": {
+    "backgroundImage": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944238-1.jpg",
+    "breadcrumb": "Home > About",
+    "title": "About LCC Campus",
+    "description": "A premier educational institution in Kerala dedicated to building confident, skilled, and career-ready professionals through job-oriented training."
   },
   "features-simple-dynamic": {
-    "tagline": "OUR CORE OFFERINGS",
-    "heading": "Key Services at IBS Academy",
-    "description": "We bridge the industry's skill gap with premier training and direct certifications from global software leaders.",
+    "tagline": "OUR COURSES",
+    "heading": "Leading Job-Oriented Programs",
+    "description": "We offer a range of professional courses designed to build confident, skilled, and career-ready individuals for the modern workforce.",
     "features": [
       {
-        "title": "Professional Accounting Training",
-        "image": "https://ibsacademy.co/public/assets/web/images/about/1.png"
+        "title": "Fashion Designing Course",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_qgqkfcqgqkfcqgq.jpeg"
       },
       {
-        "title": "Direct Software Certifications",
-        "image": "https://ibsacademy.co/public/assets/web/images/about/1.png"
+        "title": "Computer Courses",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_39uryf39uryf39u-1.jpeg"
       },
       {
-        "title": "ERP Solutions Partnership",
-        "image": "https://ibsacademy.co/public/assets/web/images/about/1.png"
+        "title": "Hospital Administration Course",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944238-1.jpg"
       }
     ]
   },
   "footer-simple": {
-    "brandName": "IBS Academy",
-    "description": "A premier ISO 9001:2015 certified professional accounting institute.",
-    "copyright": "© 2024 IBS Academy. All rights reserved."
+    "brandName": "LCC Campus",
+    "description": "A premier educational institution in Kerala offering job-oriented career training.",
+    "copyright": "Copyright © 2026 lcccampus.com"
   }
 }
