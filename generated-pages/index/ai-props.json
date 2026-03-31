@@ -1,7 +1,7 @@
 {
   "navbar-dynamic": {
     "logo": {
-      "text": "IBS Academy",
+      "text": "Bloombiz Creatives",
       "href": "/preview/index"
     },
     "navItems": [
@@ -12,196 +12,202 @@
     ],
     "actions": [
       {
-        "label": "Sign In",
-        "href": "#",
-        "variant": "outline"
-      },
-      {
-        "label": "Register Now",
+        "label": "Contact WhatsApp",
         "href": "#",
         "variant": "primary"
       }
     ]
   },
-  "hero-elegant-coloured-dynamic": {
-    "title": "India's Premier Tally & Accounting Institute",
-    "subtitle": "A professional accounting institute elevating careers with expert-led training, direct certifications, and 100% placement assistance.",
-    "primaryButtonText": "Get Started",
-    "secondaryButtonText": "Explore Courses",
-    "missionText": "Our commitment is to uphold the highest standards of financial professionalism and mastery.",
-    "stat1Value": "20+",
-    "stat1Label": "Years of Industry Experience",
-    "stat2Value": "100%",
-    "stat2Label": "Placement Assistance",
-    "centerImageLabel": "Watch Our Story"
-  },
-  "features-simple-dynamic": {
-    "tagline": "TOP COURSES",
-    "heading": "Our Featured Certification Programs",
-    "description": "A suite of professional accounting and finance certifications designed to provide deep conceptual understanding and practical mastery.",
+  "hero-supersimple-coloured-dynamic": {
+    "title": "Turning Ideas Into Your Reality",
+    "description": "We are a premier digital marketing agency in Calicut, crafting intelligent branding, websites, and marketing experiences with precision and style.",
+    "primaryCtaText": "Start Your Project",
+    "secondaryCtaText": "View Our Services",
+    "heroImage": "https://bloombizcreatives.com/wp-content/uploads/2023/11/Illustration-2.jpg",
     "features": [
       {
-        "title": "US CPA - Certified Public Accountant",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762929871.jpg"
+        "title": "Branding",
+        "description": "Shape a standout brand with compelling stories and eye-catching visuals."
       },
       {
-        "title": "US CMA - Certified Management Accountant",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930486.jpg"
+        "title": "Lead Generation",
+        "description": "Drive business growth by converting prospects into valuable customers."
       },
       {
-        "title": "Diploma in Financial Accounting & Taxation",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg"
+        "title": "Ecommerce Marketing",
+        "description": "Boost online sales with targeted strategies for visibility and user experience."
+      },
+      {
+        "title": "Mobile App Development",
+        "description": "Turn ideas into user-friendly, high-performance mobile applications."
       }
-    ]
+    ],
+    "primaryCtaIcon": null,
+    "secondaryCtaIcon": null,
+    "bottomRightIcon": null
   },
-  "gallery-dynamic": {
-    "title": "Our Student Gallery",
-    "subtitle": "A visual showcase of our campus, students, and learning environment.",
-    "items": [
+  "features-simple-dynamic": {
+    "tagline": "WHAT WE DO",
+    "heading": "Our Key Operational Areas",
+    "description": "We boost your online presence with specialized digital marketing services, from compelling branding to targeted lead generation.",
+    "features": [
       {
-        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762929871.jpg",
-        "caption": "Interactive Classroom Session",
-        "category": "Campus"
+        "title": "Branding",
+        "image": "https://bloombizcreatives.com/wp-content/uploads/2023/11/light-bulb-idea-icon-digital-red-vector-19960121.jpg"
       },
       {
-        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg",
-        "caption": "US CPA Program Workshop",
-        "category": "Course"
+        "title": "Lead Generation",
+        "image": "https://bloombizcreatives.com/wp-content/uploads/2023/11/pic-11.png"
       },
       {
-        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762930486.jpg",
-        "caption": "Diploma in Financial Accounting",
-        "category": "Course"
-      },
-      {
-        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762930687.jpg",
-        "caption": "US CMA Certification Training",
-        "category": "Course"
-      },
-      {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg",
-        "caption": "Student Success Story",
-        "category": "Alumni"
-      },
-      {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg",
-        "caption": "Graduate Achievement",
-        "category": "Alumni"
+        "title": "Ecommerce Marketing",
+        "image": "https://bloombizcreatives.com/wp-content/uploads/2023/11/images.png"
       }
     ]
   },
   "about-simple-dynamic": {
-    "headline": "The Cornerstone of Financial Mastery",
-    "topIntro": "A premier ISO 9001:2015 certified institute elevating the accounting profession with expert support and continuous practice.",
-    "heroImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
-    "label": "Our Commitment to Excellence",
-    "subIntro": "With over 20 years of industry experience, we provide direct certifications from leading software providers like Tally and SAP.",
+    "headline": "Turning Ideas Into Your Reality",
+    "topIntro": "Branding, Websites and Digital Marketing Experiences Crafted with Intelligence, Precision and Style.",
+    "heroImage": "https://bloombizcreatives.com/wp-content/uploads/2023/11/Illustration-2.jpg",
+    "label": "Our Global Reach",
+    "subIntro": "A leading digital marketing agency in Calicut, Kerala, specializing in SEO, social media marketing, Google Ads, and creative branding solutions.",
     "avatarImage": null,
     "avatarName": null,
     "avatarTitle": null,
-    "mainStatement": "IBS Academy is Kerala's leading professional accounting institute. Our commitment extends beyond the classroom as we strive to uphold the highest standards of professionalism. We equip students with a deep understanding of key accounting concepts through an industry-relevant syllabus, expert guidance, and a proven track record of 100% placement assistance. We are your gateway to success in finance."
+    "mainStatement": "At Bloombiz Creatives, we help businesses of all sizes build their online presence and achieve their marketing goals with proven strategies. Our passionate team of experts is dedicated to delivering impactful results and elevating brands to global standards. We transform your vision into measurable growth and stronger online visibility."
   },
   "testimonials-elegant-dynamic": {
-    "title": "Student Success Stories",
+    "title": "What Our Clients Say",
     "testimonials": [
       {
-        "name": "Aspiring CPA",
-        "text": "The US CPA program at IBS Academy provided the expert support and structured learning I needed to pass my exams. The institute truly lives up to its reputation as a gateway to success.",
-        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg"
+        "name": "Business Owner, Calicut",
+        "text": "Bloombiz Creatives transformed our online presence. Their SEO and branding strategies delivered measurable growth and stronger visibility. A truly professional team.",
+        "avatar": "https://bloombizcreatives.com/wp-content/uploads/2023/11/pic-19.jpg"
       },
       {
-        "name": "CMA Graduate",
-        "text": "The Certified Management Accountant course equipped me with a deep understanding of key financial concepts. The industry-relevant syllabus and placement assistance were invaluable.",
-        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg"
+        "name": "E-commerce Client, UAE",
+        "text": "Their targeted digital marketing and e-commerce solutions significantly boosted our online sales. Intelligent strategies crafted with precision.",
+        "avatar": "https://bloombizcreatives.com/wp-content/uploads/2023/11/Illustration-2.jpg"
       },
       {
-        "name": "Diploma Student",
-        "text": "The Diploma in Financial Accounting & Taxation was the perfect cornerstone for my career. The practical focus and professional standards upheld by the faculty were exceptional.",
-        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367452.jpg"
-      },
-      {
-        "name": "Tally Professional",
-        "text": "As a certified Tally professional, I can attest that IBS Academy elevates the accounting profession. The direct certification and continuous practice modules are top-notch.",
-        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367376.jpg"
-      },
-      {
-        "name": "Career Changer",
-        "text": "With over 20 years of excellence, IBS Academy's commitment extends beyond the classroom. Their programs are designed for mastery, and the 100% placement assistance gave me confidence.",
-        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367265.jpg"
-      },
-      {
-        "name": "Finance Graduate",
-        "text": "Choosing the premier accounting institute in Kerala was the best decision for my financial career. The ISO-certified quality and expert guidance provided a clear path to professionalism.",
-        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367197.jpg"
+        "name": "Startup Founder, Kerala",
+        "text": "From idea to reality, Bloombiz built our brand from the ground up. Their creative solutions and digital expertise are unmatched.",
+        "avatar": "https://bloombizcreatives.com/wp-content/uploads/2023/11/pic-11.png"
       }
     ],
     "plusIcon": null,
     "prevIcon": null,
     "nextIcon": null
   },
-  "blog-dynamic": {
-    "title": "Insights & Updates",
-    "subtitle": "Explore the latest trends, success stories, and expert advice from the world of accounting and finance.",
+  "gallery-dynamic": {
+    "title": "Our Creative Portfolio",
+    "subtitle": "A showcase of branding, digital marketing, and web experiences crafted with intelligence and style.",
     "items": [
       {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg",
-        "category": "Student Success",
-        "title": "From Classroom to Career",
-        "excerpt": "How our graduates secured top accounting roles with 100% placement support.",
-        "author": "IBS Team",
-        "date": "2024-05-15",
+        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/Engims-Cover-Pic-1-scaled-1-2048x1450.webp",
+        "caption": "Branding & Digital Marketing",
+        "category": "Branding"
+      },
+      {
+        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/Landscape_Brochure_and_Catalog_-1-scaled-1-1-2048x1366.webp",
+        "caption": "Creative Print & Catalog Design",
+        "category": "Design"
+      },
+      {
+        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/MSRK-Website-scaled-1-2048x1365.webp",
+        "caption": "Modern Website Development",
+        "category": "Web"
+      },
+      {
+        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/Naturals-1-scaled-2-2048x1434.webp",
+        "caption": "Ecommerce Brand Identity",
+        "category": "Branding"
+      },
+      {
+        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/De-Peach-Cover-scaled-min-2048x1529.webp",
+        "caption": "Packaging & Visual Identity",
+        "category": "Design"
+      },
+      {
+        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2023/05/Sweeco-Cover-Pic-scaled-1-2048x1534.webp",
+        "caption": "Digital Marketing Campaign",
+        "category": "Marketing"
+      }
+    ]
+  },
+  "cta-simple-dynamic": {
+    "heading": "Turning Ideas Into Your Reality",
+    "description": "Branding, websites, and digital marketing experiences crafted with intelligence, precision, and style.",
+    "primaryCtaText": "Contact WhatsApp",
+    "secondaryCtaText": "See Portfolio",
+    "stats": [
+      {
+        "value": "10 k+",
+        "label": "Projects Completed"
+      },
+      {
+        "value": "100 +",
+        "label": "Clients"
+      },
+      {
+        "value": "5 y+",
+        "label": "Experienced Experts"
+      }
+    ]
+  },
+  "blog-dynamic": {
+    "title": "Latest Insights",
+    "subtitle": "Explore expert articles on digital marketing, branding, and growth strategies.",
+    "items": [
+      {
+        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2023/05/Sweeco-Cover-Pic-scaled-1-2048x1534.webp",
+        "category": "Branding",
+        "title": "Building Memorable Brands",
+        "excerpt": "Learn how strategic branding creates lasting customer connections and loyalty.",
+        "author": "Team",
+        "date": "2024-11-15",
         "readMoreText": "Read More",
-        "href": "/blog/classroom-to-career"
+        "href": "/preview/blog/building-memorable-brands"
       },
       {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg",
-        "category": "Certification Guide",
-        "title": "US CPA vs US CMA",
-        "excerpt": "A detailed comparison to help you choose the right global credential for your goals.",
-        "author": "Expert Faculty",
-        "date": "2024-04-22",
+        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/MSRK-Website-scaled-1-2048x1365.webp",
+        "category": "Web Design",
+        "title": "Modern Website Essentials",
+        "excerpt": "Key elements every high-converting business website must have today.",
+        "author": "Team",
+        "date": "2024-10-28",
         "readMoreText": "Read More",
-        "href": "/blog/cpa-vs-cma"
+        "href": "/preview/blog/modern-website-essentials"
       },
       {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367452.jpg",
-        "category": "Industry News",
-        "title": "Future of Accounting",
-        "excerpt": "Emerging trends in financial software and the skills accountants need to master.",
-        "author": "IBS Academy",
-        "date": "2024-03-10",
-        "readMoreText": "Learn More",
-        "href": "/blog/future-of-accounting"
-      },
-      {
-        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367376.jpg",
-        "category": "Tips & Advice",
-        "title": "Mastering Tally Prime",
-        "excerpt": "Essential shortcuts and features for efficient financial management and reporting.",
-        "author": "Tally Expert",
-        "date": "2024-02-28",
-        "readMoreText": "Read Now",
-        "href": "/blog/mastering-tally"
+        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/Engims-Cover-Pic-1-scaled-1-2048x1450.webp",
+        "category": "SEO",
+        "title": "SEO Trends for 2024",
+        "excerpt": "Stay ahead with the latest search engine optimization strategies and updates.",
+        "author": "Team",
+        "date": "2024-09-10",
+        "readMoreText": "Read More",
+        "href": "/preview/blog/seo-trends-2024"
       }
     ]
   },
   "contact-split-dynamic": {
-    "title": "Begin Your Journey to Financial Mastery",
-    "description": "Connect with India's premier accounting institute. Our team is ready to guide you towards the right certification and answer all your questions about our programs and placement assistance.",
-    "formTitle": "Get in Touch",
-    "nameLabel": "Full Name",
+    "title": "Let's Turn Your Ideas Into Reality",
+    "description": "Ready to elevate your brand? Get in touch with the leading digital marketing agency in Calicut. Our team is here to craft intelligent, precise, and stylish solutions for your business.",
+    "formTitle": "Start Your Project",
+    "nameLabel": "Your Name",
     "namePlaceholder": "Enter your full name",
     "emailLabel": "Email Address",
-    "emailPlaceholder": "Enter your email address",
+    "emailPlaceholder": "you@example.com",
     "phoneLabel": "Phone Number",
-    "phonePlaceholder": "Enter your phone number",
-    "messageLabel": "Your Message",
-    "messagePlaceholder": "Tell us about your career goals or ask a question...",
-    "submitButtonText": "Send Message"
+    "phonePlaceholder": "+91 00000 00000",
+    "messageLabel": "Your Project Details",
+    "messagePlaceholder": "Tell us about your branding, website, or digital marketing goals...",
+    "submitButtonText": "Send Message & Connect"
   },
   "footer-simple": {
-    "brandName": "IBS Academy",
-    "description": "A premier ISO 9001:2015 certified professional accounting institute providing direct certifications from leading accounting software providers.",
-    "copyright": "© 2024 IBS Academy. All rights reserved."
+    "brandName": "Bloombiz Creatives",
+    "description": "A creative digital marketing agency in Calicut, Kerala, helping businesses grow online.",
+    "copyright": "Copyright © 2025 Bloombiz Creatives. All rights reserved."
   }
 }

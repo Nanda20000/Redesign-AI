@@ -6,15 +6,11 @@
     },
     {
       "section": "hero",
-      "component": "hero-elegant-coloured-dynamic"
+      "component": "hero-supersimple-coloured-dynamic"
     },
     {
       "section": "features",
       "component": "features-simple-dynamic"
-    },
-    {
-      "section": "gallery",
-      "component": "gallery-dynamic"
     },
     {
       "section": "about",
@@ -23,6 +19,14 @@
     {
       "section": "testimonials",
       "component": "testimonials-elegant-dynamic"
+    },
+    {
+      "section": "gallery",
+      "component": "gallery-dynamic"
+    },
+    {
+      "section": "cta",
+      "component": "cta-simple-dynamic"
     },
     {
       "section": "blog",

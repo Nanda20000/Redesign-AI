@@ -50,18 +50,31 @@ function isSelectableAIComponent(componentName: string): boolean {
 /**
  * Get AI-selectable components for a section using the manifest instead of a hardcoded whitelist.
  * For non-home pages, still force hero-banner-dynamic when available.
+ * For homepage, exclude hero-banner-dynamic to reserve it for inner pages.
+ * Excludes cta-dynamic from all pages.
  */
 function getAIComponentsForSection(
   section: string,
   availableComponents: string[],
   pageSlug: string
 ): string[] {
-  const safeComponents = availableComponents.filter(isSelectableAIComponent);
+  let safeComponents = availableComponents.filter(isSelectableAIComponent);
 
-  if (section === 'hero' && pageSlug !== 'index') {
-    return safeComponents.includes('hero-banner-dynamic')
-      ? ['hero-banner-dynamic']
-      : safeComponents;
+  if (section === 'hero') {
+    if (pageSlug !== 'index') {
+      // Non-home pages: force hero-banner-dynamic only
+      return safeComponents.includes('hero-banner-dynamic')
+        ? ['hero-banner-dynamic']
+        : safeComponents;
+    } else {
+      // Homepage: exclude hero-banner-dynamic from selection pool
+      safeComponents = safeComponents.filter(name => name !== 'hero-banner-dynamic');
+    }
+  }
+
+  // Exclude cta-dynamic from all pages
+  if (section === 'cta') {
+    safeComponents = safeComponents.filter(name => name !== 'cta-dynamic');
   }
 
   return safeComponents;
@@ -122,6 +135,23 @@ const TONE_STYLE_PREFERENCES: Record<Tone, string[]> = {
  * Required sections that must always be included
  */
 const REQUIRED_SECTIONS = ['hero', 'footer'];
+
+/**
+ * All sections for homepage - always included in fixed order
+ */
+const HOMEPAGE_SECTIONS = [
+  'navbar',
+  'hero',
+  'features',
+  'about',
+  'testimonials',
+  'gallery',
+  'cta',
+  'blog',
+  'contact',
+  'pricing',
+  'footer'
+];
 
 /**
  * Conditional sections based on content/business type
@@ -315,6 +345,7 @@ function scoreComponent(
 
 /**
  * Select the best component for a section
+ * Uses random selection from valid candidates for variety across regenerations
  */
 function selectBestComponent(
   category: string,
@@ -324,72 +355,49 @@ function selectBestComponent(
   usedStyles: Set<string>,
   content?: ExtractedContent
 ): { component: string; score: number; reason: string } {
-  const scoredComponents = availableComponents.map(name => ({
-    name,
-    score: scoreComponent(name, analysis, recommendations, category, content),
-    description: ''
-  }));
-
-  // Sort by score descending
-  scoredComponents.sort((a, b) => b.score - a.score);
-
-  // Variety enforcement: if we've used the same style too much, boost alternatives
-  const styleCounts: Record<string, number> = {};
-  usedStyles.forEach(style => {
-    styleCounts[style] = (styleCounts[style] || 0) + 1;
-  });
-
-  // Find most used style
-  const maxUsedStyle = Object.entries(styleCounts)
-    .sort((a, b) => b[1] - a[1])[0]?.[0];
-
-  // If one style dominates, boost alternatives
-  if (maxUsedStyle && styleCounts[maxUsedStyle] >= 2) {
-    for (const comp of scoredComponents) {
-      const isAlternativeStyle = !componentMatchesStyle(comp.name, maxUsedStyle);
-      if (isAlternativeStyle && comp.score >= scoredComponents[0].score - 3) {
-        // Boost alternative styles if score is close
-        comp.score += 2;
-      }
-    }
-    // Re-sort after adjustment
-    scoredComponents.sort((a, b) => b.score - a.score);
-  }
-
-  const selected = scoredComponents[0];
-
-  // Determine the style of selected component
-  let selectedStyle = 'standard';
-  for (const [style, keywords] of Object.entries(COMPONENT_STYLES)) {
-    if (keywords.some(k => selected.name.toLowerCase().includes(k))) {
-      selectedStyle = style;
-      break;
+  // Filter to only image-capable components if images exist
+  let candidates = availableComponents;
+  
+  if (content?.images && content.images.length > 0) {
+    const imageCandidates = availableComponents.filter(name => 
+      componentSupportsImages(name, category)
+    );
+    if (imageCandidates.length > 0) {
+      candidates = imageCandidates;
     }
   }
 
-  // Build reason
-  const categoryRec = recommendations[category as keyof ComponentRecommendations];
-  const isPreferred = categoryRec?.preferred.includes(selected.name);
-  const reason = isPreferred
-    ? `Selected based on ${analysis.businessType}/${analysis.tone} preferences`
-    : `Good match for ${analysis.tone} tone and ${analysis.contentRichness} content`;
+  // Pick randomly from valid candidates
+  const selected = candidates[Math.floor(Math.random() * candidates.length)];
 
   return {
-    component: selected.name,
-    score: selected.score,
-    reason
+    component: selected,
+    score: 100,
+    reason: `Randomly selected from ${candidates.length} available ${category} components`,
   };
 }
 
 /**
  * Determine which sections to include based on analysis
- * IMPORTANT: All sections detected in the source website are ALWAYS included.
+ * For homepage: Always includes all 11 sections in fixed order
+ * For non-home pages: All sections detected in the source website are ALWAYS included.
  * Business type analysis only ADDS extra sections, never removes detected ones.
  */
 function determineSections(
   detectedSections: string[],
-  analysis: WebsiteAnalysis
+  analysis: WebsiteAnalysis,
+  pageSlug: string = 'index'
 ): { section: string; required: boolean; reason: string }[] {
+  // For homepage, force all 11 sections in fixed order
+  if (pageSlug === 'index') {
+    return HOMEPAGE_SECTIONS.map(section => ({
+      section,
+      required: true,
+      reason: 'Homepage always includes all sections'
+    }));
+  }
+
+  // Non-home pages: keep current detection-based logic
   const sections: { section: string; required: boolean; reason: string }[] = [];
   const processedSections = new Set<string>();
 
@@ -510,12 +518,10 @@ export function selectComponents(
   const recommendations = getComponentRecommendations(analysis);
 
   // Determine which sections to include
-  const sectionsToBuild = determineSections(detectedSections, analysis);
+  const sectionsToBuild = determineSections(detectedSections, analysis, pageSlug);
 
   console.log('[Component Selector] Sections to build:', sectionsToBuild);
 
-  // Track used styles for variety enforcement
-  const usedStyles = new Set<string>();
   const layout: LayoutItem[] = [];
   const selectionReasons: Record<string, string> = {};
 
@@ -545,7 +551,7 @@ export function selectComponents(
       availableComponents,
       analysis,
       recommendations,
-      usedStyles,
+      new Set<string>(),
       content
     );
 
@@ -557,32 +563,10 @@ export function selectComponents(
     const supportsImages = componentSupportsImages(selection.component, section);
     selectionReasons[section] = `${selection.reason}. ${reason}${content?.images && content.images.length > 0 ? ` (Image support: ${supportsImages ? 'YES' : 'NO'})` : ''}`;
 
-    // Track the style used
-    for (const [style, keywords] of Object.entries(COMPONENT_STYLES)) {
-      if (keywords.some(k => selection.component.toLowerCase().includes(k))) {
-        usedStyles.add(style);
-        break;
-      }
-    }
-
     console.log(`[Component Selector] ${section}: ${selection.component} (${selection.score} pts)${supportsImages && content?.images?.length ? ' [IMAGE-CAPABLE]' : ''}`);
   }
 
-  // Calculate variety score (0-100)
-  const styleCounts: Record<string, number> = {};
-  usedStyles.forEach(style => {
-    styleCounts[style] = (styleCounts[style] || 0) + 1;
-  });
-
-  const styleDistribution = Object.values(styleCounts);
-  const maxStyleCount = Math.max(...styleDistribution, 0);
-  const minStyleCount = Math.min(...styleDistribution, 0);
-  const varietyScore = styleDistribution.length > 1
-    ? Math.round(100 - ((maxStyleCount - minStyleCount) / maxStyleCount) * 100)
-    : 50;
-
-  console.log('[Component Selector] Selection complete. Variety score:', varietyScore);
-  console.log('[Component Selector] Styles used:', Array.from(usedStyles));
+  console.log('[Component Selector] Selection complete.');
 
   // ENFORCE AI-COMPATIBLE COMPONENTS from the current manifest
   console.log('[Component Selector] Enforcing AI-safe component whitelist...');
@@ -591,7 +575,7 @@ export function selectComponents(
   return {
     layout: filteredLayout,
     selectionReasons,
-    varietyScore
+    varietyScore: 100
   };
 }
 

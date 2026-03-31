@@ -483,12 +483,23 @@ function getAIComponentsForSection(
   availableComponents: string[],
   pageSlug: string
 ): string[] {
-  const safeComponents = availableComponents.filter(isSelectableAIComponent);
+  let safeComponents = availableComponents.filter(isSelectableAIComponent);
 
-  if (section === 'hero' && pageSlug !== 'index') {
-    return safeComponents.includes('hero-banner-dynamic')
-      ? ['hero-banner-dynamic']
-      : safeComponents;
+  if (section === 'hero') {
+    if (pageSlug !== 'index') {
+      // Non-home pages: force hero-banner-dynamic only
+      return safeComponents.includes('hero-banner-dynamic')
+        ? ['hero-banner-dynamic']
+        : safeComponents;
+    } else {
+      // Homepage: exclude hero-banner-dynamic from selection pool
+      safeComponents = safeComponents.filter(name => name !== 'hero-banner-dynamic');
+    }
+  }
+
+  // Exclude cta-dynamic from all pages
+  if (section === 'cta') {
+    safeComponents = safeComponents.filter(name => name !== 'cta-dynamic');
   }
 
   return safeComponents;
@@ -586,11 +597,20 @@ function mergeLayoutsByDetectedSections(
   detectedSections: string[],
   aiLayout: LayoutResponse,
   selectedLayout: LayoutItem[],
+  pageSlug: string = 'index',
   options?: { preserveDuplicates?: boolean }
 ): LayoutResponse {
-  let orderedSections = options?.preserveDuplicates
-    ? normalizeStructuralSections(detectedSections)
-    : getUniqueSectionsInOrder(detectedSections);
+  let orderedSections: string[];
+
+  if (pageSlug === 'index') {
+    // For homepage, use rules engine sections in their order
+    orderedSections = selectedLayout.map(item => item.section);
+  } else {
+    // Non-home pages: use detected sections
+    orderedSections = options?.preserveDuplicates
+      ? normalizeStructuralSections(detectedSections)
+      : getUniqueSectionsInOrder(detectedSections);
+  }
 
   // Guarantee hero exists in orderedSections — it is essential for all pages
   if (!orderedSections.includes('hero')) {
@@ -623,7 +643,10 @@ function mergeLayoutsByDetectedSections(
     const selectedCandidates = selectedBySection.get(section) || [];
 
     let candidate: LayoutItem | undefined;
-    if (aiCandidates.length > 0) {
+    // For hero section, prefer rules engine (selectedLayout) over AI to enforce homepage restrictions
+    if (section === 'hero' && selectedCandidates.length > 0) {
+      candidate = selectedCandidates[0];
+    } else if (aiCandidates.length > 0) {
       candidate = aiCandidates.shift();
     } else if (selectedCandidates.length > 0) {
       candidate = selectedCandidates[0];
@@ -826,6 +849,7 @@ export async function generateLayoutWithAI(
       pageStructure.sections,
       layout,
       selectionResult.layout,
+      pageSlug,
       { preserveDuplicates: true }
     );
 
