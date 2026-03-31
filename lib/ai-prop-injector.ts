@@ -101,10 +101,25 @@ function getSectionImages(
   content: ExtractedWebsiteContent,
   maxImages?: number
 ): string[] {
-  const buckets = content.sectionBuckets?.[section] || [];
-  const sectionImages = uniqueBySrc(buckets.flatMap(bucket => bucket.images || []));
+  // Try exact match first
+  let buckets = content.sectionBuckets?.[section] || [];
   
-  // Return image URLs, limited to maxImages if specified
+  // Try common aliases if exact match is empty
+  if (buckets.length === 0) {
+    const aliases: Record<string, string[]> = {
+      'features': ['services', 'courses', 'programs', 'departments'],
+      'testimonials': ['reviews', 'feedback'],
+      'about': ['story', 'mission'],
+      'gallery': ['portfolio', 'work', 'photos'],
+    };
+    const sectionAliases = aliases[section] || [];
+    for (const alias of sectionAliases) {
+      buckets = content.sectionBuckets?.[alias] || [];
+      if (buckets.length > 0) break;
+    }
+  }
+  
+  const sectionImages = uniqueBySrc(buckets.flatMap(bucket => bucket.images || []));
   const limit = maxImages ?? sectionImages.length;
   return sectionImages.slice(0, limit).map(img => img.src);
 }
@@ -951,15 +966,17 @@ function buildPropPrompt(
 
   // Check if images are pre-populated
   const hasPrePopulatedImages = prePopulatedProps && (
-    prePopulatedProps.image || 
+    prePopulatedProps.image ||
     prePopulatedProps._sectionImages ||
     prePopulatedProps.mediaUrl ||
     prePopulatedProps.heroImage ||
-    prePopulatedProps.backgroundImage
+    prePopulatedProps.backgroundImage ||
+    prePopulatedProps.centerImageSrc ||
+    prePopulatedProps.rightImageSrc
   );
 
   const availableImages = hasPrePopulatedImages
-    ? 'Images have been pre-selected for this section based on the source website structure.'
+    ? '**IMAGES ARE PRE-ASSIGNED. Do NOT include any image URLs in your JSON response. Image fields will be injected automatically.**'
     : formatImageList([
         ...sectionContext.sectionImages,
         ...(content.images || []),
@@ -1163,7 +1180,12 @@ export async function generatePropsForComponent(
   // === ADD: Pre-populate images based on section ===
   const section = schema.section;
   const prePopulatedProps: Record<string, any> = {};
-  
+
+  // Move arrayProp declaration to the top so it's available later
+  const arrayProp = schema.props.find(p => 
+    p.name === 'features' || p.name === 'items' || p.name === 'posts' || p.name === 'testimonials'
+  );
+
   // Get section-specific images
   const sectionImages = getSectionImages(section, content);
   
@@ -1171,12 +1193,22 @@ export async function generatePropsForComponent(
   
   // Component-specific image injection rules
   if (section === 'hero' && sectionImages.length > 0) {
-    // Hero: Use first image from hero section
-    const imageProp = schema.props.find(p => p.name === 'image' || p.name === 'mediaUrl');
-    if (imageProp) {
-      prePopulatedProps[imageProp.name] = sectionImages[0];
-      console.log(`[AI Prop Injector] Pre-populated hero image for ${componentName}`);
+    // Map all known hero image props
+    const heroImagePropNames = ['mediaUrl', 'image', 'backgroundImage', 'posterUrl', 'centerImageSrc', 'rightImageSrc'];
+    for (const propName of heroImagePropNames) {
+      const found = schema.props.find(p => p.name === propName);
+      if (found && propName === 'mediaUrl') {
+        prePopulatedProps['mediaUrl'] = sectionImages[0];
+      } else if (found && propName === 'image') {
+        prePopulatedProps['image'] = sectionImages[0];
+      } else if (found && propName === 'backgroundImage') {
+        prePopulatedProps['backgroundImage'] = sectionImages[0];
+      } else if (found && propName === 'centerImageSrc') {
+        prePopulatedProps['centerImageSrc'] = sectionImages[0];
+        prePopulatedProps['rightImageSrc'] = sectionImages[1] || sectionImages[0];
+      }
     }
+    console.log(`[AI Prop Injector] Pre-populated hero images for ${componentName}:`, Object.keys(prePopulatedProps));
   } else if (section === 'features' && sectionImages.length > 0) {
     // Features: Distribute images across feature items (max 6)
     const arrayProp = schema.props.find(p => p.name === 'features' || p.name === 'items');
@@ -1192,15 +1224,17 @@ export async function generatePropsForComponent(
       console.log(`[AI Prop Injector] Will inject ${prePopulatedProps._sectionImages.length} images into gallery for ${componentName}`);
     }
   } else if (section === 'about' && sectionImages.length > 0) {
-    // About: Use first image as heroImage, second as avatarImage if available
-    const heroImageProp = schema.props.find(p => p.name === 'heroImage' || p.name === 'image');
-    const avatarImageProp = schema.props.find(p => p.name === 'avatarImage');
-    if (heroImageProp) {
-      prePopulatedProps[heroImageProp.name] = sectionImages[0];
+    // about-simple-dynamic uses 'heroImage', about-dynamic uses 'image'
+    if (schema.props.find(p => p.name === 'heroImage')) {
+      prePopulatedProps['heroImage'] = sectionImages[0];
       console.log(`[AI Prop Injector] Pre-populated about heroImage for ${componentName}`);
+    } else if (schema.props.find(p => p.name === 'image')) {
+      prePopulatedProps['image'] = sectionImages[0];
+      console.log(`[AI Prop Injector] Pre-populated about image for ${componentName}`);
     }
-    if (avatarImageProp && sectionImages.length > 1) {
-      prePopulatedProps[avatarImageProp.name] = sectionImages[1];
+    // avatar image if available
+    if (schema.props.find(p => p.name === 'avatarImage') && sectionImages.length > 1) {
+      prePopulatedProps['avatarImage'] = sectionImages[1];
       console.log(`[AI Prop Injector] Pre-populated about avatarImage for ${componentName}`);
     }
   } else if (section === 'testimonials' && sectionImages.length > 0) {
@@ -1252,19 +1286,49 @@ export async function generatePropsForComponent(
     // AI writes text, but we override images with section-specific ones
     if (prePopulatedProps._sectionImages && arrayProp) {
       const arrayPropName = arrayProp.name;
+      const sectionImgList = prePopulatedProps._sectionImages;
+      
       if (props[arrayPropName] && Array.isArray(props[arrayPropName])) {
-        // Inject section images into array items
-        props[arrayPropName] = props[arrayPropName].map((item: any, index: number) => ({
-          ...item,
-          image: prePopulatedProps._sectionImages[index] || item.image || null,
-        }));
-        console.log(`[AI Prop Injector] Injected ${Math.min(prePopulatedProps._sectionImages.length, props[arrayPropName].length)} images into ${arrayPropName}`);
+        props[arrayPropName] = props[arrayPropName].map((item: any, index: number) => {
+          const imgUrl = sectionImgList[index] || null;
+          if (!imgUrl) return item;
+          
+          // Handle different image field names per component type
+          const updatedItem = { ...item };
+          if ('imageUrl' in item || arrayPropName === 'items') {
+            updatedItem.imageUrl = imgUrl;  // gallery-dynamic, blog-dynamic
+          }
+          if ('image' in item || arrayPropName === 'features' || arrayPropName === 'posts') {
+            updatedItem.image = imgUrl;     // features-simple-dynamic, blog-elegant-dynamic
+          }
+          if ('avatar' in item || arrayPropName === 'testimonials') {
+            updatedItem.avatar = imgUrl;    // testimonials-elegant-dynamic
+          }
+          return updatedItem;
+        });
+        console.log(`[AI Prop Injector] Injected images into ${arrayPropName}:`, 
+          Math.min(sectionImgList.length, props[arrayPropName].length));
       }
       delete prePopulatedProps._sectionImages;
     }
     
     // Merge pre-populated props with AI-generated props
     const mergedProps = { ...prePopulatedProps, ...props };
+    
+    // Debug: log image fields in final props
+    const imageFields = ['image', 'mediaUrl', 'heroImage', 'backgroundImage', 'centerImageSrc', 'items', 'features', 'posts', 'testimonials'];
+    const imageDebug: Record<string, any> = {};
+    for (const field of imageFields) {
+      if (mergedProps[field] !== undefined) {
+        if (Array.isArray(mergedProps[field])) {
+          imageDebug[field] = `Array(${mergedProps[field].length}), first image: ${mergedProps[field][0]?.image || mergedProps[field][0]?.imageUrl || mergedProps[field][0]?.avatar || 'none'}`;
+        } else {
+          imageDebug[field] = mergedProps[field];
+        }
+      }
+    }
+    console.log(`[AI Prop Injector] Final image state for ${componentName}:`, imageDebug);
+    
     console.log(`[AI Prop Injector] Props generated for ${componentName}:`, mergedProps);
     return mergedProps;
     // === END ADD ===

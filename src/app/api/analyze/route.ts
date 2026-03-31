@@ -87,14 +87,20 @@ function buildSectionBuckets(
       ? rawSections[classified.sourceIndex]
       : undefined;
 
+    // Also try to find by text similarity if sourceIndex lookup fails
+    const effectiveSection = sourceSection || rawSections.find(s => 
+      s.textPreview && classified.text && 
+      s.textPreview.slice(0, 50) === classified.text.slice(0, 50)
+    );
+
     const bucketItem = {
       sourceIndex: classified.sourceIndex,
-      heading: sourceSection?.heading,
-      text: sourceSection?.text || sourceSection?.textPreview || classified.text,
-      className: sourceSection?.class,
-      id: sourceSection?.id,
-      links: sourceSection?.links || [],
-      images: sourceSection?.images || [],
+      heading: effectiveSection?.heading,
+      text: effectiveSection?.text || effectiveSection?.textPreview || classified.text,
+      className: effectiveSection?.class,
+      id: effectiveSection?.id,
+      links: effectiveSection?.links || [],
+      images: effectiveSection?.images || [],  // Per-section images from extractVisualAssets
     };
 
     if (!buckets[classified.type]) {
@@ -102,6 +108,25 @@ function buildSectionBuckets(
     }
 
     buckets[classified.type].push(bucketItem);
+  }
+
+  // Ensure hero always has images — fall back to first large image on the page if hero bucket has no images
+  if (!buckets['hero'] || buckets['hero'].every(b => !b.images?.length)) {
+    // Find large landscape images from the page (width > height, not logos)
+    const heroImages = pageImages.filter(img => 
+      img.width > 400 && img.height > 200 && 
+      !img.src.includes('logo') && !img.src.includes('icon')
+    ).slice(0, 3);
+    
+    if (heroImages.length > 0) {
+      if (!buckets['hero']) buckets['hero'] = [];
+      if (buckets['hero'].length === 0) {
+        buckets['hero'].push({ text: 'Hero section', images: heroImages });
+      } else {
+        // Merge into existing hero bucket
+        buckets['hero'][0].images = [...(buckets['hero'][0].images || []), ...heroImages];
+      }
+    }
   }
 
   if (!buckets.navbar) {

@@ -21,6 +21,14 @@
       "component": "about-simple-dynamic"
     },
     {
+      "section": "testimonials",
+      "component": "testimonials-elegant-dynamic"
+    },
+    {
+      "section": "blog",
+      "component": "blog-dynamic"
+    },
+    {
       "section": "contact",
       "component": "contact-split-dynamic"
     },

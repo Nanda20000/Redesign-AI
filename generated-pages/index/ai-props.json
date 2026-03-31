@@ -1,7 +1,7 @@
 {
   "navbar-dynamic": {
     "logo": {
-      "text": "LCC Campus",
+      "text": "IBS Academy",
       "href": "/preview/index"
     },
     "navItems": [
@@ -12,106 +12,196 @@
     ],
     "actions": [
       {
-        "label": "Learn More",
-        "href": "#"
+        "label": "Sign In",
+        "href": "#",
+        "variant": "outline"
+      },
+      {
+        "label": "Register Now",
+        "href": "#",
+        "variant": "primary"
       }
     ]
   },
   "hero-elegant-coloured-dynamic": {
-    "title": "Excellence in Every Step",
-    "subtitle": "Empowering learners in Kerala to reach their fullest potential through skill development courses and a commitment to innovation.",
-    "primaryButtonText": "Explore Courses",
-    "secondaryButtonText": "Contact Us",
-    "missionText": "Shaping futures built on knowledge, integrity, and purpose through accessible, quality education.",
-    "stat1Value": "4+",
-    "stat1Label": "Key Skill Development Courses",
-    "stat2Value": "Multi",
-    "stat2Label": "Branches Across Kerala",
-    "centerImageLabel": "Our Campus"
+    "title": "India's Premier Tally & Accounting Institute",
+    "subtitle": "A professional accounting institute elevating careers with expert-led training, direct certifications, and 100% placement assistance.",
+    "primaryButtonText": "Get Started",
+    "secondaryButtonText": "Explore Courses",
+    "missionText": "Our commitment is to uphold the highest standards of financial professionalism and mastery.",
+    "stat1Value": "20+",
+    "stat1Label": "Years of Industry Experience",
+    "stat2Value": "100%",
+    "stat2Label": "Placement Assistance",
+    "centerImageLabel": "Watch Our Story"
   },
   "features-simple-dynamic": {
-    "tagline": "OUR DEPARTMENTS",
-    "heading": "Skill Development Courses",
-    "description": "We offer a range of professional courses designed to equip students with practical skills and knowledge for successful careers in growing industries.",
+    "tagline": "TOP COURSES",
+    "heading": "Our Featured Certification Programs",
+    "description": "A suite of professional accounting and finance certifications designed to provide deep conceptual understanding and practical mastery.",
     "features": [
       {
-        "title": "Computer Courses",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg"
+        "title": "US CPA - Certified Public Accountant",
+        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762929871.jpg"
       },
       {
-        "title": "Fashion Designing Course",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
+        "title": "US CMA - Certified Management Accountant",
+        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930486.jpg"
       },
       {
-        "title": "Hospital Administration Course",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg"
+        "title": "Diploma in Financial Accounting & Taxation",
+        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg"
       }
     ]
   },
   "gallery-dynamic": {
-    "title": "Campus Life & Learning",
-    "subtitle": "A glimpse into our vibrant educational environment and student activities.",
+    "title": "Our Student Gallery",
+    "subtitle": "A visual showcase of our campus, students, and learning environment.",
     "items": [
       {
-        "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
-        "caption": "Students engaged in practical learning",
-        "category": "Learning"
-      },
-      {
-        "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-8527897-1-1024x683.jpg",
-        "caption": "Collaborative classroom discussions",
-        "category": "Learning"
-      },
-      {
-        "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg",
-        "caption": "Fashion design student project",
-        "category": "Courses"
-      },
-      {
-        "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg",
-        "caption": "Professional development workshop",
-        "category": "Events"
-      },
-      {
-        "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/int1-768x1024.jpeg",
-        "caption": "Modern computer lab facility",
+        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762929871.jpg",
+        "caption": "Interactive Classroom Session",
         "category": "Campus"
       },
       {
-        "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/int6-2-768x1024.jpeg",
-        "caption": "Interactive teaching session",
-        "category": "Learning"
+        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg",
+        "caption": "US CPA Program Workshop",
+        "category": "Course"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762930486.jpg",
+        "caption": "Diploma in Financial Accounting",
+        "category": "Course"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762930687.jpg",
+        "caption": "US CMA Certification Training",
+        "category": "Course"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg",
+        "caption": "Student Success Story",
+        "category": "Alumni"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg",
+        "caption": "Graduate Achievement",
+        "category": "Alumni"
       }
     ]
   },
   "about-simple-dynamic": {
-    "headline": "Excellence in Every Step",
-    "topIntro": "Empowering every learner to reach their fullest potential through an environment where innovation and growth thrive.",
-    "heroImage": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
-    "label": "About LCC Campus",
-    "subIntro": "A leading educational institution in Kerala dedicated to accessible, quality skill development.",
+    "headline": "The Cornerstone of Financial Mastery",
+    "topIntro": "A premier ISO 9001:2015 certified institute elevating the accounting profession with expert support and continuous practice.",
+    "heroImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
+    "label": "Our Commitment to Excellence",
+    "subIntro": "With over 20 years of industry experience, we provide direct certifications from leading software providers like Tally and SAP.",
     "avatarImage": null,
     "avatarName": null,
     "avatarTitle": null,
-    "mainStatement": "At LCC Campus, we are committed to shaping futures built on knowledge, integrity, and purpose. We offer a range of skill development courses, including Computer Science, Fashion Design, Hospital Administration, and Pre-primary Teacher Training, supported by expert faculty and modern infrastructure to make quality education accessible across the region."
+    "mainStatement": "IBS Academy is Kerala's leading professional accounting institute. Our commitment extends beyond the classroom as we strive to uphold the highest standards of professionalism. We equip students with a deep understanding of key accounting concepts through an industry-relevant syllabus, expert guidance, and a proven track record of 100% placement assistance. We are your gateway to success in finance."
+  },
+  "testimonials-elegant-dynamic": {
+    "title": "Student Success Stories",
+    "testimonials": [
+      {
+        "name": "Aspiring CPA",
+        "text": "The US CPA program at IBS Academy provided the expert support and structured learning I needed to pass my exams. The institute truly lives up to its reputation as a gateway to success.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg"
+      },
+      {
+        "name": "CMA Graduate",
+        "text": "The Certified Management Accountant course equipped me with a deep understanding of key financial concepts. The industry-relevant syllabus and placement assistance were invaluable.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg"
+      },
+      {
+        "name": "Diploma Student",
+        "text": "The Diploma in Financial Accounting & Taxation was the perfect cornerstone for my career. The practical focus and professional standards upheld by the faculty were exceptional.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367452.jpg"
+      },
+      {
+        "name": "Tally Professional",
+        "text": "As a certified Tally professional, I can attest that IBS Academy elevates the accounting profession. The direct certification and continuous practice modules are top-notch.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367376.jpg"
+      },
+      {
+        "name": "Career Changer",
+        "text": "With over 20 years of excellence, IBS Academy's commitment extends beyond the classroom. Their programs are designed for mastery, and the 100% placement assistance gave me confidence.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367265.jpg"
+      },
+      {
+        "name": "Finance Graduate",
+        "text": "Choosing the premier accounting institute in Kerala was the best decision for my financial career. The ISO-certified quality and expert guidance provided a clear path to professionalism.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367197.jpg"
+      }
+    ],
+    "plusIcon": null,
+    "prevIcon": null,
+    "nextIcon": null
+  },
+  "blog-dynamic": {
+    "title": "Insights & Updates",
+    "subtitle": "Explore the latest trends, success stories, and expert advice from the world of accounting and finance.",
+    "items": [
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg",
+        "category": "Student Success",
+        "title": "From Classroom to Career",
+        "excerpt": "How our graduates secured top accounting roles with 100% placement support.",
+        "author": "IBS Team",
+        "date": "2024-05-15",
+        "readMoreText": "Read More",
+        "href": "/blog/classroom-to-career"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg",
+        "category": "Certification Guide",
+        "title": "US CPA vs US CMA",
+        "excerpt": "A detailed comparison to help you choose the right global credential for your goals.",
+        "author": "Expert Faculty",
+        "date": "2024-04-22",
+        "readMoreText": "Read More",
+        "href": "/blog/cpa-vs-cma"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367452.jpg",
+        "category": "Industry News",
+        "title": "Future of Accounting",
+        "excerpt": "Emerging trends in financial software and the skills accountants need to master.",
+        "author": "IBS Academy",
+        "date": "2024-03-10",
+        "readMoreText": "Learn More",
+        "href": "/blog/future-of-accounting"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367376.jpg",
+        "category": "Tips & Advice",
+        "title": "Mastering Tally Prime",
+        "excerpt": "Essential shortcuts and features for efficient financial management and reporting.",
+        "author": "Tally Expert",
+        "date": "2024-02-28",
+        "readMoreText": "Read Now",
+        "href": "/blog/mastering-tally"
+      }
+    ]
   },
   "contact-split-dynamic": {
-    "title": "Get in Touch",
-    "description": "Reach out to LCC Campus for more information about our skill development courses, admissions, or any queries. We're here to help shape your future.",
-    "formTitle": "Send Us a Message",
-    "nameLabel": "Your Name",
+    "title": "Begin Your Journey to Financial Mastery",
+    "description": "Connect with India's premier accounting institute. Our team is ready to guide you towards the right certification and answer all your questions about our programs and placement assistance.",
+    "formTitle": "Get in Touch",
+    "nameLabel": "Full Name",
     "namePlaceholder": "Enter your full name",
     "emailLabel": "Email Address",
-    "emailPlaceholder": "Enter your email",
+    "emailPlaceholder": "Enter your email address",
     "phoneLabel": "Phone Number",
     "phonePlaceholder": "Enter your phone number",
     "messageLabel": "Your Message",
-    "messagePlaceholder": "Tell us how we can assist you",
+    "messagePlaceholder": "Tell us about your career goals or ask a question...",
     "submitButtonText": "Send Message"
   },
   "footer-simple": {
-    "brandName": "LCC Campus",
-    "description": "A leading educational institution in Kerala offering skill development courses.",
-    "copyright": "Copyright © 2026 LCC Campus. All rights reserved."
+    "brandName": "IBS Academy",
+    "description": "A premier ISO 9001:2015 certified professional accounting institute providing direct certifications from leading accounting software providers.",
+    "copyright": "© 2024 IBS Academy. All rights reserved."
   }
 }
