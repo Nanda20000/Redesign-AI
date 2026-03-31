@@ -1012,6 +1012,12 @@ export async function POST(request: NextRequest) {
       }));
     }
 
+    // Diagnostic: log classification results
+    console.log('[Analyze] Scraped sections count:', structure.sections.length);
+    console.log('[Analyze] Classified sections count:', classifiedSections.length);
+    console.log('[Analyze] Classified section types:', classifiedSections.map(s => s.type));
+    console.log('[Analyze] Detected types from scraping:', structure.sections.map(s => s.detectedType).filter(Boolean));
+
     const sectionBuckets = buildSectionBuckets(
       classifiedSections,
       structure.sections as ExtractedSection[],

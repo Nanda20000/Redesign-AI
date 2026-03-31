@@ -5,20 +5,32 @@
       "component": "navbar-dynamic"
     },
     {
-      "section": "features",
-      "component": "features-simple-dynamic"
+      "section": "hero",
+      "component": "hero-elegant-coloured-dynamic"
     },
     {
       "section": "features",
       "component": "features-simple-dynamic"
+    },
+    {
+      "section": "gallery",
+      "component": "gallery-dynamic"
     },
     {
       "section": "about",
       "component": "about-simple-dynamic"
     },
     {
+      "section": "testimonials",
+      "component": "testimonials-elegant-dynamic"
+    },
+    {
       "section": "blog",
       "component": "blog-dynamic"
+    },
+    {
+      "section": "contact",
+      "component": "contact-split-dynamic"
     },
     {
       "section": "footer",

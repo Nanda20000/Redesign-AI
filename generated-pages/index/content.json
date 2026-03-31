@@ -454,21 +454,21 @@
       "items": [
         {
           "title": "US CPA - Certified Public Accountant",
-          "description": "A 1 to 1.5-year program covering 4 papers to become a Certified Public Accountant."
+          "description": "A 1-1.5 year program with 4 papers, leading to a prestigious US accounting certification."
         },
         {
           "title": "Diploma in Financial Accounting & Taxation",
-          "description": "A 4-month diploma program with 13 lessons focused on financial accounting and taxation."
+          "description": "A 4-month diploma program with 13 lessons focused on practical financial accounting and tax skills."
         },
         {
-          "title": "NSDC Authorized Direct Certification",
-          "description": "Provides direct certifications from leading software providers like SAP and Tally, with 100% placement assistance."
+          "title": "Certification in Professional Accounting (CPA)",
+          "description": "An 8-month certification program comprising 20 lessons for professional accounting mastery."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in Kerala with over 20 years of experience. It provides direct certifications from leading accounting software providers like SAP and Tally, with an industry-relevant syllabus crafted to provide students with the necessary skills.",
+      "description": "IBS Academy is a premier ISO 9001:2015 certified professional accounting institute in Kerala with over 20 years of experience. It provides direct certifications from leading software providers like SAP and Tally, with an industry-relevant syllabus crafted to equip students with necessary skills.",
       "companies": [
         "Tally Education Pvt.Ltd",
         "SAP"
@@ -484,15 +484,15 @@
         }
       ],
       "breakout": {
-        "title": "The cornerstone of financial mastery",
-        "description": "Commitment to excellence extends beyond the classroom, striving to uphold the highest standards of professionalism."
+        "title": "The gateway to success",
+        "description": "Programs are designed to equip students with a deep understanding of key accounting concepts and practices."
       }
     },
     "footer": {
       "brandName": "IBS Academy",
-      "description": "A premier ISO 9001:2015 certified professional accounting institute providing direct certifications from leading software providers.",
+      "description": "A premier ISO 9001:2015 certified professional accounting institute providing direct certifications from leading accounting software providers, SAP and Tally.",
       "contactInfo": {
-        "email": "email@example.com",
+        "email": "Not provided in input",
         "phone": "+91 75940 62999, +91 75940 14999",
         "address": "3rd floor, calicut mall, stadium jn., Puthiyara road, Kozhikode - 673004"
       },

@@ -382,6 +382,8 @@ function selectBestComponent(
 
 /**
  * Determine which sections to include based on analysis
+ * IMPORTANT: All sections detected in the source website are ALWAYS included.
+ * Business type analysis only ADDS extra sections, never removes detected ones.
  */
 function determineSections(
   detectedSections: string[],
@@ -390,17 +392,32 @@ function determineSections(
   const sections: { section: string; required: boolean; reason: string }[] = [];
   const processedSections = new Set<string>();
 
-  // Always include required sections, even if classification missed them.
-  for (const requiredSection of REQUIRED_SECTIONS) {
-    sections.push({
-      section: requiredSection,
-      required: true,
-      reason: `${requiredSection} is essential for all websites`
-    });
-    processedSections.add(requiredSection);
+  // 1. Add ALL detected sections first (no filtering by business type)
+  // This ensures sections like testimonials, gallery, CTA are preserved if detected
+  for (const section of detectedSections) {
+    if (!processedSections.has(section)) {
+      sections.push({
+        section,
+        required: false,
+        reason: 'Detected from source content'
+      });
+      processedSections.add(section);
+    }
   }
 
-  // Add navbar for structural consistency, especially on homepages.
+  // 2. Ensure required sections (hero, footer) exist even if classification missed them
+  for (const requiredSection of REQUIRED_SECTIONS) {
+    if (!processedSections.has(requiredSection)) {
+      sections.push({
+        section: requiredSection,
+        required: true,
+        reason: `${requiredSection} is essential for all websites`
+      });
+      processedSections.add(requiredSection);
+    }
+  }
+
+  // 3. Add navbar for structural consistency (if not already detected)
   if (!processedSections.has('navbar')) {
     sections.unshift({
       section: 'navbar',
@@ -410,11 +427,11 @@ function determineSections(
     processedSections.add('navbar');
   }
 
-  // Evaluate conditional sections
+  // 4. CONDITIONAL_SECTIONS: Only ADD if not already detected
+  // This step now only adds EXTRA sections based on business type,
+  // never removes detected ones
   for (const [section, config] of Object.entries(CONDITIONAL_SECTIONS)) {
-    if (processedSections.has(section)) continue;
-    if (!detectedSections.includes(section)) continue;
-
+    if (processedSections.has(section)) continue; // Already detected from source
     if (config.shouldInclude(analysis, detectedSections)) {
       sections.push({
         section,
@@ -422,17 +439,6 @@ function determineSections(
         reason: config.reason
       });
       processedSections.add(section);
-    }
-  }
-
-  // Add any remaining detected sections not covered
-  for (const section of detectedSections) {
-    if (!processedSections.has(section)) {
-      sections.push({
-        section,
-        required: false,
-        reason: 'Detected from source content'
-      });
     }
   }
 

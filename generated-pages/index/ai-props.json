@@ -12,21 +12,33 @@
     ],
     "actions": [
       {
+        "label": "Sign In",
+        "href": "#",
+        "variant": "outline"
+      },
+      {
         "label": "Register Now",
         "href": "#",
         "variant": "primary"
-      },
-      {
-        "label": "Sign In",
-        "href": "#",
-        "variant": "secondary"
       }
     ]
+  },
+  "hero-elegant-coloured-dynamic": {
+    "title": "India's Premier Tally & Accounting Institute",
+    "subtitle": "A professional accounting institute elevating careers with expert-led training, direct certifications, and a 20+ year legacy of excellence.",
+    "primaryButtonText": "Get Started",
+    "secondaryButtonText": "Explore Courses",
+    "missionText": "We are committed to upholding the highest standards of professionalism and financial mastery beyond the classroom.",
+    "stat1Value": "28+",
+    "stat1Label": "Years of Educational Excellence",
+    "stat2Value": "100%",
+    "stat2Label": "Placement Assistance for Students",
+    "centerImageLabel": "Watch Our Story"
   },
   "features-simple-dynamic": {
     "tagline": "TOP COURSES",
     "heading": "Our Featured Certification Programs",
-    "description": "A suite of professional accounting and finance certifications designed to equip students with key industry concepts and practices.",
+    "description": "A suite of professional accounting and finance certifications designed to provide deep understanding and practical mastery of key concepts.",
     "features": [
       {
         "title": "US CPA - Certified Public Accountant",
@@ -37,61 +49,149 @@
         "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg"
       },
       {
-        "title": "NSDC Authorized Direct Certification",
+        "title": "Certification in Professional Accounting (CPA)",
         "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930486.jpg"
+      }
+    ]
+  },
+  "gallery-dynamic": {
+    "title": "Our Learning Journey",
+    "subtitle": "A glimpse into our campus, student life, and professional achievements.",
+    "items": [
+      {
+        "imageUrl": "https://ibsacademy.co/public/assets/web/images/about/1.png",
+        "caption": "Our modern campus environment",
+        "category": "Campus"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762929871.jpg",
+        "caption": "Interactive classroom sessions",
+        "category": "Learning"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg",
+        "caption": "Expert-led training workshops",
+        "category": "Learning"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg",
+        "caption": "Student success stories",
+        "category": "Success"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg",
+        "caption": "Graduation and certification",
+        "category": "Success"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367452.jpg",
+        "caption": "Industry networking events",
+        "category": "Events"
       }
     ]
   },
   "about-simple-dynamic": {
     "headline": "The Cornerstone of Financial Mastery",
-    "topIntro": "A premier ISO 9001:2015 certified institute elevating the accounting profession with expert support and continuous practice.",
+    "topIntro": "A premier professional accounting institute elevating careers with expert support and continuous practice.",
     "heroImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
     "label": "About IBS Academy",
-    "subIntro": "With over 20 years of industry experience, we provide direct certifications from leading software providers like Tally and SAP.",
+    "subIntro": "With over 20 years of industry experience, we are an ISO 9001:2015 certified institute providing direct certifications from leading software providers.",
     "avatarImage": null,
     "avatarName": null,
     "avatarTitle": null,
-    "mainStatement": "IBS Academy is the No.1 Tally Institute in India, dedicated to shaping the future of finance. Our commitment to excellence extends beyond the classroom as we strive to uphold the highest standards of professionalism in everything we do. We equip students with a deep understanding of key accounting concepts through an industry-relevant syllabus, expert guidance, and a proven track record of success spanning 28+ years."
+    "mainStatement": "IBS Academy is the No.1 Tally Institute in India, certified by Tally Education Pvt. Ltd. Our commitment to excellence extends beyond the classroom as we strive to uphold the highest standards of professionalism. We equip students with a deep understanding of key accounting concepts and practices through an industry-relevant syllabus, offering programs like US CPA, CMA, and diplomas in financial accounting. Our mission is to be the gateway to success for aspiring finance professionals."
+  },
+  "testimonials-elegant-dynamic": {
+    "title": "Success Stories from Our Students",
+    "testimonials": [
+      {
+        "name": "Anjali S.",
+        "text": "The US CPA program at IBS Academy was transformative. The expert support and industry-relevant curriculum gave me the confidence to pass all four papers and launch my international career.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg"
+      },
+      {
+        "name": "Rahul K.",
+        "text": "As a Diploma in Financial Accounting & Taxation graduate, I secured a placement immediately. The practical, hands-on approach truly prepares you for the real world of finance.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg"
+      },
+      {
+        "name": "Priya M.",
+        "text": "Choosing IBS Academy for my CMA certification was the best decision. The institute's commitment to excellence and direct certification pathways opened doors I never thought possible.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367452.jpg"
+      },
+      {
+        "name": "Suresh N.",
+        "text": "The 100% placement assistance is real. With the skills from the Professional Accounting certification, I received multiple job offers even before completing the course.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367376.jpg"
+      },
+      {
+        "name": "Meera P.",
+        "text": "The faculty's deep expertise and the institute's partnership with Tally Education provided an unmatched learning experience, making complex accounting concepts clear and manageable.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367265.jpg"
+      },
+      {
+        "name": "Arun V.",
+        "text": "IBS Academy's 20+ years of experience shows in their structured programs. The gateway to success they provide through financial mastery is genuine and impactful.",
+        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367197.jpg"
+      }
+    ],
+    "plusIcon": null,
+    "prevIcon": null,
+    "nextIcon": null
   },
   "blog-dynamic": {
     "title": "Insights & Updates",
-    "subtitle": "Explore the latest news, industry trends, and success stories from IBS Academy.",
+    "subtitle": "Latest news, industry trends, and success stories from IBS Academy.",
     "items": [
       {
-        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762929871.jpg",
-        "category": "Certifications",
-        "title": "US CPA Pathway Explained",
-        "excerpt": "A detailed guide to the 1 to 1.5-year program covering all 4 papers.",
-        "author": "IBS Team",
-        "date": "2024-10-15",
-        "readMoreText": "Read More",
-        "href": "/blog/us-cpa-pathway"
-      },
-      {
-        "imageUrl": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg",
-        "category": "Diploma",
-        "title": "Master Financial Accounting",
-        "excerpt": "Highlights from our 4-month diploma program in accounting & taxation.",
-        "author": "IBS Team",
-        "date": "2024-10-08",
-        "readMoreText": "Read More",
-        "href": "/blog/financial-accounting-diploma"
-      },
-      {
         "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg",
-        "category": "Success",
-        "title": "Student Placement Stories",
-        "excerpt": "How our 100% placement assistance helped graduates launch careers.",
+        "category": "Student Success",
+        "title": "From Classroom to Career",
+        "excerpt": "How our graduates secured top accounting roles with global certifications.",
         "author": "IBS Team",
-        "date": "2024-10-01",
+        "date": "2024-05-15",
         "readMoreText": "Read More",
-        "href": "/blog/placement-success"
+        "href": "#"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg",
+        "category": "Industry News",
+        "title": "Future of Accounting",
+        "excerpt": "Key trends shaping the finance and accounting profession in 2024.",
+        "author": "IBS Team",
+        "date": "2024-05-10",
+        "readMoreText": "Read More",
+        "href": "#"
+      },
+      {
+        "imageUrl": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367452.jpg",
+        "category": "Exam Tips",
+        "title": "Ace Your US CPA",
+        "excerpt": "Expert strategies and study plans for passing the CPA exams.",
+        "author": "IBS Faculty",
+        "date": "2024-05-05",
+        "readMoreText": "Read More",
+        "href": "#"
       }
     ]
   },
+  "contact-split-dynamic": {
+    "title": "Begin Your Journey to Financial Mastery",
+    "description": "Connect with India's premier accounting institute. Our team is ready to guide you towards the right certification and answer all your questions about our programs and placement assistance.",
+    "formTitle": "Get in Touch",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "Tell us about your interest in US CPA, CMA, Tally, or other accounting programs...",
+    "submitButtonText": "Send Message"
+  },
   "footer-simple": {
     "brandName": "IBS Academy",
-    "description": "A premier ISO 9001:2015 certified professional accounting institute providing direct certifications from leading software providers.",
+    "description": "A premier ISO 9001:2015 certified professional accounting institute providing direct certifications from SAP and Tally.",
     "copyright": "© 2024 IBS Academy. All rights reserved."
   }
 }

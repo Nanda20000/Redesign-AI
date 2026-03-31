@@ -142,6 +142,14 @@ export async function POST(request: NextRequest) {
       });
       const layout = await generateLayoutWithAI(pageStructure, content as ExtractedContent, pageSlug);
 
+      // Diagnostic: warn if hero is missing from generated layout
+      const heroInLayout = layout.layout.find(item => item.section === 'hero');
+      if (!heroInLayout) {
+        console.warn('[generate-layout] WARN: Hero section missing from generated layout for page:', pageSlug);
+        console.warn('[generate-layout] Input sections were:', sections);
+        console.warn('[generate-layout] Final layout sections:', layout.layout.map(i => i.section));
+      }
+
       // Generate AI props for all components in parallel
       if (content) {
         try {

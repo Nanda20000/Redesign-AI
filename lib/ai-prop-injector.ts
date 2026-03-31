@@ -1149,6 +1149,14 @@ export async function generatePropsForLayout(
 ): Promise<Record<string, Record<string, any>>> {
   console.log('[AI Prop Injector] Starting AI prop generation for all components...');
 
+  // Diagnostic: check for hero section
+  const heroItems = layout.filter(item => item.section === 'hero');
+  if (heroItems.length === 0) {
+    console.warn('[AI Prop Injector] WARNING: No hero section in layout — hero props will not be generated');
+  } else {
+    console.log('[AI Prop Injector] Hero component(s) to inject:', heroItems.map(i => i.component));
+  }
+
   // Run all AI calls in parallel for speed
   const results = await Promise.allSettled(
     layout.map(async (item) => {

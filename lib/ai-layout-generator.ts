@@ -523,7 +523,13 @@ function enforceAICompatibleComponents(
       });
       scored.sort((a, b) => b.overlap - a.overlap);
       newItem.component = scored[0].name;
-      console.log(`[enforceAI] ${item.section}: replaced "${item.component}" → "${newItem.component}" (token-scored)`);
+      
+      // Hero-specific logging for debugging
+      if (item.section === 'hero') {
+        console.log(`[enforceAI] Hero: AI chose "${item.component}", safe list: ${safeComponents.join(', ')}, final: "${newItem.component}"`);
+      } else {
+        console.log(`[enforceAI] ${item.section}: replaced "${item.component}" → "${newItem.component}" (token-scored)`);
+      }
     }
 
     enhancedLayout.push(newItem);
@@ -556,11 +562,24 @@ function normalizeStructuralSections(sections: string[]): string[] {
     ? cleaned.length - 1 - lastFooterIndexFromEnd
     : -1;
 
-  return cleaned.filter((section, index) => {
+  const result = cleaned.filter((section, index) => {
     if (section === 'navbar') return index === firstNavbarIndex;
     if (section === 'footer') return index === lastFooterIndex;
-    return true;
+    return true; // hero, features, about, blog, etc. all pass through
   });
+
+  // Guarantee hero survives normalization
+  if (!result.includes('hero')) {
+    const navIdx = result.indexOf('navbar');
+    if (navIdx >= 0) {
+      result.splice(navIdx + 1, 0, 'hero');
+    } else {
+      result.unshift('hero');
+    }
+    console.log('[normalizeStructuralSections] Hero injected — was absent from input:', sections);
+  }
+
+  return result;
 }
 
 function mergeLayoutsByDetectedSections(
@@ -569,9 +588,20 @@ function mergeLayoutsByDetectedSections(
   selectedLayout: LayoutItem[],
   options?: { preserveDuplicates?: boolean }
 ): LayoutResponse {
-  const orderedSections = options?.preserveDuplicates
+  let orderedSections = options?.preserveDuplicates
     ? normalizeStructuralSections(detectedSections)
     : getUniqueSectionsInOrder(detectedSections);
+
+  // Guarantee hero exists in orderedSections — it is essential for all pages
+  if (!orderedSections.includes('hero')) {
+    const navbarIndex = orderedSections.indexOf('navbar');
+    if (navbarIndex >= 0) {
+      orderedSections.splice(navbarIndex + 1, 0, 'hero');
+    } else {
+      orderedSections.unshift('hero');
+    }
+    console.log('[mergeLayouts] Hero was missing from detectedSections — injected after navbar');
+  }
 
   const aiBySection = new Map<string, LayoutItem[]>();
   for (const item of aiLayout.layout) {
@@ -608,8 +638,17 @@ function mergeLayoutsByDetectedSections(
     mergedLayout.push(normalized);
   }
 
+  // Final deduplication safety net: ensure one of each section type
+  // This catches any duplicates that may have slipped through
+  const seen = new Set<string>();
+  const dedupedLayout = mergedLayout.filter(item => {
+    if (seen.has(item.section)) return false;
+    seen.add(item.section);
+    return true;
+  });
+
   return {
-    layout: mergedLayout,
+    layout: dedupedLayout,
   };
 }
 
@@ -780,12 +819,22 @@ export async function generateLayoutWithAI(
     // Merge AI output with rule-based selection so we keep all detected sections
     // while preserving valid AI choices where they exist.
     // Note: preserveDuplicates is now true to allow multiple section types (e.g. multiple features or about)
+    console.log('[AI Layout Generator] Pre-merge detectedSections:', pageStructure.sections);
+    console.log('[AI Layout Generator] Pre-merge AI layout sections:', layout.layout.map(i => i.section));
+
     layout = mergeLayoutsByDetectedSections(
       pageStructure.sections,
       layout,
       selectionResult.layout,
       { preserveDuplicates: true }
     );
+
+    console.log('[AI Layout Generator] Post-merge layout sections:', layout.layout.map(i => i.section));
+    const heroAfterMerge = layout.layout.find(i => i.section === 'hero');
+    if (!heroAfterMerge) {
+      console.error('[AI Layout Generator] CRITICAL: Hero lost after merge. detectedSections had hero:', 
+        pageStructure.sections.includes('hero'));
+    }
 
     // FORCE IMAGE-CAPABLE COMPONENTS when images exist
     if (hasImages) {
@@ -800,18 +849,24 @@ export async function generateLayoutWithAI(
     // FINAL GUARD: Catch runaway layouts without severely restricting real duplicates
     if (layout.layout.length > 20) {
       console.warn(`[AI Layout Generator] Layout has ${layout.layout.length} items — trimming to 20`);
-      
+
       // Keep first navbar, last footer, and best middle sections
       const navbar = layout.layout.find(i => i.section === 'navbar');
       const reversedLayout = [...layout.layout].reverse();
       const footer = reversedLayout.find(i => i.section === 'footer');
-      const middle = layout.layout.filter(i => i.section !== 'navbar' && i.section !== 'footer');
       
+      // Extract hero explicitly before middle filter — hero must always survive
+      const heroItem = layout.layout.find(i => i.section === 'hero');
+      const middle = layout.layout.filter(
+        i => i.section !== 'navbar' && i.section !== 'footer' && i.section !== 'hero'
+      );
+
       // Deduplicate middle sections with the same generous limits
       const seen: Record<string, number> = {};
-      const maxMid: Record<string, number> = { 
-        features: 6, about: 3, testimonials: 3, gallery: 3, 
-        blog: 3, cta: 4, services: 4, hero: 1
+      const maxMid: Record<string, number> = {
+        features: 6, about: 3, testimonials: 3, gallery: 3,
+        blog: 3, cta: 4, services: 4
+        // hero is handled separately — always included
       };
       const dedupedMiddle = middle.filter(item => {
         const count = seen[item.section] || 0;
@@ -819,15 +874,17 @@ export async function generateLayoutWithAI(
         if (count < max) { seen[item.section] = count + 1; return true; }
         return false;
       });
-      
+
+      // Reassemble: navbar → hero (always) → middle sections → footer
       layout = {
         layout: [
           ...(navbar ? [navbar] : []),
-          ...dedupedMiddle.slice(0, 18),
+          ...(heroItem ? [heroItem] : []),  // hero always preserved
+          ...dedupedMiddle.slice(0, 17),    // reduced from 18 to make room for explicit hero
           ...(footer ? [footer] : []),
         ]
       };
-      
+
       saveLayout(layout, pageSlug);
     }
 

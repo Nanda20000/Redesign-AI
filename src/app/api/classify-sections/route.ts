@@ -200,21 +200,34 @@ export async function POST(request: NextRequest) {
 
       // Fallback: create basic classification with navbar and footer
       const fallbackSections: ClassifiedSection[] = [];
-      
+
       // Always add navbar if detected
       if (hasNavbar) {
         fallbackSections.push({ type: 'navbar', text: 'Navigation menu' });
       }
-      
-      // Add sections based on headings
-      normalizedSections.forEach((section, index) => {
+
+      // Inject hero if missing — all pages should have a hero
+      if (!fallbackSections.some(s => s.type === 'hero')) {
         fallbackSections.push({
-          type: inferSectionType(section.heading || section.textPreview || section.text || headings[index] || ''),
+          type: 'hero',
+          text: headings[0] || 'Welcome',
+          sourceIndex: -3
+        });
+      }
+
+      // Add sections based on scraped detectedType (preferred) or fallback to inferSectionType
+      normalizedSections.forEach((section, index) => {
+        // Use detectedType from scraping if available (more accurate than text-based inference)
+        const detectedType = (section as any).detectedType;
+        const sectionType = detectedType || inferSectionType(section.heading || section.textPreview || section.text || headings[index] || '');
+        
+        fallbackSections.push({
+          type: sectionType,
           text: section.textPreview || section.text || section.heading || 'Content section',
           sourceIndex: section.sourceIndex,
         });
       });
-      
+
       // Always add footer if detected
       if (hasFooter) {
         fallbackSections.push({ type: 'footer', text: 'Footer content' });
@@ -238,13 +251,19 @@ export async function POST(request: NextRequest) {
       result = JSON.parse(jsonString);
     } catch (parseError) {
       console.error('Failed to parse AI response:', parseError);
-      
-      // Fallback to basic classification
-      const fallbackSections: ClassifiedSection[] = normalizedSections.map((section, index) => ({
-        type: inferSectionType(section.heading || section.textPreview || section.text || headings[index] || ''),
-        text: section.textPreview || section.text || section.heading || 'Content section',
-        sourceIndex: section.sourceIndex,
-      }));
+
+      // Fallback to basic classification using detectedType from scraping
+      const fallbackSections: ClassifiedSection[] = normalizedSections.map((section, index) => {
+        // Use detectedType from scraping if available (more accurate than text-based inference)
+        const detectedType = (section as any).detectedType;
+        const sectionType = detectedType || inferSectionType(section.heading || section.textPreview || section.text || headings[index] || '');
+        
+        return {
+          type: sectionType,
+          text: section.textPreview || section.text || section.heading || 'Content section',
+          sourceIndex: section.sourceIndex,
+        };
+      });
 
       if (hasNavbar) {
         fallbackSections.unshift({ type: 'navbar', text: 'Navigation menu', sourceIndex: -1 });
@@ -256,7 +275,7 @@ export async function POST(request: NextRequest) {
       if (hasFooter) {
         fallbackSections.push({ type: 'footer', text: 'Footer content', sourceIndex: -2 });
       }
-      
+
       return NextResponse.json({ sections: normalizeStructuralSections(fallbackSections) });
     }
 
@@ -269,6 +288,11 @@ export async function POST(request: NextRequest) {
         sourceIndex: typeof s.sourceIndex === 'number' ? s.sourceIndex : undefined,
       }));
 
+    // Diagnostic: log AI classification coverage
+    console.log('[classify-sections] AI response sections:', validatedSections.map(s => s.type));
+    console.log('[classify-sections] Scraped sections count:', normalizedSections.length);
+    console.log('[classify-sections] AI classified count:', validatedSections.length);
+
     const bySourceIndex = new Map<number, ClassifiedSection>();
     for (const section of validatedSections) {
       if (typeof section.sourceIndex === 'number' && section.sourceIndex >= 0) {
@@ -279,19 +303,25 @@ export async function POST(request: NextRequest) {
     }
 
     // Guarantee one classified output per scraped section index.
+    let fallbackCount = 0;
     const sourceAlignedSections: ClassifiedSection[] = normalizedSections.map((section, index) => {
       const sourceIndex = typeof section.sourceIndex === 'number' ? section.sourceIndex : index;
       const existing = bySourceIndex.get(sourceIndex);
       if (existing) return existing;
 
+      // Fallback to inferSectionType when AI didn't classify this section
       const fallbackText = section.textPreview || section.text || section.heading || 'Content section';
       const inferred = inferSectionType([section.heading, section.class, section.id, section.textPreview].filter(Boolean).join(' '));
+      fallbackCount++;
       return {
         type: normalizeSectionType(inferred),
         text: fallbackText,
         sourceIndex,
       };
     });
+
+    // Diagnostic: log fallback usage
+    console.log('[classify-sections] Sections falling back to inferSectionType:', fallbackCount);
 
     const finalSections: ClassifiedSection[] = [];
 
@@ -310,6 +340,9 @@ export async function POST(request: NextRequest) {
     if (hasFooter) {
       finalSections.push({ type: 'footer', text: 'Footer content', sourceIndex: -2 });
     }
+
+    // Diagnostic: log final classified sections
+    console.log('[classify-sections] Final classified sections:', finalSections.map(s => s.type));
 
     return NextResponse.json({ sections: normalizeStructuralSections(finalSections) });
   } catch (error) {
