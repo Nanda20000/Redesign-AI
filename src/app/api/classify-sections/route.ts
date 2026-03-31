@@ -16,6 +16,7 @@ interface InputSection {
   sourceIndex?: number;
   links?: string[];
   images?: Array<{ src: string; alt?: string; title?: string; width?: number; height?: number }>;
+  detectedType?: string | null;  // Type detected during scraping
 }
 
 interface ClassifyRequest {
@@ -218,9 +219,9 @@ export async function POST(request: NextRequest) {
       // Add sections based on scraped detectedType (preferred) or fallback to inferSectionType
       normalizedSections.forEach((section, index) => {
         // Use detectedType from scraping if available (more accurate than text-based inference)
-        const detectedType = (section as any).detectedType;
+        const detectedType = section.detectedType;
         const sectionType = detectedType || inferSectionType(section.heading || section.textPreview || section.text || headings[index] || '');
-        
+
         fallbackSections.push({
           type: sectionType,
           text: section.textPreview || section.text || section.heading || 'Content section',
@@ -255,9 +256,9 @@ export async function POST(request: NextRequest) {
       // Fallback to basic classification using detectedType from scraping
       const fallbackSections: ClassifiedSection[] = normalizedSections.map((section, index) => {
         // Use detectedType from scraping if available (more accurate than text-based inference)
-        const detectedType = (section as any).detectedType;
+        const detectedType = section.detectedType;
         const sectionType = detectedType || inferSectionType(section.heading || section.textPreview || section.text || headings[index] || '');
-        
+
         return {
           type: sectionType,
           text: section.textPreview || section.text || section.heading || 'Content section',

@@ -13,8 +13,7 @@
     "actions": [
       {
         "label": "Learn More",
-        "href": "#",
-        "variant": "primary"
+        "href": "#"
       }
     ]
   },
@@ -22,31 +21,30 @@
     "title": "Excellence in Every Step",
     "subtitle": "Empowering learners in Kerala to reach their fullest potential through skill development courses and a commitment to innovation.",
     "primaryButtonText": "Explore Courses",
-    "secondaryButtonText": "About Us",
-    "missionText": "Shaping futures built on knowledge, integrity, and purpose through quality education.",
+    "secondaryButtonText": "Contact Us",
+    "missionText": "Shaping futures built on knowledge, integrity, and purpose through accessible, quality education.",
     "stat1Value": "4+",
     "stat1Label": "Key Skill Development Courses",
     "stat2Value": "Multi",
     "stat2Label": "Branches Across Kerala",
-    "centerImageLabel": "Our Campus",
-    "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg"
+    "centerImageLabel": "Our Campus"
   },
   "features-simple-dynamic": {
     "tagline": "OUR DEPARTMENTS",
-    "heading": "Skill Development Courses for Your Future",
-    "description": "LCC Campus offers a range of practical courses designed to provide essential knowledge and create valuable career opportunities.",
+    "heading": "Skill Development Courses",
+    "description": "We offer a range of professional courses designed to equip students with practical skills and knowledge for successful careers in growing industries.",
     "features": [
       {
         "title": "Computer Courses",
         "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg"
       },
       {
-        "title": "Hospital Administration Course",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg"
+        "title": "Fashion Designing Course",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
       },
       {
-        "title": "Pre-primary TTC Course",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
+        "title": "Hospital Administration Course",
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg"
       }
     ]
   },
@@ -56,50 +54,50 @@
     "items": [
       {
         "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
-        "caption": "Students engaged in classroom learning",
-        "category": "Academics"
+        "caption": "Students engaged in practical learning",
+        "category": "Learning"
       },
       {
         "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-8527897-1-1024x683.jpg",
-        "caption": "Practical computer lab session",
-        "category": "Courses"
+        "caption": "Collaborative classroom discussions",
+        "category": "Learning"
       },
       {
         "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg",
-        "caption": "Fashion design student at work",
+        "caption": "Fashion design student project",
         "category": "Courses"
       },
       {
         "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg",
-        "caption": "Collaborative group discussion",
-        "category": "Community"
+        "caption": "Professional development workshop",
+        "category": "Events"
       },
       {
         "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/int1-768x1024.jpeg",
-        "caption": "Modern campus interior",
+        "caption": "Modern computer lab facility",
         "category": "Campus"
       },
       {
         "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/int6-2-768x1024.jpeg",
-        "caption": "Well-equipped training facility",
-        "category": "Infrastructure"
+        "caption": "Interactive teaching session",
+        "category": "Learning"
       }
     ]
   },
   "about-simple-dynamic": {
-    "headline": "About LCC Campus",
-    "topIntro": "A leading educational institution in Kerala dedicated to empowering learners through practical skill development.",
+    "headline": "Excellence in Every Step",
+    "topIntro": "Empowering every learner to reach their fullest potential through an environment where innovation and growth thrive.",
     "heroImage": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
-    "label": "Our Commitment",
-    "subIntro": "We offer a diverse range of career-focused courses designed to meet the demands of today's industries and foster professional growth.",
+    "label": "About LCC Campus",
+    "subIntro": "A leading educational institution in Kerala dedicated to accessible, quality skill development.",
     "avatarImage": null,
     "avatarName": null,
     "avatarTitle": null,
-    "mainStatement": "At LCC Campus, we are committed to empowering every learner to achieve their full potential. We foster an environment of innovation and excellence, shaping futures built on a strong foundation of knowledge, integrity, and purpose. Our mission is to make quality, practical education accessible, preparing students for successful careers and meaningful contributions to society."
+    "mainStatement": "At LCC Campus, we are committed to shaping futures built on knowledge, integrity, and purpose. We offer a range of skill development courses, including Computer Science, Fashion Design, Hospital Administration, and Pre-primary Teacher Training, supported by expert faculty and modern infrastructure to make quality education accessible across the region."
   },
   "contact-split-dynamic": {
-    "title": "Get in Touch with LCC Campus",
-    "description": "Have questions about our skill development courses or want to learn more about your future? Our team is here to guide you every step of the way.",
+    "title": "Get in Touch",
+    "description": "Reach out to LCC Campus for more information about our skill development courses, admissions, or any queries. We're here to help shape your future.",
     "formTitle": "Send Us a Message",
     "nameLabel": "Your Name",
     "namePlaceholder": "Enter your full name",
@@ -108,12 +106,12 @@
     "phoneLabel": "Phone Number",
     "phonePlaceholder": "Enter your phone number",
     "messageLabel": "Your Message",
-    "messagePlaceholder": "Tell us about your interest in our courses or ask a question...",
+    "messagePlaceholder": "Tell us how we can assist you",
     "submitButtonText": "Send Message"
   },
   "footer-simple": {
     "brandName": "LCC Campus",
-    "description": "A leading educational institution offering skill development courses in Kerala.",
+    "description": "A leading educational institution in Kerala offering skill development courses.",
     "copyright": "Copyright © 2026 LCC Campus. All rights reserved."
   }
 }

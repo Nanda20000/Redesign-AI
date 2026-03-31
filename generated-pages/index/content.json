@@ -141,29 +141,29 @@
   "processed": {
     "features": {
       "heading": "DEPARTMENTS",
-      "description": "LCC Campus offers a range of skill development courses designed to provide practical knowledge and career opportunities.",
+      "description": "Skill development courses offered by the institution.",
       "items": [
         {
           "title": "Computer Courses",
-          "description": "Courses teaching skills and knowledge about computers, technology, and digital systems, covering topics like software, data management, and real-world applications."
+          "description": "Courses teaching skills and knowledge about computers, technology, and digital systems, covering topics like how computers work, software development, data management, and real-world applications."
         },
         {
           "title": "Fashion Designing Course",
-          "description": "Programs that teach students how to create clothing and accessories, combining creativity with technical skills from sketching to marketing."
+          "description": "Programs that teach students how to create clothing, accessories, and fashion concepts, combining creativity with technical skills like sketching, garment construction, marketing, and brand development."
         },
         {
           "title": "Hospital Administration Course",
-          "description": "Training in coordinating healthcare facility systems, including staff oversight, budget management, regulatory compliance, and patient service improvement."
+          "description": "Course covering the coordination of healthcare facility systems, including overseeing staff, managing budgets, ensuring regulatory compliance, improving patient services, and supporting clinical operations."
         },
         {
           "title": "Pre-primary TTC Course",
-          "description": "A certification program to prepare individuals for teaching young children (ages 2-6), focusing on early childhood education methodologies."
+          "description": "A professional certification program designed to prepare individuals for teaching young children (ages 2-6), focusing on skills, knowledge, and methodologies for early childhood education."
         }
       ]
     },
     "about": {
       "title": "About Us",
-      "description": "LCC Campus is a reputed educational institution in Kerala offering skill development courses like fashion designing, computer courses, pre-primary TTC, and beautician courses. With multiple branches, it is committed to making quality education accessible across the region through expert faculty and modern infrastructure.",
+      "description": "LCC Campus is a reputed educational institution in Kerala offering skill development courses like fashion designing, computer courses, pre-primary TTC, and beautician courses. With multiple branches, it is committed to making quality education accessible across the region with expert faculty and modern infrastructure.",
       "companies": [],
       "achievements": [],
       "breakout": {
@@ -173,7 +173,7 @@
     },
     "footer": {
       "brandName": "LCC Campus",
-      "description": "A reputed educational institution offering skill development courses in Kerala.",
+      "description": "Educational institution offering skill development courses in Kerala.",
       "contactInfo": {
         "email": "johnsonlccedk@gmail.com",
         "phone": "9744064081",

@@ -1005,11 +1005,14 @@ export async function POST(request: NextRequest) {
       const classifyData = await classifyResponse.json();
       classifiedSections = classifyData.sections || [];
     } else {
+      // Fallback: Use detectedType from scraping instead of defaulting to 'features'
+      // This preserves section types (testimonials, gallery, cta, etc.) when AI classification fails
       classifiedSections = (structure.sections as ExtractedSection[]).map((section, index) => ({
-        type: 'features',
+        type: section.detectedType || 'features',  // Use scraped detectedType, fallback to 'features'
         text: section.textPreview || section.text || '',
         sourceIndex: typeof section.sourceIndex === 'number' ? section.sourceIndex : index,
       }));
+      console.log('[Analyze] Using detectedType from scraping as fallback (AI classification failed)');
     }
 
     // Diagnostic: log classification results
