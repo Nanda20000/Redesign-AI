@@ -89,6 +89,26 @@ function getSectionSpecificContext(content: ExtractedWebsiteContent, section: st
   };
 }
 
+/**
+ * Extract image URLs for a specific section from section buckets.
+ * Returns an array of image URLs that came from this specific section.
+ * @param section - The section type (e.g., 'hero', 'features', 'gallery')
+ * @param content - The extracted website content with sectionBuckets
+ * @param maxImages - Maximum number of images to return (optional)
+ */
+function getSectionImages(
+  section: string,
+  content: ExtractedWebsiteContent,
+  maxImages?: number
+): string[] {
+  const buckets = content.sectionBuckets?.[section] || [];
+  const sectionImages = uniqueBySrc(buckets.flatMap(bucket => bucket.images || []));
+  
+  // Return image URLs, limited to maxImages if specified
+  const limit = maxImages ?? sectionImages.length;
+  return sectionImages.slice(0, limit).map(img => img.src);
+}
+
 function formatImageList(
   images: Array<{ src: string; alt?: string; title?: string; width?: number; height?: number }>
 ) {
@@ -921,17 +941,29 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
  */
 function buildPropPrompt(
   schema: ComponentPropSchema,
-  content: ExtractedWebsiteContent
+  content: ExtractedWebsiteContent,
+  prePopulatedProps?: Record<string, any>
 ): string {
   const sectionContext = getSectionSpecificContext(content, schema.section);
   const propsDescription = schema.props
     .map(p => `  - "${p.name}" (${p.type}): ${p.description}${p.required ? ' [REQUIRED]' : ' [OPTIONAL]'}`)
     .join('\n');
 
-  const availableImages = formatImageList([
-    ...sectionContext.sectionImages,
-    ...(content.images || []),
-  ]);
+  // Check if images are pre-populated
+  const hasPrePopulatedImages = prePopulatedProps && (
+    prePopulatedProps.image || 
+    prePopulatedProps._sectionImages ||
+    prePopulatedProps.mediaUrl ||
+    prePopulatedProps.heroImage ||
+    prePopulatedProps.backgroundImage
+  );
+
+  const availableImages = hasPrePopulatedImages
+    ? 'Images have been pre-selected for this section based on the source website structure.'
+    : formatImageList([
+        ...sectionContext.sectionImages,
+        ...(content.images || []),
+      ]);
 
   return `You are an expert web content writer. Your job is to write content for a website component using extracted content from a real website.
 
@@ -944,11 +976,11 @@ Contact Info: ${JSON.stringify(content.contactInfo || {})}
 AI-Processed Features: ${JSON.stringify(content.processed?.features || {})}
 AI-Processed About: ${JSON.stringify(content.processed?.about || {})}
 AI-Processed Footer: ${JSON.stringify(content.processed?.footer || {})}
-${content.availablePages && content.availablePages.length > 0 
+${content.availablePages && content.availablePages.length > 0
   ? `\n## AVAILABLE REDESIGNED PAGES (navbar MUST link to ALL of these):\n${
-      content.availablePages.map(p => 
+      content.availablePages.map(p =>
         `  - slug: "${p}" → href: "/preview/${p}" → label: "${
-          p === 'index' ? 'Home' 
+          p === 'index' ? 'Home'
           : p.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
         }"`
       ).join('\n')
@@ -969,7 +1001,10 @@ ${sectionContext.summary}
 ## Section-Specific Guidance:
 - Base the copy primarily on the section-specific content above.
 - Preserve the original section's purpose and information hierarchy.
-- Prefer images that came from this specific section when available.
+${hasPrePopulatedImages 
+  ? '- **Images are pre-selected from this section**. Focus on writing text content that matches the pre-selected images.'
+  : '- Prefer images that came from this specific section when available.'
+}
 
 Use this context to write props that closely mirror the PURPOSE and CONTENT TYPE of the source website,
 but rewritten in fresh, professional language suitable for the redesigned page.
@@ -977,8 +1012,8 @@ ${schema.componentName === 'navbar-dynamic' ? `\n## NAVBAR-SPECIFIC RULES (CRITI
 - You MUST create one navItem for EVERY slug listed in "AVAILABLE REDESIGNED PAGES" above
 - If there are 7 pages listed, navItems array MUST have 7 items
 - href format is EXACTLY "/preview/[slug]" — no trailing slash, no domain
-- Label mapping: "index"→"Home", "about"→"About", "career"→"Career", 
-  "exam"→"Exam", "gallery"→"Gallery", "contact-us"→"Contact Us", 
+- Label mapping: "index"→"Home", "about"→"About", "career"→"Career",
+  "exam"→"Exam", "gallery"→"Gallery", "contact-us"→"Contact Us",
   "partnership"→"Partnership", "contact"→"Contact"
 - For any other slug: capitalize each word and replace hyphens with spaces
 - Include a logo object: {"text": "[brand name from content]", "href": "/preview/index"}
@@ -986,8 +1021,12 @@ ${schema.componentName === 'navbar-dynamic' ? `\n## NAVBAR-SPECIFIC RULES (CRITI
   (e.g., Sign In / Register Now)
 ` : ''}
 
-## Available Images (select most relevant ones for this section):
+## Available Images:
 ${availableImages}
+${hasPrePopulatedImages 
+  ? '\n**NOTE**: Image fields will be automatically populated. Do NOT include image URLs in your response — focus on text content only.\n' 
+  : ''
+}
 
 ## Component: ${schema.componentName} (${schema.section} section)
 
@@ -1003,8 +1042,10 @@ ${propsDescription}
 6. For menuItems/menu: use the actual navigation links from the website.
 7. All text must be professional, clean, and ready to display on a live website.
 8. If a prop is OPTIONAL and there is no relevant content, set it to null.
-9. **IMAGE SELECTION**: Select the MOST relevant image(s) for this section from the "Available Images" list above. Return the selected image URL(s) in the 'image' or 'items[].image' field if the component supports it. Do NOT use images not listed above.
-10. If no relevant image exists for this section, leave image fields as null/undefined — do NOT force an image.
+${hasPrePopulatedImages 
+  ? '9. **IMAGES PRE-SELECTED**: Image fields are already filled with section-specific images. Do NOT modify image fields — focus on writing quality text content.\n'
+  : '9. **IMAGE SELECTION**: Select the MOST relevant image(s) for this section from the "Available Images" list above. Return the selected image URL(s) in the \'image\' or \'items[].image\' field if the component supports it. Do NOT use images not listed above.\n'
+}10. If no relevant image exists for this section, leave image fields as null/undefined — do NOT force an image.
 
 12. Prefer section-specific images first and avoid logos/icons unless this is navbar/footer or no better image exists.
 13. Do not write generic filler. If the section mentions specific programs, services, qualifications, outcomes, locations, or audiences, reflect them in the props.
@@ -1119,13 +1160,114 @@ export async function generatePropsForComponent(
     };
   }
 
+  // === ADD: Pre-populate images based on section ===
+  const section = schema.section;
+  const prePopulatedProps: Record<string, any> = {};
+  
+  // Get section-specific images
+  const sectionImages = getSectionImages(section, content);
+  
+  console.log(`[AI Prop Injector] Section "${section}" has ${sectionImages.length} section-specific images`);
+  
+  // Component-specific image injection rules
+  if (section === 'hero' && sectionImages.length > 0) {
+    // Hero: Use first image from hero section
+    const imageProp = schema.props.find(p => p.name === 'image' || p.name === 'mediaUrl');
+    if (imageProp) {
+      prePopulatedProps[imageProp.name] = sectionImages[0];
+      console.log(`[AI Prop Injector] Pre-populated hero image for ${componentName}`);
+    }
+  } else if (section === 'features' && sectionImages.length > 0) {
+    // Features: Distribute images across feature items (max 6)
+    const arrayProp = schema.props.find(p => p.name === 'features' || p.name === 'items');
+    if (arrayProp) {
+      prePopulatedProps._sectionImages = sectionImages.slice(0, 6);
+      console.log(`[AI Prop Injector] Will inject ${prePopulatedProps._sectionImages.length} images into features for ${componentName}`);
+    }
+  } else if (section === 'gallery' && sectionImages.length > 0) {
+    // Gallery: Use all gallery images (max 10 for elegant gallery)
+    const arrayProp = schema.props.find(p => p.name === 'items');
+    if (arrayProp) {
+      prePopulatedProps._sectionImages = sectionImages.slice(0, 10);
+      console.log(`[AI Prop Injector] Will inject ${prePopulatedProps._sectionImages.length} images into gallery for ${componentName}`);
+    }
+  } else if (section === 'about' && sectionImages.length > 0) {
+    // About: Use first image as heroImage, second as avatarImage if available
+    const heroImageProp = schema.props.find(p => p.name === 'heroImage' || p.name === 'image');
+    const avatarImageProp = schema.props.find(p => p.name === 'avatarImage');
+    if (heroImageProp) {
+      prePopulatedProps[heroImageProp.name] = sectionImages[0];
+      console.log(`[AI Prop Injector] Pre-populated about heroImage for ${componentName}`);
+    }
+    if (avatarImageProp && sectionImages.length > 1) {
+      prePopulatedProps[avatarImageProp.name] = sectionImages[1];
+      console.log(`[AI Prop Injector] Pre-populated about avatarImage for ${componentName}`);
+    }
+  } else if (section === 'testimonials' && sectionImages.length > 0) {
+    // Testimonials: Use first image as avatar/background
+    const avatarProp = schema.props.find(p => p.name === 'avatarImage' || p.name === 'image');
+    if (avatarProp) {
+      prePopulatedProps[avatarProp.name] = sectionImages[0];
+      console.log(`[AI Prop Injector] Pre-populated testimonial image for ${componentName}`);
+    }
+  } else if (section === 'blog' && sectionImages.length > 0) {
+    // Blog: Distribute images across posts
+    const arrayProp = schema.props.find(p => p.name === 'posts' || p.name === 'items');
+    if (arrayProp) {
+      prePopulatedProps._sectionImages = sectionImages.slice(0, 6);
+      console.log(`[AI Prop Injector] Will inject ${prePopulatedProps._sectionImages.length} images into blog posts for ${componentName}`);
+    }
+  } else if (section === 'cta' && sectionImages.length > 0) {
+    // CTA: Use first image as background
+    const bgProp = schema.props.find(p => p.name === 'backgroundImage' || p.name === 'image');
+    if (bgProp) {
+      prePopulatedProps[bgProp.name] = sectionImages[0];
+      console.log(`[AI Prop Injector] Pre-populated CTA background image for ${componentName}`);
+    }
+  } else {
+    // Generic fallback for other sections
+    const singleImageProp = schema.props.find(p => 
+      p.name === 'image' || p.name === 'mediaUrl' || p.name === 'heroImage' || p.name === 'backgroundImage' || p.name === 'posterUrl'
+    );
+    if (singleImageProp && sectionImages.length > 0) {
+      prePopulatedProps[singleImageProp.name] = sectionImages[0];
+      console.log(`[AI Prop Injector] Pre-populated ${singleImageProp.name} with section image for ${componentName}`);
+    }
+    
+    const arrayProp = schema.props.find(p => p.name === 'features' || p.name === 'items' || p.name === 'posts');
+    if (arrayProp && sectionImages.length > 0) {
+      prePopulatedProps._sectionImages = sectionImages;
+      console.log(`[AI Prop Injector] Will inject ${sectionImages.length} images into ${arrayProp.name} array for ${componentName}`);
+    }
+  }
+  // === END ADD ===
+
   try {
-    const prompt = buildPropPrompt(schema, content);
+    const prompt = buildPropPrompt(schema, content, prePopulatedProps);
     console.log(`[AI Prop Injector] Generating props for ${componentName}...`);
     const raw = await callAI(prompt);
     const props = parseJSON(raw);
-    console.log(`[AI Prop Injector] Props generated for ${componentName}:`, props);
-    return props;
+    
+    // === ADD: Merge pre-populated images with AI content ===
+    // AI writes text, but we override images with section-specific ones
+    if (prePopulatedProps._sectionImages && arrayProp) {
+      const arrayPropName = arrayProp.name;
+      if (props[arrayPropName] && Array.isArray(props[arrayPropName])) {
+        // Inject section images into array items
+        props[arrayPropName] = props[arrayPropName].map((item: any, index: number) => ({
+          ...item,
+          image: prePopulatedProps._sectionImages[index] || item.image || null,
+        }));
+        console.log(`[AI Prop Injector] Injected ${Math.min(prePopulatedProps._sectionImages.length, props[arrayPropName].length)} images into ${arrayPropName}`);
+      }
+      delete prePopulatedProps._sectionImages;
+    }
+    
+    // Merge pre-populated props with AI-generated props
+    const mergedProps = { ...prePopulatedProps, ...props };
+    console.log(`[AI Prop Injector] Props generated for ${componentName}:`, mergedProps);
+    return mergedProps;
+    // === END ADD ===
   } catch (error: any) {
     console.error(`[AI Prop Injector] Failed for ${componentName}:`, error.message);
     // Log full error details for debugging
