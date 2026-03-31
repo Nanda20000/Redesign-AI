@@ -7,6 +7,7 @@ import type { ComponentType } from "react";
 import { About3 as AboutTwoColumn } from '../../components-library/about/about-two-column';
 import { AboutSimpleDynamic } from '../../components-library/about/about-simple-dynamic';
 import { AboutDynamic } from '../../components-library/about/about-dynamic';
+import { AboutSupersimpleColouredDynamic } from '../../components-library/about/about-supersimple-coloured-dynamic';
 
 // Blog components
 import { BlogDynamic } from '../../components-library/blog/blog-dynamic';
@@ -59,6 +60,8 @@ import { HeroMinimal } from '../../components-library/hero/hero-minimal';
 import { OceanHero as HeroModern } from '../../components-library/hero/hero-modern';
 import { HeroSimple } from '../../components-library/hero/hero-simple';
 import HeroStylish from '../../components-library/hero/hero-stylish';
+import { HeroSuperColouredDynamic } from '../../components-library/hero/hero-super-coloured-dynamic';
+import { HeroSupersimpleColouredDynamic } from '../../components-library/hero/hero-supersimple-coloured-dynamic';
 
 // Navbar components
 import { FloatingNav as NavbarElegant } from '../../components-library/navbar/navbar-elegant';
@@ -67,6 +70,8 @@ import NavbarMinimal from '../../components-library/navbar/navbar-minimal';
 import { NavbarModern } from '../../components-library/navbar/navbar-modern';
 import { NavbarStylish } from '../../components-library/navbar/navbar-stylish';
 import { NavbarDynamic } from '../../components-library/navbar/navbar-dynamic';
+import { NavbarFloatingDynamic } from '../../components-library/navbar/navbar-floating-dynamic';
+import { NavbarFloatingtwoDynamic } from '../../components-library/navbar/navbar-floatingtwo-dynamic';
 
 // Pricing components
 import { PricingCards } from '../../components-library/pricing/pricing-cards';
@@ -89,6 +94,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'about-two-column': AboutTwoColumn,
   'about-simple-dynamic': AboutSimpleDynamic,
   'about-dynamic': AboutDynamic,
+  'about-supersimple-coloured-dynamic': AboutSupersimpleColouredDynamic,
 
   // Blog components
   'blog-dynamic': BlogDynamic,
@@ -139,6 +145,8 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'hero-modern': HeroModern,
   'hero-simple': HeroSimple,
   'hero-stylish': HeroStylish,
+  'hero-super-coloured-dynamic': HeroSuperColouredDynamic,
+  'hero-supersimple-coloured-dynamic': HeroSupersimpleColouredDynamic,
 
   // Navbar components
   'navbar-elegant': NavbarElegant,
@@ -147,6 +155,8 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'navbar-modern': NavbarModern,
   'navbar-stylish': NavbarStylish,
   'navbar-dynamic': NavbarDynamic,
+  'navbar-floating-dynamic': NavbarFloatingDynamic,
+  'navbar-floatingtwo-dynamic': NavbarFloatingtwoDynamic,
 
   // Pricing components
   'pricing-cards': PricingCards,

@@ -13,6 +13,12 @@
       "description": "Six-column about section with headline, hero image, avatar profile, and philosophy statement."
     },
     {
+      "name": "about-supersimple-coloured-dynamic",
+      "category": "about",
+      "file": "about/about-supersimple-coloured-dynamic.tsx",
+      "description": "A clean, two-section about layout with a top heading and a bottom image-text split with testimonial overlays."
+    },
+    {
       "name": "blog-dynamic",
       "category": "blog",
       "file": "blog/blog-dynamic.tsx",
@@ -229,6 +235,18 @@
       "description": "A stylish hero section with a large heading, email signup, and a grid of colorful featured plan cards."
     },
     {
+      "name": "hero-super-coloured-dynamic",
+      "category": "hero",
+      "file": "hero/hero-super-coloured-dynamic.tsx",
+      "description": "A complex, multi-element hero section with stats, features, and a large featured image."
+    },
+    {
+      "name": "hero-supersimple-coloured-dynamic",
+      "category": "hero",
+      "file": "hero/hero-supersimple-coloured-dynamic.tsx",
+      "description": "A modern hero section with a large image, title, description, and feature cards at the bottom."
+    },
+    {
       "name": "navbar-elegant",
       "category": "navbar",
       "file": "navbar/navbar-elegant.tsx",
@@ -263,6 +281,18 @@
       "category": "navbar",
       "file": "navbar/navbar-dynamic.tsx",
       "description": "A responsive navigation bar with desktop dropdowns and mobile expandable menus"
+    },
+    {
+      "name": "navbar-floating-dynamic",
+      "category": "navbar",
+      "file": "navbar/navbar-floating-dynamic.tsx",
+      "description": "A minimalist, pill-shaped floating navigation bar with a dark CTA button."
+    },
+    {
+      "name": "navbar-floatingtwo-dynamic",
+      "category": "navbar",
+      "file": "navbar/navbar-floatingtwo-dynamic.tsx",
+      "description": "A pill-shaped floating navigation bar with centered links and a call-to-action button."
     },
     {
       "name": "pricing-cards",

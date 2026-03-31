@@ -84,6 +84,31 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'items', type: 'list', maxWords: 100 },
     ],
   },
+  'hero-super-coloured-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badgeText', type: 'label', maxWords: 10 },
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'primaryCtaText', type: 'cta', maxWords: 5 },
+      { prop: 'secondaryCtaText', type: 'cta', maxWords: 5 },
+      { prop: 'statTopRightValue', type: 'label', maxWords: 3 },
+      { prop: 'statTopRightLabel', type: 'label', maxWords: 5 },
+      { prop: 'smallCardText', type: 'paragraph', maxWords: 10 },
+      { prop: 'bottomLeftStatValue', type: 'label', maxWords: 5 },
+      { prop: 'bottomLeftStatLabel', type: 'paragraph', maxWords: 15 },
+    ],
+  },
+  'hero-supersimple-coloured-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'primaryCtaText', type: 'cta', maxWords: 5 },
+      { prop: 'secondaryCtaText', type: 'cta', maxWords: 5 },
+      { prop: 'features.title', type: 'label', maxWords: 10 },
+      { prop: 'features.description', type: 'paragraph', maxWords: 20 },
+    ],
+  },
   'hero-banner-dynamic': {
     isDynamic: true,
     contentSlots: [
@@ -286,6 +311,19 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'companiesTitle',           type: 'label',     maxWords: 6  },
     ],
   },
+  'about-supersimple-coloured-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'descriptionLeft', type: 'paragraph', maxWords: 50 },
+      { prop: 'descriptionRight', type: 'paragraph', maxWords: 50 },
+      { prop: 'testimonialQuote', type: 'paragraph', maxWords: 15 },
+      { prop: 'testimonialAuthor', type: 'label', maxWords: 10 },
+      { prop: 'subTitle', type: 'heading', maxWords: 15 },
+      { prop: 'subDescription', type: 'paragraph', maxWords: 50 },
+      { prop: 'highlightQuote', type: 'paragraph', maxWords: 30 },
+    ],
+  },
 
   // ── TESTIMONIALS ────────────────────────────────────────────────────
   'testimonials-dynamic': {
@@ -350,6 +388,20 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     contentSlots: [
       { prop: 'navItems', type: 'list', maxWords: 5 },
       { prop: 'actions', type: 'list', maxWords: 3 },
+    ],
+  },
+  'navbar-floating-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'links', type: 'list', maxWords: 12 },
+      { prop: 'ctaLabel', type: 'cta', maxWords: 3 },
+    ],
+  },
+  'navbar-floatingtwo-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'navItems', type: 'list', maxWords: 10 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 },
     ],
   },
 

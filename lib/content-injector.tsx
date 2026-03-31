@@ -479,6 +479,25 @@ export function getComponentContentProps(
         chevronIcon: <span>▼</span>,
       };
 
+    case 'navbar-floating-dynamic': {
+      const sectionContent = mappedContent.navbar as any;
+      return {
+        links: sectionContent?.links ?? [],
+        ctaLabel: sectionContent?.ctaLabel ?? '',
+        ctaHref: sectionContent?.ctaHref ?? '#',
+      };
+    }
+
+    case 'navbar-floatingtwo-dynamic': {
+      const sectionContent = mappedContent.navbar as any;
+      return {
+        logoImage: sectionContent?.logo ?? '',
+        navItems: sectionContent?.links ?? [],
+        ctaText: sectionContent?.cta?.text ?? '',
+        ctaHref: sectionContent?.cta?.href ?? '',
+      };
+    }
+
     // Hero components
     case 'hero-dynamic':
       // Dynamic hero - image comes from AI props
@@ -569,6 +588,46 @@ export function getComponentContentProps(
           footerValue: item?.footerValue ?? '',
           color: item?.color ?? 'bg-gray-100',
         })) ?? [],
+      };
+    }
+
+    case 'hero-super-coloured-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        title: sectionContent?.title ?? '',
+        badgeText: sectionContent?.badgeText ?? '',
+        primaryCtaText: sectionContent?.primaryCtaText ?? '',
+        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
+        statTopRightValue: sectionContent?.statTopRightValue ?? '',
+        statTopRightLabel: sectionContent?.statTopRightLabel ?? '',
+        smallCardText: sectionContent?.smallCardText ?? '',
+        bottomLeftStatValue: sectionContent?.bottomLeftStatValue ?? '',
+        bottomLeftStatLabel: sectionContent?.bottomLeftStatLabel ?? '',
+        mainImage: sectionContent?.mainImage ?? '',
+        features: sectionContent?.items?.map((item: any) => ({
+          title: item.title,
+          description: item.description,
+          icon: item.icon
+        })) ?? []
+      };
+    }
+
+    case 'hero-supersimple-coloured-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        primaryCtaText: sectionContent?.primaryCta?.text ?? '',
+        primaryCtaIcon: sectionContent?.primaryCta?.icon ?? null,
+        secondaryCtaText: sectionContent?.secondaryCta?.text ?? '',
+        secondaryCtaIcon: sectionContent?.secondaryCta?.icon ?? null,
+        heroImage: sectionContent?.image?.url ?? '',
+        features: sectionContent?.items?.map((item: any) => ({
+          icon: item?.icon,
+          title: item?.title,
+          description: item?.description,
+        })) ?? [],
+        bottomRightIcon: sectionContent?.decorativeIcon ?? null,
       };
     }
 
@@ -804,6 +863,22 @@ export function getComponentContentProps(
         injectedAchievements: aboutContent?.achievements ?? [],
         images: aboutContent?.images ?? [],
       };
+
+    case 'about-supersimple-coloured-dynamic': {
+      const sectionContent = mappedContent.about as any;
+      return {
+        title: sectionContent?.title ?? '',
+        descriptionLeft: sectionContent?.descriptionLeft ?? '',
+        descriptionRight: sectionContent?.descriptionRight ?? '',
+        imageSrc: sectionContent?.imageSrc ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+        testimonialQuote: sectionContent?.testimonialQuote ?? '',
+        testimonialAuthor: sectionContent?.testimonialAuthor ?? '',
+        subTitle: sectionContent?.subTitle ?? '',
+        subDescription: sectionContent?.subDescription ?? '',
+        highlightQuote: sectionContent?.highlightQuote ?? '',
+      };
+    }
 
     // Testimonials components
     case 'testimonials-dynamic':

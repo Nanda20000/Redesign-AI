@@ -35,6 +35,16 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageProp: 'none',
     imageMode: 'none',
   },
+  'hero-super-coloured-dynamic': {
+    imageCount: 1,
+    imageProp: 'mainImage',
+    imageMode: 'single',
+  },
+  'hero-supersimple-coloured-dynamic': {
+    imageCount: 1,
+    imageProp: 'heroImage',
+    imageMode: 'single',
+  },
   'hero-banner-dynamic': { imageCount: 1, imageProp: 'backgroundImage', imageMode: 'single' },
   'hero-elegant': { imageCount: 0, imageProp: '',             imageMode: 'none'   },
   'hero-minimal': { imageCount: 0, imageProp: '',             imageMode: 'none'   },
@@ -94,6 +104,11 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   // ── ABOUT ─────────────────────────────────────────────────────────────
   'about-two-column': { imageCount: 2, imageProp: 'images', imageMode: 'array' },
   'about-simple-dynamic': { imageCount: 2, imageProp: 'heroImage', imageMode: 'single' },
+  'about-supersimple-coloured-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageSrc',
+    imageMode: 'single',
+  },
 
   // ── TESTIMONIALS ──────────────────────────────────────────────────────
   'testimonials-elegant-dynamic': { imageCount: 5, imageProp: 'testimonials', imageMode: 'items' },
@@ -110,6 +125,16 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   'navbar-modern':   { imageCount: 0, imageProp: '', imageMode: 'none' },
   'navbar-stylish':  { imageCount: 0, imageProp: '', imageMode: 'none' },
   'navbar-dynamic':  { imageCount: 0, imageProp: '', imageMode: 'none' },
+  'navbar-floating-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+  'navbar-floatingtwo-dynamic': {
+    imageCount: 1,
+    imageProp: 'logoImage',
+    imageMode: 'single',
+  },
 
   // ── FOOTER ────────────────────────────────────────────────────────────
   'footer-corporate': { imageCount: 0, imageProp: '', imageMode: 'none' },

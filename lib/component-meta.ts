@@ -4,6 +4,8 @@ export const COMPONENT_META = {
   "hero-elegant-dynamic": { section: "hero",   supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 12 },
   "hero-elegant-coloured-dynamic": { section: "hero", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
   "hero-stylish-coloured-dynamic": { section: "hero", supportsImages: false, supportsItems: true, contentLevel: "high", priority: 14 },
+  "hero-super-coloured-dynamic": { section: "hero", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+  "hero-supersimple-coloured-dynamic": { section: "hero", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
   "hero-banner-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "low",    priority: 9 },
   "hero-ab":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
   "hero-ac":      { section: "hero",         supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 9  },
@@ -37,6 +39,7 @@ export const COMPONENT_META = {
   "about-dynamic":      { section: "about", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 11 },
   "about-simple-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 12 },
   "about-two-column": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "low", priority: 9 },
+  "about-supersimple-coloured-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
 
   "testimonials-dynamic": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 11 },
   "testimonials-elegant-dynamic": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 10 },
@@ -52,6 +55,8 @@ export const COMPONENT_META = {
   "navbar-modern":   { section: "navbar", supportsImages: false, supportsItems: false, contentLevel: "low", priority: 9  },
   "navbar-stylish":  { section: "navbar", supportsImages: false, supportsItems: false, contentLevel: "low", priority: 7  },
   "navbar-dynamic":  { section: "navbar", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 11 },
+  "navbar-floating-dynamic": { section: "navbar", supportsImages: false, supportsItems: true, contentLevel: "low", priority: 10 },
+  "navbar-floatingtwo-dynamic": { section: "navbar", supportsImages: true, supportsItems: true, contentLevel: "low", priority: 10 },
 
   "footer-corporate": { section: "footer", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 8 },
   "footer-elegant":   { section: "footer", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 8 },
