@@ -101,6 +101,7 @@ export default function PreviewPage({ params }: PreviewPageProps) {
   const [aiProps, setAiProps] = useState<Record<string, Record<string, any>> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isUnlocked, setIsUnlocked] = useState<boolean | null>(null);
 
   useEffect(() => {
     params.then(({ slug }) => {
@@ -110,6 +111,35 @@ export default function PreviewPage({ params }: PreviewPageProps) {
 
   useEffect(() => {
     if (!slug) return;
+
+    // First verify the page is unlocked for viewing
+    async function verifyUnlock() {
+      try {
+        const response = await fetch(`/api/verify-unlock?slug=${slug}`);
+        const data = await response.json();
+        
+        if (!data.unlocked) {
+          setError('This page has not been generated yet. Please analyze a website first.');
+          setIsUnlocked(false);
+          setLoading(false);
+          return;
+        }
+        
+        setIsUnlocked(true);
+      } catch (err: any) {
+        console.error('[PreviewPage] Unlock verification failed:', err);
+        setError('Failed to verify page access');
+        setIsUnlocked(false);
+        setLoading(false);
+      }
+    }
+
+    verifyUnlock();
+  }, [slug]);
+
+  useEffect(() => {
+    if (!slug || isUnlocked === false) return;
+    if (isUnlocked !== true) return; // Wait for unlock verification
 
     async function loadLayout() {
       try {
@@ -201,7 +231,7 @@ export default function PreviewPage({ params }: PreviewPageProps) {
     }
 
     loadLayout();
-  }, [slug]);
+  }, [slug, isUnlocked]);
 
   if (loading) {
     return (

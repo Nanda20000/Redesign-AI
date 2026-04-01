@@ -1,7 +1,7 @@
 {
   "navbar-dynamic": {
     "logo": {
-      "text": "Bloombiz Creatives",
+      "text": "INSTIL Learning Hub",
       "href": "/preview/index"
     },
     "navItems": [
@@ -12,202 +12,198 @@
     ],
     "actions": [
       {
-        "label": "Contact WhatsApp",
+        "label": "Sign In",
+        "href": "#",
+        "variant": "outline"
+      },
+      {
+        "label": "Create Free Account",
         "href": "#",
         "variant": "primary"
       }
     ]
   },
   "hero-supersimple-coloured-dynamic": {
-    "title": "Turning Ideas Into Your Reality",
-    "description": "We are a premier digital marketing agency in Calicut, crafting intelligent branding, websites, and marketing experiences with precision and style.",
-    "primaryCtaText": "Start Your Project",
-    "secondaryCtaText": "View Our Services",
-    "heroImage": "https://bloombizcreatives.com/wp-content/uploads/2023/11/Illustration-2.jpg",
+    "title": "Premium ACCA, CFA & CMA Classes for Exam Success",
+    "description": "Your efforts shine when equipped with the right resources. Join our limited batches and turn your professional qualification dream into reality.",
+    "primaryCtaText": "Explore Our Courses",
+    "secondaryCtaText": "View Free Videos",
+    "heroImage": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
     "features": [
       {
-        "title": "Branding",
-        "description": "Shape a standout brand with compelling stories and eye-catching visuals."
+        "title": "7+ Years Experience",
+        "description": "Proven expertise in shaping finance leaders and toppers."
       },
       {
-        "title": "Lead Generation",
-        "description": "Drive business growth by converting prospects into valuable customers."
+        "title": "4+ Comprehensive Courses",
+        "description": "Structured programs for ACCA, CFA, and CMA qualifications."
       },
       {
-        "title": "Ecommerce Marketing",
-        "description": "Boost online sales with targeted strategies for visibility and user experience."
-      },
-      {
-        "title": "Mobile App Development",
-        "description": "Turn ideas into user-friendly, high-performance mobile applications."
+        "title": "25,000+ Students",
+        "description": "A growing community of successful finance professionals."
       }
     ],
     "primaryCtaIcon": null,
     "secondaryCtaIcon": null,
     "bottomRightIcon": null
   },
-  "features-simple-dynamic": {
-    "tagline": "WHAT WE DO",
-    "heading": "Our Key Operational Areas",
-    "description": "We boost your online presence with specialized digital marketing services, from compelling branding to targeted lead generation.",
-    "features": [
+  "features-dynamic": {
+    "title": "Discover Our Premier Courses",
+    "description": "Premium quality classes for ACCA, CFA & CMA designed to equip students with all necessary resources for exam success.",
+    "items": [
       {
-        "title": "Branding",
-        "image": "https://bloombizcreatives.com/wp-content/uploads/2023/11/light-bulb-idea-icon-digital-red-vector-19960121.jpg"
+        "title": "CMA US - EXAM EDGE",
+        "description": "A structured support program providing focused practice, guidance, and strategy to prepare for the real exam environment.",
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1774624181793000.webp?alt=media&token=4fb5bc31-83a3-4c1b-b911-f8ad52fd1269"
       },
       {
-        "title": "Lead Generation",
-        "image": "https://bloombizcreatives.com/wp-content/uploads/2023/11/pic-11.png"
-      },
-      {
-        "title": "Ecommerce Marketing",
-        "image": "https://bloombizcreatives.com/wp-content/uploads/2023/11/images.png"
+        "title": "ACCA Courses",
+        "description": "Comprehensive courses for various ACCA papers, focusing on conceptual clarity, exam techniques, and real-world application.",
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874521192000.webp?alt=media&token=8a6d6bda-658b-4114-81f9-6ee41435a5a3"
       }
     ]
   },
-  "about-simple-dynamic": {
-    "headline": "Turning Ideas Into Your Reality",
-    "topIntro": "Branding, Websites and Digital Marketing Experiences Crafted with Intelligence, Precision and Style.",
-    "heroImage": "https://bloombizcreatives.com/wp-content/uploads/2023/11/Illustration-2.jpg",
-    "label": "Our Global Reach",
-    "subIntro": "A leading digital marketing agency in Calicut, Kerala, specializing in SEO, social media marketing, Google Ads, and creative branding solutions.",
-    "avatarImage": null,
-    "avatarName": null,
-    "avatarTitle": null,
-    "mainStatement": "At Bloombiz Creatives, we help businesses of all sizes build their online presence and achieve their marketing goals with proven strategies. Our passionate team of experts is dedicated to delivering impactful results and elevating brands to global standards. We transform your vision into measurable growth and stronger online visibility."
+  "about-supersimple-coloured-dynamic": {
+    "title": "Your Exam Partner Since 2025",
+    "descriptionLeft": "Instil Learning Hub provides premium quality classes for ACCA, CFA, and CMA. We are dedicated to shaping leaders and toppers by equipping students with all the resources they need to succeed.",
+    "descriptionRight": "Our approach goes beyond just studying. We focus on real-world application, exam strategy, and structured support to prepare you for the actual exam environment and make your dream a reality.",
+    "imageSrc": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+    "imageAlt": "Students engaged in learning using the Instil Learning Hub platform",
+    "testimonialQuote": "Instil is your partner from live classes to final resources.",
+    "testimonialAuthor": "One Team. One Dream. One Goal.",
+    "subTitle": "Shaping Up Leaders & Toppers",
+    "subDescription": "With over 7 years of experience, 4+ specialized courses, and a community of 25,000+ students, we are committed to being your dedicated partner in achieving exam success and career goals.",
+    "highlightQuote": "Your efforts will shine only when you are equipped with all the resources."
   },
-  "testimonials-elegant-dynamic": {
-    "title": "What Our Clients Say",
+  "testimonials-dynamic": {
+    "title": "Student Success Stories",
+    "description": "Hear from our high-achieving ACCA, CFA & CMA students",
     "testimonials": [
       {
-        "name": "Business Owner, Calicut",
-        "text": "Bloombiz Creatives transformed our online presence. Their SEO and branding strategies delivered measurable growth and stronger visibility. A truly professional team.",
-        "avatar": "https://bloombizcreatives.com/wp-content/uploads/2023/11/pic-19.jpg"
+        "text": "Scored 71 in PM thanks to the structured guidance and focused exam strategy from Instil Learning Hub.",
+        "name": "Fathima Nadha",
+        "role": "ACCA Student",
+        "image": "https://www.instillearninghub.com/_next/static/media/learning-1.13fa7f9a.webp"
       },
       {
-        "name": "E-commerce Client, UAE",
-        "text": "Their targeted digital marketing and e-commerce solutions significantly boosted our online sales. Intelligent strategies crafted with precision.",
-        "avatar": "https://bloombizcreatives.com/wp-content/uploads/2023/11/Illustration-2.jpg"
+        "text": "Achieved 77 in AA. The live classes and clear explanations made complex auditing standards manageable.",
+        "name": "Neeraj",
+        "role": "ACCA Graduate",
+        "image": null
       },
       {
-        "name": "Startup Founder, Kerala",
-        "text": "From idea to reality, Bloombiz built our brand from the ground up. Their creative solutions and digital expertise are unmatched.",
-        "avatar": "https://bloombizcreatives.com/wp-content/uploads/2023/11/pic-11.png"
+        "text": "Secured 70 in AAA. The course's emphasis on real-world application and professional judgement was key.",
+        "name": "Shaijal",
+        "role": "ACCA Professional Level Student",
+        "image": null
       }
-    ],
-    "plusIcon": null,
-    "prevIcon": null,
-    "nextIcon": null
+    ]
   },
-  "gallery-dynamic": {
-    "title": "Our Creative Portfolio",
-    "subtitle": "A showcase of branding, digital marketing, and web experiences crafted with intelligence and style.",
+  "gallery-elegant-dynamic": {
+    "label": "OUR COURSES",
+    "heading": "Discover Our Premium Programs",
+    "subheading": "Explore our structured courses for ACCA, CFA, and CMA, designed to equip you with the resources for exam success.",
     "items": [
       {
-        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/Engims-Cover-Pic-1-scaled-1-2048x1450.webp",
-        "caption": "Branding & Digital Marketing",
-        "category": "Branding"
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1774624181793000.webp?alt=media&token=4fb5bc31-83a3-4c1b-b911-f8ad52fd1269",
+        "alt": "CMA US - EXAM EDGE",
+        "title": "CMA US - EXAM EDGE",
+        "description": "Structured support program for focused practice and real exam strategy."
       },
       {
-        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/Landscape_Brochure_and_Catalog_-1-scaled-1-1-2048x1366.webp",
-        "caption": "Creative Print & Catalog Design",
-        "category": "Design"
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874664392000.webp?alt=media&token=cca5330e-f6d2-4d77-9443-b0ce828f8622",
+        "alt": "Taxation UK (TX)",
+        "title": "Taxation UK (TX)",
+        "description": "Simplifies legislation with logical methods and smart exam techniques."
       },
       {
-        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/MSRK-Website-scaled-1-2048x1365.webp",
-        "caption": "Modern Website Development",
-        "category": "Web"
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874521192000.webp?alt=media&token=8a6d6bda-658b-4114-81f9-6ee41435a5a3",
+        "alt": "Strategic Business Reporting (SBR)",
+        "title": "Strategic Business Reporting",
+        "description": "Focuses on advanced reporting, professional judgement, and scenario analysis."
       },
       {
-        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/Naturals-1-scaled-2-2048x1434.webp",
-        "caption": "Ecommerce Brand Identity",
-        "category": "Branding"
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874483307000.webp?alt=media&token=5c4c0346-37d3-4035-a889-b0369bef1018",
+        "alt": "Strategic Business Leader (SBL)",
+        "title": "Strategic Business Leader",
+        "description": "Develops leadership and strategic decision-making skills for professionals."
       },
       {
-        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/De-Peach-Cover-scaled-min-2048x1529.webp",
-        "caption": "Packaging & Visual Identity",
-        "category": "Design"
-      },
-      {
-        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2023/05/Sweeco-Cover-Pic-scaled-1-2048x1534.webp",
-        "caption": "Digital Marketing Campaign",
-        "category": "Marketing"
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874445051000.webp?alt=media&token=31e15401-7a87-4e05-a6b6-34afe64757b3",
+        "alt": "Performance Management (PM)",
+        "title": "Performance Management",
+        "description": "Master techniques for managing and measuring business performance."
       }
     ]
   },
   "cta-simple-dynamic": {
-    "heading": "Turning Ideas Into Your Reality",
-    "description": "Branding, websites, and digital marketing experiences crafted with intelligence, precision, and style.",
-    "primaryCtaText": "Contact WhatsApp",
-    "secondaryCtaText": "See Portfolio",
+    "heading": "Shape Your Future with Premium ACCA, CFA & CMA Classes",
+    "description": "Join our limited batches and get equipped with all the resources to make your professional dream a reality.",
+    "primaryCtaText": "Explore Courses",
+    "secondaryCtaText": "Request Callback",
     "stats": [
       {
-        "value": "10 k+",
-        "label": "Projects Completed"
+        "value": "7+",
+        "label": "Years Experience"
       },
       {
-        "value": "100 +",
-        "label": "Clients"
+        "value": "4+",
+        "label": "Courses"
       },
       {
-        "value": "5 y+",
-        "label": "Experienced Experts"
+        "value": "25,000+",
+        "label": "Students"
       }
     ]
   },
-  "blog-dynamic": {
-    "title": "Latest Insights",
-    "subtitle": "Explore expert articles on digital marketing, branding, and growth strategies.",
-    "items": [
+  "blog-elegant-dynamic": {
+    "tagline": "Insights & Updates",
+    "title": "Latest from the Learning Hub",
+    "description": "Explore expert articles, student success stories, and exam preparation tips from our faculty and community.",
+    "posts": [
       {
-        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2023/05/Sweeco-Cover-Pic-scaled-1-2048x1534.webp",
-        "category": "Branding",
-        "title": "Building Memorable Brands",
-        "excerpt": "Learn how strategic branding creates lasting customer connections and loyalty.",
-        "author": "Team",
-        "date": "2024-11-15",
-        "readMoreText": "Read More",
-        "href": "/preview/blog/building-memorable-brands"
+        "image": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+        "title": "Beyond Memorisation: Applying Concepts for the CMA Exam",
+        "author": "Instil Faculty",
+        "date": "2025-03-15",
+        "summary": "Learn how our structured CMA US Exam Edge program shifts focus from rote learning to real-world scenario application for exam success.",
+        "readMoreText": "Read Strategy"
       },
       {
-        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/MSRK-Website-scaled-1-2048x1365.webp",
-        "category": "Web Design",
-        "title": "Modern Website Essentials",
-        "excerpt": "Key elements every high-converting business website must have today.",
-        "author": "Team",
-        "date": "2024-10-28",
-        "readMoreText": "Read More",
-        "href": "/preview/blog/modern-website-essentials"
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874664392000.webp?alt=media&token=cca5330e-f6d2-4d77-9443-b0ce828f8622",
+        "title": "Simplifying Taxation: A Logical Approach to TX",
+        "author": "Zoroor AK",
+        "date": "2025-03-10",
+        "summary": "Discover the teaching methodology that breaks down complex UK tax legislation into logical, easy-to-apply methods for ACCA students.",
+        "readMoreText": "Read Article"
       },
       {
-        "imageUrl": "https://bloombizcreatives.com/wp-content/uploads/2024/01/Engims-Cover-Pic-1-scaled-1-2048x1450.webp",
-        "category": "SEO",
-        "title": "SEO Trends for 2024",
-        "excerpt": "Stay ahead with the latest search engine optimization strategies and updates.",
-        "author": "Team",
-        "date": "2024-09-10",
-        "readMoreText": "Read More",
-        "href": "/preview/blog/seo-trends-2024"
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874521192000.webp?alt=media&token=8a6d6bda-658b-4114-81f9-6ee41435a5a3",
+        "title": "Mastering Professional Judgement in SBR",
+        "author": "Mohammed Shafrin VM",
+        "date": "2025-03-05",
+        "summary": "An insight into developing the advanced analytical skills and ethical application of standards required for Strategic Business Reporting.",
+        "readMoreText": "Read Guide"
       }
     ]
   },
   "contact-split-dynamic": {
-    "title": "Let's Turn Your Ideas Into Reality",
-    "description": "Ready to elevate your brand? Get in touch with the leading digital marketing agency in Calicut. Our team is here to craft intelligent, precise, and stylish solutions for your business.",
-    "formTitle": "Start Your Project",
-    "nameLabel": "Your Name",
+    "title": "Your Exam Partner Awaits",
+    "description": "Have questions about our ACCA, CFA, or CMA programs? Our team is here to guide you towards your goal. Reach out for course details, enrollment, or support.",
+    "formTitle": "Get in Touch",
+    "nameLabel": "Full Name",
     "namePlaceholder": "Enter your full name",
     "emailLabel": "Email Address",
-    "emailPlaceholder": "you@example.com",
+    "emailPlaceholder": "Enter your email",
     "phoneLabel": "Phone Number",
-    "phonePlaceholder": "+91 00000 00000",
-    "messageLabel": "Your Project Details",
-    "messagePlaceholder": "Tell us about your branding, website, or digital marketing goals...",
-    "submitButtonText": "Send Message & Connect"
+    "phonePlaceholder": "Enter your phone number",
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "Tell us about your goals or ask a question...",
+    "submitButtonText": "Send Message"
   },
   "footer-simple": {
-    "brandName": "Bloombiz Creatives",
-    "description": "A creative digital marketing agency in Calicut, Kerala, helping businesses grow online.",
-    "copyright": "Copyright © 2025 Bloombiz Creatives. All rights reserved."
+    "brandName": "Instil Learning Hub",
+    "description": "Premium exam preparation for ACCA, CFA, and CMA qualifications.",
+    "copyright": "© 2026 Instil Institute of Commerce Private Limited. All rights reserved."
   }
 }

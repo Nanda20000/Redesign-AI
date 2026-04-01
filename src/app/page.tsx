@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useRef } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface DiscoveredPage {
   url: string;
@@ -46,6 +46,8 @@ function normalizeStructuralSections(sectionTypes: string[]): string[] {
 
 export default function Home() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const hasNavigatedToDiscovery = useRef(false);
   const [url, setUrl] = useState('');
   const [step, setStep] = useState<Step>('input');
   const [errorMessage, setErrorMessage] = useState('');
@@ -55,6 +57,23 @@ export default function Home() {
     current: 0, total: 0, currentPage: '',
   });
   const [generatedSlugs, setGeneratedSlugs] = useState<string[]>([]);
+
+  // Handle browser back button - reset to input state when navigating back
+  useEffect(() => {
+    const handlePopState = () => {
+      if (hasNavigatedToDiscovery.current && step === 'select') {
+        // User clicked back from discovery page, reset to input
+        setStep('input');
+        setUrl('');
+        setDiscoveredPages([]);
+        setSelectedSlugs(new Set());
+        hasNavigatedToDiscovery.current = false;
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [step]);
 
   // ── Step 1: Analyze homepage + discover all pages ──
   const handleDiscover = async () => {
@@ -92,6 +111,9 @@ export default function Home() {
       // Pre-select all pages
       setSelectedSlugs(new Set(pages.map(p => p.slug)));
       setStep('select');
+      // Mark that we've navigated to discovery and replace history entry
+      hasNavigatedToDiscovery.current = true;
+      router.replace('/');
     } catch (err: any) {
       setErrorMessage(err.message || 'Something went wrong');
       setStep('error');
@@ -329,9 +351,6 @@ export default function Home() {
                   <span className="text-2xl">{TYPE_ICONS[page.type] || '📄'}</span>
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold">{page.navbarLabel || page.title}</p>
-                    <p className={`truncate text-xs mt-0.5 ${selected ? 'text-zinc-400' : 'text-zinc-400'}`}>
-                      {page.navbarLabel ? page.title : page.url}
-                    </p>
                   </div>
                   <div className={`h-5 w-5 flex-shrink-0 rounded-full border-2 flex items-center justify-center ${
                     selected ? 'border-white bg-white' : 'border-zinc-400'

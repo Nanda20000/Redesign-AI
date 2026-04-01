@@ -10,19 +10,19 @@
     },
     {
       "section": "features",
-      "component": "features-simple-dynamic"
+      "component": "features-dynamic"
     },
     {
       "section": "about",
-      "component": "about-simple-dynamic"
+      "component": "about-supersimple-coloured-dynamic"
     },
     {
       "section": "testimonials",
-      "component": "testimonials-elegant-dynamic"
+      "component": "testimonials-dynamic"
     },
     {
       "section": "gallery",
-      "component": "gallery-dynamic"
+      "component": "gallery-elegant-dynamic"
     },
     {
       "section": "cta",
@@ -30,7 +30,7 @@
     },
     {
       "section": "blog",
-      "component": "blog-dynamic"
+      "component": "blog-elegant-dynamic"
     },
     {
       "section": "contact",

@@ -33,14 +33,15 @@ export interface ComponentSelectionResult {
  * Component capability map - which components support images
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-supersimple-coloured-dynamic', 'hero-super-coloured-dynamic', 'hero-elegant-coloured-dynamic', 'hero-dynamic', 'hero-simple-dynamic', 'hero-elegant-dynamic', 'hero-banner-dynamic', 'hero-ab', 'hero-ac', 'hero-ad', 'hero-ae'],
-  features: ['features-dynamic', 'features-simple-dynamic', 'features-image', 'features-gallery-type', 'features-slideshow', 'features- Image', 'features-Image-new'],
-  testimonials: ['testimonials-dynamic', 'testimonials-elegant-dynamic', 'testimonial-cards', 'testimonial-modern', 'testimonial-gradient'],
-  about: ['about-supersimple-coloured-dynamic', 'about-dynamic', 'about-simple-dynamic', 'about-two-column'],
+  hero: ['hero-supersimple-coloured-dynamic', 'hero-super-coloured-dynamic', 'hero-stylish-coloured-dynamic', 'hero-dynamic', 'hero-simple-dynamic', 'hero-elegant-dynamic', 'hero-banner-dynamic'],
+  features: ['features-dynamic', 'features-simple-dynamic'],
+  testimonials: ['testimonials-dynamic', 'testimonials-elegant-dynamic'],
+  about: ['about-supersimple-coloured-dynamic', 'about-dynamic', 'about-simple-dynamic'],
   gallery: ['gallery-dynamic', 'gallery-elegant-dynamic'],
-  cta: ['cta-dynamic'],
+  cta: ['cta-dynamic', 'cta-simple-dynamic'],
   blog: ['blog-dynamic', 'blog-elegant-dynamic'],
-  navbar: ['navbar-floatingtwo-dynamic', 'navbar-floating-dynamic'],
+  navbar: ['navbar-dynamic', 'navbar-floating-dynamic', 'navbar-floatingtwo-dynamic'],
+  contact: ['contact-split-dynamic'],
 };
 
 function isSelectableAIComponent(componentName: string): boolean {

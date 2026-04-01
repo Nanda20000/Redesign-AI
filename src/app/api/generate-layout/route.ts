@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { generateLayoutWithAI, loadLayout, loadContent, saveContent, type PageStructure, type ExtractedContent } from '@/../lib/ai-layout-generator';
 import { generatePropsForLayout, type ExtractedWebsiteContent } from '@/../lib/ai-prop-injector';
 import { capturePreviewScreenshot } from '@/../lib/screenshot-capture';
+import { unlockSlug } from '../../../../lib/session-manager';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -250,6 +251,10 @@ export async function POST(request: NextRequest) {
       }
       fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2), 'utf-8');
       console.log('[generate-layout] Meta saved to:', metaPath);
+
+      // Unlock this slug for viewing - marks page as ready for preview access
+      unlockSlug(pageSlug);
+      console.log('[generate-layout] Page unlocked for preview:', pageSlug);
 
       return NextResponse.json({
         status: 'success',

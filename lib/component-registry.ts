@@ -1,41 +1,59 @@
-import { HeroSlide } from '../components-library/hero/hero-ab';
 import { HeroDynamic } from '../components-library/hero/hero-dynamic';
-import { HeroElegantColouredDynamic } from '../components-library/hero/hero-elegant-coloured-dynamic';
 import { HeroStylishColouredDynamic } from '../components-library/hero/hero-stylish-coloured-dynamic';
-import { FeaturesSlideshow } from '../components-library/features/features-slideshow';
+import { HeroSuperColouredDynamic } from '../components-library/hero/hero-super-coloured-dynamic';
+import { HeroSupersimpleColouredDynamic } from '../components-library/hero/hero-supersimple-coloured-dynamic';
+import { HeroBannerDynamic } from '../components-library/hero/hero-banner-dynamic';
+import { HeroSimpleDynamic } from '../components-library/hero/hero-simple-dynamic';
+import { HeroElegantDynamic } from '../components-library/hero/hero-elegant-dynamic';
 import { FeaturesDynamic } from '../components-library/features/features-dynamic';
-import { About3 } from '../components-library/about/about-two-column';
+import { FeaturesSimpleDynamic } from '../components-library/features/features-simple-dynamic';
 import { AboutDynamic } from '../components-library/about/about-dynamic';
-import { TestimonialsCards } from '../components-library/testimonials/testimonial-cards';
+import { AboutSimpleDynamic } from '../components-library/about/about-simple-dynamic';
+import { AboutSupersimpleColouredDynamic } from '../components-library/about/about-supersimple-coloured-dynamic';
 import { TestimonialsDynamic } from '../components-library/testimonials/testimonials-dynamic';
-import { ContactCard } from '../components-library/contact/contact-form';
+import { TestimonialsElegantDynamic } from '../components-library/testimonials/testimonials-elegant-dynamic';
 import { ContactSplit } from '../components-library/contact/contact-split-dynamic';
 import { FooterSimple } from '../components-library/footer/footer-simple';
-import NavbarMinimal from '../components-library/navbar/navbar-minimal';
 import { NavbarDynamic } from '../components-library/navbar/navbar-dynamic';
+import { NavbarFloatingDynamic } from '../components-library/navbar/navbar-floating-dynamic';
+import { NavbarFloatingtwoDynamic } from '../components-library/navbar/navbar-floatingtwo-dynamic';
+import { BlogDynamic } from '../components-library/blog/blog-dynamic';
+import { BlogElegantDynamic } from '../components-library/blog/blog-elegant-dynamic';
+import { CtaDynamic } from '../components-library/cta/cta-dynamic';
+import { CtaSimpleDynamic } from '../components-library/cta/cta-simple-dynamic';
+import { GalleryDynamic } from '../components-library/gallery/gallery-dynamic';
+import { GalleryElegantDynamic } from '../components-library/gallery/gallery-elegant-dynamic';
 import * as fs from 'fs';
 import * as path from 'path';
 
-// Main component registry - includes all components (dynamic + fallback-only)
+// Main component registry - includes only dynamic components (AI-selectable) plus footer-simple
 const components = {
   // Dynamic components (AI-selectable)
   "hero-dynamic": HeroDynamic,
-  "hero-elegant-coloured-dynamic": HeroElegantColouredDynamic,
   "hero-stylish-coloured-dynamic": HeroStylishColouredDynamic,
+  "hero-super-coloured-dynamic": HeroSuperColouredDynamic,
+  "hero-supersimple-coloured-dynamic": HeroSupersimpleColouredDynamic,
+  "hero-banner-dynamic": HeroBannerDynamic,
+  "hero-simple-dynamic": HeroSimpleDynamic,
+  "hero-elegant-dynamic": HeroElegantDynamic,
   "features-dynamic": FeaturesDynamic,
+  "features-simple-dynamic": FeaturesSimpleDynamic,
   "about-dynamic": AboutDynamic,
+  "about-simple-dynamic": AboutSimpleDynamic,
+  "about-supersimple-coloured-dynamic": AboutSupersimpleColouredDynamic,
   "testimonials-dynamic": TestimonialsDynamic,
+  "testimonials-elegant-dynamic": TestimonialsElegantDynamic,
   "contact-split-dynamic": ContactSplit,
   "navbar-dynamic": NavbarDynamic,
+  "navbar-floating-dynamic": NavbarFloatingDynamic,
+  "navbar-floatingtwo-dynamic": NavbarFloatingtwoDynamic,
+  "blog-dynamic": BlogDynamic,
+  "blog-elegant-dynamic": BlogElegantDynamic,
+  "cta-dynamic": CtaDynamic,
+  "cta-simple-dynamic": CtaSimpleDynamic,
+  "gallery-dynamic": GalleryDynamic,
+  "gallery-elegant-dynamic": GalleryElegantDynamic,
   "footer-simple": FooterSimple,
-
-  // Fallback-only components (not AI-selectable, kept for compatibility)
-  "hero-ab": HeroSlide,
-  "features-slideshow": FeaturesSlideshow,
-  "about-two-column": About3,
-  "testimonial-cards": TestimonialsCards,
-  "contact-form": ContactCard,
-  "navbar-minimal": NavbarMinimal
 };
 
 export function getComponentByName(name: string) {

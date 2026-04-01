@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import * as fs from 'fs';
 import * as path from 'path';
+import { getUnlockedSlugs } from '../../../../lib/session-manager';
 
 export interface PreviewPageMeta {
   slug: string;
@@ -19,14 +20,12 @@ export async function GET() {
     return NextResponse.json({ pages: [] });
   }
 
-  const slugs = fs.readdirSync(generatedPagesDir).filter(name => {
-    const slugPath = path.join(generatedPagesDir, name);
-    return fs.statSync(slugPath).isDirectory();
-  });
-
+  // Get only unlocked slugs - pages that have been properly generated
+  const unlockedSlugs = getUnlockedSlugs();
+  
   const pages: PreviewPageMeta[] = [];
 
-  for (const slug of slugs) {
+  for (const slug of unlockedSlugs) {
     const slugDir = path.join(generatedPagesDir, slug);
     const layoutPath = path.join(slugDir, 'layout.json');
     const metaPath = path.join(slugDir, 'meta.json');

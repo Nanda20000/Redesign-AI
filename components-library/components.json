@@ -1,12 +1,6 @@
 {
   "components": [
     {
-      "name": "about-two-column",
-      "category": "about",
-      "file": "about/about-two-column.tsx",
-      "description": "A two-column about section with image and text"
-    },
-    {
       "name": "about-simple-dynamic",
       "category": "about",
       "file": "about/about-simple-dynamic.tsx",
@@ -17,6 +11,12 @@
       "category": "about",
       "file": "about/about-supersimple-coloured-dynamic.tsx",
       "description": "A clean, two-section about layout with a top heading and a bottom image-text split with testimonial overlays."
+    },
+    {
+      "name": "about-dynamic",
+      "category": "about",
+      "file": "about/about-dynamic.tsx",
+      "description": "Dynamic about section component"
     },
     {
       "name": "blog-dynamic",
@@ -43,6 +43,30 @@
       "description": "A split CTA section with a grid-patterned card and a vertical list of key statistics."
     },
     {
+      "name": "contact-split-dynamic",
+      "category": "contact",
+      "file": "contact/contact-split-dynamic.tsx",
+      "description": "A split-layout contact section with contact info and form"
+    },
+    {
+      "name": "features-simple-dynamic",
+      "category": "features",
+      "file": "features/features-simple-dynamic.tsx",
+      "description": "Clean features section with dashed dividers, two-column header, and three feature cards."
+    },
+    {
+      "name": "features-dynamic",
+      "category": "features",
+      "file": "features/features-dynamic.tsx",
+      "description": "Dynamic features section component"
+    },
+    {
+      "name": "footer-simple",
+      "category": "footer",
+      "file": "footer/footer-simple.tsx",
+      "description": "A simple footer with brand info and social links"
+    },
+    {
       "name": "gallery-dynamic",
       "category": "gallery",
       "file": "gallery/gallery-dynamic.tsx",
@@ -61,156 +85,6 @@
       "description": "Full-width banner hero for inner pages with background image, breadcrumb, title, and description"
     },
     {
-      "name": "contact-form",
-      "category": "contact",
-      "file": "contact/contact-form.tsx",
-      "description": "A contact form with name, email, and message fields"
-    },
-    {
-      "name": "contact-split-dynamic",
-      "category": "contact",
-      "file": "contact/contact-split-dynamic.tsx",
-      "description": "A split-layout contact section with contact info and form"
-    },
-    {
-      "name": "features- Image",
-      "category": "features",
-      "file": "features/features- Image.tsx",
-      "description": "Features section component"
-    },
-    {
-      "name": "features-coursel",
-      "category": "features",
-      "file": "features/features-coursel.tsx",
-      "description": "A carousel layout for showcasing features"
-    },
-    {
-      "name": "features-gallery-type",
-      "category": "features",
-      "file": "features/features-gallery-type.tsx",
-      "description": "A gallery-style section with visual content"
-    },
-    {
-      "name": "features-grid",
-      "category": "features",
-      "file": "features/features-grid.tsx",
-      "description": "A grid layout for displaying content cards"
-    },
-    {
-      "name": "features-Image-new",
-      "category": "features",
-      "file": "features/features-Image-new.tsx",
-      "description": "Features section component"
-    },
-    {
-      "name": "features-slideshow",
-      "category": "features",
-      "file": "features/features-slideshow.tsx",
-      "description": "A slideshow layout for dynamic content presentation"
-    },
-    {
-      "name": "features-simple-dynamic",
-      "category": "features",
-      "file": "features/features-simple-dynamic.tsx",
-      "description": "Clean features section with dashed dividers, two-column header, and three feature cards."
-    },
-    {
-      "name": "footer-corporate",
-      "category": "footer",
-      "file": "footer/footer-corporate.tsx",
-      "description": "A corporate section with business-focused design"
-    },
-    {
-      "name": "footer-elegant",
-      "category": "footer",
-      "file": "footer/footer-elegant.tsx",
-      "description": "A minimal footer with essential information"
-    },
-    {
-      "name": "footer-gradient",
-      "category": "footer",
-      "file": "footer/footer-gradient.tsx",
-      "description": "A gradient footer with stylish design"
-    },
-    {
-      "name": "footer-minimal",
-      "category": "footer",
-      "file": "footer/footer-minimal.tsx",
-      "description": "A modern footer with comprehensive navigation"
-    },
-    {
-      "name": "footer-modern",
-      "category": "footer",
-      "file": "footer/footer-modern.tsx",
-      "description": "A simple footer with brand info and social links"
-    },
-    {
-      "name": "footer-simple",
-      "category": "footer",
-      "file": "footer/footer-simple.tsx",
-      "description": "A simple footer with brand info and social links"
-    },
-    {
-      "name": "footer-startup",
-      "category": "footer",
-      "file": "footer/footer-startup.tsx",
-      "description": "A startup-focused section with modern elements"
-    },
-    {
-      "name": "hero-ab",
-      "category": "hero",
-      "file": "hero/hero-ab.tsx",
-      "description": "Hero section component"
-    },
-    {
-      "name": "hero-ac",
-      "category": "hero",
-      "file": "hero/hero-ac.tsx",
-      "description": "A hero section with heading and subtext and CTA button with image"
-    },
-    {
-      "name": "hero-ad",
-      "category": "hero",
-      "file": "hero/hero-ad.tsx",
-      "description": "A hero section with heading and subtext and CTA button with image"
-    },
-    {
-      "name": "hero-ae",
-      "category": "hero",
-      "file": "hero/hero-ae.tsx",
-      "description": "A hero section, grid layout, flex layout, CTA buttons, image content and animations component"
-    },
-    {
-      "name": "hero-elegant",
-      "category": "hero",
-      "file": "hero/hero-elegant.tsx",
-      "description": "An elegant hero section with sophisticated styling"
-    },
-    {
-      "name": "hero-minimal",
-      "category": "hero",
-      "file": "hero/hero-minimal.tsx",
-      "description": "A minimal hero section with clean design and focused messaging"
-    },
-    {
-      "name": "hero-modern",
-      "category": "hero",
-      "file": "hero/hero-modern.tsx",
-      "description": "A modern hero section with engaging headline and call-to-action"
-    },
-    {
-      "name": "hero-simple",
-      "category": "hero",
-      "file": "hero/hero-simple.tsx",
-      "description": "A modern hero section with engaging headline and call-to-action"
-    },
-    {
-      "name": "hero-stylish",
-      "category": "hero",
-      "file": "hero/hero-stylish.tsx",
-      "description": "A stylish hero section with contemporary design"
-    },
-    {
       "name": "hero-simple-dynamic",
       "category": "hero",
       "file": "hero/hero-simple-dynamic.tsx",
@@ -221,12 +95,6 @@
       "category": "hero",
       "file": "hero/hero-elegant-dynamic.tsx",
       "description": "Elegant two-column hero with bold typography and a circular media element."
-    },
-    {
-      "name": "hero-elegant-coloured-dynamic",
-      "category": "hero",
-      "file": "hero/hero-elegant-coloured-dynamic.tsx",
-      "description": "Elegant hero section with centered text, dual CTAs, and a dynamic grid of stats and images."
     },
     {
       "name": "hero-stylish-coloured-dynamic",
@@ -247,34 +115,10 @@
       "description": "A modern hero section with a large image, title, description, and feature cards at the bottom."
     },
     {
-      "name": "navbar-elegant",
-      "category": "navbar",
-      "file": "navbar/navbar-elegant.tsx",
-      "description": "An elegant navigation bar with sophisticated layout"
-    },
-    {
-      "name": "navbar-gradient",
-      "category": "navbar",
-      "file": "navbar/navbar-gradient.tsx",
-      "description": "A gradient navigation bar with colorful styling"
-    },
-    {
-      "name": "navbar-minimal",
-      "category": "navbar",
-      "file": "navbar/navbar-minimal.tsx",
-      "description": "A minimal navigation bar with clean and simple design"
-    },
-    {
-      "name": "navbar-modern",
-      "category": "navbar",
-      "file": "navbar/navbar-modern.tsx",
-      "description": "A modern navigation bar with logo, links, and CTA buttons"
-    },
-    {
-      "name": "navbar-stylish",
-      "category": "navbar",
-      "file": "navbar/navbar-stylish.tsx",
-      "description": "A stylish navigation bar with contemporary design"
+      "name": "hero-dynamic",
+      "category": "hero",
+      "file": "hero/hero-dynamic.tsx",
+      "description": "Dynamic hero section component"
     },
     {
       "name": "navbar-dynamic",
@@ -295,64 +139,10 @@
       "description": "A pill-shaped floating navigation bar with centered links and a call-to-action button."
     },
     {
-      "name": "pricing-cards",
-      "category": "pricing",
-      "file": "pricing/pricing-cards.tsx",
-      "description": "Cards layout with clean and organized design"
-    },
-    {
-      "name": "pricing-elegant",
-      "category": "pricing",
-      "file": "pricing/pricing-elegant.tsx",
-      "description": "An elegant pricing layout with sophisticated styling"
-    },
-    {
-      "name": "pricing-gradient",
-      "category": "pricing",
-      "file": "pricing/pricing-gradient.tsx",
-      "description": "A gradient pricing section with stylish design"
-    },
-    {
-      "name": "pricing-modern",
-      "category": "pricing",
-      "file": "pricing/pricing-modern.tsx",
-      "description": "Pricing cards with plan details and CTA buttons"
-    },
-    {
-      "name": "pricing-simple",
-      "category": "pricing",
-      "file": "pricing/pricing-simple.tsx",
-      "description": "Pricing cards with plan details and CTA buttons"
-    },
-    {
-      "name": "testimonial-cards",
+      "name": "testimonials-dynamic",
       "category": "testimonials",
-      "file": "testimonials/testimonial-cards.tsx",
-      "description": "Testimonials section component"
-    },
-    {
-      "name": "testimonial-gradient",
-      "category": "testimonials",
-      "file": "testimonials/testimonial-gradient.tsx",
-      "description": "Testimonials section component"
-    },
-    {
-      "name": "testimonial-modern",
-      "category": "testimonials",
-      "file": "testimonials/testimonial-modern.tsx",
-      "description": "Testimonials section component"
-    },
-    {
-      "name": "testimonial-section4",
-      "category": "testimonials",
-      "file": "testimonials/testimonial-section4.tsx",
-      "description": "Testimonials section component"
-    },
-    {
-      "name": "testimonial-section5",
-      "category": "testimonials",
-      "file": "testimonials/testimonial-section5.tsx",
-      "description": "Testimonials section component"
+      "file": "testimonials/testimonials-dynamic.tsx",
+      "description": "Dynamic testimonials section component"
     },
     {
       "name": "testimonials-elegant-dynamic",

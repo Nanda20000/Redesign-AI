@@ -35,7 +35,8 @@ export async function POST(request: NextRequest) {
     if (!pathname || pathname === '/') continue; // skip homepage, already added
 
     // Generate a slug from the pathname
-    const slug = pathname.replace(/^\//, '').replace(/\//g, '-') || 'page';
+    const baseSlug = pathname.replace(/^\//, '').replace(/\//g, '-') || 'page';
+    let slug = baseSlug;
 
     // Classify by pathname keywords
     const lower = pathname.toLowerCase();
@@ -49,8 +50,8 @@ export async function POST(request: NextRequest) {
       const matchedNavLink = navbarLinks.find(navLink => {
         const navSlug = navLink.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
         const pathSlug = pathSegment.toLowerCase().replace(/[^a-z0-9-]/g, '');
-        return navSlug === pathSlug || 
-               navSlug.includes(pathSlug) || 
+        return navSlug === pathSlug ||
+               navSlug.includes(pathSlug) ||
                pathSlug.includes(navSlug) ||
                navLink.toLowerCase().includes(pathSegment.toLowerCase()) ||
                pathSegment.toLowerCase().includes(navLink.toLowerCase().replace(/\s+/g, ''));
@@ -60,6 +61,8 @@ export async function POST(request: NextRequest) {
         title = matchedNavLink.split(' ')
           .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
           .join(' ');
+        // Use navbar label as base for slug to ensure uniqueness
+        slug = matchedNavLink.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || baseSlug;
       }
     }
 
@@ -73,8 +76,13 @@ export async function POST(request: NextRequest) {
       else if (/pric|plan|package/.test(lower)) { type = 'pricing'; title = 'Pricing'; }
     }
 
-    // Skip duplicate slugs
-    if (pages.some(p => p.slug === slug)) continue;
+    // Ensure slug uniqueness by appending a counter if duplicate exists
+    let counter = 1;
+    const originalSlug = slug;
+    while (pages.some(p => p.slug === slug)) {
+      counter++;
+      slug = `${originalSlug}-${counter}`;
+    }
 
     pages.push({ url: link, slug, type, title, navbarLabel });
   }

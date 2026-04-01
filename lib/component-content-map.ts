@@ -57,21 +57,6 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'secondaryCtaText', type: 'cta', maxWords: 4 }
     ],
   },
-  'hero-elegant-coloured-dynamic': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'title', type: 'heading', maxWords: 12 },
-      { prop: 'subtitle', type: 'paragraph', maxWords: 30 },
-      { prop: 'primaryButtonText', type: 'cta', maxWords: 3 },
-      { prop: 'secondaryButtonText', type: 'cta', maxWords: 3 },
-      { prop: 'missionText', type: 'paragraph', maxWords: 20 },
-      { prop: 'stat1Value', type: 'heading', maxWords: 2 },
-      { prop: 'stat1Label', type: 'label', maxWords: 8 },
-      { prop: 'stat2Value', type: 'heading', maxWords: 2 },
-      { prop: 'stat2Label', type: 'label', maxWords: 8 },
-      { prop: 'centerImageLabel', type: 'label', maxWords: 4 }
-    ],
-  },
   'hero-stylish-coloured-dynamic': {
     isDynamic: true,
     contentSlots: [
@@ -117,45 +102,6 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'description', type: 'paragraph', maxWords: 30 },
     ],
   },
-  'hero-ab': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'content.title',       type: 'heading',   maxWords: 8  },
-      { prop: 'content.subtitle',    type: 'paragraph', maxWords: 20 },
-      { prop: 'content.buttonText',  type: 'cta',       maxWords: 4  },
-    ],
-  },
-  'hero-ac': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'content.title',       type: 'heading',   maxWords: 8  },
-      { prop: 'content.description', type: 'paragraph', maxWords: 25 },
-      { prop: 'content.buttonText',  type: 'cta',       maxWords: 4  },
-    ],
-  },
-  'hero-ad': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'content.title',       type: 'heading',   maxWords: 8  },
-      { prop: 'content.subtitle',    type: 'label',     maxWords: 6  },
-      { prop: 'content.description', type: 'paragraph', maxWords: 25 },
-      { prop: 'content.buttonText',  type: 'cta',       maxWords: 4  },
-    ],
-  },
-  'hero-ae': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'content.title',       type: 'heading',   maxWords: 8  },
-      { prop: 'content.subtitle',    type: 'label',     maxWords: 6  },
-      { prop: 'content.description', type: 'paragraph', maxWords: 25 },
-      { prop: 'content.buttonText',  type: 'cta',       maxWords: 4  },
-    ],
-  },
-  'hero-elegant': { isDynamic: false, contentSlots: [] },
-  'hero-minimal': { isDynamic: false, contentSlots: [] },
-  'hero-modern':  { isDynamic: false, contentSlots: [] },
-  'hero-simple':  { isDynamic: false, contentSlots: [] },
-  'hero-stylish': { isDynamic: false, contentSlots: [] },
 
   // ── GALLERY ─────────────────────────────────────────────────────────
   'gallery-dynamic': {
@@ -218,55 +164,12 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
   },
 
   // ── FEATURES ────────────────────────────────────────────────────────
-  'features- Image': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'heading', type: 'heading', maxWords: 6 },
-    ],
-  },
-  'features-coursel': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'title',       type: 'heading',   maxWords: 6  },
-      { prop: 'description', type: 'paragraph', maxWords: 20 },
-    ],
-  },
   'features-dynamic': {
     isDynamic: true,
     contentSlots: [
       { prop: 'title',        type: 'heading',   maxWords: 8  },
       { prop: 'description',  type: 'paragraph', maxWords: 25 },
       { prop: 'items',        type: 'list',     maxWords: 50 },
-    ],
-  },
-  'features-gallery-type': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'title',       type: 'heading',   maxWords: 6  },
-      { prop: 'description', type: 'paragraph', maxWords: 20 },
-    ],
-  },
-  'features-grid': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'badge',       type: 'label',     maxWords: 3  },
-      { prop: 'heading',     type: 'heading',   maxWords: 6  },
-      { prop: 'description', type: 'paragraph', maxWords: 15 },
-      { prop: 'featureItems', type: 'list',     maxWords: 10 },
-    ],
-  },
-  'features-Image-new': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'badge',        type: 'label',     maxWords: 3  },
-      { prop: 'title',        type: 'heading',   maxWords: 8  },
-      { prop: 'description',  type: 'paragraph', maxWords: 25 },
-    ],
-  },
-  'features-slideshow': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'heading', type: 'heading', maxWords: 6 },
     ],
   },
   'features-simple-dynamic': {
@@ -301,16 +204,6 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'mainStatement', type: 'paragraph', maxWords: 80 },
     ],
   },
-  'about-two-column': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'title',                   type: 'heading',   maxWords: 6  },
-      { prop: 'description',             type: 'paragraph', maxWords: 40 },
-      { prop: 'achievementsTitle',        type: 'heading',   maxWords: 5  },
-      { prop: 'achievementsDescription',  type: 'paragraph', maxWords: 20 },
-      { prop: 'companiesTitle',           type: 'label',     maxWords: 6  },
-    ],
-  },
   'about-supersimple-coloured-dynamic': {
     isDynamic: true,
     contentSlots: [
@@ -341,48 +234,8 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'testimonials', type: 'list', maxWords: 100 },
     ],
   },
-  'testimonial-cards': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'title',       type: 'heading',   maxWords: 6  },
-      { prop: 'description', type: 'paragraph', maxWords: 15 },
-    ],
-  },
-  'testimonial-gradient': {
-    isDynamic: true,
-    contentSlots: [],
-  },
-  'testimonial-modern': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'title', type: 'heading', maxWords: 6 },
-    ],
-  },
-  'testimonial-section4': { isDynamic: true, contentSlots: [] },
-  'testimonial-section5': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'title',       type: 'heading',   maxWords: 6  },
-      { prop: 'description', type: 'paragraph', maxWords: 15 },
-    ],
-  },
 
   // ── NAVBAR ──────────────────────────────────────────────────────────
-  'navbar-elegant':  { isDynamic: false, contentSlots: [] },
-  'navbar-gradient': { isDynamic: false, contentSlots: [] },
-  'navbar-minimal':  {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'menuItems', type: 'list', maxWords: 3 },
-    ],
-  },
-  'navbar-modern': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'menu', type: 'list', maxWords: 3 },
-    ],
-  },
-  'navbar-stylish': { isDynamic: false, contentSlots: [] },
   'navbar-dynamic': {
     isDynamic: true,
     contentSlots: [
@@ -406,11 +259,6 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
   },
 
   // ── FOOTER ──────────────────────────────────────────────────────────
-  'footer-corporate': { isDynamic: false, contentSlots: [] },
-  'footer-elegant':   { isDynamic: false, contentSlots: [] },
-  'footer-gradient':  { isDynamic: false, contentSlots: [] },
-  'footer-minimal':   { isDynamic: false, contentSlots: [] },
-  'footer-modern':    { isDynamic: false, contentSlots: [] },
   'footer-simple': {
     isDynamic: true,
     contentSlots: [
@@ -419,16 +267,8 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'copyright',   type: 'label',     maxWords: 10 },
     ],
   },
-  'footer-startup': { isDynamic: false, contentSlots: [] },
 
   // ── CONTACT ─────────────────────────────────────────────────────────
-  'contact-form': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'title',       type: 'heading',   maxWords: 5  },
-      { prop: 'description', type: 'paragraph', maxWords: 20 },
-    ],
-  },
   'contact-split-dynamic': {
     isDynamic: true,
     contentSlots: [
@@ -447,12 +287,6 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
-  // ── PRICING ─────────────────────────────────────────────────────────
-  'pricing-cards':    { isDynamic: false, contentSlots: [] },
-  'pricing-elegant':  { isDynamic: false, contentSlots: [] },
-  'pricing-gradient': { isDynamic: false, contentSlots: [] },
-  'pricing-modern':   { isDynamic: false, contentSlots: [] },
-  'pricing-simple':   { isDynamic: false, contentSlots: [] },
 };
 
 /**

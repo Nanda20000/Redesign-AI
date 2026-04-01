@@ -411,50 +411,6 @@ export function getComponentContentProps(
   // Map section content to component-specific props
   switch (componentName) {
     // Navbar components
-    case 'navbar-modern':
-      return {
-        logo: {
-          url: '/',
-          src: 'https://www.shadcnblocks.com/images/block/block-1.svg',
-          alt: 'Logo',
-          title: mappedContent.navbar?.menu?.[0]?.title ?? '',
-        },
-        menu: mappedContent.navbar?.menu?.map((item) => ({
-          title: item.title,
-          url: item.url,
-        })) ?? [],
-        auth: mappedContent.navbar?.auth,
-      };
-
-    case 'navbar-minimal':
-      const menuItems = mappedContent.navbar?.menu?.map((item) => ({
-        to: item.url,
-        text: item.title,
-      })) ?? [];
-
-      return {
-        theme: 'light' as const,
-        logo: <span className="text-xl font-bold">{mappedContent.navbar?.menu?.[0]?.title ?? ''}</span>,
-        menuItems: menuItems,
-        rightContent: (
-          <>
-            <button className="text-sm font-medium hover:underline">Sign In</button>
-            <button className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-black/90">
-              Get Started
-            </button>
-          </>
-        ),
-      };
-
-    case 'navbar-elegant':
-      return {
-        navItems: mappedContent.navbar?.menu?.map((item, index) => ({
-          name: item.title,
-          link: item.url,
-          icon: <span>{['🏠', '✨', '💰', '📞', 'ℹ️'][index % 5]}</span>,
-        })) ?? [],
-      };
-
     case 'navbar-dynamic':
       return {
         logo: {
@@ -552,24 +508,6 @@ export function getComponentContentProps(
       };
     }
 
-    case 'hero-elegant-coloured-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.subtitle ?? '',
-        primaryButtonText: sectionContent?.primaryActionText ?? '',
-        secondaryButtonText: sectionContent?.secondaryActionText ?? '',
-        missionText: sectionContent?.missionText ?? '',
-        stat1Value: sectionContent?.stats?.[0]?.value ?? '',
-        stat1Label: sectionContent?.stats?.[0]?.label ?? '',
-        stat2Value: sectionContent?.stats?.[1]?.value ?? '',
-        stat2Label: sectionContent?.stats?.[1]?.label ?? '',
-        centerImageSrc: sectionContent?.images?.[0] ?? '',
-        centerImageLabel: sectionContent?.centerImageLabel ?? '',
-        rightImageSrc: sectionContent?.images?.[1] ?? '',
-      };
-    }
-
     case 'hero-stylish-coloured-dynamic': {
       const sectionContent = mappedContent.hero as any;
       return {
@@ -630,39 +568,6 @@ export function getComponentContentProps(
         bottomRightIcon: sectionContent?.decorativeIcon ?? null,
       };
     }
-
-    case 'hero-ab':
-      // HeroSlide component supports images prop
-      const heroAbProps = {
-        content: {
-          title: (mappedContent.hero as any)?.title ?? '',
-          subtitle: '',
-          description: (mappedContent.hero as any)?.description ?? '',
-          buttonText: 'Get Started',
-        },
-        images: (mappedContent.hero as any)?.image
-          ? [(mappedContent.hero as any).image]
-          : [],
-      };
-      if (heroAbProps.images && heroAbProps.images.length > 0) {
-        console.log("[getComponentContentProps] hero-ab: passing", heroAbProps.images.length, "image(s)");
-      }
-      return heroAbProps;
-
-    case 'hero-modern':
-      // OceanHero does NOT support image prop - omit it
-      return {
-        title: (mappedContent.hero as any)?.title ?? '',
-        description: (mappedContent.hero as any)?.description ?? '',
-        primaryAction: (mappedContent.hero as any)?.primaryAction,
-        secondaryAction: (mappedContent.hero as any)?.secondaryAction,
-      };
-
-    case 'hero-minimal':
-      return {}; // Uses internal state
-
-    case 'hero-elegant':
-      return {}; // Shader-based hero, no content props
 
     // Gallery components
     case 'gallery-dynamic': {
@@ -759,53 +664,6 @@ export function getComponentContentProps(
       }
       return featuresDynamicProps;
 
-    case 'features- Image':
-      return {
-        heading: (mappedContent.features as any)?.heading ?? '',
-        images: (mappedContent.features as any)?.images ?? [],
-      };
-
-    case 'features-Image-new':
-      return {
-        badge: (mappedContent.features as any)?.badge ?? '',
-        title: (mappedContent.features as any)?.heading ?? '',
-        description: (mappedContent.features as any)?.description ?? '',
-        images: (mappedContent.features as any)?.images ?? [],
-      };
-
-    case 'features-grid':
-      const featuresContent = mappedContent.features as any;
-      return {
-        badge: featuresContent?.badge ?? '',
-        heading: featuresContent?.heading ?? '',
-        description: featuresContent?.description ?? '',
-        featureItems: featuresContent?.items ?? [],
-        images: featuresContent?.images ?? [],
-      };
-
-    case 'features-slideshow':
-      const featuresSlideshowContent = mappedContent.features as any;
-      return {
-        heading: featuresSlideshowContent?.heading ?? '',
-        images: featuresSlideshowContent?.images ?? [],
-      };
-
-    case 'features-gallery-type':
-      const featuresGalleryTypeContent = mappedContent.features as any;
-      return {
-        title: featuresGalleryTypeContent?.heading ?? '',
-        description: featuresGalleryTypeContent?.description ?? '',
-        images: featuresGalleryTypeContent?.images ?? [],
-      };
-
-    case 'features-coursel':
-      const featuresCourselContent = mappedContent.features as any;
-      return {
-        title: featuresCourselContent?.heading ?? '',
-        description: featuresCourselContent?.description ?? '',
-        images: featuresCourselContent?.images ?? [],
-      };
-
     case 'features-simple-dynamic': {
       const sectionContent = mappedContent.features as any;
       return {
@@ -850,19 +708,6 @@ export function getComponentContentProps(
         mainStatement: sectionContent?.description ?? '',
       };
     }
-
-    case 'about-two-column':
-      const aboutContent = mappedContent.about as any;
-      return {
-        title: aboutContent?.title ?? '',
-        description: aboutContent?.description ?? '',
-        achievementsTitle: 'Our Achievements',
-        achievementsDescription: '',
-        companiesTitle: 'Trusted By',
-        injectedCompanies: aboutContent?.companies ?? [],
-        injectedAchievements: aboutContent?.achievements ?? [],
-        images: aboutContent?.images ?? [],
-      };
 
     case 'about-supersimple-coloured-dynamic': {
       const sectionContent = mappedContent.about as any;
@@ -909,99 +754,7 @@ export function getComponentContentProps(
       };
     }
 
-    case 'testimonial-cards':
-    case 'testimonial-section5':
-      return {
-        title: (mappedContent.testimonials as any)?.title ?? '',
-        description: (mappedContent.testimonials as any)?.description ?? '',
-        testimonials: (mappedContent.testimonials as any)?.testimonials ?? [],
-      };
-
-    case 'testimonial-gradient':
-    case 'testimonial-section4':
-    case 'testimonial-section5': {
-      const t = mappedContent.testimonials as any;
-      const items = (t?.testimonials ?? []).map((item: any) => ({
-        text: item.text ?? '',
-        image: item.image ?? '',
-        name: item.name ?? '',
-        role: item.username ?? '',
-      }));
-      return { testimonials: items };
-    }
-
-    case 'testimonial-modern': {
-      const t = mappedContent.testimonials as any;
-      const items = (t?.testimonials ?? []).map((item: any, i: number) => ({
-        type: i === 1 ? 'quote' : 'user',
-        quote: item.text ?? '',
-        name: item.name ?? '',
-        role: item.username ?? '',
-        avatarSrc: item.image ?? '',
-        avatarFallback: (item.name ?? 'C').charAt(0),
-      }));
-      return {
-        title: t?.title ?? '',
-        testimonials: items,
-      };
-    }
-
     // Contact components
-    case 'contact-form':
-      const contactContent = mappedContent.contact as any;
-      return {
-        title: contactContent?.title ?? '',
-        description: contactContent?.subtitle ?? '',
-        contactInfo: [
-          { icon: 'Mail',   label: 'Email',   value: mappedContent.footer?.brandName ?? '' },
-          { icon: 'Phone',  label: 'Phone',   value: '' },
-          { icon: 'MapPin', label: 'Address', value: '' },
-        ],
-        children: (
-          <form className="flex w-full flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
-            <div>
-              <label htmlFor="name" className="text-sm font-medium">
-                Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Your name"
-                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="text-sm font-medium">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="your@email.com"
-                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="text-sm font-medium">
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                placeholder="How can we help?"
-                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              />
-            </div>
-            <button
-              type="submit"
-              className="mt-2 w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-            >
-              {contactContent?.submitText ?? ''}
-            </button>
-          </form>
-        ),
-      };
-
     case 'contact-split-dynamic':
       const contactSplitContent = mappedContent.contact as any;
       return {
@@ -1031,14 +784,6 @@ export function getComponentContentProps(
         },
         copyright: (mappedContent.footer as any)?.copyright ?? '',
         links: (mappedContent.footer as any)?.links ?? [],
-      };
-
-    // Pricing components
-    case 'pricing-cards':
-      return {
-        heading: (mappedContent.pricing as any)?.heading ?? '',
-        subheading: (mappedContent.pricing as any)?.subheading ?? '',
-        plans: (mappedContent.pricing as any)?.plans ?? [],
       };
 
     default:
