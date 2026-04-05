@@ -1,167 +1,84 @@
 {
   "components": [
     {
-      "name": "about-simple-dynamic",
-      "category": "about",
-      "file": "about/about-simple-dynamic.tsx",
-      "description": "Six-column about section with headline, hero image, avatar profile, and philosophy statement."
-    },
-    {
-      "name": "about-supersimple-coloured-dynamic",
-      "category": "about",
-      "file": "about/about-supersimple-coloured-dynamic.tsx",
-      "description": "A clean, two-section about layout with a top heading and a bottom image-text split with testimonial overlays."
-    },
-    {
-      "name": "about-dynamic",
-      "category": "about",
-      "file": "about/about-dynamic.tsx",
-      "description": "Dynamic about section component"
-    },
-    {
-      "name": "blog-dynamic",
-      "category": "blog",
-      "file": "blog/blog-dynamic.tsx",
-      "description": "Blog articles listing section with section header and responsive grid of article cards"
-    },
-    {
-      "name": "blog-elegant-dynamic",
-      "category": "blog",
-      "file": "blog/blog-elegant-dynamic.tsx",
-      "description": "A refined blog showcase with a header, description, and a 3-column grid of posts featuring images and summaries."
-    },
-    {
-      "name": "cta-dynamic",
-      "category": "cta",
-      "file": "cta/cta-dynamic.tsx",
-      "description": "Full-width call-to-action section with headline, description, optional badge, and up to two CTA buttons"
-    },
-    {
-      "name": "cta-simple-dynamic",
-      "category": "cta",
-      "file": "cta/cta-simple-dynamic.tsx",
-      "description": "A split CTA section with a grid-patterned card and a vertical list of key statistics."
-    },
-    {
-      "name": "contact-split-dynamic",
-      "category": "contact",
-      "file": "contact/contact-split-dynamic.tsx",
-      "description": "A split-layout contact section with contact info and form"
-    },
-    {
-      "name": "features-simple-dynamic",
-      "category": "features",
-      "file": "features/features-simple-dynamic.tsx",
-      "description": "Clean features section with dashed dividers, two-column header, and three feature cards."
-    },
-    {
-      "name": "features-dynamic",
-      "category": "features",
-      "file": "features/features-dynamic.tsx",
-      "description": "Dynamic features section component"
-    },
-    {
       "name": "footer-simple",
       "category": "footer",
       "file": "footer/footer-simple.tsx",
       "description": "A simple footer with brand info and social links"
     },
     {
-      "name": "gallery-dynamic",
-      "category": "gallery",
-      "file": "gallery/gallery-dynamic.tsx",
-      "description": "Responsive image gallery with section title, subtitle, and grid of images with captions and category labels"
+      "name": "company-story-dynamic",
+      "category": "company-story",
+      "file": "company-story/company-story-dynamic.tsx",
+      "description": "Timeline-based company history section with milestone cards, images, and year markers."
     },
     {
-      "name": "gallery-elegant-dynamic",
-      "category": "gallery",
-      "file": "gallery/gallery-elegant-dynamic.tsx",
-      "description": "Elegant product showcase with a dynamic bento-style grid layout and hover effects."
+      "name": "faq-process-dynamic",
+      "category": "faq-process",
+      "file": "faq-process/faq-process-dynamic.tsx",
+      "description": "Accordion-style FAQ or numbered process steps section with expandable answers and visual step indicators."
     },
     {
-      "name": "hero-banner-dynamic",
+      "name": "hero-action-dynamic",
       "category": "hero",
-      "file": "hero/hero-banner-dynamic.tsx",
-      "description": "Full-width banner hero for inner pages with background image, breadcrumb, title, and description"
+      "file": "hero/hero-action-dynamic.tsx",
+      "description": "A dynamic hero section with a badge, trust indicators, and floating action cards."
     },
     {
-      "name": "hero-simple-dynamic",
-      "category": "hero",
-      "file": "hero/hero-simple-dynamic.tsx",
-      "description": "A clean dual-column hero section with a badge, dual-color heading, two buttons, and a featured graphic."
+      "name": "about-bio-dynamic",
+      "category": "about",
+      "file": "about/about-bio-dynamic.tsx",
+      "description": "A dynamic about section with a grid layout featuring a large story card with image overlay and mission/vision cards."
     },
     {
-      "name": "hero-elegant-dynamic",
-      "category": "hero",
-      "file": "hero/hero-elegant-dynamic.tsx",
-      "description": "Elegant two-column hero with bold typography and a circular media element."
+      "name": "blog-article-dynamic",
+      "category": "blog",
+      "file": "blog/blog-article-dynamic.tsx",
+      "description": "A dynamic blog section with a grid of posts featuring alternating image and content styles."
     },
     {
-      "name": "hero-stylish-coloured-dynamic",
-      "category": "hero",
-      "file": "hero/hero-stylish-coloured-dynamic.tsx",
-      "description": "A stylish hero section with a large heading, email signup, and a grid of colorful featured plan cards."
+      "name": "contact-form-dynamic",
+      "category": "contact",
+      "file": "contact/contact-form-dynamic.tsx",
+      "description": "A clean two-column contact section with info details and a message form."
     },
     {
-      "name": "hero-super-coloured-dynamic",
-      "category": "hero",
-      "file": "hero/hero-super-coloured-dynamic.tsx",
-      "description": "A complex, multi-element hero section with stats, features, and a large featured image."
+      "name": "cta-banner-dynamic",
+      "category": "cta",
+      "file": "cta/cta-banner-dynamic.tsx",
+      "description": "A high-impact CTA banner with a background image, service list, and a prominent bottom action bar."
     },
     {
-      "name": "hero-supersimple-coloured-dynamic",
-      "category": "hero",
-      "file": "hero/hero-supersimple-coloured-dynamic.tsx",
-      "description": "A modern hero section with a large image, title, description, and feature cards at the bottom."
-    },
-    {
-      "name": "hero-dynamic",
-      "category": "hero",
-      "file": "hero/hero-dynamic.tsx",
-      "description": "Dynamic hero section component"
-    },
-    {
-      "name": "navbar-dynamic",
+      "name": "nav-bar-dynamic",
       "category": "navbar",
-      "file": "navbar/navbar-dynamic.tsx",
-      "description": "A responsive navigation bar with desktop dropdowns and mobile expandable menus"
+      "file": "navbar/nav-bar-dynamic.tsx",
+      "description": "A floating navbar with a logo, navigation links, and two call-to-action buttons."
     },
     {
-      "name": "navbar-floating-dynamic",
-      "category": "navbar",
-      "file": "navbar/navbar-floating-dynamic.tsx",
-      "description": "A minimalist, pill-shaped floating navigation bar with a dark CTA button."
-    },
-    {
-      "name": "navbar-floatingtwo-dynamic",
-      "category": "navbar",
-      "file": "navbar/navbar-floatingtwo-dynamic.tsx",
-      "description": "A pill-shaped floating navigation bar with centered links and a call-to-action button."
-    },
-    {
-      "name": "testimonials-dynamic",
+      "name": "testi-client-dynamic",
       "category": "testimonials",
-      "file": "testimonials/testimonials-dynamic.tsx",
-      "description": "Dynamic testimonials section component"
+      "file": "testimonials/testi-client-dynamic.tsx",
+      "description": "A vibrant testimonials section with staggered colorful cards and circular avatars."
     },
     {
-      "name": "testimonials-elegant-dynamic",
-      "category": "testimonials",
-      "file": "testimonials/testimonials-elegant-dynamic.tsx",
-      "description": "Elegant minimalist testimonials carousel with dashed borders and corner accents."
+      "name": "gallery-album-dynamic",
+      "category": "gallery",
+      "file": "gallery/gallery-album-dynamic.tsx",
+      "description": "A dynamic gallery album with a masonry-like grid layout and a centered title."
     }
   ],
   "categories": [
+    "footer",
+    "company-story",
+    "faq-process",
+    "pricing",
+    "hero",
     "about",
     "blog",
     "contact",
     "cta",
-    "features",
-    "footer",
-    "gallery",
-    "hero",
     "navbar",
-    "pricing",
-    "testimonials"
+    "testimonials",
+    "gallery"
   ]
 }

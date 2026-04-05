@@ -30,74 +30,30 @@ function getGeneratedPageSlugsFromDisk(): string[] {
     });
 }
 
-function slugToNavLabel(slug: string): string {
-  return slug === 'index'
-    ? 'Home'
-    : slug
-      .split('-')
-      .filter(Boolean)
-      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-      .join(' ');
-}
-
-function sanitizeNavbarPropsForGeneratedPages(navbarProps: any, availablePages: string[]) {
-  if (!navbarProps || !Array.isArray(availablePages) || availablePages.length === 0) {
-    return navbarProps;
-  }
-
-  const uniqueSlugs = Array.from(new Set(
-    availablePages
-      .map((slug) => String(slug || '').toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-'))
-      .filter(Boolean)
-  )).sort((a, b) => {
-    if (a === 'index') return -1;
-    if (b === 'index') return 1;
-    return a.localeCompare(b);
-  });
-
-  const navItems = uniqueSlugs.map((slug) => ({
-    label: slugToNavLabel(slug),
-    href: `/preview/${slug}`,
-  }));
-
-  return {
-    ...navbarProps,
-    logo: {
-      ...(navbarProps.logo || {}),
-      href: '/preview/index',
-    },
-    navItems,
-  };
-}
-
 /**
- * Get shared navbar and footer props from the index (homepage) ai-props
- * This ensures all pages share the same navbar and footer
+ * Get shared footer props from the index (homepage) ai-props
+ * This ensures all pages share the same footer
+ * Note: Only footer-simple is shared (no navbar in kept components)
  */
-function getSharedNavbarFooterProps(indexSlug: string = 'index'): { 'navbar-dynamic'?: any; 'footer-simple'?: any } {
+function getSharedNavbarFooterProps(indexSlug: string = 'index'): { 'footer-simple'?: any } {
   const indexPath = getAiPropsPath(indexSlug);
-  
+
   if (!fs.existsSync(indexPath)) {
     return {};
   }
-  
+
   try {
     const indexProps = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
-    const shared: { 'navbar-dynamic'?: any; 'footer-simple'?: any } = {};
-    
-    // Extract navbar-dynamic props
-    if (indexProps['navbar-dynamic']) {
-      shared['navbar-dynamic'] = indexProps['navbar-dynamic'];
-    }
-    
+    const shared: { 'footer-simple'?: any } = {};
+
     // Extract footer-simple props
     if (indexProps['footer-simple']) {
       shared['footer-simple'] = indexProps['footer-simple'];
     }
-    
+
     return shared;
   } catch (err) {
-    console.error('[generate-layout] Failed to load shared navbar/footer props:', err);
+    console.error('[generate-layout] Failed to load shared footer props:', err);
     return {};
   }
 }
@@ -191,12 +147,6 @@ export async function POST(request: NextRequest) {
             availablePages, // Pass available pages for navbar filtering
           };
           const aiProps = await generatePropsForLayout(layout.layout, aiContent);
-          if (aiProps['navbar-dynamic']) {
-            aiProps['navbar-dynamic'] = sanitizeNavbarPropsForGeneratedPages(
-              aiProps['navbar-dynamic'],
-              availablePages
-            );
-          }
 
           // Save AI props to file for the page renderer to use
           fs.writeFileSync(
@@ -325,7 +275,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // For non-index pages, merge shared navbar/footer from index page
+    // For non-index pages, merge shared footer from index page
     if (slug !== 'index' && aiProps) {
       const sharedProps = getSharedNavbarFooterProps('index');
       if (Object.keys(sharedProps).length > 0) {
@@ -333,16 +283,8 @@ export async function GET(request: NextRequest) {
           ...aiProps,
           ...sharedProps,
         };
-        console.log('[generate-layout] Merged shared navbar/footer props for page:', slug);
+        console.log('[generate-layout] Merged shared footer props for page:', slug);
       }
-    }
-
-    // Always ensure navbar only links to actually generated pages.
-    if (aiProps?.['navbar-dynamic']) {
-      aiProps['navbar-dynamic'] = sanitizeNavbarPropsForGeneratedPages(
-        aiProps['navbar-dynamic'],
-        getGeneratedPageSlugsFromDisk()
-      );
     }
 
     console.log("[API /generate-layout] Returning images:", content?.images?.length || 0);
@@ -363,93 +305,6 @@ export async function GET(request: NextRequest) {
         message: 'No layout has been generated yet. Call POST first.',
       },
       { status: 404 }
-    );
-  }
-}
-
-export async function PATCH(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const { allPageSlugs } = body;
-
-    if (!allPageSlugs || !Array.isArray(allPageSlugs)) {
-      return NextResponse.json(
-        { error: 'allPageSlugs array is required' },
-        { status: 400 }
-      );
-    }
-
-    console.log('[generate-layout PATCH] Regenerating navbars for:', allPageSlugs);
-
-    const { generatePropsForComponent } = await import('@/../lib/ai-prop-injector');
-
-    for (const slug of allPageSlugs) {
-      const aiPropsPath = getAiPropsPath(slug);
-      const contentPath = path.join(
-        process.cwd(), 'generated-pages', slug, 'content.json'
-      );
-
-      if (!fs.existsSync(aiPropsPath) || !fs.existsSync(contentPath)) {
-        console.warn('[PATCH] Missing files for slug:', slug);
-        continue;
-      }
-
-      try {
-        const existingAiProps = JSON.parse(
-          fs.readFileSync(aiPropsPath, 'utf-8')
-        );
-        const content = JSON.parse(
-          fs.readFileSync(contentPath, 'utf-8')
-        );
-
-        // Regenerate navbar props with the full allPageSlugs list
-        const freshNavbarProps = await generatePropsForComponent(
-          'navbar-dynamic',
-          {
-            headings: content.headings || [],
-            paragraphs: content.paragraphs || [],
-            navigationLinks: content.navigationLinks || [],
-            footerText: content.footerText,
-            contactInfo: content.contactInfo,
-            processed: content.processed,
-            images: content.images || [],
-            sectionSequence: content.sectionSequence || [],
-            sectionBuckets: content.sectionBuckets || {},
-            availablePages: allPageSlugs,
-          }
-        );
-
-        const sanitizedNavbarProps = sanitizeNavbarPropsForGeneratedPages(
-          freshNavbarProps,
-          allPageSlugs
-        );
-
-        // Merge fresh navbar into existing ai-props
-        const updatedAiProps = {
-          ...existingAiProps,
-          'navbar-dynamic': sanitizedNavbarProps,
-        };
-
-        fs.writeFileSync(
-          aiPropsPath,
-          JSON.stringify(updatedAiProps, null, 2),
-          'utf-8'
-        );
-        console.log('[PATCH] Navbar regenerated for:', slug);
-      } catch (err: any) {
-        console.error('[PATCH] Failed for slug:', slug, err.message);
-      }
-    }
-
-    return NextResponse.json({
-      status: 'success',
-      message: `Navbar regenerated for ${allPageSlugs.length} pages`,
-    });
-  } catch (error: any) {
-    console.error('[generate-layout PATCH] Error:', error);
-    return NextResponse.json(
-      { error: error.message },
-      { status: 500 }
     );
   }
 }

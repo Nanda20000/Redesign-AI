@@ -426,211 +426,137 @@ export function getComponentRecommendations(analysis: WebsiteAnalysis): Componen
   const { businessType, tone, contentRichness } = analysis;
 
   const recommendations: ComponentRecommendations = {
-    navbar: getNavbarRecommendation(businessType, tone, contentRichness),
     hero: getHeroRecommendation(businessType, tone, contentRichness),
-    features: getFeaturesRecommendation(businessType, tone, contentRichness),
-    testimonials: getTestimonialsRecommendation(businessType, tone),
-    footer: getFooterRecommendation(businessType, tone, contentRichness),
     about: getAboutRecommendation(businessType, tone),
-    contact: getContactRecommendation(businessType, tone),
-    pricing: getPricingRecommendation(businessType, tone),
-    gallery: getGalleryRecommendation(businessType, tone),
-    cta: getCtaRecommendation(businessType, tone, contentRichness),
     blog: getBlogRecommendation(businessType, tone, contentRichness),
+    companyStory: getCompanyStoryRecommendation(businessType, tone),
+    faqProcess: getFaqProcessRecommendation(businessType, tone),
+    footer: getFooterRecommendation(businessType, tone, contentRichness),
   };
 
   return recommendations;
 }
 
 export interface ComponentRecommendations {
-  navbar: { preferred: string[]; avoid: string[]; reason: string };
   hero: { preferred: string[]; avoid: string[]; reason: string };
-  features: { preferred: string[]; avoid: string[]; reason: string };
-  testimonials: { preferred: string[]; avoid: string[]; reason: string };
-  footer: { preferred: string[]; avoid: string[]; reason: string };
   about: { preferred: string[]; avoid: string[]; reason: string };
-  contact: { preferred: string[]; avoid: string[]; reason: string };
-  pricing: { preferred: string[]; avoid: string[]; reason: string };
-  gallery: { preferred: string[]; avoid: string[]; reason: string };
-  cta: { preferred: string[]; avoid: string[]; reason: string };
   blog: { preferred: string[]; avoid: string[]; reason: string };
-}
-
-function getNavbarRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['navbar'] {
-  // Navbar should generally be minimal/modern - avoid heavy UI
-  const preferred: string[] = [];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // Business type preferences
-  if (businessType === 'corporate' || businessType === 'education') {
-    preferred.push('navbar-dynamic', 'navbar-floating-dynamic');
-    reasons.push('Professional appearance preferred');
-  } else if (businessType === 'saas' || businessType === 'startup') {
-    preferred.push('navbar-dynamic', 'navbar-floating-dynamic');
-    reasons.push('Modern tech aesthetic');
-  } else if (businessType === 'portfolio' || businessType === 'agency') {
-    preferred.push('navbar-dynamic', 'navbar-floatingtwo-dynamic');
-    reasons.push('Creative expression balanced with usability');
-  } else if (businessType === 'ecommerce') {
-    preferred.push('navbar-dynamic', 'navbar-floating-dynamic');
-    reasons.push('Clear navigation for shopping');
-  } else {
-    preferred.push('navbar-dynamic', 'navbar-floating-dynamic');
-  }
-
-  // Tone adjustments
-  if (tone === 'minimal' || tone === 'corporate') {
-    preferred.unshift('navbar-dynamic');
-    reasons.push('Clean, professional style matches tone');
-  } else if (tone === 'modern') {
-    preferred.unshift('navbar-dynamic');
-  } else if (tone === 'creative' || tone === 'playful') {
-    preferred.unshift('navbar-dynamic', 'navbar-floatingtwo-dynamic');
-  }
-
-  // Richness adjustments - avoid heavy nav for simple sites
-  if (richness === 'low') {
-    preferred.push('navbar-dynamic');
-    reasons.push('Simple site needs simple navigation');
-  }
-
-  return {
-    preferred: deduplicate(preferred).slice(0, 3),
-    avoid: deduplicate(avoid),
-    reason: reasons.join('. ')
-  };
+  companyStory: { preferred: string[]; avoid: string[]; reason: string };
+  faqProcess: { preferred: string[]; avoid: string[]; reason: string };
+  footer: { preferred: string[]; avoid: string[]; reason: string };
 }
 
 function getHeroRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['hero'] {
-  const preferred: string[] = [];
+  const preferred: string[] = ['hero-action-dynamic'];
   const avoid: string[] = [];
-  const reasons: string[] = [];
+  const reasons: string[] = ['Hero section is essential for all websites'];
 
-  // Hero MUST be included - provide good options
+  // Business type specific messaging guidance
   if (businessType === 'saas' || businessType === 'startup') {
-    preferred.push('hero-dynamic', 'hero-stylish-coloured-dynamic');
-    reasons.push('Engaging hero for product showcase');
+    reasons.push('Engaging hero with action-oriented design');
   } else if (businessType === 'corporate') {
-    preferred.push('hero-elegant-dynamic', 'hero-simple-dynamic');
-    reasons.push('Professional first impression');
-  } else if (businessType === 'portfolio' || businessType === 'agency') {
-    preferred.push('hero-stylish-coloured-dynamic', 'hero-dynamic');
-    reasons.push('Visual impact for creative work');
+    reasons.push('Professional hero with clear value proposition');
   } else if (businessType === 'education') {
-    preferred.push('hero-simple-dynamic', 'hero-supersimple-coloured-dynamic');
-    reasons.push('Clear, readable messaging');
-  } else if (businessType === 'ecommerce') {
-    preferred.push('hero-dynamic', 'hero-stylish-coloured-dynamic');
-    reasons.push('Product-focused hero');
-  } else {
-    preferred.push('hero-simple-dynamic', 'hero-dynamic');
-  }
-
-  // Tone adjustments
-  if (tone === 'minimal') {
-    preferred.unshift('hero-supersimple-coloured-dynamic');
-  } else if (tone === 'creative') {
-    preferred.unshift('hero-stylish-coloured-dynamic');
-  } else if (tone === 'luxury') {
-    preferred.unshift('hero-elegant-dynamic');
+    reasons.push('Clear, readable hero messaging');
   }
 
   return {
-    preferred: deduplicate(preferred).slice(0, 3),
-    avoid: deduplicate(avoid),
-    reason: reasons.join('. ') || 'Hero section is essential for all websites'
-  };
-}
-
-function getFeaturesRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['features'] {
-  const preferred: string[] = [];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  if (businessType === 'saas' || businessType === 'startup') {
-    preferred.push('features-dynamic', 'features-simple-dynamic');
-    reasons.push('Feature-heavy presentation for product benefits');
-  } else if (businessType === 'ecommerce') {
-    preferred.push('features-dynamic', 'features-simple-dynamic');
-    reasons.push('Visual product showcase');
-  } else if (businessType === 'corporate') {
-    preferred.push('features-dynamic', 'features-simple-dynamic');
-    reasons.push('Structured information display');
-  } else if (businessType === 'portfolio' || businessType === 'agency') {
-    preferred.push('features-dynamic', 'features-simple-dynamic');
-    reasons.push('Visual portfolio presentation');
-  } else if (businessType === 'education') {
-    preferred.push('features-dynamic', 'features-simple-dynamic');
-    reasons.push('Clear, organized content display');
-  } else {
-    preferred.push('features-dynamic');
-  }
-
-  // Avoid heavy components for simple sites
-  if (richness === 'low') {
-    preferred.unshift('features-dynamic', 'features-simple-dynamic');
-    reasons.push('Simpler layout for limited content');
-  }
-
-  // Tone adjustments
-  if (tone === 'minimal') {
-    preferred.unshift('features-simple-dynamic');
-  } else if (tone === 'modern') {
-    preferred.unshift('features-dynamic');
-  }
-
-  return {
-    preferred: deduplicate(preferred).slice(0, 3),
-    avoid: deduplicate(avoid),
+    preferred,
+    avoid,
     reason: reasons.join('. ')
   };
 }
 
-function getTestimonialsRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['testimonials'] {
-  const preferred: string[] = [];
+function getAboutRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['about'] {
+  const preferred: string[] = ['about-bio-dynamic'];
   const avoid: string[] = [];
-  const reasons: string[] = [];
+  const reasons: string[] = ['About section provides company background'];
 
-  // Testimonials needed for trust-based businesses
-  const trustHeavyTypes: BusinessType[] = ['saas', 'ecommerce', 'corporate', 'healthcare', 'agency'];
-
-  if (trustHeavyTypes.includes(businessType)) {
-    reasons.push('Trust signals important for this business type');
-  } else {
-    reasons.push('Social proof enhances credibility');
-  }
-
-  if (businessType === 'saas' || businessType === 'startup') {
-    preferred.push('testimonials-dynamic', 'testimonials-elegant-dynamic');
-  } else if (businessType === 'corporate') {
-    preferred.push('testimonials-dynamic', 'testimonials-elegant-dynamic');
-  } else if (businessType === 'ecommerce') {
-    preferred.push('testimonials-dynamic', 'testimonials-elegant-dynamic');
+  if (businessType === 'corporate') {
+    reasons.push('Structured about section with story, mission, and vision');
   } else if (businessType === 'portfolio' || businessType === 'agency') {
-    preferred.push('testimonials-dynamic', 'testimonials-elegant-dynamic');
-  } else if (businessType === 'education') {
-    preferred.push('testimonials-dynamic', 'testimonials-elegant-dynamic');
-  } else {
-    preferred.push('testimonials-dynamic', 'testimonials-elegant-dynamic');
-  }
-
-  // Tone adjustments
-  if (tone === 'minimal' || tone === 'corporate') {
-    preferred.unshift('testimonials-dynamic');
-  } else if (tone === 'creative') {
-    preferred.unshift('testimonials-elegant-dynamic');
+    reasons.push('Visual about for creative presentation');
   }
 
   return {
-    preferred: deduplicate(preferred).slice(0, 3),
-    avoid: deduplicate(avoid),
+    preferred,
+    avoid,
+    reason: reasons.join('. ')
+  };
+}
+
+function getBlogRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['blog'] {
+  const preferred: string[] = ['blog-article-dynamic'];
+  const avoid: string[] = [];
+  const reasons: string[] = [];
+
+  // Blog is only recommended for content-rich sites
+  if (businessType === 'education' || businessType === 'saas') {
+    reasons.push('Article listing for content marketing and education');
+  } else if (businessType === 'agency' || businessType === 'corporate') {
+    reasons.push('News and insights section for thought leadership');
+  } else {
+    reasons.push('Blog section for content updates');
+  }
+
+  // Only show blog for content-rich sites
+  if (richness === 'low') {
+    reasons.push('Blog may not be needed for content-light sites');
+  }
+
+  return {
+    preferred,
+    avoid,
+    reason: reasons.join('. ')
+  };
+}
+
+function getCompanyStoryRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['companyStory'] {
+  const preferred: string[] = ['company-story-dynamic'];
+  const avoid: string[] = [];
+  const reasons: string[] = [];
+
+  // Company story/history for established businesses
+  if (businessType === 'corporate' || businessType === 'education') {
+    reasons.push('Company history and milestones build trust and credibility');
+  } else if (businessType === 'agency' || businessType === 'portfolio') {
+    reasons.push('Journey timeline showcases growth and achievements');
+  } else {
+    reasons.push('Company story helps users connect with brand heritage');
+  }
+
+  return {
+    preferred,
+    avoid,
+    reason: reasons.join('. ')
+  };
+}
+
+function getFaqProcessRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['faqProcess'] {
+  const preferred: string[] = ['faq-process-dynamic'];
+  const avoid: string[] = [];
+  const reasons: string[] = [];
+
+  // FAQ/Process for businesses that need to explain or support
+  if (businessType === 'saas' || businessType === 'education') {
+    reasons.push('FAQ section addresses common questions and reduces support load');
+  } else if (businessType === 'ecommerce') {
+    reasons.push('FAQ for shipping, returns, and product questions');
+  } else if (businessType === 'healthcare') {
+    reasons.push('Process steps explain patient journey and procedures');
+  } else {
+    reasons.push('FAQ or process section improves user understanding');
+  }
+
+  return {
+    preferred,
+    avoid,
     reason: reasons.join('. ')
   };
 }
 
 function getFooterRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['footer'] {
-  const preferred: string[] = [];
+  const preferred: string[] = ['footer-simple'];
   const avoid: string[] = [];
   const reasons: string[] = [];
 
@@ -638,206 +564,20 @@ function getFooterRecommendation(businessType: BusinessType, tone: Tone, richnes
   reasons.push('Footer provides essential site closure and navigation');
 
   if (businessType === 'corporate') {
-    preferred.push('footer-simple');
     reasons.push('Professional footer with comprehensive links');
   } else if (businessType === 'saas' || businessType === 'startup') {
-    preferred.push('footer-simple');
     reasons.push('Modern footer with social and links');
   } else if (businessType === 'ecommerce') {
-    preferred.push('footer-simple');
     reasons.push('Customer service links and policies');
   } else if (businessType === 'portfolio' || businessType === 'agency') {
-    preferred.push('footer-simple');
     reasons.push('Clean footer with contact info');
   } else if (businessType === 'education') {
-    preferred.push('footer-simple');
     reasons.push('Clear institutional information');
-  } else {
-    preferred.push('footer-simple');
-  }
-
-  // Tone adjustments
-  if (tone === 'minimal') {
-    preferred.unshift('footer-simple');
-  } else if (tone === 'modern') {
-    preferred.unshift('footer-simple');
-  } else if (tone === 'luxury') {
-    preferred.unshift('footer-simple');
-  }
-
-  // Avoid heavy footers for simple sites
-  if (richness === 'low') {
-    preferred.unshift('footer-simple');
   }
 
   return {
-    preferred: deduplicate(preferred).slice(0, 3),
-    avoid: deduplicate(avoid),
-    reason: reasons.join('. ')
-  };
-}
-
-function getAboutRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['about'] {
-  const preferred: string[] = [];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  if (businessType === 'corporate') {
-    preferred.push('about-dynamic');
-    reasons.push('Structured about section for company info');
-  } else if (businessType === 'portfolio' || businessType === 'agency') {
-    preferred.push('about-dynamic');
-    reasons.push('Visual about for creative presentation');
-  } else {
-    preferred.push('about-dynamic');
-  }
-
-  return {
-    preferred: deduplicate(preferred),
-    avoid: deduplicate(avoid),
-    reason: reasons.join('. ') || 'About section provides company background'
-  };
-}
-
-function getContactRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['contact'] {
-  const preferred: string[] = [];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // Contact important for lead generation
-  if (businessType === 'saas' || businessType === 'corporate' || businessType === 'agency') {
-    reasons.push('Contact form for lead generation');
-  } else {
-    reasons.push('Contact information for user communication');
-  }
-
-  preferred.push('contact-split-dynamic');
-
-  return {
-    preferred: deduplicate(preferred),
-    avoid: deduplicate(avoid),
-    reason: reasons.join('. ')
-  };
-}
-
-function getPricingRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['pricing'] {
-  const preferred: string[] = [];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // Pricing only for certain business types
-  if (businessType === 'saas' || businessType === 'ecommerce' || businessType === 'startup') {
-    reasons.push('Pricing display for product/service tiers');
-    // Note: No dynamic pricing components available
-  } else {
-    reasons.push('Pricing may not be needed for this business type');
-  }
-
-  return {
-    preferred: deduplicate(preferred),
-    avoid: deduplicate(avoid),
-    reason: reasons.join('. ')
-  };
-}
-
-function getGalleryRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['gallery'] {
-  const preferred: string[] = [];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // Gallery recommendations based on business type
-  if (businessType === 'portfolio' || businessType === 'agency') {
-    preferred.push('gallery-elegant-dynamic', 'gallery-dynamic');
-    reasons.push('Elegant bento grid layout ideal for showcasing creative work');
-  } else if (businessType === 'ecommerce') {
-    preferred.push('gallery-elegant-dynamic', 'gallery-dynamic');
-    reasons.push('Product showcase with hover effects for ecommerce');
-  } else if (businessType === 'restaurant') {
-    preferred.push('gallery-elegant-dynamic', 'gallery-dynamic');
-    reasons.push('Visual menu and ambiance showcase');
-  } else {
-    preferred.push('gallery-elegant-dynamic', 'gallery-dynamic');
-    reasons.push('Elegant gallery layout for visual content');
-  }
-
-  // Tone adjustments
-  if (tone === 'minimal' || tone === 'luxury') {
-    preferred.unshift('gallery-elegant-dynamic');
-    reasons.push('Clean, sophisticated layout matches tone');
-  }
-
-  return {
-    preferred: deduplicate(preferred),
-    avoid: deduplicate(avoid),
-    reason: reasons.join('. ')
-  };
-}
-
-function getCtaRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['cta'] {
-  const preferred: string[] = [];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // CTA recommendations based on business type
-  if (businessType === 'saas' || businessType === 'startup') {
-    preferred.push('cta-simple-dynamic', 'cta-dynamic');
-    reasons.push('Split layout with stats for conversion-focused CTA');
-  } else if (businessType === 'corporate' || businessType === 'education') {
-    preferred.push('cta-simple-dynamic', 'cta-dynamic');
-    reasons.push('Professional CTA with key metrics');
-  } else if (businessType === 'agency') {
-    preferred.push('cta-simple-dynamic', 'cta-dynamic');
-    reasons.push('CTA with social proof elements');
-  } else {
-    preferred.push('cta-simple-dynamic', 'cta-dynamic');
-    reasons.push('Effective CTA layout for lead generation');
-  }
-
-  // Tone adjustments
-  if (tone === 'minimal' || tone === 'corporate') {
-    preferred.unshift('cta-simple-dynamic');
-    reasons.push('Clean layout with statistics matches professional tone');
-  }
-
-  // Richness adjustments
-  if (richness === 'low') {
-    preferred.push('cta-dynamic');
-    reasons.push('Simpler CTA for content-light sites');
-  }
-
-  return {
-    preferred: deduplicate(preferred),
-    avoid: deduplicate(avoid),
-    reason: reasons.join('. ')
-  };
-}
-
-function getBlogRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['blog'] {
-  const preferred: string[] = [];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // Blog is only recommended for content-rich sites
-  if (businessType === 'education' || businessType === 'saas') {
-    preferred.push('blog-dynamic');
-    reasons.push('Article listing for content marketing and education');
-  } else if (businessType === 'agency' || businessType === 'corporate') {
-    preferred.push('blog-dynamic');
-    reasons.push('News and insights section for thought leadership');
-  } else {
-    preferred.push('blog-dynamic');
-    reasons.push('Blog section for content updates');
-  }
-
-  // Only show blog for content-rich sites
-  if (richness === 'low') {
-    avoid.push('blog-dynamic');
-    reasons.push('Blog may not be needed for content-light sites');
-  }
-
-  return {
-    preferred: deduplicate(preferred),
-    avoid: deduplicate(avoid),
+    preferred,
+    avoid,
     reason: reasons.join('. ')
   };
 }

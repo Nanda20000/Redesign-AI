@@ -423,15 +423,13 @@ export function loadGeneratedPageData(): Promise<GeneratedPageData> {
 function getDefaultImageComponent(section: string): string | null {
   switch (section) {
     case 'hero':
-      return 'hero-dynamic';
-    case 'features':
-      return 'features-dynamic';
+      return 'hero-action-dynamic';
     case 'about':
-      return 'about-simple-dynamic';
-    case 'testimonials':
-      return 'testimonials-dynamic';
-    case 'gallery':
-      return 'gallery-elegant-dynamic';
+      return 'about-bio-dynamic';
+    case 'blog':
+      return 'blog-article-dynamic';
+    case 'company-story':
+      return 'company-story-dynamic';
     default:
       return null;
   }
@@ -453,8 +451,8 @@ function enforceImageComponents(
   for (const item of layout.layout) {
     const newItem = { ...item };
 
-    // Check if this section should have images
-    if (['hero', 'features', 'about', 'testimonials'].includes(item.section)) {
+    // Check if this section should have images (only for kept components)
+    if (['hero', 'about', 'blog', 'company-story'].includes(item.section)) {
       if (!componentSupportsImages(item.component, item.section)) {
         const replacement = getDefaultImageComponent(item.section);
         if (replacement) {
@@ -478,31 +476,16 @@ function isSelectableAIComponent(componentName: string): boolean {
   return componentName.endsWith('-dynamic') || componentName === 'footer-simple';
 }
 
+/**
+ * Get AI-selectable components for a section.
+ * Only returns the 6 kept components.
+ */
 function getAIComponentsForSection(
   section: string,
   availableComponents: string[],
   pageSlug: string
 ): string[] {
-  let safeComponents = availableComponents.filter(isSelectableAIComponent);
-
-  if (section === 'hero') {
-    if (pageSlug !== 'index') {
-      // Non-home pages: force hero-banner-dynamic only
-      return safeComponents.includes('hero-banner-dynamic')
-        ? ['hero-banner-dynamic']
-        : safeComponents;
-    } else {
-      // Homepage: exclude hero-banner-dynamic from selection pool
-      safeComponents = safeComponents.filter(name => name !== 'hero-banner-dynamic');
-    }
-  }
-
-  // Exclude cta-dynamic from all pages
-  if (section === 'cta') {
-    safeComponents = safeComponents.filter(name => name !== 'cta-dynamic');
-  }
-
-  return safeComponents;
+  return availableComponents.filter(isSelectableAIComponent);
 }
 
 /**
@@ -567,26 +550,19 @@ function normalizeStructuralSections(sections: string[]): string[] {
   const cleaned = sections.filter(Boolean);
   if (cleaned.length === 0) return [];
 
-  const firstNavbarIndex = cleaned.findIndex((section) => section === 'navbar');
   const lastFooterIndexFromEnd = [...cleaned].reverse().findIndex((section) => section === 'footer');
   const lastFooterIndex = lastFooterIndexFromEnd >= 0
     ? cleaned.length - 1 - lastFooterIndexFromEnd
     : -1;
 
   const result = cleaned.filter((section, index) => {
-    if (section === 'navbar') return index === firstNavbarIndex;
     if (section === 'footer') return index === lastFooterIndex;
-    return true; // hero, features, about, blog, etc. all pass through
+    return true; // hero, about, blog, company-story, faq-process all pass through
   });
 
   // Guarantee hero survives normalization
   if (!result.includes('hero')) {
-    const navIdx = result.indexOf('navbar');
-    if (navIdx >= 0) {
-      result.splice(navIdx + 1, 0, 'hero');
-    } else {
-      result.unshift('hero');
-    }
+    result.unshift('hero');
     console.log('[normalizeStructuralSections] Hero injected — was absent from input:', sections);
   }
 
@@ -614,13 +590,8 @@ function mergeLayoutsByDetectedSections(
 
   // Guarantee hero exists in orderedSections — it is essential for all pages
   if (!orderedSections.includes('hero')) {
-    const navbarIndex = orderedSections.indexOf('navbar');
-    if (navbarIndex >= 0) {
-      orderedSections.splice(navbarIndex + 1, 0, 'hero');
-    } else {
-      orderedSections.unshift('hero');
-    }
-    console.log('[mergeLayouts] Hero was missing from detectedSections — injected after navbar');
+    orderedSections.unshift('hero');
+    console.log('[mergeLayouts] Hero was missing from detectedSections — injected at start');
   }
 
   const aiBySection = new Map<string, LayoutItem[]>();
@@ -874,23 +845,23 @@ export async function generateLayoutWithAI(
     if (layout.layout.length > 20) {
       console.warn(`[AI Layout Generator] Layout has ${layout.layout.length} items — trimming to 20`);
 
-      // Keep first navbar, last footer, and best middle sections
-      const navbar = layout.layout.find(i => i.section === 'navbar');
+      // Keep first and last footer, and best middle sections
       const reversedLayout = [...layout.layout].reverse();
       const footer = reversedLayout.find(i => i.section === 'footer');
-      
+
       // Extract hero explicitly before middle filter — hero must always survive
       const heroItem = layout.layout.find(i => i.section === 'hero');
       const middle = layout.layout.filter(
-        i => i.section !== 'navbar' && i.section !== 'footer' && i.section !== 'hero'
+        i => i.section !== 'footer' && i.section !== 'hero'
       );
 
-      // Deduplicate middle sections with the same generous limits
+      // Deduplicate middle sections with limits for kept sections only
       const seen: Record<string, number> = {};
       const maxMid: Record<string, number> = {
-        features: 6, about: 3, testimonials: 3, gallery: 3,
-        blog: 3, cta: 4, services: 4
-        // hero is handled separately — always included
+        about: 3,
+        blog: 3,
+        'company-story': 2,
+        'faq-process': 2
       };
       const dedupedMiddle = middle.filter(item => {
         const count = seen[item.section] || 0;
@@ -899,12 +870,11 @@ export async function generateLayoutWithAI(
         return false;
       });
 
-      // Reassemble: navbar → hero (always) → middle sections → footer
+      // Reassemble: hero (always) → middle sections → footer
       layout = {
         layout: [
-          ...(navbar ? [navbar] : []),
           ...(heroItem ? [heroItem] : []),  // hero always preserved
-          ...dedupedMiddle.slice(0, 17),    // reduced from 18 to make room for explicit hero
+          ...dedupedMiddle.slice(0, 18),
           ...(footer ? [footer] : []),
         ]
       };

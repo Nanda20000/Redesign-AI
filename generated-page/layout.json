@@ -1,36 +1,24 @@
 {
   "layout": [
     {
-      "section": "navbar",
-      "component": "navbar-dynamic"
-    },
-    {
       "section": "hero",
-      "component": "hero-elegant-dynamic"
-    },
-    {
-      "section": "features",
-      "component": "features-simple-dynamic"
+      "component": "hero-action-dynamic"
     },
     {
       "section": "about",
-      "component": "about-simple-dynamic"
+      "component": "about-bio-dynamic"
     },
     {
-      "section": "services",
-      "component": "features-simple-dynamic"
+      "section": "blog",
+      "component": "blog-article-dynamic"
     },
     {
-      "section": "cta",
-      "component": "cta-simple-dynamic"
+      "section": "company-story",
+      "component": "company-story-dynamic"
     },
     {
-      "section": "testimonials",
-      "component": "testimonials-elegant-dynamic"
-    },
-    {
-      "section": "gallery",
-      "component": "gallery-elegant-dynamic"
+      "section": "faq-process",
+      "component": "faq-process-dynamic"
     },
     {
       "section": "footer",

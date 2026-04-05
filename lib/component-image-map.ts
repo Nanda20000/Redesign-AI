@@ -18,98 +18,82 @@ export interface ComponentImageConfig {
 export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
 
   // ── HERO ──────────────────────────────────────────────────────────────
-  'hero-dynamic': { imageCount: 1, imageProp: 'image', imageMode: 'single' },
-  'hero-simple-dynamic': { imageCount: 1, imageProp: 'image', imageMode: 'single' },
-  'hero-elegant-dynamic': { imageCount: 1, imageProp: 'mediaUrl', imageMode: 'single' },
-  'hero-stylish-coloured-dynamic': {
-    imageCount: 0,
-    imageProp: 'none',
-    imageMode: 'none',
-  },
-  'hero-super-coloured-dynamic': {
+  'hero-action-dynamic': {
     imageCount: 1,
     imageProp: 'mainImage',
     imageMode: 'single',
   },
-  'hero-supersimple-coloured-dynamic': {
-    imageCount: 1,
-    imageProp: 'heroImage',
-    imageMode: 'single',
-  },
-  'hero-banner-dynamic': { imageCount: 1, imageProp: 'backgroundImage', imageMode: 'single' },
-
-  // ── GALLERY ───────────────────────────────────────────────────────────
-  'gallery-dynamic': {
-    imageCount: 6,
-    imageProp: 'items',
-    imageMode: 'items',
-  },
-  'gallery-elegant-dynamic': {
-    imageCount: 5,
-    imageProp: 'items',
-    imageMode: 'items',
-  },
-
-  // ── CTA ───────────────────────────────────────────────────────────────
-  'cta-dynamic': {
-    imageCount: 1,
-    imageProp: 'backgroundImage',
-    imageMode: 'single',
-  },
-  'cta-simple-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
 
   // ── BLOG ──────────────────────────────────────────────────────────────
-  'blog-dynamic': {
+  'blog-article-dynamic': {
     imageCount: 6,
-    imageProp: 'items',
-    imageMode: 'items',
-  },
-  'blog-elegant-dynamic': {
-    imageCount: 3,
     imageProp: 'posts',
     imageMode: 'items',
   },
 
-  // ── FEATURES ──────────────────────────────────────────────────────────
-  'features-simple-dynamic': {
-    imageCount: 3,
-    imageProp: 'features',
-    imageMode: 'items',
-  },
-
   // ── ABOUT ─────────────────────────────────────────────────────────────
-  'about-simple-dynamic': { imageCount: 2, imageProp: 'heroImage', imageMode: 'single' },
-  'about-supersimple-coloured-dynamic': {
+  'about-bio-dynamic': {
     imageCount: 1,
-    imageProp: 'imageSrc',
+    imageProp: 'storyImage',
     imageMode: 'single',
   },
 
-  // ── TESTIMONIALS ──────────────────────────────────────────────────────
-  'testimonials-elegant-dynamic': { imageCount: 5, imageProp: 'testimonials', imageMode: 'items' },
+  // ── COMPANY-STORY ─────────────────────────────────────────────────────
+  'company-story-dynamic': {
+    imageCount: 4,
+    imageProp: 'milestones',
+    imageMode: 'items',
+  },
 
-  // ── NAVBAR ────────────────────────────────────────────────────────────
-  'navbar-dynamic':  { imageCount: 0, imageProp: '', imageMode: 'none' },
-  'navbar-floating-dynamic': {
+  // ── FAQ-PROCESS ───────────────────────────────────────────────────────
+  'faq-process-dynamic': {
     imageCount: 0,
     imageProp: '',
     imageMode: 'none',
   },
-  'navbar-floatingtwo-dynamic': {
+
+  // ── FOOTER ────────────────────────────────────────────────────────────
+  'footer-simple': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  // ── CONTACT ──────────────────────────────────────────────────────────
+  'contact-form-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  // ── CTA ─────────────────────────────────────────────────────────────
+  'cta-banner-dynamic': {
     imageCount: 1,
-    imageProp: 'logoImage',
+    imageProp: 'backgroundImage',
     imageMode: 'single',
   },
 
-  // ── FOOTER ────────────────────────────────────────────────────────────
-  'footer-simple':    { imageCount: 0, imageProp: '', imageMode: 'none' },
+  // ── NAVBAR ──────────────────────────────────────────────────────────
+  'nav-bar-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
 
-  // ── CONTACT ───────────────────────────────────────────────────────────
-  'contact-split-dynamic': { imageCount: 0, imageProp: '', imageMode: 'none' },
+  // ── TESTIMONIALS ────────────────────────────────────────────────────
+  'testi-client-dynamic': {
+    imageCount: 6,
+    imageProp: 'authorImage',
+    imageMode: 'items',
+  },
+
+  // ── GALLERY ─────────────────────────────────────────────────────────
+  'gallery-album-dynamic': {
+    imageCount: 7,
+    imageProp: 'images',
+    imageMode: 'array',
+  },
+
 };
 
 /**

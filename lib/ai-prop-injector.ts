@@ -164,96 +164,24 @@ export interface ComponentPropSchema {
 /**
  * Registry of every component's prop schema.
  * AI uses this to know what to write for each component.
- * STRICT: Only -dynamic components are included (plus footer-simple and contact-split-dynamic)
+ * STRICT: Only the 6 kept components are included.
  */
 export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
 
   // ── HERO ──────────────────────────────────────────────────────────
-  'hero-dynamic': {
-    componentName: 'hero-dynamic',
-    section: 'hero',
-    props: [
-      { name: 'subtitle',              type: 'string', description: 'Small label above title, max 6 words', maxWords: 6,  required: false },
-      { name: 'title',                 type: 'string', description: 'Main headline — bold, impactful, max 8 words', maxWords: 8,  required: true  },
-      { name: 'description',           type: 'string', description: 'Supporting paragraph, max 25 words',   maxWords: 25, required: false },
-      { name: 'buttonText',            type: 'string', description: 'Primary CTA button label, max 4 words', maxWords: 4,  required: false },
-      { name: 'secondaryButtonText',   type: 'string', description: 'Secondary CTA button, max 4 words',    maxWords: 4,  required: false },
-      { name: 'image',                 type: 'string', description: 'Hero section image URL — select most relevant image from Available Images list', required: false },
-    ],
-  },
-  'hero-simple-dynamic': {
-    componentName: 'hero-simple-dynamic',
+  'hero-action-dynamic': {
+    componentName: 'hero-action-dynamic',
     section: 'hero',
     props: [
       {
-        name: 'badge',
+        name: 'badgeText',
         type: 'string',
-        description: 'A small label above the heading, e.g., "Coming Soon" or "New Feature". Max 3 words.',
-        maxWords: 3,
+        description: 'A short welcome or status badge text (e.g., "Welcome to BetterCare"). Max 5 words.',
+        maxWords: 5,
         required: false,
       },
       {
-        name: 'titlePart1',
-        type: 'string',
-        description: 'The first part of the main heading, rendered in a lighter grey color. Max 10 words.',
-        maxWords: 10,
-        required: true,
-      },
-      {
-        name: 'titlePart2',
-        type: 'string',
-        description: 'The second part of the main heading, rendered in solid black. Max 10 words.',
-        maxWords: 10,
-        required: true,
-      },
-      {
-        name: 'description',
-        type: 'string',
-        description: 'A short paragraph explaining the value proposition. Max 30 words.',
-        maxWords: 30,
-        required: true,
-      },
-      {
-        name: 'primaryCtaText',
-        type: 'string',
-        description: 'Text for the main action button (dark background). Max 4 words.',
-        maxWords: 4,
-        required: true,
-      },
-      {
-        name: 'secondaryCtaText',
-        type: 'string',
-        description: 'Text for the secondary action button (light background). Max 4 words.',
-        maxWords: 4,
-        required: false,
-      },
-      {
-        name: 'image',
-        type: 'string',
-        description: 'URL for the featured graphic or product image.',
-        required: true,
-      },
-      {
-        name: 'imageAlt',
-        type: 'string',
-        description: 'Alt text for the featured image.',
-        required: false,
-      },
-    ],
-  },
-  'hero-elegant-dynamic': {
-    componentName: 'hero-elegant-dynamic',
-    section: 'hero',
-    props: [
-      {
-        name: 'label',
-        type: 'string',
-        description: 'A small uppercase label above the main heading. Max 15 words.',
-        maxWords: 15,
-        required: false,
-      },
-      {
-        name: 'title',
+        name: 'heading',
         type: 'string',
         description: 'The main hero headline. Should be bold and impactful. Max 12 words.',
         maxWords: 12,
@@ -262,415 +190,8 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
       {
         name: 'description',
         type: 'string',
-        description: 'A supporting sub-headline or paragraph. Max 25 words.',
-        maxWords: 25,
-        required: false,
-      },
-      {
-        name: 'primaryCtaText',
-        type: 'string',
-        description: 'Text for the primary action button. Max 4 words.',
-        maxWords: 4,
-        required: false,
-      },
-      {
-        name: 'secondaryCtaText',
-        type: 'string',
-        description: 'Text for the secondary action button. Max 4 words.',
-        maxWords: 4,
-        required: false,
-      },
-      {
-        name: 'mediaUrl',
-        type: 'string',
-        description: 'URL for the hero video or image.',
-        required: true,
-      },
-      {
-        name: 'mediaType',
-        type: 'string',
-        description: 'Type of media to display: "video" or "image".',
-        required: false,
-      },
-      {
-        name: 'posterUrl',
-        type: 'string',
-        description: 'Optional poster image URL for the video.',
-        required: false,
-      }
-    ],
-  },
-  'hero-stylish-coloured-dynamic': {
-    componentName: 'hero-stylish-coloured-dynamic',
-    section: 'hero',
-    props: [
-      {
-        name: 'title',
-        type: 'string',
-        description: 'The main headline for the hero section. Should be bold and catchy. Max 15 words.',
-        maxWords: 15,
-        required: true,
-      },
-      {
-        name: 'subtitle',
-        type: 'string',
-        description: 'A brief sub-headline or description below the main title. Max 25 words.',
-        maxWords: 25,
-        required: false,
-      },
-      {
-        name: 'emailPlaceholder',
-        type: 'string',
-        description: 'Placeholder text for the email input field. Max 5 words.',
-        maxWords: 5,
-        required: false,
-      },
-      {
-        name: 'buttonText',
-        type: 'string',
-        description: 'Text for the sign-up button. Max 3 words.',
-        maxWords: 3,
-        required: true,
-      },
-      {
-        name: 'sectionTitle',
-        type: 'string',
-        description: 'Title for the featured items section below the hero. Max 5 words.',
-        maxWords: 5,
-        required: false,
-      },
-      {
-        name: 'exploreText',
-        type: 'string',
-        description: 'Text for the "Explore All" link. Max 3 words.',
-        maxWords: 3,
-        required: false,
-      },
-      {
-        name: 'exploreLink',
-        type: 'string',
-        description: 'URL for the "Explore All" link.',
-        required: false,
-      },
-      {
-        name: 'items',
-        type: 'array',
-        description: 'An array of featured plan objects. Each object should have a label (e.g. STRATEGY), title, description, footerLabel (e.g. 3 yrs CAGR), footerValue (e.g. 7.20%), and a Tailwind color class (e.g., bg-[#66D1A1], bg-black, bg-[#C49BFF], bg-[#F5FF90]).',
-        required: true,
-      },
-    ],
-  },
-  'hero-super-coloured-dynamic': {
-    componentName: 'hero-super-coloured-dynamic',
-    section: 'hero',
-    props: [
-      {
-        name: 'badgeText',
-        type: 'string',
-        description: 'Small text for the top badge. Max 10 words.',
-        maxWords: 10,
-        required: false,
-      },
-      {
-        name: 'title',
-        type: 'string',
-        description: 'Main hero heading. Max 10 words.',
-        maxWords: 10,
-        required: true,
-      },
-      {
-        name: 'primaryCtaText',
-        type: 'string',
-        description: 'Text for the primary button. Max 5 words.',
-        maxWords: 5,
-        required: false,
-      },
-      {
-        name: 'secondaryCtaText',
-        type: 'string',
-        description: 'Text for the secondary button. Max 5 words.',
-        maxWords: 5,
-        required: false,
-      },
-      {
-        name: 'statTopRightValue',
-        type: 'string',
-        description: 'Value for the top right stat (e.g., 70k).',
-        maxWords: 3,
-        required: false,
-      },
-      {
-        name: 'statTopRightLabel',
-        type: 'string',
-        description: 'Label for the top right stat (e.g., Downloads).',
-        maxWords: 5,
-        required: false,
-      },
-      {
-        name: 'smallCardText',
-        type: 'string',
-        description: 'Short text for the small floating card. Max 10 words.',
-        maxWords: 10,
-        required: false,
-      },
-      {
-        name: 'bottomLeftStatValue',
-        type: 'string',
-        description: 'Large stat value for the bottom left card (e.g., 1 million +).',
-        maxWords: 5,
-        required: false,
-      },
-      {
-        name: 'bottomLeftStatLabel',
-        type: 'string',
-        description: 'Description for the bottom left stat card. Max 15 words.',
-        maxWords: 15,
-        required: false,
-      },
-      {
-        name: 'mainImage',
-        type: 'string',
-        description: 'URL for the main featured image of a person or product.',
-        required: true,
-      }
-    ],
-  },
-  'hero-supersimple-coloured-dynamic': {
-    componentName: 'hero-supersimple-coloured-dynamic',
-    section: 'hero',
-    props: [
-      {
-        name: 'title',
-        type: 'string',
-        description: 'The main headline for the hero section. Should be bold and catchy. Max 15 words.',
-        maxWords: 15,
-        required: true,
-      },
-      {
-        name: 'description',
-        type: 'string',
-        description: 'A supporting paragraph that elaborates on the headline. Max 40 words.',
-        maxWords: 40,
-        required: true,
-      },
-      {
-        name: 'primaryCtaText',
-        type: 'string',
-        description: 'Text for the main call-to-action button. Max 5 words.',
-        maxWords: 5,
-        required: true,
-      },
-      {
-        name: 'secondaryCtaText',
-        type: 'string',
-        description: 'Text for the secondary call-to-action link. Max 5 words.',
-        maxWords: 5,
-        required: false,
-      },
-      {
-        name: 'heroImage',
-        type: 'string',
-        description: 'URL for the large hero image. Should be high quality and relevant to the content.',
-        required: true,
-      },
-      {
-        name: 'features',
-        type: 'array',
-        description: 'A list of feature items to display at the bottom. Each item should have a title and a short description.',
-        required: true,
-      },
-      {
-        name: 'primaryCtaIcon',
-        type: 'icon',
-        description: 'Icon for the primary CTA button.',
-        required: false,
-      },
-      {
-        name: 'secondaryCtaIcon',
-        type: 'icon',
-        description: 'Icon for the secondary CTA link.',
-        required: false,
-      },
-      {
-        name: 'bottomRightIcon',
-        type: 'icon',
-        description: 'Large icon for the bottom right decorative button.',
-        required: false,
-      }
-    ],
-  },
-  'hero-banner-dynamic': {
-    componentName: 'hero-banner-dynamic',
-    section: 'hero',
-    props: [
-      {
-        name: 'backgroundImage',
-        type: 'string',
-        description: 'Select the most prominent banner/hero image from the source page\'s Available Images list — prefer wide landscape images over portraits or logos',
-        required: false,
-      },
-      {
-        name: 'breadcrumb',
-        type: 'string',
-        description: 'Breadcrumb navigation text (e.g., "Home > About"). Max 10 words.',
-        maxWords: 10,
-        required: false,
-      },
-      {
-        name: 'title',
-        type: 'string',
-        description: 'Large bold page title. Max 10 words.',
-        maxWords: 10,
-        required: false,
-      },
-      {
-        name: 'description',
-        type: 'string',
-        description: 'Short description paragraph below the title. Max 30 words.',
+        description: 'A supporting sub-headline that explains the value proposition. Max 30 words.',
         maxWords: 30,
-        required: false,
-      },
-    ],
-  },
-
-  // ── GALLERY ────────────────────────────────────────────────────────
-  'gallery-dynamic': {
-    componentName: 'gallery-dynamic',
-    section: 'gallery',
-    props: [
-      {
-        name: 'title',
-        type: 'string',
-        description: 'Main heading for the gallery section. maxWords: 10',
-        maxWords: 10,
-        required: false,
-      },
-      {
-        name: 'subtitle',
-        type: 'string',
-        description: 'Optional descriptive text below the title. maxWords: 30',
-        maxWords: 30,
-        required: false,
-      },
-      {
-        name: 'items',
-        type: 'array',
-        description: 'Array of gallery items, each with imageUrl, optional caption (maxWords: 8), and optional category label (maxWords: 3)',
-        maxWords: 100,
-        required: true,
-      },
-    ],
-  },
-  'gallery-elegant-dynamic': {
-    componentName: 'gallery-elegant-dynamic',
-    section: 'gallery',
-    props: [
-      {
-        name: 'label',
-        type: 'string',
-        description: 'A small uppercase label identifying the category or collection. Max 3 words.',
-        maxWords: 3,
-        required: false,
-      },
-      {
-        name: 'heading',
-        type: 'string',
-        description: 'The main title of the gallery section. Max 8 words.',
-        maxWords: 8,
-        required: true,
-      },
-      {
-        name: 'subheading',
-        type: 'string',
-        description: 'A brief description or context for the displayed items. Max 25 words.',
-        maxWords: 25,
-        required: false,
-      },
-      {
-        name: 'items',
-        type: 'array',
-        description: 'An array of exactly 5 gallery items. Each item must have: "image" (URL selected from Available Images list — pick the most visually rich images), "alt" (short alt text), and optionally "title" (max 5 words) and "description" (max 15 words) for hover overlay. Select images that best represent the website content.',
-        required: true,
-      },
-    ],
-  },
-
-  // ── CTA ────────────────────────────────────────────────────────────
-  'cta-dynamic': {
-    componentName: 'cta-dynamic',
-    section: 'cta',
-    props: [
-      {
-        name: 'badge',
-        type: 'string',
-        description: 'Optional label displayed above the headline. maxWords: 5',
-        maxWords: 5,
-        required: false,
-      },
-      {
-        name: 'headline',
-        type: 'string',
-        description: 'Main bold headline for the CTA section. maxWords: 12',
-        maxWords: 12,
-        required: false,
-      },
-      {
-        name: 'description',
-        type: 'string',
-        description: 'Supporting paragraph text below the headline. maxWords: 40',
-        maxWords: 40,
-        required: false,
-      },
-      {
-        name: 'primaryButtonText',
-        type: 'string',
-        description: 'Text for the primary call-to-action button. maxWords: 4',
-        maxWords: 4,
-        required: false,
-      },
-      {
-        name: 'primaryButtonHref',
-        type: 'string',
-        description: 'URL link for the primary button',
-        required: false,
-      },
-      {
-        name: 'secondaryButtonText',
-        type: 'string',
-        description: 'Text for the secondary call-to-action button. maxWords: 4',
-        maxWords: 4,
-        required: false,
-      },
-      {
-        name: 'secondaryButtonHref',
-        type: 'string',
-        description: 'URL link for the secondary button',
-        required: false,
-      },
-      {
-        name: 'backgroundImage',
-        type: 'string',
-        description: 'Optional background image URL displayed behind an overlay',
-        required: false,
-      },
-    ],
-  },
-  'cta-simple-dynamic': {
-    componentName: 'cta-simple-dynamic',
-    section: 'cta',
-    props: [
-      {
-        name: 'heading',
-        type: 'string',
-        description: 'The main punchy headline for the CTA card. Max 10 words.',
-        maxWords: 10,
-        required: true,
-      },
-      {
-        name: 'description',
-        type: 'string',
-        description: 'Supporting text explaining the value proposition. Max 25 words.',
-        maxWords: 25,
         required: true,
       },
       {
@@ -678,459 +199,243 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
         type: 'string',
         description: 'Text for the primary action button. Max 3 words.',
         maxWords: 3,
-        required: true,
+        required: false,
       },
       {
         name: 'secondaryCtaText',
         type: 'string',
-        description: 'Text for the secondary action button. Max 3 words.',
+        description: 'Text for the secondary action link. Max 4 words.',
+        maxWords: 4,
+        required: false,
+      },
+      {
+        name: 'trustText',
+        type: 'string',
+        description: 'Social proof text (e.g., "Rated 4.5 and trusted by 1800+ patients"). Max 15 words.',
+        maxWords: 15,
+        required: false,
+      },
+      {
+        name: 'mainImage',
+        type: 'string',
+        description: 'The primary hero image URL. Should be a high-quality photo of a professional or relevant scene.',
+        required: true,
+      },
+      {
+        name: 'floatingCard1Title',
+        type: 'string',
+        description: 'Title for the top-right floating card (e.g., "24 Hour"). Max 3 words.',
         maxWords: 3,
         required: false,
       },
       {
-        name: 'stats',
+        name: 'floatingCard1Subtitle',
+        type: 'string',
+        description: 'Subtitle for the top-right floating card (e.g., "Emergency Services"). Max 8 words.',
+        maxWords: 8,
+        required: false,
+      },
+      {
+        name: 'floatingCard2Title',
+        type: 'string',
+        description: 'Title for the middle-left floating card (e.g., "300+"). Max 4 words.',
+        maxWords: 4,
+        required: false,
+      },
+      {
+        name: 'floatingCard2Subtitle',
+        type: 'string',
+        description: 'Subtitle for the middle-left floating card (e.g., "Expert Doctors"). Max 8 words.',
+        maxWords: 8,
+        required: false,
+      },
+    ],
+  },
+
+  // ── ABOUT ─────────────────────────────────────────────────────────
+  'about-bio-dynamic': {
+    componentName: 'about-bio-dynamic',
+    section: 'about',
+    props: [
+      {
+        name: 'label',
+        type: 'string',
+        description: 'Small label text above the main heading, e.g., "About Us". Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'Main section heading. Should be bold and impactful. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'Main description paragraph placed on the right side of the header. Max 40 words.',
+        maxWords: 40,
+        required: false,
+      },
+      {
+        name: 'ctaText',
+        type: 'string',
+        description: 'Text for the call-to-action button. Max 3 words.',
+        maxWords: 3,
+        required: false,
+      },
+      {
+        name: 'storyTitle',
+        type: 'string',
+        description: 'Title for the large story card with image background. Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'storyDescription',
+        type: 'string',
+        description: 'Description text for the story card. Max 30 words.',
+        maxWords: 30,
+        required: false,
+      },
+      {
+        name: 'storyImage',
+        type: 'string',
+        description: 'URL for the background image of the story card.',
+        required: true,
+      },
+      {
+        name: 'missionTitle',
+        type: 'string',
+        description: 'Title for the mission card (light background). Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'missionDescription',
+        type: 'string',
+        description: 'Description text for the mission card. Max 25 words.',
+        maxWords: 25,
+        required: false,
+      },
+      {
+        name: 'visionTitle',
+        type: 'string',
+        description: 'Title for the vision card (dark background). Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'visionDescription',
+        type: 'string',
+        description: 'Description text for the vision card. Max 25 words.',
+        maxWords: 25,
+        required: false,
+      },
+    ],
+  },
+
+  // ── BLOG ──────────────────────────────────────────────────────────
+  'blog-article-dynamic': {
+    componentName: 'blog-article-dynamic',
+    section: 'blog',
+    props: [
+      {
+        name: 'tagline',
+        type: 'string',
+        description: 'Small label above the main heading. Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'Main section heading. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'posts',
         type: 'array',
-        description: 'A list of exactly 3 key statistics. Each item must have a "value" field (e.g. "99.9%", "500+", "28+") and a "label" field (e.g. "uptime", "students", "years experience"). Extract real numbers from the website content if available.',
+        description: 'List of blog posts. Each post can have a title, description, image, date, and category. Style should alternate between "image" and "content".',
         required: true,
       },
     ],
   },
 
-  // ── BLOG ───────────────────────────────────────────────────────────
-  'blog-dynamic': {
-    componentName: 'blog-dynamic',
-    section: 'blog',
+  // ── COMPANY STORY ─────────────────────────────────────────────────
+  'company-story-dynamic': {
+    componentName: 'company-story-dynamic',
+    section: 'company-story',
     props: [
       {
         name: 'title',
         type: 'string',
-        description: 'Main heading for the blog section. maxWords: 10',
+        description: 'Main heading for the company story section. Max 10 words.',
         maxWords: 10,
         required: false,
       },
       {
         name: 'subtitle',
         type: 'string',
-        description: 'Optional descriptive text below the title. maxWords: 30',
-        maxWords: 30,
+        description: 'Subtitle or tagline for the company story. Max 8 words.',
+        maxWords: 8,
         required: false,
       },
       {
-        name: 'items',
-        type: 'array',
-        description: 'Array of blog articles, each with imageUrl, category (maxWords: 3), title (maxWords: 12), excerpt (maxWords: 25), author (maxWords: 4), date string, readMoreText (maxWords: 3), and href',
-        maxWords: 150,
-        required: true,
-      },
-    ],
-  },
-  'blog-elegant-dynamic': {
-    componentName: 'blog-elegant-dynamic',
-    section: 'blog',
-    props: [
-      {
-        name: 'tagline',
+        name: 'intro',
         type: 'string',
-        description: 'A small label above the main heading. Max 5 words.',
-        maxWords: 5,
-        required: false,
-      },
-      {
-        name: 'title',
-        type: 'string',
-        description: 'The main heading for the blog section. Max 10 words.',
-        maxWords: 10,
-        required: true,
-      },
-      {
-        name: 'description',
-        type: 'string',
-        description: 'A brief overview of the blog content. Max 40 words.',
+        description: 'Introductory paragraph about the company journey. Max 40 words.',
         maxWords: 40,
         required: false,
       },
       {
-        name: 'posts',
+        name: 'milestones',
         type: 'array',
-        description: 'An array of blog post objects. Each object should have image, title, author, date, summary, and readMoreText.',
-        required: true,
+        description: 'Array of milestone objects representing key moments in company history. Each milestone should have: year (e.g., "2020"), title (max 8 words), description (max 25 words), and optionally image (URL from Available Images list).',
+        required: false,
       },
     ],
   },
 
-  // ── FEATURES ──────────────────────────────────────────────────────
-  'features-dynamic': {
-    componentName: 'features-dynamic',
-    section: 'features',
-    props: [
-      { name: 'title',       type: 'string', description: 'Section title, max 8 words',       maxWords: 8,  required: true  },
-      { name: 'description', type: 'string', description: 'Short description, max 25 words',  maxWords: 25, required: false },
-      { name: 'items',       type: 'Array<{title:string,description:string,image?:string}>', description: 'List of 2-6 feature cards. Each title max 6 words, each description max 20 words. For each item, select the most relevant image from Available Images list if applicable.', required: true },
-    ],
-  },
-  'features-simple-dynamic': {
-    componentName: 'features-simple-dynamic',
-    section: 'features',
-    props: [
-      {
-        name: 'tagline',
-        type: 'string',
-        description: 'A short, uppercase tagline for the top of the section. Max 10 words.',
-        maxWords: 10,
-        required: true,
-      },
-      {
-        name: 'heading',
-        type: 'string',
-        description: 'The main heading for the features section. Max 15 words.',
-        maxWords: 15,
-        required: true,
-      },
-      {
-        name: 'description',
-        type: 'string',
-        description: 'A supporting paragraph explaining the features. Max 40 words.',
-        maxWords: 40,
-        required: true,
-      },
-      {
-        name: 'features',
-        type: 'array',
-        description: 'An array of EXACTLY 3 feature objects. Each object MUST have: "title" (string, max 8 words) and "image" (string, URL selected from Available Images list - pick the most relevant image for each feature). Example: [{"title": "Feature Name", "image": "https://example.com/img.jpg"}, ...]',
-        required: true,
-      },
-    ],
-  },
-
-  // ── ABOUT ─────────────────────────────────────────────────────────
-  'about-dynamic': {
-    componentName: 'about-dynamic',
-    section: 'about',
-    props: [
-      { name: 'title',       type: 'string', description: 'About section heading, max 6 words',                    maxWords: 6,  required: true  },
-      { name: 'description', type: 'string', description: 'About paragraph summarised in max 40 words',            maxWords: 40, required: true  },
-      { name: 'stats',       type: 'Array<{label:string,value:string}>', description: 'Key statistics like years, students, courses. Extract real numbers from content if available (e.g. "28+", "1000+")', required: false },
-      { name: 'companies',   type: 'string[]', description: 'List of partner/client company names if mentioned in content', required: false },
-      { name: 'image',       type: 'string', description: 'About section image URL — select most relevant image from Available Images list (e.g. team photo, office, campus)', required: false },
-    ],
-  },
-  'about-simple-dynamic': {
-    componentName: 'about-simple-dynamic',
-    section: 'about',
-    props: [
-      {
-        name: 'headline',
-        type: 'string',
-        description: 'The main headline for the about section. Max 10 words.',
-        maxWords: 10,
-        required: true,
-      },
-      {
-        name: 'topIntro',
-        type: 'string',
-        description: 'A brief introductory text or philosophy snippet at the top right. Max 40 words.',
-        maxWords: 40,
-        required: false,
-      },
-      {
-        name: 'heroImage',
-        type: 'string',
-        description: 'The main hero image URL for the about section.',
-        required: true,
-      },
-      {
-        name: 'label',
-        type: 'string',
-        description: 'A small label or category text for the bottom section. Max 10 words.',
-        maxWords: 10,
-        required: false,
-      },
-      {
-        name: 'subIntro',
-        type: 'string',
-        description: 'Secondary introductory text placed above the avatar. Max 50 words.',
-        maxWords: 50,
-        required: false,
-      },
-      {
-        name: 'avatarImage',
-        type: 'string',
-        description: 'The profile picture URL for the featured person.',
-        required: false,
-      },
-      {
-        name: 'avatarName',
-        type: 'string',
-        description: 'The name of the featured person. Max 10 words.',
-        maxWords: 10,
-        required: false,
-      },
-      {
-        name: 'avatarTitle',
-        type: 'string',
-        description: 'The job title or role of the featured person. Max 15 words.',
-        maxWords: 15,
-        required: false,
-      },
-      {
-        name: 'mainStatement',
-        type: 'string',
-        description: 'The main philosophy, mission, or summary statement. Max 80 words.',
-        maxWords: 80,
-        required: true,
-      },
-    ],
-  },
-  'about-supersimple-coloured-dynamic': {
-    componentName: 'about-supersimple-coloured-dynamic',
-    section: 'about',
+  // ── FAQ PROCESS ───────────────────────────────────────────────────
+  'faq-process-dynamic': {
+    componentName: 'faq-process-dynamic',
+    section: 'faq-process',
     props: [
       {
         name: 'title',
         type: 'string',
-        description: 'The main bold heading at the top of the about section. Max 15 words.',
-        maxWords: 15,
-        required: true,
-      },
-      {
-        name: 'descriptionLeft',
-        type: 'string',
-        description: 'The first column of descriptive text below the main heading. Max 50 words.',
-        maxWords: 50,
-        required: true,
-      },
-      {
-        name: 'descriptionRight',
-        type: 'string',
-        description: 'The second column of descriptive text below the main heading. Max 50 words.',
-        maxWords: 50,
-        required: true,
-      },
-      {
-        name: 'imageSrc',
-        type: 'string',
-        description: 'The URL for the main image in the bottom section.',
-        maxWords: 0,
-        required: true,
-      },
-      {
-        name: 'imageAlt',
-        type: 'string',
-        description: 'Descriptive alt text for the main image.',
+        description: 'Main heading for the FAQ or Process section. Max 10 words.',
         maxWords: 10,
         required: false,
       },
       {
-        name: 'testimonialQuote',
+        name: 'subtitle',
         type: 'string',
-        description: 'A short, punchy quote displayed on a card overlapping the image. Max 15 words.',
-        maxWords: 15,
+        description: 'Subtitle or description for the section. Max 20 words.',
+        maxWords: 20,
         required: false,
       },
       {
-        name: 'testimonialAuthor',
+        name: 'type',
         type: 'string',
-        description: 'The name or title of the person being quoted on the image card. Max 10 words.',
-        maxWords: 10,
+        description: 'Type of content: "faq" for frequently asked questions, or "process" for step-by-step workflow.',
         required: false,
       },
       {
-        name: 'subTitle',
-        type: 'string',
-        description: 'The heading for the bottom split section. Max 15 words.',
-        maxWords: 15,
-        required: true,
-      },
-      {
-        name: 'subDescription',
-        type: 'string',
-        description: 'The paragraph text for the bottom split section. Max 50 words.',
-        maxWords: 50,
-        required: true,
-      },
-      {
-        name: 'highlightQuote',
-        type: 'string',
-        description: 'An italicized highlight quote with a yellow border on the right side. Max 30 words.',
-        maxWords: 30,
-        required: false,
-      },
-    ],
-  },
-
-  // ── TESTIMONIALS ──────────────────────────────────────────────────
-  'testimonials-dynamic': {
-    componentName: 'testimonials-dynamic',
-    section: 'testimonials',
-    props: [
-      { name: 'title',       type: 'string', description: 'Section title, max 6 words',       maxWords: 6,  required: true  },
-      { name: 'description', type: 'string', description: 'Subtitle text, max 15 words',      maxWords: 15, required: false },
-      { name: 'testimonials',type: 'Array<{text:string,name?:string,role?:string,image?:string}>', description: 'Real feedback content summarised from site. Each text max 25 words. If no real testimonials exist, generate realistic domain-specific feedback with contextual roles (e.g. "Accounting Student", "Course Graduate") - NOT generic names like John Doe. For each testimonial, optionally include a portrait image URL from Available Images if relevant.', required: true },
-    ],
-  },
-  'testimonials-elegant-dynamic': {
-    componentName: 'testimonials-elegant-dynamic',
-    section: 'testimonials',
-    props: [
-      {
-        name: 'title',
-        type: 'string',
-        description: 'The main heading for the testimonials section. Max 10 words.',
-        maxWords: 10,
-        required: true,
-      },
-      {
-        name: 'testimonials',
+        name: 'faqItems',
         type: 'array',
-        description: 'A list of testimonial objects, each containing name, text, and avatar URL.',
-        required: true,
-      },
-      {
-        name: 'plusIcon',
-        type: 'icon',
-        description: 'A plus or cross icon to be placed at the corners of the testimonial box.',
+        description: 'Array of FAQ objects (only if type is "faq"). Each item should have: question (max 15 words) and answer (max 50 words).',
         required: false,
       },
       {
-        name: 'prevIcon',
-        type: 'icon',
-        description: 'An arrow icon for the previous button.',
-        required: false,
-      },
-      {
-        name: 'nextIcon',
-        type: 'icon',
-        description: 'An arrow icon for the next button.',
-        required: false,
-      },
-    ],
-  },
-
-  // ── NAVBAR ────────────────────────────────────────────────────────
-  'navbar-dynamic': {
-    componentName: 'navbar-dynamic',
-    section: 'navbar',
-    props: [
-      { name: 'logo',
-        type: 'object',
-        description: 'Brand logo with text and link',
-        properties: {
-          text: { type: 'string', description: 'The brand name text' },
-          href: { type: 'string', description: 'The link for the logo' }
-        },
-        required: false
-      },
-      { name: 'navItems',
+        name: 'processSteps',
         type: 'array',
-        description: 'Navigation links. IMPORTANT: You MUST create one navItem for EACH page in the "Available Redesigned Pages" list. Map each slug to a human-readable label using these rules: "index" → "Home", "about" → "About", "career" → "Career", "exam" → "Exam", "gallery" → "Gallery", "contact-us" or "contact us" → "Contact", "partnership" → "Partnership". Use href format exactly: "/preview/[slug]" (e.g., "/preview/index", "/preview/about", "/preview/career"). Do NOT skip any page from the list. Do NOT add pages not in the list.',
-        items: {
-          type: 'object',
-          properties: {
-            label: { type: 'string' },
-            href: { type: 'string' },
-            subItems: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  label: { type: 'string' },
-                  href: { type: 'string' }
-                }
-              }
-            }
-          }
-        },
-        required: false
-      },
-      { name: 'actions',
-        type: 'array',
-        description: 'Call-to-action buttons in the navbar',
-        items: {
-          type: 'object',
-          properties: {
-            label: { type: 'string' },
-            href: { type: 'string' },
-            variant: { type: 'string', enum: ['primary', 'secondary', 'outline'] }
-          }
-        },
-        required: false
-      },
-    ],
-  },
-  'navbar-floating-dynamic': {
-    componentName: 'navbar-floating-dynamic',
-    section: 'navbar',
-    props: [
-      {
-        name: 'links',
-        type: 'array',
-        description: 'An array of navigation links, each with a label and href. Labels should be short (1-2 words). Max 5 links.',
-        required: true,
-      },
-      {
-        name: 'ctaLabel',
-        type: 'string',
-        description: 'The text for the primary call-to-action button. Max 3 words.',
-        maxWords: 3,
-        required: true,
-      },
-      {
-        name: 'ctaHref',
-        type: 'string',
-        description: 'The destination URL for the call-to-action button.',
+        description: 'Array of process step objects (only if type is "process"). Each step should have: stepNumber (e.g., "Step 1"), title (max 8 words), and description (max 30 words).',
         required: false,
       },
-    ],
-  },
-  'navbar-floatingtwo-dynamic': {
-    componentName: 'navbar-floatingtwo-dynamic',
-    section: 'navbar',
-    props: [
-      {
-        name: 'logoImage',
-        type: 'string',
-        description: 'The URL for the logo image. Should be a small, clear icon or brand mark.',
-        required: false,
-      },
-      {
-        name: 'navItems',
-        type: 'array',
-        description: 'An array of navigation items, each with a label and a href. Max 5 items.',
-        required: true,
-      },
-      {
-        name: 'ctaText',
-        type: 'string',
-        description: 'The text for the primary call-to-action button. Max 3 words.',
-        maxWords: 3,
-        required: false,
-      },
-      {
-        name: 'ctaHref',
-        type: 'string',
-        description: 'The URL destination for the primary call-to-action button.',
-        required: false,
-      },
-    ],
-  },
-
-  // ── CONTACT ───────────────────────────────────────────────────────
-  'contact-split-dynamic': {
-    componentName: 'contact-split-dynamic',
-    section: 'contact',
-    props: [
-      { name: 'title', type: 'string', description: 'Main heading for the contact section', maxWords: 8, required: true },
-      { name: 'description', type: 'string', description: 'Subtext explaining the contact purpose', maxWords: 20, required: false },
-      { name: 'formTitle', type: 'string', description: 'Heading for the contact form', maxWords: 6, required: false },
-      { name: 'nameLabel', type: 'string', description: 'Label for the name input field', maxWords: 3, required: false },
-      { name: 'namePlaceholder', type: 'string', description: 'Placeholder for the name input field', maxWords: 5, required: false },
-      { name: 'emailLabel', type: 'string', description: 'Label for the email input field', maxWords: 3, required: false },
-      { name: 'emailPlaceholder', type: 'string', description: 'Placeholder for the email input field', maxWords: 5, required: false },
-      { name: 'phoneLabel', type: 'string', description: 'Label for the phone input field', maxWords: 3, required: false },
-      { name: 'phonePlaceholder', type: 'string', description: 'Placeholder for the phone input field', maxWords: 5, required: false },
-      { name: 'messageLabel', type: 'string', description: 'Label for the message textarea', maxWords: 3, required: false },
-      { name: 'messagePlaceholder', type: 'string', description: 'Placeholder for the message textarea', maxWords: 8, required: false },
-      { name: 'submitButtonText', type: 'string', description: 'Text for the form submission button', maxWords: 4, required: false }
     ],
   },
 
@@ -1139,9 +444,285 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
     componentName: 'footer-simple',
     section: 'footer',
     props: [
-      { name: 'brandName',   type: 'string',   description: 'Brand or company name',                     maxWords: 4,  required: true  },
-      { name: 'description', type: 'string',   description: 'Short brand description, max 20 words',     maxWords: 20, required: false },
-      { name: 'copyright',   type: 'string',   description: 'Copyright text with year and brand name',   maxWords: 10, required: false },
+      {
+        name: 'brandName',
+        type: 'string',
+        description: 'Brand or company name',
+        maxWords: 4,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'Short brand description, max 20 words',
+        maxWords: 20,
+        required: false,
+      },
+      {
+        name: 'copyright',
+        type: 'string',
+        description: 'Copyright text with year and brand name',
+        maxWords: 10,
+        required: false,
+      },
+    ],
+  },
+
+  // ── CONTACT ───────────────────────────────────────────────────────
+  'contact-form-dynamic': {
+    componentName: 'contact-form-dynamic',
+    section: 'contact',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the contact section. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'emailLabel',
+        type: 'string',
+        description: 'Label for the email address field (e.g., "Email:"). Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'email',
+        type: 'string',
+        description: 'The contact email address to display. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'phoneLabel',
+        type: 'string',
+        description: 'Label for the phone number field (e.g., "Phone:"). Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'phone',
+        type: 'string',
+        description: 'The contact phone number to display. Max 10 words.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'addressLabel',
+        type: 'string',
+        description: 'Label for the physical address field (e.g., "Address:"). Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'address',
+        type: 'string',
+        description: 'The physical address to display, can be multi-line. Max 30 words.',
+        maxWords: 30,
+        required: false,
+      },
+      {
+        name: 'socialTitle',
+        type: 'string',
+        description: 'Label for the social media section (e.g., "Follow us"). Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'formNameLabel',
+        type: 'string',
+        description: 'Label for the name input in the form. Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'formNamePlaceholder',
+        type: 'string',
+        description: 'Placeholder text for the name input. Max 10 words.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'formEmailLabel',
+        type: 'string',
+        description: 'Label for the email input in the form. Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'formEmailPlaceholder',
+        type: 'string',
+        description: 'Placeholder text for the email input. Max 10 words.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'formMessageLabel',
+        type: 'string',
+        description: 'Label for the message textarea in the form. Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'formMessagePlaceholder',
+        type: 'string',
+        description: 'Placeholder text for the message textarea. Max 15 words.',
+        maxWords: 15,
+        required: false,
+      },
+      {
+        name: 'formSubmitLabel',
+        type: 'string',
+        description: 'Text for the submit button (e.g., "Send Message"). Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+    ],
+  },
+
+  // ── CTA ─────────────────────────────────────────────────────────────
+  'cta-banner-dynamic': {
+    componentName: 'cta-banner-dynamic',
+    section: 'cta',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main headline for the CTA section. Should be bold and benefit-driven. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A brief supporting paragraph that explains the value proposition. Max 20 words.',
+        maxWords: 20,
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'string[]',
+        description: 'A list of services, features, or categories to display on the right side. Max 4 items.',
+        required: false,
+      },
+      {
+        name: 'bottomLabel',
+        type: 'string',
+        description: 'A short, punchy question or statement displayed in the yellow bar to lead into the CTA. Max 10 words.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'ctaText',
+        type: 'string',
+        description: 'The text for the primary action button. Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'backgroundImage',
+        type: 'string',
+        description: 'The URL of the background image. Should be high-quality and relevant to the service.',
+        required: true,
+      },
+    ],
+  },
+
+  // ── NAVBAR ──────────────────────────────────────────────────────────
+  'nav-bar-dynamic': {
+    componentName: 'nav-bar-dynamic',
+    section: 'navbar',
+    props: [
+      {
+        name: 'logoText',
+        type: 'string',
+        description: 'The brand name or logo text to display on the left side of the navbar. Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'navLinks',
+        type: 'array',
+        description: 'An array of navigation links with labels and hrefs. Labels should be concise (1-2 words).',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'loginLabel',
+        type: 'string',
+        description: 'The text for the login button. Max 3 words.',
+        maxWords: 3,
+        required: true,
+      },
+      {
+        name: 'signupLabel',
+        type: 'string',
+        description: 'The text for the signup button. Max 3 words.',
+        maxWords: 3,
+        required: true,
+      },
+      {
+        name: 'loginHref',
+        type: 'string',
+        description: 'The URL for the login button.',
+        required: false,
+      },
+      {
+        name: 'signupHref',
+        type: 'string',
+        description: 'The URL for the signup button.',
+        required: false,
+      },
+    ],
+  },
+
+  // ── TESTIMONIALS ────────────────────────────────────────────────────
+  'testi-client-dynamic': {
+    componentName: 'testi-client-dynamic',
+    section: 'testimonials',
+    props: [
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'The main title for the testimonials section. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'subtext',
+        type: 'string',
+        description: 'A brief introductory sentence below the heading. Max 25 words.',
+        maxWords: 25,
+        required: false,
+      },
+      {
+        name: 'testimonials',
+        type: 'array',
+        description: 'An array of testimonial objects. Each object should include: quote (the testimonial text, max 40 words), authorName (person name), authorRole (job title or location), authorImage (avatar URL), and bgColor (a soft pastel Tailwind background color class like bg-red-100, bg-blue-100, etc.).',
+        required: true,
+      },
+    ],
+  },
+
+  // ── GALLERY ─────────────────────────────────────────────────────────
+  'gallery-album-dynamic': {
+    componentName: 'gallery-album-dynamic',
+    section: 'gallery',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The title of the gallery album. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'images',
+        type: 'array',
+        description: 'An array of 7 high-quality images for the gallery album. Each object should have url and alt properties.',
+        required: true,
+      },
     ],
   },
 };
@@ -1220,18 +801,6 @@ ${hasPrePopulatedImages
 
 Use this context to write props that closely mirror the PURPOSE and CONTENT TYPE of the source website,
 but rewritten in fresh, professional language suitable for the redesigned page.
-${schema.componentName === 'navbar-dynamic' ? `\n## NAVBAR-SPECIFIC RULES (CRITICAL — FOLLOW EXACTLY):
-- You MUST create one navItem for EVERY slug listed in "AVAILABLE REDESIGNED PAGES" above
-- If there are 7 pages listed, navItems array MUST have 7 items
-- href format is EXACTLY "/preview/[slug]" — no trailing slash, no domain
-- Label mapping: "index"→"Home", "about"→"About", "career"→"Career",
-  "exam"→"Exam", "gallery"→"Gallery", "contact-us"→"Contact Us",
-  "partnership"→"Partnership", "contact"→"Contact"
-- For any other slug: capitalize each word and replace hyphens with spaces
-- Include a logo object: {"text": "[brand name from content]", "href": "/preview/index"}
-- Include actions array with at least one CTA button from the source website
-  (e.g., Sign In / Register Now)
-` : ''}
 
 ## Available Images:
 ${availableImages}
@@ -1491,13 +1060,10 @@ export async function generatePropsForComponent(
           // Handle different image field names per component type
           const updatedItem = { ...item };
           if ('imageUrl' in item || arrayPropName === 'items') {
-            updatedItem.imageUrl = imgUrl;  // gallery-dynamic, blog-dynamic
+            updatedItem.imageUrl = imgUrl;  // blog-article-dynamic
           }
-          if ('image' in item || arrayPropName === 'features' || arrayPropName === 'posts') {
-            updatedItem.image = imgUrl;     // features-simple-dynamic, blog-elegant-dynamic
-          }
-          if ('avatar' in item || arrayPropName === 'testimonials') {
-            updatedItem.avatar = imgUrl;    // testimonials-elegant-dynamic
+          if ('image' in item || arrayPropName === 'posts') {
+            updatedItem.image = imgUrl;     // blog-article-dynamic
           }
           return updatedItem;
         });

@@ -1,36 +1,12 @@
 /**
  * Content Injection System
  * Maps extracted webpage content to component props
- * 
+ *
  * NOTE: Image distribution is now handled by AI prop injector.
  * Dynamic components receive images directly from AI-generated props.
  */
 
 import type { ProcessedSectionContent } from './ai-content-processor';
-import { getComponentImageConfig } from './component-image-map';
-import { isComponentDynamic } from './component-content-map';
-import { ArrowRight, ArrowLeft, Plus } from 'lucide-react';
-
-/**
- * Build testimonial objects from text content.
- * NOTE: Images are now handled by AI prop injector - no automatic fallback images.
- */
-function buildTestimonialItems(
-  images: string[],
-  paragraphs: string[],
-  headings: string[]
-): Array<{ image?: string; name: string; username: string; text: string; social: string }> {
-  if (paragraphs.length === 0) {
-    return [];
-  }
-  return paragraphs.slice(0, 3).map((para, i) => ({
-    // No automatic image - AI handles image selection
-    name: headings[i + 2] || `Customer ${i + 1}`,
-    username: `@customer${i + 1}`,
-    text: para.slice(0, 120),
-    social: 'https://twitter.com',
-  }));
-}
 
 export interface ExtractedContent {
   headings: string[];
@@ -54,22 +30,6 @@ export interface ExtractedContent {
 }
 
 export interface MappedContent {
-  navbar?: {
-    logo?: {
-      url: string;
-      src: string;
-      alt: string;
-      title: string;
-    };
-    menu?: Array<{
-      title: string;
-      url: string;
-    }>;
-    auth?: {
-      login: { text: string; url: string };
-      signup: { text: string; url: string };
-    };
-  };
   hero?: {
     title: string;
     description: string;
@@ -83,36 +43,10 @@ export interface MappedContent {
       onClick: () => void;
     };
   };
-  gallery?: {
-    title: string;
-    subtitle?: string;
-    items?: any[];
-  };
-  cta?: {
-    badge?: string;
-    headline?: string;
-    description?: string;
-    primaryButtonText?: string;
-    primaryButtonHref?: string;
-    secondaryButtonText?: string;
-    secondaryButtonHref?: string;
-    backgroundImage?: string;
-  };
   blog?: {
     title: string;
     subtitle?: string;
     items?: any[];
-  };
-  features?: {
-    badge: string;
-    heading: string;
-    description: string;
-    images?: string[];
-    items?: Array<{
-      title: string;
-      description: string;
-      icon?: string;
-    }>;
   };
   about?: {
     title: string;
@@ -124,20 +58,30 @@ export interface MappedContent {
     }>;
     images?: string[];
   };
-  testimonials?: {
+  'company-story'?: {
     title: string;
-    description: string;
-    testimonials: Array<{
+    subtitle?: string;
+    intro?: string;
+    milestones?: Array<{
+      year?: string;
+      title?: string;
+      description?: string;
       image?: string;
-      name: string;
-      username: string;
-      text: string;
-      social?: string;
     }>;
   };
-  contact?: {
+  'faq-process'?: {
     title: string;
-    subtitle: string;
+    subtitle?: string;
+    type?: 'faq' | 'process';
+    faqItems?: Array<{
+      question?: string;
+      answer?: string;
+    }>;
+    processSteps?: Array<{
+      stepNumber?: string;
+      title?: string;
+      description?: string;
+    }>;
   };
   footer?: {
     brandName: string;
@@ -146,19 +90,53 @@ export interface MappedContent {
     socialLinks?: Array<{ platform: string; url: string }>;
     copyright: string;
   };
-  pricing?: {
-    heading: string;
-    subheading: string;
-    plans: Array<{
-      name: string;
-      price: string;
-      period: string;
-      features: string[];
-      description: string;
-      buttonText: string;
-      href: string;
-      isPopular: boolean;
+  contact?: {
+    title?: string;
+    emailLabel?: string;
+    email?: string;
+    phoneLabel?: string;
+    phone?: string;
+    addressLabel?: string;
+    address?: string;
+    socialTitle?: string;
+    formNameLabel?: string;
+    formNamePlaceholder?: string;
+    formEmailLabel?: string;
+    formEmailPlaceholder?: string;
+    formMessageLabel?: string;
+    formMessagePlaceholder?: string;
+    formSubmitLabel?: string;
+  };
+  cta?: {
+    title?: string;
+    description?: string;
+    items?: string[];
+    bottomLabel?: string;
+    ctaText?: string;
+    backgroundImage?: string;
+  };
+  navbar?: {
+    logoText?: string;
+    links?: Array<{ label: string; href: string }>;
+    loginLabel?: string;
+    loginHref?: string;
+    signupLabel?: string;
+    signupHref?: string;
+  };
+  testimonials?: {
+    heading?: string;
+    subtext?: string;
+    items?: Array<{
+      quote?: string;
+      authorName?: string;
+      authorRole?: string;
+      authorImage?: string;
+      bgColor?: string;
     }>;
+  };
+  gallery?: {
+    title?: string;
+    images?: Array<{ url: string; alt: string }>;
   };
 }
 
@@ -255,21 +233,6 @@ export function mapContentToSections(
     console.log("[ContentMapper] First image:", images[0]?.src?.slice(0, 50));
   }
 
-  // Map navbar content - Always ensure navbar has menu items
-  if (sections.includes('navbar')) {
-    const navLinks = processed?.footer?.description ? navigationLinks : navigationLinks.slice(0, 5);
-    mapped.navbar = {
-      menu: navLinks.map(link => ({
-        title: link,
-        url: `#${link.toLowerCase().replace(/\s+/g, '-')}`,
-      })),
-      auth: {
-        login: { text: 'Sign In', url: '#' },
-        signup: { text: 'Get Started', url: '#' },
-      },
-    };
-  }
-
   // Map hero content - NO automatic image assignment (AI handles it)
   if (sections.includes('hero')) {
     mapped.hero = {
@@ -278,29 +241,6 @@ export function mapContentToSections(
       primaryAction: { label: 'Get Started', onClick: () => {} },
       secondaryAction: { label: 'Learn More', onClick: () => {} },
       // image field removed - AI prop injector handles image selection
-    };
-  }
-
-  // Map gallery content
-  if (sections.includes('gallery')) {
-    mapped.gallery = {
-      title: headings[0] ?? 'Gallery',
-      subtitle: paragraphs[0]?.slice(0, 100) ?? '',
-      items: [],
-    };
-  }
-
-  // Map CTA content
-  if (sections.includes('cta')) {
-    mapped.cta = {
-      badge: '',
-      headline: headings[0] ?? 'Get Started',
-      description: paragraphs[0]?.slice(0, 150) ?? '',
-      primaryButtonText: 'Learn More',
-      primaryButtonHref: '#',
-      secondaryButtonText: 'Contact Us',
-      secondaryButtonHref: '#contact',
-      backgroundImage: '',
     };
   }
 
@@ -324,39 +264,24 @@ export function mapContentToSections(
     };
   }
 
-  // Map features content - NO automatic image assignment (AI handles it)
-  if (sections.includes('features')) {
-    mapped.features = {
-      badge: processed?.features?.heading ? 'Features' : '',
-      heading: processed?.features?.heading ?? 'Our Features',
-      description: processed?.features?.description ?? paragraphs[2]?.slice(0, 100) ?? '',
-      items: processed?.features?.items && processed.features.items.length > 0
-        ? processed.features.items
-        : undefined,
-      // images field removed - AI prop injector handles image selection
+  // Map company-story content
+  if (sections.includes('company-story')) {
+    mapped['company-story'] = {
+      title: processed?.about?.title ?? 'Our Story',
+      subtitle: processed?.about?.description ?? 'Building the future together',
+      intro: paragraphs[0]?.slice(0, 200) ?? '',
+      milestones: [],
     };
   }
 
-  // Map testimonials content - NO automatic image assignment (AI handles it)
-  if (sections.includes('testimonials')) {
-    const builtTestimonials = (paragraphs.slice(0, 3) || []).map((para, i) => ({
-      text: para.slice(0, 120),
-      name: headings[i + 2] || `Customer ${i + 1}`,
-      username: `@customer${i + 1}`,
-    }));
-    mapped.testimonials = {
-      title: 'What Our Customers Say',
-      description: 'Real feedback from our valued clients',
-      testimonials: builtTestimonials,
-      // No image field - AI prop injector handles testimonial image selection
-    };
-  }
-
-  // Map contact content
-  if (sections.includes('contact')) {
-    mapped.contact = {
-      title: 'Get In Touch',
-      subtitle: 'We\'d love to hear from you',
+  // Map faq-process content
+  if (sections.includes('faq-process')) {
+    mapped['faq-process'] = {
+      title: 'Frequently Asked Questions',
+      subtitle: 'Find answers to common questions',
+      type: 'faq',
+      faqItems: [],
+      processSteps: [],
     };
   }
 
@@ -374,22 +299,67 @@ export function mapContentToSections(
     };
   }
 
-  // Map pricing content (uses defaults as pricing is usually specific)
-  if (sections.includes('pricing')) {
-    mapped.pricing = {
-      heading: '',
-      subheading: '',
-      plans: [],
+  // Map contact content - Use contact info from processed content or extracted data
+  if (sections.includes('contact')) {
+    mapped.contact = {
+      title: 'Get in Touch',
+      emailLabel: 'Email:',
+      email: processed?.footer?.contactInfo?.email ?? content.contactInfo?.email ?? '',
+      phoneLabel: 'Phone:',
+      phone: processed?.footer?.contactInfo?.phone ?? content.contactInfo?.phone ?? '',
+      addressLabel: 'Address:',
+      address: processed?.footer?.contactInfo?.address ?? content.contactInfo?.address ?? '',
+      socialTitle: 'Follow Us',
+      formNameLabel: 'Your Name',
+      formNamePlaceholder: 'John Doe',
+      formEmailLabel: 'Your Email',
+      formEmailPlaceholder: 'john@example.com',
+      formMessageLabel: 'Message',
+      formMessagePlaceholder: 'Tell us how we can help...',
+      formSubmitLabel: 'Send Message',
     };
   }
 
-  // Debug logs for image distribution
-  console.log('[Image Distribution]', {
-    hero: mapped.hero?.image ? 'yes' : 'no',
-    about: mapped.about?.images?.length || 0,
-    features: mapped.features?.images?.length || 0,
-    testimonials: mapped.testimonials?.testimonials?.filter((t) => t.image).length || 0,
-  });
+  // Map cta content - Use for call-to-action sections
+  if (sections.includes('cta')) {
+    mapped.cta = {
+      title: 'Ready to Get Started?',
+      description: 'Take the next step towards your goals',
+      items: [],
+      bottomLabel: 'Limited spots available',
+      ctaText: 'Book Now',
+      backgroundImage: '',
+    };
+  }
+
+  // Map navbar content - Use navigation links from extracted content
+  if (sections.includes('navbar')) {
+    mapped.navbar = {
+      logoText: '',
+      links: [],
+      loginLabel: 'Log In',
+      loginHref: '#',
+      signupLabel: 'Sign Up',
+      signupHref: '#',
+    };
+  }
+
+  // Map testimonials content - Use for customer testimonials/reviews sections
+  if (sections.includes('testimonials')) {
+    mapped.testimonials = {
+      heading: 'What Our Customers Say',
+      subtext: 'Real stories from real people',
+      items: [],
+    };
+  }
+
+  // Map gallery content - Use for photo gallery sections
+  if (sections.includes('gallery')) {
+    mapped.gallery = {
+      title: 'Gallery',
+      images: [],
+    };
+  }
 
   return mapped;
 }
@@ -410,369 +380,87 @@ export function getComponentContentProps(
 
   // Map section content to component-specific props
   switch (componentName) {
-    // Navbar components
-    case 'navbar-dynamic':
-      return {
-        logo: {
-          text: mappedContent.navbar?.menu?.[0]?.title ?? 'Brand',
-          href: '/',
-        },
-        navItems: mappedContent.navbar?.menu?.map((item, index) => ({
-          label: item.title,
-          href: item.url,
-          subItems: index < 2 ? [
-            { label: `${item.title} Option 1`, href: `${item.url}/option-1` },
-            { label: `${item.title} Option 2`, href: `${item.url}/option-2` },
-          ] : undefined,
-        })) ?? [],
-        actions: [
-          { label: 'Contact', href: '/contact', variant: 'outline' },
-          { label: 'Log in', href: '/login', variant: 'outline' },
-          { label: 'Sign up', href: '/signup', variant: 'primary' },
-        ],
-        mobileMenuIcon: <span>Menu</span>,
-        closeMenuIcon: <span>Close</span>,
-        chevronIcon: <span>▼</span>,
-      };
-
-    case 'navbar-floating-dynamic': {
-      const sectionContent = mappedContent.navbar as any;
-      return {
-        links: sectionContent?.links ?? [],
-        ctaLabel: sectionContent?.ctaLabel ?? '',
-        ctaHref: sectionContent?.ctaHref ?? '#',
-      };
-    }
-
-    case 'navbar-floatingtwo-dynamic': {
-      const sectionContent = mappedContent.navbar as any;
-      return {
-        logoImage: sectionContent?.logo ?? '',
-        navItems: sectionContent?.links ?? [],
-        ctaText: sectionContent?.cta?.text ?? '',
-        ctaHref: sectionContent?.cta?.href ?? '',
-      };
-    }
-
     // Hero components
-    case 'hero-dynamic':
-      // Dynamic hero - image comes from AI props
-      const heroDynamicProps = {
-        title: (mappedContent.hero as any)?.title ?? '',
-        subtitle: (mappedContent.hero as any)?.subtitle ?? '',
-        description: (mappedContent.hero as any)?.description ?? '',
-        buttonText: (mappedContent.hero as any)?.buttonText ?? '',
-        secondaryButtonText: (mappedContent.hero as any)?.secondaryButtonText ?? '',
-        image: (mappedContent.hero as any)?.image ?? undefined,
-      };
-      if (heroDynamicProps.image) {
-        console.log('[HERO COMPONENT] hero-dynamic: AI-selected image:', heroDynamicProps.image?.slice(0, 80));
-      }
-      return heroDynamicProps;
-
-    case 'hero-banner-dynamic': {
+    case 'hero-action-dynamic': {
       const sectionContent = mappedContent.hero as any;
       return {
-        backgroundImage: sectionContent?.backgroundImage ?? '',
-        breadcrumb: sectionContent?.breadcrumb ?? '',
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-      };
-    }
-
-    case 'hero-simple-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        badge: sectionContent?.badge ?? '',
-        titlePart1: sectionContent?.titlePart1 ?? '',
-        titlePart2: sectionContent?.titlePart2 ?? '',
-        description: sectionContent?.description ?? '',
-        primaryCtaText: sectionContent?.primaryCtaText ?? '',
-        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
-        image: sectionContent?.image ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-      };
-    }
-
-    case 'hero-elegant-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        label: sectionContent?.label ?? sectionContent?.topLabel ?? '',
-        title: sectionContent?.title ?? sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? sectionContent?.subtext ?? '',
-        primaryCtaText: sectionContent?.primaryCtaText ?? sectionContent?.primaryButtonText ?? '',
-        secondaryCtaText: sectionContent?.secondaryCtaText ?? sectionContent?.secondaryButtonText ?? '',
-        mediaUrl: sectionContent?.mediaUrl ?? sectionContent?.videoUrl ?? sectionContent?.image ?? '',
-        mediaType: sectionContent?.mediaType ?? 'image',
-        posterUrl: sectionContent?.posterUrl ?? '',
-      };
-    }
-
-    case 'hero-stylish-coloured-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.subtitle ?? '',
-        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
-        buttonText: sectionContent?.buttonText ?? '',
-        sectionTitle: sectionContent?.sectionTitle ?? '',
-        exploreText: sectionContent?.exploreText ?? '',
-        exploreLink: sectionContent?.exploreLink ?? '',
-        items: sectionContent?.items?.map((item: any) => ({
-          label: item?.label ?? '',
-          title: item?.title ?? '',
-          description: item?.description ?? '',
-          footerLabel: item?.footerLabel ?? '',
-          footerValue: item?.footerValue ?? '',
-          color: item?.color ?? 'bg-gray-100',
-        })) ?? [],
-      };
-    }
-
-    case 'hero-super-coloured-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        title: sectionContent?.title ?? '',
-        badgeText: sectionContent?.badgeText ?? '',
-        primaryCtaText: sectionContent?.primaryCtaText ?? '',
-        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
-        statTopRightValue: sectionContent?.statTopRightValue ?? '',
-        statTopRightLabel: sectionContent?.statTopRightLabel ?? '',
-        smallCardText: sectionContent?.smallCardText ?? '',
-        bottomLeftStatValue: sectionContent?.bottomLeftStatValue ?? '',
-        bottomLeftStatLabel: sectionContent?.bottomLeftStatLabel ?? '',
-        mainImage: sectionContent?.mainImage ?? '',
-        features: sectionContent?.items?.map((item: any) => ({
-          title: item.title,
-          description: item.description,
-          icon: item.icon
-        })) ?? []
-      };
-    }
-
-    case 'hero-supersimple-coloured-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        title: sectionContent?.title ?? '',
+        badgeText: sectionContent?.badge ?? '',
+        heading: sectionContent?.title ?? '',
         description: sectionContent?.description ?? '',
         primaryCtaText: sectionContent?.primaryCta?.text ?? '',
-        primaryCtaIcon: sectionContent?.primaryCta?.icon ?? null,
         secondaryCtaText: sectionContent?.secondaryCta?.text ?? '',
         secondaryCtaIcon: sectionContent?.secondaryCta?.icon ?? null,
-        heroImage: sectionContent?.image?.url ?? '',
-        features: sectionContent?.items?.map((item: any) => ({
-          icon: item?.icon,
-          title: item?.title,
-          description: item?.description,
-        })) ?? [],
-        bottomRightIcon: sectionContent?.decorativeIcon ?? null,
-      };
-    }
-
-    // Gallery components
-    case 'gallery-dynamic': {
-      const sectionContent = mappedContent.gallery as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.subtitle ?? '',
-        items: sectionContent?.items ?? [],
-      };
-    }
-
-    case 'gallery-elegant-dynamic': {
-      const sectionContent = mappedContent.gallery as any;
-      return {
-        label: sectionContent?.label ?? '',
-        heading: sectionContent?.heading ?? '',
-        subheading: sectionContent?.subheading ?? '',
-        items: sectionContent?.items?.map((item: any) => ({
-          image: item.image,
-          alt: item.alt,
-          title: item.title,
-          description: item.description,
-        })) ?? [],
-      };
-    }
-
-    // CTA components
-    case 'cta-dynamic': {
-      const sectionContent = mappedContent.cta as any;
-      return {
-        badge: sectionContent?.badge ?? '',
-        headline: sectionContent?.headline ?? '',
-        description: sectionContent?.description ?? '',
-        primaryButtonText: sectionContent?.primaryButtonText ?? '',
-        primaryButtonHref: sectionContent?.primaryButtonHref ?? '',
-        secondaryButtonText: sectionContent?.secondaryButtonText ?? '',
-        secondaryButtonHref: sectionContent?.secondaryButtonHref ?? '',
-        backgroundImage: sectionContent?.backgroundImage ?? '',
-      };
-    }
-
-    case 'cta-simple-dynamic': {
-      const sectionContent = mappedContent.cta as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        primaryCtaText: sectionContent?.primaryCtaText ?? '',
-        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
-        stats: sectionContent?.items?.map((item: any) => ({
-          value: item?.title ?? '',
-          label: item?.description ?? '',
-        })) ?? [],
+        trustAvatars: sectionContent?.trust?.avatars ?? [],
+        trustText: sectionContent?.trust?.text ?? '',
+        mainImage: sectionContent?.image ?? '',
+        floatingCard1Title: sectionContent?.stats?.[0]?.title ?? '',
+        floatingCard1Subtitle: sectionContent?.stats?.[0]?.subtitle ?? '',
+        floatingCard2Title: sectionContent?.stats?.[1]?.title ?? '',
+        floatingCard2Subtitle: sectionContent?.stats?.[1]?.subtitle ?? '',
+        floatingCard2Avatars: sectionContent?.stats?.[1]?.avatars ?? [],
       };
     }
 
     // Blog components
-    case 'blog-dynamic': {
+    case 'blog-article-dynamic': {
       const sectionContent = mappedContent.blog as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.subtitle ?? '',
-        items: sectionContent?.items ?? [],
-      };
-    }
-    case 'blog-elegant-dynamic': {
-      const sectionContent = mappedContent.blog as any;
-      return {
-        tagline: sectionContent?.tagline ?? '',
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        posts: sectionContent?.items?.map((item: any) => ({
-          image: item?.image ?? '',
-          title: item?.title ?? '',
-          author: item?.author ?? '',
-          date: item?.date ?? '',
-          summary: item?.description ?? '',
-          readMoreText: item?.ctaText ?? '',
-        })) ?? [],
-        readMoreIcon: <ArrowRight className="w-4 h-4" />,
-      };
-    }
-
-    // Features components
-    case 'features-dynamic':
-      // Dynamic features - images come from AI props in items array
-      const featuresDynamicProps = {
-        title: (mappedContent.features as any)?.heading ?? '',
-        description: (mappedContent.features as any)?.description ?? '',
-        items: (mappedContent.features as any)?.items ?? [],
-      };
-      const itemsWithImages = featuresDynamicProps.items?.filter((item: any) => item.image) || [];
-      if (itemsWithImages.length > 0) {
-        console.log('[FEATURES COMPONENT] features-dynamic: AI-selected', itemsWithImages.length, 'image(s) for items');
-      }
-      return featuresDynamicProps;
-
-    case 'features-simple-dynamic': {
-      const sectionContent = mappedContent.features as any;
       return {
         tagline: sectionContent?.tagline ?? '',
         heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        features: (sectionContent?.items ?? []).map((item: any) => ({
-          title: item?.title ?? '',
-          image: item?.image ?? '',
-          icon: <ArrowRight className="w-4 h-4" />,
-        })),
+        posts: sectionContent?.items?.map((item: any, index: number) => ({
+          id: item.id,
+          title: item.title ?? '',
+          description: item.description ?? '',
+          image: item.image ?? '',
+          date: item.date ?? '',
+          category: item.category ?? '',
+          style: index % 2 === 0 ? 'image' : 'content',
+        })) ?? [],
       };
     }
 
     // About components
-    case 'about-dynamic':
-      // Dynamic about - image comes from AI props
-      const aboutDynamicProps = {
-        title: (mappedContent.about as any)?.title ?? '',
-        description: (mappedContent.about as any)?.description ?? '',
-        stats: (mappedContent.about as any)?.achievements ?? [],
-        companies: (mappedContent.about as any)?.companies ?? [],
-        image: (mappedContent.about as any)?.image ?? undefined,
-      };
-      if (aboutDynamicProps.image) {
-        console.log('[ABOUT COMPONENT] about-dynamic: AI-selected image:', aboutDynamicProps.image?.slice(0, 80));
-      }
-      return aboutDynamicProps;
-
-    case 'about-simple-dynamic': {
+    case 'about-bio-dynamic': {
       const sectionContent = mappedContent.about as any;
-      const aboutImages = (sectionContent as any)?.images || [];
       return {
-        headline: sectionContent?.title ?? '',
-        topIntro: sectionContent?.description ?? '',
-        heroImage: sectionContent?.heroImage ?? aboutImages[0] ?? '',
         label: sectionContent?.label ?? '',
-        subIntro: sectionContent?.description ?? '',
-        avatarImage: sectionContent?.avatarImage ?? '',
-        avatarName: sectionContent?.avatarName ?? '',
-        avatarTitle: sectionContent?.avatarTitle ?? '',
-        mainStatement: sectionContent?.description ?? '',
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        storyTitle: sectionContent?.storyTitle ?? '',
+        storyDescription: sectionContent?.storyDescription ?? '',
+        storyImage: sectionContent?.storyImage ?? '',
+        missionTitle: sectionContent?.missionTitle ?? '',
+        missionDescription: sectionContent?.missionDescription ?? '',
+        visionTitle: sectionContent?.visionTitle ?? '',
+        visionDescription: sectionContent?.visionDescription ?? '',
       };
     }
 
-    case 'about-supersimple-coloured-dynamic': {
-      const sectionContent = mappedContent.about as any;
+    // Company Story components
+    case 'company-story-dynamic': {
+      const sectionContent = mappedContent['company-story'] as any;
       return {
         title: sectionContent?.title ?? '',
-        descriptionLeft: sectionContent?.descriptionLeft ?? '',
-        descriptionRight: sectionContent?.descriptionRight ?? '',
-        imageSrc: sectionContent?.imageSrc ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-        testimonialQuote: sectionContent?.testimonialQuote ?? '',
-        testimonialAuthor: sectionContent?.testimonialAuthor ?? '',
-        subTitle: sectionContent?.subTitle ?? '',
-        subDescription: sectionContent?.subDescription ?? '',
-        highlightQuote: sectionContent?.highlightQuote ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        intro: sectionContent?.intro ?? '',
+        milestones: sectionContent?.milestones ?? [],
       };
     }
 
-    // Testimonials components
-    case 'testimonials-dynamic':
-      // Dynamic testimonials - images come from AI props in testimonials array
-      const testimonialsDynamicProps = {
-        title: (mappedContent.testimonials as any)?.title ?? '',
-        description: (mappedContent.testimonials as any)?.description ?? '',
-        testimonials: (mappedContent.testimonials as any)?.testimonials ?? [],
-      };
-      const testimonialsWithImages = testimonialsDynamicProps.testimonials?.filter((t: any) => t.image) || [];
-      if (testimonialsWithImages.length > 0) {
-        console.log('[TESTIMONIALS COMPONENT] testimonials-dynamic: AI-selected', testimonialsWithImages.length, 'image(s)');
-      }
-      return testimonialsDynamicProps;
-
-    case 'testimonials-elegant-dynamic': {
-      const sectionContent = mappedContent.testimonials as any;
+    // FAQ Process components
+    case 'faq-process-dynamic': {
+      const sectionContent = mappedContent['faq-process'] as any;
       return {
         title: sectionContent?.title ?? '',
-        testimonials: (sectionContent?.testimonials ?? []).map((item: any) => ({
-          name: item.name ?? '',
-          text: item.text ?? '',
-          avatar: item.image ?? item.avatar ?? '',
-        })),
-        plusIcon: <Plus size={16} />,
-        prevIcon: <ArrowLeft size={20} />,
-        nextIcon: <ArrowRight size={20} />,
+        subtitle: sectionContent?.subtitle ?? '',
+        type: sectionContent?.type ?? 'faq',
+        faqItems: sectionContent?.faqItems ?? [],
+        processSteps: sectionContent?.processSteps ?? [],
       };
     }
 
-    // Contact components
-    case 'contact-split-dynamic':
-      const contactSplitContent = mappedContent.contact as any;
-      return {
-        title: contactSplitContent?.title ?? "Let's Talk",
-        description: contactSplitContent?.subtitle ?? "Have a project in mind? We would love to hear from you.",
-        formTitle: "Send a Message",
-        nameLabel: "Name",
-        namePlaceholder: "Your name",
-        emailLabel: "Email",
-        emailPlaceholder: "you@example.com",
-        phoneLabel: "Phone",
-        phonePlaceholder: "+1 (555) 000-0000",
-        messageLabel: "Message",
-        messagePlaceholder: "Tell us about your project...",
-        submitButtonText: "Send Message",
-      };
-
-    // Footer components - Now accepts props
+    // Footer components
     case 'footer-simple':
       return {
         brandName:   (mappedContent.footer as any)?.brandName    ?? '',
@@ -786,6 +474,79 @@ export function getComponentContentProps(
         links: (mappedContent.footer as any)?.links ?? [],
       };
 
+    // Contact components
+    case 'contact-form-dynamic': {
+      const sectionContent = mappedContent.contact as any;
+      return {
+        title: sectionContent?.title ?? '',
+        emailLabel: sectionContent?.emailLabel ?? '',
+        email: sectionContent?.email ?? '',
+        phoneLabel: sectionContent?.phoneLabel ?? '',
+        phone: sectionContent?.phone ?? '',
+        addressLabel: sectionContent?.addressLabel ?? '',
+        address: sectionContent?.address ?? '',
+        socialTitle: sectionContent?.socialTitle ?? '',
+        formNameLabel: sectionContent?.formNameLabel ?? '',
+        formNamePlaceholder: sectionContent?.formNamePlaceholder ?? '',
+        formEmailLabel: sectionContent?.formEmailLabel ?? '',
+        formEmailPlaceholder: sectionContent?.formEmailPlaceholder ?? '',
+        formMessageLabel: sectionContent?.formMessageLabel ?? '',
+        formMessagePlaceholder: sectionContent?.formMessagePlaceholder ?? '',
+        formSubmitLabel: sectionContent?.formSubmitLabel ?? '',
+      };
+    }
+
+    // CTA components
+    case 'cta-banner-dynamic': {
+      const sectionContent = mappedContent.cta as any;
+      return {
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        items: sectionContent?.items ?? [],
+        bottomLabel: sectionContent?.bottomLabel ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        backgroundImage: sectionContent?.backgroundImage ?? '',
+      };
+    }
+
+    // Navbar components
+    case 'nav-bar-dynamic': {
+      const sectionContent = mappedContent.navbar as any;
+      return {
+        logoText: sectionContent?.logoText ?? '',
+        navLinks: sectionContent?.links ?? [],
+        loginLabel: sectionContent?.loginLabel ?? '',
+        loginHref: sectionContent?.loginHref ?? '',
+        signupLabel: sectionContent?.signupLabel ?? '',
+        signupHref: sectionContent?.signupHref ?? '',
+      };
+    }
+
+    // Testimonials components
+    case 'testi-client-dynamic': {
+      const sectionContent = mappedContent.testimonials as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        subtext: sectionContent?.subtext ?? '',
+        testimonials: sectionContent?.items?.map((item: any) => ({
+          quote: item?.quote ?? '',
+          authorName: item?.authorName ?? '',
+          authorRole: item?.authorRole ?? '',
+          authorImage: item?.authorImage ?? '',
+          bgColor: item?.bgColor ?? '',
+        })) ?? [],
+      };
+    }
+
+    // Gallery components
+    case 'gallery-album-dynamic': {
+      const sectionContent = mappedContent.gallery as any;
+      return {
+        title: sectionContent?.title ?? '',
+        images: sectionContent?.images ?? [],
+      };
+    }
+
     default:
       return {};
   }
@@ -796,18 +557,6 @@ export function getComponentContentProps(
  */
 export function getDefaultMappedContent(): MappedContent {
   return {
-    navbar: {
-      menu: [
-        { title: 'Home', url: '#' },
-        { title: 'Features', url: '#features' },
-        { title: 'About', url: '#about' },
-        { title: 'Contact', url: '#contact' },
-      ],
-      auth: {
-        login: { text: 'Sign In', url: '#' },
-        signup: { text: 'Get Started', url: '#' },
-      },
-    },
     hero: {
       title: 'Welcome to Our Website',
       description: 'Discover amazing features and services tailored for you',
@@ -820,36 +569,23 @@ export function getDefaultMappedContent(): MappedContent {
         onClick: () => console.log('Learn More clicked'),
       },
     },
-    features: {
-      badge: 'Features',
-      heading: 'Our Features',
-      description: 'Explore what makes us special',
-      items: [
-        { title: 'Feature One', description: 'Description of feature one' },
-        { title: 'Feature Two', description: 'Description of feature two' },
-        { title: 'Feature Three', description: 'Description of feature three' },
-      ],
-    },
     about: {
       title: 'About Us',
       description: 'We are dedicated to providing the best service possible',
     },
-    testimonials: {
-      title: 'What Our Clients Say',
-      description: 'Real feedback from real customers',
-      testimonials: [
-        {
-          image: 'https://avatars.githubusercontent.com/u/1?v=4',
-          name: 'John Doe',
-          username: '@johndoe',
-          text: 'Excellent service!',
-          social: 'https://twitter.com',
-        },
-      ],
+    blog: {
+      title: 'Latest Articles',
+      subtitle: 'Insights and updates from our team',
+      items: [],
     },
-    contact: {
-      title: 'Get In Touch',
-      subtitle: 'We\'d love to hear from you',
+    'company-story': {
+      title: 'Our Story',
+      subtitle: 'Building the future together',
+      intro: 'We started with a simple mission and have grown ever since.',
+    },
+    'faq-process': {
+      title: 'Frequently Asked Questions',
+      subtitle: 'Find answers to common questions',
     },
     footer: {
       brandName: 'Brand',
@@ -860,32 +596,6 @@ export function getDefaultMappedContent(): MappedContent {
         { name: 'Contact', url: '#contact' },
       ],
       copyright: '© 2024 Brand. All rights reserved.',
-    },
-    pricing: {
-      heading: 'Simple, Transparent Pricing',
-      subheading: 'Choose the plan that\'s right for you',
-      plans: [
-        {
-          name: 'Starter',
-          price: '0',
-          period: 'month',
-          features: ['Basic Features', 'Limited Support'],
-          description: 'Perfect for getting started',
-          buttonText: 'Get Started',
-          href: '#',
-          isPopular: false,
-        },
-        {
-          name: 'Pro',
-          price: '29',
-          period: 'month',
-          features: ['All Features', 'Priority Support'],
-          description: 'Best for professionals',
-          buttonText: 'Start Free Trial',
-          href: '#',
-          isPopular: true,
-        },
-      ],
     },
   };
 }

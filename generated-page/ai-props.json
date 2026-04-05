@@ -1,170 +1,111 @@
 {
-  "navbar-dynamic": {
-    "logo": {
-      "src": "https://ibsacademy.co/public/assets//web/images/logo/logo.png",
-      "alt": "IBS Academy Logo"
-    },
-    "navItems": [
-      {
-        "label": "Home",
-        "href": "home"
-      },
-      {
-        "label": "About",
-        "href": "about"
-      },
-      {
-        "label": "Career",
-        "href": "career"
-      },
-      {
-        "label": "Exam",
-        "href": "exam"
-      },
-      {
-        "label": "Gallery",
-        "href": "gallery"
-      },
-      {
-        "label": "Contact Us",
-        "href": "contact us"
-      },
-      {
-        "label": "Partnership",
-        "href": "partnership"
-      }
-    ],
-    "actions": [
-      {
-        "label": "Sign In",
-        "href": "sign in",
-        "variant": "outline"
-      },
-      {
-        "label": "Register Now",
-        "href": "register now",
-        "variant": "primary"
-      }
-    ]
+  "hero-action-dynamic": {
+    "badgeText": "Welcome",
+    "heading": "Your Gateway to Success",
+    "description": "Discover opportunities that transform your future with expert guidance and support.",
+    "primaryCtaText": "Get Started",
+    "secondaryCtaText": "Learn More",
+    "trustText": "Trusted by thousands of satisfied clients",
+    "mainImage": "https://example.com/hero-image.jpg",
+    "floatingCard1Title": "24/7",
+    "floatingCard1Subtitle": "Support Available",
+    "floatingCard2Title": "500+",
+    "floatingCard2Subtitle": "Success Stories"
   },
-  "hero-elegant-dynamic": {
-    "label": "NO.1 TALLY INSTITUTE IN INDIA",
-    "title": "The Gateway to Financial Mastery & Success",
-    "description": "A premier ISO 9001:2015 certified institute elevating the accounting profession with expert support.",
-    "primaryCtaText": "Explore Courses",
-    "secondaryCtaText": "Register Now",
-    "mediaUrl": "https://ibsacademy.co/public/assets/web/images/bg/1.png",
-    "mediaType": "image",
-    "posterUrl": null
+  "about-bio-dynamic": {
+    "label": "About Us",
+    "heading": "Building Tomorrow's Leaders Today",
+    "description": "We are dedicated to providing exceptional services that empower individuals and organizations to achieve their full potential through innovative solutions and expert guidance.",
+    "ctaText": "Our Story",
+    "storyTitle": "Our Journey of Excellence",
+    "storyDescription": "Years of dedication and commitment to delivering outstanding results for our clients.",
+    "storyImage": "https://example.com/about-story.jpg",
+    "missionTitle": "Our Mission",
+    "missionDescription": "To empower every individual with the skills and knowledge needed for success.",
+    "visionTitle": "Our Vision",
+    "visionDescription": "To be the leading provider of transformative educational solutions."
   },
-  "features-simple-dynamic": {
-    "tagline": "PREMIER PROGRAMS",
-    "heading": "Our Featured Courses",
-    "description": "A selection of premier professional accounting and finance certifications designed to elevate your career to new heights.",
-    "features": [
+  "blog-article-dynamic": {
+    "tagline": "Latest Insights",
+    "heading": "News and Articles",
+    "posts": [
       {
-        "title": "US CPA - Certified Public Accountant",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930687.jpg"
+        "title": "Transforming Education Through Innovation",
+        "description": "Discover how modern approaches are reshaping the learning landscape.",
+        "image": "https://example.com/blog-1.jpg",
+        "date": "2024-01-15",
+        "category": "Education",
+        "style": "image"
       },
       {
-        "title": "US CMA - Certified Management Accountant",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930895.jpg"
+        "title": "Building Skills for the Future",
+        "description": "Essential competencies that will define success in tomorrow's world.",
+        "image": "https://example.com/blog-2.jpg",
+        "date": "2024-01-10",
+        "category": "Career",
+        "style": "content"
       },
       {
-        "title": "Diploma in Financial Accounting & Taxation",
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762931137.jpg"
+        "title": "Success Stories from Our Community",
+        "description": "Real experiences from individuals who transformed their careers.",
+        "image": "https://example.com/blog-3.jpg",
+        "date": "2024-01-05",
+        "category": "Stories",
+        "style": "image"
       }
     ]
   },
-  "about-simple-dynamic": {
-    "headline": "The Cornerstone of Financial Mastery",
-    "topIntro": "A premier ISO 9001:2015 certified institute elevating the accounting profession with expert support and continuous practice.",
-    "heroImage": "https://ibsacademy.co/public/assets/web/images/about/1.png",
-    "label": "Numbers Tell a Story of Success",
-    "subIntro": "As the No.1 Tally Institute in India and an NSDC Authorized partner, we are the gateway to professional success.",
-    "avatarImage": null,
-    "avatarName": null,
-    "avatarTitle": null,
-    "mainStatement": "IBS Academy is a premier professional accounting institute dedicated to shaping the future of finance. With over 28 years of experience, we provide the expert guidance and rigorous practice needed to master global certifications like US CPA, CMA, and more. Our mission is to transform aspiring professionals into industry leaders, building a solid foundation for lasting career success."
-  },
-  "cta-simple-dynamic": {
-    "heading": "The Gateway to Your Accounting Career Success",
-    "description": "Elevate your profession with expert-led courses and continuous practice at India's premier accounting institute.",
-    "primaryCtaText": "Register Now",
-    "secondaryCtaText": "Sign In",
-    "stats": [
+  "company-story-dynamic": {
+    "title": "Our Company Story",
+    "subtitle": "From Vision to Reality",
+    "intro": "Our journey began with a simple mission: to make quality education and professional development accessible to everyone. Today, we continue to innovate and expand our reach.",
+    "milestones": [
       {
-        "value": "28+",
-        "label": "Years Experience"
+        "year": "2015",
+        "title": "Foundation Established",
+        "description": "Started with a small team dedicated to transforming education.",
+        "image": "https://example.com/milestone-1.jpg"
       },
       {
-        "value": "No.1",
-        "label": "Tally Institute"
+        "year": "2018",
+        "title": "Major Expansion",
+        "description": "Grew to serve thousands of students across multiple regions.",
+        "image": "https://example.com/milestone-2.jpg"
       },
       {
-        "value": "ISO 9001:2015",
-        "label": "Certified Institute"
+        "year": "2022",
+        "title": "Industry Recognition",
+        "description": "Received awards for excellence in educational innovation.",
+        "image": "https://example.com/milestone-3.jpg"
       }
     ]
   },
-  "testimonials-elegant-dynamic": {
-    "title": "What Our Students Say About Us",
-    "testimonials": [
+  "faq-process-dynamic": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about our services",
+    "type": "faq",
+    "faqItems": [
       {
-        "name": "Priya Sharma",
-        "text": "IBS Academy's expert guidance was instrumental in my US CMA success. The structured curriculum and continuous support truly elevate your learning.",
-        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg"
+        "question": "How do I get started with your programs?",
+        "answer": "Simply reach out through our contact form or call us directly. Our team will guide you through the enrollment process and help you choose the right program for your goals."
       },
       {
-        "name": "Rohan Mehta",
-        "text": "The No.1 Tally Institute tag is well-deserved. The practical training and NSDC-authorised programs provided a solid foundation for my accounting career.",
-        "avatar": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367506.jpg"
-      }
-    ],
-    "plusIcon": null,
-    "prevIcon": null,
-    "nextIcon": null
-  },
-  "gallery-elegant-dynamic": {
-    "label": "OUR MOMENTS",
-    "heading": "Gallery of Success",
-    "subheading": "A visual journey through our institute's achievements, student life, and professional milestones.",
-    "items": [
-      {
-        "image": "https://ibsacademy.co/public/assets/web/images/about/1.png",
-        "alt": "IBS Academy campus or classroom",
-        "title": "Our Learning Environment",
-        "description": "State-of-the-art facilities for professional accounting education."
+        "question": "What support do you provide during the course?",
+        "answer": "We offer comprehensive support including dedicated mentors, 24/7 access to learning materials, regular assessments, and personalized feedback to ensure your success."
       },
       {
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762929871.jpg",
-        "alt": "US CPA course promotional image",
-        "title": "US CPA Certification",
-        "description": "Launching careers in global public accounting."
+        "question": "Are there any prerequisites for enrollment?",
+        "answer": "Most programs are open to everyone. Some advanced courses may require basic knowledge in the field, but we offer foundation courses to help you get up to speed."
       },
       {
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930307.jpg",
-        "alt": "US CMA course promotional image",
-        "title": "US CMA Program",
-        "description": "Mastering management accounting and financial strategy."
-      },
-      {
-        "image": "https://ibsacademy.co/public/web/web/testimonial/testimonialimage_1681367562.jpg",
-        "alt": "A satisfied student testimonial",
-        "title": "Student Success Stories",
-        "description": "Hear from our accomplished graduates."
-      },
-      {
-        "image": "https://ibsacademy.co/public/web/web/course/courseimage_1762930486.jpg",
-        "alt": "Diploma in Financial Accounting image",
-        "title": "Diploma Programs",
-        "description": "Building strong foundations in finance and taxation."
+        "question": "What certification will I receive?",
+        "answer": "Upon successful completion, you'll receive an industry-recognized certification that validates your skills and enhances your professional credentials."
       }
     ]
   },
   "footer-simple": {
-    "brandName": "IBS Academy",
-    "description": "A premier ISO 9001:2015 certified professional accounting institute.",
-    "copyright": "© 2024 IBS Academy. All rights reserved."
+    "brandName": "Your Company",
+    "description": "Empowering individuals and organizations through innovative educational solutions and expert guidance.",
+    "copyright": "© 2024 Your Company. All rights reserved."
   }
 }

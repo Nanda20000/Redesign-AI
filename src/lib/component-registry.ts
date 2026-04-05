@@ -3,97 +3,61 @@
 
 import type { ComponentType } from "react";
 
-// About components
-import { AboutSimpleDynamic } from '../../components-library/about/about-simple-dynamic';
-import { AboutDynamic } from '../../components-library/about/about-dynamic';
-import { AboutSupersimpleColouredDynamic } from '../../components-library/about/about-supersimple-coloured-dynamic';
-
-// Blog components
-import { BlogDynamic } from '../../components-library/blog/blog-dynamic';
-import { BlogElegantDynamic } from '../../components-library/blog/blog-elegant-dynamic';
-
-// CTA components
-import { CtaDynamic } from '../../components-library/cta/cta-dynamic';
-import { CtaSimpleDynamic } from '../../components-library/cta/cta-simple-dynamic';
-
-// Contact components
-import { ContactSplit as ContactSplitDynamic } from '../../components-library/contact/contact-split-dynamic';
-
-// Features components
-import { FeaturesDynamic } from '../../components-library/features/features-dynamic';
-import { FeaturesSimpleDynamic } from '../../components-library/features/features-simple-dynamic';
-
 // Footer components
 import { FooterSimple } from '../../components-library/footer/footer-simple';
 
-// Gallery components
-import { GalleryDynamic } from '../../components-library/gallery/gallery-dynamic';
-import { GalleryElegantDynamic } from '../../components-library/gallery/gallery-elegant-dynamic';
-
 // Hero components
-import { HeroDynamic } from '../../components-library/hero/hero-dynamic';
-import { HeroSimpleDynamic } from '../../components-library/hero/hero-simple-dynamic';
-import { HeroElegantDynamic } from '../../components-library/hero/hero-elegant-dynamic';
-import { HeroBannerDynamic } from '../../components-library/hero/hero-banner-dynamic';
-import { HeroStylishColouredDynamic } from '../../components-library/hero/hero-stylish-coloured-dynamic';
-import { HeroSuperColouredDynamic } from '../../components-library/hero/hero-super-coloured-dynamic';
-import { HeroSupersimpleColouredDynamic } from '../../components-library/hero/hero-supersimple-coloured-dynamic';
+import { HeroActionDynamic } from '../../components-library/hero/hero-action-dynamic';
+
+// About components
+import { AboutBioDynamic } from '../../components-library/about/about-bio-dynamic';
+
+// Blog components
+import { BlogArticleDynamic } from '../../components-library/blog/blog-article-dynamic';
+
+// Contact components
+import { ContactFormDynamic } from '../../components-library/contact/contact-form-dynamic';
+
+// CTA components
+import { CtaBannerDynamic } from '../../components-library/cta/cta-banner-dynamic';
 
 // Navbar components
-import { NavbarDynamic } from '../../components-library/navbar/navbar-dynamic';
-import { NavbarFloatingDynamic } from '../../components-library/navbar/navbar-floating-dynamic';
-import { NavbarFloatingtwoDynamic } from '../../components-library/navbar/navbar-floatingtwo-dynamic';
+import { NavBarDynamic } from '../../components-library/navbar/nav-bar-dynamic';
 
 // Testimonials components
-import { TestimonialsDynamic } from '../../components-library/testimonials/testimonials-dynamic';
-import { TestimonialsElegantDynamic } from '../../components-library/testimonials/testimonials-elegant-dynamic';
+import { TestiClientDynamic } from '../../components-library/testimonials/testi-client-dynamic';
+
+// Gallery components
+import { GalleryAlbumDynamic } from '../../components-library/gallery/gallery-album-dynamic';
 
 // Component registry mapping component names to their implementations
 export const componentRegistry: Record<string, ComponentType<any>> = {
-  // About components
-  'about-simple-dynamic': AboutSimpleDynamic,
-  'about-dynamic': AboutDynamic,
-  'about-supersimple-coloured-dynamic': AboutSupersimpleColouredDynamic,
-
-  // Blog components
-  'blog-dynamic': BlogDynamic,
-  'blog-elegant-dynamic': BlogElegantDynamic,
-
-  // CTA components
-  'cta-dynamic': CtaDynamic,
-  'cta-simple-dynamic': CtaSimpleDynamic,
-
-  // Contact components
-  'contact-split-dynamic': ContactSplitDynamic,
-
-  // Features components
-  'features-dynamic': FeaturesDynamic,
-  'features-simple-dynamic': FeaturesSimpleDynamic,
-
   // Footer components
   'footer-simple': FooterSimple,
 
-  // Gallery components
-  'gallery-dynamic': GalleryDynamic,
-  'gallery-elegant-dynamic': GalleryElegantDynamic,
-
   // Hero components
-  'hero-dynamic': HeroDynamic,
-  'hero-simple-dynamic': HeroSimpleDynamic,
-  'hero-elegant-dynamic': HeroElegantDynamic,
-  'hero-banner-dynamic': HeroBannerDynamic,
-  'hero-stylish-coloured-dynamic': HeroStylishColouredDynamic,
-  'hero-super-coloured-dynamic': HeroSuperColouredDynamic,
-  'hero-supersimple-coloured-dynamic': HeroSupersimpleColouredDynamic,
+  'hero-action-dynamic': HeroActionDynamic,
+
+  // About components
+  'about-bio-dynamic': AboutBioDynamic,
+
+  // Blog components
+  'blog-article-dynamic': BlogArticleDynamic,
+
+  // Contact components
+  'contact-form-dynamic': ContactFormDynamic,
+
+  // CTA components
+  'cta-banner-dynamic': CtaBannerDynamic,
 
   // Navbar components
-  'navbar-dynamic': NavbarDynamic,
-  'navbar-floating-dynamic': NavbarFloatingDynamic,
-  'navbar-floatingtwo-dynamic': NavbarFloatingtwoDynamic,
+  'nav-bar-dynamic': NavBarDynamic,
 
   // Testimonials components
-  'testimonials-dynamic': TestimonialsDynamic,
-  'testimonials-elegant-dynamic': TestimonialsElegantDynamic,
+  'testi-client-dynamic': TestiClientDynamic,
+
+  // Gallery components
+  'gallery-album-dynamic': GalleryAlbumDynamic,
 
 };
 

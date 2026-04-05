@@ -33,15 +33,13 @@ export interface ComponentSelectionResult {
  * Component capability map - which components support images
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-supersimple-coloured-dynamic', 'hero-super-coloured-dynamic', 'hero-stylish-coloured-dynamic', 'hero-dynamic', 'hero-simple-dynamic', 'hero-elegant-dynamic', 'hero-banner-dynamic'],
-  features: ['features-dynamic', 'features-simple-dynamic'],
-  testimonials: ['testimonials-dynamic', 'testimonials-elegant-dynamic'],
-  about: ['about-supersimple-coloured-dynamic', 'about-dynamic', 'about-simple-dynamic'],
-  gallery: ['gallery-dynamic', 'gallery-elegant-dynamic'],
-  cta: ['cta-dynamic', 'cta-simple-dynamic'],
-  blog: ['blog-dynamic', 'blog-elegant-dynamic'],
-  navbar: ['navbar-dynamic', 'navbar-floating-dynamic', 'navbar-floatingtwo-dynamic'],
-  contact: ['contact-split-dynamic'],
+  hero: ['hero-action-dynamic'],
+  about: ['about-bio-dynamic'],
+  blog: ['blog-article-dynamic'],
+  'company-story': ['company-story-dynamic'],
+  cta: ['cta-banner-dynamic'],
+  testimonials: ['testi-client-dynamic'],
+  gallery: ['gallery-album-dynamic'],
 };
 
 function isSelectableAIComponent(componentName: string): boolean {
@@ -50,35 +48,15 @@ function isSelectableAIComponent(componentName: string): boolean {
 
 /**
  * Get AI-selectable components for a section using the manifest instead of a hardcoded whitelist.
- * For non-home pages, still force hero-banner-dynamic when available.
- * For homepage, exclude hero-banner-dynamic to reserve it for inner pages.
- * Excludes cta-dynamic from all pages.
+ * Only returns the 6 kept components: hero-action-dynamic, about-bio-dynamic, blog-article-dynamic,
+ * company-story-dynamic, faq-process-dynamic, footer-simple.
  */
 function getAIComponentsForSection(
   section: string,
   availableComponents: string[],
   pageSlug: string
 ): string[] {
-  let safeComponents = availableComponents.filter(isSelectableAIComponent);
-
-  if (section === 'hero') {
-    if (pageSlug !== 'index') {
-      // Non-home pages: force hero-banner-dynamic only
-      return safeComponents.includes('hero-banner-dynamic')
-        ? ['hero-banner-dynamic']
-        : safeComponents;
-    } else {
-      // Homepage: exclude hero-banner-dynamic from selection pool
-      safeComponents = safeComponents.filter(name => name !== 'hero-banner-dynamic');
-    }
-  }
-
-  // Exclude cta-dynamic from all pages
-  if (section === 'cta') {
-    safeComponents = safeComponents.filter(name => name !== 'cta-dynamic');
-  }
-
-  return safeComponents;
+  return availableComponents.filter(isSelectableAIComponent);
 }
 
 /**
@@ -141,16 +119,11 @@ const REQUIRED_SECTIONS = ['hero', 'footer'];
  * All sections for homepage - always included in fixed order
  */
 const HOMEPAGE_SECTIONS = [
-  'navbar',
   'hero',
-  'features',
   'about',
-  'testimonials',
-  'gallery',
-  'cta',
   'blog',
-  'contact',
-  'pricing',
+  'company-story',
+  'faq-process',
   'footer'
 ];
 
@@ -161,21 +134,6 @@ const CONDITIONAL_SECTIONS: Record<string, {
   shouldInclude: (analysis: WebsiteAnalysis, sections: string[]) => boolean;
   reason: string;
 }> = {
-  features: {
-    shouldInclude: (analysis) => analysis.contentRichness !== 'low',
-    reason: 'Features section included due to sufficient content'
-  },
-  testimonials: {
-    shouldInclude: (analysis) => {
-      const trustHeavyTypes: BusinessType[] = ['saas', 'ecommerce', 'corporate', 'healthcare', 'agency'];
-      return trustHeavyTypes.includes(analysis.businessType) || analysis.contentRichness === 'high';
-    },
-    reason: 'Testimonials included for trust/social proof'
-  },
-  navbar: {
-    shouldInclude: () => true,
-    reason: 'Navigation is essential'
-  },
   about: {
     shouldInclude: (analysis) => {
       const aboutHeavyTypes: BusinessType[] = ['corporate', 'agency', 'nonprofit', 'education'];
@@ -183,39 +141,26 @@ const CONDITIONAL_SECTIONS: Record<string, {
     },
     reason: 'About section for organization background'
   },
-  pricing: {
-    shouldInclude: (analysis) => {
-      const pricingTypes: BusinessType[] = ['saas', 'ecommerce', 'startup'];
-      return pricingTypes.includes(analysis.businessType);
-    },
-    reason: 'Pricing section for product/service tiers'
-  },
-  contact: {
-    shouldInclude: (analysis) => {
-      const contactHeavyTypes: BusinessType[] = ['corporate', 'agency', 'healthcare', 'restaurant'];
-      return contactHeavyTypes.includes(analysis.businessType) || analysis.contentRichness === 'high';
-    },
-    reason: 'Contact section for user communication'
-  },
-  gallery: {
-    shouldInclude: (analysis) => {
-      const visualTypes: BusinessType[] = ['portfolio', 'agency', 'restaurant', 'ecommerce', 'education'];
-      return visualTypes.includes(analysis.businessType);
-    },
-    reason: 'Gallery section for visual content showcase'
-  },
-  cta: {
-    shouldInclude: (analysis) => {
-      return analysis.contentRichness !== 'low';
-    },
-    reason: 'CTA section to drive conversions'
-  },
   blog: {
     shouldInclude: (analysis) => {
       const blogTypes: BusinessType[] = ['education', 'saas', 'agency', 'corporate', 'startup'];
       return blogTypes.includes(analysis.businessType) || analysis.contentRichness === 'high';
     },
     reason: 'Blog section for content and news'
+  },
+  'company-story': {
+    shouldInclude: (analysis) => {
+      const storyHeavyTypes: BusinessType[] = ['corporate', 'education', 'agency', 'portfolio'];
+      return storyHeavyTypes.includes(analysis.businessType) || analysis.contentRichness === 'high';
+    },
+    reason: 'Company story/history for brand heritage'
+  },
+  'faq-process': {
+    shouldInclude: (analysis) => {
+      const faqHeavyTypes: BusinessType[] = ['saas', 'education', 'ecommerce', 'healthcare'];
+      return faqHeavyTypes.includes(analysis.businessType) || analysis.contentRichness !== 'low';
+    },
+    reason: 'FAQ/Process to address questions and explain workflows'
   },
 };
 
@@ -266,7 +211,7 @@ function scoreComponent(
   content?: ExtractedContent
 ): number {
   let score = 0;
-  const meta = COMPONENT_META[componentName];
+  const meta = COMPONENT_META[componentName as keyof typeof COMPONENT_META];
 
   // Check if in preferred list
   const categoryRec = recommendations[category as keyof ComponentRecommendations];
@@ -614,8 +559,8 @@ export function buildEnhancedPrompt(
 ## STRICT RULE — DYNAMIC COMPONENTS ONLY
 You MUST only select components whose name ends with "-dynamic".
 Never select components like hero-modern, hero-minimal, navbar-gradient, footer-elegant etc.
-Only valid selections end with: -dynamic (e.g. hero-dynamic, features-dynamic, about-dynamic)
-${isNonHomePage ? '\n## CRITICAL: NON-HOME PAGE RULE\nThis is NOT the homepage. The hero section MUST use "hero-banner-dynamic" only.\nDo NOT use hero-elegant-dynamic, hero-simple-dynamic, or hero-dynamic for this page.\n' : ''}
+Only valid selections end with: -dynamic (e.g. hero-action-dynamic, about-bio-dynamic, blog-article-dynamic)
+Exception: footer-simple is also valid.
 
 ## Source Website Analysis:
 - Business Type: ${businessType} (confidence: ${Math.round(analysis.confidence * 100)}%)
@@ -630,47 +575,40 @@ ${sections.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 ## Available DYNAMIC-ONLY Components (ONLY choose from these):
 ${JSON.stringify(dynamicOnlyByCategory, null, 2)}
 
-## IMPORTANT: All components listed above are valid choices. Prefer newly added components (check full list above) over the examples below.
+## IMPORTANT: All components listed above are valid choices.
 
 ## How to Choose the Best Dynamic Component:
 Analyze the source website's detected sections and match them to the best available component.
 ALWAYS check the full "Available DYNAMIC-ONLY Components" list above before deciding.
-New components may have been added — do not assume only the examples listed below are valid.
 
 Selection guidelines (use Available Components list as the authoritative source):
-- Large background image hero → any hero-*-dynamic that accepts mediaUrl or image prop
-- Course/service grid with images → features-simple-dynamic or features-dynamic  
-- About/history with stats → about-simple-dynamic or about-dynamic
-- Student/customer reviews → testimonials-elegant-dynamic or testimonials-dynamic
-- Contact form → contact-split-dynamic
-- Image gallery/portfolio → gallery-elegant-dynamic or gallery-dynamic
-- Stats + CTA card → cta-simple-dynamic
-- Full-width CTA with background → cta-dynamic
-- News/blog articles → blog-elegant-dynamic or blog-dynamic
-- Navigation → navbar-dynamic
+- Hero section → hero-action-dynamic
+- About section → about-bio-dynamic
+- Blog section → blog-article-dynamic
+- Company story/history → company-story-dynamic
+- FAQ or Process steps → faq-process-dynamic
 - Page footer → footer-simple
-${isNonHomePage ? '- Inner page header → hero-banner-dynamic (REQUIRED for non-homepage)' : ''}
 
 ## Business Type Guidance:
-- education/academy → prioritize about-dynamic (show stats like years, students), features-dynamic (courses)
-- saas/startup → prioritize features-dynamic (product features), hero-stylish-coloured-dynamic (email capture + feature cards)
-- corporate → prioritize about-dynamic (company info), contact-split-dynamic
-- portfolio/agency → prioritize features-dynamic (gallery/work items), hero-stylish-coloured-dynamic (visual service cards)
+- education/academy → prioritize about-bio-dynamic, blog-article-dynamic, company-story-dynamic
+- saas/startup → prioritize hero-action-dynamic, blog-article-dynamic, faq-process-dynamic
+- corporate → prioritize about-bio-dynamic, company-story-dynamic, faq-process-dynamic
+- portfolio/agency → prioritize company-story-dynamic, blog-article-dynamic
+- ecommerce → prioritize faq-process-dynamic, blog-article-dynamic
 
 ## Response Format — Return ONLY this JSON, no markdown, no explanation:
 {
   "layout": [
-    {"section": "navbar", "component": "navbar-dynamic"},
-    {"section": "hero", "component": "${isNonHomePage ? 'hero-banner-dynamic' : 'hero-stylish-coloured-dynamic'}"},
-    {"section": "features", "component": "features-dynamic"},
-    {"section": "about", "component": "about-dynamic"},
-    {"section": "testimonials", "component": "testimonials-dynamic"},
+    {"section": "hero", "component": "hero-action-dynamic"},
+    {"section": "about", "component": "about-bio-dynamic"},
+    {"section": "blog", "component": "blog-article-dynamic"},
+    {"section": "company-story", "component": "company-story-dynamic"},
+    {"section": "faq-process", "component": "faq-process-dynamic"},
     {"section": "footer", "component": "footer-simple"}
   ]
 }
 
-IMPORTANT: Only include sections that were detected. Always include navbar, hero, and footer.
+IMPORTANT: Only include sections that were detected. Always include hero and footer.
 Every component name you return MUST end with "-dynamic" (exception: footer-simple).
-${isNonHomePage ? 'CRITICAL: This is NOT the homepage. Use hero-banner-dynamic for the hero section.' : ''}
 `;
 }

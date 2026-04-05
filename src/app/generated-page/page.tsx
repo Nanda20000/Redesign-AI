@@ -21,16 +21,17 @@ export interface LayoutData {
 
 // Fallback components for each section type (only dynamic ones)
 const FALLBACK_COMPONENTS: Record<string, string> = {
-  hero: "hero-stylish-coloured-dynamic",
-  navbar: "navbar-dynamic",
-  features: "features-dynamic",
-  testimonials: "testimonials-elegant-dynamic",
-  contact: "contact-split-dynamic",
+  hero: "hero-action-dynamic",
   footer: "footer-simple",
-  about: "about-simple-dynamic",
-  gallery: "gallery-dynamic",
-  cta: "cta-simple-dynamic",
-  blog: "blog-elegant-dynamic",
+  about: "about-bio-dynamic",
+  blog: "blog-article-dynamic",
+  "company-story": "company-story-dynamic",
+  "faq-process": "faq-process-dynamic",
+  contact: "contact-form-dynamic",
+  cta: "cta-banner-dynamic",
+  navbar: "nav-bar-dynamic",
+  testimonials: "testi-client-dynamic",
+  gallery: "gallery-album-dynamic",
 };
 
 /**
@@ -44,7 +45,7 @@ function getFallbackComponent(section: string): string {
   }
 
   // Default fallbacks in order of preference (only dynamic components)
-  const defaultFallbacks = ["features-dynamic", "hero-dynamic", "navbar-dynamic", "footer-simple"];
+  const defaultFallbacks = ["hero-action-dynamic", "about-bio-dynamic", "blog-article-dynamic", "footer-simple"];
   return defaultFallbacks[0];
 }
 
@@ -148,7 +149,6 @@ function GeneratedPageContent() {
             console.log("[GeneratedPage] Content has images:", data.content.images?.length || 0);
             const mapped = mapContentToSections(content, sectionTypes, layoutData.layout);
             console.log("[GeneratedPage] Mapped hero image:", mapped.hero?.image);
-            console.log("[GeneratedPage] Mapped features images:", mapped.features?.images?.length || 0);
             setMappedContent(mapped);
           } else {
             // Content not ready yet - retry after delay
