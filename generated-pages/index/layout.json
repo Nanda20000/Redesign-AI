@@ -10,11 +10,11 @@
     },
     {
       "section": "blog",
-      "component": "blog-article-dynamic"
+      "component": "blog-feed-dynamic"
     },
     {
       "section": "company-story",
-      "component": "company-story-dynamic"
+      "component": "story-archive-dynamic"
     },
     {
       "section": "faq-process",

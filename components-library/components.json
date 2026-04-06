@@ -13,6 +13,12 @@
       "description": "Timeline-based company history section with milestone cards, images, and year markers."
     },
     {
+      "name": "story-archive-dynamic",
+      "category": "company-story",
+      "file": "company-story/story-archive-dynamic.tsx",
+      "description": "A dynamic company story section with a header, large image, and statistics grid."
+    },
+    {
       "name": "faq-process-dynamic",
       "category": "faq-process",
       "file": "faq-process/faq-process-dynamic.tsx",
@@ -43,6 +49,18 @@
       "description": "A dynamic blog section with a grid of posts featuring alternating image and content styles."
     },
     {
+      "name": "blog-feed-dynamic",
+      "category": "blog",
+      "file": "blog/blog-feed-dynamic.tsx",
+      "description": "Minimalist blog feed with large heading, navigation buttons, and responsive cards."
+    },
+    {
+      "name": "blog-grid-dynamic",
+      "category": "blog",
+      "file": "blog/blog-grid-dynamic.tsx",
+      "description": "A modern blog grid with category tags, read time, author info, and pagination."
+    },
+    {
       "name": "contact-form-dynamic",
       "category": "contact",
       "file": "contact/contact-form-dynamic.tsx",
@@ -61,6 +79,12 @@
       "description": "A floating navbar with a logo, navigation links, and two call-to-action buttons."
     },
     {
+      "name": "nav-float-dynamic",
+      "category": "navbar",
+      "file": "navbar/nav-float-dynamic.tsx",
+      "description": "A modern floating pill-shaped navbar with centered navigation and a CTA button."
+    },
+    {
       "name": "testi-client-dynamic",
       "category": "testimonials",
       "file": "testimonials/testi-client-dynamic.tsx",
@@ -77,6 +101,30 @@
       "category": "feature",
       "file": "feature/feature-aspect-dynamic.tsx",
       "description": "A feature section with a central image flanked by four feature cards in a grid layout."
+    },
+    {
+      "name": "feature-detail-dynamic",
+      "category": "feature",
+      "file": "feature/feature-detail-dynamic.tsx",
+      "description": "A grid of feature cards with alternating text/image positions and a highlighted card."
+    },
+    {
+      "name": "benefits-advantage-dynamic",
+      "category": "benefits",
+      "file": "benefits/benefits-advantage-dynamic.tsx",
+      "description": "A dynamic benefits section with an accordion-style list and a dual-image layout."
+    },
+    {
+      "name": "benefits-asset-dynamic",
+      "category": "benefits",
+      "file": "benefits/benefits-asset-dynamic.tsx",
+      "description": "A grid-based benefits section with customizable cards, icons, and a highlighted option."
+    },
+    {
+      "name": "feature-element-dynamic",
+      "category": "features",
+      "file": "features/feature-element-dynamic.tsx",
+      "description": "A clean, minimalist features section with a grid layout, header labels, and dual call-to-action buttons."
     }
   ],
   "categories": [
@@ -92,6 +140,8 @@
     "navbar",
     "testimonials",
     "gallery",
-    "feature"
+    "feature",
+    "benefits",
+    "features"
   ]
 }

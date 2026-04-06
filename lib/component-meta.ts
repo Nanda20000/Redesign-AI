@@ -4,6 +4,8 @@ export const COMPONENT_META = {
 
   // Blog components
   "blog-article-dynamic": { section: "blog", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
+  "blog-feed-dynamic": { section: "blog", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
+  "blog-grid-dynamic": { section: "blog", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
 
   // About components
   "about-bio-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
@@ -14,6 +16,7 @@ export const COMPONENT_META = {
 
   // Company-story components
   "company-story-dynamic": { section: "company-story", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+  "story-archive-dynamic": { section: "company-story", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
 
   // Faq-process components
   "faq-process-dynamic": { section: "faq-process", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
@@ -26,6 +29,7 @@ export const COMPONENT_META = {
 
   // Navbar components
   "nav-bar-dynamic": { section: "navbar", supportsImages: false, supportsItems: true, contentLevel: "low", priority: 1 },
+  "nav-float-dynamic": { section: "navbar", supportsImages: false, supportsItems: true, contentLevel: "low", priority: 10 },
 
   // Testimonials components
   "testi-client-dynamic": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
@@ -35,4 +39,12 @@ export const COMPONENT_META = {
 
   // Feature components
   "feature-aspect-dynamic": { section: "feature", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
+  "feature-detail-dynamic": { section: "feature", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+
+  // Benefits components
+  "benefits-advantage-dynamic": { section: "benefits", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+  "benefits-asset-dynamic": { section: "benefits", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
+
+  // Features components
+  "feature-element-dynamic": { section: "features", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
 };

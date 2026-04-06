@@ -424,6 +424,60 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
     ],
   },
 
+  'blog-feed-dynamic': {
+    componentName: 'blog-feed-dynamic',
+    section: 'blog',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the blog section. Usually 3-5 words, light weight. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'posts',
+        type: 'array',
+        description: 'An array of blog post objects. Each object should contain a category (short label), a title (compelling headline), an image URL, and ctaText (e.g., "Read Blog").',
+        required: true,
+      }
+    ],
+  },
+
+  'blog-grid-dynamic': {
+    componentName: 'blog-grid-dynamic',
+    section: 'blog',
+    props: [
+      {
+        name: 'sectionTitle',
+        type: 'string',
+        description: 'The main heading for the blog section, e.g., "Articles" or "Latest News". Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'articleCount',
+        type: 'string',
+        description: 'A number or label showing total count, e.g., "354". Max 2 words.',
+        maxWords: 2,
+        required: false,
+      },
+      {
+        name: 'sortLabel',
+        type: 'string',
+        description: 'Label for the sort dropdown, e.g., "Sort by". Max 3 words.',
+        maxWords: 3,
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'An array of blog post objects. Each should include title, excerpt, category, readTime, authorName, date, image, and authorAvatar.',
+        required: true,
+      }
+    ],
+  },
+
   // ── COMPANY STORY ─────────────────────────────────────────────────
   'company-story-dynamic': {
     componentName: 'company-story-dynamic',
@@ -455,6 +509,67 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
         type: 'array',
         description: 'Array of milestone objects representing key moments in company history. Each milestone should have: year (e.g., "2020"), title (max 8 words), description (max 25 words), and optionally image (URL from Available Images list).',
         required: false,
+      },
+    ],
+  },
+
+  'story-archive-dynamic': {
+    componentName: 'story-archive-dynamic',
+    section: 'company-story',
+    props: [
+      {
+        name: 'topHeading',
+        type: 'string',
+        description: 'The main heading for the top section of the company story. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'topDescription',
+        type: 'string',
+        description: 'A small paragraph text for the top right section. Max 30 words.',
+        maxWords: 30,
+        required: true,
+      },
+      {
+        name: 'mainImage',
+        type: 'string',
+        description: 'The URL of the large main image representing the company or team.',
+        required: true,
+      },
+      {
+        name: 'bottomHeading',
+        type: 'string',
+        description: 'The large heading for the bottom white section. Max 25 words.',
+        maxWords: 25,
+        required: true,
+      },
+      {
+        name: 'bottomDescription',
+        type: 'string',
+        description: 'The sub-paragraph text in the bottom section. Max 60 words.',
+        maxWords: 60,
+        required: true,
+      },
+      {
+        name: 'ratingValue',
+        type: 'string',
+        description: 'The numerical rating value (e.g., "4.97/5").',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'ratingLabel',
+        type: 'string',
+        description: 'The label for the rating (e.g., "from").',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'stats',
+        type: 'array',
+        description: 'An array of 4 statistics objects, each with a "value" (e.g., "95%") and a "label" (e.g., "Customer satisfaction rate").',
+        required: true,
       },
     ],
   },
@@ -737,6 +852,40 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
     ],
   },
 
+  // ── NAVBAR ──────────────────────────────────────────────────────────
+  'nav-float-dynamic': {
+    componentName: 'nav-float-dynamic',
+    section: 'navbar',
+    props: [
+      {
+        name: 'logoText',
+        type: 'string',
+        description: 'The brand name or logo text to display on the left side of the navbar. Max 3 words.',
+        maxWords: 3,
+        required: true,
+      },
+      {
+        name: 'ctaText',
+        type: 'string',
+        description: 'The text for the call-to-action button on the right side. Max 3 words.',
+        maxWords: 3,
+        required: true,
+      },
+      {
+        name: 'ctaHref',
+        type: 'string',
+        description: 'The URL or anchor link for the CTA button.',
+        required: false,
+      },
+      {
+        name: 'navLinks',
+        type: 'array',
+        description: 'An array of navigation links with label, href, and optional isActive boolean.',
+        required: true,
+      },
+    ],
+  },
+
   // ── TESTIMONIALS ────────────────────────────────────────────────────
   'testi-client-dynamic': {
     componentName: 'testi-client-dynamic',
@@ -866,6 +1015,175 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
         description: 'Description for the fourth feature. Max 15 words.',
         maxWords: 15,
         required: true,
+      },
+    ],
+  },
+
+  'feature-detail-dynamic': {
+    componentName: 'feature-detail-dynamic',
+    section: 'feature',
+    props: [
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'The main heading for the feature section. Focus on growth and expertise. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'An array of feature objects. Each object should have title, description (max 25 words), image (grayscale business/marketing style), linkText, and optionally isHighlighted: true for one item to make it stand out.',
+        required: true,
+      },
+      {
+        name: 'loadMoreText',
+        type: 'string',
+        description: 'Text for the load more button at the bottom. Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'loadMoreUrl',
+        type: 'string',
+        description: 'URL for the load more button.',
+        required: false,
+      }
+    ],
+  },
+
+  'benefits-advantage-dynamic': {
+    componentName: 'benefits-advantage-dynamic',
+    section: 'benefits',
+    props: [
+      {
+        name: 'badgeText',
+        type: 'string',
+        description: 'A small label text at the top of the section (e.g., "Benefits"). Max 3 words.',
+        maxWords: 3,
+        required: false,
+      },
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the benefits section. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A supporting paragraph below the heading explaining the value proposition. Max 30 words.',
+        maxWords: 30,
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'A list of benefit items. Each item should have a title and a detailed description. Provide 3-4 items.',
+        required: true,
+      },
+      {
+        name: 'images',
+        type: 'array',
+        description: 'Two high-quality images. The first image is a tall vertical shot, the second is a shorter supporting shot.',
+        required: true,
+      },
+      {
+        name: 'experienceValue',
+        type: 'string',
+        description: 'A short value for the experience badge (e.g., "10y+"). Max 2 words.',
+        maxWords: 2,
+        required: false,
+      },
+      {
+        name: 'experienceLabel',
+        type: 'string',
+        description: 'The label for the experience badge (e.g., "Experiences"). Max 3 words.',
+        maxWords: 3,
+        required: false,
+      },
+    ],
+  },
+
+  'benefits-asset-dynamic': {
+    componentName: 'benefits-asset-dynamic',
+    section: 'benefits',
+    props: [
+      {
+        name: 'label',
+        type: 'string',
+        description: 'A small label above the main heading (e.g., "Practice Areas"). Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'The main heading for the section. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'footerButtonText',
+        type: 'string',
+        description: 'The text for the footer button (e.g., "View More Services"). Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'An array of benefit items. Each item should have a title, description, and linkText. One item can have isHighlighted: true.',
+        required: true,
+      },
+    ],
+  },
+
+  'feature-element-dynamic': {
+    componentName: 'feature-element-dynamic',
+    section: 'features',
+    props: [
+      {
+        name: 'label',
+        type: 'string',
+        description: 'A short label above the main heading (e.g., "OUR SERVICES"). Max 3 words.',
+        maxWords: 3,
+        required: false,
+      },
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'The main section heading. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A supporting paragraph on the right side of the header. Max 30 words.',
+        maxWords: 30,
+        required: false,
+      },
+      {
+        name: 'features',
+        type: 'array',
+        description: 'An array of feature objects. Each object should have a title and description. The AI should also suggest an appropriate icon from lucide-react.',
+        required: true,
+      },
+      {
+        name: 'primaryCtaText',
+        type: 'string',
+        description: 'Text for the primary action button (e.g., "Get a quote"). Max 3 words.',
+        maxWords: 3,
+        required: false,
+      },
+      {
+        name: 'secondaryCtaText',
+        type: 'string',
+        description: 'Text for the secondary action button (e.g., "Browse all services"). Max 3 words.',
+        maxWords: 3,
+        required: false,
       },
     ],
   },

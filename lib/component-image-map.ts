@@ -31,6 +31,18 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'items',
   },
 
+  'blog-feed-dynamic': {
+    imageCount: 4,
+    imageProp: 'posts.image',
+    imageMode: 'items',
+  },
+
+  'blog-grid-dynamic': {
+    imageCount: 6,
+    imageProp: 'items',
+    imageMode: 'items',
+  },
+
   // ── ABOUT ─────────────────────────────────────────────────────────────
   'about-bio-dynamic': {
     imageCount: 1,
@@ -49,6 +61,12 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageCount: 4,
     imageProp: 'milestones',
     imageMode: 'items',
+  },
+
+  'story-archive-dynamic': {
+    imageCount: 1,
+    imageProp: 'mainImage',
+    imageMode: 'single',
   },
 
   // ── FAQ-PROCESS ───────────────────────────────────────────────────────
@@ -86,6 +104,12 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'none',
   },
 
+  'nav-float-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
   // ── TESTIMONIALS ────────────────────────────────────────────────────
   'testi-client-dynamic': {
     imageCount: 6,
@@ -105,6 +129,32 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageCount: 1,
     imageProp: 'centerImage',
     imageMode: 'single',
+  },
+
+  'feature-detail-dynamic': {
+    imageCount: 9,
+    imageProp: 'items',
+    imageMode: 'items',
+  },
+
+  // ── BENEFITS ─────────────────────────────────────────────────────────
+  'benefits-advantage-dynamic': {
+    imageCount: 2,
+    imageProp: 'images',
+    imageMode: 'array',
+  },
+
+  'benefits-asset-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  // ── FEATURES ─────────────────────────────────────────────────────────
+  'feature-element-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
   },
 
 };

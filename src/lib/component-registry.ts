@@ -15,6 +15,8 @@ import { AboutBrandDynamic } from '../../components-library/about/about-brand-dy
 
 // Blog components
 import { BlogArticleDynamic } from '../../components-library/blog/blog-article-dynamic';
+import { BlogFeedDynamic } from '../../components-library/blog/blog-feed-dynamic';
+import { BlogGridDynamic } from '../../components-library/blog/blog-grid-dynamic';
 
 // Contact components
 import { ContactFormDynamic } from '../../components-library/contact/contact-form-dynamic';
@@ -24,6 +26,7 @@ import { CtaBannerDynamic } from '../../components-library/cta/cta-banner-dynami
 
 // Navbar components
 import { NavBarDynamic } from '../../components-library/navbar/nav-bar-dynamic';
+import { NavFloatDynamic } from '../../components-library/navbar/nav-float-dynamic';
 
 // Testimonials components
 import { TestiClientDynamic } from '../../components-library/testimonials/testi-client-dynamic';
@@ -31,8 +34,19 @@ import { TestiClientDynamic } from '../../components-library/testimonials/testi-
 // Gallery components
 import { GalleryAlbumDynamic } from '../../components-library/gallery/gallery-album-dynamic';
 
+// Company Story components
+import { StoryArchiveDynamic } from '../../components-library/company-story/story-archive-dynamic';
+
 // Feature components
 import { FeatureAspectDynamic } from '../../components-library/feature/feature-aspect-dynamic';
+import { FeatureDetailDynamic } from '../../components-library/feature/feature-detail-dynamic';
+
+// Benefits components
+import { BenefitsAdvantageDynamic } from '../../components-library/benefits/benefits-advantage-dynamic';
+import { BenefitsAssetDynamic } from '../../components-library/benefits/benefits-asset-dynamic';
+
+// Features components
+import { FeatureElementDynamic } from '../../components-library/features/feature-element-dynamic';
 
 // Component registry mapping component names to their implementations
 export const componentRegistry: Record<string, ComponentType<any>> = {
@@ -48,6 +62,8 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Blog components
   'blog-article-dynamic': BlogArticleDynamic,
+  'blog-feed-dynamic': BlogFeedDynamic,
+  'blog-grid-dynamic': BlogGridDynamic,
 
   // Contact components
   'contact-form-dynamic': ContactFormDynamic,
@@ -57,6 +73,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Navbar components
   'nav-bar-dynamic': NavBarDynamic,
+  'nav-float-dynamic': NavFloatDynamic,
 
   // Testimonials components
   'testi-client-dynamic': TestiClientDynamic,
@@ -64,8 +81,19 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   // Gallery components
   'gallery-album-dynamic': GalleryAlbumDynamic,
 
+  // Company Story components
+  'story-archive-dynamic': StoryArchiveDynamic,
+
   // Feature components
   'feature-aspect-dynamic': FeatureAspectDynamic,
+  'feature-detail-dynamic': FeatureDetailDynamic,
+
+  // Benefits components
+  'benefits-advantage-dynamic': BenefitsAdvantageDynamic,
+  'benefits-asset-dynamic': BenefitsAssetDynamic,
+
+  // Features components
+  'feature-element-dynamic': FeatureElementDynamic,
 
 };
 

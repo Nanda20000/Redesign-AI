@@ -7,6 +7,7 @@
  */
 
 import type { ProcessedSectionContent } from './ai-content-processor';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export interface ExtractedContent {
   headings: string[];
@@ -68,6 +69,17 @@ export interface MappedContent {
       description?: string;
       image?: string;
     }>;
+  };
+  companyStory?: {
+    topHeading?: string;
+    topDescription?: string;
+    mainImage?: string;
+    bottomHeading?: string;
+    bottomDescription?: string;
+    ratingValue?: string;
+    ratingLabel?: string;
+    ratingIcon?: React.ReactNode;
+    stats?: Array<{ value?: string; label?: string }>;
   };
   'faq-process'?: {
     title: string;
@@ -147,6 +159,39 @@ export interface MappedContent {
       description?: string;
       icon?: React.ReactNode;
     }>;
+  };
+  benefits?: {
+    badge?: {
+      text?: string;
+      icon?: React.ReactNode;
+    };
+    title?: string;
+    description?: string;
+    items?: Array<{
+      id?: string;
+      title?: string;
+      description?: string;
+      icon?: React.ReactNode;
+      toggleIcon?: React.ReactNode;
+      expandedToggleIcon?: React.ReactNode;
+    }>;
+    images?: string[];
+    experience?: {
+      value?: string;
+      label?: string;
+    };
+  };
+  features?: {
+    label?: string;
+    heading?: string;
+    description?: string;
+    items?: Array<{
+      icon?: React.ReactNode;
+      title?: string;
+      description?: string;
+    }>;
+    primaryCtaText?: string;
+    secondaryCtaText?: string;
   };
 }
 
@@ -429,6 +474,46 @@ export function getComponentContentProps(
       };
     }
 
+    case 'blog-feed-dynamic': {
+      const sectionContent = mappedContent.blog as any;
+      return {
+        title: sectionContent?.title ?? '',
+        posts: sectionContent?.items?.map((item: any) => ({
+          id: item.id,
+          image: item.image,
+          category: item.label,
+          title: item.title,
+          ctaText: item.ctaText,
+          ctaIcon: <ArrowRight className="w-4 h-4" />,
+        })) ?? [],
+        prevIcon: <ChevronLeft className="w-6 h-6" />,
+        nextIcon: <ChevronRight className="w-6 h-6" />,
+      };
+    }
+
+    case 'blog-grid-dynamic': {
+      const sectionContent = mappedContent.blog as any;
+      return {
+        sectionTitle: sectionContent?.title ?? '',
+        articleCount: sectionContent?.count ?? '',
+        sortLabel: sectionContent?.sortText ?? 'Sort by',
+        items: sectionContent?.posts?.map((post: any) => ({
+          image: post?.image ?? '',
+          category: post?.category ?? '',
+          readTime: post?.readTime ?? '',
+          title: post?.title ?? '',
+          excerpt: post?.description ?? '',
+          authorName: post?.author?.name ?? '',
+          authorAvatar: post?.author?.avatar ?? '',
+          date: post?.date ?? '',
+        })) ?? [],
+        paginationItems: sectionContent?.pagination?.pages?.map((p: any) => ({
+          label: p?.label ?? '',
+          isActive: p?.active ?? false,
+        })) ?? []
+      };
+    }
+
     // About components
     case 'about-bio-dynamic': {
       const sectionContent = mappedContent.about as any;
@@ -473,6 +558,21 @@ export function getComponentContentProps(
         subtitle: sectionContent?.subtitle ?? '',
         intro: sectionContent?.intro ?? '',
         milestones: sectionContent?.milestones ?? [],
+      };
+    }
+
+    case 'story-archive-dynamic': {
+      const sectionContent = mappedContent.companyStory as any;
+      return {
+        topHeading: sectionContent?.topHeading ?? '',
+        topDescription: sectionContent?.topDescription ?? '',
+        mainImage: sectionContent?.mainImage ?? '',
+        bottomHeading: sectionContent?.bottomHeading ?? '',
+        bottomDescription: sectionContent?.bottomDescription ?? '',
+        ratingValue: sectionContent?.ratingValue ?? '',
+        ratingLabel: sectionContent?.ratingLabel ?? '',
+        ratingIcon: sectionContent?.ratingIcon ?? null,
+        stats: sectionContent?.stats ?? [],
       };
     }
 
@@ -550,6 +650,16 @@ export function getComponentContentProps(
       };
     }
 
+    case 'nav-float-dynamic': {
+      const sectionContent = mappedContent.navbar as any;
+      return {
+        logoText: sectionContent?.logoText ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        ctaHref: sectionContent?.ctaHref ?? '',
+        navLinks: sectionContent?.navLinks ?? [],
+      };
+    }
+
     // Testimonials components
     case 'testi-client-dynamic': {
       const sectionContent = mappedContent.testimonials as any;
@@ -594,6 +704,75 @@ export function getComponentContentProps(
         feature4Title: sectionContent?.items?.[3]?.title ?? '',
         feature4Description: sectionContent?.items?.[3]?.description ?? '',
         feature4Icon: sectionContent?.items?.[3]?.icon ?? null,
+      };
+    }
+
+    case 'feature-detail-dynamic': {
+      const sectionContent = mappedContent.feature as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        items: sectionContent?.items?.map((item: any) => ({
+          title: item.title ?? '',
+          description: item.description ?? '',
+          image: item.image ?? '',
+          linkText: item.linkText ?? '',
+          linkUrl: item.linkUrl ?? '',
+          isHighlighted: item.isHighlighted ?? false,
+        })) ?? [],
+        loadMoreText: sectionContent?.loadMoreText ?? '',
+        loadMoreUrl: sectionContent?.loadMoreUrl ?? '',
+      };
+    }
+
+    // Benefits components
+    case 'benefits-advantage-dynamic': {
+      const sectionContent = mappedContent.benefits as any;
+      return {
+        badgeText: sectionContent?.badge?.text ?? '',
+        badgeIcon: sectionContent?.badge?.icon ?? null,
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        items: sectionContent?.items?.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          description: item.description,
+          icon: item.icon,
+          toggleIcon: item.toggleIcon,
+          expandedToggleIcon: item.expandedToggleIcon,
+        })) ?? [],
+        images: sectionContent?.images ?? [],
+        experienceValue: sectionContent?.experience?.value ?? '',
+        experienceLabel: sectionContent?.experience?.label ?? '',
+      };
+    }
+
+    case 'benefits-asset-dynamic': {
+      const sectionContent = mappedContent.benefits as any;
+      return {
+        label: sectionContent?.label ?? '',
+        heading: sectionContent?.heading ?? '',
+        footerButtonText: sectionContent?.footerButtonText ?? '',
+        footerButtonHref: sectionContent?.footerButtonHref ?? '',
+        items: sectionContent?.items ?? [],
+        arrowIcon: sectionContent?.arrowIcon ?? null,
+        readMoreArrowIcon: sectionContent?.readMoreArrowIcon ?? null,
+      };
+    }
+
+    // Features components
+    case 'feature-element-dynamic': {
+      const sectionContent = mappedContent.features as any;
+      return {
+        label: sectionContent?.label ?? '',
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        primaryCtaText: sectionContent?.primaryCtaText ?? '',
+        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
+        features: sectionContent?.items?.map((item: any) => ({
+          icon: item.icon,
+          title: item.title,
+          description: item.description,
+        })) ?? [],
       };
     }
 
