@@ -38,6 +38,12 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
+  'about-brand-dynamic': {
+    imageCount: 1,
+    imageProp: 'image',
+    imageMode: 'single',
+  },
+
   // ── COMPANY-STORY ─────────────────────────────────────────────────────
   'company-story-dynamic': {
     imageCount: 4,
@@ -92,6 +98,13 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageCount: 7,
     imageProp: 'images',
     imageMode: 'array',
+  },
+
+  // ── FEATURE ─────────────────────────────────────────────────────────
+  'feature-aspect-dynamic': {
+    imageCount: 1,
+    imageProp: 'centerImage',
+    imageMode: 'single',
   },
 
 };

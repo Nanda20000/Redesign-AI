@@ -336,6 +336,66 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
     ],
   },
 
+  // ── ABOUT ─────────────────────────────────────────────────────────
+  'about-brand-dynamic': {
+    componentName: 'about-brand-dynamic',
+    section: 'about',
+    props: [
+      {
+        name: 'badge',
+        type: 'string',
+        description: 'A short, catchy label or tagline above the main heading. Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the brand story. Should be bold and inspiring. Max 12 words.',
+        maxWords: 12,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A detailed paragraph explaining the brand mission, history, or unique value. Max 50 words.',
+        maxWords: 50,
+        required: true,
+      },
+      {
+        name: 'image',
+        type: 'string',
+        description: 'URL for a high-quality brand image that represents the company culture or product.',
+        required: true,
+      },
+      {
+        name: 'imageAlt',
+        type: 'string',
+        description: 'Descriptive alt text for the brand image.',
+        required: false,
+      },
+      {
+        name: 'ctaText',
+        type: 'string',
+        description: 'Text for the primary call-to-action button. Max 4 words.',
+        maxWords: 4,
+        required: false,
+      },
+      {
+        name: 'ctaLink',
+        type: 'string',
+        description: 'The destination URL for the call-to-action button.',
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'A list of 2-4 key features, values, or stats. Each item should have a title and short description.',
+        required: false,
+      },
+    ],
+  },
+
   // ── BLOG ──────────────────────────────────────────────────────────
   'blog-article-dynamic': {
     componentName: 'blog-article-dynamic',
@@ -721,6 +781,90 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
         name: 'images',
         type: 'array',
         description: 'An array of 7 high-quality images for the gallery album. Each object should have url and alt properties.',
+        required: true,
+      },
+    ],
+  },
+
+  // ── FEATURE ─────────────────────────────────────────────────────────
+  'feature-aspect-dynamic': {
+    componentName: 'feature-aspect-dynamic',
+    section: 'feature',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the feature section. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        description: 'The descriptive subtitle below the title. Max 30 words.',
+        maxWords: 30,
+        required: true,
+      },
+      {
+        name: 'centerImage',
+        type: 'string',
+        description: 'URL for the large central image.',
+        required: true,
+      },
+      {
+        name: 'feature1Title',
+        type: 'string',
+        description: 'Title for the first feature (top left). Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'feature1Description',
+        type: 'string',
+        description: 'Description for the first feature. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'feature2Title',
+        type: 'string',
+        description: 'Title for the second feature (bottom left). Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'feature2Description',
+        type: 'string',
+        description: 'Description for the second feature. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'feature3Title',
+        type: 'string',
+        description: 'Title for the third feature (top right). Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'feature3Description',
+        type: 'string',
+        description: 'Description for the third feature. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'feature4Title',
+        type: 'string',
+        description: 'Title for the fourth feature (bottom right). Max 5 words.',
+        maxWords: 5,
+        required: true,
+      },
+      {
+        name: 'feature4Description',
+        type: 'string',
+        description: 'Description for the fourth feature. Max 15 words.',
+        maxWords: 15,
         required: true,
       },
     ],

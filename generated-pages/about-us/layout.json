@@ -1,0 +1,28 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "nav-bar-dynamic"
+    },
+    {
+      "section": "hero",
+      "component": "hero-action-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "faq-process-dynamic"
+    },
+    {
+      "section": "about",
+      "component": "about-bio-dynamic"
+    },
+    {
+      "section": "gallery",
+      "component": "gallery-album-dynamic"
+    },
+    {
+      "section": "footer",
+      "component": "footer-simple"
+    }
+  ]
+}

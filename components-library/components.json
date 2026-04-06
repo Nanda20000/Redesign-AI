@@ -31,6 +31,12 @@
       "description": "A dynamic about section with a grid layout featuring a large story card with image overlay and mission/vision cards."
     },
     {
+      "name": "about-brand-dynamic",
+      "category": "about",
+      "file": "about/about-brand-dynamic.tsx",
+      "description": "A high-impact brand story section with split layout, image focus, and feature grid."
+    },
+    {
       "name": "blog-article-dynamic",
       "category": "blog",
       "file": "blog/blog-article-dynamic.tsx",
@@ -65,6 +71,12 @@
       "category": "gallery",
       "file": "gallery/gallery-album-dynamic.tsx",
       "description": "A dynamic gallery album with a masonry-like grid layout and a centered title."
+    },
+    {
+      "name": "feature-aspect-dynamic",
+      "category": "feature",
+      "file": "feature/feature-aspect-dynamic.tsx",
+      "description": "A feature section with a central image flanked by four feature cards in a grid layout."
     }
   ],
   "categories": [
@@ -79,6 +91,7 @@
     "cta",
     "navbar",
     "testimonials",
-    "gallery"
+    "gallery",
+    "feature"
   ]
 }

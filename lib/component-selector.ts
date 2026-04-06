@@ -34,12 +34,13 @@ export interface ComponentSelectionResult {
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
   hero: ['hero-action-dynamic'],
-  about: ['about-bio-dynamic'],
+  about: ['about-brand-dynamic', 'about-bio-dynamic'],
   blog: ['blog-article-dynamic'],
   'company-story': ['company-story-dynamic'],
   cta: ['cta-banner-dynamic'],
   testimonials: ['testi-client-dynamic'],
   gallery: ['gallery-album-dynamic'],
+  feature: ['feature-aspect-dynamic'],
 };
 
 function isSelectableAIComponent(componentName: string): boolean {

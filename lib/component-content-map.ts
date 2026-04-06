@@ -72,6 +72,17 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
+  'about-brand-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badge', type: 'label', maxWords: 5 },
+      { prop: 'title', type: 'heading', maxWords: 12 },
+      { prop: 'description', type: 'paragraph', maxWords: 50 },
+      { prop: 'ctaText', type: 'cta', maxWords: 4 },
+      { prop: 'items', type: 'list', maxWords: 30 },
+    ],
+  },
+
   // ── FOOTER ──────────────────────────────────────────────────────────
   'footer-simple': {
     isDynamic: true,
@@ -164,6 +175,23 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     isDynamic: true,
     contentSlots: [
       { prop: 'title', type: 'heading', maxWords: 10 },
+    ],
+  },
+
+  // ── FEATURE ─────────────────────────────────────────────────────────
+  'feature-aspect-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 30 },
+      { prop: 'feature1Title', type: 'label', maxWords: 5 },
+      { prop: 'feature1Description', type: 'paragraph', maxWords: 15 },
+      { prop: 'feature2Title', type: 'label', maxWords: 5 },
+      { prop: 'feature2Description', type: 'paragraph', maxWords: 15 },
+      { prop: 'feature3Title', type: 'label', maxWords: 5 },
+      { prop: 'feature3Description', type: 'paragraph', maxWords: 15 },
+      { prop: 'feature4Title', type: 'label', maxWords: 5 },
+      { prop: 'feature4Description', type: 'paragraph', maxWords: 15 },
     ],
   },
 

@@ -1,0 +1,110 @@
+{
+  "nav-bar-dynamic": {
+    "logoText": "Instil Learning Hub",
+    "navLinks": [
+      {
+        "label": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "label": "About Us",
+        "href": "/preview/about-us"
+      }
+    ],
+    "loginLabel": "Sign In",
+    "signupLabel": "Create Account",
+    "loginHref": null,
+    "signupHref": null
+  },
+  "hero-action-dynamic": {
+    "badgeText": "Premier Finance Institute",
+    "heading": "Empowering Future Finance Leaders",
+    "description": "Guided by expert mentors, we deliver premier ACCA and CFA education focused on real-world skills and exceptional results.",
+    "primaryCtaText": "Explore Courses",
+    "secondaryCtaText": "Learn About Us",
+    "trustText": "Guiding students to national and global rankings.",
+    "mainImage": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+    "floatingCard1Title": "4+ Years",
+    "floatingCard1Subtitle": "Founder Teaching Experience",
+    "floatingCard2Title": "National Ranks",
+    "floatingCard2Subtitle": "Student Achievements"
+  },
+  "faq-process-dynamic": {
+    "title": "How to Start Your Journey",
+    "subtitle": "A simple, guided process to begin your ACCA or CFA studies with Instil.",
+    "type": "process",
+    "processSteps": [
+      {
+        "stepNumber": "Step 1",
+        "title": "Explore Our Courses",
+        "description": "Review our ACCA, CFA, and CMA US programs to find the right fit for your career goals."
+      },
+      {
+        "stepNumber": "Step 2",
+        "title": "Choose Your Format",
+        "description": "Select from online, offline, or hybrid learning modes, with the flexibility to swap between them."
+      },
+      {
+        "stepNumber": "Step 3",
+        "title": "Create Your Account",
+        "description": "Sign up for free to access course details, resources, and personalized guidance from our mentors."
+      },
+      {
+        "stepNumber": "Step 4",
+        "title": "Begin Learning",
+        "description": "Start your classes with expert instructors focused on building real-world skills and confidence."
+      }
+    ]
+  },
+  "about-bio-dynamic": {
+    "label": "About Us",
+    "heading": "Mentors, Not Just Instructors",
+    "description": "Instil is a premier ACCA and CFA institute founded by four passionate educators dedicated to guiding students to exceptional results.",
+    "ctaText": "Learn More",
+    "storyTitle": "Our Story",
+    "storyDescription": "Co-founded by educators with over four years of experience, we mentor students to achieve national and global rankings in finance and accounting.",
+    "storyImage": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+    "missionTitle": "Our Beliefs",
+    "missionDescription": "We empower students with knowledge beyond exams, building confidence and critical thinking for real-world challenges with personalized guidance.",
+    "visionTitle": "Our Vision",
+    "visionDescription": "Promoting a system where individuals are approached for their skills and talent, fostering a learning environment where success is the goal."
+  },
+  "gallery-album-dynamic": {
+    "title": "Our Learning Environment and Community",
+    "images": [
+      {
+        "url": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+        "alt": "Students engaged in collaborative learning at Instil Institute."
+      },
+      {
+        "url": "https://www.instillearninghub.com/_next/static/media/our-beliefs.ff46991d.webp",
+        "alt": "Symbolic representation of our educational beliefs and values."
+      },
+      {
+        "url": "https://www.instillearninghub.com/_next/static/media/our-vision.16267eb1.webp",
+        "alt": "Visualizing our vision for empowering future finance leaders."
+      },
+      {
+        "url": "https://www.instillearninghub.com/_next/static/media/graduation-cap.cee78045.webp",
+        "alt": "Celebrating student success and academic achievement."
+      },
+      {
+        "url": "https://www.instillearninghub.com/_next/static/media/mobile-app-preview-1.22849109.webp",
+        "alt": "Our mobile application for accessible, on-the-go learning."
+      },
+      {
+        "url": "https://www.instillearninghub.com/_next/static/media/pattern-2.5908f556.webp",
+        "alt": "Abstract design element from the Instil brand."
+      },
+      {
+        "url": "https://www.instillearninghub.com/_next/static/media/pattern-1.5b063e2e.webp",
+        "alt": "Secondary brand pattern representing structure and growth."
+      }
+    ]
+  },
+  "footer-simple": {
+    "brandName": "INSTIL INSTITUTE OF COMMERCE PRIVATE LIMITED",
+    "description": "A premier institute for ACCA, CFA, and CMA US qualifications.",
+    "copyright": "© 2026 INSTIL INSTITUTE OF COMMERCE PRIVATE LIMITED. All rights reserved."
+  }
+}

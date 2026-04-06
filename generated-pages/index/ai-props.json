@@ -1,111 +1,108 @@
 {
   "hero-action-dynamic": {
-    "badgeText": "Welcome to LCC Campus",
-    "heading": "Excellence in Every Step",
-    "description": "Empowering learners to reach their fullest potential through innovation, growth, and a commitment to shaping futures built on knowledge and integrity.",
+    "badgeText": "Premium Quality Classes",
+    "heading": "Shaping Leaders & Toppers Since 2025",
+    "description": "Your dedicated exam partner for ACCA, CFA & CMA. Join our limited batches and equip yourself with the resources to make your dream a reality.",
     "primaryCtaText": "Explore Courses",
-    "secondaryCtaText": "Learn More",
-    "trustText": "A reputed educational institution offering skill development courses in Kerala.",
-    "mainImage": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
-    "floatingCard1Title": "Skill Development",
-    "floatingCard1Subtitle": "Practical courses for real-world success",
-    "floatingCard2Title": "Expert Faculty",
-    "floatingCard2Subtitle": "Dedicated to accessible, quality education"
+    "secondaryCtaText": "Request a Callback",
+    "trustText": "Trusted by 25,000+ students with 7+ years of experience",
+    "mainImage": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+    "floatingCard1Title": "7+ Years",
+    "floatingCard1Subtitle": "Experience",
+    "floatingCard2Title": "25,000+",
+    "floatingCard2Subtitle": "Students"
   },
   "about-bio-dynamic": {
     "label": "About Us",
-    "heading": "Excellence in Every Step",
-    "description": "LCC Campus is a leading educational institution in Kerala, empowering learners to reach their fullest potential through skill development courses.",
-    "ctaText": "Learn More",
-    "storyTitle": "Our Story",
-    "storyDescription": "We are committed to creating an environment where innovation and growth thrive, shaping futures built on knowledge, integrity, and purpose.",
-    "storyImage": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
-    "missionTitle": "Our Mission",
-    "missionDescription": "To provide accessible, quality education and practical skill development courses that empower students for successful careers.",
+    "heading": "Shaping Leaders & Toppers Since 2025",
+    "description": "Instil Learning Hub provides premium quality classes for ACCA, CFA & CMA, acting as your dedicated exam partner with live classes and a supportive community.",
+    "ctaText": "Join Us",
+    "storyTitle": "One Team. One Dream.",
+    "storyDescription": "From live class assistance to exclusive study resources, we are your committed partner on the journey to exam success.",
+    "storyImage": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+    "missionTitle": "Your Exam Partner",
+    "missionDescription": "We equip you with all the resources and structured support needed to make your professional dreams a reality.",
     "visionTitle": "Our Vision",
-    "visionDescription": "To be the premier institution in Kerala for transformative skill-based education, fostering innovation and community growth."
+    "visionDescription": "To be the premier learning hub that transforms ambitious students into industry leaders and top performers."
   },
   "blog-article-dynamic": {
     "tagline": "Insights & Updates",
-    "heading": "Latest News and Educational Insights",
+    "heading": "Latest from the Learning Hub",
     "posts": [
       {
-        "title": "Empowering Futures Through Skill Development",
-        "description": "Discover how our practical courses in computer technology, fashion design, and hospital administration are creating new career pathways for learners in Kerala.",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
-        "date": "2025-11-15",
-        "category": "Institution News"
+        "title": "CMA US Exam Edge: Beyond Traditional Study",
+        "description": "Discover how our structured support program prepares you for real-world exam scenarios with focused practice and strategic guidance.",
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1775303675506000.webp?alt=media&token=09966164-5b3b-42cc-94cd-19996441ae31",
+        "date": "2026-03-15",
+        "category": "CMA",
+        "style": "image"
       },
       {
-        "title": "The Importance of Early Childhood Education Training",
-        "description": "Exploring the methodologies and impact of our Pre-primary TTC course in shaping the educators of tomorrow for young children.",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg",
-        "date": "2025-11-10",
-        "category": "Academics"
+        "title": "Mastering ACCA Taxation (TX): A Strategic Approach",
+        "description": "Learn how our expert-led course simplifies complex legislation and focuses on accuracy, computation, and smart exam techniques for maximum marks.",
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874664392000.webp?alt=media&token=cca5330e-f6d2-4d77-9443-b0ce828f8622",
+        "date": "2026-03-10",
+        "category": "ACCA",
+        "style": "content"
       },
       {
-        "title": "Innovation and Growth in Our Learning Environment",
-        "description": "A look inside our commitment to creating a campus atmosphere where knowledge, integrity, and purpose drive student success.",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg",
-        "date": "2025-11-05",
-        "category": "Campus Life"
+        "title": "The Power of a Limited Batch: Focused Learning for Success",
+        "description": "Explore the benefits of joining our premium, limited-size batches designed to provide personalised attention and superior resources for ACCA, CFA & CMA aspirants.",
+        "image": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+        "date": "2026-03-05",
+        "category": "Student Success",
+        "style": "image"
       }
     ]
   },
   "company-story-dynamic": {
-    "title": "Our Journey of Educational Excellence",
-    "subtitle": "Shaping Futures Since Our Inception",
-    "intro": "LCC Campus began with a vision to make quality skill development accessible across Kerala. We have grown into a multi-branch institution empowering learners through expert-led courses and modern infrastructure.",
+    "title": "Our Journey: Shaping Leaders Since 2025",
+    "subtitle": "One Team. One Dream. One Goal.",
+    "intro": "Instil Learning Hub began with a vision to be the definitive exam partner for finance professionals, providing premium ACCA, CFA, and CMA courses that transform effort into excellence.",
     "milestones": [
       {
-        "year": "Foundation",
-        "title": "Establishment of First Campus",
-        "description": "Founded in Edakkara, Nilambur, with a mission to provide accessible, practical education.",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg"
+        "year": "2025",
+        "title": "Foundation & Vision",
+        "description": "Established with a mission to deliver premium, exam-focused education for ACCA, CFA, and CMA aspirants."
       },
       {
-        "year": "Growth",
-        "title": "Expansion of Course Portfolio",
-        "description": "Introduced key programs in Computer Science, Fashion Design, and Hospital Administration.",
-        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
-      },
-      {
-        "year": "Mission",
-        "title": "Commitment to Learner Empowerment",
-        "description": "Formalized our core philosophy of building futures on knowledge, integrity, and purpose."
+        "year": "Present",
+        "title": "Community & Growth",
+        "description": "Now a trusted partner to over 25,000 students, shaping leaders and toppers with structured support programs.",
+        "image": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp"
       }
     ]
   },
   "faq-process-dynamic": {
-    "title": "How to Enroll at LCC Campus",
-    "subtitle": "A simple guide to starting your educational journey with us.",
+    "title": "How to Start Your Journey",
+    "subtitle": "Your step-by-step guide to joining our premium ACCA, CFA & CMA courses.",
     "type": "process",
     "processSteps": [
       {
         "stepNumber": "Step 1",
         "title": "Explore Our Courses",
-        "description": "Review our skill development programs in computers, fashion design, hospital administration, and pre-primary teaching."
+        "description": "Review our premium ACCA, CFA, and CMA programs, including the CMA US Exam Edge and detailed ACCA subject courses."
       },
       {
         "stepNumber": "Step 2",
-        "title": "Contact for Guidance",
-        "description": "Reach out via phone or email to discuss your interests and get detailed course information."
+        "title": "Join a Limited Batch",
+        "description": "Secure your spot in our focused, limited-size batches to ensure personalised attention and quality resources."
       },
       {
         "stepNumber": "Step 3",
-        "title": "Complete Your Registration",
-        "description": "Submit the required details and documentation to secure your spot in the chosen program."
+        "title": "Access Live & Recorded Classes",
+        "description": "Attend live interactive sessions and use recorded lectures to master concepts and exam techniques at your pace."
       },
       {
         "stepNumber": "Step 4",
-        "title": "Begin Your Learning",
-        "description": "Start your classes with expert faculty in a supportive, modern learning environment."
+        "title": "Utilise Exam Platform & Tracker",
+        "description": "Practice with our structured exam platform and track your progress with dedicated study tools and support."
       }
     ]
   },
   "footer-simple": {
-    "brandName": "LCC Campus",
-    "description": "A leading educational institution offering skill development courses in Kerala.",
-    "copyright": "Copyright © 2026 LCC Campus. All rights reserved."
+    "brandName": "Instil Institute of Commerce Private Limited",
+    "description": "Premium quality classes for ACCA, CFA & CMA.",
+    "copyright": "© 2026 Instil Institute of Commerce Private Limited. All rights reserved."
   }
 }

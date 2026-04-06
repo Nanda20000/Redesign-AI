@@ -7,6 +7,7 @@ export const COMPONENT_META = {
 
   // About components
   "about-bio-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
+  "about-brand-dynamic": { section: "about", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
 
   // Footer components
   "footer-simple":    { section: "footer", supportsImages: false, supportsItems: false, contentLevel: "low",    priority: 8 },
@@ -31,4 +32,7 @@ export const COMPONENT_META = {
 
   // Gallery components
   "gallery-album-dynamic": { section: "gallery", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 10 },
+
+  // Feature components
+  "feature-aspect-dynamic": { section: "feature", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
 };

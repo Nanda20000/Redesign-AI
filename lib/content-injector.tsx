@@ -138,6 +138,16 @@ export interface MappedContent {
     title?: string;
     images?: Array<{ url: string; alt: string }>;
   };
+  feature?: {
+    title?: string;
+    subtitle?: string;
+    image?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      icon?: React.ReactNode;
+    }>;
+  };
 }
 
 /**
@@ -437,6 +447,24 @@ export function getComponentContentProps(
       };
     }
 
+    case 'about-brand-dynamic': {
+      const sectionContent = mappedContent.about as any;
+      return {
+        badge: sectionContent?.badge ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        image: sectionContent?.image ?? '',
+        imageAlt: sectionContent?.title ?? 'About our brand',
+        ctaText: sectionContent?.ctaText ?? '',
+        ctaLink: sectionContent?.ctaLink ?? '',
+        items: sectionContent?.items?.map((item: any) => ({
+          title: item.title,
+          description: item.description,
+          icon: item.icon, // Injector handles icon mapping
+        })) ?? [],
+      };
+    }
+
     // Company Story components
     case 'company-story-dynamic': {
       const sectionContent = mappedContent['company-story'] as any;
@@ -544,6 +572,28 @@ export function getComponentContentProps(
       return {
         title: sectionContent?.title ?? '',
         images: sectionContent?.images ?? [],
+      };
+    }
+
+    // Feature components
+    case 'feature-aspect-dynamic': {
+      const sectionContent = mappedContent.feature as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        centerImage: sectionContent?.image ?? '',
+        feature1Title: sectionContent?.items?.[0]?.title ?? '',
+        feature1Description: sectionContent?.items?.[0]?.description ?? '',
+        feature1Icon: sectionContent?.items?.[0]?.icon ?? null,
+        feature2Title: sectionContent?.items?.[1]?.title ?? '',
+        feature2Description: sectionContent?.items?.[1]?.description ?? '',
+        feature2Icon: sectionContent?.items?.[1]?.icon ?? null,
+        feature3Title: sectionContent?.items?.[2]?.title ?? '',
+        feature3Description: sectionContent?.items?.[2]?.description ?? '',
+        feature3Icon: sectionContent?.items?.[2]?.icon ?? null,
+        feature4Title: sectionContent?.items?.[3]?.title ?? '',
+        feature4Description: sectionContent?.items?.[3]?.description ?? '',
+        feature4Icon: sectionContent?.items?.[3]?.icon ?? null,
       };
     }
 

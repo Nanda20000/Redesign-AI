@@ -11,6 +11,7 @@ import { HeroActionDynamic } from '../../components-library/hero/hero-action-dyn
 
 // About components
 import { AboutBioDynamic } from '../../components-library/about/about-bio-dynamic';
+import { AboutBrandDynamic } from '../../components-library/about/about-brand-dynamic';
 
 // Blog components
 import { BlogArticleDynamic } from '../../components-library/blog/blog-article-dynamic';
@@ -30,6 +31,9 @@ import { TestiClientDynamic } from '../../components-library/testimonials/testi-
 // Gallery components
 import { GalleryAlbumDynamic } from '../../components-library/gallery/gallery-album-dynamic';
 
+// Feature components
+import { FeatureAspectDynamic } from '../../components-library/feature/feature-aspect-dynamic';
+
 // Component registry mapping component names to their implementations
 export const componentRegistry: Record<string, ComponentType<any>> = {
   // Footer components
@@ -40,6 +44,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // About components
   'about-bio-dynamic': AboutBioDynamic,
+  'about-brand-dynamic': AboutBrandDynamic,
 
   // Blog components
   'blog-article-dynamic': BlogArticleDynamic,
@@ -58,6 +63,9 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Gallery components
   'gallery-album-dynamic': GalleryAlbumDynamic,
+
+  // Feature components
+  'feature-aspect-dynamic': FeatureAspectDynamic,
 
 };
 
