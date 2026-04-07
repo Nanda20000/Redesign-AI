@@ -33,7 +33,7 @@ export interface ComponentSelectionResult {
  * Component capability map - which components support images
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-action-dynamic'],
+  hero: ['hero-apex-dynamic', 'hero-anchor-dynamic', 'hero-alpha-dynamic', 'hero-adapt-dynamic', 'hero-active-dynamic', 'hero-action-dynamic'],
   about: ['about-brand-dynamic', 'about-bio-dynamic'],
   blog: ['blog-grid-dynamic', 'blog-feed-dynamic', 'blog-article-dynamic'],
   'company-story': ['story-archive-dynamic', 'company-story-dynamic'],
@@ -121,10 +121,16 @@ const REQUIRED_SECTIONS = ['hero', 'footer'];
  * All sections for homepage - always included in fixed order
  */
 const HOMEPAGE_SECTIONS = [
+  'navbar',
   'hero',
   'about',
+  'features',
   'blog',
   'company-story',
+  'gallery',
+  'testimonials',
+  'cta',
+  'contact',
   'faq-process',
   'footer'
 ];

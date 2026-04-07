@@ -8,6 +8,11 @@ import { FooterSimple } from '../../components-library/footer/footer-simple';
 
 // Hero components
 import { HeroActionDynamic } from '../../components-library/hero/hero-action-dynamic';
+import { HeroActiveDynamic } from '../../components-library/hero/hero-active-dynamic';
+import { HeroAdaptDynamic } from '../../components-library/hero/hero-adapt-dynamic';
+import { HeroAlphaDynamic } from '../../components-library/hero/hero-alpha-dynamic';
+import { HeroAnchorDynamic } from '../../components-library/hero/hero-anchor-dynamic';
+import { HeroApexDynamic } from '../../components-library/hero/hero-apex-dynamic';
 
 // About components
 import { AboutBioDynamic } from '../../components-library/about/about-bio-dynamic';
@@ -55,6 +60,11 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Hero components
   'hero-action-dynamic': HeroActionDynamic,
+  'hero-active-dynamic': HeroActiveDynamic,
+  'hero-adapt-dynamic': HeroAdaptDynamic,
+  'hero-alpha-dynamic': HeroAlphaDynamic,
+  'hero-anchor-dynamic': HeroAnchorDynamic,
+  'hero-apex-dynamic': HeroApexDynamic,
 
   // About components
   'about-bio-dynamic': AboutBioDynamic,

@@ -24,6 +24,36 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
+  'hero-active-dynamic': {
+    imageCount: 5,
+    imageProp: 'expertAvatars',
+    imageMode: 'array',
+  },
+
+  'hero-adapt-dynamic': {
+    imageCount: 4,
+    imageProp: 'images',
+    imageMode: 'object',
+  },
+
+  'hero-alpha-dynamic': {
+    imageCount: 1,
+    imageProp: 'image',
+    imageMode: 'single',
+  },
+
+  'hero-anchor-dynamic': {
+    imageCount: 1,
+    imageProp: 'image',
+    imageMode: 'single',
+  },
+
+  'hero-apex-dynamic': {
+    imageCount: 1,
+    imageProp: 'backgroundImage',
+    imageMode: 'single',
+  },
+
   // ── BLOG ──────────────────────────────────────────────────────────────
   'blog-article-dynamic': {
     imageCount: 6,

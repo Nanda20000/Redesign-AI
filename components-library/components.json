@@ -31,6 +31,36 @@
       "description": "A dynamic hero section with a badge, trust indicators, and floating action cards."
     },
     {
+      "name": "hero-active-dynamic",
+      "category": "hero",
+      "file": "hero/hero-active-dynamic.tsx",
+      "description": "A dynamic bento-style hero section using Roboto font with video thumbnail and portrait image."
+    },
+    {
+      "name": "hero-adapt-dynamic",
+      "category": "hero",
+      "file": "hero/hero-adapt-dynamic.tsx",
+      "description": "Adaptive hero section with Trustpilot social proof, feature list, and a dynamic image grid."
+    },
+    {
+      "name": "hero-alpha-dynamic",
+      "category": "hero",
+      "file": "hero/hero-alpha-dynamic.tsx",
+      "description": "A split-layout hero section with a large image, bold typography with a red accent, and a striking diagonal background element."
+    },
+    {
+      "name": "hero-anchor-dynamic",
+      "category": "hero",
+      "file": "hero/hero-anchor-dynamic.tsx",
+      "description": "A sophisticated hero section with a background image, red accent line, and dual CTAs."
+    },
+    {
+      "name": "hero-apex-dynamic",
+      "category": "hero",
+      "file": "hero/hero-apex-dynamic.tsx",
+      "description": "A premium hero section with background image, center content, and a bottom bar featuring social proof and stats."
+    },
+    {
       "name": "about-bio-dynamic",
       "category": "about",
       "file": "about/about-bio-dynamic.tsx",

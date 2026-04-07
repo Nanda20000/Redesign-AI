@@ -456,6 +456,94 @@ export function getComponentContentProps(
       };
     }
 
+    case 'hero-active-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        heading: sectionContent?.title ?? '',
+        expertAvatars: sectionContent?.images?.slice(0, 3) ?? [],
+        expertCount: sectionContent?.stats?.[0]?.value ?? '',
+        expertLabel: sectionContent?.stats?.[0]?.label ?? '',
+        expertDescription: sectionContent?.description ?? '',
+        videoThumbnail: sectionContent?.images?.[3] ?? '',
+        portraitImage: sectionContent?.images?.[4] ?? '',
+        portraitCtaText: sectionContent?.ctaText ?? '',
+        featureTitle: sectionContent?.features?.[0]?.title ?? '',
+        featureDescription: sectionContent?.features?.[0]?.description ?? '',
+        statsCount: sectionContent?.stats?.[1]?.value ?? '',
+        statsLabel: sectionContent?.stats?.[1]?.label ?? '',
+        statsDescription: sectionContent?.stats?.[1]?.description ?? '',
+      };
+    }
+
+    case 'hero-adapt-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        trustpilotRating: sectionContent?.trustpilotRating ?? '',
+        trustpilotReviews: sectionContent?.trustpilotReviews ?? '',
+        trustpilotSubLabel: sectionContent?.trustpilotSubLabel ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        feature1Text: sectionContent?.features?.[0]?.text ?? '',
+        feature2Text: sectionContent?.features?.[1]?.text ?? '',
+        feature3Text: sectionContent?.features?.[2]?.text ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        ctaLink: sectionContent?.ctaLink ?? '',
+        images: {
+          main: sectionContent?.images?.[0] ?? '',
+          badge: sectionContent?.badgeImage ?? '',
+          bottomLeft: sectionContent?.images?.[1] ?? '',
+          bottomRight: sectionContent?.images?.[2] ?? '',
+        },
+      };
+    }
+
+    case 'hero-alpha-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        badge: sectionContent?.badge ?? '',
+        titleStart: sectionContent?.titleStart ?? sectionContent?.title ?? '',
+        titleAccent: sectionContent?.titleAccent ?? '',
+        titleEnd: sectionContent?.titleEnd ?? '',
+        description: sectionContent?.description ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        image: sectionContent?.image ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+      };
+    }
+
+    case 'hero-anchor-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        label: sectionContent?.label ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        primaryCtaText: sectionContent?.primaryCtaText ?? '',
+        primaryCtaUrl: sectionContent?.primaryCtaUrl ?? '',
+        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
+        secondaryCtaUrl: sectionContent?.secondaryCtaUrl ?? '',
+        image: sectionContent?.image ?? '',
+      };
+    }
+
+    case 'hero-apex-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        subheading: sectionContent?.subheading ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        backgroundImage: sectionContent?.backgroundImage ?? '',
+        ratingValue: sectionContent?.ratingValue ?? '',
+        testimonialQuote: sectionContent?.testimonialQuote ?? '',
+        testimonialAuthor: sectionContent?.testimonialAuthor ?? '',
+        featureTitle: sectionContent?.featureTitle ?? '',
+        featureDescription: sectionContent?.featureDescription ?? '',
+        stat1Value: sectionContent?.stat1Value ?? '',
+        stat1Label: sectionContent?.stat1Label ?? '',
+        sinceLabel: sectionContent?.sinceLabel ?? '',
+        sinceValue: sectionContent?.sinceValue ?? '',
+      };
+    }
+
     // Blog components
     case 'blog-article-dynamic': {
       const sectionContent = mappedContent.blog as any;

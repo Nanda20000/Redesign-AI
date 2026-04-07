@@ -1,6 +1,11 @@
 export const COMPONENT_META = {
   // Hero components
   "hero-action-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 12 },
+  "hero-active-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 10 },
+  "hero-adapt-dynamic":  { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 10 },
+  "hero-alpha-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
+  "hero-anchor-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
+  "hero-apex-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high", priority: 1 },
 
   // Blog components
   "blog-article-dynamic": { section: "blog", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },

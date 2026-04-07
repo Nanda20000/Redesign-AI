@@ -42,6 +42,78 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
+  'hero-active-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 12 },
+      { prop: 'expertCount', type: 'label', maxWords: 5 },
+      { prop: 'expertLabel', type: 'label', maxWords: 10 },
+      { prop: 'expertDescription', type: 'paragraph', maxWords: 30 },
+      { prop: 'portraitCtaText', type: 'cta', maxWords: 5 },
+      { prop: 'featureTitle', type: 'heading', maxWords: 8 },
+      { prop: 'featureDescription', type: 'paragraph', maxWords: 20 },
+      { prop: 'statsCount', type: 'label', maxWords: 5 },
+      { prop: 'statsLabel', type: 'heading', maxWords: 8 },
+      { prop: 'statsDescription', type: 'paragraph', maxWords: 20 },
+    ],
+  },
+
+  'hero-adapt-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'trustpilotRating', type: 'label', maxWords: 5 },
+      { prop: 'trustpilotReviews', type: 'label', maxWords: 5 },
+      { prop: 'trustpilotSubLabel', type: 'paragraph', maxWords: 15 },
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 30 },
+      { prop: 'feature1Text', type: 'list', maxWords: 10 },
+      { prop: 'feature2Text', type: 'list', maxWords: 10 },
+      { prop: 'feature3Text', type: 'list', maxWords: 10 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 },
+    ],
+  },
+
+  'hero-alpha-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badge', type: 'label', maxWords: 10 },
+      { prop: 'titleStart', type: 'heading', maxWords: 5 },
+      { prop: 'titleAccent', type: 'heading', maxWords: 2 },
+      { prop: 'titleEnd', type: 'heading', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 },
+    ],
+  },
+
+  'hero-anchor-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'label', type: 'label', maxWords: 10 },
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'primaryCtaText', type: 'cta', maxWords: 5 },
+      { prop: 'secondaryCtaText', type: 'cta', maxWords: 5 },
+    ],
+  },
+
+  'hero-apex-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 10 },
+      { prop: 'subheading', type: 'paragraph', maxWords: 25 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 },
+      { prop: 'ratingValue', type: 'label', maxWords: 3 },
+      { prop: 'testimonialQuote', type: 'paragraph', maxWords: 15 },
+      { prop: 'testimonialAuthor', type: 'label', maxWords: 5 },
+      { prop: 'featureTitle', type: 'heading', maxWords: 8 },
+      { prop: 'featureDescription', type: 'paragraph', maxWords: 15 },
+      { prop: 'stat1Value', type: 'label', maxWords: 5 },
+      { prop: 'stat1Label', type: 'label', maxWords: 8 },
+      { prop: 'sinceLabel', type: 'label', maxWords: 3 },
+      { prop: 'sinceValue', type: 'label', maxWords: 3 },
+    ],
+  },
+
   // ── BLOG ────────────────────────────────────────────────────────────
   'blog-article-dynamic': {
     isDynamic: true,
