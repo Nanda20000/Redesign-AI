@@ -638,6 +638,17 @@ export function getComponentContentProps(
       };
     }
 
+    case 'about-brief-dynamic': {
+      const sectionContent = mappedContent.about as any;
+      return {
+        title: sectionContent?.title ?? '',
+        description1: sectionContent?.description1 ?? '',
+        description2: sectionContent?.description2 ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        image: sectionContent?.image ?? '',
+      };
+    }
+
     // Company Story components
     case 'company-story-dynamic': {
       const sectionContent = mappedContent['company-story'] as any;
@@ -809,6 +820,69 @@ export function getComponentContentProps(
         })) ?? [],
         loadMoreText: sectionContent?.loadMoreText ?? '',
         loadMoreUrl: sectionContent?.loadMoreUrl ?? '',
+      };
+    }
+
+    case 'feature-facet-dynamic': {
+      const sectionContent = mappedContent.feature as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        imageSrc: sectionContent?.imageSrc ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        items: sectionContent?.items?.map((item: any) => ({
+          title: item.title ?? '',
+          description: item.description ?? '',
+          icon: item.icon,
+          linkIcon: item.linkIcon
+        })) ?? [],
+      };
+    }
+
+    case 'feature-focus-dynamic': {
+      const sectionContent = mappedContent.feature as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.description ?? '',
+        imageSrc: sectionContent?.image ?? '',
+        imageAlt: sectionContent?.title ?? 'Feature focus',
+        features: sectionContent?.items?.map((item: any) => ({
+          title: item.title,
+          description: item.description,
+          icon: item.icon
+        })) ?? [],
+      };
+    }
+
+    case 'feature-item-dynamic': {
+      const sectionContent = mappedContent.feature as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.description ?? '',
+        primaryCtaText: sectionContent?.primaryButtonText ?? '',
+        primaryCtaLink: sectionContent?.primaryButtonUrl ?? '',
+        secondaryCtaText: sectionContent?.secondaryButtonText ?? '',
+        secondaryCtaLink: sectionContent?.secondaryButtonUrl ?? '',
+        items: sectionContent?.items?.map((item: any, index: number) => ({
+          badge: item.badge ?? '',
+          title: item.title ?? '',
+          description: item.description ?? '',
+          linkText: item.linkText ?? '',
+          linkUrl: item.linkUrl ?? '',
+          variant: index % 3 === 0 ? 'dark' : index % 3 === 1 ? 'blue' : 'orange'
+        })) ?? []
+      };
+    }
+
+    case 'feature-list-dynamic': {
+      const sectionContent = mappedContent.feature as any;
+      return {
+        label: sectionContent?.label ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        features: sectionContent?.items ?? [],
+        backgroundImage: sectionContent?.image ?? '',
       };
     }
 

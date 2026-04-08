@@ -17,6 +17,7 @@ import { HeroApexDynamic } from '../../components-library/hero/hero-apex-dynamic
 // About components
 import { AboutBioDynamic } from '../../components-library/about/about-bio-dynamic';
 import { AboutBrandDynamic } from '../../components-library/about/about-brand-dynamic';
+import { AboutBriefDynamic } from '../../components-library/about/about-brief-dynamic';
 
 // Blog components
 import { BlogArticleDynamic } from '../../components-library/blog/blog-article-dynamic';
@@ -45,6 +46,10 @@ import { StoryArchiveDynamic } from '../../components-library/company-story/stor
 // Feature components
 import { FeatureAspectDynamic } from '../../components-library/feature/feature-aspect-dynamic';
 import { FeatureDetailDynamic } from '../../components-library/feature/feature-detail-dynamic';
+import { FeatureFacetDynamic } from '../../components-library/feature/feature-facet-dynamic';
+import { FeatureFocusDynamic } from '../../components-library/feature/feature-focus-dynamic';
+import { FeatureItemDynamic } from '../../components-library/feature/feature-item-dynamic';
+import { FeatureListDynamic } from '../../components-library/feature/feature-list-dynamic';
 
 // Benefits components
 import { BenefitsAdvantageDynamic } from '../../components-library/benefits/benefits-advantage-dynamic';
@@ -69,6 +74,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   // About components
   'about-bio-dynamic': AboutBioDynamic,
   'about-brand-dynamic': AboutBrandDynamic,
+  'about-brief-dynamic': AboutBriefDynamic,
 
   // Blog components
   'blog-article-dynamic': BlogArticleDynamic,
@@ -97,6 +103,10 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   // Feature components
   'feature-aspect-dynamic': FeatureAspectDynamic,
   'feature-detail-dynamic': FeatureDetailDynamic,
+  'feature-facet-dynamic': FeatureFacetDynamic,
+  'feature-focus-dynamic': FeatureFocusDynamic,
+  'feature-item-dynamic': FeatureItemDynamic,
+  'feature-list-dynamic': FeatureListDynamic,
 
   // Benefits components
   'benefits-advantage-dynamic': BenefitsAdvantageDynamic,

@@ -34,13 +34,13 @@ export interface ComponentSelectionResult {
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
   hero: ['hero-apex-dynamic', 'hero-anchor-dynamic', 'hero-alpha-dynamic', 'hero-adapt-dynamic', 'hero-active-dynamic', 'hero-action-dynamic'],
-  about: ['about-brand-dynamic', 'about-bio-dynamic'],
+  about: ['about-brief-dynamic', 'about-brand-dynamic', 'about-bio-dynamic'],
   blog: ['blog-grid-dynamic', 'blog-feed-dynamic', 'blog-article-dynamic'],
   'company-story': ['story-archive-dynamic', 'company-story-dynamic'],
   cta: ['cta-banner-dynamic'],
   testimonials: ['testi-client-dynamic'],
   gallery: ['gallery-album-dynamic'],
-  feature: ['feature-detail-dynamic', 'feature-aspect-dynamic'],
+  feature: ['feature-list-dynamic', 'feature-focus-dynamic', 'feature-facet-dynamic', 'feature-detail-dynamic', 'feature-aspect-dynamic'],
   benefits: ['benefits-advantage-dynamic'],
 };
 

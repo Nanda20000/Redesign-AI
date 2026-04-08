@@ -181,6 +181,16 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
+  'about-brief-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'description1', type: 'paragraph', maxWords: 60 },
+      { prop: 'description2', type: 'paragraph', maxWords: 60 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 },
+    ],
+  },
+
   // ── FOOTER ──────────────────────────────────────────────────────────
   'footer-simple': {
     isDynamic: true,
@@ -320,6 +330,46 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'heading', type: 'heading', maxWords: 15 },
       { prop: 'loadMoreText', type: 'cta', maxWords: 5 },
       { prop: 'items', type: 'list', maxWords: 100 },
+    ],
+  },
+
+  'feature-facet-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 12 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 },
+      { prop: 'items', type: 'list', maxWords: 80 }
+    ],
+  },
+
+  'feature-focus-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 30 },
+      { prop: 'features', type: 'list', maxWords: 100 }
+    ],
+  },
+
+  'feature-item-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 40 },
+      { prop: 'primaryCtaText', type: 'cta', maxWords: 5 },
+      { prop: 'secondaryCtaText', type: 'cta', maxWords: 5 },
+      { prop: 'items', type: 'list', maxWords: 150 }
+    ],
+  },
+
+  'feature-list-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'label', type: 'label', maxWords: 5 },
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 },
+      { prop: 'features', type: 'list', maxWords: 100 }
     ],
   },
 

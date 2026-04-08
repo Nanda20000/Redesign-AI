@@ -1,0 +1,52 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "nav-bar-dynamic"
+    },
+    {
+      "section": "hero",
+      "component": "hero-action-dynamic"
+    },
+    {
+      "section": "about",
+      "component": "about-brand-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "feature-element-dynamic"
+    },
+    {
+      "section": "blog",
+      "component": "blog-article-dynamic"
+    },
+    {
+      "section": "company-story",
+      "component": "story-archive-dynamic"
+    },
+    {
+      "section": "gallery",
+      "component": "gallery-album-dynamic"
+    },
+    {
+      "section": "testimonials",
+      "component": "testi-client-dynamic"
+    },
+    {
+      "section": "cta",
+      "component": "cta-banner-dynamic"
+    },
+    {
+      "section": "contact",
+      "component": "contact-form-dynamic"
+    },
+    {
+      "section": "faq-process",
+      "component": "faq-process-dynamic"
+    },
+    {
+      "section": "footer",
+      "component": "footer-simple"
+    }
+  ]
+}

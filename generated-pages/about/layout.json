@@ -1,0 +1,28 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "nav-bar-dynamic"
+    },
+    {
+      "section": "hero",
+      "component": "hero-action-dynamic"
+    },
+    {
+      "section": "about",
+      "component": "about-bio-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "feature-element-dynamic"
+    },
+    {
+      "section": "contact",
+      "component": "contact-form-dynamic"
+    },
+    {
+      "section": "footer",
+      "component": "footer-simple"
+    }
+  ]
+}

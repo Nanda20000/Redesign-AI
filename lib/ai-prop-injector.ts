@@ -796,6 +796,47 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
     ],
   },
 
+  'about-brief-dynamic': {
+    componentName: 'about-brief-dynamic',
+    section: 'about',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the about section. Should be engaging and concise. Max 10 words.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'description1',
+        type: 'string',
+        description: 'The first paragraph of the about section, introducing the company or mission. Max 60 words.',
+        maxWords: 60,
+        required: true,
+      },
+      {
+        name: 'description2',
+        type: 'string',
+        description: 'The second paragraph of the about section, providing more detail or a call to trust. Max 60 words.',
+        maxWords: 60,
+        required: false,
+      },
+      {
+        name: 'ctaText',
+        type: 'string',
+        description: 'The text for the primary call-to-action button. Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'image',
+        type: 'string',
+        description: 'The URL for the main showcase image. Should represent the business or its work.',
+        required: true,
+      },
+    ],
+  },
+
   // ── BLOG ──────────────────────────────────────────────────────────
   'blog-article-dynamic': {
     componentName: 'blog-article-dynamic',
@@ -1447,6 +1488,178 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
         name: 'loadMoreUrl',
         type: 'string',
         description: 'URL for the load more button.',
+        required: false,
+      }
+    ],
+  },
+
+  'feature-facet-dynamic': {
+    componentName: 'feature-facet-dynamic',
+    section: 'feature',
+    props: [
+      {
+        name: 'heading',
+        type: 'string',
+        description: 'The main title of the feature section, placed above the image. Max 12 words.',
+        maxWords: 12,
+        required: true,
+      },
+      {
+        name: 'imageSrc',
+        type: 'string',
+        description: 'The URL of the large feature image. Should represent the core service or product.',
+        required: true,
+      },
+      {
+        name: 'imageAlt',
+        type: 'string',
+        description: 'Alt text for the feature image.',
+        required: false,
+      },
+      {
+        name: 'ctaText',
+        type: 'string',
+        description: 'Text for the call-to-action button at the top right. Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'A list of feature items. Each item should be an object with "title" (max 5 words) and "description" (max 25 words). Icons are injected separately. Max 4 items.',
+        required: true,
+      }
+    ],
+  },
+
+  'feature-focus-dynamic': {
+    componentName: 'feature-focus-dynamic',
+    section: 'feature',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the feature section. Should be bold and impactful. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        description: 'A brief explanatory paragraph below the title. Max 30 words.',
+        maxWords: 30,
+        required: true,
+      },
+      {
+        name: 'imageSrc',
+        type: 'string',
+        description: 'The URL for the central focus image. Should represent the product or a person using it.',
+        required: true,
+      },
+      {
+        name: 'features',
+        type: 'array',
+        description: 'An array of exactly 4 feature objects. Each object should have a title and a description (max 15 words each). Icons will be assigned automatically.',
+        required: true,
+      }
+    ],
+  },
+
+  'feature-item-dynamic': {
+    componentName: 'feature-item-dynamic',
+    section: 'feature',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main headline for the feature section. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        description: 'A descriptive sub-headline or paragraph explaining the section. Max 40 words.',
+        maxWords: 40,
+        required: false,
+      },
+      {
+        name: 'primaryCtaText',
+        type: 'string',
+        description: 'Text for the primary call-to-action button.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'primaryCtaLink',
+        type: 'string',
+        description: 'URL for the primary call-to-action button.',
+        required: false,
+      },
+      {
+        name: 'secondaryCtaText',
+        type: 'string',
+        description: 'Text for the secondary call-to-action button.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'secondaryCtaLink',
+        type: 'string',
+        description: 'URL for the secondary call-to-action button.',
+        required: false,
+      },
+      {
+        name: 'items',
+        type: 'array',
+        description: 'An array of feature items. Each item can have a badge (e.g., "NEW"), title, description, linkText, linkUrl, and a variant ("dark", "blue", "orange").',
+        required: true,
+      }
+    ],
+  },
+
+  'feature-list-dynamic': {
+    componentName: 'feature-list-dynamic',
+    section: 'feature',
+    props: [
+      {
+        name: 'label',
+        type: 'string',
+        description: 'A small uppercase label above the main heading. Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main heading for the feature section. Max 15 words.',
+        maxWords: 15,
+        required: true,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A brief introductory paragraph explaining the services or features. Max 40 words.',
+        maxWords: 40,
+        required: false,
+      },
+      {
+        name: 'ctaText',
+        type: 'string',
+        description: 'The text for the call-to-action button. Max 5 words.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'features',
+        type: 'array',
+        description: 'A list of feature items, each with an icon, title, and description. Provide 3-6 items.',
+        required: true,
+      },
+      {
+        name: 'backgroundImage',
+        type: 'string',
+        description: 'A faint background image for the section.',
         required: false,
       }
     ],

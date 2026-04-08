@@ -73,6 +73,12 @@
       "description": "A high-impact brand story section with split layout, image focus, and feature grid."
     },
     {
+      "name": "about-brief-dynamic",
+      "category": "about",
+      "file": "about/about-brief-dynamic.tsx",
+      "description": "A clean about section with a decorative red line, bold heading, dual paragraphs, and an overlapping image layout."
+    },
+    {
       "name": "blog-article-dynamic",
       "category": "blog",
       "file": "blog/blog-article-dynamic.tsx",
@@ -139,6 +145,12 @@
       "description": "A grid of feature cards with alternating text/image positions and a highlighted card."
     },
     {
+      "name": "feature-facet-dynamic",
+      "category": "feature",
+      "file": "feature/feature-facet-dynamic.tsx",
+      "description": "Two-column feature section with a large image and a detailed list of services or capabilities."
+    },
+    {
       "name": "benefits-advantage-dynamic",
       "category": "benefits",
       "file": "benefits/benefits-advantage-dynamic.tsx",
@@ -155,6 +167,24 @@
       "category": "features",
       "file": "features/feature-element-dynamic.tsx",
       "description": "A clean, minimalist features section with a grid layout, header labels, and dual call-to-action buttons."
+    },
+    {
+      "name": "feature-focus-dynamic",
+      "category": "feature",
+      "file": "feature/feature-focus-dynamic.tsx",
+      "description": "A centered feature spotlight with a middle image and four surrounding feature cards."
+    },
+    {
+      "name": "feature-item-dynamic",
+      "category": "feature",
+      "file": "feature/feature-item-dynamic.tsx",
+      "description": "A feature section with a centered header, CTA buttons, and a grid of stylized cards with badges and links."
+    },
+    {
+      "name": "feature-list-dynamic",
+      "category": "feature",
+      "file": "feature/feature-list-dynamic.tsx",
+      "description": "A split-layout feature section with a left-side intro and a right-side grid of services or features."
     }
   ],
   "categories": [

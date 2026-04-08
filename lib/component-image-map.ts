@@ -86,6 +86,12 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
+  'about-brief-dynamic': {
+    imageCount: 1,
+    imageProp: 'image',
+    imageMode: 'single',
+  },
+
   // ── COMPANY-STORY ─────────────────────────────────────────────────────
   'company-story-dynamic': {
     imageCount: 4,
@@ -165,6 +171,30 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageCount: 9,
     imageProp: 'items',
     imageMode: 'items',
+  },
+
+  'feature-facet-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageSrc',
+    imageMode: 'single',
+  },
+
+  'feature-focus-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageSrc',
+    imageMode: 'single',
+  },
+
+  'feature-item-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'feature-list-dynamic': {
+    imageCount: 1,
+    imageProp: 'backgroundImage',
+    imageMode: 'single',
   },
 
   // ── BENEFITS ─────────────────────────────────────────────────────────

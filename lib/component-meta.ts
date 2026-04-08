@@ -15,6 +15,7 @@ export const COMPONENT_META = {
   // About components
   "about-bio-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
   "about-brand-dynamic": { section: "about", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+  "about-brief-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 10 },
 
   // Footer components
   "footer-simple":    { section: "footer", supportsImages: false, supportsItems: false, contentLevel: "low",    priority: 8 },
@@ -45,6 +46,10 @@ export const COMPONENT_META = {
   // Feature components
   "feature-aspect-dynamic": { section: "feature", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
   "feature-detail-dynamic": { section: "feature", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+  "feature-facet-dynamic": { section: "feature", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+  "feature-focus-dynamic": { section: "feature", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+  "feature-item-dynamic": { section: "feature", supportsImages: false, supportsItems: true, contentLevel: "high", priority: 10 },
+  "feature-list-dynamic": { section: "feature", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
 
   // Benefits components
   "benefits-advantage-dynamic": { section: "benefits", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },

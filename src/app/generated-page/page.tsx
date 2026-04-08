@@ -23,7 +23,7 @@ export interface LayoutData {
 const FALLBACK_COMPONENTS: Record<string, string> = {
   hero: "hero-action-dynamic",
   footer: "footer-simple",
-  about: "about-brand-dynamic",
+  about: "about-brief-dynamic",
   blog: "blog-feed-dynamic",
   "company-story": "company-story-dynamic",
   "faq-process": "faq-process-dynamic",
@@ -32,7 +32,7 @@ const FALLBACK_COMPONENTS: Record<string, string> = {
   navbar: "nav-float-dynamic",
   testimonials: "testi-client-dynamic",
   gallery: "gallery-album-dynamic",
-  feature: "feature-detail-dynamic",
+  feature: "feature-list-dynamic",
   benefits: "benefits-advantage-dynamic",
   features: "feature-element-dynamic",
 };
