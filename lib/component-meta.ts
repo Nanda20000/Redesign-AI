@@ -20,13 +20,6 @@ export const COMPONENT_META = {
   // Footer components
   "footer-simple":    { section: "footer", supportsImages: false, supportsItems: false, contentLevel: "low",    priority: 8 },
 
-  // Company-story components
-  "company-story-dynamic": { section: "company-story", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
-  "story-archive-dynamic": { section: "company-story", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
-
-  // Faq-process components
-  "faq-process-dynamic": { section: "faq-process", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
-
   // Contact components
   "contact-form-dynamic": { section: "contact", supportsImages: false, supportsItems: false, contentLevel: "high", priority: 10 },
 

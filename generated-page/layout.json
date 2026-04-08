@@ -13,14 +13,6 @@
       "component": "blog-article-dynamic"
     },
     {
-      "section": "company-story",
-      "component": "company-story-dynamic"
-    },
-    {
-      "section": "faq-process",
-      "component": "faq-process-dynamic"
-    },
-    {
       "section": "footer",
       "component": "footer-simple"
     }

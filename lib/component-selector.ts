@@ -36,7 +36,7 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
   hero: ['hero-apex-dynamic', 'hero-anchor-dynamic', 'hero-alpha-dynamic', 'hero-adapt-dynamic', 'hero-active-dynamic', 'hero-action-dynamic'],
   about: ['about-brief-dynamic', 'about-brand-dynamic', 'about-bio-dynamic'],
   blog: ['blog-grid-dynamic', 'blog-feed-dynamic', 'blog-article-dynamic'],
-  'company-story': ['story-archive-dynamic', 'company-story-dynamic'],
+  'company-story': ['story-archive-dynamic'],
   cta: ['cta-banner-dynamic'],
   testimonials: ['testi-client-dynamic'],
   gallery: ['gallery-album-dynamic'],
@@ -50,8 +50,7 @@ function isSelectableAIComponent(componentName: string): boolean {
 
 /**
  * Get AI-selectable components for a section using the manifest instead of a hardcoded whitelist.
- * Only returns the 6 kept components: hero-action-dynamic, about-bio-dynamic, blog-article-dynamic,
- * company-story-dynamic, faq-process-dynamic, footer-simple.
+ * Only returns kept components: hero-action-dynamic, about-bio-dynamic, blog-article-dynamic, story-archive-dynamic, footer-simple.
  */
 function getAIComponentsForSection(
   section: string,
@@ -608,11 +607,11 @@ ${sectionGuidelines}
 IMPORTANT: You are encouraged to pick DIFFERENT components on different runs. Do not default to the same component every time.
 
 ## Business Type Guidance:
-- education/academy → prioritize about-bio-dynamic, blog-article-dynamic, company-story-dynamic
-- saas/startup → prioritize hero-action-dynamic, blog-article-dynamic, faq-process-dynamic
-- corporate → prioritize about-bio-dynamic, company-story-dynamic, faq-process-dynamic
-- portfolio/agency → prioritize company-story-dynamic, blog-article-dynamic
-- ecommerce → prioritize faq-process-dynamic, blog-article-dynamic
+- education/academy → prioritize about-bio-dynamic, blog-article-dynamic, story-archive-dynamic
+- saas/startup → prioritize hero-action-dynamic, blog-article-dynamic
+- corporate → prioritize about-bio-dynamic, story-archive-dynamic
+- portfolio/agency → prioritize story-archive-dynamic, blog-article-dynamic
+- ecommerce → prioritize blog-article-dynamic
 
 ## Response Format — Return ONLY this JSON, no markdown, no explanation:
 {
@@ -620,8 +619,7 @@ IMPORTANT: You are encouraged to pick DIFFERENT components on different runs. Do
     {"section": "hero", "component": "hero-action-dynamic"},
     {"section": "about", "component": "about-bio-dynamic"},
     {"section": "blog", "component": "blog-article-dynamic"},
-    {"section": "company-story", "component": "company-story-dynamic"},
-    {"section": "faq-process", "component": "faq-process-dynamic"},
+    {"section": "company-story", "component": "story-archive-dynamic"},
     {"section": "footer", "component": "footer-simple"}
   ]
 }

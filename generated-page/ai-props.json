@@ -55,54 +55,6 @@
       }
     ]
   },
-  "company-story-dynamic": {
-    "title": "Our Company Story",
-    "subtitle": "From Vision to Reality",
-    "intro": "Our journey began with a simple mission: to make quality education and professional development accessible to everyone. Today, we continue to innovate and expand our reach.",
-    "milestones": [
-      {
-        "year": "2015",
-        "title": "Foundation Established",
-        "description": "Started with a small team dedicated to transforming education.",
-        "image": "https://example.com/milestone-1.jpg"
-      },
-      {
-        "year": "2018",
-        "title": "Major Expansion",
-        "description": "Grew to serve thousands of students across multiple regions.",
-        "image": "https://example.com/milestone-2.jpg"
-      },
-      {
-        "year": "2022",
-        "title": "Industry Recognition",
-        "description": "Received awards for excellence in educational innovation.",
-        "image": "https://example.com/milestone-3.jpg"
-      }
-    ]
-  },
-  "faq-process-dynamic": {
-    "title": "Frequently Asked Questions",
-    "subtitle": "Find answers to common questions about our services",
-    "type": "faq",
-    "faqItems": [
-      {
-        "question": "How do I get started with your programs?",
-        "answer": "Simply reach out through our contact form or call us directly. Our team will guide you through the enrollment process and help you choose the right program for your goals."
-      },
-      {
-        "question": "What support do you provide during the course?",
-        "answer": "We offer comprehensive support including dedicated mentors, 24/7 access to learning materials, regular assessments, and personalized feedback to ensure your success."
-      },
-      {
-        "question": "Are there any prerequisites for enrollment?",
-        "answer": "Most programs are open to everyone. Some advanced courses may require basic knowledge in the field, but we offer foundation courses to help you get up to speed."
-      },
-      {
-        "question": "What certification will I receive?",
-        "answer": "Upon successful completion, you'll receive an industry-recognized certification that validates your skills and enhances your professional credentials."
-      }
-    ]
-  },
   "footer-simple": {
     "brandName": "Your Company",
     "description": "Empowering individuals and organizations through innovative educational solutions and expert guidance.",

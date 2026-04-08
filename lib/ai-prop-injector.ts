@@ -920,40 +920,6 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
   },
 
   // ── COMPANY STORY ─────────────────────────────────────────────────
-  'company-story-dynamic': {
-    componentName: 'company-story-dynamic',
-    section: 'company-story',
-    props: [
-      {
-        name: 'title',
-        type: 'string',
-        description: 'Main heading for the company story section. Max 10 words.',
-        maxWords: 10,
-        required: false,
-      },
-      {
-        name: 'subtitle',
-        type: 'string',
-        description: 'Subtitle or tagline for the company story. Max 8 words.',
-        maxWords: 8,
-        required: false,
-      },
-      {
-        name: 'intro',
-        type: 'string',
-        description: 'Introductory paragraph about the company journey. Max 40 words.',
-        maxWords: 40,
-        required: false,
-      },
-      {
-        name: 'milestones',
-        type: 'array',
-        description: 'Array of milestone objects representing key moments in company history. Each milestone should have: year (e.g., "2020"), title (max 8 words), description (max 25 words), and optionally image (URL from Available Images list).',
-        required: false,
-      },
-    ],
-  },
-
   'story-archive-dynamic': {
     componentName: 'story-archive-dynamic',
     section: 'company-story',
@@ -1011,46 +977,6 @@ export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
         type: 'array',
         description: 'An array of 4 statistics objects, each with a "value" (e.g., "95%") and a "label" (e.g., "Customer satisfaction rate").',
         required: true,
-      },
-    ],
-  },
-
-  // ── FAQ PROCESS ───────────────────────────────────────────────────
-  'faq-process-dynamic': {
-    componentName: 'faq-process-dynamic',
-    section: 'faq-process',
-    props: [
-      {
-        name: 'title',
-        type: 'string',
-        description: 'Main heading for the FAQ or Process section. Max 10 words.',
-        maxWords: 10,
-        required: false,
-      },
-      {
-        name: 'subtitle',
-        type: 'string',
-        description: 'Subtitle or description for the section. Max 20 words.',
-        maxWords: 20,
-        required: false,
-      },
-      {
-        name: 'type',
-        type: 'string',
-        description: 'Type of content: "faq" for frequently asked questions, or "process" for step-by-step workflow.',
-        required: false,
-      },
-      {
-        name: 'faqItems',
-        type: 'array',
-        description: 'Array of FAQ objects (only if type is "faq"). Each item should have: question (max 15 words) and answer (max 50 words).',
-        required: false,
-      },
-      {
-        name: 'processSteps',
-        type: 'array',
-        description: 'Array of process step objects (only if type is "process"). Each step should have: stepNumber (e.g., "Step 1"), title (max 8 words), and description (max 30 words).',
-        required: false,
       },
     ],
   },

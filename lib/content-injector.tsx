@@ -649,17 +649,6 @@ export function getComponentContentProps(
       };
     }
 
-    // Company Story components
-    case 'company-story-dynamic': {
-      const sectionContent = mappedContent['company-story'] as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.subtitle ?? '',
-        intro: sectionContent?.intro ?? '',
-        milestones: sectionContent?.milestones ?? [],
-      };
-    }
-
     case 'story-archive-dynamic': {
       const sectionContent = mappedContent.companyStory as any;
       return {
@@ -672,18 +661,6 @@ export function getComponentContentProps(
         ratingLabel: sectionContent?.ratingLabel ?? '',
         ratingIcon: sectionContent?.ratingIcon ?? null,
         stats: sectionContent?.stats ?? [],
-      };
-    }
-
-    // FAQ Process components
-    case 'faq-process-dynamic': {
-      const sectionContent = mappedContent['faq-process'] as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.subtitle ?? '',
-        type: sectionContent?.type ?? 'faq',
-        faqItems: sectionContent?.faqItems ?? [],
-        processSteps: sectionContent?.processSteps ?? [],
       };
     }
 

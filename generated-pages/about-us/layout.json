@@ -1,0 +1,28 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "nav-float-dynamic"
+    },
+    {
+      "section": "hero",
+      "component": "hero-anchor-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "feature-element-dynamic"
+    },
+    {
+      "section": "about",
+      "component": "about-brand-dynamic"
+    },
+    {
+      "section": "gallery",
+      "component": "gallery-album-dynamic"
+    },
+    {
+      "section": "footer",
+      "component": "footer-simple"
+    }
+  ]
+}

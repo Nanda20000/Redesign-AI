@@ -93,23 +93,10 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   },
 
   // ── COMPANY-STORY ─────────────────────────────────────────────────────
-  'company-story-dynamic': {
-    imageCount: 4,
-    imageProp: 'milestones',
-    imageMode: 'items',
-  },
-
   'story-archive-dynamic': {
     imageCount: 1,
     imageProp: 'mainImage',
     imageMode: 'single',
-  },
-
-  // ── FAQ-PROCESS ───────────────────────────────────────────────────────
-  'faq-process-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
   },
 
   // ── FOOTER ────────────────────────────────────────────────────────────

@@ -201,17 +201,6 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
-  // ── COMPANY-STORY ───────────────────────────────────────────────────
-  'company-story-dynamic': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'tagline', type: 'label', maxWords: 5 },
-      { prop: 'heading', type: 'heading', maxWords: 15 },
-      { prop: 'description', type: 'paragraph', maxWords: 40 },
-      { prop: 'milestones', type: 'list', maxWords: 100 },
-    ],
-  },
-
   'story-archive-dynamic': {
     isDynamic: true,
     contentSlots: [
@@ -222,17 +211,6 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'ratingValue', type: 'label', maxWords: 5 },
       { prop: 'ratingLabel', type: 'label', maxWords: 5 },
       { prop: 'stats', type: 'list', maxWords: 20 },
-    ],
-  },
-
-  // ── FAQ-PROCESS ─────────────────────────────────────────────────────
-  'faq-process-dynamic': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'tagline', type: 'label', maxWords: 5 },
-      { prop: 'heading', type: 'heading', maxWords: 15 },
-      { prop: 'description', type: 'paragraph', maxWords: 40 },
-      { prop: 'items', type: 'list', maxWords: 150 },
     ],
   },
 

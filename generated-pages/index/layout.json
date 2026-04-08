@@ -6,7 +6,7 @@
     },
     {
       "section": "hero",
-      "component": "hero-adapt-dynamic"
+      "component": "hero-alpha-dynamic"
     },
     {
       "section": "about",
@@ -22,7 +22,7 @@
     },
     {
       "section": "company-story",
-      "component": "company-story-dynamic"
+      "component": "story-archive-dynamic"
     },
     {
       "section": "gallery",
@@ -39,10 +39,6 @@
     {
       "section": "contact",
       "component": "contact-form-dynamic"
-    },
-    {
-      "section": "faq-process",
-      "component": "faq-process-dynamic"
     },
     {
       "section": "footer",

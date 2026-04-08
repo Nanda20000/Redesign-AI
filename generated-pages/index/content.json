@@ -645,25 +645,25 @@
   "processed": {
     "features": {
       "heading": "Discover Our Courses",
-      "description": "Premium quality online courses for professional certifications in accounting and finance, including ACCA, CFA, and CMA USA.",
+      "description": "Premium quality online courses for professional certifications in ACCA, CFA, and CMA USA, designed to equip students with exam-focused resources and real-world application skills.",
       "items": [
         {
           "title": "CMA USA - PART 1 & 2 (ONLINE)",
-          "description": "Globally recognized certification in management accounting focusing on financial planning, performance analysis, and strategic decision-making."
+          "description": "Globally recognized certification in management accounting and financial management from IMA, USA. Focuses on financial planning, performance analysis, strategic decision-making, and business control."
         },
         {
           "title": "ACCA Courses (e.g., TX, SBR, SBL, PM, FR, FM, ATX, APM)",
-          "description": "Comprehensive ACCA subject courses with live classes, recordings, and exam-focused strategies taught by experienced faculty."
+          "description": "Comprehensive ACCA subject courses taught by experienced faculty. Emphasizes conceptual clarity, exam strategy, and practical application through live classes and recordings."
         },
         {
           "title": "CMA US - EXAM EDGE (PART 1 & 2)",
-          "description": "Structured support program providing focused practice and strategy to prepare for the real CMA exam environment."
+          "description": "A structured free support program providing focused practice, guidance, and strategy to prepare students for the real CMA exam environment and application of concepts."
         }
       ]
     },
     "about": {
       "title": "One Team. One Dream. One Goal.",
-      "description": "Instil Learning Hub provides premium quality classes for ACCA, CFA, and CMA, acting as a dedicated exam partner. The institute focuses on shaping leaders and toppers by equipping students with resources, exclusive study materials, and community support.",
+      "description": "Instil Learning Hub provides premium quality classes for ACCA, CFA, and CMA, acting as a dedicated exam partner. With over 7 years of experience, they have shaped leaders and toppers since 2025, offering live classes, exclusive study materials, and a supportive community.",
       "companies": [],
       "achievements": [
         {
@@ -681,7 +681,7 @@
       ],
       "breakout": {
         "title": "Your Exam Partner",
-        "description": "Shaping up leaders & toppers since 2025. From assisting in live classes to providing all resources, Instil is your partner for exam success."
+        "description": "Shaping up leaders & toppers since 2025. From assisting in live classes to providing all resources, Instil is your partner in achieving exam success."
       }
     },
     "footer": {

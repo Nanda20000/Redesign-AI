@@ -426,7 +426,7 @@ function getDefaultImageComponent(section: string): string | null {
     hero: ['hero-action-dynamic', 'hero-active-dynamic', 'hero-adapt-dynamic', 'hero-alpha-dynamic', 'hero-anchor-dynamic', 'hero-apex-dynamic'],
     about: ['about-bio-dynamic', 'about-brand-dynamic', 'about-brief-dynamic'],
     blog: ['blog-article-dynamic', 'blog-feed-dynamic', 'blog-grid-dynamic'],
-    'company-story': ['company-story-dynamic', 'story-archive-dynamic'],
+    'company-story': ['story-archive-dynamic'],
   };
   
   const candidates = imageCandidates[section];
@@ -546,7 +546,7 @@ function normalizeStructuralSections(sections: string[]): string[] {
 
   const result = cleaned.filter((section, index) => {
     if (section === 'footer') return index === lastFooterIndex;
-    return true; // hero, about, blog, company-story, faq-process all pass through
+    return true; // hero, about, blog, company-story all pass through
   });
 
   // Guarantee hero survives normalization
@@ -843,7 +843,6 @@ export async function generateLayoutWithAI(
         about: 3,
         blog: 3,
         'company-story': 2,
-        'faq-process': 2
       };
       const dedupedMiddle = middle.filter(item => {
         const count = seen[item.section] || 0;

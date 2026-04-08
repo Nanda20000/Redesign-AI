@@ -7,22 +7,10 @@
       "description": "A simple footer with brand info and social links"
     },
     {
-      "name": "company-story-dynamic",
-      "category": "company-story",
-      "file": "company-story/company-story-dynamic.tsx",
-      "description": "Timeline-based company history section with milestone cards, images, and year markers."
-    },
-    {
       "name": "story-archive-dynamic",
       "category": "company-story",
       "file": "company-story/story-archive-dynamic.tsx",
       "description": "A dynamic company story section with a header, large image, and statistics grid."
-    },
-    {
-      "name": "faq-process-dynamic",
-      "category": "faq-process",
-      "file": "faq-process/faq-process-dynamic.tsx",
-      "description": "Accordion-style FAQ or numbered process steps section with expandable answers and visual step indicators."
     },
     {
       "name": "hero-action-dynamic",
@@ -190,7 +178,6 @@
   "categories": [
     "footer",
     "company-story",
-    "faq-process",
     "pricing",
     "hero",
     "about",

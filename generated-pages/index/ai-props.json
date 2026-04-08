@@ -8,81 +8,49 @@
       },
       {
         "label": "About Us",
-        "href": "#"
-      },
-      {
-        "label": "Courses",
-        "href": "#"
-      },
-      {
-        "label": "Our Team",
-        "href": "#"
-      },
-      {
-        "label": "My Courses",
-        "href": "#"
-      },
-      {
-        "label": "Exam Platform",
-        "href": "#"
-      },
-      {
-        "label": "Study Tracker",
-        "href": "#"
-      },
-      {
-        "label": "Contact Us",
-        "href": "#"
+        "href": "/preview/about-us"
       }
     ],
     "loginLabel": "Sign In",
     "signupLabel": "Create Account",
-    "loginHref": "#",
-    "signupHref": "#"
+    "loginHref": null,
+    "signupHref": null
   },
-  "hero-adapt-dynamic": {
-    "trustpilotRating": null,
-    "trustpilotReviews": null,
-    "trustpilotSubLabel": null,
-    "title": "Premium ACCA, CFA & CMA Classes",
-    "description": "Join our limited batches and equip yourself with the resources to make your professional dream a reality. Quality education since 2025.",
-    "feature1Text": "7+ Years of Teaching Excellence",
-    "feature2Text": "25,000+ Successful Students",
-    "feature3Text": "4+ Comprehensive Certification Courses",
+  "hero-alpha-dynamic": {
+    "badge": "PREMIUM QUALITY CLASSES",
+    "titleStart": "Your Partner for",
+    "titleAccent": "Exam Success",
+    "titleEnd": "in ACCA, CFA & CMA",
+    "description": "Join Instil Learning Hub's premium classes. Your efforts shine when equipped with the right resources. Join our limited batches and turn your professional dreams into reality.",
     "ctaText": "Explore Our Courses",
-    "ctaLink": null,
-    "images": {
-      "main": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
-      "badge": null,
-      "bottomLeft": null,
-      "bottomRight": null
-    }
+    "image": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+    "imageAlt": "Two individuals engaged in learning at a computer, using the Instil Learning Hub platform for ACCA and CFA studies."
   },
   "about-brief-dynamic": {
     "title": "One Team. One Dream. One Goal.",
-    "description1": "Instil Learning Hub is your dedicated partner for ACCA, CFA, and CMA exam success. We provide premium quality classes and equip you with all the resources needed to make your efforts shine and achieve your professional dreams.",
-    "description2": "Since 2025, we have focused on shaping leaders and toppers. From live classes to exclusive study materials and community support, we are committed to being your trusted exam partner every step of the way.",
+    "description1": "Instil Learning Hub is your dedicated exam partner for ACCA, CFA, and CMA certifications. We provide premium quality classes designed to equip you with the resources and strategic guidance needed to excel.",
+    "description2": "Shaping leaders and toppers since 2025, we combine over 7 years of experience with a supportive community, live classes, and exclusive study materials to turn your professional aspirations into reality.",
     "ctaText": "Explore Our Courses",
     "image": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp"
   },
   "feature-element-dynamic": {
     "label": "OUR COURSES",
     "heading": "Discover Our Premium Certification Programs",
-    "description": "Globally recognized professional courses in accounting and finance, designed to equip you with practical, career-advancing skills.",
+    "description": "Equip yourself with exam-focused resources and real-world skills through our structured, high-quality courses.",
     "features": [
       {
         "title": "CMA USA Certification",
-        "description": "A globally recognized credential in management accounting focusing on financial planning, analysis, and strategic decision-making.",
+        "description": "Globally recognized management accounting credential focusing on financial planning, analysis, and strategic decision-making.",
         "icon": "Award"
       },
       {
         "title": "ACCA Professional Level",
-        "description": "Comprehensive courses for key ACCA subjects, featuring live classes, expert faculty, and exam-focused strategies.",
+        "description": "Comprehensive courses for key ACCA subjects, emphasizing conceptual clarity and practical exam strategy.",
         "icon": "GraduationCap"
       },
       {
         "title": "CMA Exam Edge Program",
-        "description": "A structured support initiative providing focused practice and strategy to master the real exam environment.",
+        "description": "A structured support initiative providing focused practice and strategy for the real exam environment.",
         "icon": "Target"
       }
     ],
@@ -90,113 +58,111 @@
     "secondaryCtaText": "View Free Videos"
   },
   "blog-grid-dynamic": {
-    "sectionTitle": "Insights & Exam Strategies",
-    "articleCount": null,
+    "sectionTitle": "Exam Insights & Success Stories",
+    "articleCount": "3",
     "sortLabel": "Sort by",
     "items": [
       {
-        "title": "Mastering CMA USA: A Strategic Approach",
-        "excerpt": "Learn how to effectively prepare for the CMA USA exam with focused study plans and real-world application strategies.",
-        "category": "CMA",
+        "title": "How to Approach the CMA USA Exam: A Strategic Guide",
+        "excerpt": "Learn the proven strategies for tackling the CMA USA exam, focusing on financial planning and performance analysis sections.",
+        "category": "Exam Strategy",
         "readTime": "5 min",
         "authorName": "Instil Faculty",
-        "date": "2026-03-15",
+        "date": "2024-11-15",
         "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1775537104858000.webp?alt=media&token=49d9d2d6-670f-4dc1-8ce3-59157a5dc059",
         "authorAvatar": null
       },
       {
-        "title": "ACCA Success Stories: From Study to Score",
-        "excerpt": "Discover the journeys of top performers and the resources that helped them excel in challenging ACCA subjects.",
-        "category": "ACCA",
-        "readTime": "7 min",
-        "authorName": "Instil Faculty",
-        "date": "2026-03-10",
+        "title": "From Student to Topper: Fathima's PM Success Story",
+        "excerpt": "Discover how Fathima Nadha achieved 71 marks in Performance Management (PM) with structured guidance and focused practice.",
+        "category": "Student Success",
+        "readTime": "4 min",
+        "authorName": "Fathima Nadha",
+        "date": "2024-10-28",
         "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874445051000.webp?alt=media&token=31e15401-7a87-4e05-a6b6-34afe64757b3",
         "authorAvatar": null
       },
       {
-        "title": "The Exam Edge: Beyond Just Studying",
-        "excerpt": "How structured support programs build confidence and practical skills for the actual professional exam environment.",
-        "category": "Strategy",
-        "readTime": "4 min",
-        "authorName": "Instil Faculty",
-        "date": "2026-03-05",
-        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1775303675506000.webp?alt=media&token=09966164-5b3b-42cc-94cd-19996441ae31",
+        "title": "Mastering ACCA Strategic Papers: SBR & SBL Tips",
+        "excerpt": "Essential tips and resources for excelling in ACCA's Strategic Business Reporting (SBR) and Strategic Business Leader (SBL) exams.",
+        "category": "ACCA Guidance",
+        "readTime": "6 min",
+        "authorName": "Instil Learning Hub",
+        "date": "2024-11-05",
+        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874521192000.webp?alt=media&token=8a6d6bda-658b-4114-81f9-6ee41435a5a3",
         "authorAvatar": null
       }
     ]
   },
-  "company-story-dynamic": {
-    "title": "One Team. One Dream. One Goal.",
-    "subtitle": "Shaping Leaders & Toppers Since 2025",
-    "intro": "Instil Learning Hub began with a singular vision: to be the definitive exam partner for ambitious finance professionals pursuing ACCA, CFA, and CMA certifications.",
-    "milestones": [
-      {
-        "year": "2025",
-        "title": "Our Foundation",
-        "description": "Founded to provide premium quality, resource-rich classes for a limited batch of dedicated students.",
-        "image": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp"
-      },
-      {
-        "year": "Today",
-        "title": "Your Dedicated Exam Partner",
-        "description": "Supporting over 25,000 students with expert-led courses and a comprehensive success ecosystem."
-      }
+  "story-archive-dynamic": {
+    "topHeading": "One Team. One Dream. One Goal.",
+    "topDescription": "Shaping Leaders & Toppers Since 2025",
+    "mainImage": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
+    "bottomHeading": "Your Dedicated Exam Partner",
+    "bottomDescription": "Supporting over 25,000 students with expert-led courses and a comprehensive success ecosystem.",
+    "ratingValue": "4.97/5",
+    "ratingLabel": "from",
+    "ratingIcon": null,
+    "stats": [
+      {"value": "95%", "label": "Pass Rate"},
+      {"value": "25K+", "label": "Students"},
+      {"value": "50+", "label": "Courses"},
+      {"value": "100+", "label": "Expert Faculty"}
     ]
   },
   "gallery-album-dynamic": {
-    "title": "Our Students' Success Stories & Learning Moments",
+    "title": "Student Success Stories & Learning Moments",
     "images": [
       {
         "url": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
-        "alt": "Students engaged in collaborative learning at Instil Learning Hub."
+        "alt": "Students engaged in collaborative learning on the Instil platform."
       },
       {
         "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1775537437096000.webp?alt=media&token=f9b5672b-d025-4275-9c6c-87ee18427d4a",
-        "alt": "CMA USA Part 2 course materials and resources."
+        "alt": "CMA USA Part 2 course promotional image."
       },
       {
         "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1775537104858000.webp?alt=media&token=49d9d2d6-670f-4dc1-8ce3-59157a5dc059",
-        "alt": "CMA USA Part 1 online learning interface."
-      },
-      {
-        "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1775303675506000.webp?alt=media&token=09966164-5b3b-42cc-94cd-19996441ae31",
-        "alt": "CMA US Exam Edge Part 1 preparation program."
+        "alt": "CMA USA Part 1 course promotional image."
       },
       {
         "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874664392000.webp?alt=media&token=cca5330e-f6d2-4d77-9443-b0ce828f8622",
-        "alt": "ACCA Taxation UK (TX) course preview."
+        "alt": "ACCA Taxation UK (TX) course promotional image."
       },
       {
         "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874521192000.webp?alt=media&token=8a6d6bda-658b-4114-81f9-6ee41435a5a3",
-        "alt": "ACCA Strategic Business Reporting (SBR) course materials."
+        "alt": "ACCA Strategic Business Reporting (SBR) course promotional image."
       },
       {
-        "url": "https://www.instillearninghub.com/_next/static/media/learning-1.13fa7f9a.webp",
-        "alt": "A student achieving success with Instil's premium resources."
+        "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874483307000.webp?alt=media&token=5c4c0346-37d3-4035-a889-b0369bef1018",
+        "alt": "ACCA Strategic Business Leader (SBL) course promotional image."
+      },
+      {
+        "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874445051000.webp?alt=media&token=31e15401-7a87-4e05-a6b6-34afe64757b3",
+        "alt": "ACCA Performance Management (PM) course promotional image."
       }
     ]
   },
   "testi-client-dynamic": {
     "heading": "Student Success Stories",
-    "subtext": "Hear from our high-achieving students who turned their professional goals into reality.",
+    "subtext": "Hear from our high-achieving students who turned their exam goals into reality.",
     "testimonials": [
       {
-        "quote": "Scoring 71 in PM was a dream. The structured guidance and resources at Instil made the complex concepts clear and manageable.",
+        "quote": "Scored 71 in PM with Instil's structured guidance and exam-focused resources. The live classes made complex concepts clear.",
         "authorName": "Fathima Nadha",
         "authorRole": "ACCA Student",
         "authorImage": null,
         "bgColor": "bg-blue-100"
       },
       {
-        "quote": "Achieving 77 in AA was a significant milestone. The faculty's support and exam-focused strategy were instrumental to my success.",
+        "quote": "Achieved 77 in AA. The faculty's support and the comprehensive study materials were instrumental in my success.",
         "authorName": "Neeraj",
         "authorRole": "ACCA Student",
         "authorImage": null,
         "bgColor": "bg-green-100"
       },
       {
-        "quote": "Securing 70 in AAA required deep understanding. The premium quality classes and dedicated mentorship provided the edge I needed.",
+        "quote": "Secured 70 in AAA. The strategic approach and practical application focus at Instil were key differentiators.",
         "authorName": "Shaijal",
         "authorRole": "ACCA Student",
         "authorImage": null,
@@ -208,24 +174,24 @@
     "title": "Your Exam Success Partner Since 2025",
     "description": "Join our limited batches and get equipped with premium resources to make your dream a reality.",
     "items": [
-      "ACCA",
-      "CFA",
-      "CMA USA",
-      "Exam Edge Support"
+      "ACCA Courses",
+      "CMA USA Certification",
+      "CFA Program",
+      "Free Exam Edge Support"
     ],
     "bottomLabel": "Ready to shape your future?",
     "ctaText": "Explore Our Courses",
     "backgroundImage": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp"
   },
   "contact-form-dynamic": {
-    "title": "Get in Touch with Your Exam Partner",
-    "emailLabel": "Email Address:",
+    "title": "Get in Touch with Instil Learning Hub",
+    "emailLabel": "Email:",
     "email": "instil.admissions@gmail.com",
-    "phoneLabel": "Phone Number:",
+    "phoneLabel": "Phone:",
     "phone": "+91 98955 53355",
     "addressLabel": null,
     "address": null,
-    "socialTitle": "Connect With Us",
+    "socialTitle": "Follow us",
     "formNameLabel": "Your Name",
     "formNamePlaceholder": "Enter your full name",
     "formEmailLabel": "Your Email",
@@ -234,36 +200,9 @@
     "formMessagePlaceholder": "Tell us about your ACCA, CFA, or CMA query",
     "formSubmitLabel": "Send Message"
   },
-  "faq-process-dynamic": {
-    "title": "Your Journey to Success",
-    "subtitle": "A clear, structured path from enrollment to exam day with Instil Learning Hub.",
-    "type": "process",
-    "processSteps": [
-      {
-        "stepNumber": "Step 1",
-        "title": "Explore & Enroll",
-        "description": "Browse our premium ACCA, CFA, or CMA courses and join a limited batch to secure your spot."
-      },
-      {
-        "stepNumber": "Step 2",
-        "title": "Access Resources & Live Classes",
-        "description": "Gain immediate access to exclusive study materials, recorded lectures, and interactive live sessions."
-      },
-      {
-        "stepNumber": "Step 3",
-        "title": "Utilize Study Tools",
-        "description": "Track your progress with our Study Tracker and practice on the dedicated Exam Platform."
-      },
-      {
-        "stepNumber": "Step 4",
-        "title": "Achieve Your Goal",
-        "description": "With expert guidance and comprehensive support, sit for your exam with confidence and succeed."
-      }
-    ]
-  },
   "footer-simple": {
-    "brandName": "INSTIL INSTITUTE OF COMMERCE PRIVATE LIMITED",
+    "brandName": "Instil Institute of Commerce Private Limited",
     "description": "Premium quality classes for ACCA, CFA & CMA certifications.",
-    "copyright": "© 2026 INSTIL INSTITUTE OF COMMERCE PRIVATE LIMITED. All rights reserved."
+    "copyright": "© 2026 Instil Institute of Commerce Private Limited. All rights reserved."
   }
 }
