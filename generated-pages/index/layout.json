@@ -6,11 +6,11 @@
     },
     {
       "section": "hero",
-      "component": "hero-action-dynamic"
+      "component": "hero-adapt-dynamic"
     },
     {
       "section": "about",
-      "component": "about-brand-dynamic"
+      "component": "about-brief-dynamic"
     },
     {
       "section": "features",
@@ -18,11 +18,11 @@
     },
     {
       "section": "blog",
-      "component": "blog-article-dynamic"
+      "component": "blog-grid-dynamic"
     },
     {
       "section": "company-story",
-      "component": "story-archive-dynamic"
+      "component": "company-story-dynamic"
     },
     {
       "section": "gallery",

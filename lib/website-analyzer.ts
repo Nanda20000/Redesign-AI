@@ -447,138 +447,50 @@ export interface ComponentRecommendations {
 }
 
 function getHeroRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['hero'] {
-  const preferred: string[] = ['hero-action-dynamic'];
-  const avoid: string[] = [];
-  const reasons: string[] = ['Hero section is essential for all websites'];
-
-  // Business type specific messaging guidance
-  if (businessType === 'saas' || businessType === 'startup') {
-    reasons.push('Engaging hero with action-oriented design');
-  } else if (businessType === 'corporate') {
-    reasons.push('Professional hero with clear value proposition');
-  } else if (businessType === 'education') {
-    reasons.push('Clear, readable hero messaging');
-  }
-
   return {
-    preferred,
-    avoid,
-    reason: reasons.join('. ')
+    preferred: [],
+    avoid: [],
+    reason: 'Hero section for page introduction'
   };
 }
 
 function getAboutRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['about'] {
-  const preferred: string[] = ['about-bio-dynamic'];
-  const avoid: string[] = [];
-  const reasons: string[] = ['About section provides company background'];
-
-  if (businessType === 'corporate') {
-    reasons.push('Structured about section with story, mission, and vision');
-  } else if (businessType === 'portfolio' || businessType === 'agency') {
-    reasons.push('Visual about for creative presentation');
-  }
-
   return {
-    preferred,
-    avoid,
-    reason: reasons.join('. ')
+    preferred: [],
+    avoid: [],
+    reason: 'About section for company background'
   };
 }
 
 function getBlogRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['blog'] {
-  const preferred: string[] = ['blog-article-dynamic'];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // Blog is only recommended for content-rich sites
-  if (businessType === 'education' || businessType === 'saas') {
-    reasons.push('Article listing for content marketing and education');
-  } else if (businessType === 'agency' || businessType === 'corporate') {
-    reasons.push('News and insights section for thought leadership');
-  } else {
-    reasons.push('Blog section for content updates');
-  }
-
-  // Only show blog for content-rich sites
-  if (richness === 'low') {
-    reasons.push('Blog may not be needed for content-light sites');
-  }
-
   return {
-    preferred,
-    avoid,
-    reason: reasons.join('. ')
+    preferred: [],
+    avoid: [],
+    reason: 'Blog section for content'
   };
 }
 
 function getCompanyStoryRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['companyStory'] {
-  const preferred: string[] = ['company-story-dynamic'];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // Company story/history for established businesses
-  if (businessType === 'corporate' || businessType === 'education') {
-    reasons.push('Company history and milestones build trust and credibility');
-  } else if (businessType === 'agency' || businessType === 'portfolio') {
-    reasons.push('Journey timeline showcases growth and achievements');
-  } else {
-    reasons.push('Company story helps users connect with brand heritage');
-  }
-
   return {
-    preferred,
-    avoid,
-    reason: reasons.join('. ')
+    preferred: [],
+    avoid: [],
+    reason: 'Company story for brand heritage'
   };
 }
 
 function getFaqProcessRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['faqProcess'] {
-  const preferred: string[] = ['faq-process-dynamic'];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // FAQ/Process for businesses that need to explain or support
-  if (businessType === 'saas' || businessType === 'education') {
-    reasons.push('FAQ section addresses common questions and reduces support load');
-  } else if (businessType === 'ecommerce') {
-    reasons.push('FAQ for shipping, returns, and product questions');
-  } else if (businessType === 'healthcare') {
-    reasons.push('Process steps explain patient journey and procedures');
-  } else {
-    reasons.push('FAQ or process section improves user understanding');
-  }
-
   return {
-    preferred,
-    avoid,
-    reason: reasons.join('. ')
+    preferred: [],
+    avoid: [],
+    reason: 'FAQ or process section'
   };
 }
 
 function getFooterRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['footer'] {
-  const preferred: string[] = ['footer-simple'];
-  const avoid: string[] = [];
-  const reasons: string[] = [];
-
-  // Footer always included
-  reasons.push('Footer provides essential site closure and navigation');
-
-  if (businessType === 'corporate') {
-    reasons.push('Professional footer with comprehensive links');
-  } else if (businessType === 'saas' || businessType === 'startup') {
-    reasons.push('Modern footer with social and links');
-  } else if (businessType === 'ecommerce') {
-    reasons.push('Customer service links and policies');
-  } else if (businessType === 'portfolio' || businessType === 'agency') {
-    reasons.push('Clean footer with contact info');
-  } else if (businessType === 'education') {
-    reasons.push('Clear institutional information');
-  }
-
   return {
-    preferred,
-    avoid,
-    reason: reasons.join('. ')
+    preferred: [],
+    avoid: [],
+    reason: 'Footer for site closure'
   };
 }
 

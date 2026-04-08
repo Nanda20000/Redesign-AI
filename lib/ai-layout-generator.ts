@@ -419,20 +419,19 @@ export function loadGeneratedPageData(): Promise<GeneratedPageData> {
 
 /**
  * Get default image-capable component for a section
+ * Randomly picks from all image-capable components for that section
  */
 function getDefaultImageComponent(section: string): string | null {
-  switch (section) {
-    case 'hero':
-      return 'hero-action-dynamic';
-    case 'about':
-      return 'about-bio-dynamic';
-    case 'blog':
-      return 'blog-article-dynamic';
-    case 'company-story':
-      return 'company-story-dynamic';
-    default:
-      return null;
-  }
+  const imageCandidates: Record<string, string[]> = {
+    hero: ['hero-action-dynamic', 'hero-active-dynamic', 'hero-adapt-dynamic', 'hero-alpha-dynamic', 'hero-anchor-dynamic', 'hero-apex-dynamic'],
+    about: ['about-bio-dynamic', 'about-brand-dynamic', 'about-brief-dynamic'],
+    blog: ['blog-article-dynamic', 'blog-feed-dynamic', 'blog-grid-dynamic'],
+    'company-story': ['company-story-dynamic', 'story-archive-dynamic'],
+  };
+  
+  const candidates = imageCandidates[section];
+  if (!candidates || candidates.length === 0) return null;
+  return candidates[Math.floor(Math.random() * candidates.length)];
 }
 
 /**
@@ -490,7 +489,8 @@ function getAIComponentsForSection(
 
 /**
  * Enforce AI-compatible components on layout AFTER AI generation.
- * Uses token-overlap scoring to pick the best match instead of blind fallback.
+ * If the AI picked a valid -dynamic component that exists in safeComponents, keep it.
+ * If it picked something invalid, pick randomly from safe list.
  */
 function enforceAICompatibleComponents(
   layout: LayoutResponse,
@@ -508,23 +508,12 @@ function enforceAICompatibleComponents(
     );
 
     if (safeComponents.length > 0 && !safeComponents.includes(item.component)) {
-      // Score candidates: prefer names that share tokens with the AI's original pick
-      const aiTokens = item.component.toLowerCase().split('-');
-      const scored = safeComponents.map(name => {
-        const tokens = name.toLowerCase().split('-');
-        const overlap = tokens.filter(t => aiTokens.includes(t)).length;
-        return { name, overlap };
-      });
-      scored.sort((a, b) => b.overlap - a.overlap);
-      newItem.component = scored[0].name;
-      
-      // Hero-specific logging for debugging
-      if (item.section === 'hero') {
-        console.log(`[enforceAI] Hero: AI chose "${item.component}", safe list: ${safeComponents.join(', ')}, final: "${newItem.component}"`);
-      } else {
-        console.log(`[enforceAI] ${item.section}: replaced "${item.component}" → "${newItem.component}" (token-scored)`);
-      }
+      // AI picked something not in our safe list — pick randomly from safe list
+      const randomIndex = Math.floor(Math.random() * safeComponents.length);
+      newItem.component = safeComponents[randomIndex];
+      console.log(`[enforceAI] ${item.section}: AI chose invalid "${item.component}", randomly assigned "${newItem.component}"`);
     }
+    // else: AI picked a valid component, keep it as-is
 
     enhancedLayout.push(newItem);
   }
@@ -648,35 +637,28 @@ function mergeLayoutsByDetectedSections(
 
 /**
  * Select the best component for a section based on metadata and content
+ * Uses random selection for variety across regenerations
  */
 function selectBestComponent(section: string, content?: ExtractedContent): string | null {
   const candidates = Object.entries(COMPONENT_META)
-    .filter(([_, meta]) => meta.section === section);
+    .filter(([_, meta]) => meta.section === section)
+    .map(([name]) => name);
 
   if (candidates.length === 0) return null;
 
-  let best = candidates[0];
-
-  for (const candidate of candidates) {
-    const [name, meta] = candidate;
-
-    // Rule 1: prefer image components if images exist
-    if (content?.images?.length && content.images.length > 0 && meta.supportsImages) {
-      best = candidate;
-    }
-
-    // Rule 2: prefer item components if items exist
-    if (content?.items?.length && content.items.length > 0 && meta.supportsItems) {
-      best = candidate;
-    }
-
-    // Rule 3: higher priority wins
-    if (meta.priority > best[1].priority) {
-      best = candidate;
+  // If images exist, prefer image-capable components
+  if (content?.images && content.images.length > 0) {
+    const imageCandidates = candidates.filter(name => {
+      const meta = COMPONENT_META[name as keyof typeof COMPONENT_META];
+      return meta?.supportsImages;
+    });
+    if (imageCandidates.length > 0) {
+      return imageCandidates[Math.floor(Math.random() * imageCandidates.length)];
     }
   }
 
-  return best[0];
+  // Otherwise pick randomly from all candidates for this section
+  return candidates[Math.floor(Math.random() * candidates.length)];
 }
 
 /**

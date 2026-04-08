@@ -309,11 +309,15 @@ function selectBestComponent(
   usedStyles: Set<string>,
   content?: ExtractedContent
 ): { component: string; score: number; reason: string } {
-  // Filter to only image-capable components if images exist
-  let candidates = availableComponents;
+  let candidates = availableComponents.filter(isSelectableAIComponent);
   
+  if (candidates.length === 0) {
+    candidates = availableComponents;
+  }
+
+  // If images exist, prefer image-capable components but don't restrict entirely
   if (content?.images && content.images.length > 0) {
-    const imageCandidates = availableComponents.filter(name => 
+    const imageCandidates = candidates.filter(name => 
       componentSupportsImages(name, category)
     );
     if (imageCandidates.length > 0) {
@@ -321,13 +325,12 @@ function selectBestComponent(
     }
   }
 
-  // Pick randomly from valid candidates
   const selected = candidates[Math.floor(Math.random() * candidates.length)];
 
   return {
     component: selected,
     score: 100,
-    reason: `Randomly selected from ${candidates.length} available ${category} components`,
+    reason: `Randomly selected "${selected}" from ${candidates.length} available ${category} components`,
   };
 }
 
@@ -429,7 +432,7 @@ function enforceAICompatibleComponents(
     if (safeComponents.length > 0) {
       const isSafe = safeComponents.includes(item.component);
       if (!isSafe) {
-        newItem.component = safeComponents[0];
+        newItem.component = safeComponents[Math.floor(Math.random() * safeComponents.length)];
       }
     }
 
@@ -562,6 +565,16 @@ export function buildEnhancedPrompt(
     dynamicOnlyByCategory.hero = ['hero-banner-dynamic'];
   }
 
+  // Build dynamic selection guidelines from actual available components
+  const sectionGuidelines = Object.entries(dynamicOnlyByCategory)
+    .map(([section, comps]) => {
+      if (comps.length === 0) return null;
+      const randomPick = comps[Math.floor(Math.random() * comps.length)];
+      return `- ${section} section → choose ANY from: [${comps.join(', ')}] (suggested this run: ${randomPick})`;
+    })
+    .filter(Boolean)
+    .join('\n');
+
   return `You are an expert UI/UX designer. Your job is to select the best dynamic components to rebuild a website.
 
 ## STRICT RULE — DYNAMIC COMPONENTS ONLY
@@ -589,13 +602,10 @@ ${JSON.stringify(dynamicOnlyByCategory, null, 2)}
 Analyze the source website's detected sections and match them to the best available component.
 ALWAYS check the full "Available DYNAMIC-ONLY Components" list above before deciding.
 
-Selection guidelines (use Available Components list as the authoritative source):
-- Hero section → hero-action-dynamic
-- About section → about-bio-dynamic
-- Blog section → blog-article-dynamic
-- Company story/history → company-story-dynamic
-- FAQ or Process steps → faq-process-dynamic
-- Page footer → footer-simple
+Selection guidelines — pick freely from the available components list above:
+${sectionGuidelines}
+
+IMPORTANT: You are encouraged to pick DIFFERENT components on different runs. Do not default to the same component every time.
 
 ## Business Type Guidance:
 - education/academy → prioritize about-bio-dynamic, blog-article-dynamic, company-story-dynamic
