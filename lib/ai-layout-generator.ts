@@ -614,7 +614,10 @@ function mergeLayoutsByDetectedSections(
       candidate = fallbackBySection.get(section);
     }
 
-    if (!candidate) continue;
+    if (!candidate) {
+      console.warn(`[mergeLayouts] No candidate for section "${section}" — skipped`);
+      continue;
+    }
 
     const normalized = { section, component: candidate.component };
     fallbackBySection.set(section, normalized);

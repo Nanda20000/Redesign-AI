@@ -170,6 +170,10 @@ const CONDITIONAL_SECTIONS: Record<string, {
     },
     reason: 'FAQ/Process to address questions and explain workflows'
   },
+  contact: {
+    shouldInclude: () => true,
+    reason: 'Contact section for visitor inquiries'
+  },
 };
 
 /**
@@ -315,13 +319,28 @@ function selectBestComponent(
     candidates = availableComponents;
   }
 
-  // If images exist, prefer image-capable components but don't restrict entirely
+  // If images exist, prefer image-capable components but keep the full pool as a fallback
   if (content?.images && content.images.length > 0) {
-    const imageCandidates = candidates.filter(name => 
+    const imageCandidates = candidates.filter(name =>
       componentSupportsImages(name, category)
     );
     if (imageCandidates.length > 0) {
-      candidates = imageCandidates;
+      // Weighted pick: 70% image-capable, 30% other variants for variety
+      const weightedPool: string[] = [];
+      for (const name of imageCandidates) {
+        weightedPool.push(name, name, name, name, name, name, name);
+      }
+      for (const name of candidates) {
+        if (!imageCandidates.includes(name)) {
+          weightedPool.push(name, name, name);
+        }
+      }
+      const selectedWeighted = weightedPool[Math.floor(Math.random() * weightedPool.length)];
+      return {
+        component: selectedWeighted,
+        score: 100,
+        reason: `Randomly selected "${selectedWeighted}" from ${candidates.length} ${category} components (image-capable weighted 7:3 over non-image variants)`,
+      };
     }
   }
 
@@ -613,6 +632,7 @@ IMPORTANT: You are encouraged to pick DIFFERENT components on different runs. Do
 - corporate → prioritize about-bio-dynamic, story-archive-dynamic
 - portfolio/agency → prioritize story-archive-dynamic, blog-article-dynamic
 - ecommerce → prioritize blog-article-dynamic
+- All site types → always include a contact component (contact-form-dynamic, contact-help-dynamic, contact-inbox-dynamic, contact-lead-dynamic, contact-link-dynamic, or contact-mail-dynamic)
 
 ## Response Format — Return ONLY this JSON, no markdown, no explanation:
 {
@@ -621,6 +641,7 @@ IMPORTANT: You are encouraged to pick DIFFERENT components on different runs. Do
     {"section": "about", "component": "about-bio-dynamic"},
     {"section": "blog", "component": "blog-article-dynamic"},
     {"section": "company-story", "component": "story-archive-dynamic"},
+    {"section": "contact", "component": "contact-form-dynamic"},
     {"section": "footer", "component": "footer-simple"}
   ]
 }
