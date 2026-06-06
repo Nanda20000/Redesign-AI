@@ -49,6 +49,18 @@
       "description": "A premium hero section with background image, center content, and a bottom bar featuring social proof and stats."
     },
     {
+      "name": "hero-aspect-dynamic",
+      "category": "hero",
+      "file": "hero/hero-aspect-dynamic.tsx",
+      "description": "A sophisticated hero section with a badge, large heading, CTA, social proof ratings, and a feature grid at the bottom."
+    },
+    {
+      "name": "hero-atlas-dynamic",
+      "category": "hero",
+      "file": "hero/hero-atlas-dynamic.tsx",
+      "description": "Dynamic travel-themed hero section with a large background image and a floating info card."
+    },
+    {
       "name": "about-bio-dynamic",
       "category": "about",
       "file": "about/about-bio-dynamic.tsx",
@@ -65,6 +77,18 @@
       "category": "about",
       "file": "about/about-brief-dynamic.tsx",
       "description": "A clean about section with a decorative red line, bold heading, dual paragraphs, and an overlapping image layout."
+    },
+    {
+      "name": "about-card-dynamic",
+      "category": "about",
+      "file": "about/about-card-dynamic.tsx",
+      "description": "A dynamic about section with two offset images and a feature highlight block."
+    },
+    {
+      "name": "about-crew-dynamic",
+      "category": "about",
+      "file": "about/about-crew-dynamic.tsx",
+      "description": "A two-column about section with a dark values card and a large image card with overlay text."
     },
     {
       "name": "blog-article-dynamic",
@@ -89,6 +113,12 @@
       "category": "contact",
       "file": "contact/contact-form-dynamic.tsx",
       "description": "A clean two-column contact section with info details and a message form."
+    },
+    {
+      "name": "contact-help-dynamic",
+      "category": "contact",
+      "file": "contact/contact-help-dynamic.tsx",
+      "description": "A dynamic contact and service request section featuring a customizable name, phone/email, services field, and submission actions."
     },
     {
       "name": "cta-banner-dynamic",
@@ -151,12 +181,6 @@
       "description": "A grid-based benefits section with customizable cards, icons, and a highlighted option."
     },
     {
-      "name": "feature-element-dynamic",
-      "category": "features",
-      "file": "features/feature-element-dynamic.tsx",
-      "description": "A clean, minimalist features section with a grid layout, header labels, and dual call-to-action buttons."
-    },
-    {
       "name": "feature-focus-dynamic",
       "category": "feature",
       "file": "feature/feature-focus-dynamic.tsx",
@@ -188,7 +212,6 @@
     "testimonials",
     "gallery",
     "feature",
-    "benefits",
-    "features"
+    "benefits"
   ]
 }

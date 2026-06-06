@@ -25,14 +25,13 @@ const FALLBACK_COMPONENTS: Record<string, string> = {
   about: "about-brief-dynamic",
   blog: "blog-feed-dynamic",
   "company-story": "story-archive-dynamic",
-  contact: "contact-form-dynamic",
+  contact: "contact-help-dynamic",
   cta: "cta-banner-dynamic",
   navbar: "nav-float-dynamic",
   testimonials: "testi-client-dynamic",
   gallery: "gallery-album-dynamic",
   feature: "feature-list-dynamic",
   benefits: "benefits-advantage-dynamic",
-  features: "feature-element-dynamic",
 };
 
 /**

@@ -114,6 +114,33 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
+  'hero-aspect-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badgeText', type: 'label', maxWords: 10 },
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 },
+      { prop: 'ratingValue', type: 'label', maxWords: 5 },
+      { prop: 'ratingLabel', type: 'paragraph', maxWords: 10 },
+      { prop: 'features', type: 'list', maxWords: 60 }
+    ],
+  },
+
+  'hero-atlas-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'eyebrow', type: 'label', maxWords: 10 },
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'highlightedTitle', type: 'heading', maxWords: 5 },
+      { prop: 'primaryCta', type: 'cta', maxWords: 5 },
+      { prop: 'secondaryCta', type: 'cta', maxWords: 5 },
+      { prop: 'floatingCardLabel', type: 'label', maxWords: 5 },
+      { prop: 'floatingCardTitle', type: 'heading', maxWords: 10 },
+      { prop: 'floatingCardDescription', type: 'paragraph', maxWords: 25 },
+    ],
+  },
+
   // ── BLOG ────────────────────────────────────────────────────────────
   'blog-article-dynamic': {
     isDynamic: true,
@@ -154,6 +181,30 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
   },
 
   // ── ABOUT ───────────────────────────────────────────────────────────
+  'about-crew-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'label', type: 'label', maxWords: 5 },
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'values', type: 'list', maxWords: 50 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 },
+      { prop: 'imageNumber', type: 'label', maxWords: 5 },
+      { prop: 'imageLabel', type: 'label', maxWords: 10 },
+    ],
+  },
+
+  'about-card-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 12 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'featureTitle', type: 'heading', maxWords: 10 },
+      { prop: 'featureDescription', type: 'paragraph', maxWords: 30 },
+      { prop: 'ctaText', type: 'cta', maxWords: 4 },
+    ],
+  },
+
   'about-bio-dynamic': {
     isDynamic: true,
     contentSlots: [
@@ -233,6 +284,26 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'formMessageLabel', type: 'label', maxWords: 5 },
       { prop: 'formMessagePlaceholder', type: 'paragraph', maxWords: 15 },
       { prop: 'formSubmitLabel', type: 'cta', maxWords: 5 },
+    ],
+  },
+
+  'contact-help-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badgeText', type: 'label', maxWords: 6 },
+      { prop: 'heading', type: 'heading', maxWords: 12 },
+      { prop: 'descriptionText', type: 'paragraph', maxWords: 40 },
+      { prop: 'phoneText', type: 'label', maxWords: 8 },
+      { prop: 'addressText', type: 'label', maxWords: 15 },
+      { prop: 'emailText', type: 'label', maxWords: 15 },
+      { prop: 'formNameLabel', type: 'label', maxWords: 5 },
+      { prop: 'formNamePlaceholder', type: 'label', maxWords: 5 },
+      { prop: 'formPhoneLabel', type: 'label', maxWords: 5 },
+      { prop: 'formPhonePlaceholder', type: 'label', maxWords: 5 },
+      { prop: 'formServicesLabel', type: 'label', maxWords: 5 },
+      { prop: 'formServicesPlaceholder', type: 'label', maxWords: 8 },
+      { prop: 'formServicesOptions', type: 'list', maxWords: 30 },
+      { prop: 'submitText', type: 'cta', maxWords: 5 }
     ],
   },
 
@@ -371,19 +442,6 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'heading', type: 'heading', maxWords: 15 },
       { prop: 'footerButtonText', type: 'cta', maxWords: 5 },
       { prop: 'items', type: 'list', maxWords: 100 },
-    ],
-  },
-
-  // ── FEATURES ──────────────────────────────────────────────────────────
-  'feature-element-dynamic': {
-    isDynamic: true,
-    contentSlots: [
-      { prop: 'label', type: 'label', maxWords: 3 },
-      { prop: 'heading', type: 'heading', maxWords: 10 },
-      { prop: 'description', type: 'paragraph', maxWords: 30 },
-      { prop: 'primaryCtaText', type: 'cta', maxWords: 3 },
-      { prop: 'secondaryCtaText', type: 'cta', maxWords: 3 },
-      { prop: 'features', type: 'list', maxWords: 100 },
     ],
   },
 

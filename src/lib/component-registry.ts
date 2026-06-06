@@ -13,11 +13,15 @@ import { HeroAdaptDynamic } from '../../components-library/hero/hero-adapt-dynam
 import { HeroAlphaDynamic } from '../../components-library/hero/hero-alpha-dynamic';
 import { HeroAnchorDynamic } from '../../components-library/hero/hero-anchor-dynamic';
 import { HeroApexDynamic } from '../../components-library/hero/hero-apex-dynamic';
+import { HeroAspectDynamic } from '../../components-library/hero/hero-aspect-dynamic';
+import { HeroAtlasDynamic } from '../../components-library/hero/hero-atlas-dynamic';
 
 // About components
 import { AboutBioDynamic } from '../../components-library/about/about-bio-dynamic';
 import { AboutBrandDynamic } from '../../components-library/about/about-brand-dynamic';
 import { AboutBriefDynamic } from '../../components-library/about/about-brief-dynamic';
+import { AboutCardDynamic } from '../../components-library/about/about-card-dynamic';
+import { AboutCrewDynamic } from '../../components-library/about/about-crew-dynamic';
 
 // Blog components
 import { BlogArticleDynamic } from '../../components-library/blog/blog-article-dynamic';
@@ -26,6 +30,7 @@ import { BlogGridDynamic } from '../../components-library/blog/blog-grid-dynamic
 
 // Contact components
 import { ContactFormDynamic } from '../../components-library/contact/contact-form-dynamic';
+import { ContactHelpDynamic } from '../../components-library/contact/contact-help-dynamic';
 
 // CTA components
 import { CtaBannerDynamic } from '../../components-library/cta/cta-banner-dynamic';
@@ -55,9 +60,6 @@ import { FeatureListDynamic } from '../../components-library/feature/feature-lis
 import { BenefitsAdvantageDynamic } from '../../components-library/benefits/benefits-advantage-dynamic';
 import { BenefitsAssetDynamic } from '../../components-library/benefits/benefits-asset-dynamic';
 
-// Features components
-import { FeatureElementDynamic } from '../../components-library/features/feature-element-dynamic';
-
 // Component registry mapping component names to their implementations
 export const componentRegistry: Record<string, ComponentType<any>> = {
   // Footer components
@@ -70,11 +72,15 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'hero-alpha-dynamic': HeroAlphaDynamic,
   'hero-anchor-dynamic': HeroAnchorDynamic,
   'hero-apex-dynamic': HeroApexDynamic,
+  'hero-aspect-dynamic': HeroAspectDynamic,
+  'hero-atlas-dynamic': HeroAtlasDynamic,
 
   // About components
   'about-bio-dynamic': AboutBioDynamic,
   'about-brand-dynamic': AboutBrandDynamic,
   'about-brief-dynamic': AboutBriefDynamic,
+  'about-card-dynamic': AboutCardDynamic,
+  'about-crew-dynamic': AboutCrewDynamic,
 
   // Blog components
   'blog-article-dynamic': BlogArticleDynamic,
@@ -83,6 +89,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
 
   // Contact components
   'contact-form-dynamic': ContactFormDynamic,
+  'contact-help-dynamic': ContactHelpDynamic,
 
   // CTA components
   'cta-banner-dynamic': CtaBannerDynamic,
@@ -111,9 +118,6 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   // Benefits components
   'benefits-advantage-dynamic': BenefitsAdvantageDynamic,
   'benefits-asset-dynamic': BenefitsAssetDynamic,
-
-  // Features components
-  'feature-element-dynamic': FeatureElementDynamic,
 
 };
 

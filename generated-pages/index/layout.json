@@ -6,15 +6,11 @@
     },
     {
       "section": "hero",
-      "component": "hero-alpha-dynamic"
+      "component": "hero-apex-dynamic"
     },
     {
       "section": "about",
       "component": "about-brief-dynamic"
-    },
-    {
-      "section": "features",
-      "component": "feature-element-dynamic"
     },
     {
       "section": "blog",

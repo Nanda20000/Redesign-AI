@@ -544,6 +544,43 @@ export function getComponentContentProps(
       };
     }
 
+    case 'hero-aspect-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        badgeText: sectionContent?.badgeText ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        ctaText: sectionContent?.primaryCta?.text ?? '',
+        ratingValue: sectionContent?.socialProof?.value ?? '',
+        ratingLabel: sectionContent?.socialProof?.label ?? '',
+        ratingAvatars: sectionContent?.socialProof?.avatars ?? [],
+        videoThumbnail: sectionContent?.image ?? '',
+        features: sectionContent?.items?.map((item: any) => ({
+          title: item?.title ?? '',
+          description: item?.description ?? '',
+        })) ?? [],
+      };
+    }
+
+    case 'hero-atlas-dynamic': {
+      const sectionContent = mappedContent.hero as any;
+      return {
+        eyebrow: sectionContent?.eyebrow ?? '',
+        title: sectionContent?.title ?? '',
+        highlightedTitle: sectionContent?.highlightedTitle ?? '',
+        primaryCta: sectionContent?.primaryCta ?? '',
+        secondaryCta: sectionContent?.secondaryCta ?? '',
+        backgroundImage: sectionContent?.backgroundImage ?? '',
+        floatingCardLabel: sectionContent?.floatingCardLabel ?? '',
+        floatingCardTitle: sectionContent?.floatingCardTitle ?? '',
+        floatingCardDescription: sectionContent?.floatingCardDescription ?? '',
+        floatingCardImages: sectionContent?.floatingCardImages ?? [],
+        primaryCtaIcon: sectionContent?.primaryCtaIcon,
+        secondaryCtaIcon: sectionContent?.secondaryCtaIcon,
+        cardArrowIcon: sectionContent?.cardArrowIcon,
+      };
+    }
+
     // Blog components
     case 'blog-article-dynamic': {
       const sectionContent = mappedContent.blog as any;
@@ -649,6 +686,34 @@ export function getComponentContentProps(
       };
     }
 
+    case 'about-crew-dynamic': {
+      const sectionContent = mappedContent.about as any;
+      return {
+        label: sectionContent?.label ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        values: sectionContent?.items?.map((item: any) => item.title || item.text) ?? [],
+        ctaText: sectionContent?.ctaText ?? '',
+        ctaLink: sectionContent?.ctaLink ?? '',
+        backgroundImage: sectionContent?.image || sectionContent?.backgroundImage || '',
+        imageNumber: sectionContent?.imageNumber ?? '',
+        imageLabel: sectionContent?.imageLabel ?? '',
+      };
+    }
+
+    case 'about-card-dynamic': {
+      const sectionContent = mappedContent.about as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        featureTitle: sectionContent?.subheading ?? '',
+        featureDescription: sectionContent?.text ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        image1: sectionContent?.images?.[0] ?? '',
+        image2: sectionContent?.images?.[1] ?? '',
+      };
+    }
+
     case 'story-archive-dynamic': {
       const sectionContent = mappedContent.companyStory as any;
       return {
@@ -697,6 +762,26 @@ export function getComponentContentProps(
         formMessageLabel: sectionContent?.formMessageLabel ?? '',
         formMessagePlaceholder: sectionContent?.formMessagePlaceholder ?? '',
         formSubmitLabel: sectionContent?.formSubmitLabel ?? '',
+      };
+    }
+
+    case 'contact-help-dynamic': {
+      const sectionContent = mappedContent.contact as any;
+      return {
+        badgeText: sectionContent?.badgeText ?? '',
+        heading: sectionContent?.heading ?? '',
+        descriptionText: sectionContent?.descriptionText ?? '',
+        phoneText: sectionContent?.phoneText ?? '',
+        addressText: sectionContent?.addressText ?? '',
+        emailText: sectionContent?.emailText ?? '',
+        formNameLabel: sectionContent?.formNameLabel ?? '',
+        formNamePlaceholder: sectionContent?.formNamePlaceholder ?? '',
+        formPhoneLabel: sectionContent?.formPhoneLabel ?? '',
+        formPhonePlaceholder: sectionContent?.formPhonePlaceholder ?? '',
+        formServicesLabel: sectionContent?.formServicesLabel ?? '',
+        formServicesPlaceholder: sectionContent?.formServicesPlaceholder ?? '',
+        formServicesOptions: sectionContent?.formServicesOptions ?? [],
+        submitText: sectionContent?.submitText ?? '',
       };
     }
 
@@ -895,23 +980,6 @@ export function getComponentContentProps(
         items: sectionContent?.items ?? [],
         arrowIcon: sectionContent?.arrowIcon ?? null,
         readMoreArrowIcon: sectionContent?.readMoreArrowIcon ?? null,
-      };
-    }
-
-    // Features components
-    case 'feature-element-dynamic': {
-      const sectionContent = mappedContent.features as any;
-      return {
-        label: sectionContent?.label ?? '',
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        primaryCtaText: sectionContent?.primaryCtaText ?? '',
-        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
-        features: sectionContent?.items?.map((item: any) => ({
-          icon: item.icon,
-          title: item.title,
-          description: item.description,
-        })) ?? [],
       };
     }
 

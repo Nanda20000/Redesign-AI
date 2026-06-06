@@ -1,208 +1,206 @@
 {
   "nav-bar-dynamic": {
-    "logoText": "Instil Learning Hub",
+    "logoText": "Dr Zainu's Dental Clinic",
     "navLinks": [
       {
         "label": "Home",
         "href": "/preview/index"
-      },
-      {
-        "label": "About Us",
-        "href": "/preview/about-us"
       }
     ],
-    "loginLabel": "Sign In",
-    "signupLabel": "Create Account",
+    "loginLabel": "Login",
+    "signupLabel": "Sign Up",
     "loginHref": null,
     "signupHref": null
   },
-  "hero-alpha-dynamic": {
-    "badge": "PREMIUM QUALITY CLASSES",
-    "titleStart": "Your Partner for",
-    "titleAccent": "Exam Success",
-    "titleEnd": "in ACCA, CFA & CMA",
-    "description": "Join Instil Learning Hub's premium classes. Your efforts shine when equipped with the right resources. Join our limited batches and turn your professional dreams into reality.",
-    "ctaText": "Explore Our Courses",
-    "image": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
-    "imageAlt": "Two individuals engaged in learning at a computer, using the Instil Learning Hub platform for ACCA and CFA studies."
+  "hero-apex-dynamic": {
+    "heading": "Expert Dental Care for Your Brightest Smile",
+    "subheading": "Multi-speciality clinic offering advanced implantology, orthodontics, and cosmetic dentistry at N.H Kolappuram.",
+    "ctaText": "Book Your Appointment",
+    "backgroundImage": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg",
+    "ratingValue": "4.9",
+    "testimonialQuote": "Caring doctors and modern treatments—truly transformed my smile!",
+    "testimonialAuthor": "Satisfied Patient",
+    "featureTitle": "Expert Implant Dentistry",
+    "featureDescription": "Permanent tooth replacement by skilled implantologists.",
+    "stat1Value": "6+",
+    "stat1Label": "Specialist Doctors",
+    "sinceLabel": "SINCE",
+    "sinceValue": "2015"
   },
   "about-brief-dynamic": {
-    "title": "One Team. One Dream. One Goal.",
-    "description1": "Instil Learning Hub is your dedicated exam partner for ACCA, CFA, and CMA certifications. We provide premium quality classes designed to equip you with the resources and strategic guidance needed to excel.",
-    "description2": "Shaping leaders and toppers since 2025, we combine over 7 years of experience with a supportive community, live classes, and exclusive study materials to turn your professional aspirations into reality.",
-    "ctaText": "Explore Our Courses",
-    "image": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp"
-  },
-  "feature-element-dynamic": {
-    "label": "OUR COURSES",
-    "heading": "Discover Our Premium Certification Programs",
-    "description": "Equip yourself with exam-focused resources and real-world skills through our structured, high-quality courses.",
-    "features": [
-      {
-        "title": "CMA USA Certification",
-        "description": "Globally recognized management accounting credential focusing on financial planning, analysis, and strategic decision-making.",
-        "icon": "Award"
-      },
-      {
-        "title": "ACCA Professional Level",
-        "description": "Comprehensive courses for key ACCA subjects, emphasizing conceptual clarity and practical exam strategy.",
-        "icon": "GraduationCap"
-      },
-      {
-        "title": "CMA Exam Edge Program",
-        "description": "A structured support initiative providing focused practice and strategy for the real exam environment.",
-        "icon": "Target"
-      }
-    ],
-    "primaryCtaText": "Explore Courses",
-    "secondaryCtaText": "View Free Videos"
+    "title": "About Dr Zainu's Multi Speciality Dental Clinic",
+    "description1": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre, located at N.H Kolappuram, offers comprehensive dental care under one roof. Our dedicated team of specialists provides advanced treatments in implantology, orthodontics, endodontics, and more.",
+    "description2": "Led by Dr. Zainul Abid K.P, our clinic combines expertise with compassion to deliver exceptional oral healthcare. We are committed to using the latest technology and techniques to ensure your smile stays healthy and bright.",
+    "ctaText": "Book an Appointment",
+    "image": "https://drzainusdentalclinic.dialndial.com/images/banner/17030623056582ab217b48f.jpg"
   },
   "blog-grid-dynamic": {
-    "sectionTitle": "Exam Insights & Success Stories",
-    "articleCount": "3",
-    "sortLabel": "Sort by",
+    "sectionTitle": "Latest from Our Blog",
+    "articleCount": null,
+    "sortLabel": null,
     "items": [
       {
-        "title": "How to Approach the CMA USA Exam: A Strategic Guide",
-        "excerpt": "Learn the proven strategies for tackling the CMA USA exam, focusing on financial planning and performance analysis sections.",
-        "category": "Exam Strategy",
-        "readTime": "5 min",
-        "authorName": "Instil Faculty",
-        "date": "2024-11-15",
-        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1775537104858000.webp?alt=media&token=49d9d2d6-670f-4dc1-8ce3-59157a5dc059",
+        "title": "The Benefits of Dental Implants for a Lasting Smile",
+        "excerpt": "Discover how dental implants can restore your smile and oral function with a permanent, natural-looking solution.",
+        "category": "Implant Dentistry",
+        "readTime": "4 min read",
+        "authorName": "Dr. Zainul Abid K.P",
+        "date": "2025-03-15",
+        "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304612065826be88df70.jpg",
         "authorAvatar": null
       },
       {
-        "title": "From Student to Topper: Fathima's PM Success Story",
-        "excerpt": "Discover how Fathima Nadha achieved 71 marks in Performance Management (PM) with structured guidance and focused practice.",
-        "category": "Student Success",
-        "readTime": "4 min",
-        "authorName": "Fathima Nadha",
-        "date": "2024-10-28",
-        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874445051000.webp?alt=media&token=31e15401-7a87-4e05-a6b6-34afe64757b3",
+        "title": "Root Canal Treatment: Myths vs. Facts",
+        "excerpt": "Learn the truth about root canal therapy and how it can save your natural tooth from extraction.",
+        "category": "Root Canal Treatment",
+        "readTime": "5 min read",
+        "authorName": "Dr. Babu P.P",
+        "date": "2025-03-10",
+        "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304614565826c01b57ee.jpg",
         "authorAvatar": null
       },
       {
-        "title": "Mastering ACCA Strategic Papers: SBR & SBL Tips",
-        "excerpt": "Essential tips and resources for excelling in ACCA's Strategic Business Reporting (SBR) and Strategic Business Leader (SBL) exams.",
-        "category": "ACCA Guidance",
-        "readTime": "6 min",
-        "authorName": "Instil Learning Hub",
-        "date": "2024-11-05",
-        "image": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874521192000.webp?alt=media&token=8a6d6bda-658b-4114-81f9-6ee41435a5a3",
+        "title": "Orthodontic Care for Children and Adults",
+        "excerpt": "From braces to clear aligners, explore orthodontic options that straighten teeth and improve oral health at any age.",
+        "category": "Orthodontics",
+        "readTime": "6 min read",
+        "authorName": "Dr. Muhammed Noufal M.N",
+        "date": "2025-03-05",
+        "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304975965827a1f99120.jpg",
+        "authorAvatar": null
+      },
+      {
+        "title": "Cosmetic Dentistry: Enhance Your Smile Naturally",
+        "excerpt": "Explore cosmetic treatments like veneers and whitening to boost your confidence and achieve a radiant smile.",
+        "category": "Cosmetic Dentistry",
+        "readTime": "3 min read",
+        "authorName": "Dr. Prashanth Mohan",
+        "date": "2025-02-28",
+        "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304999065827b0699cdd.jpg",
         "authorAvatar": null
       }
     ]
   },
   "story-archive-dynamic": {
-    "topHeading": "One Team. One Dream. One Goal.",
-    "topDescription": "Shaping Leaders & Toppers Since 2025",
-    "mainImage": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
-    "bottomHeading": "Your Dedicated Exam Partner",
-    "bottomDescription": "Supporting over 25,000 students with expert-led courses and a comprehensive success ecosystem.",
-    "ratingValue": "4.97/5",
-    "ratingLabel": "from",
-    "ratingIcon": null,
+    "topHeading": "Our Story: Excellence in Dental Care Since Inception",
+    "topDescription": "Discover the journey of Dr. Zainu's Multi Speciality Dental Clinic & Implant Centre.",
+    "mainImage": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg",
+    "bottomHeading": "Comprehensive Multi-Speciality Dentistry Under One Roof at N.H Kolappuram",
+    "bottomDescription": "Led by Dr. Zainul Abid K.P, our clinic brings together a panel of expert visiting specialists in orthodontics, endodontics, pedodontics, oral surgery, and prosthodontics. We are committed to delivering advanced, compassionate dental care for the whole family.",
+    "ratingValue": null,
+    "ratingLabel": null,
     "stats": [
-      {"value": "95%", "label": "Pass Rate"},
-      {"value": "25K+", "label": "Students"},
-      {"value": "50+", "label": "Courses"},
-      {"value": "100+", "label": "Expert Faculty"}
+      {
+        "value": "6+",
+        "label": "Specialist Doctors"
+      },
+      {
+        "value": "8+",
+        "label": "Advanced Treatments"
+      },
+      {
+        "value": "100%",
+        "label": "Patient Satisfaction"
+      },
+      {
+        "value": "10+",
+        "label": "Years of Service"
+      }
     ]
   },
   "gallery-album-dynamic": {
-    "title": "Student Success Stories & Learning Moments",
+    "title": "Our Dental Care Gallery",
     "images": [
       {
-        "url": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp",
-        "alt": "Students engaged in collaborative learning on the Instil platform."
+        "url": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg",
+        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       },
       {
-        "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1775537437096000.webp?alt=media&token=f9b5672b-d025-4275-9c6c-87ee18427d4a",
-        "alt": "CMA USA Part 2 course promotional image."
+        "url": "https://drzainusdentalclinic.dialndial.com/images/banner/172302794166b351e53d048.jpeg",
+        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       },
       {
-        "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1775537104858000.webp?alt=media&token=49d9d2d6-670f-4dc1-8ce3-59157a5dc059",
-        "alt": "CMA USA Part 1 course promotional image."
+        "url": "https://drzainusdentalclinic.dialndial.com/images/banner/17030623056582ab217b48f.jpg",
+        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       },
       {
-        "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874664392000.webp?alt=media&token=cca5330e-f6d2-4d77-9443-b0ce828f8622",
-        "alt": "ACCA Taxation UK (TX) course promotional image."
+        "url": "https://drzainusdentalclinic.dialndial.com/images/banner/17030624006582ab803a9b3.jpg",
+        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       },
       {
-        "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874521192000.webp?alt=media&token=8a6d6bda-658b-4114-81f9-6ee41435a5a3",
-        "alt": "ACCA Strategic Business Reporting (SBR) course promotional image."
+        "url": "https://drzainusdentalclinic.dialndial.com/images/service/170304612065826be88df70.jpg",
+        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       },
       {
-        "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874483307000.webp?alt=media&token=5c4c0346-37d3-4035-a889-b0369bef1018",
-        "alt": "ACCA Strategic Business Leader (SBL) course promotional image."
+        "url": "https://drzainusdentalclinic.dialndial.com/images/service/170304614565826c01b57ee.jpg",
+        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       },
       {
-        "url": "https://firebasestorage.googleapis.com/v0/b/instil-learning-hub.firebasestorage.app/o/Course_Images%2F1770874445051000.webp?alt=media&token=31e15401-7a87-4e05-a6b6-34afe64757b3",
-        "alt": "ACCA Performance Management (PM) course promotional image."
+        "url": "https://drzainusdentalclinic.dialndial.com/images/service/170304975965827a1f99120.jpg",
+        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       }
     ]
   },
   "testi-client-dynamic": {
-    "heading": "Student Success Stories",
-    "subtext": "Hear from our high-achieving students who turned their exam goals into reality.",
+    "heading": "What Our Patients Say",
+    "subtext": "Hear from our valued patients about their experience at our clinic.",
     "testimonials": [
       {
-        "quote": "Scored 71 in PM with Instil's structured guidance and exam-focused resources. The live classes made complex concepts clear.",
-        "authorName": "Fathima Nadha",
-        "authorRole": "ACCA Student",
+        "quote": "The implant procedure was smooth and painless. Dr. Zainu and his team were incredibly professional and caring throughout.",
+        "authorName": "Rahul K.",
+        "authorRole": "Kozhikode",
         "authorImage": null,
         "bgColor": "bg-blue-100"
       },
       {
-        "quote": "Achieved 77 in AA. The faculty's support and the comprehensive study materials were instrumental in my success.",
-        "authorName": "Neeraj",
-        "authorRole": "ACCA Student",
+        "quote": "My daughter's orthodontic treatment has been a wonderful experience. The staff is very patient and gentle with children.",
+        "authorName": "Sneha M.",
+        "authorRole": "Kolappuram",
         "authorImage": null,
         "bgColor": "bg-green-100"
       },
       {
-        "quote": "Secured 70 in AAA. The strategic approach and practical application focus at Instil were key differentiators.",
-        "authorName": "Shaijal",
-        "authorRole": "ACCA Student",
+        "quote": "I had a root canal treatment here and was amazed at how comfortable it was. Highly recommend this clinic for dental care.",
+        "authorName": "Arun P.",
+        "authorRole": "N.H Kolappuram",
         "authorImage": null,
-        "bgColor": "bg-purple-100"
+        "bgColor": "bg-yellow-100"
       }
     ]
   },
   "cta-banner-dynamic": {
-    "title": "Your Exam Success Partner Since 2025",
-    "description": "Join our limited batches and get equipped with premium resources to make your dream a reality.",
+    "title": "Your Smile Deserves Expert Care",
+    "description": "Advanced dental treatments by a panel of specialists under one roof.",
     "items": [
-      "ACCA Courses",
-      "CMA USA Certification",
-      "CFA Program",
-      "Free Exam Edge Support"
+      "Implant Dentistry",
+      "Root Canal Treatment",
+      "Orthodontic Treatment",
+      "Cosmetic Dentistry"
     ],
-    "bottomLabel": "Ready to shape your future?",
-    "ctaText": "Explore Our Courses",
-    "backgroundImage": "https://www.instillearninghub.com/_next/static/media/hero-team-photo.7e71bb16.webp"
+    "bottomLabel": "Ready for a healthier smile?",
+    "ctaText": "Book Your Appointment",
+    "backgroundImage": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg"
   },
   "contact-form-dynamic": {
-    "title": "Get in Touch with Instil Learning Hub",
+    "title": "Get in Touch with Us",
     "emailLabel": "Email:",
-    "email": "instil.admissions@gmail.com",
+    "email": "zainsabi@gmail.com",
     "phoneLabel": "Phone:",
-    "phone": "+91 98955 53355",
-    "addressLabel": null,
-    "address": null,
-    "socialTitle": "Follow us",
-    "formNameLabel": "Your Name",
-    "formNamePlaceholder": "Enter your full name",
-    "formEmailLabel": "Your Email",
-    "formEmailPlaceholder": "Enter your email address",
-    "formMessageLabel": "Your Message",
-    "formMessagePlaceholder": "Tell us about your ACCA, CFA, or CMA query",
+    "phone": "9995740140",
+    "addressLabel": "Address:",
+    "address": "1st Floor, TR Building, N.H Kolappuram",
+    "socialTitle": "Follow Us",
+    "formNameLabel": "Name",
+    "formNamePlaceholder": "Your full name",
+    "formEmailLabel": "Email",
+    "formEmailPlaceholder": "Your email address",
+    "formMessageLabel": "Message",
+    "formMessagePlaceholder": "Write your enquiry or concern here",
     "formSubmitLabel": "Send Message"
   },
   "footer-simple": {
-    "brandName": "Instil Institute of Commerce Private Limited",
-    "description": "Premium quality classes for ACCA, CFA & CMA certifications.",
-    "copyright": "© 2026 Instil Institute of Commerce Private Limited. All rights reserved."
+    "brandName": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre",
+    "description": "Comprehensive dental care at N.H Kolappuram with expert specialists in implantology, orthodontics, and more.",
+    "copyright": "© 2025 Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
   }
 }

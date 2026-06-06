@@ -33,8 +33,8 @@ export interface ComponentSelectionResult {
  * Component capability map - which components support images
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-apex-dynamic', 'hero-anchor-dynamic', 'hero-alpha-dynamic', 'hero-adapt-dynamic', 'hero-active-dynamic', 'hero-action-dynamic'],
-  about: ['about-brief-dynamic', 'about-brand-dynamic', 'about-bio-dynamic'],
+  hero: ['hero-atlas-dynamic', 'hero-aspect-dynamic', 'hero-apex-dynamic', 'hero-anchor-dynamic', 'hero-alpha-dynamic', 'hero-adapt-dynamic', 'hero-active-dynamic', 'hero-action-dynamic'],
+  about: ['about-crew-dynamic', 'about-card-dynamic', 'about-brief-dynamic', 'about-brand-dynamic', 'about-bio-dynamic'],
   blog: ['blog-grid-dynamic', 'blog-feed-dynamic', 'blog-article-dynamic'],
   'company-story': ['story-archive-dynamic'],
   cta: ['cta-banner-dynamic'],

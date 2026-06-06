@@ -6,6 +6,8 @@ export const COMPONENT_META = {
   "hero-alpha-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
   "hero-anchor-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
   "hero-apex-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high", priority: 1 },
+  "hero-aspect-dynamic": { section: "hero",    supportsImages: true,  supportsItems: true, contentLevel: "high",    priority: 10 },
+  "hero-atlas-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 10 },
 
   // Blog components
   "blog-article-dynamic": { section: "blog", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
@@ -13,6 +15,8 @@ export const COMPONENT_META = {
   "blog-grid-dynamic": { section: "blog", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
 
   // About components
+  "about-crew-dynamic": { section: "about", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+  "about-card-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
   "about-bio-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
   "about-brand-dynamic": { section: "about", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
   "about-brief-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 10 },
@@ -22,6 +26,7 @@ export const COMPONENT_META = {
 
   // Contact components
   "contact-form-dynamic": { section: "contact", supportsImages: false, supportsItems: false, contentLevel: "high", priority: 10 },
+  "contact-help-dynamic": { section: "contact", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 15 },
 
   // CTA components
   "cta-banner-dynamic": { section: "cta", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 10 },
@@ -47,7 +52,4 @@ export const COMPONENT_META = {
   // Benefits components
   "benefits-advantage-dynamic": { section: "benefits", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
   "benefits-asset-dynamic": { section: "benefits", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
-
-  // Features components
-  "feature-element-dynamic": { section: "features", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
 };

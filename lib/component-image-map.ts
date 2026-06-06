@@ -54,6 +54,18 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
+  'hero-aspect-dynamic': {
+    imageCount: 1,
+    imageProp: 'videoThumbnail',
+    imageMode: 'single',
+  },
+
+  'hero-atlas-dynamic': {
+    imageCount: 4,
+    imageProp: 'backgroundImage',
+    imageMode: 'single',
+  },
+
   // ── BLOG ──────────────────────────────────────────────────────────────
   'blog-article-dynamic': {
     imageCount: 6,
@@ -74,6 +86,18 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   },
 
   // ── ABOUT ─────────────────────────────────────────────────────────────
+  'about-crew-dynamic': {
+    imageCount: 1,
+    imageProp: 'backgroundImage',
+    imageMode: 'single',
+  },
+
+  'about-card-dynamic': {
+    imageCount: 2,
+    imageProp: 'image',
+    imageMode: 'array',
+  },
+
   'about-bio-dynamic': {
     imageCount: 1,
     imageProp: 'storyImage',
@@ -108,6 +132,12 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
 
   // ── CONTACT ──────────────────────────────────────────────────────────
   'contact-form-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'contact-help-dynamic': {
     imageCount: 0,
     imageProp: '',
     imageMode: 'none',
@@ -192,13 +222,6 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   },
 
   'benefits-asset-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  // ── FEATURES ─────────────────────────────────────────────────────────
-  'feature-element-dynamic': {
     imageCount: 0,
     imageProp: '',
     imageMode: 'none',
