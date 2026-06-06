@@ -31,6 +31,10 @@ import { BlogGridDynamic } from '../../components-library/blog/blog-grid-dynamic
 // Contact components
 import { ContactFormDynamic } from '../../components-library/contact/contact-form-dynamic';
 import { ContactHelpDynamic } from '../../components-library/contact/contact-help-dynamic';
+import { ContactInboxDynamic } from '../../components-library/contact/contact-inbox-dynamic';
+import { ContactLeadDynamic } from '../../components-library/contact/contact-lead-dynamic';
+import { ContactLinkDynamic } from '../../components-library/contact/contact-link-dynamic';
+import { ContactMailDynamic } from '../../components-library/contact/contact-mail-dynamic';
 
 // CTA components
 import { CtaBannerDynamic } from '../../components-library/cta/cta-banner-dynamic';
@@ -90,6 +94,10 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   // Contact components
   'contact-form-dynamic': ContactFormDynamic,
   'contact-help-dynamic': ContactHelpDynamic,
+  'contact-inbox-dynamic': ContactInboxDynamic,
+  'contact-lead-dynamic': ContactLeadDynamic,
+  'contact-link-dynamic': ContactLinkDynamic,
+  'contact-mail-dynamic': ContactMailDynamic,
 
   // CTA components
   'cta-banner-dynamic': CtaBannerDynamic,

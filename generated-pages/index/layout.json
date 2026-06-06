@@ -6,15 +6,15 @@
     },
     {
       "section": "hero",
-      "component": "hero-apex-dynamic"
+      "component": "hero-anchor-dynamic"
     },
     {
       "section": "about",
-      "component": "about-brief-dynamic"
+      "component": "about-bio-dynamic"
     },
     {
       "section": "blog",
-      "component": "blog-grid-dynamic"
+      "component": "blog-article-dynamic"
     },
     {
       "section": "company-story",

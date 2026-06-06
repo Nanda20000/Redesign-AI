@@ -121,6 +121,30 @@
       "description": "A dynamic contact and service request section featuring a customizable name, phone/email, services field, and submission actions."
     },
     {
+      "name": "contact-inbox-dynamic",
+      "category": "contact",
+      "file": "contact/contact-inbox-dynamic.tsx",
+      "description": "Dynamic modular contact inbox container featuring a dark-teal form card and itemized footer capsules styled in pure Roboto."
+    },
+    {
+      "name": "contact-lead-dynamic",
+      "category": "contact",
+      "file": "contact/contact-lead-dynamic.tsx",
+      "description": "Dynamic contact lead capture form displaying sales team details and contact information."
+    },
+    {
+      "name": "contact-link-dynamic",
+      "category": "contact",
+      "file": "contact/contact-link-dynamic.tsx",
+      "description": "A contact section with a form and an image."
+    },
+    {
+      "name": "contact-mail-dynamic",
+      "category": "contact",
+      "file": "contact/contact-mail-dynamic.tsx",
+      "description": "A sleek, clean contact form with custom social links and dynamically bound inputs using Roboto typography."
+    },
+    {
       "name": "cta-banner-dynamic",
       "category": "cta",
       "file": "cta/cta-banner-dynamic.tsx",

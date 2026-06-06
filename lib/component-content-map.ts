@@ -307,6 +307,76 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
+  'contact-inbox-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badgeText', type: 'label', maxWords: 6 },
+      { prop: 'titlePart1', type: 'heading', maxWords: 15 },
+      { prop: 'titlePart2', type: 'heading', maxWords: 5 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'formNameLabel', type: 'label', maxWords: 5 },
+      { prop: 'formNamePlaceholder', type: 'label', maxWords: 5 },
+      { prop: 'formPhoneLabel', type: 'label', maxWords: 5 },
+      { prop: 'formPhonePlaceholder', type: 'label', maxWords: 5 },
+      { prop: 'formServiceLabel', type: 'label', maxWords: 5 },
+      { prop: 'formServicePlaceholder', type: 'label', maxWords: 5 },
+      { prop: 'formSubmitText', type: 'cta', maxWords: 5 }
+    ],
+  },
+
+  'contact-lead-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'tagText', type: 'label', maxWords: 10 },
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'emailLabel', type: 'label', maxWords: 8 },
+      { prop: 'emailValue', type: 'paragraph', maxWords: 15 },
+      { prop: 'phoneLabel', type: 'label', maxWords: 8 },
+      { prop: 'phoneValue', type: 'paragraph', maxWords: 15 },
+      { prop: 'officeLabel', type: 'label', maxWords: 8 },
+      { prop: 'officeValue', type: 'paragraph', maxWords: 20 },
+      { prop: 'nameLabel', type: 'label', maxWords: 8 },
+      { prop: 'namePlaceholder', type: 'label', maxWords: 8 },
+      { prop: 'lastNameLabel', type: 'label', maxWords: 8 },
+      { prop: 'lastNamePlaceholder', type: 'label', maxWords: 8 },
+      { prop: 'emailFieldLabel', type: 'label', maxWords: 8 },
+      { prop: 'emailFieldPlaceholder', type: 'label', maxWords: 8 },
+      { prop: 'messageLabel', type: 'label', maxWords: 8 },
+      { prop: 'messagePlaceholder', type: 'label', maxWords: 10 },
+      { prop: 'submitButtonText', type: 'cta', maxWords: 5 }
+    ],
+  },
+
+  'contact-link-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 5 },
+      { prop: 'description', type: 'paragraph', maxWords: 30 },
+      { prop: 'namePlaceholder', type: 'label', maxWords: 2 },
+      { prop: 'emailPlaceholder', type: 'label', maxWords: 2 },
+      { prop: 'messagePlaceholder', type: 'label', maxWords: 2 },
+      { prop: 'buttonText', type: 'cta', maxWords: 1 },
+    ],
+  },
+
+  'contact-mail-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 50 },
+      { prop: 'address', type: 'paragraph', maxWords: 30 },
+      { prop: 'email', type: 'paragraph', maxWords: 15 },
+      { prop: 'nameLabel', type: 'label', maxWords: 8 },
+      { prop: 'emailLabel', type: 'label', maxWords: 8 },
+      { prop: 'companyLabel', type: 'label', maxWords: 8 },
+      { prop: 'phoneLabel', type: 'label', maxWords: 8 },
+      { prop: 'messageLabel', type: 'label', maxWords: 8 },
+      { prop: 'submitButtonText', type: 'cta', maxWords: 5 },
+      { prop: 'successMessage', type: 'paragraph', maxWords: 30 }
+    ],
+  },
+
   // ── CTA ─────────────────────────────────────────────────────────────
   'cta-banner-dynamic': {
     isDynamic: true,

@@ -143,6 +143,30 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'none',
   },
 
+  'contact-inbox-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'contact-lead-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'contact-link-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageUrl',
+    imageMode: 'single',
+  },
+
+  'contact-mail-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
   // ── CTA ─────────────────────────────────────────────────────────────
   'cta-banner-dynamic': {
     imageCount: 1,

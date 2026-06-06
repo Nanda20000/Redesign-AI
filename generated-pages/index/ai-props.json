@@ -5,6 +5,18 @@
       {
         "label": "Home",
         "href": "/preview/index"
+      },
+      {
+        "label": "About Us",
+        "href": "#about"
+      },
+      {
+        "label": "Contact Us",
+        "href": "#contact"
+      },
+      {
+        "label": "Enquiry",
+        "href": "#enquiry"
       }
     ],
     "loginLabel": "Login",
@@ -12,104 +24,92 @@
     "loginHref": null,
     "signupHref": null
   },
-  "hero-apex-dynamic": {
-    "heading": "Expert Dental Care for Your Brightest Smile",
-    "subheading": "Multi-speciality clinic offering advanced implantology, orthodontics, and cosmetic dentistry at N.H Kolappuram.",
-    "ctaText": "Book Your Appointment",
-    "backgroundImage": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg",
-    "ratingValue": "4.9",
-    "testimonialQuote": "Caring doctors and modern treatments—truly transformed my smile!",
-    "testimonialAuthor": "Satisfied Patient",
-    "featureTitle": "Expert Implant Dentistry",
-    "featureDescription": "Permanent tooth replacement by skilled implantologists.",
-    "stat1Value": "6+",
-    "stat1Label": "Specialist Doctors",
-    "sinceLabel": "SINCE",
-    "sinceValue": "2015"
+  "hero-anchor-dynamic": {
+    "label": "DENTAL CARE",
+    "title": "Expert Dental Care at N.H Kolappuram",
+    "description": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre offers advanced treatments with a dedicated team of specialists.",
+    "primaryCtaText": "BOOK APPOINTMENT",
+    "primaryCtaUrl": "/preview/index",
+    "secondaryCtaText": "OUR SERVICES",
+    "secondaryCtaUrl": "/preview/index",
+    "image": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg"
   },
-  "about-brief-dynamic": {
-    "title": "About Dr Zainu's Multi Speciality Dental Clinic",
-    "description1": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre, located at N.H Kolappuram, offers comprehensive dental care under one roof. Our dedicated team of specialists provides advanced treatments in implantology, orthodontics, endodontics, and more.",
-    "description2": "Led by Dr. Zainul Abid K.P, our clinic combines expertise with compassion to deliver exceptional oral healthcare. We are committed to using the latest technology and techniques to ensure your smile stays healthy and bright.",
-    "ctaText": "Book an Appointment",
-    "image": "https://drzainusdentalclinic.dialndial.com/images/banner/17030623056582ab217b48f.jpg"
+  "about-bio-dynamic": {
+    "label": "About Us",
+    "heading": "Expert Dental Care at N.H Kolappuram",
+    "description": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre offers comprehensive dental solutions with a dedicated team of specialists and advanced technology.",
+    "ctaText": "Learn More",
+    "storyTitle": "Our Story",
+    "storyDescription": "Founded by Dr. Zainul Abid K.P, our clinic is built on a commitment to quality, precision, and patient comfort.",
+    "storyImage": "https://drzainusdentalclinic.dialndial.com/images/banner/17030623056582ab217b48f.jpg",
+    "missionTitle": "Our Mission",
+    "missionDescription": "To provide accessible, high-quality dental care that restores smiles and improves lives through innovation and compassion.",
+    "visionTitle": "Our Vision",
+    "visionDescription": "To be the trusted leader in multi-speciality dentistry, setting benchmarks for excellence and patient satisfaction."
   },
-  "blog-grid-dynamic": {
-    "sectionTitle": "Latest from Our Blog",
-    "articleCount": null,
-    "sortLabel": null,
-    "items": [
+  "blog-article-dynamic": {
+    "tagline": "Latest from Our Clinic",
+    "heading": "Expert Insights & Dental Care Tips",
+    "posts": [
       {
-        "title": "The Benefits of Dental Implants for a Lasting Smile",
-        "excerpt": "Discover how dental implants can restore your smile and oral function with a permanent, natural-looking solution.",
-        "category": "Implant Dentistry",
-        "readTime": "4 min read",
-        "authorName": "Dr. Zainul Abid K.P",
-        "date": "2025-03-15",
+        "title": "Understanding the Benefits of Dental Implants",
+        "description": "Dental implants offer a permanent, natural-looking solution for missing teeth. Learn how our implantology specialists restore your smile with precision and care.",
         "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304612065826be88df70.jpg",
-        "authorAvatar": null
+        "date": "2024-03-15",
+        "category": "Implant Dentistry"
       },
       {
-        "title": "Root Canal Treatment: Myths vs. Facts",
-        "excerpt": "Learn the truth about root canal therapy and how it can save your natural tooth from extraction.",
-        "category": "Root Canal Treatment",
-        "readTime": "5 min read",
-        "authorName": "Dr. Babu P.P",
-        "date": "2025-03-10",
+        "title": "When Is Root Canal Treatment Necessary?",
+        "description": "Root canal therapy can save an infected tooth and relieve pain. Our endodontist explains the signs, procedure, and what to expect during recovery.",
         "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304614565826c01b57ee.jpg",
-        "authorAvatar": null
+        "date": "2024-02-28",
+        "category": "Endodontics"
       },
       {
-        "title": "Orthodontic Care for Children and Adults",
-        "excerpt": "From braces to clear aligners, explore orthodontic options that straighten teeth and improve oral health at any age.",
-        "category": "Orthodontics",
-        "readTime": "6 min read",
-        "authorName": "Dr. Muhammed Noufal M.N",
-        "date": "2025-03-05",
+        "title": "Orthodontic Care for Children & Adults",
+        "description": "From traditional braces to modern aligners, orthodontic treatment improves both function and aesthetics. Discover the options available at our clinic.",
         "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304975965827a1f99120.jpg",
-        "authorAvatar": null
+        "date": "2024-02-10",
+        "category": "Orthodontics"
       },
       {
-        "title": "Cosmetic Dentistry: Enhance Your Smile Naturally",
-        "excerpt": "Explore cosmetic treatments like veneers and whitening to boost your confidence and achieve a radiant smile.",
-        "category": "Cosmetic Dentistry",
-        "readTime": "3 min read",
-        "authorName": "Dr. Prashanth Mohan",
-        "date": "2025-02-28",
+        "title": "Pediatric Dentistry: Building Healthy Smiles Early",
+        "description": "Early dental visits set the foundation for lifelong oral health. Our pediatric specialist provides gentle, child-friendly care in a comforting environment.",
         "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304999065827b0699cdd.jpg",
-        "authorAvatar": null
+        "date": "2024-01-20",
+        "category": "Pediatric Dentistry"
       }
     ]
   },
   "story-archive-dynamic": {
-    "topHeading": "Our Story: Excellence in Dental Care Since Inception",
-    "topDescription": "Discover the journey of Dr. Zainu's Multi Speciality Dental Clinic & Implant Centre.",
+    "topHeading": "Our Journey in Dental Excellence",
+    "topDescription": "Discover the story behind Dr Zainu's Multi Speciality Dental Clinic & Implant Centre.",
     "mainImage": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg",
-    "bottomHeading": "Comprehensive Multi-Speciality Dentistry Under One Roof at N.H Kolappuram",
-    "bottomDescription": "Led by Dr. Zainul Abid K.P, our clinic brings together a panel of expert visiting specialists in orthodontics, endodontics, pedodontics, oral surgery, and prosthodontics. We are committed to delivering advanced, compassionate dental care for the whole family.",
+    "bottomHeading": "Comprehensive Care Under One Roof at N.H Kolappuram",
+    "bottomDescription": "Founded by Dr. Zainul Abid K.P, our clinic brings together a panel of six visiting specialists in orthodontics, endodontics, pedodontics, OMFS, and prosthodontics. We offer advanced implant dentistry, root canal treatments, pediatric care, orthodontic alignment, cosmetic procedures, and digital X-rays — all tailored to restore your smile with precision and compassion.",
     "ratingValue": null,
     "ratingLabel": null,
     "stats": [
       {
-        "value": "6+",
+        "value": "6",
         "label": "Specialist Doctors"
       },
       {
         "value": "8+",
-        "label": "Advanced Treatments"
+        "label": "Services Offered"
       },
       {
-        "value": "100%",
-        "label": "Patient Satisfaction"
+        "value": "15+",
+        "label": "Years of Experience"
       },
       {
-        "value": "10+",
-        "label": "Years of Service"
+        "value": "1000+",
+        "label": "Smiles Restored"
       }
     ]
   },
   "gallery-album-dynamic": {
-    "title": "Our Dental Care Gallery",
+    "title": "Our Dental Gallery",
     "images": [
       {
         "url": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg",
@@ -128,61 +128,68 @@
         "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       },
       {
+        "url": "https://drzainusdentalclinic.dialndial.com/documents/entity/image/Dr_Zainu's_Multi_Speciality_Dental_Clinic_&_Implant_Centre_image_65826e4b6ed08.jpg",
+        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+      },
+      {
         "url": "https://drzainusdentalclinic.dialndial.com/images/service/170304612065826be88df70.jpg",
         "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       },
       {
         "url": "https://drzainusdentalclinic.dialndial.com/images/service/170304614565826c01b57ee.jpg",
         "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
-      },
-      {
-        "url": "https://drzainusdentalclinic.dialndial.com/images/service/170304975965827a1f99120.jpg",
-        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
       }
     ]
   },
   "testi-client-dynamic": {
     "heading": "What Our Patients Say",
-    "subtext": "Hear from our valued patients about their experience at our clinic.",
+    "subtext": "Hear from our valued patients about their experiences at our clinic.",
     "testimonials": [
       {
-        "quote": "The implant procedure was smooth and painless. Dr. Zainu and his team were incredibly professional and caring throughout.",
+        "quote": "Excellent care and professional staff. My implant procedure was smooth and painless. Highly recommend Dr. Zainu's clinic!",
         "authorName": "Rahul K.",
-        "authorRole": "Kozhikode",
+        "authorRole": "Kolappuram",
         "authorImage": null,
         "bgColor": "bg-blue-100"
       },
       {
-        "quote": "My daughter's orthodontic treatment has been a wonderful experience. The staff is very patient and gentle with children.",
+        "quote": "My child was so comfortable during the dental visit. The pediatric specialist was wonderful and put us both at ease.",
         "authorName": "Sneha M.",
-        "authorRole": "Kolappuram",
+        "authorRole": "N.H Kolappuram",
         "authorImage": null,
         "bgColor": "bg-green-100"
       },
       {
-        "quote": "I had a root canal treatment here and was amazed at how comfortable it was. Highly recommend this clinic for dental care.",
-        "authorName": "Arun P.",
-        "authorRole": "N.H Kolappuram",
+        "quote": "I got my root canal treatment done here. The doctor explained everything clearly and the result was fantastic. Thank you!",
+        "authorName": "Anoop P.",
+        "authorRole": "Kolappuram",
         "authorImage": null,
         "bgColor": "bg-yellow-100"
+      },
+      {
+        "quote": "The orthodontic treatment transformed my smile. The team is very friendly and the clinic is well-equipped with modern technology.",
+        "authorName": "Fathima N.",
+        "authorRole": "N.H Kolappuram",
+        "authorImage": null,
+        "bgColor": "bg-pink-100"
       }
     ]
   },
   "cta-banner-dynamic": {
-    "title": "Your Smile Deserves Expert Care",
-    "description": "Advanced dental treatments by a panel of specialists under one roof.",
+    "title": "Expert Dental Care for Your Perfect Smile",
+    "description": "Advanced treatments by a dedicated team of specialists.",
     "items": [
       "Implant Dentistry",
       "Root Canal Treatment",
-      "Orthodontic Treatment",
+      "Orthodontic Care",
       "Cosmetic Dentistry"
     ],
-    "bottomLabel": "Ready for a healthier smile?",
+    "bottomLabel": "Ready to transform your smile?",
     "ctaText": "Book Your Appointment",
     "backgroundImage": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg"
   },
   "contact-form-dynamic": {
-    "title": "Get in Touch with Us",
+    "title": "Get in Touch With Us",
     "emailLabel": "Email:",
     "email": "zainsabi@gmail.com",
     "phoneLabel": "Phone:",
@@ -195,12 +202,12 @@
     "formEmailLabel": "Email",
     "formEmailPlaceholder": "Your email address",
     "formMessageLabel": "Message",
-    "formMessagePlaceholder": "Write your enquiry or concern here",
+    "formMessagePlaceholder": "Write your message or enquiry here",
     "formSubmitLabel": "Send Message"
   },
   "footer-simple": {
     "brandName": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre",
-    "description": "Comprehensive dental care at N.H Kolappuram with expert specialists in implantology, orthodontics, and more.",
-    "copyright": "© 2025 Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+    "description": "Send us your questions or concerns and we will give you the help you need.",
+    "copyright": "© 2024 Dr Zainu's Multi Speciality Dental Clinic & Implant Centre. All rights reserved."
   }
 }

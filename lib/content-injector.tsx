@@ -785,6 +785,82 @@ export function getComponentContentProps(
       };
     }
 
+    case 'contact-inbox-dynamic': {
+      const sectionContent = mappedContent.contact as any;
+      return {
+        badgeText: sectionContent?.badgeText ?? '',
+        titlePart1: sectionContent?.titlePart1 ?? sectionContent?.title ?? '',
+        titlePart2: sectionContent?.titlePart2 ?? sectionContent?.subtitle ?? '',
+        description: sectionContent?.description ?? '',
+        formNameLabel: sectionContent?.formNameLabel ?? '',
+        formNamePlaceholder: sectionContent?.formNamePlaceholder ?? '',
+        formPhoneLabel: sectionContent?.formPhoneLabel ?? '',
+        formPhonePlaceholder: sectionContent?.formPhonePlaceholder ?? '',
+        formServiceLabel: sectionContent?.formServiceLabel ?? '',
+        formServicePlaceholder: sectionContent?.formServicePlaceholder ?? '',
+        formServiceOptions: sectionContent?.formServiceOptions ?? [],
+        formSubmitText: sectionContent?.formSubmitText ?? '',
+        items: sectionContent?.items ?? [],
+      };
+    }
+
+    case 'contact-lead-dynamic': {
+      const sectionContent = mappedContent.contact as any;
+      return {
+        tagText: sectionContent?.tag || '',
+        title: sectionContent?.title || '',
+        description: sectionContent?.description || '',
+        emailLabel: sectionContent?.emailLabel || '',
+        emailValue: sectionContent?.email || '',
+        phoneLabel: sectionContent?.phoneLabel || '',
+        phoneValue: sectionContent?.phone || '',
+        officeLabel: sectionContent?.officeLabel || '',
+        officeValue: sectionContent?.address || '',
+        nameLabel: sectionContent?.firstNameLabel || '',
+        namePlaceholder: sectionContent?.firstNamePlaceholder || '',
+        lastNameLabel: sectionContent?.lastNameLabel || '',
+        lastNamePlaceholder: sectionContent?.lastNamePlaceholder || '',
+        emailFieldLabel: sectionContent?.emailInputLabel || '',
+        emailFieldPlaceholder: sectionContent?.emailInputPlaceholder || '',
+        messageLabel: sectionContent?.messageInputLabel || '',
+        messagePlaceholder: sectionContent?.messageInputPlaceholder || '',
+        submitButtonText: sectionContent?.submitText || '',
+      };
+    }
+
+    case 'contact-link-dynamic': {
+      const sectionContent = mappedContent.contact as any;
+      return {
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        namePlaceholder: sectionContent?.namePlaceholder ?? '',
+        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
+        messagePlaceholder: sectionContent?.messagePlaceholder ?? '',
+        buttonText: sectionContent?.buttonText ?? '',
+        imageUrl: sectionContent?.imageUrl ?? '',
+      };
+    }
+
+    case 'contact-mail-dynamic': {
+      const sectionContent = mappedContent.contact as any;
+      return {
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        address: sectionContent?.address ?? '',
+        email: sectionContent?.email ?? '',
+        linkedinUrl: sectionContent?.linkedinUrl ?? '',
+        facebookUrl: sectionContent?.facebookUrl ?? '',
+        twitterUrl: sectionContent?.twitterUrl ?? '',
+        nameLabel: sectionContent?.nameLabel ?? '',
+        emailLabel: sectionContent?.emailLabel ?? '',
+        companyLabel: sectionContent?.companyLabel ?? '',
+        phoneLabel: sectionContent?.phoneLabel ?? '',
+        messageLabel: sectionContent?.messageLabel ?? '',
+        submitButtonText: sectionContent?.submitButtonText ?? '',
+        successMessage: sectionContent?.successMessage ?? '',
+      };
+    }
+
     // CTA components
     case 'cta-banner-dynamic': {
       const sectionContent = mappedContent.cta as any;

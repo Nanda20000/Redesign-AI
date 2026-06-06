@@ -27,6 +27,10 @@ export const COMPONENT_META = {
   // Contact components
   "contact-form-dynamic": { section: "contact", supportsImages: false, supportsItems: false, contentLevel: "high", priority: 10 },
   "contact-help-dynamic": { section: "contact", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 15 },
+  "contact-inbox-dynamic": { section: "contact", supportsImages: false, supportsItems: true, contentLevel: "high", priority: 15 },
+  "contact-lead-dynamic": { section: "contact", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 10 },
+  "contact-link-dynamic": { section: "contact", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 1 },
+  "contact-mail-dynamic": { section: "contact", supportsImages: false, supportsItems: false, contentLevel: "high", priority: 10 },
 
   // CTA components
   "cta-banner-dynamic": { section: "cta", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 10 },

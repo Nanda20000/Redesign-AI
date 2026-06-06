@@ -42,6 +42,7 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
   gallery: ['gallery-album-dynamic'],
   feature: ['feature-list-dynamic', 'feature-focus-dynamic', 'feature-facet-dynamic', 'feature-detail-dynamic', 'feature-aspect-dynamic'],
   benefits: ['benefits-advantage-dynamic'],
+  contact: ['contact-link-dynamic'],
 };
 
 function isSelectableAIComponent(componentName: string): boolean {

@@ -204,44 +204,46 @@
   ],
   "processed": {
     "features": {
-      "heading": "Our Treatments",
-      "description": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre offers a wide range of advanced dental treatments to meet all your oral health needs.",
+      "heading": "Our Services",
+      "description": "These are the services we provide, these Makes us stand apart",
       "items": [
         {
-          "title": "Implant Dentistry",
-          "description": "Advanced dental implant solutions for replacing missing teeth, performed by experienced implantologists."
+          "title": "IMPLANT DENTISTRY",
+          "description": "Advanced dental implant solutions for replacing missing teeth with natural-looking and durable results."
         },
         {
-          "title": "Root Canal Treatment",
-          "description": "Effective endodontic treatment to save infected or damaged teeth, performed by specialist endodontists."
+          "title": "ROOT CANAL TREATMENT",
+          "description": "Professional endodontic care to treat infected tooth pulp and save natural teeth."
         },
         {
-          "title": "Orthodontic Treatment",
-          "description": "Dental alignment and correction treatments including braces and clear aligners for both children and adults."
+          "title": "ORTHODONTIC TREATMENT",
+          "description": "Dental alignment and correction treatments, including braces and clear aligners, for improved smile and bite."
         },
         {
-          "title": "Cosmetic Dentistry",
-          "description": "Aesthetic dental procedures to enhance the appearance of your smile, including veneers and whitening."
+          "title": "COSMETIC DENTISTRY",
+          "description": "Aesthetic dental procedures to enhance the appearance of teeth, including whitening, veneers, and bonding."
         }
       ]
     },
     "about": {
       "title": "About us",
-      "description": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre is a comprehensive dental care provider located at N.H Kolappuram. The clinic features a dedicated doctors panel led by Dr. Zainul Abid K.P and includes visiting specialists in orthodontics, endodontics, pedodontics, oral surgery, and prosthodontics.",
-      "companies": [],
+      "description": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre is a comprehensive dental care provider located at N.H Kolappuram. The clinic offers a wide range of treatments including implant dentistry, root canal, orthodontics, pediatric dentistry, and cosmetic procedures, supported by a panel of specialized doctors.",
+      "companies": [
+        "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+      ],
       "achievements": [
         {
-          "label": "Specialists",
-          "value": "6+"
+          "label": "Doctors Panel",
+          "value": "6 Specialists"
         },
         {
           "label": "Treatments",
-          "value": "8+"
+          "value": "8+ Services"
         }
       ],
       "breakout": {
-        "title": "Our Services",
-        "description": "These are the services we provide, these Makes us stand apart."
+        "title": "Key message",
+        "description": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre provides expert dental care with a dedicated team of specialists and advanced technology."
       }
     },
     "footer": {
@@ -252,7 +254,7 @@
         "phone": "9995740140",
         "address": "1st Floor, TR Building, N.H Kolappuram"
       },
-      "copyright": ""
+      "copyright": "© 2024 Dr Zainu's Multi Speciality Dental Clinic & Implant Centre. All rights reserved."
     }
   },
   "sourceUrl": "https://drzainusdentalclinic.dialndial.com/"
