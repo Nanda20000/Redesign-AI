@@ -5,6 +5,11 @@ import type { ComponentType } from "react";
 
 // Footer components
 import { FooterSimple } from '../../components-library/footer/footer-simple';
+import { FooterGlowDynamic } from '../../components-library/footer/footer-glow-dynamic';
+import { FooterHaloDynamic } from '../../components-library/footer/footer-halo-dynamic';
+import { FooterPrismDynamic } from '../../components-library/footer/footer-prism-dynamic';
+import { FooterEtherDynamic } from '../../components-library/footer/footer-ether-dynamic';
+import { FooterLumeDynamic } from '../../components-library/footer/footer-lume-dynamic';
 
 // Hero components
 import { HeroActionDynamic } from '../../components-library/hero/hero-action-dynamic';
@@ -35,16 +40,33 @@ import { ContactInboxDynamic } from '../../components-library/contact/contact-in
 import { ContactLeadDynamic } from '../../components-library/contact/contact-lead-dynamic';
 import { ContactLinkDynamic } from '../../components-library/contact/contact-link-dynamic';
 import { ContactMailDynamic } from '../../components-library/contact/contact-mail-dynamic';
+import { ContactOfficeDynamic } from '../../components-library/contact/contact-office-dynamic';
+import { ContactReachDynamic } from '../../components-library/contact/contact-reach-dynamic';
+import { ContactSupportDynamic } from '../../components-library/contact/contact-support-dynamic';
 
 // CTA components
 import { CtaBannerDynamic } from '../../components-library/cta/cta-banner-dynamic';
+import { CtaButtonDynamic } from '../../components-library/cta/cta-button-dynamic';
+import { CtaClickDynamic } from '../../components-library/cta/cta-click-dynamic';
+import { CtaConvertDynamic } from '../../components-library/cta/cta-convert-dynamic';
+import { CtaDriveDynamic } from '../../components-library/cta/cta-drive-dynamic';
+import { CtaGoalDynamic } from '../../components-library/cta/cta-goal-dynamic';
 
 // Navbar components
 import { NavBarDynamic } from '../../components-library/navbar/nav-bar-dynamic';
 import { NavFloatDynamic } from '../../components-library/navbar/nav-float-dynamic';
+import { NavHeaderDynamic } from '../../components-library/navbar/nav-header-dynamic';
+import { NavLinkDynamic } from '../../components-library/navbar/nav-link-dynamic';
+import { NavMenuDynamic } from '../../components-library/navbar/nav-menu-dynamic';
+import { NavPanelDynamic } from '../../components-library/navbar/nav-panel-dynamic';
 
 // Testimonials components
 import { TestiClientDynamic } from '../../components-library/testimonials/testi-client-dynamic';
+import { TestiCritiqueDynamic } from '../../components-library/testimonials/testi-critique-dynamic';
+import { TestiFeedbackDynamic } from '../../components-library/testimonials/testi-feedback-dynamic';
+import { TestiHonorDynamic } from '../../components-library/testimonials/testi-honor-dynamic';
+import { TestiPraiseDynamic } from '../../components-library/testimonials/testi-praise-dynamic';
+import { TestiQuoteDynamic } from '../../components-library/testimonials/testi-quote-dynamic';
 
 // Gallery components
 import { GalleryAlbumDynamic } from '../../components-library/gallery/gallery-album-dynamic';
@@ -68,6 +90,11 @@ import { BenefitsAssetDynamic } from '../../components-library/benefits/benefits
 export const componentRegistry: Record<string, ComponentType<any>> = {
   // Footer components
   'footer-simple': FooterSimple,
+  'footer-glow-dynamic': FooterGlowDynamic,
+  'footer-halo-dynamic': FooterHaloDynamic,
+  'footer-prism-dynamic': FooterPrismDynamic,
+  'footer-ether-dynamic': FooterEtherDynamic,
+  'footer-lume-dynamic': FooterLumeDynamic,
 
   // Hero components
   'hero-action-dynamic': HeroActionDynamic,
@@ -98,16 +125,33 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'contact-lead-dynamic': ContactLeadDynamic,
   'contact-link-dynamic': ContactLinkDynamic,
   'contact-mail-dynamic': ContactMailDynamic,
+  'contact-office-dynamic': ContactOfficeDynamic,
+  'contact-reach-dynamic': ContactReachDynamic,
+  'contact-support-dynamic': ContactSupportDynamic,
 
   // CTA components
   'cta-banner-dynamic': CtaBannerDynamic,
+  'cta-button-dynamic': CtaButtonDynamic,
+  'cta-click-dynamic': CtaClickDynamic,
+  'cta-convert-dynamic': CtaConvertDynamic,
+  'cta-drive-dynamic': CtaDriveDynamic,
+  'cta-goal-dynamic': CtaGoalDynamic,
 
   // Navbar components
   'nav-bar-dynamic': NavBarDynamic,
   'nav-float-dynamic': NavFloatDynamic,
+  'nav-header-dynamic': NavHeaderDynamic,
+  'nav-link-dynamic': NavLinkDynamic,
+  'nav-menu-dynamic': NavMenuDynamic,
+  'nav-panel-dynamic': NavPanelDynamic,
 
   // Testimonials components
   'testi-client-dynamic': TestiClientDynamic,
+  'testi-critique-dynamic': TestiCritiqueDynamic,
+  'testi-feedback-dynamic': TestiFeedbackDynamic,
+  'testi-honor-dynamic': TestiHonorDynamic,
+  'testi-praise-dynamic': TestiPraiseDynamic,
+  'testi-quote-dynamic': TestiQuoteDynamic,
 
   // Gallery components
   'gallery-album-dynamic': GalleryAlbumDynamic,

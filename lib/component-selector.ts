@@ -37,12 +37,13 @@ const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
   about: ['about-crew-dynamic', 'about-card-dynamic', 'about-brief-dynamic', 'about-brand-dynamic', 'about-bio-dynamic'],
   blog: ['blog-grid-dynamic', 'blog-feed-dynamic', 'blog-article-dynamic'],
   'company-story': ['story-archive-dynamic'],
-  cta: ['cta-banner-dynamic'],
-  testimonials: ['testi-client-dynamic'],
+  cta: ['cta-button-dynamic', 'cta-banner-dynamic'],
+  testimonials: ['testi-quote-dynamic', 'testi-praise-dynamic', 'testi-honor-dynamic', 'testi-feedback-dynamic', 'testi-critique-dynamic', 'testi-client-dynamic'],
   gallery: ['gallery-album-dynamic'],
   feature: ['feature-list-dynamic', 'feature-focus-dynamic', 'feature-facet-dynamic', 'feature-detail-dynamic', 'feature-aspect-dynamic'],
   benefits: ['benefits-advantage-dynamic'],
-  contact: ['contact-link-dynamic'],
+  contact: ['contact-support-dynamic', 'contact-reach-dynamic', 'contact-link-dynamic'],
+  footer: ['footer-ether-dynamic', 'footer-prism-dynamic'],
 };
 
 function isSelectableAIComponent(componentName: string): boolean {

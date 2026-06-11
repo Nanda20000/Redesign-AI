@@ -743,6 +743,90 @@ export function getComponentContentProps(
         links: (mappedContent.footer as any)?.links ?? [],
       };
 
+    case 'footer-glow-dynamic': {
+      const sectionContent = mappedContent.footer as any;
+      return {
+        logoText: sectionContent?.logoText ?? '',
+        description: sectionContent?.description ?? '',
+        newsletterTitle: sectionContent?.newsletterTitle ?? '',
+        newsletterDescription: sectionContent?.newsletterDescription ?? '',
+        newsletterPlaceholder: sectionContent?.newsletterPlaceholder ?? '',
+        newsletterButtonText: sectionContent?.newsletterButtonText ?? '',
+        copyrightText: sectionContent?.copyrightText ?? '',
+        columns: sectionContent?.columns ?? [],
+        bottomLinks: sectionContent?.bottomLinks ?? [],
+      };
+    }
+
+    case 'footer-halo-dynamic': {
+      const sectionContent = mappedContent.footer as any;
+      return {
+        logoText: sectionContent?.logoText ?? '',
+        brandDescription: sectionContent?.brandDescription ?? '',
+        copyrightText: sectionContent?.copyrightText ?? '',
+        column1Title: sectionContent?.column1Title ?? '',
+        column1Links: sectionContent?.column1Links ?? [],
+        column2Title: sectionContent?.column2Title ?? '',
+        column2Links: sectionContent?.column2Links ?? [],
+        column3Title: sectionContent?.column3Title ?? '',
+        column3Links: sectionContent?.column3Links ?? [],
+      };
+    }
+
+    case 'footer-prism-dynamic': {
+      const sectionContent = mappedContent.footer as any;
+      return {
+        logoImgSrc: sectionContent?.logoImgSrc ?? '',
+        logoImgAlt: sectionContent?.logoImgAlt ?? '',
+        logoText: sectionContent?.logoText ?? '',
+        logoSubtext: sectionContent?.logoSubtext ?? '',
+        links: sectionContent?.links ?? [],
+        socials: sectionContent?.socials ?? [],
+        copyrightText: sectionContent?.copyrightText ?? '',
+        copyrightBrandText: sectionContent?.copyrightBrandText ?? '',
+        copyrightBrandHref: sectionContent?.copyrightBrandHref ?? '',
+      };
+    }
+
+    case 'footer-ether-dynamic': {
+      const sectionContent = mappedContent.footer as any;
+      return {
+        backgroundImage: sectionContent?.backgroundImage ?? '',
+        brandName: sectionContent?.brandName ?? '',
+        brandDescription: sectionContent?.brandDescription ?? '',
+        searchPlaceholder: sectionContent?.searchPlaceholder ?? '',
+        menuTitle: sectionContent?.menuTitle ?? '',
+        menuLinks: sectionContent?.menuLinks ?? [],
+        infoTitle: sectionContent?.infoTitle ?? '',
+        infoLinks: sectionContent?.infoLinks ?? [],
+        socialTitle: sectionContent?.socialTitle ?? '',
+        socialLinks: sectionContent?.socialLinks ?? [],
+        goOnTopText: sectionContent?.goOnTopText ?? '',
+        copyrightText: sectionContent?.copyrightText ?? '',
+      };
+    }
+
+    case 'footer-lume-dynamic': {
+      const sectionContent = mappedContent.footer as any;
+      return {
+        logoText: sectionContent?.logoText ?? '',
+        brandDescription: sectionContent?.brandDescription ?? '',
+        col2Title: sectionContent?.col2Title ?? '',
+        col2Links: sectionContent?.links?.slice(0, 5).map((l: any) => ({ label: l.label, href: l.href })) ?? [],
+        col3Title: sectionContent?.col3Title ?? '',
+        col3Links: sectionContent?.links?.slice(5, 10).map((l: any) => ({ label: l.label, href: l.href })) ?? [],
+        col4Title: sectionContent?.col4Title ?? '',
+        col4Description: sectionContent?.col4Description ?? '',
+        newsletterPlaceholder: sectionContent?.newsletterPlaceholder ?? '',
+        contactEmail: sectionContent?.contactEmail ?? '',
+        copyrightText: sectionContent?.copyrightText ?? '',
+        privacyText: sectionContent?.privacyText ?? '',
+        privacyUrl: sectionContent?.privacyUrl ?? '',
+        termsText: sectionContent?.termsText ?? '',
+        termsUrl: sectionContent?.termsUrl ?? '',
+      };
+    }
+
     // Contact components
     case 'contact-form-dynamic': {
       const sectionContent = mappedContent.contact as any;
@@ -861,6 +945,59 @@ export function getComponentContentProps(
       };
     }
 
+    case 'contact-office-dynamic': {
+      const sectionContent = mappedContent.contact as any;
+      return {
+        title: sectionContent?.title ?? '',
+        fullNameLabel: sectionContent?.fullNameLabel ?? '',
+        fullNamePlaceholder: sectionContent?.fullNamePlaceholder ?? '',
+        emailLabel: sectionContent?.emailLabel ?? '',
+        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
+        messageLabel: sectionContent?.messageLabel ?? '',
+        messagePlaceholder: sectionContent?.messagePlaceholder ?? '',
+        submitButtonText: sectionContent?.submitButtonText ?? '',
+        cardTitle: sectionContent?.cardTitle ?? '',
+        cardSubtitle: sectionContent?.cardSubtitle ?? '',
+        contactItems: sectionContent?.contactItems ?? []
+      };
+    }
+
+    case 'contact-reach-dynamic': {
+      const sectionContent = mappedContent.contact as any;
+      return {
+        backgroundImageUrl: sectionContent?.backgroundImageUrl ?? '',
+        titleLine: sectionContent?.titleLine ?? '',
+        brandName: sectionContent?.brandName ?? '',
+        description: sectionContent?.description ?? '',
+        formTitle: sectionContent?.formTitle ?? '',
+        nameLabel: sectionContent?.nameLabel ?? '',
+        namePlaceholder: sectionContent?.namePlaceholder ?? '',
+        emailLabel: sectionContent?.emailLabel ?? '',
+        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
+        servicesLabel: sectionContent?.servicesLabel ?? '',
+        servicesPlaceholder: sectionContent?.servicesPlaceholder ?? '',
+        servicesOptions: sectionContent?.servicesOptions ?? [],
+        messageLabel: sectionContent?.messageLabel ?? '',
+        messagePlaceholder: sectionContent?.messagePlaceholder ?? '',
+        submitButtonText: sectionContent?.submitButtonText ?? '',
+      };
+    }
+
+    case 'contact-support-dynamic': {
+      const sectionContent = mappedContent.contact as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        emailLabel: sectionContent?.emailLabel ?? '',
+        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
+        messageLabel: sectionContent?.messageLabel ?? '',
+        messagePlaceholder: sectionContent?.messagePlaceholder ?? '',
+        submitButtonText: sectionContent?.submitButtonText ?? '',
+        successMessage: sectionContent?.successMessage ?? '',
+        images: sectionContent?.images ?? [],
+      };
+    }
+
     // CTA components
     case 'cta-banner-dynamic': {
       const sectionContent = mappedContent.cta as any;
@@ -871,6 +1008,65 @@ export function getComponentContentProps(
         bottomLabel: sectionContent?.bottomLabel ?? '',
         ctaText: sectionContent?.ctaText ?? '',
         backgroundImage: sectionContent?.backgroundImage ?? '',
+      };
+    }
+
+    case 'cta-button-dynamic': {
+      const sectionContent = mappedContent.cta as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        ctaHref: sectionContent?.ctaHref ?? '',
+        imageSrc: sectionContent?.imageSrc ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+      };
+    }
+
+    case 'cta-click-dynamic': {
+      const sectionContent = mappedContent.cta as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+      };
+    }
+
+    case 'cta-convert-dynamic': {
+      const sectionContent = mappedContent.cta as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        inputLabel: sectionContent?.inputLabel ?? '',
+        inputPlaceholder: sectionContent?.inputPlaceholder ?? '',
+        buttonText: sectionContent?.buttonText ?? '',
+        subtext: sectionContent?.subtext ?? '',
+        linkText: sectionContent?.linkText ?? '',
+        linkUrl: sectionContent?.linkUrl ?? '',
+      };
+    }
+
+    case 'cta-drive-dynamic': {
+      const sectionContent = mappedContent.cta as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        cardText: sectionContent?.cardText ?? '',
+        inputPlaceholder: sectionContent?.inputPlaceholder ?? '',
+        buttonText: sectionContent?.buttonText ?? '',
+        privacyTextPrefix: sectionContent?.privacyTextPrefix ?? '',
+        privacyLinkText: sectionContent?.privacyLinkText ?? '',
+        privacyLinkUrl: sectionContent?.privacyLinkUrl ?? '',
+      };
+    }
+
+    case 'cta-goal-dynamic': {
+      const sectionContent = mappedContent.cta as any;
+      return {
+        badgeCategory: sectionContent?.badgeCategory ?? '',
+        badgeText: sectionContent?.badgeText ?? '',
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        inputPlaceholder: sectionContent?.inputPlaceholder ?? '',
+        buttonText: sectionContent?.buttonText ?? '',
       };
     }
 
@@ -897,6 +1093,59 @@ export function getComponentContentProps(
       };
     }
 
+    case 'nav-header-dynamic': {
+      const sectionContent = mappedContent.navbar as any;
+      return {
+        brandName: sectionContent?.brandName ?? '',
+        brandLink: sectionContent?.brandLink ?? '',
+        navLinks: sectionContent?.links ?? [],
+        searchPlaceholder: sectionContent?.searchPlaceholder ?? '',
+      };
+    }
+
+    case 'nav-link-dynamic': {
+      const sectionContent = mappedContent.navbar as any;
+      return {
+        logoText: sectionContent?.logoText ?? '',
+        topLink1Text: sectionContent?.topLink1Text ?? '',
+        topLink1Url: sectionContent?.topLink1Url ?? '',
+        topLink2Text: sectionContent?.topLink2Text ?? '',
+        topLink2Url: sectionContent?.topLink2Url ?? '',
+        topLink3Text: sectionContent?.topLink3Text ?? '',
+        topLink3Url: sectionContent?.topLink3Url ?? '',
+        mainLink1Text: sectionContent?.mainLink1Text ?? '',
+        mainLink1Url: sectionContent?.mainLink1Url ?? '',
+        mainLink2Text: sectionContent?.mainLink2Text ?? '',
+        mainLink2Url: sectionContent?.mainLink2Url ?? '',
+        mainLink3Text: sectionContent?.mainLink3Text ?? '',
+        mainLink3Url: sectionContent?.mainLink3Url ?? '',
+        mainLink4Text: sectionContent?.mainLink4Text ?? '',
+        mainLink4Url: sectionContent?.mainLink4Url ?? '',
+      };
+    }
+
+    case 'nav-menu-dynamic': {
+      const sectionContent = mappedContent.navbar as any;
+      return {
+        topLinks: sectionContent?.topLinks ?? [],
+        brandName: sectionContent?.brandName ?? '',
+        brandHref: sectionContent?.brandHref ?? '#',
+        mainLinks: sectionContent?.mainLinks ?? [],
+      };
+    }
+
+    case 'nav-panel-dynamic': {
+      const sectionContent = mappedContent.navbar as any;
+      return {
+        logoText: sectionContent?.logoText ?? '',
+        navItems: sectionContent?.navItems ?? [],
+        signInText: sectionContent?.signInText ?? '',
+        signInUrl: sectionContent?.signInUrl ?? '',
+        signUpText: sectionContent?.signUpText ?? '',
+        signUpUrl: sectionContent?.signUpUrl ?? '',
+      };
+    }
+
     // Testimonials components
     case 'testi-client-dynamic': {
       const sectionContent = mappedContent.testimonials as any;
@@ -910,6 +1159,76 @@ export function getComponentContentProps(
           authorImage: item?.authorImage ?? '',
           bgColor: item?.bgColor ?? '',
         })) ?? [],
+      };
+    }
+
+    case 'testi-critique-dynamic': {
+      const sectionContent = mappedContent.testimonials as any;
+      return {
+        badgeText: sectionContent?.badge ?? '',
+        headingText: sectionContent?.title ?? '',
+        testimonials: Array.isArray(sectionContent?.items) 
+          ? sectionContent.items.map((item: any, idx: number) => ({
+              id: item.id || idx,
+              quote: item.text || item.quote || '',
+              authorName: item.name || item.author || '',
+              authorHandle: item.handle || '',
+              authorAvatar: item.image || item.avatar || '',
+            }))
+          : [],
+      };
+    }
+
+    case 'testi-feedback-dynamic': {
+      const sectionContent = mappedContent.testimonials as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        items: sectionContent?.items?.map((item: any, idx: number) => ({
+          id: item.id ?? idx,
+          feedback: item.feedback ?? '',
+          authorName: item.authorName ?? '',
+          authorRole: item.authorRole ?? '',
+          authorAvatarUrl: item.authorAvatarUrl ?? '',
+        })) ?? [],
+      };
+    }
+
+    case 'testi-honor-dynamic': {
+      const sectionContent = mappedContent.testimonials as any;
+      return {
+        items: sectionContent?.items?.map((item: any) => ({
+          quote: item?.quote ?? '',
+          authorName: item?.authorName ?? '',
+          authorRole: item?.authorRole ?? '',
+          authorAvatar: item?.authorAvatar ?? '',
+        })) ?? [],
+      };
+    }
+
+    case 'testi-praise-dynamic': {
+      const sectionContent = mappedContent.testimonials as any;
+      return {
+        items: sectionContent?.items?.map((item: any, idx: number) => ({
+          id: item?.id ?? idx,
+          quote: item?.quote ?? '',
+          ratingText: item?.ratingText ?? '',
+          authorName: item?.authorName ?? '',
+          authorRole: item?.authorRole ?? '',
+          authorImage: item?.authorImage ?? '',
+        })) ?? [],
+        dividerText: sectionContent?.dividerText ?? '————',
+      };
+    }
+
+    case 'testi-quote-dynamic': {
+      const sectionContent = mappedContent.testimonials as any;
+      return {
+        quoteText: sectionContent?.quoteText ?? '',
+        authorName: sectionContent?.authorName ?? '',
+        authorRole: sectionContent?.authorRole ?? '',
+        authorAvatarUrl: sectionContent?.authorAvatarUrl ?? '',
+        testimonialImageUrl: sectionContent?.testimonialImageUrl ?? '',
       };
     }
 

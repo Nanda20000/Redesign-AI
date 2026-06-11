@@ -7,6 +7,12 @@
       "description": "A simple footer with brand info and social links"
     },
     {
+      "name": "footer-halo-dynamic",
+      "category": "footer",
+      "file": "footer/footer-halo-dynamic.tsx",
+      "description": "Premium dynamic footer with configurable multi-column navigation, brand descriptions, social links, and an elegant accent boundary line."
+    },
+    {
       "name": "story-archive-dynamic",
       "category": "company-story",
       "file": "company-story/story-archive-dynamic.tsx",
@@ -145,10 +151,82 @@
       "description": "A sleek, clean contact form with custom social links and dynamically bound inputs using Roboto typography."
     },
     {
+      "name": "contact-office-dynamic",
+      "category": "contact",
+      "file": "contact/contact-office-dynamic.tsx",
+      "description": "A refined, ultra-high-fidelity dynamic contact layout combining interactive custom forms and pinned contact info cards, with built-in Roboto font constraints and customizable icons."
+    },
+    {
+      "name": "contact-reach-dynamic",
+      "category": "contact",
+      "file": "contact/contact-reach-dynamic.tsx",
+      "description": "An elegant, responsive contact section matching wellness or yoga spa styling with custom form inputs, Roboto font, and dynamic layout customization."
+    },
+    {
+      "name": "contact-support-dynamic",
+      "category": "contact",
+      "file": "contact/contact-support-dynamic.tsx",
+      "description": "A refined, responsive sage-green support contact section featuring a custom rounded image layout and inputs."
+    },
+    {
       "name": "cta-banner-dynamic",
       "category": "cta",
       "file": "cta/cta-banner-dynamic.tsx",
       "description": "A high-impact CTA banner with a background image, service list, and a prominent bottom action bar."
+    },
+    {
+      "name": "cta-button-dynamic",
+      "category": "cta",
+      "file": "cta/cta-button-dynamic.tsx",
+      "description": "Vibrant blue CTA card with a rounded layout, light-lime primary text button, and modern featured image on the right."
+    },
+    {
+      "name": "cta-click-dynamic",
+      "category": "cta",
+      "file": "cta/cta-click-dynamic.tsx",
+      "description": "A dynamic high-contrast CTA card with custom headings, triggers, and action-path tracking."
+    },
+    {
+      "name": "cta-convert-dynamic",
+      "category": "cta",
+      "file": "cta/cta-convert-dynamic.tsx",
+      "description": "A premium, orange newsletter CTA banner with an integrated side-by-side input form, strictly conforming to the Roboto typography rules."
+    },
+    {
+      "name": "cta-drive-dynamic",
+      "category": "cta",
+      "file": "cta/cta-drive-dynamic.tsx",
+      "description": "A glassmorphic slate-colored subscription CTA section with geometric accents, custom email field, and Roboto typography."
+    },
+    {
+      "name": "cta-goal-dynamic",
+      "category": "cta",
+      "file": "cta/cta-goal-dynamic.tsx",
+      "description": "Centered CTA banner with customizable badge highlights, elegant headings, custom descriptions, and a responsive email capture field."
+    },
+    {
+      "name": "footer-glow-dynamic",
+      "category": "footer",
+      "file": "footer/footer-glow-dynamic.tsx",
+      "description": "An elegant, modern dynamic footer component featuring customizable link columns, newsletter signup integration, social icons, and a premium top border glow effect."
+    },
+    {
+      "name": "footer-prism-dynamic",
+      "category": "footer",
+      "file": "footer/footer-prism-dynamic.tsx",
+      "description": "A dark, modern footer featuring navigation links, circular social icons, and configurable copyright branding, typeset in Roboto."
+    },
+    {
+      "name": "footer-ether-dynamic",
+      "category": "footer",
+      "file": "footer/footer-ether-dynamic.tsx",
+      "description": "An atmospheric, alpine-themed footer component featuring a dark backdrop, brand column with custom search pill, multi-column navigation links, and scroll-to-top controls."
+    },
+    {
+      "name": "footer-lume-dynamic",
+      "category": "footer",
+      "file": "footer/footer-lume-dynamic.tsx",
+      "description": "Dynamic responsive footer with e-commerce quick links, newsletter subscription, and brand social profiles."
     },
     {
       "name": "nav-bar-dynamic",
@@ -163,10 +241,64 @@
       "description": "A modern floating pill-shaped navbar with centered navigation and a CTA button."
     },
     {
+      "name": "nav-header-dynamic",
+      "category": "navbar",
+      "file": "navbar/nav-header-dynamic.tsx",
+      "description": "A clean header-style navbar with brand, navigation links, search input, and mobile drawer."
+    },
+    {
+      "name": "nav-link-dynamic",
+      "category": "navbar",
+      "file": "navbar/nav-link-dynamic.tsx",
+      "description": "Double-row layout premium navbar featuring utility metadata anchors, custom search/cart/user icons, and primary links aligned with inline Roboto typography weights."
+    },
+    {
+      "name": "nav-menu-dynamic",
+      "category": "navbar",
+      "file": "navbar/nav-menu-dynamic.tsx",
+      "description": "A premium dual-tier responsive header section with custom branding, auxiliary top toolbar, search controller, and social connectors styled in Roboto font."
+    },
+    {
+      "name": "nav-panel-dynamic",
+      "category": "navbar",
+      "file": "navbar/nav-panel-dynamic.tsx",
+      "description": "A dynamic responsive navigation bar with a branding logo, navigation links, and dual rounded action buttons."
+    },
+    {
       "name": "testi-client-dynamic",
       "category": "testimonials",
       "file": "testimonials/testi-client-dynamic.tsx",
       "description": "A vibrant testimonials section with staggered colorful cards and circular avatars."
+    },
+    {
+      "name": "testi-critique-dynamic",
+      "category": "testimonials",
+      "file": "testimonials/testi-critique-dynamic.tsx",
+      "description": "A high-fidelity dynamic testimonials carousel and grid featuring speech-bubble cards with rounded corner cutouts in Roboto typography."
+    },
+    {
+      "name": "testi-feedback-dynamic",
+      "category": "testimonials",
+      "file": "testimonials/testi-feedback-dynamic.tsx",
+      "description": "An interactive, responsive testimonials slider styled with warm sand cards and custom Roboto-rendered typography."
+    },
+    {
+      "name": "testi-honor-dynamic",
+      "category": "testimonials",
+      "file": "testimonials/testi-honor-dynamic.tsx",
+      "description": "An elegant, interactive testimonials slider featuring decorative quotes, gradient avatar rings, and minimal slider pagination."
+    },
+    {
+      "name": "testi-praise-dynamic",
+      "category": "testimonials",
+      "file": "testimonials/testi-praise-dynamic.tsx",
+      "description": "A highly polished, responsive testimonial card slider section using Roboto, with high-contrast text and a compact, balanced layout."
+    },
+    {
+      "name": "testi-quote-dynamic",
+      "category": "testimonials",
+      "file": "testimonials/testi-quote-dynamic.tsx",
+      "description": "A high-quality testimonials section styled with a side-by-side bento layout and elegant Roboto typography."
     },
     {
       "name": "gallery-album-dynamic",

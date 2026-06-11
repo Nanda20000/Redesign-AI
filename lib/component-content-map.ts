@@ -252,6 +252,75 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
+  'footer-glow-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'logoText', type: 'heading', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 50 },
+      { prop: 'newsletterTitle', type: 'heading', maxWords: 10 },
+      { prop: 'newsletterDescription', type: 'paragraph', maxWords: 40 },
+      { prop: 'newsletterPlaceholder', type: 'label', maxWords: 10 },
+      { prop: 'newsletterButtonText', type: 'cta', maxWords: 5 },
+      { prop: 'copyrightText', type: 'paragraph', maxWords: 15 }
+    ],
+  },
+
+  'footer-halo-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'logoText', type: 'label', maxWords: 5 },
+      { prop: 'brandDescription', type: 'paragraph', maxWords: 35 },
+      { prop: 'copyrightText', type: 'label', maxWords: 8 },
+      { prop: 'column1Title', type: 'heading', maxWords: 4 },
+      { prop: 'column1Links', type: 'list', maxWords: 20 },
+      { prop: 'column2Title', type: 'heading', maxWords: 4 },
+      { prop: 'column2Links', type: 'list', maxWords: 20 },
+      { prop: 'column3Title', type: 'heading', maxWords: 4 },
+      { prop: 'column3Links', type: 'list', maxWords: 20 }
+    ],
+  },
+
+  'footer-prism-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'logoText', type: 'heading', maxWords: 5 },
+      { prop: 'logoSubtext', type: 'label', maxWords: 10 },
+      { prop: 'copyrightText', type: 'paragraph', maxWords: 15 },
+      { prop: 'copyrightBrandText', type: 'label', maxWords: 10 }
+    ],
+  },
+
+  'footer-ether-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'brandName', type: 'heading', maxWords: 10 },
+      { prop: 'brandDescription', type: 'paragraph', maxWords: 80 },
+      { prop: 'searchPlaceholder', type: 'label', maxWords: 6 },
+      { prop: 'menuTitle', type: 'heading', maxWords: 8 },
+      { prop: 'infoTitle', type: 'heading', maxWords: 8 },
+      { prop: 'socialTitle', type: 'heading', maxWords: 8 },
+      { prop: 'goOnTopText', type: 'label', maxWords: 6 },
+      { prop: 'copyrightText', type: 'paragraph', maxWords: 15 }
+    ],
+  },
+
+  'footer-lume-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'logoText', type: 'heading', maxWords: 4 },
+      { prop: 'brandDescription', type: 'paragraph', maxWords: 20 },
+      { prop: 'col2Title', type: 'label', maxWords: 4 },
+      { prop: 'col3Title', type: 'label', maxWords: 4 },
+      { prop: 'col4Title', type: 'label', maxWords: 4 },
+      { prop: 'col4Description', type: 'paragraph', maxWords: 20 },
+      { prop: 'newsletterPlaceholder', type: 'label', maxWords: 6 },
+      { prop: 'contactEmail', type: 'paragraph', maxWords: 6 },
+      { prop: 'copyrightText', type: 'paragraph', maxWords: 10 },
+      { prop: 'privacyText', type: 'label', maxWords: 4 },
+      { prop: 'termsText', type: 'label', maxWords: 4 }
+    ],
+  },
+
   'story-archive-dynamic': {
     isDynamic: true,
     contentSlots: [
@@ -377,6 +446,55 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
+  'contact-office-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 4 },
+      { prop: 'fullNameLabel', type: 'label', maxWords: 4 },
+      { prop: 'fullNamePlaceholder', type: 'paragraph', maxWords: 6 },
+      { prop: 'emailLabel', type: 'label', maxWords: 6 },
+      { prop: 'emailPlaceholder', type: 'paragraph', maxWords: 6 },
+      { prop: 'messageLabel', type: 'label', maxWords: 6 },
+      { prop: 'messagePlaceholder', type: 'paragraph', maxWords: 10 },
+      { prop: 'submitButtonText', type: 'cta', maxWords: 3 },
+      { prop: 'cardTitle', type: 'heading', maxWords: 8 },
+      { prop: 'cardSubtitle', type: 'paragraph', maxWords: 12 }
+    ],
+  },
+
+  'contact-reach-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'titleLine', type: 'heading', maxWords: 10 },
+      { prop: 'brandName', type: 'heading', maxWords: 8 },
+      { prop: 'description', type: 'paragraph', maxWords: 35 },
+      { prop: 'formTitle', type: 'heading', maxWords: 10 },
+      { prop: 'nameLabel', type: 'label', maxWords: 5 },
+      { prop: 'namePlaceholder', type: 'paragraph', maxWords: 8 },
+      { prop: 'emailLabel', type: 'label', maxWords: 5 },
+      { prop: 'emailPlaceholder', type: 'paragraph', maxWords: 8 },
+      { prop: 'servicesLabel', type: 'label', maxWords: 5 },
+      { prop: 'servicesPlaceholder', type: 'paragraph', maxWords: 8 },
+      { prop: 'messageLabel', type: 'label', maxWords: 5 },
+      { prop: 'messagePlaceholder', type: 'paragraph', maxWords: 8 },
+      { prop: 'submitButtonText', type: 'cta', maxWords: 5 }
+    ],
+  },
+
+  'contact-support-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 8 },
+      { prop: 'description', type: 'paragraph', maxWords: 30 },
+      { prop: 'emailLabel', type: 'label', maxWords: 4 },
+      { prop: 'emailPlaceholder', type: 'label', maxWords: 6 },
+      { prop: 'messageLabel', type: 'label', maxWords: 4 },
+      { prop: 'messagePlaceholder', type: 'label', maxWords: 6 },
+      { prop: 'submitButtonText', type: 'cta', maxWords: 3 },
+      { prop: 'successMessage', type: 'paragraph', maxWords: 15 }
+    ],
+  },
+
   // ── CTA ─────────────────────────────────────────────────────────────
   'cta-banner-dynamic': {
     isDynamic: true,
@@ -386,6 +504,60 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'items', type: 'list', maxWords: 20 },
       { prop: 'bottomLabel', type: 'label', maxWords: 10 },
       { prop: 'ctaText', type: 'cta', maxWords: 5 },
+    ],
+  },
+
+  'cta-button-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 15 },
+      { prop: 'description', type: 'paragraph', maxWords: 40 },
+      { prop: 'ctaText', type: 'cta', maxWords: 5 }
+    ],
+  },
+
+  'cta-click-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 15 }
+    ],
+  },
+
+  'cta-convert-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 35 },
+      { prop: 'inputLabel', type: 'label', maxWords: 5 },
+      { prop: 'inputPlaceholder', type: 'label', maxWords: 5 },
+      { prop: 'buttonText', type: 'cta', maxWords: 3 },
+      { prop: 'subtext', type: 'paragraph', maxWords: 15 },
+      { prop: 'linkText', type: 'cta', maxWords: 5 }
+    ],
+  },
+
+  'cta-drive-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'heading', type: 'heading', maxWords: 15 },
+      { prop: 'description', type: 'paragraph', maxWords: 25 },
+      { prop: 'cardText', type: 'paragraph', maxWords: 60 },
+      { prop: 'inputPlaceholder', type: 'label', maxWords: 8 },
+      { prop: 'buttonText', type: 'cta', maxWords: 5 },
+      { prop: 'privacyTextPrefix', type: 'paragraph', maxWords: 15 },
+      { prop: 'privacyLinkText', type: 'cta', maxWords: 5 }
+    ],
+  },
+
+  'cta-goal-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badgeCategory', type: 'label', maxWords: 5 },
+      { prop: 'badgeText', type: 'paragraph', maxWords: 15 },
+      { prop: 'heading', type: 'heading', maxWords: 20 },
+      { prop: 'description', type: 'paragraph', maxWords: 50 },
+      { prop: 'inputPlaceholder', type: 'label', maxWords: 10 },
+      { prop: 'buttonText', type: 'cta', maxWords: 10 }
     ],
   },
 
@@ -408,6 +580,47 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
     ],
   },
 
+  'nav-header-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'brandName', type: 'label', maxWords: 5 },
+      { prop: 'searchPlaceholder', type: 'cta', maxWords: 3 },
+      { prop: 'navLinks', type: 'list', maxWords: 10 },
+    ],
+  },
+
+  'nav-link-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'logoText', type: 'heading', maxWords: 4 },
+      { prop: 'topLink1Text', type: 'label', maxWords: 5 },
+      { prop: 'topLink2Text', type: 'label', maxWords: 5 },
+      { prop: 'topLink3Text', type: 'label', maxWords: 5 },
+      { prop: 'mainLink1Text', type: 'label', maxWords: 4 },
+      { prop: 'mainLink2Text', type: 'label', maxWords: 4 },
+      { prop: 'mainLink3Text', type: 'label', maxWords: 4 },
+      { prop: 'mainLink4Text', type: 'label', maxWords: 4 }
+    ],
+  },
+
+  'nav-menu-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'brandName', type: 'heading', maxWords: 5 },
+      { prop: 'topLinks', type: 'list', maxWords: 15 },
+      { prop: 'mainLinks', type: 'list', maxWords: 20 }
+    ],
+  },
+
+  'nav-panel-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'logoText', type: 'label', maxWords: 5 },
+      { prop: 'signInText', type: 'cta', maxWords: 3 },
+      { prop: 'signUpText', type: 'cta', maxWords: 3 }
+    ],
+  },
+
   // ── TESTIMONIALS ────────────────────────────────────────────────────
   'testi-client-dynamic': {
     isDynamic: true,
@@ -415,6 +628,49 @@ export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
       { prop: 'heading', type: 'heading', maxWords: 10 },
       { prop: 'subtext', type: 'paragraph', maxWords: 25 },
       { prop: 'testimonials', type: 'list', maxWords: 0 },
+    ],
+  },
+
+  'testi-critique-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'badgeText', type: 'label', maxWords: 5 },
+      { prop: 'headingText', type: 'heading', maxWords: 15 },
+      { prop: 'testimonials', type: 'list', maxWords: 200 }
+    ],
+  },
+
+  'testi-feedback-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 25 },
+    ],
+  },
+
+  'testi-honor-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'items.quote', type: 'paragraph', maxWords: 80 },
+      { prop: 'items.authorName', type: 'heading', maxWords: 10 },
+      { prop: 'items.authorRole', type: 'label', maxWords: 10 }
+    ],
+  },
+
+  'testi-praise-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'items', type: 'list', maxWords: 15 },
+      { prop: 'dividerText', type: 'label', maxWords: 5 }
+    ],
+  },
+
+  'testi-quote-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'quoteText', type: 'paragraph', maxWords: 60 },
+      { prop: 'authorName', type: 'heading', maxWords: 8 },
+      { prop: 'authorRole', type: 'label', maxWords: 10 }
     ],
   },
 
