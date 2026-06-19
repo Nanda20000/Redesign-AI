@@ -1,7 +1,6 @@
 export const COMPONENT_META = {
   // Hero components
   "hero-action-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 12 },
-  "hero-active-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 10 },
   "hero-adapt-dynamic":  { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 10 },
   "hero-alpha-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
   "hero-anchor-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "medium", priority: 10 },
@@ -9,15 +8,8 @@ export const COMPONENT_META = {
   "hero-aspect-dynamic": { section: "hero",    supportsImages: true,  supportsItems: true, contentLevel: "high",    priority: 10 },
   "hero-atlas-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 10 },
 
-  // Blog components
-  "blog-article-dynamic": { section: "blog", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
-  "blog-feed-dynamic": { section: "blog", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
-  "blog-grid-dynamic": { section: "blog", supportsImages: true,  supportsItems: true,  contentLevel: "high",   priority: 10 },
-
   // About components
   "about-crew-dynamic": { section: "about", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
-  "about-card-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
-  "about-bio-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "high", priority: 10 },
   "about-brand-dynamic": { section: "about", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
   "about-brief-dynamic": { section: "about", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 10 },
 
@@ -64,6 +56,14 @@ export const COMPONENT_META = {
   "testi-praise-dynamic": { section: "testimonials", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 1 },
   "testi-quote-dynamic": { section: "testimonials", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 15 },
 
+  // Blog components
+  "blog-journal-dynamic": { section: "blog", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+
+  // Mission-vision components
+  "mission-new-dynamic": { section: "mission-vision", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 10 },
+  "mission-enhanced-dynamic": { section: "mission-vision", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
+  "mission-brand-dynamic": { section: "mission-vision", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 1 },
+
   // Gallery components
   "gallery-album-dynamic": { section: "gallery", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 10 },
 
@@ -75,7 +75,23 @@ export const COMPONENT_META = {
   "feature-item-dynamic": { section: "feature", supportsImages: false, supportsItems: true, contentLevel: "high", priority: 10 },
   "feature-list-dynamic": { section: "feature", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
 
+  // FAQ-process components
+  "faq-great-dynamic": { section: "faq-process", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
+  "faq-new-dynamic": { section: "faq-process", supportsImages: false, supportsItems: true, contentLevel: "high", priority: 1 },
+  "faq-super-dynamic": { section: "faq-process", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
+
   // Benefits components
   "benefits-advantage-dynamic": { section: "benefits", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
   "benefits-asset-dynamic": { section: "benefits", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
+
+  // Pricing components
+  "pricing-matrix-dynamic": { section: "pricing", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
+  "pricing-static-dynamic": { section: "pricing", supportsImages: false, supportsItems: true, contentLevel: "high", priority: 1 },
+
+  // Company-story components
+  "story-chapter-dynamic": { section: "company-story", supportsImages: false, supportsItems: true, contentLevel: "medium", priority: 10 },
+  "story-event-dynamic": { section: "company-story", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 1 },
+  "story-heritage-dynamic": { section: "company-story", supportsImages: true, supportsItems: true, contentLevel: "medium", priority: 10 },
+  "story-history-dynamic": { section: "company-story", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
+  "story-journey-dynamic": { section: "company-story", supportsImages: true, supportsItems: true, contentLevel: "high", priority: 10 },
 };

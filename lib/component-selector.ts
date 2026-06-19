@@ -33,17 +33,18 @@ export interface ComponentSelectionResult {
  * Component capability map - which components support images
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-atlas-dynamic', 'hero-aspect-dynamic', 'hero-apex-dynamic', 'hero-anchor-dynamic', 'hero-alpha-dynamic', 'hero-adapt-dynamic', 'hero-active-dynamic', 'hero-action-dynamic'],
-  about: ['about-crew-dynamic', 'about-card-dynamic', 'about-brief-dynamic', 'about-brand-dynamic', 'about-bio-dynamic'],
-  blog: ['blog-grid-dynamic', 'blog-feed-dynamic', 'blog-article-dynamic'],
-  'company-story': ['story-archive-dynamic'],
+  hero: ['hero-atlas-dynamic', 'hero-aspect-dynamic', 'hero-apex-dynamic', 'hero-anchor-dynamic', 'hero-alpha-dynamic', 'hero-adapt-dynamic', 'hero-action-dynamic'],
+  about: ['about-crew-dynamic', 'about-brief-dynamic', 'about-brand-dynamic'],
   cta: ['cta-button-dynamic', 'cta-banner-dynamic'],
   testimonials: ['testi-quote-dynamic', 'testi-praise-dynamic', 'testi-honor-dynamic', 'testi-feedback-dynamic', 'testi-critique-dynamic', 'testi-client-dynamic'],
   gallery: ['gallery-album-dynamic'],
   feature: ['feature-list-dynamic', 'feature-focus-dynamic', 'feature-facet-dynamic', 'feature-detail-dynamic', 'feature-aspect-dynamic'],
+  blog: ['blog-journal-dynamic'],
   benefits: ['benefits-advantage-dynamic'],
   contact: ['contact-support-dynamic', 'contact-reach-dynamic', 'contact-link-dynamic'],
   footer: ['footer-ether-dynamic', 'footer-prism-dynamic'],
+  'company-story': ['story-journey-dynamic', 'story-history-dynamic', 'story-heritage-dynamic', 'story-event-dynamic', 'story-chapter-dynamic'],
+  'mission-vision': ['mission-new-dynamic', 'mission-brand-dynamic'],
 };
 
 function isSelectableAIComponent(componentName: string): boolean {
@@ -52,7 +53,7 @@ function isSelectableAIComponent(componentName: string): boolean {
 
 /**
  * Get AI-selectable components for a section using the manifest instead of a hardcoded whitelist.
- * Only returns kept components: hero-action-dynamic, about-bio-dynamic, blog-article-dynamic, story-archive-dynamic, footer-simple.
+ * Only returns kept components: hero-action-dynamic, about-brief-dynamic, footer-simple.
  */
 function getAIComponentsForSection(
   section: string,
@@ -126,9 +127,10 @@ const HOMEPAGE_SECTIONS = [
   'hero',
   'about',
   'features',
-  'blog',
-  'company-story',
   'gallery',
+  'blog',
+  'benefits',
+  'mission-vision',
   'testimonials',
   'cta',
   'contact',
@@ -150,20 +152,6 @@ const CONDITIONAL_SECTIONS: Record<string, {
     },
     reason: 'About section for organization background'
   },
-  blog: {
-    shouldInclude: (analysis) => {
-      const blogTypes: BusinessType[] = ['education', 'saas', 'agency', 'corporate', 'startup'];
-      return blogTypes.includes(analysis.businessType) || analysis.contentRichness === 'high';
-    },
-    reason: 'Blog section for content and news'
-  },
-  'company-story': {
-    shouldInclude: (analysis) => {
-      const storyHeavyTypes: BusinessType[] = ['corporate', 'education', 'agency', 'portfolio'];
-      return storyHeavyTypes.includes(analysis.businessType) || analysis.contentRichness === 'high';
-    },
-    reason: 'Company story/history for brand heritage'
-  },
   'faq-process': {
     shouldInclude: (analysis) => {
       const faqHeavyTypes: BusinessType[] = ['saas', 'education', 'ecommerce', 'healthcare'];
@@ -174,6 +162,27 @@ const CONDITIONAL_SECTIONS: Record<string, {
   contact: {
     shouldInclude: () => true,
     reason: 'Contact section for visitor inquiries'
+  },
+  blog: {
+    shouldInclude: (analysis) => {
+      const blogHeavyTypes: BusinessType[] = ['agency', 'startup', 'education', 'nonprofit'];
+      return blogHeavyTypes.includes(analysis.businessType) || analysis.contentRichness !== 'low';
+    },
+    reason: 'Blog section for articles and insights'
+  },
+  benefits: {
+    shouldInclude: (analysis) => {
+      const benefitsHeavyTypes: BusinessType[] = ['saas', 'startup', 'corporate', 'healthcare', 'ecommerce'];
+      return benefitsHeavyTypes.includes(analysis.businessType) || analysis.contentRichness !== 'low';
+    },
+    reason: 'Benefits section to highlight value propositions'
+  },
+  'mission-vision': {
+    shouldInclude: (analysis) => {
+      const missionHeavyTypes: BusinessType[] = ['nonprofit', 'corporate', 'education', 'healthcare'];
+      return missionHeavyTypes.includes(analysis.businessType);
+    },
+    reason: 'Mission-vision section for organizational purpose and goals'
   },
 };
 
@@ -600,7 +609,7 @@ export function buildEnhancedPrompt(
 ## STRICT RULE — DYNAMIC COMPONENTS ONLY
 You MUST only select components whose name ends with "-dynamic".
 Never select components like hero-modern, hero-minimal, navbar-gradient, footer-elegant etc.
-Only valid selections end with: -dynamic (e.g. hero-action-dynamic, about-bio-dynamic, blog-article-dynamic)
+Only valid selections end with: -dynamic (e.g. hero-action-dynamic, about-brief-dynamic)
 Exception: footer-simple is also valid.
 
 ## Source Website Analysis:
@@ -628,20 +637,22 @@ ${sectionGuidelines}
 IMPORTANT: You are encouraged to pick DIFFERENT components on different runs. Do not default to the same component every time.
 
 ## Business Type Guidance:
-- education/academy → prioritize about-bio-dynamic, blog-article-dynamic, story-archive-dynamic
-- saas/startup → prioritize hero-action-dynamic, blog-article-dynamic
-- corporate → prioritize about-bio-dynamic, story-archive-dynamic
-- portfolio/agency → prioritize story-archive-dynamic, blog-article-dynamic
-- ecommerce → prioritize blog-article-dynamic
+- education/academy → prioritize about-brief-dynamic, include mission-vision
+- saas/startup → prioritize hero-action-dynamic, include benefits
+- corporate → prioritize about-brief-dynamic, include mission-vision and benefits
+- portfolio/agency → prioritize about-brief-dynamic, include blog
+- nonprofit → prioritize about-brief-dynamic, include mission-vision and blog
+- healthcare → include benefits and mission-vision
+- ecommerce → include benefits
 - All site types → always include a contact component (contact-form-dynamic, contact-help-dynamic, contact-inbox-dynamic, contact-lead-dynamic, contact-link-dynamic, or contact-mail-dynamic)
+- All site types → consider including blog-journal-dynamic for articles/insights
+- All site types → consider including benefits-advantage-dynamic or benefits-asset-dynamic for value propositions
 
 ## Response Format — Return ONLY this JSON, no markdown, no explanation:
 {
   "layout": [
     {"section": "hero", "component": "hero-action-dynamic"},
-    {"section": "about", "component": "about-bio-dynamic"},
-    {"section": "blog", "component": "blog-article-dynamic"},
-    {"section": "company-story", "component": "story-archive-dynamic"},
+    {"section": "about", "component": "about-brief-dynamic"},
     {"section": "contact", "component": "contact-form-dynamic"},
     {"section": "footer", "component": "footer-simple"}
   ]

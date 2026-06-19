@@ -1,78 +1,6 @@
 {
   "components": [
     {
-      "name": "footer-simple",
-      "category": "footer",
-      "file": "footer/footer-simple.tsx",
-      "description": "A simple footer with brand info and social links"
-    },
-    {
-      "name": "footer-halo-dynamic",
-      "category": "footer",
-      "file": "footer/footer-halo-dynamic.tsx",
-      "description": "Premium dynamic footer with configurable multi-column navigation, brand descriptions, social links, and an elegant accent boundary line."
-    },
-    {
-      "name": "story-archive-dynamic",
-      "category": "company-story",
-      "file": "company-story/story-archive-dynamic.tsx",
-      "description": "A dynamic company story section with a header, large image, and statistics grid."
-    },
-    {
-      "name": "hero-action-dynamic",
-      "category": "hero",
-      "file": "hero/hero-action-dynamic.tsx",
-      "description": "A dynamic hero section with a badge, trust indicators, and floating action cards."
-    },
-    {
-      "name": "hero-active-dynamic",
-      "category": "hero",
-      "file": "hero/hero-active-dynamic.tsx",
-      "description": "A dynamic bento-style hero section using Roboto font with video thumbnail and portrait image."
-    },
-    {
-      "name": "hero-adapt-dynamic",
-      "category": "hero",
-      "file": "hero/hero-adapt-dynamic.tsx",
-      "description": "Adaptive hero section with Trustpilot social proof, feature list, and a dynamic image grid."
-    },
-    {
-      "name": "hero-alpha-dynamic",
-      "category": "hero",
-      "file": "hero/hero-alpha-dynamic.tsx",
-      "description": "A split-layout hero section with a large image, bold typography with a red accent, and a striking diagonal background element."
-    },
-    {
-      "name": "hero-anchor-dynamic",
-      "category": "hero",
-      "file": "hero/hero-anchor-dynamic.tsx",
-      "description": "A sophisticated hero section with a background image, red accent line, and dual CTAs."
-    },
-    {
-      "name": "hero-apex-dynamic",
-      "category": "hero",
-      "file": "hero/hero-apex-dynamic.tsx",
-      "description": "A premium hero section with background image, center content, and a bottom bar featuring social proof and stats."
-    },
-    {
-      "name": "hero-aspect-dynamic",
-      "category": "hero",
-      "file": "hero/hero-aspect-dynamic.tsx",
-      "description": "A sophisticated hero section with a badge, large heading, CTA, social proof ratings, and a feature grid at the bottom."
-    },
-    {
-      "name": "hero-atlas-dynamic",
-      "category": "hero",
-      "file": "hero/hero-atlas-dynamic.tsx",
-      "description": "Dynamic travel-themed hero section with a large background image and a floating info card."
-    },
-    {
-      "name": "about-bio-dynamic",
-      "category": "about",
-      "file": "about/about-bio-dynamic.tsx",
-      "description": "A dynamic about section with a grid layout featuring a large story card with image overlay and mission/vision cards."
-    },
-    {
       "name": "about-brand-dynamic",
       "category": "about",
       "file": "about/about-brand-dynamic.tsx",
@@ -84,35 +12,23 @@
       "file": "about/about-brief-dynamic.tsx",
       "description": "A clean about section with a decorative red line, bold heading, dual paragraphs, and an overlapping image layout."
     },
-    {
-      "name": "about-card-dynamic",
-      "category": "about",
-      "file": "about/about-card-dynamic.tsx",
-      "description": "A dynamic about section with two offset images and a feature highlight block."
-    },
-    {
+{
       "name": "about-crew-dynamic",
       "category": "about",
       "file": "about/about-crew-dynamic.tsx",
       "description": "A two-column about section with a dark values card and a large image card with overlay text."
     },
     {
-      "name": "blog-article-dynamic",
-      "category": "blog",
-      "file": "blog/blog-article-dynamic.tsx",
-      "description": "A dynamic blog section with a grid of posts featuring alternating image and content styles."
+      "name": "benefits-advantage-dynamic",
+      "category": "benefits",
+      "file": "benefits/benefits-advantage-dynamic.tsx",
+      "description": "A dynamic benefits section with an accordion-style list and a dual-image layout."
     },
     {
-      "name": "blog-feed-dynamic",
-      "category": "blog",
-      "file": "blog/blog-feed-dynamic.tsx",
-      "description": "Minimalist blog feed with large heading, navigation buttons, and responsive cards."
-    },
-    {
-      "name": "blog-grid-dynamic",
-      "category": "blog",
-      "file": "blog/blog-grid-dynamic.tsx",
-      "description": "A modern blog grid with category tags, read time, author info, and pagination."
+      "name": "benefits-asset-dynamic",
+      "category": "benefits",
+      "file": "benefits/benefits-asset-dynamic.tsx",
+      "description": "A grid-based benefits section with customizable cards, icons, and a highlighted option."
     },
     {
       "name": "contact-form-dynamic",
@@ -205,16 +121,40 @@
       "description": "Centered CTA banner with customizable badge highlights, elegant headings, custom descriptions, and a responsive email capture field."
     },
     {
-      "name": "footer-glow-dynamic",
-      "category": "footer",
-      "file": "footer/footer-glow-dynamic.tsx",
-      "description": "An elegant, modern dynamic footer component featuring customizable link columns, newsletter signup integration, social icons, and a premium top border glow effect."
+      "name": "feature-aspect-dynamic",
+      "category": "feature",
+      "file": "feature/feature-aspect-dynamic.tsx",
+      "description": "A feature section with a central image flanked by four feature cards in a grid layout."
     },
     {
-      "name": "footer-prism-dynamic",
-      "category": "footer",
-      "file": "footer/footer-prism-dynamic.tsx",
-      "description": "A dark, modern footer featuring navigation links, circular social icons, and configurable copyright branding, typeset in Roboto."
+      "name": "feature-detail-dynamic",
+      "category": "feature",
+      "file": "feature/feature-detail-dynamic.tsx",
+      "description": "A grid of feature cards with alternating text/image positions and a highlighted card."
+    },
+    {
+      "name": "feature-facet-dynamic",
+      "category": "feature",
+      "file": "feature/feature-facet-dynamic.tsx",
+      "description": "Two-column feature section with a large image and a detailed list of services or capabilities."
+    },
+    {
+      "name": "feature-focus-dynamic",
+      "category": "feature",
+      "file": "feature/feature-focus-dynamic.tsx",
+      "description": "A centered feature spotlight with a middle image and four surrounding feature cards."
+    },
+    {
+      "name": "feature-item-dynamic",
+      "category": "feature",
+      "file": "feature/feature-item-dynamic.tsx",
+      "description": "A feature section with a centered header, CTA buttons, and a grid of stylized cards with badges and links."
+    },
+    {
+      "name": "feature-list-dynamic",
+      "category": "feature",
+      "file": "feature/feature-list-dynamic.tsx",
+      "description": "A split-layout feature section with a left-side intro and a right-side grid of services or features."
     },
     {
       "name": "footer-ether-dynamic",
@@ -223,10 +163,82 @@
       "description": "An atmospheric, alpine-themed footer component featuring a dark backdrop, brand column with custom search pill, multi-column navigation links, and scroll-to-top controls."
     },
     {
+      "name": "footer-glow-dynamic",
+      "category": "footer",
+      "file": "footer/footer-glow-dynamic.tsx",
+      "description": "An elegant, modern dynamic footer component featuring customizable link columns, newsletter signup integration, social icons, and a premium top border glow effect."
+    },
+    {
+      "name": "footer-halo-dynamic",
+      "category": "footer",
+      "file": "footer/footer-halo-dynamic.tsx",
+      "description": "Premium dynamic footer with configurable multi-column navigation, brand descriptions, social links, and an elegant accent boundary line."
+    },
+    {
       "name": "footer-lume-dynamic",
       "category": "footer",
       "file": "footer/footer-lume-dynamic.tsx",
       "description": "Dynamic responsive footer with e-commerce quick links, newsletter subscription, and brand social profiles."
+    },
+    {
+      "name": "footer-prism-dynamic",
+      "category": "footer",
+      "file": "footer/footer-prism-dynamic.tsx",
+      "description": "A dark, modern footer featuring navigation links, circular social icons, and configurable copyright branding, typeset in Roboto."
+    },
+    {
+      "name": "footer-simple",
+      "category": "footer",
+      "file": "footer/footer-simple.tsx",
+      "description": "A simple footer with brand info and social links"
+    },
+    {
+      "name": "gallery-album-dynamic",
+      "category": "gallery",
+      "file": "gallery/gallery-album-dynamic.tsx",
+      "description": "A dynamic gallery album with a masonry-like grid layout and a centered title."
+    },
+    {
+      "name": "hero-action-dynamic",
+      "category": "hero",
+      "file": "hero/hero-action-dynamic.tsx",
+      "description": "A dynamic hero section with a badge, trust indicators, and floating action cards."
+    },
+    {
+      "name": "hero-adapt-dynamic",
+      "category": "hero",
+      "file": "hero/hero-adapt-dynamic.tsx",
+      "description": "Adaptive hero section with Trustpilot social proof, feature list, and a dynamic image grid."
+    },
+    {
+      "name": "hero-alpha-dynamic",
+      "category": "hero",
+      "file": "hero/hero-alpha-dynamic.tsx",
+      "description": "A split-layout hero section with a large image, bold typography with a red accent, and a striking diagonal background element."
+    },
+    {
+      "name": "hero-anchor-dynamic",
+      "category": "hero",
+      "file": "hero/hero-anchor-dynamic.tsx",
+      "description": "A sophisticated hero section with a background image, red accent line, and dual CTAs."
+    },
+    {
+      "name": "hero-apex-dynamic",
+      "category": "hero",
+      "file": "hero/hero-apex-dynamic.tsx",
+      "description": "A premium hero section with background image, center content, and a bottom bar featuring social proof and stats."
+    },
+    {
+      "name": "hero-aspect-dynamic",
+      "category": "hero",
+      "file": "hero/hero-aspect-dynamic.tsx",
+      "description": "A sophisticated hero section with a badge, large heading, CTA, social proof ratings, and a feature grid at the bottom."
+    },
+    {
+      "name": "hero-atlas-dynamic",
+      "category": "hero",
+      "file": "hero/hero-atlas-dynamic.tsx",
+      "description": "Dynamic travel-themed hero section with a large background image and a floating info card."
     },
     {
       "name": "nav-bar-dynamic",
@@ -301,73 +313,111 @@
       "description": "A high-quality testimonials section styled with a side-by-side bento layout and elegant Roboto typography."
     },
     {
-      "name": "gallery-album-dynamic",
-      "category": "gallery",
-      "file": "gallery/gallery-album-dynamic.tsx",
-      "description": "A dynamic gallery album with a masonry-like grid layout and a centered title."
+      "name": "faq-process-dynamic",
+      "category": "faq-process",
+      "file": "faq-process/faq-process-dynamic.tsx",
+      "description": "A grid layout, flex layout, CTA buttons and icons component"
     },
     {
-      "name": "feature-aspect-dynamic",
-      "category": "feature",
-      "file": "feature/feature-aspect-dynamic.tsx",
-      "description": "A feature section with a central image flanked by four feature cards in a grid layout."
+      "name": "faq-great-dynamic",
+      "category": "faq-process",
+      "file": "faq-process/faq-great-dynamic.tsx",
+      "description": "A modern dynamic FAQ accordion with hand-drawn highlighter accents, Roboto typography, and balanced 2-column responsive layout distribution."
     },
     {
-      "name": "feature-detail-dynamic",
-      "category": "feature",
-      "file": "feature/feature-detail-dynamic.tsx",
-      "description": "A grid of feature cards with alternating text/image positions and a highlighted card."
+      "name": "faq-new-dynamic",
+      "category": "faq-process",
+      "file": "faq-process/faq-new-dynamic.tsx",
+      "description": "Premium dark-teal interactive Frequently Asked Questions section with custom Accordion states"
     },
     {
-      "name": "feature-facet-dynamic",
-      "category": "feature",
-      "file": "feature/feature-facet-dynamic.tsx",
-      "description": "Two-column feature section with a large image and a detailed list of services or capabilities."
+      "name": "faq-super-dynamic",
+      "category": "faq-process",
+      "file": "faq-process/faq-super-dynamic.tsx",
+      "description": "An interactive double-column FAQ accordion with subtle expand/collapse motion"
     },
     {
-      "name": "benefits-advantage-dynamic",
-      "category": "benefits",
-      "file": "benefits/benefits-advantage-dynamic.tsx",
-      "description": "A dynamic benefits section with an accordion-style list and a dual-image layout."
+      "name": "blog-journal-dynamic",
+      "category": "blog",
+      "file": "blog/blog-journal-dynamic.tsx",
+      "description": "A dynamic blog journal component showcasing featured image posts and detailed text-only articles in an elegant magazine grid."
     },
     {
-      "name": "benefits-asset-dynamic",
-      "category": "benefits",
-      "file": "benefits/benefits-asset-dynamic.tsx",
-      "description": "A grid-based benefits section with customizable cards, icons, and a highlighted option."
+      "name": "story-chapter-dynamic",
+      "category": "company-story",
+      "file": "company-story/story-chapter-dynamic.tsx",
+      "description": "A elegant restaurant/entity features showcase and company story block with modern side-by-side elements."
     },
     {
-      "name": "feature-focus-dynamic",
-      "category": "feature",
-      "file": "feature/feature-focus-dynamic.tsx",
-      "description": "A centered feature spotlight with a middle image and four surrounding feature cards."
+      "name": "story-event-dynamic",
+      "category": "company-story",
+      "file": "company-story/story-event-dynamic.tsx",
+      "description": "A dynamic company-story section depicting key visual highlights, title headings with bottom metrics cards."
     },
     {
-      "name": "feature-item-dynamic",
-      "category": "feature",
-      "file": "feature/feature-item-dynamic.tsx",
-      "description": "A feature section with a centered header, CTA buttons, and a grid of stylized cards with badges and links."
+      "name": "story-heritage-dynamic",
+      "category": "company-story",
+      "file": "company-story/story-heritage-dynamic.tsx",
+      "description": "A highly customizable company story section featuring key achievements, a prominent showcase graphic, and narrative layout elements."
     },
     {
-      "name": "feature-list-dynamic",
-      "category": "feature",
-      "file": "feature/feature-list-dynamic.tsx",
-      "description": "A split-layout feature section with a left-side intro and a right-side grid of services or features."
+      "name": "story-history-dynamic",
+      "category": "company-story",
+      "file": "company-story/story-history-dynamic.tsx",
+      "description": "A dark green styled company history section with a narrative side, a main cover image, and highlights for statistics."
+    },
+    {
+      "name": "story-journey-dynamic",
+      "category": "company-story",
+      "file": "company-story/story-journey-dynamic.tsx",
+      "description": "High-fidelity company story layout with a dynamic floating metrics progress card, Roboto typography ratios, check features grid, and impact counters."
+    },
+    {
+      "name":     "mission-new-dynamic",
+      "category": "mission-vision",
+      "file": "mission-vision/mission-new-dynamic.tsx",
+      "description": "A dynamic and interactive Mission and Vision section styled precisely with Roboto typography."
+    },
+    {
+      "name": "mission-enhanced-dynamic",
+      "category": "mission-vision",
+      "file": "mission-vision/mission-enhanced-dynamic.tsx",
+      "description": "Premium mission and values section displaying a 2x2 grid with high-influence card layouts using Roboto."
+    },
+    {
+      "name": "mission-brand-dynamic",
+      "category": "mission-vision",
+      "file": "mission-vision/mission-brand-dynamic.tsx",
+      "description": "A premium slanted visual brand showcase with multi-aspect dynamic bullet indicators."
+    },
+    {
+      "name": "pricing-matrix-dynamic",
+      "category": "pricing",
+      "file": "pricing/pricing-matrix-dynamic.tsx",
+      "description": "Dynamic responsive pricing section with customizable plan cards, dark featured option, and Roboto font styling"
+    },
+    {
+      "name": "pricing-static-dynamic",
+      "category": "pricing",
+      "file": "pricing/pricing-static-dynamic.tsx",
+      "description": "Premium three-tier pricing grid supporting toggleable billing cycles and highlighted business emphasis card."
     }
   ],
   "categories": [
-    "footer",
-    "company-story",
-    "pricing",
-    "hero",
     "about",
+    "benefits",
     "blog",
+    "company-story",
     "contact",
     "cta",
-    "navbar",
-    "testimonials",
-    "gallery",
+    "faq-process",
     "feature",
-    "benefits"
+    "footer",
+    "gallery",
+    "hero",
+    "mission-vision",
+    "navbar",
+    "pricing",
+    "testimonials"
   ]
 }

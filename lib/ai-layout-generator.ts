@@ -423,10 +423,11 @@ export function loadGeneratedPageData(): Promise<GeneratedPageData> {
  */
 function getDefaultImageComponent(section: string): string | null {
   const imageCandidates: Record<string, string[]> = {
-    hero: ['hero-action-dynamic', 'hero-active-dynamic', 'hero-adapt-dynamic', 'hero-alpha-dynamic', 'hero-anchor-dynamic', 'hero-apex-dynamic'],
-    about: ['about-bio-dynamic', 'about-brand-dynamic', 'about-brief-dynamic'],
-    blog: ['blog-article-dynamic', 'blog-feed-dynamic', 'blog-grid-dynamic'],
-    'company-story': ['story-archive-dynamic'],
+    hero: ['hero-action-dynamic', 'hero-adapt-dynamic', 'hero-alpha-dynamic', 'hero-anchor-dynamic', 'hero-apex-dynamic'],
+    about: ['about-brand-dynamic', 'about-brief-dynamic'],
+    blog: ['blog-journal-dynamic'],
+    benefits: ['benefits-advantage-dynamic'],
+    'mission-vision': ['mission-new-dynamic', 'mission-brand-dynamic'],
   };
   
   const candidates = imageCandidates[section];
@@ -451,7 +452,7 @@ function enforceImageComponents(
     const newItem = { ...item };
 
     // Check if this section should have images (only for kept components)
-    if (['hero', 'about', 'blog', 'company-story'].includes(item.section)) {
+    if (['hero', 'about', 'blog', 'benefits', 'mission-vision'].includes(item.section)) {
       if (!componentSupportsImages(item.component, item.section)) {
         const replacement = getDefaultImageComponent(item.section);
         if (replacement) {
@@ -546,7 +547,7 @@ function normalizeStructuralSections(sections: string[]): string[] {
 
   const result = cleaned.filter((section, index) => {
     if (section === 'footer') return index === lastFooterIndex;
-    return true; // hero, about, blog, company-story all pass through
+    return true; // hero, about all pass through
   });
 
   // Guarantee hero survives normalization
@@ -844,8 +845,6 @@ export async function generateLayoutWithAI(
       const seen: Record<string, number> = {};
       const maxMid: Record<string, number> = {
         about: 3,
-        blog: 3,
-        'company-story': 2,
       };
       const dedupedMiddle = middle.filter(item => {
         const count = seen[item.section] || 0;
@@ -882,7 +881,7 @@ export async function generateLayoutWithAI(
     console.log('[AI Layout Generator] Final component selection:');
     layout.layout.forEach((item) => {
       const supportsImages = componentSupportsImages(item.component, item.section);
-      const wasEnforced = hasImages && ['hero', 'features', 'about', 'testimonials'].includes(item.section) && supportsImages;
+      const wasEnforced = hasImages && ['hero', 'features', 'about', 'testimonials', 'blog', 'benefits', 'mission-vision'].includes(item.section) && supportsImages;
       console.log(`  - ${item.section}: ${item.component}${wasEnforced ? ' [IMAGE-CAPABLE ✓]' : supportsImages ? ' [IMAGE-CAPABLE]' : ''}`);
     });
     console.log('[AI Layout Generator] =========================================');

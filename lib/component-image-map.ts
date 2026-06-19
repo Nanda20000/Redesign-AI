@@ -24,12 +24,6 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
-  'hero-active-dynamic': {
-    imageCount: 5,
-    imageProp: 'expertAvatars',
-    imageMode: 'array',
-  },
-
   'hero-adapt-dynamic': {
     imageCount: 4,
     imageProp: 'images',
@@ -66,41 +60,10 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
-  // ── BLOG ──────────────────────────────────────────────────────────────
-  'blog-article-dynamic': {
-    imageCount: 6,
-    imageProp: 'posts',
-    imageMode: 'items',
-  },
-
-  'blog-feed-dynamic': {
-    imageCount: 4,
-    imageProp: 'posts.image',
-    imageMode: 'items',
-  },
-
-  'blog-grid-dynamic': {
-    imageCount: 6,
-    imageProp: 'items',
-    imageMode: 'items',
-  },
-
   // ── ABOUT ─────────────────────────────────────────────────────────────
   'about-crew-dynamic': {
     imageCount: 1,
     imageProp: 'backgroundImage',
-    imageMode: 'single',
-  },
-
-  'about-card-dynamic': {
-    imageCount: 2,
-    imageProp: 'image',
-    imageMode: 'array',
-  },
-
-  'about-bio-dynamic': {
-    imageCount: 1,
-    imageProp: 'storyImage',
     imageMode: 'single',
   },
 
@@ -113,13 +76,6 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   'about-brief-dynamic': {
     imageCount: 1,
     imageProp: 'image',
-    imageMode: 'single',
-  },
-
-  // ── COMPANY-STORY ─────────────────────────────────────────────────────
-  'story-archive-dynamic': {
-    imageCount: 1,
-    imageProp: 'mainImage',
     imageMode: 'single',
   },
 
@@ -326,6 +282,25 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
+  // ── MISSION-VISION ───────────────────────────────────────────────────
+  'mission-new-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageUrl',
+    imageMode: 'single',
+  },
+
+  'mission-enhanced-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'mission-brand-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageUrl',
+    imageMode: 'single',
+  },
+
   // ── GALLERY ─────────────────────────────────────────────────────────
   'gallery-album-dynamic': {
     imageCount: 7,
@@ -370,6 +345,13 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
+  // ── BLOG ─────────────────────────────────────────────────────────────
+  'blog-journal-dynamic': {
+    imageCount: 3,
+    imageProp: 'items.image',
+    imageMode: 'items',
+  },
+
   // ── BENEFITS ─────────────────────────────────────────────────────────
   'benefits-advantage-dynamic': {
     imageCount: 2,
@@ -381,6 +363,69 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageCount: 0,
     imageProp: '',
     imageMode: 'none',
+  },
+
+  // ── PRICING ──────────────────────────────────────────────────────────
+  'pricing-matrix-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'pricing-static-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  // ── FAQ-PROCESS ───────────────────────────────────────────────────────
+  'faq-great-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'faq-new-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'faq-super-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  // ── COMPANY-STORY ─────────────────────────────────────────────────────
+  'story-chapter-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'story-event-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageUrl',
+    imageMode: 'single',
+  },
+
+  'story-heritage-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageSrc',
+    imageMode: 'single',
+  },
+
+  'story-history-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageUrl',
+    imageMode: 'single',
+  },
+
+  'story-journey-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageSrc',
+    imageMode: 'single',
   },
 
 };

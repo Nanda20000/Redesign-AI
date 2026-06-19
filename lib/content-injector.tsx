@@ -44,11 +44,6 @@ export interface MappedContent {
       onClick: () => void;
     };
   };
-  blog?: {
-    title: string;
-    subtitle?: string;
-    items?: any[];
-  };
   about?: {
     title: string;
     description: string;
@@ -58,28 +53,6 @@ export interface MappedContent {
       value: string;
     }>;
     images?: string[];
-  };
-  'company-story'?: {
-    title: string;
-    subtitle?: string;
-    intro?: string;
-    milestones?: Array<{
-      year?: string;
-      title?: string;
-      description?: string;
-      image?: string;
-    }>;
-  };
-  companyStory?: {
-    topHeading?: string;
-    topDescription?: string;
-    mainImage?: string;
-    bottomHeading?: string;
-    bottomDescription?: string;
-    ratingValue?: string;
-    ratingLabel?: string;
-    ratingIcon?: React.ReactNode;
-    stats?: Array<{ value?: string; label?: string }>;
   };
   'faq-process'?: {
     title: string;
@@ -193,6 +166,30 @@ export interface MappedContent {
     primaryCtaText?: string;
     secondaryCtaText?: string;
   };
+  blog?: {
+    subtitle?: string;
+    title?: string;
+    items?: Array<{
+      id?: number;
+      image?: string;
+      date?: string;
+      category?: string;
+      title?: string;
+      description?: string;
+    }>;
+  };
+  'mission-vision'?: {
+    badge?: string;
+    title?: string;
+    description?: string;
+    items?: Array<{
+      title?: string;
+      description?: string;
+      icon?: React.ReactNode;
+    }>;
+    imageUrl?: string;
+    imageAlt?: string;
+  };
 }
 
 /**
@@ -299,15 +296,6 @@ export function mapContentToSections(
     };
   }
 
-  // Map blog content
-  if (sections.includes('blog')) {
-    mapped.blog = {
-      title: headings[0] ?? 'Latest Articles',
-      subtitle: paragraphs[0]?.slice(0, 100) ?? '',
-      items: [],
-    };
-  }
-
   // Map about content - NO automatic image assignment (AI handles it)
   if (sections.includes('about')) {
     mapped.about = {
@@ -316,16 +304,6 @@ export function mapContentToSections(
       companies: processed?.about?.companies ?? [],
       achievements: processed?.about?.achievements ?? [],
       // images field removed - AI prop injector handles image selection
-    };
-  }
-
-  // Map company-story content
-  if (sections.includes('company-story')) {
-    mapped['company-story'] = {
-      title: processed?.about?.title ?? 'Our Story',
-      subtitle: processed?.about?.description ?? 'Building the future together',
-      intro: paragraphs[0]?.slice(0, 200) ?? '',
-      milestones: [],
     };
   }
 
@@ -416,6 +394,52 @@ export function mapContentToSections(
     };
   }
 
+  // Map blog content - Use for articles/insights sections
+  if (sections.includes('blog')) {
+    mapped.blog = {
+      subtitle: 'Latest Updates',
+      title: 'From Our Blog',
+      items: headings.slice(1, 5).map((heading, idx) => ({
+        id: idx,
+        image: images[idx]?.src ?? '',
+        date: '',
+        category: '',
+        title: heading,
+        description: paragraphs[idx]?.slice(0, 150) ?? '',
+      })),
+    };
+  }
+
+  // Map benefits content - Use for value proposition sections
+  if (sections.includes('benefits')) {
+    mapped.benefits = {
+      badge: { text: 'Benefits' },
+      title: processed?.about?.title ?? 'Why Choose Us',
+      description: processed?.about?.description ?? paragraphs[0]?.slice(0, 200) ?? '',
+      items: headings.slice(1, 6).map((heading, idx) => ({
+        id: `benefit-${idx}`,
+        title: heading,
+        description: paragraphs[idx]?.slice(0, 100) ?? '',
+      })),
+      experience: { value: '10+', label: 'Years Experience' },
+    };
+  }
+
+  // Map mission-vision content - Use for organizational purpose sections
+  if (sections.includes('mission-vision')) {
+    mapped['mission-vision'] = {
+      badge: 'Our Purpose',
+      title: processed?.about?.title ?? 'Mission & Vision',
+      description: processed?.about?.description ?? paragraphs[0]?.slice(0, 200) ?? '',
+      items: headings.slice(0, 4).map((heading, idx) => ({
+        title: heading,
+        description: paragraphs[idx]?.slice(0, 120) ?? '',
+      })),
+      imageUrl: images[0]?.src ?? '',
+      imageAlt: images[0]?.alt ?? 'Mission and Vision',
+    };
+  }
+
   return mapped;
 }
 
@@ -453,25 +477,6 @@ export function getComponentContentProps(
         floatingCard2Title: sectionContent?.stats?.[1]?.title ?? '',
         floatingCard2Subtitle: sectionContent?.stats?.[1]?.subtitle ?? '',
         floatingCard2Avatars: sectionContent?.stats?.[1]?.avatars ?? [],
-      };
-    }
-
-    case 'hero-active-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        heading: sectionContent?.title ?? '',
-        expertAvatars: sectionContent?.images?.slice(0, 3) ?? [],
-        expertCount: sectionContent?.stats?.[0]?.value ?? '',
-        expertLabel: sectionContent?.stats?.[0]?.label ?? '',
-        expertDescription: sectionContent?.description ?? '',
-        videoThumbnail: sectionContent?.images?.[3] ?? '',
-        portraitImage: sectionContent?.images?.[4] ?? '',
-        portraitCtaText: sectionContent?.ctaText ?? '',
-        featureTitle: sectionContent?.features?.[0]?.title ?? '',
-        featureDescription: sectionContent?.features?.[0]?.description ?? '',
-        statsCount: sectionContent?.stats?.[1]?.value ?? '',
-        statsLabel: sectionContent?.stats?.[1]?.label ?? '',
-        statsDescription: sectionContent?.stats?.[1]?.description ?? '',
       };
     }
 
@@ -581,82 +586,7 @@ export function getComponentContentProps(
       };
     }
 
-    // Blog components
-    case 'blog-article-dynamic': {
-      const sectionContent = mappedContent.blog as any;
-      return {
-        tagline: sectionContent?.tagline ?? '',
-        heading: sectionContent?.heading ?? '',
-        posts: sectionContent?.items?.map((item: any, index: number) => ({
-          id: item.id,
-          title: item.title ?? '',
-          description: item.description ?? '',
-          image: item.image ?? '',
-          date: item.date ?? '',
-          category: item.category ?? '',
-          style: index % 2 === 0 ? 'image' : 'content',
-        })) ?? [],
-      };
-    }
-
-    case 'blog-feed-dynamic': {
-      const sectionContent = mappedContent.blog as any;
-      return {
-        title: sectionContent?.title ?? '',
-        posts: sectionContent?.items?.map((item: any) => ({
-          id: item.id,
-          image: item.image,
-          category: item.label,
-          title: item.title,
-          ctaText: item.ctaText,
-          ctaIcon: <ArrowRight className="w-4 h-4" />,
-        })) ?? [],
-        prevIcon: <ChevronLeft className="w-6 h-6" />,
-        nextIcon: <ChevronRight className="w-6 h-6" />,
-      };
-    }
-
-    case 'blog-grid-dynamic': {
-      const sectionContent = mappedContent.blog as any;
-      return {
-        sectionTitle: sectionContent?.title ?? '',
-        articleCount: sectionContent?.count ?? '',
-        sortLabel: sectionContent?.sortText ?? 'Sort by',
-        items: sectionContent?.posts?.map((post: any) => ({
-          image: post?.image ?? '',
-          category: post?.category ?? '',
-          readTime: post?.readTime ?? '',
-          title: post?.title ?? '',
-          excerpt: post?.description ?? '',
-          authorName: post?.author?.name ?? '',
-          authorAvatar: post?.author?.avatar ?? '',
-          date: post?.date ?? '',
-        })) ?? [],
-        paginationItems: sectionContent?.pagination?.pages?.map((p: any) => ({
-          label: p?.label ?? '',
-          isActive: p?.active ?? false,
-        })) ?? []
-      };
-    }
-
     // About components
-    case 'about-bio-dynamic': {
-      const sectionContent = mappedContent.about as any;
-      return {
-        label: sectionContent?.label ?? '',
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        storyTitle: sectionContent?.storyTitle ?? '',
-        storyDescription: sectionContent?.storyDescription ?? '',
-        storyImage: sectionContent?.storyImage ?? '',
-        missionTitle: sectionContent?.missionTitle ?? '',
-        missionDescription: sectionContent?.missionDescription ?? '',
-        visionTitle: sectionContent?.visionTitle ?? '',
-        visionDescription: sectionContent?.visionDescription ?? '',
-      };
-    }
-
     case 'about-brand-dynamic': {
       const sectionContent = mappedContent.about as any;
       return {
@@ -701,33 +631,6 @@ export function getComponentContentProps(
       };
     }
 
-    case 'about-card-dynamic': {
-      const sectionContent = mappedContent.about as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        featureTitle: sectionContent?.subheading ?? '',
-        featureDescription: sectionContent?.text ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        image1: sectionContent?.images?.[0] ?? '',
-        image2: sectionContent?.images?.[1] ?? '',
-      };
-    }
-
-    case 'story-archive-dynamic': {
-      const sectionContent = mappedContent.companyStory as any;
-      return {
-        topHeading: sectionContent?.topHeading ?? '',
-        topDescription: sectionContent?.topDescription ?? '',
-        mainImage: sectionContent?.mainImage ?? '',
-        bottomHeading: sectionContent?.bottomHeading ?? '',
-        bottomDescription: sectionContent?.bottomDescription ?? '',
-        ratingValue: sectionContent?.ratingValue ?? '',
-        ratingLabel: sectionContent?.ratingLabel ?? '',
-        ratingIcon: sectionContent?.ratingIcon ?? null,
-        stats: sectionContent?.stats ?? [],
-      };
-    }
 
     // Footer components
     case 'footer-simple':
@@ -1232,6 +1135,23 @@ export function getComponentContentProps(
       };
     }
 
+    // Blog components
+    case 'blog-journal-dynamic': {
+      const sectionContent = mappedContent.blog as any;
+      return {
+        subtitle: sectionContent?.subtitle ?? '',
+        title: sectionContent?.title ?? '',
+        items: sectionContent?.items?.map((item: any, idx: number) => ({
+          id: item?.id ?? idx,
+          image: item?.image ?? '',
+          date: item?.date ?? '',
+          category: item?.category ?? '',
+          title: item?.title ?? '',
+          description: item?.description ?? '',
+        })) ?? [],
+      };
+    }
+
     // Gallery components
     case 'gallery-album-dynamic': {
       const sectionContent = mappedContent.gallery as any;
@@ -1378,6 +1298,194 @@ export function getComponentContentProps(
       };
     }
 
+    case 'pricing-matrix-dynamic': {
+      const sectionContent = mappedContent.pricing as any;
+      return {
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        featuresHeader: sectionContent?.featuresHeader ?? '',
+        cards: sectionContent?.cards ?? [],
+      };
+    }
+
+    case 'pricing-static-dynamic': {
+      const sectionContent = mappedContent.pricing as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        toggleMonthlyLabel: sectionContent?.toggleMonthlyLabel ?? '',
+        toggleYearlyLabel: sectionContent?.toggleYearlyLabel ?? '',
+        toggleSaveLabel: sectionContent?.toggleSaveLabel ?? '',
+        plans: sectionContent?.plans ?? [],
+      };
+    }
+
+    // Company-story components
+    case 'story-event-dynamic': {
+      const sectionContent = mappedContent['company-story'] as any;
+      return {
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        buttonText: sectionContent?.buttonText ?? '',
+        imageUrl: sectionContent?.imageUrl ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+        items: sectionContent?.items ?? [],
+      };
+    }
+
+    case 'story-chapter-dynamic': {
+      const sectionContent = mappedContent['company-story'] as any;
+      return {
+        label: sectionContent?.label ?? '',
+        titlePrefix: sectionContent?.titlePrefix ?? '',
+        titleHighlight: sectionContent?.titleHighlight ?? '',
+        description: sectionContent?.description ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        ctaHref: sectionContent?.ctaHref ?? '',
+        item1Title: sectionContent?.item1Title ?? '',
+        item1Description: sectionContent?.item1Description ?? '',
+        item2Title: sectionContent?.item2Title ?? '',
+        item2Description: sectionContent?.item2Description ?? '',
+        item3Title: sectionContent?.item3Title ?? '',
+        item3Description: sectionContent?.item3Description ?? '',
+        item4Title: sectionContent?.item4Title ?? '',
+        item4Description: sectionContent?.item4Description ?? '',
+      };
+    }
+
+    case 'story-heritage-dynamic': {
+      const sectionContent = mappedContent['company-story'] as any;
+      return {
+        headingStart: sectionContent?.headingStart ?? '',
+        headingAccent: sectionContent?.headingAccent ?? '',
+        headingEnd: sectionContent?.headingEnd ?? '',
+        imageSrc: sectionContent?.imageSrc ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+        rightHeading: sectionContent?.rightHeading ?? '',
+        rightDescription: sectionContent?.rightDescription ?? '',
+        stats: sectionContent?.stats ?? [],
+      };
+    }
+
+    case 'story-history-dynamic': {
+      const sectionContent = mappedContent.companyStory as any;
+      return {
+        badge: sectionContent?.badge ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        buttonText: sectionContent?.buttonText ?? '',
+        imageUrl: sectionContent?.imageUrl ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+        stats: sectionContent?.stats ?? [],
+      };
+    }
+
+    case 'story-journey-dynamic': {
+      const sectionContent = mappedContent.companyStory as any;
+      return {
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        imageSrc: sectionContent?.imageSrc ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+        overlayTitle: sectionContent?.overlayTitle ?? '',
+        overlayItems: sectionContent?.overlayItems ?? [],
+        features: sectionContent?.features ?? [],
+        stats: sectionContent?.stats ?? [],
+      };
+    }
+
+    // Mission-vision components
+    case 'mission-new-dynamic': {
+      const sectionContent = mappedContent['mission-vision'] as any;
+      return {
+        badge: sectionContent?.badge ?? '',
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        items: sectionContent?.items ?? [],
+        imageUrl: sectionContent?.imageUrl ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+      };
+    }
+
+    case 'mission-enhanced-dynamic': {
+      const sectionContent = mappedContent['mission-vision'] as any;
+      return {
+        title: sectionContent?.title ?? '',
+        description: sectionContent?.description ?? '',
+        items: sectionContent?.items ?? [],
+      };
+    }
+
+    case 'mission-brand-dynamic': {
+      const sectionContent = mappedContent['mission-vision'] as any;
+      return {
+        title: sectionContent?.title ?? '',
+        imageUrl: sectionContent?.imageUrl ?? '',
+        imageAlt: sectionContent?.imageAlt ?? '',
+        items: sectionContent?.items ?? [],
+      };
+    }
+
+    // FAQ components
+    case 'faq-great-dynamic': {
+      const sectionContent = mappedContent['faq-process'] as any;
+      return {
+        badgeText: sectionContent?.badgeText ?? '',
+        badgeDotClass: sectionContent?.badgeDotClass ?? '',
+        title: sectionContent?.title ?? '',
+        titleHighlight: sectionContent?.titleHighlight ?? '',
+        description: sectionContent?.description ?? '',
+        faqItems: sectionContent?.items?.map((item: any) => ({
+          question: item.title ?? item.question ?? '',
+          answer: item.description ?? item.answer ?? '',
+        })) ?? [],
+      };
+    }
+
+    case 'faq-process-dynamic': {
+      const sectionContent = mappedContent['faq-process'] as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        type: sectionContent?.type ?? 'faq',
+        faqItems: sectionContent?.faqItems ?? sectionContent?.items ?? [],
+        processSteps: sectionContent?.processSteps ?? [],
+      };
+    }
+
+    case 'faq-new-dynamic': {
+      const sectionContent = mappedContent['faq-process'] as any;
+      return {
+        badgeText: sectionContent?.badgeText ?? '',
+        headingPart1: sectionContent?.headingPart1 ?? '',
+        headingPart2: sectionContent?.headingPart2 ?? '',
+        headingHighlightDetail: sectionContent?.headingHighlightDetail ?? '',
+        description: sectionContent?.description ?? '',
+        cardTitle: sectionContent?.cardTitle ?? '',
+        cardDescription1: sectionContent?.cardDescription1 ?? '',
+        cardDescription2: sectionContent?.cardDescription2 ?? '',
+        cardCtaText: sectionContent?.cardCtaText ?? '',
+        cardCtaUrl: sectionContent?.cardCtaUrl ?? '',
+        items: sectionContent?.faqItems ?? sectionContent?.items ?? [],
+      };
+    }
+
+    case 'faq-super-dynamic': {
+      const sectionContent = mappedContent['faq-process'] as any;
+      return {
+        badgeText: sectionContent?.badgeText ?? '',
+        heading: sectionContent?.heading ?? '',
+        description: sectionContent?.description ?? '',
+        buttonText: sectionContent?.buttonText ?? '',
+        buttonLink: sectionContent?.buttonLink ?? '',
+        faqItems: (sectionContent?.faqItems || []).map((item: any, idx: number) => ({
+          id: item?.id || `faq-item-${idx}`,
+          question: item?.question || '',
+          answer: item?.answer || ''
+        }))
+      };
+    }
+
     default:
       return {};
   }
@@ -1403,16 +1511,6 @@ export function getDefaultMappedContent(): MappedContent {
     about: {
       title: 'About Us',
       description: 'We are dedicated to providing the best service possible',
-    },
-    blog: {
-      title: 'Latest Articles',
-      subtitle: 'Insights and updates from our team',
-      items: [],
-    },
-    'company-story': {
-      title: 'Our Story',
-      subtitle: 'Building the future together',
-      intro: 'We started with a simple mission and have grown ever since.',
     },
     'faq-process': {
       title: 'Frequently Asked Questions',

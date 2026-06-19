@@ -2,7 +2,7 @@
   "layout": [
     {
       "section": "navbar",
-      "component": "nav-bar-dynamic"
+      "component": "nav-link-dynamic"
     },
     {
       "section": "hero",
@@ -10,31 +10,39 @@
     },
     {
       "section": "about",
-      "component": "about-bio-dynamic"
-    },
-    {
-      "section": "blog",
-      "component": "blog-article-dynamic"
-    },
-    {
-      "section": "company-story",
-      "component": "story-archive-dynamic"
+      "component": "about-brief-dynamic"
     },
     {
       "section": "gallery",
       "component": "gallery-album-dynamic"
     },
     {
+      "section": "blog",
+      "component": "blog-journal-dynamic"
+    },
+    {
+      "section": "benefits",
+      "component": "benefits-advantage-dynamic"
+    },
+    {
+      "section": "mission-vision",
+      "component": "mission-brand-dynamic"
+    },
+    {
       "section": "testimonials",
-      "component": "testi-client-dynamic"
+      "component": "testi-honor-dynamic"
     },
     {
       "section": "cta",
-      "component": "cta-banner-dynamic"
+      "component": "cta-drive-dynamic"
     },
     {
       "section": "contact",
-      "component": "contact-form-dynamic"
+      "component": "contact-reach-dynamic"
+    },
+    {
+      "section": "faq-process",
+      "component": "faq-great-dynamic"
     },
     {
       "section": "footer",

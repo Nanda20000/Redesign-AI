@@ -1,213 +1,275 @@
 {
-  "nav-bar-dynamic": {
-    "logoText": "Dr Zainu's Dental Clinic",
-    "navLinks": [
-      {
-        "label": "Home",
-        "href": "/preview/index"
-      },
-      {
-        "label": "About Us",
-        "href": "#about"
-      },
-      {
-        "label": "Contact Us",
-        "href": "#contact"
-      },
-      {
-        "label": "Enquiry",
-        "href": "#enquiry"
-      }
-    ],
-    "loginLabel": "Login",
-    "signupLabel": "Sign Up",
-    "loginHref": null,
-    "signupHref": null
+  "nav-link-dynamic": {
+    "logoText": "TopTuition",
+    "topLink1Text": null,
+    "topLink1Url": null,
+    "topLink2Text": null,
+    "topLink2Url": null,
+    "topLink3Text": null,
+    "topLink3Url": null,
+    "mainLink1Text": "Home",
+    "mainLink1Url": "/preview/index",
+    "mainLink2Text": "Downloads",
+    "mainLink2Url": "#downloads",
+    "mainLink3Text": "Online",
+    "mainLink3Url": "#online",
+    "mainLink4Text": "Contact",
+    "mainLink4Url": "#contact"
   },
   "hero-anchor-dynamic": {
-    "label": "DENTAL CARE",
-    "title": "Expert Dental Care at N.H Kolappuram",
-    "description": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre offers advanced treatments with a dedicated team of specialists.",
-    "primaryCtaText": "BOOK APPOINTMENT",
+    "label": "TopTuition",
+    "title": "The Best SSLC Tuition in Nurani, Palakkad",
+    "description": "Score higher marks with expert guidance. Small batch offline classes with personal attention, daily tests, and free video support for Kerala syllabus students.",
+    "primaryCtaText": "Join Offline Classes",
     "primaryCtaUrl": "/preview/index",
-    "secondaryCtaText": "OUR SERVICES",
+    "secondaryCtaText": "Watch Free Classes",
     "secondaryCtaUrl": "/preview/index",
-    "image": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg"
-  },
-  "about-bio-dynamic": {
-    "label": "About Us",
-    "heading": "Expert Dental Care at N.H Kolappuram",
-    "description": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre offers comprehensive dental solutions with a dedicated team of specialists and advanced technology.",
-    "ctaText": "Learn More",
-    "storyTitle": "Our Story",
-    "storyDescription": "Founded by Dr. Zainul Abid K.P, our clinic is built on a commitment to quality, precision, and patient comfort.",
-    "storyImage": "https://drzainusdentalclinic.dialndial.com/images/banner/17030623056582ab217b48f.jpg",
-    "missionTitle": "Our Mission",
-    "missionDescription": "To provide accessible, high-quality dental care that restores smiles and improves lives through innovation and compassion.",
-    "visionTitle": "Our Vision",
-    "visionDescription": "To be the trusted leader in multi-speciality dentistry, setting benchmarks for excellence and patient satisfaction."
-  },
-  "blog-article-dynamic": {
-    "tagline": "Latest from Our Clinic",
-    "heading": "Expert Insights & Dental Care Tips",
-    "posts": [
-      {
-        "title": "Understanding the Benefits of Dental Implants",
-        "description": "Dental implants offer a permanent, natural-looking solution for missing teeth. Learn how our implantology specialists restore your smile with precision and care.",
-        "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304612065826be88df70.jpg",
-        "date": "2024-03-15",
-        "category": "Implant Dentistry"
-      },
-      {
-        "title": "When Is Root Canal Treatment Necessary?",
-        "description": "Root canal therapy can save an infected tooth and relieve pain. Our endodontist explains the signs, procedure, and what to expect during recovery.",
-        "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304614565826c01b57ee.jpg",
-        "date": "2024-02-28",
-        "category": "Endodontics"
-      },
-      {
-        "title": "Orthodontic Care for Children & Adults",
-        "description": "From traditional braces to modern aligners, orthodontic treatment improves both function and aesthetics. Discover the options available at our clinic.",
-        "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304975965827a1f99120.jpg",
-        "date": "2024-02-10",
-        "category": "Orthodontics"
-      },
-      {
-        "title": "Pediatric Dentistry: Building Healthy Smiles Early",
-        "description": "Early dental visits set the foundation for lifelong oral health. Our pediatric specialist provides gentle, child-friendly care in a comforting environment.",
-        "image": "https://drzainusdentalclinic.dialndial.com/images/service/170304999065827b0699cdd.jpg",
-        "date": "2024-01-20",
-        "category": "Pediatric Dentistry"
-      }
-    ]
-  },
-  "story-archive-dynamic": {
-    "topHeading": "Our Journey in Dental Excellence",
-    "topDescription": "Discover the story behind Dr Zainu's Multi Speciality Dental Clinic & Implant Centre.",
-    "mainImage": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg",
-    "bottomHeading": "Comprehensive Care Under One Roof at N.H Kolappuram",
-    "bottomDescription": "Founded by Dr. Zainul Abid K.P, our clinic brings together a panel of six visiting specialists in orthodontics, endodontics, pedodontics, OMFS, and prosthodontics. We offer advanced implant dentistry, root canal treatments, pediatric care, orthodontic alignment, cosmetic procedures, and digital X-rays — all tailored to restore your smile with precision and compassion.",
-    "ratingValue": null,
-    "ratingLabel": null,
-    "stats": [
-      {
-        "value": "6",
-        "label": "Specialist Doctors"
-      },
-      {
-        "value": "8+",
-        "label": "Services Offered"
-      },
-      {
-        "value": "15+",
-        "label": "Years of Experience"
-      },
-      {
-        "value": "1000+",
-        "label": "Smiles Restored"
-      }
-    ]
+    "image": "https://toptuition.in/wp-content/uploads/2026/04/home_img.jpg"
   },
   "gallery-album-dynamic": {
-    "title": "Our Dental Gallery",
+    "title": "Gallery: Our Tuition Centre",
     "images": [
       {
-        "url": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg",
-        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud1.jpg",
+        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
       },
       {
-        "url": "https://drzainusdentalclinic.dialndial.com/images/banner/172302794166b351e53d048.jpeg",
-        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud2.jpg",
+        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
       },
       {
-        "url": "https://drzainusdentalclinic.dialndial.com/images/banner/17030623056582ab217b48f.jpg",
-        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud3.jpg",
+        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
       },
       {
-        "url": "https://drzainusdentalclinic.dialndial.com/images/banner/17030624006582ab803a9b3.jpg",
-        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud4.jpg",
+        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
       },
       {
-        "url": "https://drzainusdentalclinic.dialndial.com/documents/entity/image/Dr_Zainu's_Multi_Speciality_Dental_Clinic_&_Implant_Centre_image_65826e4b6ed08.jpg",
-        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud5.jpg",
+        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
       },
       {
-        "url": "https://drzainusdentalclinic.dialndial.com/images/service/170304612065826be88df70.jpg",
-        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+        "url": "https://toptuition.in/wp-content/uploads/2025/11/3d_pi_proc.png",
+        "alt": "3d pi proc"
       },
       {
-        "url": "https://drzainusdentalclinic.dialndial.com/images/service/170304614565826c01b57ee.jpg",
-        "alt": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre"
+        "url": "https://toptuition.in/wp-content/uploads/2026/04/home_img.jpg",
+        "alt": "home_img"
       }
     ]
   },
-  "testi-client-dynamic": {
-    "heading": "What Our Patients Say",
-    "subtext": "Hear from our valued patients about their experiences at our clinic.",
-    "testimonials": [
-      {
-        "quote": "Excellent care and professional staff. My implant procedure was smooth and painless. Highly recommend Dr. Zainu's clinic!",
-        "authorName": "Rahul K.",
-        "authorRole": "Kolappuram",
-        "authorImage": null,
-        "bgColor": "bg-blue-100"
-      },
-      {
-        "quote": "My child was so comfortable during the dental visit. The pediatric specialist was wonderful and put us both at ease.",
-        "authorName": "Sneha M.",
-        "authorRole": "N.H Kolappuram",
-        "authorImage": null,
-        "bgColor": "bg-green-100"
-      },
-      {
-        "quote": "I got my root canal treatment done here. The doctor explained everything clearly and the result was fantastic. Thank you!",
-        "authorName": "Anoop P.",
-        "authorRole": "Kolappuram",
-        "authorImage": null,
-        "bgColor": "bg-yellow-100"
-      },
-      {
-        "quote": "The orthodontic treatment transformed my smile. The team is very friendly and the clinic is well-equipped with modern technology.",
-        "authorName": "Fathima N.",
-        "authorRole": "N.H Kolappuram",
-        "authorImage": null,
-        "bgColor": "bg-pink-100"
-      }
-    ]
-  },
-  "cta-banner-dynamic": {
-    "title": "Expert Dental Care for Your Perfect Smile",
-    "description": "Advanced treatments by a dedicated team of specialists.",
+  "blog-journal-dynamic": {
+    "subtitle": "Latest Updates & Insights",
+    "title": "Explore Our Blog for Expert SSLC Guidance",
     "items": [
-      "Implant Dentistry",
-      "Root Canal Treatment",
-      "Orthodontic Care",
-      "Cosmetic Dentistry"
-    ],
-    "bottomLabel": "Ready to transform your smile?",
-    "ctaText": "Book Your Appointment",
-    "backgroundImage": "https://drzainusdentalclinic.dialndial.com/images/banner/172286846366b0e2ef5f7c2.jpeg"
+      {
+        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud1.jpg",
+        "date": null,
+        "category": null,
+        "title": null,
+        "description": null
+      },
+      {
+        "image": null,
+        "date": "March 15, 2025",
+        "category": "Study Tips",
+        "title": "How to Score Full Marks in SSLC Maths",
+        "description": "Discover proven strategies, simple Malayalam explanations, and daily practice routines that help students master difficult problems and achieve top scores in the Kerala SSLC board exams."
+      },
+      {
+        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud2.jpg",
+        "date": null,
+        "category": null,
+        "title": null,
+        "description": null
+      },
+      {
+        "image": null,
+        "date": "February 28, 2025",
+        "category": "Exam Preparation",
+        "title": "Why Regular Tests Boost Your SSLC Performance",
+        "description": "Regular testing helps identify weak areas, builds exam confidence, and ensures thorough syllabus coverage. Learn how our daily test system transforms student results."
+      },
+      {
+        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud3.jpg",
+        "date": null,
+        "category": null,
+        "title": null,
+        "description": null
+      },
+      {
+        "image": null,
+        "date": "February 10, 2025",
+        "category": "Student Success",
+        "title": "Personal Attention: The Key to SSLC Success in Nurani",
+        "description": "Small batch sizes allow every student to receive individual doubt-clearing sessions and progress tracking. Read how this approach has helped local students improve dramatically."
+      }
+    ]
   },
-  "contact-form-dynamic": {
-    "title": "Get in Touch With Us",
-    "emailLabel": "Email:",
-    "email": "zainsabi@gmail.com",
-    "phoneLabel": "Phone:",
-    "phone": "9995740140",
-    "addressLabel": "Address:",
-    "address": "1st Floor, TR Building, N.H Kolappuram",
-    "socialTitle": "Follow Us",
-    "formNameLabel": "Name",
-    "formNamePlaceholder": "Your full name",
-    "formEmailLabel": "Email",
-    "formEmailPlaceholder": "Your email address",
-    "formMessageLabel": "Message",
-    "formMessagePlaceholder": "Write your message or enquiry here",
-    "formSubmitLabel": "Send Message"
+  "benefits-advantage-dynamic": {
+    "badgeText": "Why Choose Us",
+    "title": "The TopTuition Advantage for SSLC Success",
+    "description": "Proven methods, personal attention, and free resources to help you score higher marks in Kerala syllabus exams.",
+    "items": [
+      {
+        "title": "Simple Explanations in Malayalam",
+        "description": "Complex concepts made easy with clear, exam-oriented teaching in your native language, ensuring every student understands thoroughly."
+      },
+      {
+        "title": "Regular Tests & Performance Tracking",
+        "description": "Daily tests and progress monitoring help identify weak areas early, so we can focus on improvement before the final exams."
+      },
+      {
+        "title": "Personal Attention in Small Batches",
+        "description": "Limited batch sizes guarantee that every student gets individual doubt-clearing sessions and tailored guidance from experienced teachers."
+      },
+      {
+        "title": "Free Online Video Support",
+        "description": "Access chapterwise PDF notes, YouTube classes, and exam-focused documentaries anytime, anywhere — completely free for all enrolled students."
+      }
+    ],
+    "images": [
+      "https://toptuition.in/wp-content/uploads/2025/10/stud1.jpg",
+      "https://toptuition.in/wp-content/uploads/2025/10/stud2.jpg"
+    ],
+    "experienceValue": "10+",
+    "experienceLabel": "Years"
+  },
+  "mission-brand-dynamic": {
+    "title": "WHY TOPTUITION WORKS ?",
+    "imageUrl": "https://toptuition.in/wp-content/uploads/2026/04/home_img.jpg",
+    "imageAlt": "Students studying in a classroom at TopTuition in Palakkad",
+    "items": [
+      {
+        "title": "Simple Explanations",
+        "description": "Concepts are taught in clear, easy-to-understand Malayalam, making even complex topics accessible for every student.",
+        "icon": "book-open"
+      },
+      {
+        "title": "Focus on Marks",
+        "description": "Exam-oriented teaching with thorough syllabus coverage, revision sessions, and targeted practice to boost scores.",
+        "icon": "target"
+      },
+      {
+        "title": "Regular Tests",
+        "description": "Frequent assessments and performance tracking ensure consistent progress and identify areas needing improvement.",
+        "icon": "clipboard-check"
+      },
+      {
+        "title": "Personal Attention",
+        "description": "Small batch sizes allow individual guidance, direct doubt clearing, and tailored support for each student's learning pace.",
+        "icon": "user-check"
+      }
+    ]
+  },
+  "testi-honor-dynamic": {
+    "items": [
+      {
+        "quote": "The personal attention and daily tests at TopTuition helped me improve my marks significantly. The teachers explain concepts in Malayalam, making it so easy to understand.",
+        "name": "Ananya S.",
+        "role": "SSLC Student",
+        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud1.jpg"
+      },
+      {
+        "quote": "I love the free online videos and chapterwise PDF notes. I can revise anytime at home. The exam-focused questions are exactly what we need.",
+        "name": "Rahul K.",
+        "role": "SSLC Student",
+        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud2.jpg"
+      },
+      {
+        "quote": "Small batch size means I get individual attention. Doubt clearing sessions are very effective. My grades have improved a lot since joining.",
+        "name": "Priya M.",
+        "role": "SSLC Student",
+        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud3.jpg"
+      },
+      {
+        "quote": "The regular tests and performance tracking keep me motivated. The teachers truly care about each student's progress. Highly recommend for Kerala syllabus students.",
+        "name": "Arjun P.",
+        "role": "SSLC Student",
+        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud4.jpg"
+      },
+      {
+        "quote": "TopTuition's combination of offline classes and free online resources is perfect. I can attend classes in Nurani and also watch videos at home for revision.",
+        "name": "Sneha T.",
+        "role": "SSLC Student",
+        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud5.jpg"
+      }
+    ]
+  },
+  "cta-drive-dynamic": {
+    "heading": "Start Your SSLC Success Journey Today",
+    "description": "Join the best tuition in Nurani, Palakkad for expert guidance and higher marks.",
+    "cardText": "Small batch offline classes with personal attention, daily tests, and free video support for Kerala syllabus students. Learn with simple explanations in Malayalam and exam-focused teaching.",
+    "inputPlaceholder": "Enter your email address",
+    "buttonText": "Get Started",
+    "privacyTextPrefix": "We respect your privacy. Unsubscribe anytime.",
+    "privacyLinkText": "Privacy Policy",
+    "privacyLinkUrl": "/privacy-policy"
+  },
+  "contact-reach-dynamic": {
+    "backgroundImageUrl": "https://toptuition.in/wp-content/uploads/2026/04/home_img.jpg",
+    "titleLine": "Get in Touch with TopTuition",
+    "brandName": "TopTuition",
+    "description": "Reach out to us for SSLC tuition in Nurani, Palakkad. We offer offline classes and free online resources.",
+    "formTitle": "Send Us a Message",
+    "nameLabel": "Your Name",
+    "namePlaceholder": "Enter your full name",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "servicesLabel": "Service Interested In",
+    "servicesPlaceholder": "Select a service",
+    "servicesOptions": [
+      "Offline Classes",
+      "Free Online Resources",
+      "SSLC Tuition",
+      "Class 9 Tuition"
+    ],
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "Write your message here",
+    "submitButtonText": "Send Message"
+  },
+  "faq-great-dynamic": {
+    "badgeText": "FAQ",
+    "badgeDotClass": "bg-pink-500",
+    "title": "Frequently Asked Questions About Our SSLC Tuition",
+    "titleHighlight": "SSLC Tuition",
+    "description": "Find answers to common questions about our offline and online learning programs designed for Kerala syllabus students in Nurani, Palakkad.",
+    "faqItems": [
+      {
+        "question": "What makes TopTuition different from other tuition centres?",
+        "answer": "We focus on simple explanations in Malayalam, exam-oriented teaching, regular tests, personal attention, and progress tracking to ensure every student improves and scores higher marks."
+      },
+      {
+        "question": "Do you offer both offline and online classes?",
+        "answer": "Yes. We provide small batch offline classes with personal attention, daily tests, and direct doubt clearing. We also offer free online resources including chapterwise PDF notes, YouTube video classes, and exam-focused questions."
+      },
+      {
+        "question": "Where is your tuition centre located?",
+        "answer": "We are located opposite Nurani LP School, Nurani, Palakkad - 678004. You can also reach us at +91 800 606 6363 or nurani.it@gmail.com."
+      },
+      {
+        "question": "How do you track student progress?",
+        "answer": "We conduct regular tests, provide performance tracking, send daily updates to parents on attendance and schedule, and hold PTA meetings to ensure continuous improvement."
+      }
+    ]
   },
   "footer-simple": {
-    "brandName": "Dr Zainu's Multi Speciality Dental Clinic & Implant Centre",
-    "description": "Send us your questions or concerns and we will give you the help you need.",
-    "copyright": "© 2024 Dr Zainu's Multi Speciality Dental Clinic & Implant Centre. All rights reserved."
+    "title": "TopTuition – Best SSLC Tuition in Nurani, Palakkad",
+    "description": "Opp Nurani LP School, Nurani, Palakkad – 678004 | +91 800 606 6363 | nurani.it@gmail.com",
+    "items": [
+      {
+        "title": "Contact",
+        "description": "Phone: +91 800 606 6363 | Email: nurani.it@gmail.com"
+      },
+      {
+        "title": "Address",
+        "description": "Opp Nurani LP School, Nurani, Palakkad – 678004"
+      },
+      {
+        "title": "Follow Us",
+        "description": "YouTube | Instagram | Google"
+      }
+    ]
   }
 }
