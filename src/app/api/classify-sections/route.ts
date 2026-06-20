@@ -207,10 +207,11 @@ export async function POST(request: NextRequest) {
         fallbackSections.push({ type: 'navbar', text: 'Navigation menu' });
       }
 
-      // Inject hero if missing — all pages should have a hero
-      if (!fallbackSections.some(s => s.type === 'hero')) {
+      // Inject hero for homepage, banner for non-home pages
+      const topSectionType = pageType === 'home' ? 'hero' : 'banner';
+      if (!fallbackSections.some(s => s.type === 'hero' || s.type === 'banner')) {
         fallbackSections.push({
-          type: 'hero',
+          type: topSectionType,
           text: headings[0] || 'Welcome',
           sourceIndex: -3
         });
@@ -269,9 +270,10 @@ export async function POST(request: NextRequest) {
       if (hasNavbar) {
         fallbackSections.unshift({ type: 'navbar', text: 'Navigation menu', sourceIndex: -1 });
       }
-      if (!fallbackSections.some(s => s.type === 'hero')) {
+      if (!fallbackSections.some(s => s.type === 'hero' || s.type === 'banner')) {
+        const topSectionType = pageType === 'home' ? 'hero' : 'banner';
         const insertAt = hasNavbar ? 1 : 0;
-        fallbackSections.splice(insertAt, 0, { type: 'hero', text: headings[0] || 'Welcome', sourceIndex: -3 });
+        fallbackSections.splice(insertAt, 0, { type: topSectionType, text: headings[0] || 'Welcome', sourceIndex: -3 });
       }
       if (hasFooter) {
         fallbackSections.push({ type: 'footer', text: 'Footer content', sourceIndex: -2 });
@@ -332,10 +334,11 @@ export async function POST(request: NextRequest) {
 
     finalSections.push(...sourceAlignedSections);
 
-    // All pages should generally have a hero slot near the top.
-    if (!sourceAlignedSections.some(s => s.type === 'hero')) {
+    // Inject hero for homepage, banner for non-home pages
+    if (!sourceAlignedSections.some(s => s.type === 'hero' || s.type === 'banner')) {
+      const topSectionType = pageType === 'home' ? 'hero' : 'banner';
       const insertAt = hasNavbar ? 1 : 0;
-      finalSections.splice(insertAt, 0, { type: 'hero', text: headings[0] || 'Welcome', sourceIndex: -3 });
+      finalSections.splice(insertAt, 0, { type: topSectionType, text: headings[0] || 'Welcome', sourceIndex: -3 });
     }
 
     if (hasFooter) {

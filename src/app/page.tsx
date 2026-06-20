@@ -184,7 +184,7 @@ export default function Home() {
         });
 
         // Post-deduplication: guarantee required top section exists
-        // Homepage requires hero; non-home pages require banner
+        // Homepage requires hero; non-home pages require banner (and hero must be removed)
         const isHomePage = page.slug === 'index';
         const requiredTopSection = isHomePage ? 'hero' : 'banner';
         if (!deduplicatedSections.includes(requiredTopSection)) {
@@ -195,6 +195,10 @@ export default function Home() {
             deduplicatedSections.unshift(requiredTopSection);
           }
           console.log(`[page.tsx] ${requiredTopSection} injected into finalSections for page:`, page.slug);
+        }
+        // Non-home pages should NOT have hero — remove it if present
+        if (!isHomePage) {
+          deduplicatedSections = deduplicatedSections.filter(s => s !== 'hero');
         }
         finalSections = deduplicatedSections;
 

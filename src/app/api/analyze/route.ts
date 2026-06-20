@@ -1092,12 +1092,13 @@ export async function POST(request: NextRequest) {
       orderedSectionTypes.unshift('navbar');
     }
 
-    if (!orderedSectionTypes.includes('hero')) {
+    if (!orderedSectionTypes.includes('hero') && !orderedSectionTypes.includes('banner')) {
+      const topSectionType = pageSlug === 'index' ? 'hero' : 'banner';
       const navbarIndex = orderedSectionTypes.indexOf('navbar');
       if (navbarIndex >= 0) {
-        orderedSectionTypes.splice(navbarIndex + 1, 0, 'hero');
+        orderedSectionTypes.splice(navbarIndex + 1, 0, topSectionType);
       } else {
-        orderedSectionTypes.unshift('hero');
+        orderedSectionTypes.unshift(topSectionType);
       }
     }
 

@@ -552,11 +552,26 @@ function normalizeStructuralSections(sections: string[], pageSlug: string = 'ind
   });
 
   // For homepage, guarantee hero survives normalization
-  // For non-home pages, guarantee banner survives normalization
+  // For non-home pages, guarantee banner survives normalization and hero is removed
   const requiredTopSection = pageSlug === 'index' ? 'hero' : 'banner';
   if (!result.includes(requiredTopSection)) {
     result.unshift(requiredTopSection);
     console.log(`[normalizeStructuralSections] ${requiredTopSection} injected — was absent from input:`, sections);
+  }
+
+  // Non-home pages must not have hero; homepage must not have banner
+  if (pageSlug !== 'index') {
+    const heroIndex = result.indexOf('hero');
+    if (heroIndex !== -1) {
+      result.splice(heroIndex, 1);
+      console.log('[normalizeStructuralSections] Hero removed from non-home page');
+    }
+  } else {
+    const bannerIndex = result.indexOf('banner');
+    if (bannerIndex !== -1) {
+      result.splice(bannerIndex, 1);
+      console.log('[normalizeStructuralSections] Banner removed from homepage');
+    }
   }
 
   return result;
@@ -633,11 +648,16 @@ function mergeLayoutsByDetectedSections(
   // Final deduplication safety net: ensure one of each section type
   // This catches any duplicates that may have slipped through
   const seen = new Set<string>();
-  const dedupedLayout = mergedLayout.filter(item => {
+  let dedupedLayout = mergedLayout.filter(item => {
     if (seen.has(item.section)) return false;
     seen.add(item.section);
     return true;
   });
+
+  // Non-home pages must not have hero; remove it if present
+  if (pageSlug !== 'index') {
+    dedupedLayout = dedupedLayout.filter(item => item.section !== 'hero');
+  }
 
   return {
     layout: dedupedLayout,
@@ -876,11 +896,24 @@ export async function generateLayoutWithAI(
     console.log('[AI Layout Generator] Enforcing consistent navbar/footer...');
     layout = enforceConsistentNavbarFooter(layout, pageSlug);
 
-    // Step 10: Save the layout
+    // Step 10: Enforce consistent banner across non-home pages
+    console.log('[AI Layout Generator] Enforcing consistent banner...');
+    layout = enforceConsistentBanner(layout, pageSlug);
+
+    // Step 11: Final safety — remove hero from non-home pages if it somehow survived
+    if (pageSlug !== 'index') {
+      const heroCount = layout.layout.filter(i => i.section === 'hero').length;
+      if (heroCount > 0) {
+        console.log(`[AI Layout Generator] Removing ${heroCount} hero section(s) from non-home page`);
+        layout = { layout: layout.layout.filter(i => i.section !== 'hero') };
+      }
+    }
+
+    // Step 12: Save the layout
     console.log('[AI Layout Generator] Saving layout...');
     saveLayout(layout, pageSlug);
 
-    // Step 11: Log selected components (after enforcement)
+    // Step 13: Log selected components (after enforcement)
     console.log('[AI Layout Generator] === AI Component Selection Complete (After Image Enforcement) ===');
     console.log('[AI Layout Generator] Website Analysis:');
     console.log(`  - Business Type: ${analysis.businessType} (${Math.round(analysis.confidence * 100)}% confidence)`);
@@ -949,6 +982,71 @@ function enforceConsistentNavbarFooter(
     return { layout: enforcedLayout };
   } catch (error) {
     console.warn('[enforceConsistentNavbarFooter] Failed to enforce — using original layout:', error);
+    return layout;
+  }
+}
+
+/**
+ * Enforce consistent banner component across all non-home pages.
+ * Reads the first non-home page layout that has a banner, and uses the same component everywhere.
+ */
+function enforceConsistentBanner(
+  layout: LayoutResponse,
+  pageSlug: string
+): LayoutResponse {
+  // Homepage does not use banner — skip
+  if (pageSlug === 'index') {
+    return layout;
+  }
+
+  try {
+    // Find the first non-home page that has a banner component
+    const pagesDir = GENERATED_PAGES_DIR;
+    if (!fs.existsSync(pagesDir)) {
+      return layout;
+    }
+
+    const pageDirs = fs.readdirSync(pagesDir).filter(name => {
+      const fullPath = path.join(pagesDir, name);
+      return fs.statSync(fullPath).isDirectory() && name !== 'index' && name !== '.session';
+    });
+
+    let sharedBannerComponent: string | null = null;
+
+    for (const dir of pageDirs) {
+      const layoutPath = path.join(pagesDir, dir, 'layout.json');
+      if (!fs.existsSync(layoutPath)) continue;
+
+      try {
+        const pageLayout: LayoutResponse = JSON.parse(fs.readFileSync(layoutPath, 'utf-8'));
+        const bannerItem = pageLayout.layout.find(i => i.section === 'banner');
+        if (bannerItem) {
+          sharedBannerComponent = bannerItem.component;
+          console.log(`[enforceConsistentBanner] Found shared banner from "${dir}": ${sharedBannerComponent}`);
+          break;
+        }
+      } catch {
+        // Skip pages with invalid layout files
+      }
+    }
+
+    if (!sharedBannerComponent) {
+      console.log('[enforceConsistentBanner] No existing banner found in other pages — keeping current selection');
+      return layout;
+    }
+
+    // Replace banner component with the shared one
+    const enforcedLayout = layout.layout.map(item => {
+      if (item.section === 'banner' && item.component !== sharedBannerComponent) {
+        console.log(`[enforceConsistentBanner] Banner: ${item.component} → ${sharedBannerComponent}`);
+        return { ...item, component: sharedBannerComponent };
+      }
+      return item;
+    });
+
+    return { layout: enforcedLayout };
+  } catch (error) {
+    console.warn('[enforceConsistentBanner] Failed to enforce — using original layout:', error);
     return layout;
   }
 }

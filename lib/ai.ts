@@ -10,7 +10,7 @@ console.log('DeepSeek API key loaded:', !!process.env.DEEPSEEK_API_KEY);
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
-const VALID_SECTION_TYPES = ['navbar', 'hero', 'features', 'testimonials', 'contact', 'footer', 'gallery', 'cta', 'blog'];
+const VALID_SECTION_TYPES = ['navbar', 'hero', 'banner', 'features', 'testimonials', 'contact', 'footer', 'gallery', 'cta', 'blog'];
 
 export async function generateAIResponse(prompt: string): Promise<string> {
   const maxRetries = 2;
