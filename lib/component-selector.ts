@@ -599,7 +599,8 @@ export function buildEnhancedPrompt(
   componentsByCategory: Record<string, string[]>,
   analysis: WebsiteAnalysis,
   recommendations: ComponentRecommendations,
-  pageSlug: string = 'index'
+  pageSlug: string = 'index',
+  usedComponents?: Record<string, string[]>
 ): string {
   const { businessType, tone, contentRichness } = analysis;
 
@@ -647,6 +648,11 @@ ${sections.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 ${JSON.stringify(dynamicOnlyByCategory, null, 2)}
 
 ## IMPORTANT: All components listed above are valid choices.
+
+${usedComponents && Object.keys(usedComponents).length > 0 ? `## Components Already Used on Other Pages (AVOID these for variety):
+${Object.entries(usedComponents).map(([section, comps]) => `- ${section}: [${comps.join(', ')}]`).join('\n')}
+
+For each section, try to pick a component NOT listed above. If all components for a section are listed, pick any from the available list.` : ''}
 
 ## How to Choose the Best Dynamic Component:
 Analyze the source website's detected sections and match them to the best available component.

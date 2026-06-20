@@ -627,6 +627,16 @@ function mergeLayoutsByDetectedSections(
     // For hero section on homepage, prefer rules engine (selectedLayout) over AI to enforce homepage restrictions
     if (section === 'hero' && pageSlug === 'index' && selectedCandidates.length > 0) {
       candidate = selectedCandidates[0];
+    } else if (selectedCandidates.length > 0 && aiCandidates.length > 0) {
+      // For variety-enforced sections, prefer rules engine if it picked something different
+      const rulesChoice = selectedCandidates[0];
+      const aiChoice = aiCandidates[0];
+      if (!VARIETY_EXCLUDED_SECTIONS.has(section) && rulesChoice.component !== aiChoice.component) {
+        candidate = rulesChoice;
+        selectedCandidates.shift();
+      } else {
+        candidate = aiCandidates.shift();
+      }
     } else if (aiCandidates.length > 0) {
       candidate = aiCandidates.shift();
     } else if (selectedCandidates.length > 0) {
@@ -781,6 +791,10 @@ export async function generateLayoutWithAI(
     // Step 4: Get intelligent recommendations
     const recommendations = getComponentRecommendations(analysis);
 
+    // Step 4b: Get components already used on other pages for cross-page variety
+    const usedComponents = getUsedComponentsFromDisk(pageSlug);
+    console.log('[AI Layout Generator] Cross-page used components:', usedComponents);
+
     // Step 5: Build enhanced prompt with analysis context
     console.log('[AI Layout Generator] Building intelligent AI prompt...');
     const prompt = buildEnhancedPrompt(
@@ -788,7 +802,8 @@ export async function generateLayoutWithAI(
       componentsByCategory,
       analysis,
       recommendations,
-      pageSlug
+      pageSlug,
+      usedComponents
     );
 
     // Step 6: Call DeepSeek API
@@ -806,10 +821,6 @@ export async function generateLayoutWithAI(
       hasImages: imageCount > 0,
       imageCount: imageCount
     });
-
-    // Get components already used on other pages for cross-page variety
-    const usedComponents = getUsedComponentsFromDisk(pageSlug);
-    console.log('[AI Layout Generator] Cross-page used components:', usedComponents);
 
     const selectionResult = selectComponents({
       manifest,
@@ -1136,7 +1147,7 @@ export function getUsedComponentsFromDisk(currentPageSlug?: string): Record<stri
 
     const pageDirs = fs.readdirSync(GENERATED_PAGES_DIR).filter(name => {
       const fullPath = path.join(GENERATED_PAGES_DIR, name);
-      return fs.statSync(fullPath).isDirectory() && name !== 'index' && name !== '.session';
+      return fs.statSync(fullPath).isDirectory() && name !== '.session';
     });
 
     for (const dir of pageDirs) {
