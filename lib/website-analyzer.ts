@@ -428,8 +428,6 @@ export function getComponentRecommendations(analysis: WebsiteAnalysis): Componen
   const recommendations: ComponentRecommendations = {
     hero: getHeroRecommendation(businessType, tone, contentRichness),
     about: getAboutRecommendation(businessType, tone),
-    blog: getBlogRecommendation(businessType, tone, contentRichness),
-    companyStory: getCompanyStoryRecommendation(businessType, tone),
     faqProcess: getFaqProcessRecommendation(businessType, tone),
     footer: getFooterRecommendation(businessType, tone, contentRichness),
   };
@@ -440,8 +438,6 @@ export function getComponentRecommendations(analysis: WebsiteAnalysis): Componen
 export interface ComponentRecommendations {
   hero: { preferred: string[]; avoid: string[]; reason: string };
   about: { preferred: string[]; avoid: string[]; reason: string };
-  blog: { preferred: string[]; avoid: string[]; reason: string };
-  companyStory: { preferred: string[]; avoid: string[]; reason: string };
   faqProcess: { preferred: string[]; avoid: string[]; reason: string };
   footer: { preferred: string[]; avoid: string[]; reason: string };
 }
@@ -459,22 +455,6 @@ function getAboutRecommendation(businessType: BusinessType, tone: Tone): Compone
     preferred: [],
     avoid: [],
     reason: 'About section for company background'
-  };
-}
-
-function getBlogRecommendation(businessType: BusinessType, tone: Tone, richness: ContentRichness): ComponentRecommendations['blog'] {
-  return {
-    preferred: [],
-    avoid: [],
-    reason: 'Blog section for content'
-  };
-}
-
-function getCompanyStoryRecommendation(businessType: BusinessType, tone: Tone): ComponentRecommendations['companyStory'] {
-  return {
-    preferred: [],
-    avoid: [],
-    reason: 'Company story for brand heritage'
   };
 }
 

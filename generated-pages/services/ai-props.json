@@ -1,0 +1,251 @@
+{
+  "nav-link-dynamic": {
+    "logoText": "LCC Campus",
+    "topLink1Text": null,
+    "topLink1Url": null,
+    "topLink2Text": null,
+    "topLink2Url": null,
+    "topLink3Text": null,
+    "topLink3Url": null,
+    "mainLink1Text": "Home",
+    "mainLink1Url": "/preview/index",
+    "mainLink2Text": "About",
+    "mainLink2Url": "/preview/about",
+    "mainLink3Text": "Courses",
+    "mainLink3Url": "/preview/courses",
+    "mainLink4Text": "Contact",
+    "mainLink4Url": "/preview/contact"
+  },
+  "banner-header-dynamic": {
+    "title": "LCC CAMPUS",
+    "subtitle": "Excellence in Every Step",
+    "badgeText": "Learn More",
+    "badgeUrl": "/preview/about",
+    "backgroundImageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg",
+    "leftAccentColor": "#4f46e5"
+  },
+  "hero-apex-dynamic": {
+    "heading": "Excellence in Every Step",
+    "subheading": "Empowering learners to reach their fullest potential through innovation, integrity, and purpose-driven education.",
+    "ctaText": "Explore Programs",
+    "backgroundImage": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg",
+    "ratingValue": "4.9",
+    "testimonialQuote": "A place where knowledge meets purpose and growth never stops.",
+    "testimonialAuthor": "LCC Community",
+    "featureTitle": "Skill Development Hub",
+    "featureDescription": "Courses in computers, hospital admin, fashion, and more.",
+    "stat1Value": "500+",
+    "stat1Label": "Students Empowered",
+    "stat2Value": "4",
+    "stat2Label": "Campus Locations",
+    "sinceLabel": "Since",
+    "sinceValue": "2010"
+  },
+  "testi-client-dynamic": {
+    "heading": "What Our Students Say",
+    "subtext": "Hear from learners who transformed their careers with us.",
+    "testimonials": [
+      {
+        "quote": "The computer courses at LCC Campus gave me the practical skills I needed to start my IT career. Highly recommended!",
+        "authorName": "Anjali K.",
+        "authorRole": "Computer Course Graduate",
+        "authorImage": "https://lcccampus.com/wp-content/uploads/2025/11/int1-768x1024.jpeg",
+        "bgColor": "bg-blue-100"
+      },
+      {
+        "quote": "The hospital administration program was well-structured and helped me secure a management role in a leading clinic.",
+        "authorName": "Rahul M.",
+        "authorRole": "Hospital Admin Graduate",
+        "authorImage": "https://lcccampus.com/wp-content/uploads/2025/11/int2-2-768x1024.jpeg",
+        "bgColor": "bg-green-100"
+      },
+      {
+        "quote": "I loved the fashion designing course. The faculty guided me from sketching to creating my own collection.",
+        "authorName": "Sneha P.",
+        "authorRole": "Fashion Design Alumna",
+        "authorImage": "https://lcccampus.com/wp-content/uploads/2025/11/int3-1-768x1024.jpeg",
+        "bgColor": "bg-pink-100"
+      },
+      {
+        "quote": "The pre-primary TTC course prepared me to teach with confidence. I now work at a top preschool in Kerala.",
+        "authorName": "Divya S.",
+        "authorRole": "TTC Graduate",
+        "authorImage": "https://lcccampus.com/wp-content/uploads/2025/11/int4-2-768x1024.jpeg",
+        "bgColor": "bg-yellow-100"
+      }
+    ]
+  },
+  "feature-list-dynamic": {
+    "label": "Our Departments",
+    "title": "Comprehensive Skill Development Programs",
+    "description": "Explore our diverse range of courses designed to equip learners with practical skills and knowledge for real-world success.",
+    "ctaText": "View All Courses",
+    "features": [
+      {
+        "title": "Computer Courses",
+        "description": "Gain expertise in computing, software development, data management, and digital systems for modern careers."
+      },
+      {
+        "title": "Hospital Administration",
+        "description": "Learn to coordinate healthcare systems, manage budgets, ensure compliance, and enhance patient services."
+      },
+      {
+        "title": "Fashion Designing",
+        "description": "Combine creativity with technical skills to create clothing and accessories, from sketching to brand development."
+      },
+      {
+        "title": "Pre-Primary TTC",
+        "description": "Professional certification for teaching children ages 2 to 6, focusing on early childhood education methodologies."
+      }
+    ],
+    "backgroundImage": null
+  },
+  "gallery-album-dynamic": {
+    "title": "Campus Life & Learning Moments",
+    "images": [
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg",
+        "alt": "Students collaborating in a modern classroom"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_s8c5qys8c5qys8c.jpeg",
+        "alt": "Creative fashion design workspace"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
+        "alt": "Hospital administration training session"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-8527897-1-1024x683.jpg",
+        "alt": "Computer lab with students learning"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg",
+        "alt": "Pre-primary teaching practice in action"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg",
+        "alt": "Career guidance workshop"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
+        "alt": "LCC Campus group activity and learning environment"
+      }
+    ]
+  },
+  "feature-facet-dynamic": {
+    "heading": "Excellence in Every Step",
+    "imageSrc": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg",
+    "imageAlt": "Students collaborating in a modern learning environment",
+    "ctaText": "Explore Programs",
+    "items": [
+      {
+        "title": "Computer Courses",
+        "description": "Skill development covering hardware, software, data management, and real-world tech applications."
+      },
+      {
+        "title": "Hospital Administration",
+        "description": "Training in healthcare coordination, budgeting, compliance, and patient service improvement."
+      },
+      {
+        "title": "Fashion Designing",
+        "description": "Creative programs from sketching and garment creation to marketing and brand development."
+      },
+      {
+        "title": "Pre-primary TTC",
+        "description": "Professional certification for teaching children ages 2 to 6 with modern methodologies."
+      }
+    ]
+  },
+  "about-brief-dynamic": {
+    "title": "About LCC Campus",
+    "description1": "LCC Campus is a reputed educational institution offering skill development courses in fashion designing, computer studies, pre-primary TTC, and beautician training across Kerala.",
+    "description2": "With branches in Edakkara, Nilambur, Pothukal, and Karulai, we are committed to making quality education accessible and empowering every learner to reach their fullest potential.",
+    "ctaText": "Learn More",
+    "image": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg"
+  },
+  "footer-glow-dynamic": {
+    "logoText": "LCC Campus",
+    "description": "Empowering learners through quality skill development courses in computers, hospital administration, fashion designing, pre-primary teaching, and more across Kerala.",
+    "newsletterTitle": "Stay Updated",
+    "newsletterDescription": "Subscribe to receive updates on new courses, events, and campus news.",
+    "newsletterPlaceholder": "Your email address",
+    "newsletterButtonText": "Subscribe",
+    "copyrightText": "Copyright © 2026 lcccampus.com",
+    "columns": [
+      {
+        "title": "Quick Links",
+        "links": [
+          {
+            "label": "Home",
+            "url": "/preview/index"
+          },
+          {
+            "label": "About",
+            "url": "/preview/about"
+          },
+          {
+            "label": "Courses",
+            "url": "/preview/courses"
+          },
+          {
+            "label": "Services",
+            "url": "/preview/services"
+          },
+          {
+            "label": "Contact",
+            "url": "/preview/contact"
+          }
+        ]
+      },
+      {
+        "title": "Our Courses",
+        "links": [
+          {
+            "label": "Computer Courses",
+            "url": "/preview/courses"
+          },
+          {
+            "label": "Hospital Administration",
+            "url": "/preview/courses"
+          },
+          {
+            "label": "Fashion Designing",
+            "url": "/preview/courses"
+          },
+          {
+            "label": "Pre-primary TTC",
+            "url": "/preview/courses"
+          }
+        ]
+      },
+      {
+        "title": "Contact Info",
+        "links": [
+          {
+            "label": "Edakkara, Nilambur, Pothukal, Karulai, Kerala",
+            "url": "#"
+          },
+          {
+            "label": "Phone: 9744064081",
+            "url": "tel:9744064081"
+          },
+          {
+            "label": "Email: johnsonlccedk@gmail.com",
+            "url": "mailto:johnsonlccedk@gmail.com"
+          }
+        ]
+      }
+    ],
+    "bottomLinks": [
+      {
+        "label": "Privacy Policy",
+        "url": "#"
+      },
+      {
+        "label": "Terms of Service",
+        "url": "#"
+      }
+    ]
+  }
+}

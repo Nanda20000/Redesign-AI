@@ -1,0 +1,244 @@
+{
+  "nav-bar-dynamic": {
+    "logoText": "LCC Campus",
+    "navLinks": [
+      {
+        "label": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "label": "About",
+        "href": "/preview/about"
+      },
+      {
+        "label": "Courses",
+        "href": "/preview/courses"
+      },
+      {
+        "label": "Services",
+        "href": "/preview/services"
+      },
+      {
+        "label": "Contact",
+        "href": "/preview/contact"
+      }
+    ],
+    "loginLabel": "Login",
+    "signupLabel": "Sign Up",
+    "loginHref": null,
+    "signupHref": null
+  },
+  "banner-promo-dynamic": {
+    "title": "Explore Our\nCareer-Focused Courses",
+    "role": "LCC Campus",
+    "bgImage": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_5e7ozv5e7ozv5e7.jpeg",
+    "bgColorClass": null,
+    "topStripColor": "bg-[#1a1c7b]",
+    "bottomStripColor": "bg-[#1a1c7b]",
+    "frameBorderColor": "border-[#1a1c7b]",
+    "dividerColor": "bg-[#1a1c7b]",
+    "textColor": "text-white",
+    "ctaText": "View All Programs"
+  },
+  "hero-aspect-dynamic": {
+    "badgeText": "Explore Our Programs",
+    "title": "Build Your Career with LCC Campus",
+    "description": "Industry-focused courses in accounting, multimedia, and digital skills to launch your professional journey.",
+    "ctaText": "View Courses",
+    "ratingValue": "4.8",
+    "ratingLabel": "Student Rating",
+    "ratingAvatars": [
+      "https://lcccampus.com/wp-content/uploads/2025/11/freepik__the-style-is-candid-image-photography-with-natural__3998.jpeg",
+      "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_5e7ozv5e7ozv5e7.jpeg",
+      "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_62uufu62uufu62u.jpeg"
+    ],
+    "videoThumbnail": "https://lcccampus.com/wp-content/uploads/2025/11/ChatGPTImageNov18202512_36_12P-1024x683.jpeg",
+    "features": [
+      {
+        "title": "Expert Faculty",
+        "description": "Learn from industry professionals with years of real-world experience."
+      },
+      {
+        "title": "Hands-On Training",
+        "description": "Practical sessions using Tally, Excel, Photoshop, and more."
+      },
+      {
+        "title": "Career Support",
+        "description": "Guidance and placement assistance for accounting and multimedia roles."
+      }
+    ]
+  },
+  "feature-list-dynamic": {
+    "label": "Our Programs",
+    "title": "Explore Career-Focused Courses at LCC Campus",
+    "description": "We offer a range of professional courses in accounting, multimedia, and digital skills to prepare you for real-world success.",
+    "ctaText": "View All Courses",
+    "features": [
+      {
+        "icon": "Calculator",
+        "title": "Diploma in Computerized Industrial Accounting (DCIA)",
+        "description": "One-year program covering financial accounting, taxation, payroll, GST, and Tally/Excel for finance careers."
+      },
+      {
+        "icon": "BarChart3",
+        "title": "Advanced Diploma in Accounts & Financial Marketing",
+        "description": "Blend advanced accounting with marketing strategies, financial analysis, and digital tools for business development roles."
+      },
+      {
+        "icon": "Globe",
+        "title": "Diploma in Indian & Foreign Accounting",
+        "description": "Six-month practical training in Indian and international accounting systems, GST, income tax, and global standards."
+      },
+      {
+        "icon": "BookOpen",
+        "title": "Diploma in Financial Accounting",
+        "description": "Three-month course covering bookkeeping, GST, taxation, and Tally/Excel for entry-level accounting positions."
+      },
+      {
+        "icon": "Film",
+        "title": "Advanced Diploma in Multimedia & Animation (ADMA)",
+        "description": "18-month creative program in graphic design, 2D/3D animation, VFX, video editing, and multimedia production."
+      },
+      {
+        "icon": "Image",
+        "title": "Digital Graphics Course",
+        "description": "Eight-month course on image editing, illustration, typography, and design workflows using Photoshop and Illustrator."
+      }
+    ],
+    "backgroundImage": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_w0o3idw0o3idw0o.jpeg"
+  },
+  "gallery-album-dynamic": {
+    "title": "Campus Life & Learning Moments",
+    "images": [
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/freepik__the-style-is-candid-image-photography-with-natural__3998.jpeg",
+        "alt": "Students collaborating in a classroom setting"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/ChatGPTImageNov18202512_36_12P-1024x683.jpeg",
+        "alt": "Instructor guiding students through a practical session"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/ChatGPTImageNov18202512_33_57P-1024x683.jpeg",
+        "alt": "Students working on computer-based accounting tasks"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/ChatGPTImageNov18202512_42_42P-1024x683.jpeg",
+        "alt": "Group of students engaged in a multimedia design project"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_w0o3idw0o3idw0o.jpeg",
+        "alt": "Creative workspace with digital art and animation tools"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_5e7ozv5e7ozv5e7.jpeg",
+        "alt": "Students presenting their project work to peers"
+      },
+      {
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_mkdotqmkdotqmkd.jpeg",
+        "alt": "Campus building exterior with students walking"
+      }
+    ]
+  },
+  "blog-journal-dynamic": {
+    "subtitle": "Latest Updates & Insights",
+    "title": "Explore Our Blog for Career Tips and Industry News",
+    "items": [
+      {
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/ChatGPTImageNov18202512_36_12P-1024x683.jpeg",
+        "alt": "Students working on accounting software in a classroom"
+      },
+      {
+        "date": "November 2025",
+        "category": "Accounting",
+        "title": "Why Computerized Accounting is the Future of Finance",
+        "description": "Discover how mastering tools like Tally and Excel can open doors to careers in finance, taxation, and business administration. Our DCIA program prepares you for the digital accounting landscape."
+      },
+      {
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/ChatGPTImageNov18202512_33_57P-1024x683.jpeg",
+        "alt": "Student creating digital art on a tablet"
+      },
+      {
+        "date": "November 2025",
+        "category": "Multimedia",
+        "title": "From Concept to Screen: A Day in the Life of an Animation Student",
+        "description": "Explore the creative journey of our ADMA students as they learn 2D & 3D animation, visual effects, and video editing to build careers in film, gaming, and digital media."
+      },
+      {
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/ChatGPTImageNov18202512_42_42P-1024x683.jpeg",
+        "alt": "Students collaborating on a design project"
+      },
+      {
+        "date": "November 2025",
+        "category": "Design",
+        "title": "Top 5 Skills You'll Gain in Our Digital Graphics Course",
+        "description": "From image editing to typography, our 8-month program covers essential design workflows using Adobe Photoshop and Illustrator, preparing you for web, print, and multimedia projects."
+      }
+    ]
+  },
+  "about-brief-dynamic": {
+    "title": "About LCC Campus",
+    "description1": "LCC Campus offers a diverse range of professional courses in accounting, multimedia, design, IT, and vocational training, equipping students with industry-ready skills for successful careers.",
+    "description2": "Located in Kerala, our institution is dedicated to providing practical, career-focused education that prepares students for the demands of the modern workforce.",
+    "ctaText": "Explore Our Courses",
+    "image": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_5e7ozv5e7ozv5e7.jpeg"
+  },
+  "contact-mail-dynamic": {
+    "title": "Get In Touch",
+    "description": "Have questions or ready to enroll? Reach out to us — we're here to help you take the next step.",
+    "address": "LCC Campus, Edakkara, Nilambur, Pothukal, Karulai, Kerala",
+    "email": "johnsonlccedk@gmail.com",
+    "linkedinUrl": null,
+    "facebookUrl": null,
+    "twitterUrl": null,
+    "nameLabel": "Your Name",
+    "emailLabel": "Email Address",
+    "companyLabel": "Company",
+    "phoneLabel": "Phone Number",
+    "messageLabel": "Your Message",
+    "submitButtonText": "Send Message",
+    "successMessage": "Thank you! We'll get back to you soon."
+  },
+  "footer-halo-dynamic": {
+    "logoText": "LCC CAMPUS",
+    "brandDescription": "LCC Campus offers career-focused courses in accounting, multimedia, and design at our Kerala campus, preparing students for industry success.",
+    "copyrightText": "© 2026 lcccampus.com",
+    "column1Title": "Quick Links",
+    "column1Links": [
+      {
+        "text": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "text": "About",
+        "href": "/preview/about"
+      },
+      {
+        "text": "Courses",
+        "href": "/preview/courses"
+      },
+      {
+        "text": "Services",
+        "href": "/preview/services"
+      },
+      {
+        "text": "Contact",
+        "href": "/preview/contact"
+      }
+    ],
+    "column2Title": "Contact",
+    "column2Links": [
+      {
+        "text": "9744064081"
+      },
+      {
+        "text": "johnsonlccedk@gmail.com"
+      },
+      {
+        "text": "Edakkara, Nilambur, Kerala"
+      }
+    ],
+    "column3Title": null,
+    "column3Links": null
+  }
+}

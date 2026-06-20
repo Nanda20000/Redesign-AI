@@ -1,0 +1,151 @@
+A new dynamic component has been created. Register it in all required files.
+
+STRICT RULE: The registry key / component file slug MUST end with "-dynamic".
+If it does not, stop and flag the error - non-dynamic components are not selectable by the AI layout generator.
+The React export name should remain valid PascalCase.
+
+Component name: [COMPONENT-NAME]-dynamic
+Section: [SECTION-TYPE]
+Component file: components-library/[SECTION-TYPE]/[COMPONENT-NAME]-dynamic.tsx
+
+All registration data is provided below. Apply each block exactly as shown.
+
+---
+
+[INSERT FULL COMPONENT TSX CODE HERE]
+
+---
+
+BLOCK 1: components.json entry
+{ "name": "...", "category": "...", "file": "...", "description": "..." }
+---
+
+BLOCK 2: src/lib/component-registry.ts import line + registry entry
+import { ... } from '...';
+'...': ...,
+---
+
+BLOCK 3: lib/component-content-map.ts entry
+'...': { isDynamic: true, contentSlots: [...] },
+---
+
+BLOCK 4: lib/component-image-map.ts entry
+'...': { imageCount: ..., imageProp: '...', imageMode: '...' },
+---
+
+BLOCK 5: lib/ai-prop-injector.ts COMPONENT_PROP_SCHEMAS entry
+'...': { componentName: '...', section: '...', props: [...] }
+---
+
+BLOCK 6: lib/component-meta.ts entry
+'...': { section: '...', supportsImages: ..., supportsItems: ..., contentLevel: '...', priority: ... },
+---
+
+BLOCK 7: lib/content-injector.tsx case block
+case '...': { ... return { ... }; }
+---
+
+BLOCK 8: lib/component-selector.ts IMAGE_CAPABLE_COMPONENTS update
+[section-type]: ['[component-name]-dynamic', ...existingComponents],
+---
+
+PRE-FLIGHT VERIFICATION (complete BEFORE performing any tasks):
+
+Step 1: Read the component's TypeScript interface
+- Open the component TSX file provided above
+- Find the Props interface (e.g., StoryJourneyDynamicProps)
+- List every prop name and type
+
+Step 2: Verify Block 5 exists and matches the interface
+- If Block 5 is MISSING from the provided data → STOP and report error
+- Every prop in the TypeScript interface MUST have a corresponding entry in Block 5
+- Every prop in Block 5 MUST use the EXACT prop name from the interface
+- If there is a mismatch → STOP and report the mismatch
+
+Step 3: Verify Block 7 matches Block 5
+- Every prop in Block 5 must appear in Block 7's return object
+- The field names read from mappedContent must match Block 5 prop names
+- If there is a mismatch → STOP and report the mismatch
+
+Step 4: Verify Block 3 contentSlots are a subset of Block 5
+- Only text-accepting props should appear in Block 3
+- Every Block 3 prop must also exist in Block 5
+
+Step 5: Verify Block 4 imageProp matches Block 5
+- If imageMode is not 'none', the imageProp must exist in Block 5
+- If imageMode is 'none', imageProp must be '' (empty string)
+
+If ANY verification step fails, report the error clearly and do not proceed with registration.
+
+---
+
+TASKS — perform all of the following in order:
+
+TASK 1: Save the component TSX
+- File path: components-library/[section-type]/[component-name]-dynamic.tsx
+- Overwrite if the file already exists
+
+TASK 2: Update components-library/components.json
+- Add the Block 1 JSON object into the "components" array
+- Do not duplicate if an entry with the same "name" already exists
+
+TASK 3: Update src/lib/component-registry.ts
+- Add the Block 2 import line grouped with other imports of the same section category
+- Add the Block 2 registry entry inside the componentRegistry object
+- Do not duplicate if already present
+
+TASK 4: Update lib/component-content-map.ts
+- Add the Block 3 key-value pair inside the COMPONENT_CONTENT_MAP object
+- Place it under the correct section comment block
+- Do not duplicate if already present
+
+TASK 5: Update lib/component-image-map.ts
+- Add the Block 4 key-value pair inside the COMPONENT_IMAGE_MAP object
+- Place it under the correct section comment block
+- Do not duplicate if already present
+- IMPORTANT: imageProp must be '' (not 'none') when imageMode is 'none'
+
+TASK 6: Update lib/ai-prop-injector.ts (MANDATORY)
+- Add the Block 5 entry inside the COMPONENT_PROP_SCHEMAS object
+- Do not duplicate if already present
+- *** THIS TASK IS MANDATORY. Skipping it causes components to receive generic     ***
+    *** { title, description, items } props that don't match component prop names.  ***
+
+TASK 7: Update lib/component-meta.ts
+- Add the Block 6 key-value pair inside the COMPONENT_META object
+- Do not duplicate if already present
+
+TASK 8: Update lib/content-injector.tsx
+- Add the Block 7 case block inside the switch statement in getComponentContentProps()
+- Place it alongside other cases for the same section type
+- Do not duplicate if already present
+
+TASK 9: Update src/app/preview/[slug]/page.tsx FALLBACK_COMPONENTS
+- If this component should be the preferred fallback for its section type, update:
+  [section-type]: '[component-name]-dynamic',
+- Skip if another component is already the preferred fallback
+
+TASK 10: Update src/app/generated-page/page.tsx FALLBACK_COMPONENTS
+- Apply the same fallback update if applicable
+- This file is separate from preview/[slug]/page.tsx — both must be updated
+
+TASK 11: Update lib/component-selector.ts IMAGE_CAPABLE_COMPONENTS
+- Only if Block 6 supportsImages is true
+- Add '[component-name]-dynamic' to the array for its section key
+- Skip if the component does not support images
+
+TASK 12: Final verification
+- Confirm the component file slug ends with '-dynamic'
+- Confirm isDynamic: true is set in COMPONENT_CONTENT_MAP (Block 3)
+- Confirm the entry exists in ALL of the following files:
+    components-library/components.json         (Block 1)
+    src/lib/component-registry.ts              (Block 2)
+    lib/component-content-map.ts               (Block 3)
+    lib/component-image-map.ts                 (Block 4)
+    lib/ai-prop-injector.ts                    (Block 5) ← MANDATORY
+    lib/component-meta.ts                      (Block 6)
+    lib/content-injector.tsx                   (Block 7)
+- Confirm FALLBACK_COMPONENTS is updated in BOTH page files if applicable
+- Confirm IMAGE_CAPABLE_COMPONENTS is updated when supportsImages is true
+
+If any task fails or a file cannot be found, report the error clearly and do not proceed silently.

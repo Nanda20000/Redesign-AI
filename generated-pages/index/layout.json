@@ -2,7 +2,7 @@
   "layout": [
     {
       "section": "navbar",
-      "component": "nav-link-dynamic"
+      "component": "nav-header-dynamic"
     },
     {
       "section": "hero",
@@ -30,11 +30,11 @@
     },
     {
       "section": "testimonials",
-      "component": "testi-honor-dynamic"
+      "component": "testi-critique-dynamic"
     },
     {
       "section": "cta",
-      "component": "cta-drive-dynamic"
+      "component": "cta-goal-dynamic"
     },
     {
       "section": "contact",
@@ -46,7 +46,7 @@
     },
     {
       "section": "footer",
-      "component": "footer-simple"
+      "component": "footer-lume-dynamic"
     }
   ]
 }

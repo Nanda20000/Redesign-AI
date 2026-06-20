@@ -1,4 +1,10 @@
 export const COMPONENT_META = {
+  // Banner components
+  "banner-hero-dynamic": { section: "banner", supportsImages: false, supportsItems: false, contentLevel: "medium", priority: 1 },
+  "banner-header-dynamic": { section: "banner", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 15 },
+  "banner-promo-dynamic": { section: "banner", supportsImages: true, supportsItems: false, contentLevel: "medium", priority: 15 },
+  "banner-slider-dynamic": { section: "banner", supportsImages: false, supportsItems: false, contentLevel: "low", priority: 10 },
+
   // Hero components
   "hero-action-dynamic": { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 12 },
   "hero-adapt-dynamic":  { section: "hero",    supportsImages: true,  supportsItems: false, contentLevel: "high",    priority: 10 },

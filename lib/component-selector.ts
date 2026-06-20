@@ -35,6 +35,7 @@ export interface ComponentSelectionResult {
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
   hero: ['hero-atlas-dynamic', 'hero-aspect-dynamic', 'hero-apex-dynamic', 'hero-anchor-dynamic', 'hero-alpha-dynamic', 'hero-adapt-dynamic', 'hero-action-dynamic'],
   about: ['about-crew-dynamic', 'about-brief-dynamic', 'about-brand-dynamic'],
+  banner: ['banner-promo-dynamic', 'banner-header-dynamic'],
   cta: ['cta-button-dynamic', 'cta-banner-dynamic'],
   testimonials: ['testi-quote-dynamic', 'testi-praise-dynamic', 'testi-honor-dynamic', 'testi-feedback-dynamic', 'testi-critique-dynamic', 'testi-client-dynamic'],
   gallery: ['gallery-album-dynamic'],
@@ -116,8 +117,14 @@ const TONE_STYLE_PREFERENCES: Record<Tone, string[]> = {
 
 /**
  * Required sections that must always be included
+ * Homepage requires hero; non-home pages require banner instead
  */
-const REQUIRED_SECTIONS = ['hero', 'footer'];
+function getRequiredSections(pageSlug: string = 'index'): string[] {
+  if (pageSlug === 'index') {
+    return ['hero', 'footer'];
+  }
+  return ['banner', 'footer'];
+}
 
 /**
  * All sections for homepage - always included in fixed order
@@ -400,8 +407,9 @@ function determineSections(
     }
   }
 
-  // 2. Ensure required sections (hero, footer) exist even if classification missed them
-  for (const requiredSection of REQUIRED_SECTIONS) {
+  // 2. Ensure required sections (hero/banner, footer) exist even if classification missed them
+  const requiredSections = getRequiredSections(pageSlug);
+  for (const requiredSection of requiredSections) {
     if (!processedSections.has(requiredSection)) {
       sections.push({
         section: requiredSection,
@@ -588,11 +596,8 @@ export function buildEnhancedPrompt(
     }
   }
 
-  // For non-home pages, hero must only be hero-banner-dynamic
-  const isNonHomePage = pageSlug !== 'index';
-  if (isNonHomePage && dynamicOnlyByCategory.hero?.includes('hero-banner-dynamic')) {
-    dynamicOnlyByCategory.hero = ['hero-banner-dynamic'];
-  }
+  // For non-home pages, hero is replaced by banner — no hero restriction needed
+  // Homepage keeps hero as-is
 
   // Build dynamic selection guidelines from actual available components
   const sectionGuidelines = Object.entries(dynamicOnlyByCategory)
@@ -638,7 +643,7 @@ IMPORTANT: You are encouraged to pick DIFFERENT components on different runs. Do
 
 ## Business Type Guidance:
 - education/academy → prioritize about-brief-dynamic, include mission-vision
-- saas/startup → prioritize hero-action-dynamic, include benefits
+- saas/startup → prioritize banner or hero-action-dynamic, include benefits
 - corporate → prioritize about-brief-dynamic, include mission-vision and benefits
 - portfolio/agency → prioritize about-brief-dynamic, include blog
 - nonprofit → prioritize about-brief-dynamic, include mission-vision and blog
@@ -658,7 +663,7 @@ IMPORTANT: You are encouraged to pick DIFFERENT components on different runs. Do
   ]
 }
 
-IMPORTANT: Only include sections that were detected. Always include hero and footer.
+IMPORTANT: Only include sections that were detected. For homepage, always include hero and footer. For non-home pages, always include banner and footer.
 Every component name you return MUST end with "-dynamic" (exception: footer-simple).
 `;
 }

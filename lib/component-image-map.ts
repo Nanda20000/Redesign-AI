@@ -17,6 +17,31 @@ export interface ComponentImageConfig {
 
 export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
 
+  // ── BANNER ────────────────────────────────────────────────────────────
+  'banner-hero-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
+  'banner-promo-dynamic': {
+    imageCount: 1,
+    imageProp: 'bgImage',
+    imageMode: 'single',
+  },
+
+  'banner-header-dynamic': {
+    imageCount: 1,
+    imageProp: 'backgroundImageUrl',
+    imageMode: 'single',
+  },
+
+  'banner-slider-dynamic': {
+    imageCount: 0,
+    imageProp: '',
+    imageMode: 'none',
+  },
+
   // ── HERO ──────────────────────────────────────────────────────────────
   'hero-action-dynamic': {
     imageCount: 1,

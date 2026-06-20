@@ -183,15 +183,18 @@ export default function Home() {
           return false;
         });
 
-        // Post-deduplication: guarantee hero exists
-        if (!deduplicatedSections.includes('hero')) {
+        // Post-deduplication: guarantee required top section exists
+        // Homepage requires hero; non-home pages require banner
+        const isHomePage = page.slug === 'index';
+        const requiredTopSection = isHomePage ? 'hero' : 'banner';
+        if (!deduplicatedSections.includes(requiredTopSection)) {
           const navIdx = deduplicatedSections.indexOf('navbar');
           if (navIdx >= 0) {
-            deduplicatedSections.splice(navIdx + 1, 0, 'hero');
+            deduplicatedSections.splice(navIdx + 1, 0, requiredTopSection);
           } else {
-            deduplicatedSections.unshift('hero');
+            deduplicatedSections.unshift(requiredTopSection);
           }
-          console.log('[page.tsx] Hero injected into finalSections for page:', page.slug);
+          console.log(`[page.tsx] ${requiredTopSection} injected into finalSections for page:`, page.slug);
         }
         finalSections = deduplicatedSections;
 

@@ -1,0 +1,40 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "nav-link-dynamic"
+    },
+    {
+      "section": "banner",
+      "component": "banner-header-dynamic"
+    },
+    {
+      "section": "hero",
+      "component": "hero-apex-dynamic"
+    },
+    {
+      "section": "testimonials",
+      "component": "testi-client-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "feature-list-dynamic"
+    },
+    {
+      "section": "gallery",
+      "component": "gallery-album-dynamic"
+    },
+    {
+      "section": "services",
+      "component": "feature-facet-dynamic"
+    },
+    {
+      "section": "about",
+      "component": "about-brief-dynamic"
+    },
+    {
+      "section": "footer",
+      "component": "footer-glow-dynamic"
+    }
+  ]
+}

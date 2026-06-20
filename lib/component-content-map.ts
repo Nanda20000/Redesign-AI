@@ -25,6 +25,43 @@ export interface ComponentContentConfig {
 
 export const COMPONENT_CONTENT_MAP: Record<string, ComponentContentConfig> = {
 
+  // ── BANNER ─────────────────────────────────────────────────────────
+  'banner-hero-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'subtitle', type: 'label', maxWords: 10 },
+      { prop: 'description', type: 'paragraph', maxWords: 30 }
+    ],
+  },
+
+  'banner-promo-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 10 },
+      { prop: 'role', type: 'label', maxWords: 8 },
+      { prop: 'ctaText', type: 'cta', maxWords: 4 },
+    ],
+  },
+
+  'banner-header-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 20 },
+      { prop: 'badgeText', type: 'label', maxWords: 10 },
+    ],
+  },
+
+  'banner-slider-dynamic': {
+    isDynamic: true,
+    contentSlots: [
+      { prop: 'title', type: 'heading', maxWords: 15 },
+      { prop: 'subtitle', type: 'paragraph', maxWords: 10 },
+      { prop: 'linkText', type: 'label', maxWords: 5 },
+    ],
+  },
+
   // ── HERO ────────────────────────────────────────────────────────────
   'hero-action-dynamic': {
     isDynamic: true,

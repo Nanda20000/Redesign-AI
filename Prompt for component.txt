@@ -1,0 +1,167 @@
+Create a React TypeScript component for a [SECTION-TYPE] section called [COMPONENT-NAME]-dynamic exactly based on the screenshot above.
+
+[DESCRIPTION OF WHAT THIS COMPONENT LOOKS LIKE AND DOES]
+
+⚠️ FONT REQUIREMENT — MANDATORY:
+ALL text in this component MUST use Roboto from Google Fonts. No other font is allowed.
+- Add this as the very first child inside the root JSX element:
+  <style>{`@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');`}</style>
+- Add style={{ fontFamily: "'Roboto', sans-serif" }} on the outermost JSX wrapper element.
+- Headings (h1, h2, h3, h4, h5, h6) MUST use fontWeight: 500 (Roboto Medium). Apply style={{ fontWeight: 500 }} on every heading element.
+- All other text (p, span, a, button, li, label, and any non-heading text element) MUST use fontWeight: 300 (Roboto Light). Apply style={{ fontWeight: 300 }} on every such element.
+- NEVER use Tailwind font utilities (font-sans, font-mono, font-serif, font-['...'], font-medium, font-light, font-bold, font-semibold) anywhere in the component for font-family or font-weight. Use inline style={{ fontWeight: ... }} instead.
+- No child element may override or re-declare font-family. All text inherits Roboto from the root wrapper.
+
+STRICT NAMING RULE:
+- The component file MUST be named exactly: [COMPONENT-NAME]-dynamic.tsx
+- The registry key / file slug MUST end with "-dynamic"
+- The React export name must be valid PascalCase, for example: ComponentNameDynamic
+- This is required for the AI layout generator to recognize it as a selectable dynamic component
+
+COMPONENT REQUIREMENTS:
+- File path: components-library/[SECTION-TYPE]/[COMPONENT-NAME]-dynamic.tsx
+- NO hardcoded text, icons, images, or placeholder strings anywhere in JSX
+- Every visible string MUST come from a prop
+- If a prop is undefined/null/empty -> render nothing for that element (no fallbacks, no defaults)
+- Export both named export AND default export
+- Use only: React, Tailwind CSS utility classes, and @/components/ui/* shadcn imports
+- Do NOT import lucide-react icons directly - icons must come as React.ReactNode props
+- No <form> HTML tags - use onKeyDown on a <div> or <section> if needed
+
+---
+
+After the component code, you MUST complete ALL of the following steps in order:
+
+STEP A: Extract the component's prop interface
+Read the TypeScript interface you just created (e.g., StoryJourneyDynamicProps).
+List every prop name and its type. This is the SOURCE OF TRUTH for all registration blocks.
+
+STEP B: Generate all 8 registration blocks below
+Copy the exact format shown — do not change property names or structure.
+CRITICAL: Block 5 prop names MUST exactly match the prop names from STEP A.
+CRITICAL: Block 7 field names MUST read from mappedContent using the same prop names as Block 5.
+
+---
+
+BLOCK 1: components.json entry
+---
+{
+  "name": "[component-name]-dynamic",
+  "category": "[section-type]",
+  "file": "[section-type]/[component-name]-dynamic.tsx",
+  "description": "[one line description]"
+}
+
+---
+BLOCK 2: src/lib/component-registry.ts
+---
+Line 1 — import:
+import { ComponentNameDynamic } from '../../components-library/[section-type]/[component-name]-dynamic';
+
+Line 2 — registry entry:
+'[component-name]-dynamic': ComponentNameDynamic,
+
+---
+BLOCK 3: lib/component-content-map.ts entry
+---
+'[component-name]-dynamic': {
+  isDynamic: true,
+  contentSlots: [
+    { prop: 'propName', type: 'heading' | 'paragraph' | 'label' | 'cta' | 'list', maxWords: NUMBER },
+  ],
+},
+
+---
+BLOCK 4: lib/component-image-map.ts entry
+---
+IMPORTANT: When imageMode is 'none', imageProp must be '' (empty string), NOT 'none'.
+
+'[component-name]-dynamic': {
+  imageCount: NUMBER,
+  imageProp: 'propName' | '',
+  imageMode: 'array' | 'single' | 'object' | 'items' | 'none',
+},
+
+---
+BLOCK 5: lib/ai-prop-injector.ts COMPONENT_PROP_SCHEMAS entry (MANDATORY)
+---
+*** THIS BLOCK IS MANDATORY. If omitted, the AI prop injector falls back to generic    ***
+*** { title, description, items } which will NOT match your component's prop names.      ***
+
+The prop names listed here MUST be the EXACT prop names from your component's TypeScript interface (STEP A).
+
+'[component-name]-dynamic': {
+  componentName: '[component-name]-dynamic',
+  section: '[section-type]',
+  props: [
+    {
+      name: 'exactPropNameFromInterface',
+      type: 'string' | 'array' | 'object',
+      description: 'What this prop is and how the AI should fill it.',
+      maxWords: NUMBER,  // only for text props
+      required: true | false,
+    },
+    // ONE entry per prop — must match your TypeScript interface exactly
+  ],
+},
+
+---
+BLOCK 6: lib/component-meta.ts entry
+---
+'[component-name]-dynamic': {
+  section: '[section-type]',
+  supportsImages: true | false,
+  supportsItems: true | false,
+  contentLevel: 'low' | 'medium' | 'high',
+  priority: NUMBER,
+},
+
+---
+BLOCK 7: lib/content-injector.tsx case block
+---
+*** The field names you read from mappedContent MUST match Block 5 prop names. ***
+
+case '[component-name]-dynamic': {
+  const sectionContent = mappedContent.[section-type] as any;
+  return {
+    exactPropNameFromInterface: sectionContent?.exactPropNameFromInterface ?? '',
+    // map every prop from your TypeScript interface
+  };
+}
+
+---
+BLOCK 8: lib/component-selector.ts IMAGE_CAPABLE_COMPONENTS update
+---
+If supportsImages is true:
+[section-type]: ['[component-name]-dynamic', ...existingComponents],
+
+If supportsImages is false:
+No IMAGE_CAPABLE_COMPONENTS change required.
+
+---
+
+STEP C: Verify consistency before submitting
+Check that ALL of the following are true:
+[ ] Block 5 prop names = exact prop names from your TypeScript interface (STEP A)
+[ ] Block 7 reads the same field names that Block 5 defines
+[ ] Block 3 contentSlots props are a subset of Block 5 props (only text props)
+[ ] Block 4 imageProp matches the image prop name in Block 5 (or '' if no images)
+
+---
+
+IMPORTANT CHECKLIST (verify all before submitting):
+[ ] Component filename ends with -dynamic.tsx
+[ ] React export name is valid PascalCase; registry key ends with -dynamic
+[ ] No hardcoded strings anywhere in JSX
+[ ] Every prop renders nothing (not a placeholder) when undefined/null/empty
+[ ] Block 3 isDynamic is true
+[ ] Block 4 imageProp is '' (empty string) when imageMode is 'none'
+[ ] Block 5 is present with entries for EVERY prop the AI should fill
+[ ] Block 5 prop names match the TypeScript interface exactly
+[ ] Block 7 field names match Block 5 prop names
+[ ] Block 8 is included when supportsImages is true
+[ ] Root JSX element has style={{ fontFamily: "'Roboto', sans-serif" }}
+[ ] Google Fonts @import for Roboto weights 300 and 500 is included
+[ ] Every heading element has style={{ fontWeight: 500 }}
+[ ] Every non-heading text element has style={{ fontWeight: 300 }}
+[ ] No Tailwind font utility is used anywhere

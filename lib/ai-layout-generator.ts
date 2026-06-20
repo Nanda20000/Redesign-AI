@@ -424,6 +424,7 @@ export function loadGeneratedPageData(): Promise<GeneratedPageData> {
 function getDefaultImageComponent(section: string): string | null {
   const imageCandidates: Record<string, string[]> = {
     hero: ['hero-action-dynamic', 'hero-adapt-dynamic', 'hero-alpha-dynamic', 'hero-anchor-dynamic', 'hero-apex-dynamic'],
+    banner: ['banner-promo-dynamic', 'banner-header-dynamic'],
     about: ['about-brand-dynamic', 'about-brief-dynamic'],
     blog: ['blog-journal-dynamic'],
     benefits: ['benefits-advantage-dynamic'],
@@ -452,7 +453,7 @@ function enforceImageComponents(
     const newItem = { ...item };
 
     // Check if this section should have images (only for kept components)
-    if (['hero', 'about', 'blog', 'benefits', 'mission-vision'].includes(item.section)) {
+    if (['hero', 'banner', 'about', 'blog', 'benefits', 'mission-vision'].includes(item.section)) {
       if (!componentSupportsImages(item.component, item.section)) {
         const replacement = getDefaultImageComponent(item.section);
         if (replacement) {
@@ -536,7 +537,7 @@ function getUniqueSectionsInOrder(sections: string[]): string[] {
   return ordered;
 }
 
-function normalizeStructuralSections(sections: string[]): string[] {
+function normalizeStructuralSections(sections: string[], pageSlug: string = 'index'): string[] {
   const cleaned = sections.filter(Boolean);
   if (cleaned.length === 0) return [];
 
@@ -550,10 +551,12 @@ function normalizeStructuralSections(sections: string[]): string[] {
     return true; // hero, about all pass through
   });
 
-  // Guarantee hero survives normalization
-  if (!result.includes('hero')) {
-    result.unshift('hero');
-    console.log('[normalizeStructuralSections] Hero injected — was absent from input:', sections);
+  // For homepage, guarantee hero survives normalization
+  // For non-home pages, guarantee banner survives normalization
+  const requiredTopSection = pageSlug === 'index' ? 'hero' : 'banner';
+  if (!result.includes(requiredTopSection)) {
+    result.unshift(requiredTopSection);
+    console.log(`[normalizeStructuralSections] ${requiredTopSection} injected — was absent from input:`, sections);
   }
 
   return result;
@@ -574,14 +577,16 @@ function mergeLayoutsByDetectedSections(
   } else {
     // Non-home pages: use detected sections
     orderedSections = options?.preserveDuplicates
-      ? normalizeStructuralSections(detectedSections)
+      ? normalizeStructuralSections(detectedSections, pageSlug)
       : getUniqueSectionsInOrder(detectedSections);
   }
 
-  // Guarantee hero exists in orderedSections — it is essential for all pages
-  if (!orderedSections.includes('hero')) {
-    orderedSections.unshift('hero');
-    console.log('[mergeLayouts] Hero was missing from detectedSections — injected at start');
+  // Guarantee required top section exists in orderedSections
+  // Homepage requires hero; non-home pages require banner
+  const requiredTopSection = pageSlug === 'index' ? 'hero' : 'banner';
+  if (!orderedSections.includes(requiredTopSection)) {
+    orderedSections.unshift(requiredTopSection);
+    console.log(`[mergeLayouts] ${requiredTopSection} was missing from detectedSections — injected at start`);
   }
 
   const aiBySection = new Map<string, LayoutItem[]>();
@@ -604,8 +609,8 @@ function mergeLayoutsByDetectedSections(
     const selectedCandidates = selectedBySection.get(section) || [];
 
     let candidate: LayoutItem | undefined;
-    // For hero section, prefer rules engine (selectedLayout) over AI to enforce homepage restrictions
-    if (section === 'hero' && selectedCandidates.length > 0) {
+    // For hero section on homepage, prefer rules engine (selectedLayout) over AI to enforce homepage restrictions
+    if (section === 'hero' && pageSlug === 'index' && selectedCandidates.length > 0) {
       candidate = selectedCandidates[0];
     } else if (aiCandidates.length > 0) {
       candidate = aiCandidates.shift();
@@ -811,10 +816,11 @@ export async function generateLayoutWithAI(
     );
 
     console.log('[AI Layout Generator] Post-merge layout sections:', layout.layout.map(i => i.section));
-    const heroAfterMerge = layout.layout.find(i => i.section === 'hero');
-    if (!heroAfterMerge) {
-      console.error('[AI Layout Generator] CRITICAL: Hero lost after merge. detectedSections had hero:', 
-        pageStructure.sections.includes('hero'));
+    const requiredTopSection = pageSlug === 'index' ? 'hero' : 'banner';
+    const topSectionAfterMerge = layout.layout.find(i => i.section === requiredTopSection);
+    if (!topSectionAfterMerge) {
+      console.error(`[AI Layout Generator] CRITICAL: ${requiredTopSection} lost after merge. detectedSections had it:`, 
+        pageStructure.sections.includes(requiredTopSection));
     }
 
     // FORCE IMAGE-CAPABLE COMPONENTS when images exist
@@ -835,10 +841,11 @@ export async function generateLayoutWithAI(
       const reversedLayout = [...layout.layout].reverse();
       const footer = reversedLayout.find(i => i.section === 'footer');
 
-      // Extract hero explicitly before middle filter — hero must always survive
-      const heroItem = layout.layout.find(i => i.section === 'hero');
+      // Extract required top section explicitly before middle filter — must always survive
+      const requiredTop = pageSlug === 'index' ? 'hero' : 'banner';
+      const topItem = layout.layout.find(i => i.section === requiredTop);
       const middle = layout.layout.filter(
-        i => i.section !== 'footer' && i.section !== 'hero'
+        i => i.section !== 'footer' && i.section !== requiredTop
       );
 
       // Deduplicate middle sections with limits for kept sections only
@@ -853,10 +860,10 @@ export async function generateLayoutWithAI(
         return false;
       });
 
-      // Reassemble: hero (always) → middle sections → footer
+      // Reassemble: top section (always) → middle sections → footer
       layout = {
         layout: [
-          ...(heroItem ? [heroItem] : []),  // hero always preserved
+          ...(topItem ? [topItem] : []),  // top section always preserved
           ...dedupedMiddle.slice(0, 18),
           ...(footer ? [footer] : []),
         ]

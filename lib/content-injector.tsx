@@ -154,6 +154,16 @@ export interface MappedContent {
       label?: string;
     };
   };
+  banner?: {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    backgroundColor?: string;
+    textColor?: string;
+    topBarColor?: string;
+    dotsColor?: string;
+    dotMultiplier?: string;
+  };
   features?: {
     label?: string;
     heading?: string;
@@ -394,6 +404,15 @@ export function mapContentToSections(
     };
   }
 
+  // Map banner content - Use for hero/profile banner sections
+  if (sections.includes('banner')) {
+    mapped.banner = {
+      title: headings[0] ?? '',
+      subtitle: headings[1] ?? '',
+      description: paragraphs[0]?.slice(0, 150) ?? '',
+    };
+  }
+
   // Map blog content - Use for articles/insights sections
   if (sections.includes('blog')) {
     mapped.blog = {
@@ -459,6 +478,59 @@ export function getComponentContentProps(
 
   // Map section content to component-specific props
   switch (componentName) {
+    // Banner components
+    case 'banner-hero-dynamic': {
+      const sectionContent = mappedContent.banner as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        description: sectionContent?.description ?? '',
+        backgroundColor: sectionContent?.backgroundColor ?? '',
+        textColor: sectionContent?.textColor ?? '',
+        topBarColor: sectionContent?.topBarColor ?? '',
+        dotsColor: sectionContent?.dotsColor ?? '',
+        dotMultiplier: sectionContent?.dotMultiplier ? parseFloat(sectionContent.dotMultiplier) : 1.0,
+      };
+    }
+
+    case 'banner-promo-dynamic': {
+      const sectionContent = mappedContent.banner as any;
+      return {
+        title: sectionContent?.title ?? '',
+        role: sectionContent?.role ?? '',
+        bgImage: sectionContent?.bgImage ?? '',
+        bgColorClass: sectionContent?.bgColorClass ?? 'bg-gradient-to-r from-[#2c2e33] to-[#404349]',
+        topStripColor: sectionContent?.topStripColor ?? 'bg-[#1a1c7b]',
+        bottomStripColor: sectionContent?.bottomStripColor ?? 'bg-[#1a1c7b]',
+        frameBorderColor: sectionContent?.frameBorderColor ?? 'border-white',
+        dividerColor: sectionContent?.dividerColor ?? 'bg-white/50',
+        textColor: sectionContent?.textColor ?? 'text-white',
+        ctaText: sectionContent?.ctaText ?? '',
+      };
+    }
+
+    case 'banner-header-dynamic': {
+      const sectionContent = mappedContent.banner as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        badgeText: sectionContent?.badgeText ?? '',
+        badgeUrl: sectionContent?.badgeUrl ?? '',
+        backgroundImageUrl: sectionContent?.backgroundImageUrl ?? '',
+        leftAccentColor: sectionContent?.leftAccentColor ?? '',
+      };
+    }
+
+    case 'banner-slider-dynamic': {
+      const sectionContent = mappedContent.banner as any;
+      return {
+        title: sectionContent?.title ?? '',
+        subtitle: sectionContent?.subtitle ?? '',
+        linkText: sectionContent?.linkText ?? '',
+        linkUrl: sectionContent?.linkUrl ?? '',
+      };
+    }
+
     // Hero components
     case 'hero-action-dynamic': {
       const sectionContent = mappedContent.hero as any;

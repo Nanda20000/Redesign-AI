@@ -1,0 +1,32 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "nav-panel-dynamic"
+    },
+    {
+      "section": "banner",
+      "component": "banner-promo-dynamic"
+    },
+    {
+      "section": "hero",
+      "component": "hero-apex-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "feature-facet-dynamic"
+    },
+    {
+      "section": "testimonials",
+      "component": "testi-quote-dynamic"
+    },
+    {
+      "section": "contact",
+      "component": "contact-help-dynamic"
+    },
+    {
+      "section": "footer",
+      "component": "footer-simple"
+    }
+  ]
+}

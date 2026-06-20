@@ -8,6 +8,12 @@ import AboutBrandDynamic from '../../components-library/about/about-brand-dynami
 import AboutBriefDynamic from '../../components-library/about/about-brief-dynamic';
 import AboutCrewDynamic from '../../components-library/about/about-crew-dynamic';
 
+// Banner components
+import { BannerHeroDynamic } from '../../components-library/banner/banner-hero-dynamic';
+import { BannerHeaderDynamic } from '../../components-library/banner/banner-header-dynamic';
+import { BannerPromoDynamic } from '../../components-library/banner/banner-promo-dynamic';
+import { BannerSliderDynamic } from '../../components-library/banner/banner-slider-dynamic';
+
 // Benefits components
 import BenefitsAdvantageDynamic from '../../components-library/benefits/benefits-advantage-dynamic';
 
@@ -105,6 +111,12 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'about-brand-dynamic': AboutBrandDynamic,
   'about-brief-dynamic': AboutBriefDynamic,
   'about-crew-dynamic': AboutCrewDynamic,
+
+  // Banner components
+  'banner-hero-dynamic': BannerHeroDynamic,
+  'banner-header-dynamic': BannerHeaderDynamic,
+  'banner-promo-dynamic': BannerPromoDynamic,
+  'banner-slider-dynamic': BannerSliderDynamic,
 
   // Benefits components
   'benefits-advantage-dynamic': BenefitsAdvantageDynamic,

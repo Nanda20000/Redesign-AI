@@ -168,6 +168,215 @@ export interface ComponentPropSchema {
  */
 export const COMPONENT_PROP_SCHEMAS: Record<string, ComponentPropSchema> = {
 
+  // ── BANNER ────────────────────────────────────────────────────────
+  'banner-hero-dynamic': {
+    componentName: 'banner-hero-dynamic',
+    section: 'banner',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main user name or large heading string to display in the center of the banner.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        description: 'The job title, role, or professional status text to display below the main title.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'description',
+        type: 'string',
+        description: 'A brief tagline or summary describing talent, growth, or professional goals.',
+        maxWords: 30,
+        required: false,
+      },
+      {
+        name: 'backgroundColor',
+        type: 'string',
+        description: 'Tailwind background utility class for the main banner color, e.g. bg-[#212841] or bg-slate-900.',
+        required: false,
+      },
+      {
+        name: 'textColor',
+        type: 'string',
+        description: 'Tailwind text color utility class, e.g. text-white or text-slate-100.',
+        required: false,
+      },
+      {
+        name: 'topBarColor',
+        type: 'string',
+        description: 'Hex or solid color code for the thin top accent stripe, e.g. #4f46e5.',
+        required: false,
+      },
+      {
+        name: 'dotsColor',
+        type: 'string',
+        description: 'Hex or solid color code for the custom dynamic halftone background pattern dots.',
+        required: false,
+      },
+      {
+        name: 'dotMultiplier',
+        type: 'string',
+        description: 'A numerical factor in string format to multiply the radius of halftone pattern dots (defaults to 1.0).',
+        required: false,
+      }
+    ],
+  },
+
+  'banner-header-dynamic': {
+    componentName: 'banner-header-dynamic',
+    section: 'banner',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The main display name or title (Roboto Medium). e.g., "YOUR NAME" or "ACME CORP". Uses letter tracking and is automatically uppercase.',
+        maxWords: 15,
+        required: false,
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        description: 'Role, specialty, or professional subtitle (Roboto Light). e.g., "HR MANAGER" or "LEAD CLOUD ENGINEER".',
+        maxWords: 20,
+        required: false,
+      },
+      {
+        name: 'badgeText',
+        type: 'string',
+        description: 'The label for the bottom interactive rectangle badge (Roboto Light). e.g., "www.reallygreatsite.com" or "portfolio.dev".',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'badgeUrl',
+        type: 'string',
+        description: 'Alternative link when clicking the badge. Can point to pages, email mailto protocols, or website links.',
+        required: false,
+      },
+      {
+        name: 'backgroundImageUrl',
+        type: 'string',
+        description: 'Background graphic URL. If omitted, a dynamic 3D virtual studio backdrop is generated with clean CSS corridor lines.',
+        required: false,
+      },
+      {
+        name: 'leftAccentColor',
+        type: 'string',
+        description: 'Optional color string or CSS definition representing the left decorative vertical brand strip (e.g., "#4f46e5" or "rgba(224, 242, 254, 0.4)").',
+        required: false,
+      }
+    ],
+  },
+
+  'banner-promo-dynamic': {
+    componentName: 'banner-promo-dynamic',
+    section: 'banner',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The primary display name (e.g., "YOUR NAME"). Supports \\n for custom line wraps.',
+        maxWords: 10,
+        required: true,
+      },
+      {
+        name: 'role',
+        type: 'string',
+        description: 'Associated designation or department label on the right side of the split-frame card.',
+        maxWords: 8,
+        required: true,
+      },
+      {
+        name: 'bgImage',
+        type: 'string',
+        description: 'Optional card background pattern or corporate photography URL.',
+        required: false,
+      },
+      {
+        name: 'bgColorClass',
+        type: 'string',
+        description: 'Alternative tailwind gradient class applied to background canvas in lieu of an image.',
+        required: false,
+      },
+      {
+        name: 'topStripColor',
+        type: 'string',
+        description: 'Tailwind class defining the top edge horizontal brand strip (e.g. bg-[#1a1c7b]).',
+        required: false,
+      },
+      {
+        name: 'bottomStripColor',
+        type: 'string',
+        description: 'Tailwind class defining the bottom edge horizontal brand strip (e.g. bg-[#1a1c7b]).',
+        required: false,
+      },
+      {
+        name: 'frameBorderColor',
+        type: 'string',
+        description: 'Tailwind border specification for the outer outline frame.',
+        required: false,
+      },
+      {
+        name: 'dividerColor',
+        type: 'string',
+        description: 'Tailwind background class for styling the segment boundary line.',
+        required: false,
+      },
+      {
+        name: 'textColor',
+        type: 'string',
+        description: 'Flexible font color selector targeting titles, roles, and action labels.',
+        required: false,
+      },
+      {
+        name: 'ctaText',
+        type: 'string',
+        description: 'The narrative label describing the optional action button on the left panel.',
+        maxWords: 4,
+        required: false,
+      }
+    ],
+  },
+
+  'banner-slider-dynamic': {
+    componentName: 'banner-slider-dynamic',
+    section: 'banner',
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        description: 'The heading or main banner text displayed in the center of the section.',
+        maxWords: 15,
+        required: false,
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        description: 'The description, organizational role, or text context printed below the title.',
+        maxWords: 10,
+        required: false,
+      },
+      {
+        name: 'linkText',
+        type: 'string',
+        description: 'The clickable call-to-action text label or website domain.',
+        maxWords: 5,
+        required: false,
+      },
+      {
+        name: 'linkUrl',
+        type: 'string',
+        description: 'The redirect address or URL route target for the anchor link.',
+        required: false,
+      }
+    ],
+  },
+
   // ── HERO ──────────────────────────────────────────────────────────
   'hero-action-dynamic': {
     componentName: 'hero-action-dynamic',

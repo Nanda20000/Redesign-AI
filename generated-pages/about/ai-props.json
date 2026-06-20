@@ -1,0 +1,124 @@
+{
+  "nav-menu-dynamic": {
+    "topLinks": [
+      {
+        "label": "Blog",
+        "href": "/preview/blog"
+      },
+      {
+        "label": "Gallery",
+        "href": "/preview/gallery"
+      }
+    ],
+    "brandName": "LCC Campus",
+    "brandHref": "/preview/index",
+    "mainLinks": [
+      {
+        "label": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "label": "About",
+        "href": "/preview/about"
+      },
+      {
+        "label": "Courses",
+        "href": "/preview/courses"
+      },
+      {
+        "label": "Services",
+        "href": "/preview/services"
+      },
+      {
+        "label": "Contact",
+        "href": "/preview/contact"
+      }
+    ]
+  },
+  "banner-header-dynamic": {
+    "title": "ABOUT US",
+    "subtitle": "LCC CAMPUS",
+    "badgeText": "PSC Approved Institution",
+    "badgeUrl": "/preview/about",
+    "backgroundImageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944238-1.jpg",
+    "leftAccentColor": "#4f46e5"
+  },
+  "hero-anchor-dynamic": {
+    "label": "Welcome to LCC Campus",
+    "title": "Shaping Confident, Skilled, Career-Ready Individuals",
+    "description": "LCC Campus is a leading educational institution offering job-oriented courses and PSC-approved training programs affiliated with Kerala State Rutronix.",
+    "primaryCtaText": "Explore Courses",
+    "primaryCtaUrl": "/preview/courses",
+    "secondaryCtaText": "About Us",
+    "secondaryCtaUrl": "/preview/about",
+    "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944238-1.jpg"
+  },
+  "about-brief-dynamic": {
+    "title": "About LCC Campus",
+    "description1": "LCC Campus is a premier educational institution dedicated to shaping confident, skilled, and career-ready individuals through job-oriented training programs.",
+    "description2": "As a PSC Approved Institution affiliated with Kerala State Rutronix, we offer industry-relevant courses in fashion designing, computer applications, pre-primary TTC, accounting, hospital administration, and beautician studies.",
+    "ctaText": "Explore More",
+    "image": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_qgqkfcqgqkfcqgq.jpeg"
+  },
+  "feature-list-dynamic": {
+    "label": "Why Choose Us",
+    "title": "Empowering Careers with Industry-Ready Training",
+    "description": "LCC Campus offers job-oriented courses and government-affiliated programs to build confident, skilled professionals.",
+    "ctaText": "Explore Courses",
+    "features": [
+      {
+        "icon": "graduation-cap",
+        "title": "Job-Oriented Courses",
+        "description": "Fashion designing, computer, TTC, accounting, hospital administration, and beautician programs tailored to industry needs."
+      },
+      {
+        "icon": "badge-check",
+        "title": "PSC Approved Institution",
+        "description": "Affiliated with Kerala State Rutronix, ensuring government-backed, high-quality skill development training."
+      },
+      {
+        "icon": "users",
+        "title": "Expert Faculty",
+        "description": "Learn from experienced instructors dedicated to nurturing talent and career readiness."
+      },
+      {
+        "icon": "chart-line",
+        "title": "Proven Track Record",
+        "description": "Over 12 years of excellence, 22+ programs, and 10,000+ successful students."
+      }
+    ],
+    "backgroundImage": null
+  },
+  "footer-prism-dynamic": {
+    "logoImgSrc": null,
+    "logoImgAlt": null,
+    "logoText": "LCC Campus",
+    "logoSubtext": "Edakkara, Nilambur, Pothukal, Karulai-Kerala",
+    "links": [
+      {
+        "label": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "label": "About",
+        "href": "/preview/about"
+      },
+      {
+        "label": "Courses",
+        "href": "/preview/courses"
+      },
+      {
+        "label": "Services",
+        "href": "/preview/services"
+      },
+      {
+        "label": "Contact",
+        "href": "/preview/contact"
+      }
+    ],
+    "socials": null,
+    "copyrightText": "Copyright © 2026",
+    "copyrightBrandText": "lcccampus.com",
+    "copyrightBrandHref": "/preview/index"
+  }
+}

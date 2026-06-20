@@ -1,0 +1,128 @@
+{
+  "nav-panel-dynamic": {
+    "logoText": "LCC Campus",
+    "navItems": [
+      {
+        "label": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "label": "About",
+        "href": "/preview/about"
+      },
+      {
+        "label": "Courses",
+        "href": "/preview/courses"
+      },
+      {
+        "label": "Services",
+        "href": "/preview/services"
+      },
+      {
+        "label": "Contact",
+        "href": "/preview/contact"
+      }
+    ],
+    "signInText": null,
+    "signInUrl": null,
+    "signUpText": "Take Action",
+    "signUpUrl": "/preview/contact"
+  },
+  "banner-promo-dynamic": {
+    "title": "Get In Touch With Us!",
+    "role": "LCC Campus – Edakkara, Kerala",
+    "bgImage": "https://lcccampus.com/wp-content/uploads/2025/11/businessman-touching-email-service-1-2048x1365.jpg",
+    "bgColorClass": null,
+    "topStripColor": "bg-[#1a1c7b]",
+    "bottomStripColor": "bg-[#1a1c7b]",
+    "frameBorderColor": "border-[#1a1c7b]",
+    "dividerColor": "bg-[#1a1c7b]",
+    "textColor": "text-white",
+    "ctaText": "Start Your Career Journey"
+  },
+  "hero-apex-dynamic": {
+    "heading": "Start Your Career Journey Today",
+    "subheading": "Expert-led courses in Accounting & Finance, Multimedia & Animation, PGDCA, DCA, DTP, and MS Office.",
+    "ctaText": "Get In Touch",
+    "backgroundImage": "https://lcccampus.com/wp-content/uploads/2025/11/143341-scaled.jpg",
+    "ratingValue": null,
+    "testimonialQuote": null,
+    "testimonialAuthor": null,
+    "featureTitle": "Expert-Led Courses",
+    "featureDescription": "Guidance for admissions, course details, and learning support.",
+    "stat1Value": null,
+    "stat1Label": null,
+    "stat2Value": null,
+    "stat2Label": null,
+    "sinceLabel": null,
+    "sinceValue": null
+  },
+  "feature-facet-dynamic": {
+    "heading": "Expert-Led Courses for Your Career Journey",
+    "imageSrc": "https://lcccampus.com/wp-content/uploads/2025/11/businessman-touching-email-service-1-2048x1365.jpg",
+    "imageAlt": "Businessman Touching Email Service",
+    "ctaText": "Get In Touch",
+    "items": [
+      {
+        "title": "Accounting & Finance",
+        "description": "Build a strong foundation with expert-led courses in accounting and finance."
+      },
+      {
+        "title": "Multimedia & Animation",
+        "description": "Develop creative skills in digital design and media through hands-on training."
+      },
+      {
+        "title": "PGDCA, DCA, DTP & MS Office",
+        "description": "Gain professional computer skills with courses in application and office productivity."
+      }
+    ]
+  },
+  "testi-quote-dynamic": {
+    "quoteText": "The expert-led courses at LCC Campus gave me the practical skills and confidence to advance my career in accounting. The support from the team was exceptional throughout my learning journey.",
+    "authorName": "Rahul K.",
+    "authorRole": "Accounting & Finance Graduate",
+    "authorAvatarUrl": null,
+    "testimonialImageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/143341-scaled.jpg"
+  },
+  "contact-help-dynamic": {
+    "badgeText": "Get In Touch",
+    "heading": "We're Here to Help You Begin",
+    "descriptionText": "Reach out for admissions, course details, and learning support. Start your career journey with LCC Campus today.",
+    "phoneText": "04931278212",
+    "addressText": "LCC Campus, Edakkara, Kerala 679331, India",
+    "emailText": "johnsonlccedk@gmail.com",
+    "formNameLabel": "Your Name",
+    "formNamePlaceholder": "Enter your full name",
+    "formPhoneLabel": "Phone Number",
+    "formPhonePlaceholder": "Enter your phone number",
+    "formServicesLabel": "Course Interest",
+    "formServicesPlaceholder": "Select a course",
+    "formServicesOptions": [
+      "Accounting & Finance",
+      "Multimedia & Animation",
+      "PGDCA",
+      "DCA",
+      "DTP",
+      "MS Office"
+    ],
+    "submitText": "Send Message"
+  },
+  "footer-simple": {
+    "title": "Get In Touch With Us!",
+    "description": "Reach out to LCC Campus for admissions, course details, and learning support. Start your career journey today.",
+    "items": [
+      {
+        "title": "Phone",
+        "description": "04931278212"
+      },
+      {
+        "title": "Email",
+        "description": "johnsonlccedk@gmail.com"
+      },
+      {
+        "title": "Address",
+        "description": "LCC campus, Edakkara, Kerala 679331, India"
+      }
+    ]
+  }
+}

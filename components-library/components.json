@@ -401,10 +401,35 @@
       "category": "pricing",
       "file": "pricing/pricing-static-dynamic.tsx",
       "description": "Premium three-tier pricing grid supporting toggleable billing cycles and highlighted business emphasis card."
+    },
+    {
+      "name": "banner-hero-dynamic",
+      "category": "banner",
+      "file": "banner/banner-hero-dynamic.tsx",
+      "description": "A dynamic profile and hero banner component with a scalable halftone spiral dot grid and custom Roboto font weights."
+    },
+    {
+      "name": "banner-promo-dynamic",
+      "category": "banner",
+      "file": "banner/banner-promo-dynamic.tsx",
+      "description": "Premium industrial promo banner featuring horizontal guard strips, metallic seams, and a dual-column bordered nameplate card."
+    },
+    {
+      "name": "banner-header-dynamic",
+      "category": "banner",
+      "file": "banner/banner-header-dynamic.tsx",
+      "description": "Minimalist ultra-premium dark banner with single-point lighting, supporting name display, credentials, left vertical color highlight, and an interactive action URL badge."
+    },
+    {
+      "name": "banner-slider-dynamic",
+      "category": "banner",
+      "file": "banner/banner-slider-dynamic.tsx",
+      "description": "A static corporate workforce optimization and development banner section with sleek circular dotted background ornaments."
     }
   ],
   "categories": [
     "about",
+    "banner",
     "benefits",
     "blog",
     "company-story",

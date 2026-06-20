@@ -1,0 +1,40 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "nav-bar-dynamic"
+    },
+    {
+      "section": "banner",
+      "component": "banner-promo-dynamic"
+    },
+    {
+      "section": "hero",
+      "component": "hero-aspect-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "feature-list-dynamic"
+    },
+    {
+      "section": "gallery",
+      "component": "gallery-album-dynamic"
+    },
+    {
+      "section": "blog",
+      "component": "blog-journal-dynamic"
+    },
+    {
+      "section": "about",
+      "component": "about-brief-dynamic"
+    },
+    {
+      "section": "contact",
+      "component": "contact-mail-dynamic"
+    },
+    {
+      "section": "footer",
+      "component": "footer-halo-dynamic"
+    }
+  ]
+}

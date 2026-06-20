@@ -1,0 +1,28 @@
+{
+  "layout": [
+    {
+      "section": "navbar",
+      "component": "nav-menu-dynamic"
+    },
+    {
+      "section": "banner",
+      "component": "banner-header-dynamic"
+    },
+    {
+      "section": "hero",
+      "component": "hero-anchor-dynamic"
+    },
+    {
+      "section": "about",
+      "component": "about-brief-dynamic"
+    },
+    {
+      "section": "features",
+      "component": "feature-list-dynamic"
+    },
+    {
+      "section": "footer",
+      "component": "footer-prism-dynamic"
+    }
+  ]
+}

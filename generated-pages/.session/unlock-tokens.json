@@ -1,7 +1,11 @@
 {
   "unlockedSlugs": [
-    "index"
+    "index",
+    "services",
+    "about",
+    "courses",
+    "contact"
   ],
-  "createdAt": 1780742769545,
-  "expiresAt": 1781347569545
+  "createdAt": 1781783978388,
+  "expiresAt": 1782388778388
 }

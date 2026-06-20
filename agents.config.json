@@ -1,0 +1,15 @@
+{
+  "nanocoder": {
+    "providers": [
+      {
+        "name": "Google Gemini",
+        "models": [
+          "gemma-4-31b-it"
+        ],
+        "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+        "apiKey": "AQ.Ab8RN6IjnRDMIl84oQsp3NI_gn8EEH1OzlQLiwHBK3AgcfzU5A",
+        "sdkProvider": "google"
+      }
+    ]
+  }
+}

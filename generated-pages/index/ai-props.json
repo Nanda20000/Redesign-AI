@@ -1,229 +1,240 @@
 {
-  "nav-link-dynamic": {
-    "logoText": "TopTuition",
-    "topLink1Text": null,
-    "topLink1Url": null,
-    "topLink2Text": null,
-    "topLink2Url": null,
-    "topLink3Text": null,
-    "topLink3Url": null,
-    "mainLink1Text": "Home",
-    "mainLink1Url": "/preview/index",
-    "mainLink2Text": "Downloads",
-    "mainLink2Url": "#downloads",
-    "mainLink3Text": "Online",
-    "mainLink3Url": "#online",
-    "mainLink4Text": "Contact",
-    "mainLink4Url": "#contact"
+  "nav-header-dynamic": {
+    "brandName": "LCC Campus",
+    "brandLink": "/preview/index",
+    "navLinks": [
+      {
+        "text": "Home",
+        "href": "/preview/index"
+      },
+      {
+        "text": "About",
+        "href": "/preview/about"
+      },
+      {
+        "text": "Courses",
+        "href": "/preview/courses"
+      },
+      {
+        "text": "Services",
+        "href": "/preview/services"
+      },
+      {
+        "text": "Contact",
+        "href": "/preview/contact"
+      }
+    ],
+    "searchPlaceholder": "Search..."
   },
   "hero-anchor-dynamic": {
-    "label": "TopTuition",
-    "title": "The Best SSLC Tuition in Nurani, Palakkad",
-    "description": "Score higher marks with expert guidance. Small batch offline classes with personal attention, daily tests, and free video support for Kerala syllabus students.",
-    "primaryCtaText": "Join Offline Classes",
-    "primaryCtaUrl": "/preview/index",
-    "secondaryCtaText": "Watch Free Classes",
-    "secondaryCtaUrl": "/preview/index",
-    "image": "https://toptuition.in/wp-content/uploads/2026/04/home_img.jpg"
+    "label": "Excellence in Every Step",
+    "title": "LCC Campus – Empowering Futures",
+    "description": "At LCC Campus, we empower every learner to reach their fullest potential through innovation, integrity, and purpose-driven education.",
+    "primaryCtaText": "Learn More",
+    "primaryCtaUrl": "/preview/about",
+    "secondaryCtaText": "Our Courses",
+    "secondaryCtaUrl": "/preview/courses",
+    "image": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg"
+  },
+  "about-brief-dynamic": {
+    "title": "About LCC Campus",
+    "description1": "LCC Campus is a premier educational institution in Kerala, offering skill development courses in fashion designing, computer studies, pre-primary TTC, and more.",
+    "description2": "With branches in Edakkara, Nilambur, Pothukal, and Karulai, we are dedicated to empowering learners through quality education and hands-on training.",
+    "ctaText": "Learn More",
+    "image": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg"
   },
   "gallery-album-dynamic": {
-    "title": "Gallery: Our Tuition Centre",
+    "title": "Campus Life & Learning Moments",
     "images": [
       {
-        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud1.jpg",
-        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg",
+        "alt": "Students collaborating in a modern classroom setting"
       },
       {
-        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud2.jpg",
-        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_s8c5qys8c5qys8c.jpeg",
+        "alt": "Creative fashion design studio session"
       },
       {
-        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud3.jpg",
-        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
+        "alt": "Hospital administration training in progress"
       },
       {
-        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud4.jpg",
-        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-8527897-1-1024x683.jpg",
+        "alt": "Students engaged in computer lab practice"
       },
       {
-        "url": "https://toptuition.in/wp-content/uploads/2025/10/stud5.jpg",
-        "alt": "TopTuition | The best SSLC Tuition in Palakkad"
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg",
+        "alt": "Pre-primary teacher training classroom activity"
       },
       {
-        "url": "https://toptuition.in/wp-content/uploads/2025/11/3d_pi_proc.png",
-        "alt": "3d pi proc"
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg",
+        "alt": "Career guidance and counselling session"
       },
       {
-        "url": "https://toptuition.in/wp-content/uploads/2026/04/home_img.jpg",
-        "alt": "home_img"
+        "url": "https://lcccampus.com/wp-content/uploads/2025/11/int1-768x1024.jpeg",
+        "alt": "LCC Campus interior showcasing learning environment"
       }
     ]
   },
   "blog-journal-dynamic": {
-    "subtitle": "Latest Updates & Insights",
-    "title": "Explore Our Blog for Expert SSLC Guidance",
+    "subtitle": "Latest Insights & Updates",
+    "title": "Explore Our Journal for Expert Perspectives and Campus Stories",
     "items": [
       {
-        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud1.jpg",
-        "date": null,
-        "category": null,
-        "title": null,
-        "description": null
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg",
+        "date": "2025-11-15",
+        "category": "Campus Life",
+        "title": "Empowering Learners Through Innovation",
+        "description": "Discover how LCC Campus fosters a culture of creativity and growth, preparing students for real-world challenges with hands-on learning and expert mentorship."
       },
       {
-        "image": null,
-        "date": "March 15, 2025",
-        "category": "Study Tips",
-        "title": "How to Score Full Marks in SSLC Maths",
-        "description": "Discover proven strategies, simple Malayalam explanations, and daily practice routines that help students master difficult problems and achieve top scores in the Kerala SSLC board exams."
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-6954850-1024x683-1.jpg",
+        "date": "2025-11-10",
+        "category": "Courses",
+        "title": "Why Computer Skills Matter in Today’s World",
+        "description": "From software development to data management, our computer courses equip students with essential digital skills for thriving careers in technology-driven industries."
       },
       {
-        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud2.jpg",
-        "date": null,
-        "category": null,
-        "title": null,
-        "description": null
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg",
+        "category": "Fashion & Design",
+        "title": "From Sketch to Runway: Inside Our Fashion Design Program",
+        "description": "Explore how our fashion designing course blends creativity with technical expertise, guiding students through garment construction, branding, and market trends."
       },
       {
-        "image": null,
-        "date": "February 28, 2025",
-        "category": "Exam Preparation",
-        "title": "Why Regular Tests Boost Your SSLC Performance",
-        "description": "Regular testing helps identify weak areas, builds exam confidence, and ensures thorough syllabus coverage. Learn how our daily test system transforms student results."
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-karola-g-8527897-1-1024x683.jpg",
+        "date": "2025-11-05",
+        "category": "Healthcare",
+        "title": "Building Leaders in Hospital Administration",
+        "description": "Our hospital administration course prepares students to manage healthcare facilities effectively, covering budgeting, compliance, and patient service excellence."
       },
       {
-        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud3.jpg",
-        "date": null,
-        "category": null,
-        "title": null,
-        "description": null
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/business-colleagues-banner-concept-with-copy-space-1-1024x683.jpg",
+        "date": "2025-10-28",
+        "category": "Early Education",
+        "title": "Shaping Young Minds: Pre-Primary TTC Success Stories",
+        "description": "Learn how our Pre-Primary TTC certification empowers educators to inspire children aged 2–6 with proven teaching methodologies and nurturing environments."
       },
       {
-        "image": null,
-        "date": "February 10, 2025",
-        "category": "Student Success",
-        "title": "Personal Attention: The Key to SSLC Success in Nurani",
-        "description": "Small batch sizes allow every student to receive individual doubt-clearing sessions and progress tracking. Read how this approach has helped local students improve dramatically."
+        "image": "https://lcccampus.com/wp-content/uploads/2025/11/Gemini_Generated_Image_s8c5qys8c5qys8c.jpeg",
+        "date": "2025-10-20",
+        "category": "Community",
+        "title": "LCC Campus Expands Reach Across Kerala",
+        "description": "With branches in Edakkara, Nilambur, Pothukal, and Karulai, we are making quality skill development education accessible to more students than ever."
       }
     ]
   },
   "benefits-advantage-dynamic": {
     "badgeText": "Why Choose Us",
-    "title": "The TopTuition Advantage for SSLC Success",
-    "description": "Proven methods, personal attention, and free resources to help you score higher marks in Kerala syllabus exams.",
+    "title": "Empowering Your Future with Skill-Based Learning",
+    "description": "We combine expert guidance, hands-on training, and career-focused programs to help you succeed.",
     "items": [
       {
-        "title": "Simple Explanations in Malayalam",
-        "description": "Complex concepts made easy with clear, exam-oriented teaching in your native language, ensuring every student understands thoroughly."
+        "title": "Industry-Relevant Curriculum",
+        "description": "Our courses in computer skills, fashion designing, hospital administration, and pre-primary TTC are designed to meet current market demands and equip you with practical knowledge."
       },
       {
-        "title": "Regular Tests & Performance Tracking",
-        "description": "Daily tests and progress monitoring help identify weak areas early, so we can focus on improvement before the final exams."
+        "title": "Expert Faculty & Mentorship",
+        "description": "Learn from experienced instructors who provide personalised attention, ensuring you master both theoretical concepts and real-world applications."
       },
       {
-        "title": "Personal Attention in Small Batches",
-        "description": "Limited batch sizes guarantee that every student gets individual doubt-clearing sessions and tailored guidance from experienced teachers."
+        "title": "Flexible Learning Options",
+        "description": "We offer accessible skill development programs across multiple branches in Kerala, making quality education convenient for students from Edakkara, Nilambur, Pothukal, and Karulai."
       },
       {
-        "title": "Free Online Video Support",
-        "description": "Access chapterwise PDF notes, YouTube classes, and exam-focused documentaries anytime, anywhere — completely free for all enrolled students."
+        "title": "Career Guidance & Support",
+        "description": "From course selection to job readiness, our dedicated team helps you build a clear path toward your professional goals."
       }
     ],
     "images": [
-      "https://toptuition.in/wp-content/uploads/2025/10/stud1.jpg",
-      "https://toptuition.in/wp-content/uploads/2025/10/stud2.jpg"
+      "https://lcccampus.com/wp-content/uploads/2025/11/int1-768x1024.jpeg",
+      "https://lcccampus.com/wp-content/uploads/2025/11/pexels-rdne-7092350-scaled-1-1024x683.jpg"
     ],
     "experienceValue": "10+",
     "experienceLabel": "Years"
   },
   "mission-brand-dynamic": {
-    "title": "WHY TOPTUITION WORKS ?",
-    "imageUrl": "https://toptuition.in/wp-content/uploads/2026/04/home_img.jpg",
-    "imageAlt": "Students studying in a classroom at TopTuition in Palakkad",
+    "title": "Our Mission & Vision",
+    "imageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/annie-spratt-QckxruozjRg-unsplash-1-1024x683.jpg",
+    "imageAlt": "Students collaborating in a modern learning environment",
     "items": [
       {
-        "title": "Simple Explanations",
-        "description": "Concepts are taught in clear, easy-to-understand Malayalam, making even complex topics accessible for every student.",
-        "icon": "book-open"
+        "title": "Our Mission",
+        "description": "To empower every learner with accessible, high-quality skill development programs that foster innovation, integrity, and lifelong growth.",
+        "icon": "Rocket"
       },
       {
-        "title": "Focus on Marks",
-        "description": "Exam-oriented teaching with thorough syllabus coverage, revision sessions, and targeted practice to boost scores.",
-        "icon": "target"
+        "title": "Our Vision",
+        "description": "To be a leading educational institution in Kerala, shaping futures through excellence in computer courses, fashion designing, hospital administration, pre-primary TTC, and beautician training.",
+        "icon": "Eye"
       },
       {
-        "title": "Regular Tests",
-        "description": "Frequent assessments and performance tracking ensure consistent progress and identify areas needing improvement.",
-        "icon": "clipboard-check"
-      },
-      {
-        "title": "Personal Attention",
-        "description": "Small batch sizes allow individual guidance, direct doubt clearing, and tailored support for each student's learning pace.",
-        "icon": "user-check"
+        "title": "Our Values",
+        "description": "We believe in knowledge, integrity, and purpose — creating an environment where students thrive and communities benefit from skilled, confident professionals.",
+        "icon": "Heart"
       }
     ]
   },
-  "testi-honor-dynamic": {
-    "items": [
+  "testi-critique-dynamic": {
+    "badgeText": "Testimonials",
+    "headingText": "What Our Students Say About Us",
+    "testimonials": [
       {
-        "quote": "The personal attention and daily tests at TopTuition helped me improve my marks significantly. The teachers explain concepts in Malayalam, making it so easy to understand.",
-        "name": "Ananya S.",
-        "role": "SSLC Student",
-        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud1.jpg"
+        "id": 1,
+        "quote": "LCC Campus gave me the skills and confidence to start my career in fashion design. Truly life-changing!",
+        "authorName": "Sarah K.",
+        "authorHandle": "@sarahk",
+        "authorAvatar": "https://lcccampus.com/wp-content/uploads/2025/11/int1-768x1024.jpeg"
       },
       {
-        "quote": "I love the free online videos and chapterwise PDF notes. I can revise anytime at home. The exam-focused questions are exactly what we need.",
-        "name": "Rahul K.",
-        "role": "SSLC Student",
-        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud2.jpg"
+        "id": 2,
+        "quote": "The computer courses here are practical and industry-focused. I landed a job right after completing my training.",
+        "authorName": "Rahul M.",
+        "authorHandle": "@rahulm",
+        "authorAvatar": "https://lcccampus.com/wp-content/uploads/2025/11/int2-2-768x1024.jpeg"
       },
       {
-        "quote": "Small batch size means I get individual attention. Doubt clearing sessions are very effective. My grades have improved a lot since joining.",
-        "name": "Priya M.",
-        "role": "SSLC Student",
-        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud3.jpg"
+        "id": 3,
+        "quote": "Hospital administration course prepared me for real-world challenges. The faculty is incredibly supportive.",
+        "authorName": "Anita P.",
+        "authorHandle": "@anitap",
+        "authorAvatar": "https://lcccampus.com/wp-content/uploads/2025/11/int3-1-768x1024.jpeg"
       },
       {
-        "quote": "The regular tests and performance tracking keep me motivated. The teachers truly care about each student's progress. Highly recommend for Kerala syllabus students.",
-        "name": "Arjun P.",
-        "role": "SSLC Student",
-        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud4.jpg"
-      },
-      {
-        "quote": "TopTuition's combination of offline classes and free online resources is perfect. I can attend classes in Nurani and also watch videos at home for revision.",
-        "name": "Sneha T.",
-        "role": "SSLC Student",
-        "image": "https://toptuition.in/wp-content/uploads/2025/10/stud5.jpg"
+        "id": 4,
+        "quote": "I loved the pre-primary TTC course. It gave me the tools to become a confident and creative teacher.",
+        "authorName": "Priya S.",
+        "authorHandle": "@priyas",
+        "authorAvatar": "https://lcccampus.com/wp-content/uploads/2025/11/int4-2-768x1024.jpeg"
       }
     ]
   },
-  "cta-drive-dynamic": {
-    "heading": "Start Your SSLC Success Journey Today",
-    "description": "Join the best tuition in Nurani, Palakkad for expert guidance and higher marks.",
-    "cardText": "Small batch offline classes with personal attention, daily tests, and free video support for Kerala syllabus students. Learn with simple explanations in Malayalam and exam-focused teaching.",
-    "inputPlaceholder": "Enter your email address",
-    "buttonText": "Get Started",
-    "privacyTextPrefix": "We respect your privacy. Unsubscribe anytime.",
-    "privacyLinkText": "Privacy Policy",
-    "privacyLinkUrl": "/privacy-policy"
+  "cta-goal-dynamic": {
+    "badgeCategory": "Join Us",
+    "badgeText": "Start Your Journey Today",
+    "heading": "Take the Next Step Toward Your Future",
+    "description": "Empower your career with industry-relevant skills. LCC Campus offers expert-led courses in computer technology, fashion design, hospital administration, and early childhood education. Enroll now and build a future of purpose and success.",
+    "inputPlaceholder": "Your email address",
+    "buttonText": "Get Started"
   },
   "contact-reach-dynamic": {
-    "backgroundImageUrl": "https://toptuition.in/wp-content/uploads/2026/04/home_img.jpg",
-    "titleLine": "Get in Touch with TopTuition",
-    "brandName": "TopTuition",
-    "description": "Reach out to us for SSLC tuition in Nurani, Palakkad. We offer offline classes and free online resources.",
+    "backgroundImageUrl": "https://lcccampus.com/wp-content/uploads/2025/11/pexels-pavel-danilyuk-7944130-scaled.jpg",
+    "titleLine": "Get in Touch with Us",
+    "brandName": "LCC Campus",
+    "description": "We'd love to hear from you. Reach out for course inquiries, admissions, or any questions about our programs.",
     "formTitle": "Send Us a Message",
     "nameLabel": "Your Name",
     "namePlaceholder": "Enter your full name",
     "emailLabel": "Email Address",
-    "emailPlaceholder": "Enter your email",
-    "servicesLabel": "Service Interested In",
-    "servicesPlaceholder": "Select a service",
+    "emailPlaceholder": "Enter your email address",
+    "servicesLabel": "Select Service",
+    "servicesPlaceholder": "Choose a program",
     "servicesOptions": [
-      "Offline Classes",
-      "Free Online Resources",
-      "SSLC Tuition",
-      "Class 9 Tuition"
+      "Computer Courses",
+      "Fashion Designing Course",
+      "Hospital Administration Course",
+      "Pre-primary TTC Course",
+      "Beautician Course",
+      "Career Guidance"
     ],
     "messageLabel": "Your Message",
     "messagePlaceholder": "Write your message here",
@@ -232,44 +243,43 @@
   "faq-great-dynamic": {
     "badgeText": "FAQ",
     "badgeDotClass": "bg-pink-500",
-    "title": "Frequently Asked Questions About Our SSLC Tuition",
-    "titleHighlight": "SSLC Tuition",
-    "description": "Find answers to common questions about our offline and online learning programs designed for Kerala syllabus students in Nurani, Palakkad.",
+    "title": "Frequently Asked Questions",
+    "titleHighlight": "Frequently Asked Questions",
+    "description": "Find answers to common queries about our courses, admissions, and campus life at LCC Campus.",
     "faqItems": [
       {
-        "question": "What makes TopTuition different from other tuition centres?",
-        "answer": "We focus on simple explanations in Malayalam, exam-oriented teaching, regular tests, personal attention, and progress tracking to ensure every student improves and scores higher marks."
+        "question": "What courses does LCC Campus offer?",
+        "answer": "We offer skill development courses in Computer Applications, Fashion Designing, Hospital Administration, Pre-primary TTC, and Beautician programs, designed to equip students with practical, industry-relevant skills."
       },
       {
-        "question": "Do you offer both offline and online classes?",
-        "answer": "Yes. We provide small batch offline classes with personal attention, daily tests, and direct doubt clearing. We also offer free online resources including chapterwise PDF notes, YouTube video classes, and exam-focused questions."
+        "question": "Where are your campuses located?",
+        "answer": "LCC Campus has multiple branches across Kerala, including Edakkara, Nilambur, Pothukal, and Karulai, making quality education accessible to students throughout the region."
       },
       {
-        "question": "Where is your tuition centre located?",
-        "answer": "We are located opposite Nurani LP School, Nurani, Palakkad - 678004. You can also reach us at +91 800 606 6363 or nurani.it@gmail.com."
+        "question": "How can I apply for admission?",
+        "answer": "You can contact us via phone at 9744064081 or email johnsonlccedk@gmail.com. Our team will guide you through the application process, course details, and enrollment steps."
       },
       {
-        "question": "How do you track student progress?",
-        "answer": "We conduct regular tests, provide performance tracking, send daily updates to parents on attendance and schedule, and hold PTA meetings to ensure continuous improvement."
+        "question": "Are your courses certified?",
+        "answer": "Yes, all our programs provide professional certification upon successful completion, helping you build a strong foundation for your career in your chosen field."
+      },
+      {
+        "question": "Do you offer placement assistance?",
+        "answer": "We provide career guidance and support to help students transition into the workforce, including interview preparation and connections with industry partners."
       }
     ]
   },
-  "footer-simple": {
-    "title": "TopTuition – Best SSLC Tuition in Nurani, Palakkad",
-    "description": "Opp Nurani LP School, Nurani, Palakkad – 678004 | +91 800 606 6363 | nurani.it@gmail.com",
-    "items": [
-      {
-        "title": "Contact",
-        "description": "Phone: +91 800 606 6363 | Email: nurani.it@gmail.com"
-      },
-      {
-        "title": "Address",
-        "description": "Opp Nurani LP School, Nurani, Palakkad – 678004"
-      },
-      {
-        "title": "Follow Us",
-        "description": "YouTube | Instagram | Google"
-      }
-    ]
+  "footer-lume-dynamic": {
+    "logoText": "LCC Campus",
+    "brandDescription": "Empowering learners with quality skill development courses across Kerala.",
+    "col2Title": "Quick Links",
+    "col3Title": "Contact Info",
+    "col4Title": "Stay Connected",
+    "col4Description": "Subscribe for updates and course news.",
+    "newsletterPlaceholder": "Your email address",
+    "contactEmail": "johnsonlccedk@gmail.com",
+    "copyrightText": "Copyright © 2026 lcccampus.com",
+    "privacyText": "Privacy Policy",
+    "termsText": "Terms of Service"
   }
 }

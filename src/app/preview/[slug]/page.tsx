@@ -11,6 +11,7 @@ import {
   type ExtractedContent
 } from "@/../lib/content-injector";
 import { isComponentDynamic } from "@/../lib/component-content-map";
+import { resolveIconsInProps } from "@/lib/icon-resolver";
 
 export interface LayoutData {
   layout: LayoutItem[];
@@ -23,15 +24,19 @@ const FALLBACK_COMPONENTS: Record<string, string> = {
   hero: "hero-action-dynamic",
   footer: "footer-simple",
   about: "about-brief-dynamic",
-  blog: "blog-feed-dynamic",
-  "company-story": "story-archive-dynamic",
+  banner: "banner-hero-dynamic",
+  blog: "blog-journal-dynamic",
+  "company-story": "story-heritage-dynamic",
   contact: "contact-help-dynamic",
   cta: "cta-banner-dynamic",
   navbar: "nav-float-dynamic",
-  testimonials: "testi-client-dynamic",
+  pricing: "pricing-matrix-dynamic",
+  testimonials: "testi-honor-dynamic",
   gallery: "gallery-album-dynamic",
   feature: "feature-list-dynamic",
   benefits: "benefits-advantage-dynamic",
+  "faq-process": "faq-great-dynamic",
+  "mission-vision": "mission-new-dynamic",
 };
 
 /**
@@ -45,7 +50,7 @@ function getFallbackComponent(section: string): string {
   }
 
   // Default fallbacks in order of preference (only dynamic components)
-  const defaultFallbacks = ["hero-action-dynamic", "about-bio-dynamic", "blog-article-dynamic", "footer-simple"];
+  const defaultFallbacks = ["hero-action-dynamic", "about-brief-dynamic", "blog-article-dynamic", "footer-simple"];
   return defaultFallbacks[0];
 }
 
@@ -355,6 +360,9 @@ export default function PreviewPage({ params }: PreviewPageProps) {
 
         // Deep merge: AI props override base props
         const contentProps = mergeProps(baseProps, componentAiProps, componentName);
+
+        // Resolve string icon names to Lucide React components
+        resolveIconsInProps(contentProps);
 
         // Debug log before rendering each component
         console.log("[FINAL DEBUG]", {
