@@ -872,11 +872,15 @@ export async function generateLayoutWithAI(
       saveLayout(layout, pageSlug);
     }
 
-    // Step 9: Save the layout
+    // Step 9: Enforce consistent navbar/footer from homepage
+    console.log('[AI Layout Generator] Enforcing consistent navbar/footer...');
+    layout = enforceConsistentNavbarFooter(layout, pageSlug);
+
+    // Step 10: Save the layout
     console.log('[AI Layout Generator] Saving layout...');
     saveLayout(layout, pageSlug);
 
-    // Step 10: Log selected components (after enforcement)
+    // Step 11: Log selected components (after enforcement)
     console.log('[AI Layout Generator] === AI Component Selection Complete (After Image Enforcement) ===');
     console.log('[AI Layout Generator] Website Analysis:');
     console.log(`  - Business Type: ${analysis.businessType} (${Math.round(analysis.confidence * 100)}% confidence)`);
@@ -898,6 +902,54 @@ export async function generateLayoutWithAI(
   } catch (error) {
     console.error('[AI Layout Generator] Error generating layout:', error);
     throw error;
+  }
+}
+
+/**
+ * Enforce consistent navbar and footer across all pages.
+ * Reads the homepage layout and uses the same navbar/footer components everywhere.
+ */
+function enforceConsistentNavbarFooter(
+  layout: LayoutResponse,
+  pageSlug: string
+): LayoutResponse {
+  // Homepage keeps its own navbar/footer — no enforcement needed
+  if (pageSlug === 'index') {
+    return layout;
+  }
+
+  try {
+    const homepageLayoutPath = path.join(getPageDir('index'), 'layout.json');
+    if (!fs.existsSync(homepageLayoutPath)) {
+      console.log('[enforceConsistentNavbarFooter] Homepage layout not found — skipping enforcement');
+      return layout;
+    }
+
+    const homepageLayout: LayoutResponse = JSON.parse(fs.readFileSync(homepageLayoutPath, 'utf-8'));
+    const homepageNavbar = homepageLayout.layout.find(i => i.section === 'navbar');
+    const homepageFooter = homepageLayout.layout.find(i => i.section === 'footer');
+
+    if (!homepageNavbar && !homepageFooter) {
+      console.log('[enforceConsistentNavbarFooter] No navbar/footer in homepage layout — skipping');
+      return layout;
+    }
+
+    const enforcedLayout = layout.layout.map(item => {
+      if (item.section === 'navbar' && homepageNavbar && item.component !== homepageNavbar.component) {
+        console.log(`[enforceConsistentNavbarFooter] Navbar: ${item.component} → ${homepageNavbar.component}`);
+        return { ...item, component: homepageNavbar.component };
+      }
+      if (item.section === 'footer' && homepageFooter && item.component !== homepageFooter.component) {
+        console.log(`[enforceConsistentNavbarFooter] Footer: ${item.component} → ${homepageFooter.component}`);
+        return { ...item, component: homepageFooter.component };
+      }
+      return item;
+    });
+
+    return { layout: enforcedLayout };
+  } catch (error) {
+    console.warn('[enforceConsistentNavbarFooter] Failed to enforce — using original layout:', error);
+    return layout;
   }
 }
 
