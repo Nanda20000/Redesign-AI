@@ -21,6 +21,7 @@ export interface ComponentSelectionOptions {
   analysis: WebsiteAnalysis;
   sections: string[];
   content?: ExtractedContent;
+  usedComponents?: Record<string, string[]>;
 }
 
 export interface ComponentSelectionResult {
@@ -336,9 +337,14 @@ function selectBestComponent(
     candidates = availableComponents;
   }
 
-  // If images exist, prefer image-capable components but keep the full pool as a fallback
+  // Cross-page variety: prefer components not already used on other pages
+  const unusedCandidates = usedStyles.size > 0
+    ? candidates.filter(name => !usedStyles.has(name))
+    : candidates;
+
+  // If images exist, prefer image-capable components from the unused pool
   if (content?.images && content.images.length > 0) {
-    const imageCandidates = candidates.filter(name =>
+    const imageCandidates = (unusedCandidates.length > 0 ? unusedCandidates : candidates).filter(name =>
       componentSupportsImages(name, category)
     );
     if (imageCandidates.length > 0) {
@@ -347,26 +353,35 @@ function selectBestComponent(
       for (const name of imageCandidates) {
         weightedPool.push(name, name, name, name, name, name, name);
       }
-      for (const name of candidates) {
+      const fallbackPool = unusedCandidates.length > 0 ? unusedCandidates : candidates;
+      for (const name of fallbackPool) {
         if (!imageCandidates.includes(name)) {
           weightedPool.push(name, name, name);
         }
       }
       const selectedWeighted = weightedPool[Math.floor(Math.random() * weightedPool.length)];
+      const varietyNote = unusedCandidates.length > 0 && usedStyles.size > 0
+        ? ` (cross-page variety: avoided ${usedStyles.size} used components)`
+        : '';
       return {
         component: selectedWeighted,
         score: 100,
-        reason: `Randomly selected "${selectedWeighted}" from ${candidates.length} ${category} components (image-capable weighted 7:3 over non-image variants)`,
+        reason: `Randomly selected "${selectedWeighted}" from ${candidates.length} ${category} components (image-capable weighted 7:3)${varietyNote}`,
       };
     }
   }
 
-  const selected = candidates[Math.floor(Math.random() * candidates.length)];
+  // Prefer unused candidates for variety
+  const pool = unusedCandidates.length > 0 ? unusedCandidates : candidates;
+  const selected = pool[Math.floor(Math.random() * pool.length)];
+  const varietyNote = unusedCandidates.length > 0 && usedStyles.size > 0
+    ? ` (cross-page variety: avoided ${usedStyles.size} used components)`
+    : '';
 
   return {
     component: selected,
     score: 100,
-    reason: `Randomly selected "${selected}" from ${candidates.length} available ${category} components`,
+    reason: `Randomly selected "${selected}" from ${candidates.length} available ${category} components${varietyNote}`,
   };
 }
 
@@ -485,7 +500,7 @@ function enforceAICompatibleComponents(
 export function selectComponents(
   options: ComponentSelectionOptions & { pageSlug?: string }
 ): ComponentSelectionResult {
-  const { manifest, analysis, sections: detectedSections, content, pageSlug = 'index' } = options;
+  const { manifest, analysis, sections: detectedSections, content, usedComponents, pageSlug = 'index' } = options;
 
   const imageCount = content?.images?.length ?? 0;
   console.log('[Component Selector] Received content:', {
@@ -539,13 +554,14 @@ export function selectComponents(
       continue;
     }
 
-    // Select best component (with image awareness)
+    // Select best component (with image awareness and cross-page variety)
+    const usedForSection = new Set(usedComponents?.[category] || []);
     const selection = selectBestComponent(
       category,
       availableComponents,
       analysis,
       recommendations,
-      new Set<string>(),
+      usedForSection,
       content
     );
 

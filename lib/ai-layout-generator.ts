@@ -806,11 +806,17 @@ export async function generateLayoutWithAI(
       hasImages: imageCount > 0,
       imageCount: imageCount
     });
+
+    // Get components already used on other pages for cross-page variety
+    const usedComponents = getUsedComponentsFromDisk(pageSlug);
+    console.log('[AI Layout Generator] Cross-page used components:', usedComponents);
+
     const selectionResult = selectComponents({
       manifest,
       analysis,
       sections: pageStructure.sections,
       content: extractedContent,
+      usedComponents,
       pageSlug
     });
 
@@ -1109,6 +1115,57 @@ export function enforceConsistentBannerProps(
     console.warn('[enforceConsistentBannerProps] Failed to enforce — using original props:', error);
     return aiProps;
   }
+}
+
+/**
+ * Sections that are excluded from cross-page variety enforcement
+ * (they are enforced to be consistent across pages)
+ */
+const VARIETY_EXCLUDED_SECTIONS = new Set(['navbar', 'footer', 'banner']);
+
+/**
+ * Read existing layout files from disk and build a map of
+ * section → list of component names already used across pages.
+ * Used to enforce cross-page component variety.
+ */
+export function getUsedComponentsFromDisk(currentPageSlug?: string): Record<string, string[]> {
+  const used: Record<string, string[]> = {};
+
+  try {
+    if (!fs.existsSync(GENERATED_PAGES_DIR)) return used;
+
+    const pageDirs = fs.readdirSync(GENERATED_PAGES_DIR).filter(name => {
+      const fullPath = path.join(GENERATED_PAGES_DIR, name);
+      return fs.statSync(fullPath).isDirectory() && name !== 'index' && name !== '.session';
+    });
+
+    for (const dir of pageDirs) {
+      // Skip the current page being generated
+      if (currentPageSlug && dir === currentPageSlug) continue;
+
+      const layoutPath = path.join(GENERATED_PAGES_DIR, dir, 'layout.json');
+      if (!fs.existsSync(layoutPath)) continue;
+
+      try {
+        const layout: LayoutResponse = JSON.parse(fs.readFileSync(layoutPath, 'utf-8'));
+        for (const item of layout.layout) {
+          if (VARIETY_EXCLUDED_SECTIONS.has(item.section)) continue;
+          if (!used[item.section]) used[item.section] = [];
+          if (!used[item.section].includes(item.component)) {
+            used[item.section].push(item.component);
+          }
+        }
+      } catch {
+        // Skip pages with invalid layout files
+      }
+    }
+
+    console.log('[getUsedComponentsFromDisk] Used components:', used);
+  } catch (error) {
+    console.warn('[getUsedComponentsFromDisk] Failed to read layouts:', error);
+  }
+
+  return used;
 }
 
 /**
