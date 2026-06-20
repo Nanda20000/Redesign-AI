@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateLayoutWithAI, loadLayout, loadContent, saveContent, type PageStructure, type ExtractedContent } from '@/../lib/ai-layout-generator';
+import { generateLayoutWithAI, loadLayout, loadContent, saveContent, enforceConsistentBannerProps, type PageStructure, type ExtractedContent } from '@/../lib/ai-layout-generator';
 import { generatePropsForLayout, type ExtractedWebsiteContent } from '@/../lib/ai-prop-injector';
 import { capturePreviewScreenshot } from '@/../lib/screenshot-capture';
 import { unlockSlug } from '../../../../lib/session-manager';
@@ -148,10 +148,13 @@ export async function POST(request: NextRequest) {
           };
           const aiProps = await generatePropsForLayout(layout.layout, aiContent);
 
+          // Enforce consistent banner props across non-home pages
+          const enforcedProps = enforceConsistentBannerProps(aiProps, pageSlug);
+
           // Save AI props to file for the page renderer to use
           fs.writeFileSync(
             getAiPropsPath(pageSlug),
-            JSON.stringify(aiProps, null, 2),
+            JSON.stringify(enforcedProps, null, 2),
             'utf-8'
           );
           console.log('[generate-layout] AI props saved to:', getAiPropsPath(pageSlug));

@@ -1052,6 +1052,66 @@ function enforceConsistentBanner(
 }
 
 /**
+ * Enforce consistent banner props (including images) across all non-home pages.
+ * Reads the first non-home page's banner props and applies them to the current page.
+ */
+export function enforceConsistentBannerProps(
+  aiProps: Record<string, Record<string, any>>,
+  pageSlug: string
+): Record<string, Record<string, any>> {
+  // Homepage keeps its own banner props — skip
+  if (pageSlug === 'index') {
+    return aiProps;
+  }
+
+  try {
+    const pagesDir = GENERATED_PAGES_DIR;
+    if (!fs.existsSync(pagesDir)) {
+      return aiProps;
+    }
+
+    const pageDirs = fs.readdirSync(pagesDir).filter(name => {
+      const fullPath = path.join(pagesDir, name);
+      return fs.statSync(fullPath).isDirectory() && name !== 'index' && name !== '.session';
+    });
+
+    // Find the first non-home page that has banner props
+    for (const dir of pageDirs) {
+      const propsPath = path.join(pagesDir, dir, 'ai-props.json');
+      if (!fs.existsSync(propsPath)) continue;
+
+      try {
+        const existingProps = JSON.parse(fs.readFileSync(propsPath, 'utf-8'));
+        // Find any banner component key in the props
+        const bannerKey = Object.keys(existingProps).find(k => k.startsWith('banner-'));
+        if (bannerKey && existingProps[bannerKey]) {
+          const sharedBannerProps = existingProps[bannerKey];
+          console.log(`[enforceConsistentBannerProps] Found shared banner props from "${dir}" (${bannerKey})`);
+
+          // Apply shared banner props to current page
+          const currentBannerKey = Object.keys(aiProps).find(k => k.startsWith('banner-'));
+          if (currentBannerKey && aiProps[currentBannerKey]) {
+            aiProps[currentBannerKey] = {
+              ...aiProps[currentBannerKey],
+              ...sharedBannerProps,
+            };
+            console.log(`[enforceConsistentBannerProps] Applied shared banner props to ${currentBannerKey}`);
+          }
+          break;
+        }
+      } catch {
+        // Skip pages with invalid props files
+      }
+    }
+
+    return aiProps;
+  } catch (error) {
+    console.warn('[enforceConsistentBannerProps] Failed to enforce — using original props:', error);
+    return aiProps;
+  }
+}
+
+/**
  * List all generated pages with their available data
  */
 export function listGeneratedPages(): Array<{ slug: string; hasLayout: boolean; hasContent: boolean }> {
