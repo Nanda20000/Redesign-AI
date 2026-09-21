@@ -34,28 +34,29 @@ export interface ComponentSelectionResult {
  * Component capability map - which components support images
  */
 const IMAGE_CAPABLE_COMPONENTS: Record<string, string[]> = {
-  hero: ['hero-atlas-dynamic', 'hero-aspect-dynamic', 'hero-apex-dynamic', 'hero-anchor-dynamic', 'hero-alpha-dynamic', 'hero-adapt-dynamic', 'hero-action-dynamic'],
-  about: ['about-crew-dynamic', 'about-brief-dynamic', 'about-brand-dynamic'],
-  banner: ['banner-promo-dynamic', 'banner-header-dynamic'],
-  cta: ['cta-button-dynamic', 'cta-banner-dynamic'],
-  testimonials: ['testi-quote-dynamic', 'testi-praise-dynamic', 'testi-honor-dynamic', 'testi-feedback-dynamic', 'testi-critique-dynamic', 'testi-client-dynamic'],
+  hero: ['hero-action-dynamic', 'hero-beam-dynamic', 'hero-new-base-dynamic'],
+  about: ['about-brand-dynamic'],
+  banner: ['banner-header-dynamic'],
+  cta: ['cta-banner-dynamic'],
+  testimonials: ['testi-client-dynamic'],
   gallery: ['gallery-album-dynamic'],
-  feature: ['feature-list-dynamic', 'feature-focus-dynamic', 'feature-facet-dynamic', 'feature-detail-dynamic', 'feature-aspect-dynamic'],
+  feature: ['feature-aspect-dynamic'],
   blog: ['blog-journal-dynamic'],
   benefits: ['benefits-advantage-dynamic'],
-  contact: ['contact-support-dynamic', 'contact-reach-dynamic', 'contact-link-dynamic'],
-  footer: ['footer-ether-dynamic', 'footer-prism-dynamic'],
-  'company-story': ['story-journey-dynamic', 'story-history-dynamic', 'story-heritage-dynamic', 'story-event-dynamic', 'story-chapter-dynamic'],
-  'mission-vision': ['mission-new-dynamic', 'mission-brand-dynamic'],
+  contact: ['contact-form-dynamic'],
+  footer: ['footer-ether-dynamic'],
+  'company-story': ['company-story-dynamic'],
+  'mission-vision': ['mission-brand-dynamic'],
+  navbar: ['nav-menu-dynamic'],
 };
 
 function isSelectableAIComponent(componentName: string): boolean {
-  return componentName.endsWith('-dynamic') || componentName === 'footer-simple';
+  return componentName.endsWith('-dynamic');
 }
 
 /**
  * Get AI-selectable components for a section using the manifest instead of a hardcoded whitelist.
- * Only returns kept components: hero-action-dynamic, about-brief-dynamic, footer-simple.
+ * Only returns components ending with -dynamic.
  */
 function getAIComponentsForSection(
   section: string,
@@ -631,8 +632,7 @@ export function buildEnhancedPrompt(
 ## STRICT RULE — DYNAMIC COMPONENTS ONLY
 You MUST only select components whose name ends with "-dynamic".
 Never select components like hero-modern, hero-minimal, navbar-gradient, footer-elegant etc.
-Only valid selections end with: -dynamic (e.g. hero-action-dynamic, about-brief-dynamic)
-Exception: footer-simple is also valid.
+Only valid selections end with: -dynamic (e.g. hero-action-dynamic, about-brand-dynamic)
 
 ## Source Website Analysis:
 - Business Type: ${businessType} (confidence: ${Math.round(analysis.confidence * 100)}%)
@@ -664,28 +664,28 @@ ${sectionGuidelines}
 IMPORTANT: You are encouraged to pick DIFFERENT components on different runs. Do not default to the same component every time.
 
 ## Business Type Guidance:
-- education/academy → prioritize about-brief-dynamic, include mission-vision
+- education/academy → prioritize about-brand-dynamic, include mission-vision
 - saas/startup → prioritize banner or hero-action-dynamic, include benefits
-- corporate → prioritize about-brief-dynamic, include mission-vision and benefits
-- portfolio/agency → prioritize about-brief-dynamic, include blog
-- nonprofit → prioritize about-brief-dynamic, include mission-vision and blog
+- corporate → prioritize about-brand-dynamic, include mission-vision and benefits
+- portfolio/agency → prioritize about-brand-dynamic, include blog
+- nonprofit → prioritize about-brand-dynamic, include mission-vision and blog
 - healthcare → include benefits and mission-vision
 - ecommerce → include benefits
-- All site types → always include a contact component (contact-form-dynamic, contact-help-dynamic, contact-inbox-dynamic, contact-lead-dynamic, contact-link-dynamic, or contact-mail-dynamic)
+- All site types → always include a contact component (contact-form-dynamic)
 - All site types → consider including blog-journal-dynamic for articles/insights
-- All site types → consider including benefits-advantage-dynamic or benefits-asset-dynamic for value propositions
+- All site types → consider including benefits-advantage-dynamic for value propositions
 
 ## Response Format — Return ONLY this JSON, no markdown, no explanation:
 {
   "layout": [
     {"section": "hero", "component": "hero-action-dynamic"},
-    {"section": "about", "component": "about-brief-dynamic"},
+    {"section": "about", "component": "about-brand-dynamic"},
     {"section": "contact", "component": "contact-form-dynamic"},
-    {"section": "footer", "component": "footer-simple"}
+    {"section": "footer", "component": "footer-ether-dynamic"}
   ]
 }
 
 IMPORTANT: Only include sections that were detected. For homepage, always include hero and footer. For non-home pages, always include banner and footer.
-Every component name you return MUST end with "-dynamic" (exception: footer-simple).
+Every component name you return MUST end with "-dynamic".
 `;
 }

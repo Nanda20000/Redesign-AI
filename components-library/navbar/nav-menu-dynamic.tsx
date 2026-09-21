@@ -1,165 +1,117 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-export interface NavMenuLink {
-  label?: string;
-  href?: string;
-}
-
-export interface NavMenuSocialLink {
-  icon?: React.ReactNode;
+export interface NavItem {
+  label: string;
   href?: string;
 }
 
 export interface NavMenuDynamicProps {
-  topLinks?: NavMenuLink[];
-  socialLinks?: NavMenuSocialLink[];
-  logoIcon?: React.ReactNode;
-  brandName?: string;
-  brandHref?: string;
-  mainLinks?: NavMenuLink[];
-  searchIcon?: React.ReactNode;
-  onSearchClick?: () => void;
+  logoText?: string;
+  logoImage?: string;
+  logoHref?: string;
+  navItems?: NavItem[];
+  activeItem?: string;
+  ctaText?: string;
+  ctaHref?: string;
 }
 
 export function NavMenuDynamic({
-  topLinks,
-  socialLinks,
-  logoIcon,
-  brandName,
-  brandHref,
-  mainLinks,
-  searchIcon,
-  onSearchClick,
+  logoText,
+  logoImage,
+  logoHref,
+  navItems,
+  activeItem,
+  ctaText,
+  ctaHref,
 }: NavMenuDynamicProps) {
-  const hasTopBar = (topLinks && topLinks.length > 0) || (socialLinks && socialLinks.length > 0);
-  const hasMainBar = logoIcon || brandName || (mainLinks && mainLinks.length > 0) || searchIcon;
+  const [currentActive, setCurrentActive] = useState<string | undefined>(activeItem);
 
-  if (!hasTopBar && !hasMainBar) {
-    return null;
-  }
+  useEffect(() => {
+    setCurrentActive(activeItem);
+  }, [activeItem]);
 
   return (
     <header
-      className="w-full bg-white text-gray-800 border-b border-gray-100"
+      id="nav-menu-dynamic"
+      className="w-full flex justify-center py-6 px-4"
       style={{ fontFamily: "'Roboto', sans-serif" }}
     >
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');`}</style>
+      <nav
+        id="nav-menu-bar"
+        className="w-full max-w-5xl bg-[#111015] border border-zinc-800/80 rounded-2xl px-5 py-3 sm:px-7 sm:py-3.5 shadow-2xl shadow-black/60 flex items-center justify-between gap-4"
+      >
+        {/* Left: Brand / Logo */}
+        {(logoImage || logoText) && (
+          <a
+            id="nav-logo-link"
+            href={logoHref}
+            className="flex items-center gap-3 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded-lg"
+          >
+            {logoImage && (
+              <img
+                id="nav-logo-image"
+                src={logoImage}
+                alt={logoText || ''}
+                className="w-9 h-9 rounded-full object-cover shrink-0"
+                referrerPolicy="no-referrer"
+              />
+            )}
+            {logoText && (
+              <h2
+                id="nav-logo-text"
+                style={{ fontWeight: 500 }}
+                className="text-xl sm:text-2xl text-[#a855f7] tracking-tight leading-none"
+              >
+                {logoText}
+              </h2>
+            )}
+          </a>
+        )}
 
-      {hasTopBar && (
-        <div className="w-full border-b border-gray-100 py-2 bg-gray-50/50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            {/* Aux links on the left */}
-            <div>
-              {topLinks && topLinks.length > 0 ? (
-                <nav className="flex items-center space-x-6">
-                  {topLinks.map((link, index) => {
-                    if (!link || !link.label) return null;
-                    return (
-                      <a
-                        key={index}
-                        href={link.href}
-                        className="text-xs text-gray-500 hover:text-gray-900 transition-colors"
-                        style={{ fontWeight: 300 }}
-                      >
-                        {link.label}
-                      </a>
-                    );
-                  })}
-                </nav>
-              ) : null}
-            </div>
+        {/* Center: Navigation links */}
+        {navItems && navItems.length > 0 && (
+          <ul
+            id="nav-items-list"
+            className="flex items-center justify-center gap-1 sm:gap-2 md:gap-3 list-none m-0 p-0"
+          >
+            {navItems.map((item, index) => {
+              if (!item || !item.label) return null;
+              const isActive = currentActive === item.label;
 
-            {/* Social links on the right */}
-            <div>
-              {socialLinks && socialLinks.length > 0 ? (
-                <div className="flex items-center space-x-5">
-                  {socialLinks.map((social, index) => {
-                    if (!social || !social.icon) return null;
-                    return (
-                      <a
-                        key={index}
-                        href={social.href}
-                        className="text-gray-400 hover:text-gray-600 transition-colors flex items-center justify-center"
-                        style={{ fontWeight: 300 }}
-                      >
-                        {social.icon}
-                      </a>
-                    );
-                  })}
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      )}
+              return (
+                <li key={index} id={`nav-item-li-${index}`} className="list-none m-0 p-0">
+                  <a
+                    id={`nav-item-link-${index}`}
+                    href={item.href}
+                    onClick={() => setCurrentActive(item.label)}
+                    style={{ fontWeight: 300 }}
+                    className={`inline-block transition-all duration-200 text-sm sm:text-base leading-normal ${
+                      isActive
+                        ? 'bg-[#291345] border border-[#a855f7]/50 shadow-[0_0_22px_rgba(168,85,247,0.45)] text-white px-5 py-2 rounded-full'
+                        : 'text-zinc-200 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        )}
 
-      {hasMainBar && (
-        <div className="w-full py-4 sm:py-5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            {/* Logo + Brand name */}
-            <div className="flex items-center">
-              {logoIcon || brandName ? (
-                <a
-                  href={brandHref}
-                  className="flex items-center space-x-3 hover:opacity-90 transition-opacity"
-                  style={{ fontWeight: 300 }}
-                >
-                  {logoIcon && (
-                    <div className="flex-shrink-0 flex items-center justify-center">
-                      {logoIcon}
-                    </div>
-                  )}
-                  {brandName && (
-                    <h1
-                      className="text-xl tracking-tight text-gray-900"
-                      style={{ fontWeight: 500 }}
-                    >
-                      {brandName}
-                    </h1>
-                  )}
-                </a>
-              ) : null}
-            </div>
-
-            {/* Main navigation and search button */}
-            <div className="flex items-center space-x-8">
-              {mainLinks && mainLinks.length > 0 ? (
-                <nav className="hidden md:flex items-center space-x-8">
-                  {mainLinks.map((link, index) => {
-                    if (!link || !link.label) return null;
-                    return (
-                      <a
-                        key={index}
-                        href={link.href}
-                        className="text-xs tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
-                        style={{ fontWeight: 300 }}
-                      >
-                        {link.label}
-                      </a>
-                    );
-                  })}
-                </nav>
-              ) : null}
-
-              {searchIcon ? (
-                <button
-                  type="button"
-                  onClick={onSearchClick}
-                  className="text-gray-400 hover:text-gray-600 transition-colors focus:outline-none flex items-center justify-center p-1"
-                  style={{ fontWeight: 300 }}
-                >
-                  {searchIcon}
-                </button>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      )}
+        {/* Right: CTA Button */}
+        {ctaText && (
+          <a
+            id="nav-cta-button"
+            href={ctaHref}
+            style={{ fontWeight: 300 }}
+            className="shrink-0 bg-[#a855f7] hover:bg-[#9333ea] active:scale-95 text-white text-sm sm:text-base px-6 py-2.5 rounded-full shadow-lg shadow-purple-600/25 hover:shadow-purple-600/40 transition-all duration-200 flex items-center justify-center leading-normal focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+          >
+            {ctaText}
+          </a>
+        )}
+      </nav>
     </header>
   );
 }

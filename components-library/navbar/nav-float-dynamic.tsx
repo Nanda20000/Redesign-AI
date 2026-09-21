@@ -1,82 +1,117 @@
 import React from 'react';
 
-/**
- * NavFloatDynamic Component
- * A floating, pill-shaped navigation bar with a logo, centered links, and a CTA button.
- * Designed for a modern, clean look with a white background and rounded corners.
- */
-
-export interface NavLink {
-  label: string;
-  href: string;
+export interface NavFloatDynamicItem {
+  label?: string;
+  href?: string;
+  badge?: string;
   isActive?: boolean;
+  icon?: React.ReactNode;
+  onClick?: () => void;
 }
 
 export interface NavFloatDynamicProps {
-  logoText?: string;
-  logoIcon?: React.ReactNode;
-  navLinks?: NavLink[];
-  ctaText?: string;
-  ctaHref?: string;
+  items?: NavFloatDynamicItem[];
+  activeLabel?: string;
 }
 
-export const NavFloatDynamic: React.FC<NavFloatDynamicProps> = ({
-  logoText,
-  logoIcon,
-  navLinks,
-  ctaText,
-  ctaHref,
-}) => {
-  // If no essential props are provided, render nothing
-  if (!logoText && !logoIcon && (!navLinks || navLinks.length === 0) && !ctaText) {
+export function NavFloatDynamic({
+  items,
+  activeLabel,
+}: NavFloatDynamicProps) {
+  if (!items || items.length === 0) {
     return null;
   }
 
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl font-['Open_Sans',sans-serif]">
-      <div className="bg-white/90 backdrop-blur-md border border-white/20 shadow-lg rounded-full px-6 py-2 flex items-center justify-between">
-        {/* Logo Section */}
-        <div className="flex items-center gap-2">
-          {logoIcon && <span className="flex-shrink-0">{logoIcon}</span>}
-          {logoText && (
-            <span className="text-gray-900 font-bold text-lg tracking-tight">
-              {logoText}
-            </span>
-          )}
-        </div>
+    <header
+      className="w-full flex justify-center py-4 px-3"
+      style={{ fontFamily: "'Roboto', sans-serif" }}
+    >
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');`}</style>
+      <nav
+        className="inline-flex items-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 bg-white rounded-full shadow-[0_12px_35px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] border border-black/[0.04]"
+        aria-label="Main Navigation"
+      >
+        <ul className="flex items-center gap-1 sm:gap-1.5 m-0 p-0 list-none">
+          {items.map((item, index) => {
+            if (!item.label && !item.icon && !item.badge) {
+              return null;
+            }
 
-        {/* Navigation Links */}
-        {navLinks && navLinks.length > 0 && (
-          <ul className="hidden md:flex items-center gap-1">
-            {navLinks.map((link, index) => (
-              <li key={`${link.label}-${index}`}>
-                <a
-                  href={link.href || '#'}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    link.isActive
-                      ? 'bg-gray-100 text-gray-900'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                  }`}
-                >
-                  {link.label}
-                </a>
+            const isCurrentActive = Boolean(
+              item.isActive || (activeLabel && item.label === activeLabel)
+            );
+
+            const content = (
+              <>
+                {item.icon ? (
+                  <span
+                    style={{ fontWeight: 300 }}
+                    className="inline-flex items-center justify-center shrink-0 text-[#0d2215]"
+                  >
+                    {item.icon}
+                  </span>
+                ) : null}
+
+                {item.label ? (
+                  <span
+                    style={{ fontWeight: 300 }}
+                    className="text-sm tracking-normal select-none"
+                  >
+                    {item.label}
+                  </span>
+                ) : null}
+
+                {item.badge ? (
+                  <span
+                    style={{ fontWeight: 300 }}
+                    className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-[#0d2215] text-white text-xs leading-none shrink-0"
+                  >
+                    {item.badge}
+                  </span>
+                ) : null}
+              </>
+            );
+
+            const activeClasses =
+              'inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#ccf7c8] text-[#0d2215] transition-all cursor-pointer';
+            const inactiveClasses =
+              'inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full text-[#111827] hover:text-[#0d2215] hover:bg-black/[0.04] transition-all cursor-pointer';
+
+            return (
+              <li
+                key={item.label || index}
+                style={{ fontWeight: 300 }}
+                className="inline-flex items-center"
+              >
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    onClick={item.onClick}
+                    style={{ fontWeight: 300 }}
+                    className={isCurrentActive ? activeClasses : inactiveClasses}
+                    aria-current={isCurrentActive ? 'page' : undefined}
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={item.onClick}
+                    style={{ fontWeight: 300 }}
+                    className={isCurrentActive ? activeClasses : inactiveClasses}
+                    aria-current={isCurrentActive ? 'page' : undefined}
+                  >
+                    {content}
+                  </button>
+                )}
               </li>
-            ))}
-          </ul>
-        )}
-
-        {/* CTA Button */}
-        {ctaText && (
-          <a
-            href={ctaHref || '#'}
-            className="bg-gray-900 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-800 transition-all active:scale-95 shadow-sm"
-          >
-            {ctaText}
-          </a>
-        )}
-      </div>
-    </nav>
+            );
+          })}
+        </ul>
+      </nav>
+    </header>
   );
-};
+}
 
 export default NavFloatDynamic;

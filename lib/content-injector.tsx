@@ -479,36 +479,6 @@ export function getComponentContentProps(
   // Map section content to component-specific props
   switch (componentName) {
     // Banner components
-    case 'banner-hero-dynamic': {
-      const sectionContent = mappedContent.banner as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.subtitle ?? '',
-        description: sectionContent?.description ?? '',
-        backgroundColor: sectionContent?.backgroundColor ?? '',
-        textColor: sectionContent?.textColor ?? '',
-        topBarColor: sectionContent?.topBarColor ?? '',
-        dotsColor: sectionContent?.dotsColor ?? '',
-        dotMultiplier: sectionContent?.dotMultiplier ? parseFloat(sectionContent.dotMultiplier) : 1.0,
-      };
-    }
-
-    case 'banner-promo-dynamic': {
-      const sectionContent = mappedContent.banner as any;
-      return {
-        title: sectionContent?.title ?? '',
-        role: sectionContent?.role ?? '',
-        bgImage: sectionContent?.bgImage ?? '',
-        bgColorClass: sectionContent?.bgColorClass ?? 'bg-gradient-to-r from-[#2c2e33] to-[#404349]',
-        topStripColor: sectionContent?.topStripColor ?? 'bg-[#1a1c7b]',
-        bottomStripColor: sectionContent?.bottomStripColor ?? 'bg-[#1a1c7b]',
-        frameBorderColor: sectionContent?.frameBorderColor ?? 'border-white',
-        dividerColor: sectionContent?.dividerColor ?? 'bg-white/50',
-        textColor: sectionContent?.textColor ?? 'text-white',
-        ctaText: sectionContent?.ctaText ?? '',
-      };
-    }
-
     case 'banner-header-dynamic': {
       const sectionContent = mappedContent.banner as any;
       return {
@@ -518,16 +488,6 @@ export function getComponentContentProps(
         badgeUrl: sectionContent?.badgeUrl ?? '',
         backgroundImageUrl: sectionContent?.backgroundImageUrl ?? '',
         leftAccentColor: sectionContent?.leftAccentColor ?? '',
-      };
-    }
-
-    case 'banner-slider-dynamic': {
-      const sectionContent = mappedContent.banner as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.subtitle ?? '',
-        linkText: sectionContent?.linkText ?? '',
-        linkUrl: sectionContent?.linkUrl ?? '',
       };
     }
 
@@ -552,109 +512,42 @@ export function getComponentContentProps(
       };
     }
 
-    case 'hero-adapt-dynamic': {
+    case 'hero-new-base-dynamic': {
       const sectionContent = mappedContent.hero as any;
       return {
-        trustpilotRating: sectionContent?.trustpilotRating ?? '',
-        trustpilotReviews: sectionContent?.trustpilotReviews ?? '',
-        trustpilotSubLabel: sectionContent?.trustpilotSubLabel ?? '',
+        tagline: sectionContent?.tagline ?? '',
         title: sectionContent?.title ?? '',
         description: sectionContent?.description ?? '',
-        feature1Text: sectionContent?.features?.[0]?.text ?? '',
-        feature2Text: sectionContent?.features?.[1]?.text ?? '',
-        feature3Text: sectionContent?.features?.[2]?.text ?? '',
         ctaText: sectionContent?.ctaText ?? '',
         ctaLink: sectionContent?.ctaLink ?? '',
-        images: {
-          main: sectionContent?.images?.[0] ?? '',
-          badge: sectionContent?.badgeImage ?? '',
-          bottomLeft: sectionContent?.images?.[1] ?? '',
-          bottomRight: sectionContent?.images?.[2] ?? '',
-        },
-      };
-    }
-
-    case 'hero-alpha-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        badge: sectionContent?.badge ?? '',
-        titleStart: sectionContent?.titleStart ?? sectionContent?.title ?? '',
-        titleAccent: sectionContent?.titleAccent ?? '',
-        titleEnd: sectionContent?.titleEnd ?? '',
-        description: sectionContent?.description ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        image: sectionContent?.image ?? '',
+        ctaIcon: sectionContent?.ctaIcon ?? null,
+        imageUrl: sectionContent?.imageUrl ?? '',
         imageAlt: sectionContent?.imageAlt ?? '',
+        statValue: sectionContent?.statValue ?? '',
+        statLabel: sectionContent?.statLabel ?? '',
+        highlightTitle: sectionContent?.highlightTitle ?? '',
+        highlightDescription: sectionContent?.highlightDescription ?? '',
+        partners: sectionContent?.partners ?? [],
       };
     }
 
-    case 'hero-anchor-dynamic': {
+    case 'hero-beam-dynamic': {
       const sectionContent = mappedContent.hero as any;
       return {
-        label: sectionContent?.label ?? '',
         title: sectionContent?.title ?? '',
         description: sectionContent?.description ?? '',
         primaryCtaText: sectionContent?.primaryCtaText ?? '',
-        primaryCtaUrl: sectionContent?.primaryCtaUrl ?? '',
-        secondaryCtaText: sectionContent?.secondaryCtaText ?? '',
-        secondaryCtaUrl: sectionContent?.secondaryCtaUrl ?? '',
-        image: sectionContent?.image ?? '',
-      };
-    }
-
-    case 'hero-apex-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        subheading: sectionContent?.subheading ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        backgroundImage: sectionContent?.backgroundImage ?? '',
-        ratingValue: sectionContent?.ratingValue ?? '',
-        testimonialQuote: sectionContent?.testimonialQuote ?? '',
-        testimonialAuthor: sectionContent?.testimonialAuthor ?? '',
-        featureTitle: sectionContent?.featureTitle ?? '',
-        featureDescription: sectionContent?.featureDescription ?? '',
-        stat1Value: sectionContent?.stat1Value ?? '',
-        stat1Label: sectionContent?.stat1Label ?? '',
-        sinceLabel: sectionContent?.sinceLabel ?? '',
-        sinceValue: sectionContent?.sinceValue ?? '',
-      };
-    }
-
-    case 'hero-aspect-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        badgeText: sectionContent?.badgeText ?? '',
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        ctaText: sectionContent?.primaryCta?.text ?? '',
-        ratingValue: sectionContent?.socialProof?.value ?? '',
-        ratingLabel: sectionContent?.socialProof?.label ?? '',
-        ratingAvatars: sectionContent?.socialProof?.avatars ?? [],
-        videoThumbnail: sectionContent?.image ?? '',
-        features: sectionContent?.items?.map((item: any) => ({
-          title: item?.title ?? '',
-          description: item?.description ?? '',
-        })) ?? [],
-      };
-    }
-
-    case 'hero-atlas-dynamic': {
-      const sectionContent = mappedContent.hero as any;
-      return {
-        eyebrow: sectionContent?.eyebrow ?? '',
-        title: sectionContent?.title ?? '',
-        highlightedTitle: sectionContent?.highlightedTitle ?? '',
-        primaryCta: sectionContent?.primaryCta ?? '',
-        secondaryCta: sectionContent?.secondaryCta ?? '',
-        backgroundImage: sectionContent?.backgroundImage ?? '',
-        floatingCardLabel: sectionContent?.floatingCardLabel ?? '',
-        floatingCardTitle: sectionContent?.floatingCardTitle ?? '',
-        floatingCardDescription: sectionContent?.floatingCardDescription ?? '',
-        floatingCardImages: sectionContent?.floatingCardImages ?? [],
-        primaryCtaIcon: sectionContent?.primaryCtaIcon,
-        secondaryCtaIcon: sectionContent?.secondaryCtaIcon,
-        cardArrowIcon: sectionContent?.cardArrowIcon,
+        primaryCtaLink: sectionContent?.primaryCtaLink ?? '',
+        statValue: sectionContent?.statValue ?? '',
+        statBadge: sectionContent?.statBadge ?? '',
+        chartPath: sectionContent?.chartPath ?? '',
+        cardOneTitle: sectionContent?.cardOneTitle ?? '',
+        cardTwoTitle: sectionContent?.cardTwoTitle ?? '',
+        assetItems: sectionContent?.assetItems ?? [],
+        cardThreeTitle: sectionContent?.cardThreeTitle ?? '',
+        avatarImages: sectionContent?.avatarImages ?? [],
+        cardThreeCtaText: sectionContent?.cardThreeCtaText ?? '',
+        cardThreeCtaLink: sectionContent?.cardThreeCtaLink ?? '',
       };
     }
 
@@ -677,92 +570,7 @@ export function getComponentContentProps(
       };
     }
 
-    case 'about-brief-dynamic': {
-      const sectionContent = mappedContent.about as any;
-      return {
-        title: sectionContent?.title ?? '',
-        description1: sectionContent?.description1 ?? '',
-        description2: sectionContent?.description2 ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        image: sectionContent?.image ?? '',
-      };
-    }
-
-    case 'about-crew-dynamic': {
-      const sectionContent = mappedContent.about as any;
-      return {
-        label: sectionContent?.label ?? '',
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        values: sectionContent?.items?.map((item: any) => item.title || item.text) ?? [],
-        ctaText: sectionContent?.ctaText ?? '',
-        ctaLink: sectionContent?.ctaLink ?? '',
-        backgroundImage: sectionContent?.image || sectionContent?.backgroundImage || '',
-        imageNumber: sectionContent?.imageNumber ?? '',
-        imageLabel: sectionContent?.imageLabel ?? '',
-      };
-    }
-
-
     // Footer components
-    case 'footer-simple':
-      return {
-        brandName:   (mappedContent.footer as any)?.brandName    ?? '',
-        description: (mappedContent.footer as any)?.description  ?? '',
-        contactInfo: {
-          email:   '',
-          phone:   '',
-          address: '',
-        },
-        copyright: (mappedContent.footer as any)?.copyright ?? '',
-        links: (mappedContent.footer as any)?.links ?? [],
-      };
-
-    case 'footer-glow-dynamic': {
-      const sectionContent = mappedContent.footer as any;
-      return {
-        logoText: sectionContent?.logoText ?? '',
-        description: sectionContent?.description ?? '',
-        newsletterTitle: sectionContent?.newsletterTitle ?? '',
-        newsletterDescription: sectionContent?.newsletterDescription ?? '',
-        newsletterPlaceholder: sectionContent?.newsletterPlaceholder ?? '',
-        newsletterButtonText: sectionContent?.newsletterButtonText ?? '',
-        copyrightText: sectionContent?.copyrightText ?? '',
-        columns: sectionContent?.columns ?? [],
-        bottomLinks: sectionContent?.bottomLinks ?? [],
-      };
-    }
-
-    case 'footer-halo-dynamic': {
-      const sectionContent = mappedContent.footer as any;
-      return {
-        logoText: sectionContent?.logoText ?? '',
-        brandDescription: sectionContent?.brandDescription ?? '',
-        copyrightText: sectionContent?.copyrightText ?? '',
-        column1Title: sectionContent?.column1Title ?? '',
-        column1Links: sectionContent?.column1Links ?? [],
-        column2Title: sectionContent?.column2Title ?? '',
-        column2Links: sectionContent?.column2Links ?? [],
-        column3Title: sectionContent?.column3Title ?? '',
-        column3Links: sectionContent?.column3Links ?? [],
-      };
-    }
-
-    case 'footer-prism-dynamic': {
-      const sectionContent = mappedContent.footer as any;
-      return {
-        logoImgSrc: sectionContent?.logoImgSrc ?? '',
-        logoImgAlt: sectionContent?.logoImgAlt ?? '',
-        logoText: sectionContent?.logoText ?? '',
-        logoSubtext: sectionContent?.logoSubtext ?? '',
-        links: sectionContent?.links ?? [],
-        socials: sectionContent?.socials ?? [],
-        copyrightText: sectionContent?.copyrightText ?? '',
-        copyrightBrandText: sectionContent?.copyrightBrandText ?? '',
-        copyrightBrandHref: sectionContent?.copyrightBrandHref ?? '',
-      };
-    }
-
     case 'footer-ether-dynamic': {
       const sectionContent = mappedContent.footer as any;
       return {
@@ -778,27 +586,6 @@ export function getComponentContentProps(
         socialLinks: sectionContent?.socialLinks ?? [],
         goOnTopText: sectionContent?.goOnTopText ?? '',
         copyrightText: sectionContent?.copyrightText ?? '',
-      };
-    }
-
-    case 'footer-lume-dynamic': {
-      const sectionContent = mappedContent.footer as any;
-      return {
-        logoText: sectionContent?.logoText ?? '',
-        brandDescription: sectionContent?.brandDescription ?? '',
-        col2Title: sectionContent?.col2Title ?? '',
-        col2Links: sectionContent?.links?.slice(0, 5).map((l: any) => ({ label: l.label, href: l.href })) ?? [],
-        col3Title: sectionContent?.col3Title ?? '',
-        col3Links: sectionContent?.links?.slice(5, 10).map((l: any) => ({ label: l.label, href: l.href })) ?? [],
-        col4Title: sectionContent?.col4Title ?? '',
-        col4Description: sectionContent?.col4Description ?? '',
-        newsletterPlaceholder: sectionContent?.newsletterPlaceholder ?? '',
-        contactEmail: sectionContent?.contactEmail ?? '',
-        copyrightText: sectionContent?.copyrightText ?? '',
-        privacyText: sectionContent?.privacyText ?? '',
-        privacyUrl: sectionContent?.privacyUrl ?? '',
-        termsText: sectionContent?.termsText ?? '',
-        termsUrl: sectionContent?.termsUrl ?? '',
       };
     }
 
@@ -824,155 +611,6 @@ export function getComponentContentProps(
       };
     }
 
-    case 'contact-help-dynamic': {
-      const sectionContent = mappedContent.contact as any;
-      return {
-        badgeText: sectionContent?.badgeText ?? '',
-        heading: sectionContent?.heading ?? '',
-        descriptionText: sectionContent?.descriptionText ?? '',
-        phoneText: sectionContent?.phoneText ?? '',
-        addressText: sectionContent?.addressText ?? '',
-        emailText: sectionContent?.emailText ?? '',
-        formNameLabel: sectionContent?.formNameLabel ?? '',
-        formNamePlaceholder: sectionContent?.formNamePlaceholder ?? '',
-        formPhoneLabel: sectionContent?.formPhoneLabel ?? '',
-        formPhonePlaceholder: sectionContent?.formPhonePlaceholder ?? '',
-        formServicesLabel: sectionContent?.formServicesLabel ?? '',
-        formServicesPlaceholder: sectionContent?.formServicesPlaceholder ?? '',
-        formServicesOptions: sectionContent?.formServicesOptions ?? [],
-        submitText: sectionContent?.submitText ?? '',
-      };
-    }
-
-    case 'contact-inbox-dynamic': {
-      const sectionContent = mappedContent.contact as any;
-      return {
-        badgeText: sectionContent?.badgeText ?? '',
-        titlePart1: sectionContent?.titlePart1 ?? sectionContent?.title ?? '',
-        titlePart2: sectionContent?.titlePart2 ?? sectionContent?.subtitle ?? '',
-        description: sectionContent?.description ?? '',
-        formNameLabel: sectionContent?.formNameLabel ?? '',
-        formNamePlaceholder: sectionContent?.formNamePlaceholder ?? '',
-        formPhoneLabel: sectionContent?.formPhoneLabel ?? '',
-        formPhonePlaceholder: sectionContent?.formPhonePlaceholder ?? '',
-        formServiceLabel: sectionContent?.formServiceLabel ?? '',
-        formServicePlaceholder: sectionContent?.formServicePlaceholder ?? '',
-        formServiceOptions: sectionContent?.formServiceOptions ?? [],
-        formSubmitText: sectionContent?.formSubmitText ?? '',
-        items: sectionContent?.items ?? [],
-      };
-    }
-
-    case 'contact-lead-dynamic': {
-      const sectionContent = mappedContent.contact as any;
-      return {
-        tagText: sectionContent?.tag || '',
-        title: sectionContent?.title || '',
-        description: sectionContent?.description || '',
-        emailLabel: sectionContent?.emailLabel || '',
-        emailValue: sectionContent?.email || '',
-        phoneLabel: sectionContent?.phoneLabel || '',
-        phoneValue: sectionContent?.phone || '',
-        officeLabel: sectionContent?.officeLabel || '',
-        officeValue: sectionContent?.address || '',
-        nameLabel: sectionContent?.firstNameLabel || '',
-        namePlaceholder: sectionContent?.firstNamePlaceholder || '',
-        lastNameLabel: sectionContent?.lastNameLabel || '',
-        lastNamePlaceholder: sectionContent?.lastNamePlaceholder || '',
-        emailFieldLabel: sectionContent?.emailInputLabel || '',
-        emailFieldPlaceholder: sectionContent?.emailInputPlaceholder || '',
-        messageLabel: sectionContent?.messageInputLabel || '',
-        messagePlaceholder: sectionContent?.messageInputPlaceholder || '',
-        submitButtonText: sectionContent?.submitText || '',
-      };
-    }
-
-    case 'contact-link-dynamic': {
-      const sectionContent = mappedContent.contact as any;
-      return {
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        namePlaceholder: sectionContent?.namePlaceholder ?? '',
-        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
-        messagePlaceholder: sectionContent?.messagePlaceholder ?? '',
-        buttonText: sectionContent?.buttonText ?? '',
-        imageUrl: sectionContent?.imageUrl ?? '',
-      };
-    }
-
-    case 'contact-mail-dynamic': {
-      const sectionContent = mappedContent.contact as any;
-      return {
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        address: sectionContent?.address ?? '',
-        email: sectionContent?.email ?? '',
-        linkedinUrl: sectionContent?.linkedinUrl ?? '',
-        facebookUrl: sectionContent?.facebookUrl ?? '',
-        twitterUrl: sectionContent?.twitterUrl ?? '',
-        nameLabel: sectionContent?.nameLabel ?? '',
-        emailLabel: sectionContent?.emailLabel ?? '',
-        companyLabel: sectionContent?.companyLabel ?? '',
-        phoneLabel: sectionContent?.phoneLabel ?? '',
-        messageLabel: sectionContent?.messageLabel ?? '',
-        submitButtonText: sectionContent?.submitButtonText ?? '',
-        successMessage: sectionContent?.successMessage ?? '',
-      };
-    }
-
-    case 'contact-office-dynamic': {
-      const sectionContent = mappedContent.contact as any;
-      return {
-        title: sectionContent?.title ?? '',
-        fullNameLabel: sectionContent?.fullNameLabel ?? '',
-        fullNamePlaceholder: sectionContent?.fullNamePlaceholder ?? '',
-        emailLabel: sectionContent?.emailLabel ?? '',
-        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
-        messageLabel: sectionContent?.messageLabel ?? '',
-        messagePlaceholder: sectionContent?.messagePlaceholder ?? '',
-        submitButtonText: sectionContent?.submitButtonText ?? '',
-        cardTitle: sectionContent?.cardTitle ?? '',
-        cardSubtitle: sectionContent?.cardSubtitle ?? '',
-        contactItems: sectionContent?.contactItems ?? []
-      };
-    }
-
-    case 'contact-reach-dynamic': {
-      const sectionContent = mappedContent.contact as any;
-      return {
-        backgroundImageUrl: sectionContent?.backgroundImageUrl ?? '',
-        titleLine: sectionContent?.titleLine ?? '',
-        brandName: sectionContent?.brandName ?? '',
-        description: sectionContent?.description ?? '',
-        formTitle: sectionContent?.formTitle ?? '',
-        nameLabel: sectionContent?.nameLabel ?? '',
-        namePlaceholder: sectionContent?.namePlaceholder ?? '',
-        emailLabel: sectionContent?.emailLabel ?? '',
-        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
-        servicesLabel: sectionContent?.servicesLabel ?? '',
-        servicesPlaceholder: sectionContent?.servicesPlaceholder ?? '',
-        servicesOptions: sectionContent?.servicesOptions ?? [],
-        messageLabel: sectionContent?.messageLabel ?? '',
-        messagePlaceholder: sectionContent?.messagePlaceholder ?? '',
-        submitButtonText: sectionContent?.submitButtonText ?? '',
-      };
-    }
-
-    case 'contact-support-dynamic': {
-      const sectionContent = mappedContent.contact as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        emailLabel: sectionContent?.emailLabel ?? '',
-        emailPlaceholder: sectionContent?.emailPlaceholder ?? '',
-        messageLabel: sectionContent?.messageLabel ?? '',
-        messagePlaceholder: sectionContent?.messagePlaceholder ?? '',
-        submitButtonText: sectionContent?.submitButtonText ?? '',
-        successMessage: sectionContent?.successMessage ?? '',
-        images: sectionContent?.images ?? [],
-      };
-    }
-
     // CTA components
     case 'cta-banner-dynamic': {
       const sectionContent = mappedContent.cta as any;
@@ -983,65 +621,6 @@ export function getComponentContentProps(
         bottomLabel: sectionContent?.bottomLabel ?? '',
         ctaText: sectionContent?.ctaText ?? '',
         backgroundImage: sectionContent?.backgroundImage ?? '',
-      };
-    }
-
-    case 'cta-button-dynamic': {
-      const sectionContent = mappedContent.cta as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        ctaHref: sectionContent?.ctaHref ?? '',
-        imageSrc: sectionContent?.imageSrc ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-      };
-    }
-
-    case 'cta-click-dynamic': {
-      const sectionContent = mappedContent.cta as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-      };
-    }
-
-    case 'cta-convert-dynamic': {
-      const sectionContent = mappedContent.cta as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        inputLabel: sectionContent?.inputLabel ?? '',
-        inputPlaceholder: sectionContent?.inputPlaceholder ?? '',
-        buttonText: sectionContent?.buttonText ?? '',
-        subtext: sectionContent?.subtext ?? '',
-        linkText: sectionContent?.linkText ?? '',
-        linkUrl: sectionContent?.linkUrl ?? '',
-      };
-    }
-
-    case 'cta-drive-dynamic': {
-      const sectionContent = mappedContent.cta as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        cardText: sectionContent?.cardText ?? '',
-        inputPlaceholder: sectionContent?.inputPlaceholder ?? '',
-        buttonText: sectionContent?.buttonText ?? '',
-        privacyTextPrefix: sectionContent?.privacyTextPrefix ?? '',
-        privacyLinkText: sectionContent?.privacyLinkText ?? '',
-        privacyLinkUrl: sectionContent?.privacyLinkUrl ?? '',
-      };
-    }
-
-    case 'cta-goal-dynamic': {
-      const sectionContent = mappedContent.cta as any;
-      return {
-        badgeCategory: sectionContent?.badgeCategory ?? '',
-        badgeText: sectionContent?.badgeText ?? '',
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        inputPlaceholder: sectionContent?.inputPlaceholder ?? '',
-        buttonText: sectionContent?.buttonText ?? '',
       };
     }
 
@@ -1061,63 +640,42 @@ export function getComponentContentProps(
     case 'nav-float-dynamic': {
       const sectionContent = mappedContent.navbar as any;
       return {
-        logoText: sectionContent?.logoText ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        ctaHref: sectionContent?.ctaHref ?? '',
-        navLinks: sectionContent?.navLinks ?? [],
+        items: sectionContent?.items ?? [],
+        activeLabel: sectionContent?.activeLabel ?? '',
       };
     }
 
     case 'nav-header-dynamic': {
       const sectionContent = mappedContent.navbar as any;
       return {
-        brandName: sectionContent?.brandName ?? '',
-        brandLink: sectionContent?.brandLink ?? '',
-        navLinks: sectionContent?.links ?? [],
-        searchPlaceholder: sectionContent?.searchPlaceholder ?? '',
+        navItems: sectionContent?.navItems ?? [],
+        ctaText: sectionContent?.ctaText ?? '',
+        ctaHref: sectionContent?.ctaHref ?? '',
+        ctaIcon: sectionContent?.ctaIcon ?? null,
       };
     }
 
     case 'nav-link-dynamic': {
       const sectionContent = mappedContent.navbar as any;
       return {
-        logoText: sectionContent?.logoText ?? '',
-        topLink1Text: sectionContent?.topLink1Text ?? '',
-        topLink1Url: sectionContent?.topLink1Url ?? '',
-        topLink2Text: sectionContent?.topLink2Text ?? '',
-        topLink2Url: sectionContent?.topLink2Url ?? '',
-        topLink3Text: sectionContent?.topLink3Text ?? '',
-        topLink3Url: sectionContent?.topLink3Url ?? '',
-        mainLink1Text: sectionContent?.mainLink1Text ?? '',
-        mainLink1Url: sectionContent?.mainLink1Url ?? '',
-        mainLink2Text: sectionContent?.mainLink2Text ?? '',
-        mainLink2Url: sectionContent?.mainLink2Url ?? '',
-        mainLink3Text: sectionContent?.mainLink3Text ?? '',
-        mainLink3Url: sectionContent?.mainLink3Url ?? '',
-        mainLink4Text: sectionContent?.mainLink4Text ?? '',
-        mainLink4Url: sectionContent?.mainLink4Url ?? '',
+        navItems: sectionContent?.navItems ?? [],
+        activeItem: sectionContent?.activeItem ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        ctaHref: sectionContent?.ctaHref ?? '',
+        ctaIcon: sectionContent?.ctaIcon ?? '',
       };
     }
 
     case 'nav-menu-dynamic': {
       const sectionContent = mappedContent.navbar as any;
       return {
-        topLinks: sectionContent?.topLinks ?? [],
-        brandName: sectionContent?.brandName ?? '',
-        brandHref: sectionContent?.brandHref ?? '#',
-        mainLinks: sectionContent?.mainLinks ?? [],
-      };
-    }
-
-    case 'nav-panel-dynamic': {
-      const sectionContent = mappedContent.navbar as any;
-      return {
         logoText: sectionContent?.logoText ?? '',
+        logoImage: sectionContent?.logoImage ?? '',
+        logoHref: sectionContent?.logoHref ?? '',
         navItems: sectionContent?.navItems ?? [],
-        signInText: sectionContent?.signInText ?? '',
-        signInUrl: sectionContent?.signInUrl ?? '',
-        signUpText: sectionContent?.signUpText ?? '',
-        signUpUrl: sectionContent?.signUpUrl ?? '',
+        activeItem: sectionContent?.activeItem ?? '',
+        ctaText: sectionContent?.ctaText ?? '',
+        ctaHref: sectionContent?.ctaHref ?? '',
       };
     }
 
@@ -1134,76 +692,6 @@ export function getComponentContentProps(
           authorImage: item?.authorImage ?? '',
           bgColor: item?.bgColor ?? '',
         })) ?? [],
-      };
-    }
-
-    case 'testi-critique-dynamic': {
-      const sectionContent = mappedContent.testimonials as any;
-      return {
-        badgeText: sectionContent?.badge ?? '',
-        headingText: sectionContent?.title ?? '',
-        testimonials: Array.isArray(sectionContent?.items) 
-          ? sectionContent.items.map((item: any, idx: number) => ({
-              id: item.id || idx,
-              quote: item.text || item.quote || '',
-              authorName: item.name || item.author || '',
-              authorHandle: item.handle || '',
-              authorAvatar: item.image || item.avatar || '',
-            }))
-          : [],
-      };
-    }
-
-    case 'testi-feedback-dynamic': {
-      const sectionContent = mappedContent.testimonials as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.subtitle ?? '',
-        items: sectionContent?.items?.map((item: any, idx: number) => ({
-          id: item.id ?? idx,
-          feedback: item.feedback ?? '',
-          authorName: item.authorName ?? '',
-          authorRole: item.authorRole ?? '',
-          authorAvatarUrl: item.authorAvatarUrl ?? '',
-        })) ?? [],
-      };
-    }
-
-    case 'testi-honor-dynamic': {
-      const sectionContent = mappedContent.testimonials as any;
-      return {
-        items: sectionContent?.items?.map((item: any) => ({
-          quote: item?.quote ?? '',
-          authorName: item?.authorName ?? '',
-          authorRole: item?.authorRole ?? '',
-          authorAvatar: item?.authorAvatar ?? '',
-        })) ?? [],
-      };
-    }
-
-    case 'testi-praise-dynamic': {
-      const sectionContent = mappedContent.testimonials as any;
-      return {
-        items: sectionContent?.items?.map((item: any, idx: number) => ({
-          id: item?.id ?? idx,
-          quote: item?.quote ?? '',
-          ratingText: item?.ratingText ?? '',
-          authorName: item?.authorName ?? '',
-          authorRole: item?.authorRole ?? '',
-          authorImage: item?.authorImage ?? '',
-        })) ?? [],
-        dividerText: sectionContent?.dividerText ?? '————',
-      };
-    }
-
-    case 'testi-quote-dynamic': {
-      const sectionContent = mappedContent.testimonials as any;
-      return {
-        quoteText: sectionContent?.quoteText ?? '',
-        authorName: sectionContent?.authorName ?? '',
-        authorRole: sectionContent?.authorRole ?? '',
-        authorAvatarUrl: sectionContent?.authorAvatarUrl ?? '',
-        testimonialImageUrl: sectionContent?.testimonialImageUrl ?? '',
       };
     }
 
@@ -1255,86 +743,6 @@ export function getComponentContentProps(
       };
     }
 
-    case 'feature-detail-dynamic': {
-      const sectionContent = mappedContent.feature as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        items: sectionContent?.items?.map((item: any) => ({
-          title: item.title ?? '',
-          description: item.description ?? '',
-          image: item.image ?? '',
-          linkText: item.linkText ?? '',
-          linkUrl: item.linkUrl ?? '',
-          isHighlighted: item.isHighlighted ?? false,
-        })) ?? [],
-        loadMoreText: sectionContent?.loadMoreText ?? '',
-        loadMoreUrl: sectionContent?.loadMoreUrl ?? '',
-      };
-    }
-
-    case 'feature-facet-dynamic': {
-      const sectionContent = mappedContent.feature as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        imageSrc: sectionContent?.imageSrc ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        items: sectionContent?.items?.map((item: any) => ({
-          title: item.title ?? '',
-          description: item.description ?? '',
-          icon: item.icon,
-          linkIcon: item.linkIcon
-        })) ?? [],
-      };
-    }
-
-    case 'feature-focus-dynamic': {
-      const sectionContent = mappedContent.feature as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.description ?? '',
-        imageSrc: sectionContent?.image ?? '',
-        imageAlt: sectionContent?.title ?? 'Feature focus',
-        features: sectionContent?.items?.map((item: any) => ({
-          title: item.title,
-          description: item.description,
-          icon: item.icon
-        })) ?? [],
-      };
-    }
-
-    case 'feature-item-dynamic': {
-      const sectionContent = mappedContent.feature as any;
-      return {
-        title: sectionContent?.title ?? '',
-        subtitle: sectionContent?.description ?? '',
-        primaryCtaText: sectionContent?.primaryButtonText ?? '',
-        primaryCtaLink: sectionContent?.primaryButtonUrl ?? '',
-        secondaryCtaText: sectionContent?.secondaryButtonText ?? '',
-        secondaryCtaLink: sectionContent?.secondaryButtonUrl ?? '',
-        items: sectionContent?.items?.map((item: any, index: number) => ({
-          badge: item.badge ?? '',
-          title: item.title ?? '',
-          description: item.description ?? '',
-          linkText: item.linkText ?? '',
-          linkUrl: item.linkUrl ?? '',
-          variant: index % 3 === 0 ? 'dark' : index % 3 === 1 ? 'blue' : 'orange'
-        })) ?? []
-      };
-    }
-
-    case 'feature-list-dynamic': {
-      const sectionContent = mappedContent.feature as any;
-      return {
-        label: sectionContent?.label ?? '',
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        features: sectionContent?.items ?? [],
-        backgroundImage: sectionContent?.image ?? '',
-      };
-    }
-
     // Benefits components
     case 'benefits-advantage-dynamic': {
       const sectionContent = mappedContent.benefits as any;
@@ -1357,19 +765,6 @@ export function getComponentContentProps(
       };
     }
 
-    case 'benefits-asset-dynamic': {
-      const sectionContent = mappedContent.benefits as any;
-      return {
-        label: sectionContent?.label ?? '',
-        heading: sectionContent?.heading ?? '',
-        footerButtonText: sectionContent?.footerButtonText ?? '',
-        footerButtonHref: sectionContent?.footerButtonHref ?? '',
-        items: sectionContent?.items ?? [],
-        arrowIcon: sectionContent?.arrowIcon ?? null,
-        readMoreArrowIcon: sectionContent?.readMoreArrowIcon ?? null,
-      };
-    }
-
     case 'pricing-matrix-dynamic': {
       const sectionContent = mappedContent.pricing as any;
       return {
@@ -1380,121 +775,19 @@ export function getComponentContentProps(
       };
     }
 
-    case 'pricing-static-dynamic': {
-      const sectionContent = mappedContent.pricing as any;
+    // Company-story components
+    case 'company-story-dynamic': {
+      const sectionContent = mappedContent['company-story'] as any;
       return {
         title: sectionContent?.title ?? '',
         subtitle: sectionContent?.subtitle ?? '',
-        toggleMonthlyLabel: sectionContent?.toggleMonthlyLabel ?? '',
-        toggleYearlyLabel: sectionContent?.toggleYearlyLabel ?? '',
-        toggleSaveLabel: sectionContent?.toggleSaveLabel ?? '',
-        plans: sectionContent?.plans ?? [],
-      };
-    }
-
-    // Company-story components
-    case 'story-event-dynamic': {
-      const sectionContent = mappedContent['company-story'] as any;
-      return {
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        buttonText: sectionContent?.buttonText ?? '',
-        imageUrl: sectionContent?.imageUrl ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-        items: sectionContent?.items ?? [],
-      };
-    }
-
-    case 'story-chapter-dynamic': {
-      const sectionContent = mappedContent['company-story'] as any;
-      return {
-        label: sectionContent?.label ?? '',
-        titlePrefix: sectionContent?.titlePrefix ?? '',
-        titleHighlight: sectionContent?.titleHighlight ?? '',
-        description: sectionContent?.description ?? '',
-        ctaText: sectionContent?.ctaText ?? '',
-        ctaHref: sectionContent?.ctaHref ?? '',
-        item1Title: sectionContent?.item1Title ?? '',
-        item1Description: sectionContent?.item1Description ?? '',
-        item2Title: sectionContent?.item2Title ?? '',
-        item2Description: sectionContent?.item2Description ?? '',
-        item3Title: sectionContent?.item3Title ?? '',
-        item3Description: sectionContent?.item3Description ?? '',
-        item4Title: sectionContent?.item4Title ?? '',
-        item4Description: sectionContent?.item4Description ?? '',
-      };
-    }
-
-    case 'story-heritage-dynamic': {
-      const sectionContent = mappedContent['company-story'] as any;
-      return {
-        headingStart: sectionContent?.headingStart ?? '',
-        headingAccent: sectionContent?.headingAccent ?? '',
-        headingEnd: sectionContent?.headingEnd ?? '',
-        imageSrc: sectionContent?.imageSrc ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-        rightHeading: sectionContent?.rightHeading ?? '',
-        rightDescription: sectionContent?.rightDescription ?? '',
-        stats: sectionContent?.stats ?? [],
-      };
-    }
-
-    case 'story-history-dynamic': {
-      const sectionContent = mappedContent.companyStory as any;
-      return {
-        badge: sectionContent?.badge ?? '',
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        buttonText: sectionContent?.buttonText ?? '',
-        imageUrl: sectionContent?.imageUrl ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-        stats: sectionContent?.stats ?? [],
-      };
-    }
-
-    case 'story-journey-dynamic': {
-      const sectionContent = mappedContent.companyStory as any;
-      return {
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        imageSrc: sectionContent?.imageSrc ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-        overlayTitle: sectionContent?.overlayTitle ?? '',
-        overlayItems: sectionContent?.overlayItems ?? [],
-        features: sectionContent?.features ?? [],
-        stats: sectionContent?.stats ?? [],
-      };
-    }
-
-    // Mission-vision components
-    case 'mission-new-dynamic': {
-      const sectionContent = mappedContent['mission-vision'] as any;
-      return {
-        badge: sectionContent?.badge ?? '',
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        items: sectionContent?.items ?? [],
-        imageUrl: sectionContent?.imageUrl ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-      };
-    }
-
-    case 'mission-enhanced-dynamic': {
-      const sectionContent = mappedContent['mission-vision'] as any;
-      return {
-        title: sectionContent?.title ?? '',
-        description: sectionContent?.description ?? '',
-        items: sectionContent?.items ?? [],
-      };
-    }
-
-    case 'mission-brand-dynamic': {
-      const sectionContent = mappedContent['mission-vision'] as any;
-      return {
-        title: sectionContent?.title ?? '',
-        imageUrl: sectionContent?.imageUrl ?? '',
-        imageAlt: sectionContent?.imageAlt ?? '',
-        items: sectionContent?.items ?? [],
+        intro: sectionContent?.intro ?? '',
+        milestones: sectionContent?.milestones?.map((item: any, idx: number) => ({
+          year: item?.year ?? '',
+          title: item?.title ?? '',
+          description: item?.description ?? '',
+          image: item?.image ?? '',
+        })) ?? [],
       };
     }
 
@@ -1514,47 +807,14 @@ export function getComponentContentProps(
       };
     }
 
-    case 'faq-process-dynamic': {
-      const sectionContent = mappedContent['faq-process'] as any;
+    // Service-offerings components
+    case 'service-grid-dynamic': {
+      const sectionContent = mappedContent['service-offerings'] as any;
       return {
         title: sectionContent?.title ?? '',
         subtitle: sectionContent?.subtitle ?? '',
-        type: sectionContent?.type ?? 'faq',
-        faqItems: sectionContent?.faqItems ?? sectionContent?.items ?? [],
-        processSteps: sectionContent?.processSteps ?? [],
-      };
-    }
-
-    case 'faq-new-dynamic': {
-      const sectionContent = mappedContent['faq-process'] as any;
-      return {
-        badgeText: sectionContent?.badgeText ?? '',
-        headingPart1: sectionContent?.headingPart1 ?? '',
-        headingPart2: sectionContent?.headingPart2 ?? '',
-        headingHighlightDetail: sectionContent?.headingHighlightDetail ?? '',
-        description: sectionContent?.description ?? '',
-        cardTitle: sectionContent?.cardTitle ?? '',
-        cardDescription1: sectionContent?.cardDescription1 ?? '',
-        cardDescription2: sectionContent?.cardDescription2 ?? '',
-        cardCtaText: sectionContent?.cardCtaText ?? '',
-        cardCtaUrl: sectionContent?.cardCtaUrl ?? '',
-        items: sectionContent?.faqItems ?? sectionContent?.items ?? [],
-      };
-    }
-
-    case 'faq-super-dynamic': {
-      const sectionContent = mappedContent['faq-process'] as any;
-      return {
-        badgeText: sectionContent?.badgeText ?? '',
-        heading: sectionContent?.heading ?? '',
-        description: sectionContent?.description ?? '',
-        buttonText: sectionContent?.buttonText ?? '',
-        buttonLink: sectionContent?.buttonLink ?? '',
-        faqItems: (sectionContent?.faqItems || []).map((item: any, idx: number) => ({
-          id: item?.id || `faq-item-${idx}`,
-          question: item?.question || '',
-          answer: item?.answer || ''
-        }))
+        columnHeaders: sectionContent?.columnHeaders ?? [],
+        featuresList: sectionContent?.featuresList ?? [],
       };
     }
 

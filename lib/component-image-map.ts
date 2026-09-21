@@ -17,31 +17,6 @@ export interface ComponentImageConfig {
 
 export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
 
-  // ── BANNER ────────────────────────────────────────────────────────────
-  'banner-hero-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'banner-promo-dynamic': {
-    imageCount: 1,
-    imageProp: 'bgImage',
-    imageMode: 'single',
-  },
-
-  'banner-header-dynamic': {
-    imageCount: 1,
-    imageProp: 'backgroundImageUrl',
-    imageMode: 'single',
-  },
-
-  'banner-slider-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
   // ── HERO ──────────────────────────────────────────────────────────────
   'hero-action-dynamic': {
     imageCount: 1,
@@ -49,96 +24,37 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
-  'hero-adapt-dynamic': {
+  'hero-new-base-dynamic': {
+    imageCount: 1,
+    imageProp: 'imageUrl',
+    imageMode: 'single',
+  },
+
+  'hero-beam-dynamic': {
     imageCount: 4,
-    imageProp: 'images',
-    imageMode: 'object',
+    imageProp: 'avatarImages',
+    imageMode: 'array',
   },
 
-  'hero-alpha-dynamic': {
+  // ── BANNER ────────────────────────────────────────────────────────────
+  'banner-header-dynamic': {
     imageCount: 1,
-    imageProp: 'image',
-    imageMode: 'single',
-  },
-
-  'hero-anchor-dynamic': {
-    imageCount: 1,
-    imageProp: 'image',
-    imageMode: 'single',
-  },
-
-  'hero-apex-dynamic': {
-    imageCount: 1,
-    imageProp: 'backgroundImage',
-    imageMode: 'single',
-  },
-
-  'hero-aspect-dynamic': {
-    imageCount: 1,
-    imageProp: 'videoThumbnail',
-    imageMode: 'single',
-  },
-
-  'hero-atlas-dynamic': {
-    imageCount: 4,
-    imageProp: 'backgroundImage',
+    imageProp: 'backgroundImageUrl',
     imageMode: 'single',
   },
 
   // ── ABOUT ─────────────────────────────────────────────────────────────
-  'about-crew-dynamic': {
-    imageCount: 1,
-    imageProp: 'backgroundImage',
-    imageMode: 'single',
-  },
-
   'about-brand-dynamic': {
     imageCount: 1,
     imageProp: 'image',
     imageMode: 'single',
   },
 
-  'about-brief-dynamic': {
-    imageCount: 1,
-    imageProp: 'image',
-    imageMode: 'single',
-  },
-
   // ── FOOTER ────────────────────────────────────────────────────────────
-  'footer-simple': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'footer-glow-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'footer-halo-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'footer-prism-dynamic': {
-    imageCount: 1,
-    imageProp: 'logoImgSrc',
-    imageMode: 'single',
-  },
-
   'footer-ether-dynamic': {
     imageCount: 1,
     imageProp: 'backgroundImage',
     imageMode: 'single',
-  },
-
-  'footer-lume-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
   },
 
   // ── CONTACT ──────────────────────────────────────────────────────────
@@ -148,89 +64,11 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'none',
   },
 
-  'contact-help-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'contact-inbox-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'contact-lead-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'contact-link-dynamic': {
-    imageCount: 1,
-    imageProp: 'imageUrl',
-    imageMode: 'single',
-  },
-
-  'contact-mail-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'contact-office-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'contact-reach-dynamic': {
-    imageCount: 1,
-    imageProp: 'backgroundImageUrl',
-    imageMode: 'single',
-  },
-
-  'contact-support-dynamic': {
-    imageCount: 5,
-    imageProp: 'images',
-    imageMode: 'array',
-  },
-
   // ── CTA ─────────────────────────────────────────────────────────────
   'cta-banner-dynamic': {
     imageCount: 1,
     imageProp: 'backgroundImage',
     imageMode: 'single',
-  },
-
-  'cta-button-dynamic': {
-    imageCount: 1,
-    imageProp: 'imageSrc',
-    imageMode: 'single',
-  },
-
-  'cta-click-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'cta-convert-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'cta-drive-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'cta-goal-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
   },
 
   // ── NAVBAR ──────────────────────────────────────────────────────────
@@ -259,15 +97,9 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
   },
 
   'nav-menu-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'nav-panel-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
+    imageCount: 1,
+    imageProp: 'logoImage',
+    imageMode: 'single',
   },
 
   // ── TESTIMONIALS ────────────────────────────────────────────────────
@@ -277,49 +109,7 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'items',
   },
 
-  'testi-critique-dynamic': {
-    imageCount: 3,
-    imageProp: 'authorAvatar',
-    imageMode: 'items',
-  },
-
-  'testi-feedback-dynamic': {
-    imageCount: 4,
-    imageProp: 'authorAvatarUrl',
-    imageMode: 'items',
-  },
-
-  'testi-honor-dynamic': {
-    imageCount: 1,
-    imageProp: 'items.authorAvatar',
-    imageMode: 'items',
-  },
-
-  'testi-praise-dynamic': {
-    imageCount: 1,
-    imageProp: 'items',
-    imageMode: 'items',
-  },
-
-  'testi-quote-dynamic': {
-    imageCount: 2,
-    imageProp: 'testimonialImageUrl',
-    imageMode: 'single',
-  },
-
   // ── MISSION-VISION ───────────────────────────────────────────────────
-  'mission-new-dynamic': {
-    imageCount: 1,
-    imageProp: 'imageUrl',
-    imageMode: 'single',
-  },
-
-  'mission-enhanced-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
   'mission-brand-dynamic': {
     imageCount: 1,
     imageProp: 'imageUrl',
@@ -340,36 +130,6 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'single',
   },
 
-  'feature-detail-dynamic': {
-    imageCount: 9,
-    imageProp: 'items',
-    imageMode: 'items',
-  },
-
-  'feature-facet-dynamic': {
-    imageCount: 1,
-    imageProp: 'imageSrc',
-    imageMode: 'single',
-  },
-
-  'feature-focus-dynamic': {
-    imageCount: 1,
-    imageProp: 'imageSrc',
-    imageMode: 'single',
-  },
-
-  'feature-item-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'feature-list-dynamic': {
-    imageCount: 1,
-    imageProp: 'backgroundImage',
-    imageMode: 'single',
-  },
-
   // ── BLOG ─────────────────────────────────────────────────────────────
   'blog-journal-dynamic': {
     imageCount: 3,
@@ -384,20 +144,8 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'array',
   },
 
-  'benefits-asset-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
   // ── PRICING ──────────────────────────────────────────────────────────
   'pricing-matrix-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'pricing-static-dynamic': {
     imageCount: 0,
     imageProp: '',
     imageMode: 'none',
@@ -410,47 +158,18 @@ export const COMPONENT_IMAGE_MAP: Record<string, ComponentImageConfig> = {
     imageMode: 'none',
   },
 
-  'faq-new-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'faq-super-dynamic': {
+  // ── SERVICE-OFFERINGS ──────────────────────────────────────────────────
+  'service-grid-dynamic': {
     imageCount: 0,
     imageProp: '',
     imageMode: 'none',
   },
 
   // ── COMPANY-STORY ─────────────────────────────────────────────────────
-  'story-chapter-dynamic': {
-    imageCount: 0,
-    imageProp: '',
-    imageMode: 'none',
-  },
-
-  'story-event-dynamic': {
+  'company-story-dynamic': {
     imageCount: 1,
-    imageProp: 'imageUrl',
-    imageMode: 'single',
-  },
-
-  'story-heritage-dynamic': {
-    imageCount: 1,
-    imageProp: 'imageSrc',
-    imageMode: 'single',
-  },
-
-  'story-history-dynamic': {
-    imageCount: 1,
-    imageProp: 'imageUrl',
-    imageMode: 'single',
-  },
-
-  'story-journey-dynamic': {
-    imageCount: 1,
-    imageProp: 'imageSrc',
-    imageMode: 'single',
+    imageProp: 'milestones.image',
+    imageMode: 'items',
   },
 
 };
